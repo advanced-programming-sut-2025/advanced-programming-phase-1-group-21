@@ -23,6 +23,15 @@
   - etc
   
 - model/
+  - result/
+    - Result<T>.java // T -> Data, private constructor, public static methods
+    - error/
+      - enum/
+        - AuthError.java // implements Error
+        - UserError.java // implements Error
+        - GameError.java // implements Error
+        - etc
+      - Error.java //Interface
   - user/
     - User.java
     - UserSession.java // The user that is playing is stored here
@@ -70,6 +79,7 @@
     - etc
 - view/
   - menu/
+    - Menu.java // Interface -> ErrorHandler, SuccessHandler
     - MainMenuView.java
     - LoginMenuView.java
     - RegisterMenuView.java
@@ -114,4 +124,25 @@ TODO:
     }
     // ... other recipes
 ]
+```
+
+## Result:
+all functions should return Result<T>
+Result<T> has two states:
+- Success
+- Error
+
+Success has a value of type T
+Error has a value of type Error
+
+Error is one of the enums like AuthError, UserError, GameError, etc.
+So code will look like this:
+```java
+Result<T> result = functionThatReturnsResult();
+if (result.isError()) {
+    return Result.failure(result.getError());
+} else {
+    T value = result.getValue();
+    //handle logic...
+}
 ```
