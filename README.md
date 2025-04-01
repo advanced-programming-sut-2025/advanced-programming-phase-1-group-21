@@ -80,6 +80,7 @@
 - etc
 
 TODO:
+- [ ] Learn how to use Git for multiple people
 - [ ] Add GameSave Logic
 - [ ] Add DataBase Logic
 - [ ] Add Recepies (Remember to use Json for Recepie)
@@ -91,3 +92,26 @@ TODO:
 - [ ] Add Event System
 - [ ] Add Achievement System
 - [ ] Check Phase1.pdf again
+
+
+## RECEPIE:
+```json
+// recipes/cooking.json
+[
+    {
+        "id": "fruit_salad",
+        "name": "Fruit Salad",
+        "ingredients": [
+            {"item": "apple", "quantity": 1},
+            {"item": "orange", "quantity": 1},
+            {"item": "blueberry", "quantity": 2}
+        ],
+        "result": "fruit_salad",
+        "energyRestored": 50,
+        "healthRestored": 30,
+        "requiredSkill": "COOKING",
+        "requiredSkillLevel": 2
+    }
+    // ... other recipes
+]
+```
