@@ -1,1 +1,93 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/iDQJgb-p)
+
+
+- main.java
+
+- controller/
+  - auth/
+    - LoginCommand.java
+    - RegisterCommand.java
+    - AuthController.java
+  - menu/   
+    - MainMenuController.java
+    - LoginMenuController.java
+    - RegisterMenuController.java
+    - ProfileMenuController.java
+    - etc
+  - time/
+    - TimeController.java
+    - etc
+  - skill/ 
+    - SkillController.java
+    - etc
+  - etc
+  
+- model/
+  - user/
+    - User.java
+    - UserSession.java // The user that is playing is stored here
+    - etc
+  - game/
+    - GameSession.java // The game that is being played is stored here
+    - Game.java // The game object that is being played is stored here
+  - time/
+    - enum/
+      - Season.java
+      - DayOfWeek.java
+    - Time.java // The time object
+    - TimeSession.java // The time of the game is stored here
+  - skill/
+    - enum/
+      - SkillType.java
+    - Skill.java // The skill object
+    - SkillSession.java // The skills of the game is stored here
+  - item/
+    - enum/
+      - ItemType.java
+    - Item.java // The item object
+    - ItemSession.java // The items of the game is stored here
+  - world/
+    - tile/
+        - enum/
+            - TileType.java
+        - Tile.java
+    - world/
+        - World.java
+        - WorldSession.java
+    - rooms/
+        - enum/
+            - RoomType.java
+        - Room.java
+        - RoomSession.java // current room
+  - menu/
+    - enum/
+        - MenuType.java
+        - LoginMenuCommand.java
+        - RegisterMenuCommand.java
+        - MainMenuCommand.java
+        - ProfileMenuCommand.java
+        - etc
+    - etc
+- view/
+  - menu/
+    - MainMenuView.java
+    - LoginMenuView.java
+    - RegisterMenuView.java
+    - ProfileMenuView.java
+    - CommandLineInterfaceView.java
+    - etc
+  - etc
+- etc
+
+TODO:
+- [ ] Add GameSave Logic
+- [ ] Add DataBase Logic
+- [ ] Add Recepies (Remember to use Json for Recepie)
+- [ ] Add Inventory System
+- [ ] Add Cooking System
+- [ ] Add Crafting System
+- [ ] Add NPC System
+- [ ] Add Shop System
+- [ ] Add Event System
+- [ ] Add Achievement System
+- [ ] Check Phase1.pdf again
