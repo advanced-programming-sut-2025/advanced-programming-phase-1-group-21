@@ -4,7 +4,7 @@ public class Date {
     private long hour;
     
     private static final int HOURS_IN_DAY = 24;
-    private static final int DAYS_IN_SEASON = 90;
+    private static final int DAYS_IN_SEASON = 28;
     private static final int SEASONS_IN_YEAR = 4;
     private static final int DAYS_IN_YEAR = DAYS_IN_SEASON * SEASONS_IN_YEAR;
     
