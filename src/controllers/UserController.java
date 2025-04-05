@@ -1,22 +1,29 @@
 package controllers;
 
+import models.result.*;
+import models.user.User;
+
 public class UserController {
 
-    private User user;
+    private UserRepository userRepository;
 
-    public UserController(User user) {
-        this.user = user;
+    public UserController() {
+        userRepository = UserRepository.getInstance();
     }
 
-    public static boolean isUsernameValid(String username) {
+    public Result<User> login(String username, String password) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public static boolean isPasswordValid(String password) {
+    public Result<User> register(String username, String password, String email, String nickname, String gender) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public static boolean isEmailValid(String email) {
+    public Result<User> logout() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> saveUser() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }
