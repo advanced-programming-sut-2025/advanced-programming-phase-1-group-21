@@ -9,6 +9,12 @@ public enum UserError implements Error {
         this.message = message;
     }
 
+    private UserError() {
+        this.message = this.name();
+    }
+
     @Override
     public String getMessage() {
+        return message;
+    }
 }
