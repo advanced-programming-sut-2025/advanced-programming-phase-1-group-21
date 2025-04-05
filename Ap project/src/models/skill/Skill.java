@@ -1,4 +1,4 @@
 package models.skill;
 
-public interface skill {
+public interface Skill {
 }
