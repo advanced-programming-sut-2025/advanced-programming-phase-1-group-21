@@ -12,6 +12,7 @@ import models.result.Result;
 import models.time.Date;
 import models.time.Season;
 import models.user.User;
+import models.game.Tool;
 
 public class GameController implements MenuStarter {
 
@@ -107,7 +108,65 @@ public class GameController implements MenuStarter {
     public Result<Inventory> removeFromInventory(String itemName, int numberOfItems) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
+
+    public Result<Tool> equipTool(String toolName) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<List<Tool>> showAvailableTools() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Tool> showToolInHand() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Tool> upgradeTool(String toolName) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> useTool(Direction direction) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<String> craftInfo(String craftName) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Seed> plantSeed(Seed seed, Direction direction) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<String> showPlant(Cord cord) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> fertilizePlant(Fertilizer fertilizer, Cord cord) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Integer> howMuchWater() {
+        //GET WATER_CAN FROM INVENTORY
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<List<Recipe>> showRecipes() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    //TODO_SOBHAN
+    public Result<Item> craft(String recipeName) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> placeItem(Item item, Direction direction) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Item> addItemCheat(String itemName, int quantity) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 
     @Override
     public void start() {

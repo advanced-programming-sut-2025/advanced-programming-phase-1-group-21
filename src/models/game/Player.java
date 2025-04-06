@@ -10,6 +10,7 @@ public class Player {
     private Energy energy;
     private Inventory inventory;
     private int coins;
+    private Item itemInHand;
 
 
     public void addCoins(int coins) {
@@ -19,4 +20,14 @@ public class Player {
     public int getCoins() {
         return coins;
     }
+
+    public Item getItemInHand() {
+        return itemInHand;
+    }
+
+    public void setItemInHand(Item item) {
+        this.itemInHand = item;
+    }
+    
+    
 }

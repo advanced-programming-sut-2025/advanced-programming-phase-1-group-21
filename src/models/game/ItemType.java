@@ -1,6 +1,9 @@
 package models.game;
 
 public enum ItemType {
+    SEED,
+    TOOL,
+    CONSUMABLE,
     ;
     String name;
     ItemType(String name) {
