@@ -12,7 +12,6 @@ public class User {
     private String securityQuestion;
     private String securityAnswer;
 
-    // Hardcoded security questions
     public static final List<String> SECURITY_QUESTIONS = List.of(
         "What is your mother's maiden name?",
         "What was the name of your first pet?",

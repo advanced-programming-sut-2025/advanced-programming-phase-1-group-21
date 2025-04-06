@@ -1,5 +1,9 @@
 package controllers;
 
+import models.map.Cord;
+
+import java.util.Map;
+
 public class MapController {
     private Map map;
 
