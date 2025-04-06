@@ -100,7 +100,14 @@ public class GameController implements MenuStarter {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    public Result<Inventory> showInventory() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
+    public Result<Inventory> removeFromInventory(String itemName, int numberOfItems) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
 
     @Override
     public void start() {
