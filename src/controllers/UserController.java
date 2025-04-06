@@ -2,6 +2,7 @@ package controllers;
 
 import models.result.*;
 import models.user.User;
+import models.user.UserRepository;
 
 public class UserController {
 

@@ -2,6 +2,10 @@ package controllers;
 
 import java.util.List;
 
+import models.game.Game;
+import models.result.Result;
+import models.user.User;
+
 public class GameController {
 
 
