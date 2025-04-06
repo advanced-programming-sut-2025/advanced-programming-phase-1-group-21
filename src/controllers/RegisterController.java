@@ -12,5 +12,7 @@ public class RegisterController implements MenuStarter {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void pickQuestion(String
+    public Result<Void> pickQuestion(String answer, String repeatAnswer, int id) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

@@ -23,4 +23,8 @@ public class ProfileController implements MenuStarter {
     public Result<Void> changeNickname(String username, String newNickname) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    public Result<String> userInfo(String username) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
