@@ -2,17 +2,16 @@ package controllers;
 
 import java.util.List;
 
-import models.game.Energy;
-import models.game.Game;
-import models.game.Player;
+import models.crop.Seed;
+import models.game.*;
 import models.map.Building;
 import models.map.Cord;
+import models.map.Direction;
 import models.map.Weather;
 import models.result.Result;
 import models.time.Date;
 import models.time.Season;
 import models.user.User;
-import models.game.Tool;
 
 public class GameController implements MenuStarter {
 
@@ -24,7 +23,7 @@ public class GameController implements MenuStarter {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<Game> laodGame() {
+    public Result<Game> loadGame() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
