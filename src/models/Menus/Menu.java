@@ -1,7 +1,8 @@
 package models.Menus;
 
-public enum Menus {
+public enum Menu {
     LoginMenu,
     RegisterMenu,
+    MainMenu, ProfileMenu;
 
 }

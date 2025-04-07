@@ -3,7 +3,7 @@ package controllers;
 import models.result.Result;
 import models.user.User;
 
-public class RegisterController implements MenuStarter {
+public class RegisterMenuController implements MenuStarter {
     @Override
     public void start() {}
 

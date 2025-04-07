@@ -2,7 +2,7 @@ package controllers;
 
 import models.result.Result;
 
-public class ProfileController implements MenuStarter {
+public class ProfileMenuController implements MenuStarter {
     @Override
     public void start() {
 
