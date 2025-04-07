@@ -8,7 +8,7 @@ public class RegisterController implements MenuStarter {
     public void start() {}
 
 
-    public Result<User> register(String username, String password, String email, String nickname, String gender) {
+    public Result<User> register(String username, String password,String passwordConfirm, String nickname , String email, String gender) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
