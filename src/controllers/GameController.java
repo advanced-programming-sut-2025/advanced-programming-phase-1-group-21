@@ -5,11 +5,10 @@ import java.util.List;
 import models.crop.Seed;
 import models.game.*;
 import models.map.Building;
-import models.map.Cord;
+import models.map.Coord;
 import models.map.Direction;
 import models.map.Weather;
 import models.result.Result;
-import models.time.Date;
 import models.time.Season;
 import models.user.User;
 
@@ -60,7 +59,7 @@ public class GameController implements MenuStarter {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<Void> struckByThorCheat(Cord cord) {
+    public Result<Void> struckByThorCheat(Coord cord) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -80,7 +79,7 @@ public class GameController implements MenuStarter {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<Player> walk(Cord cord) {
+    public Result<Player> walk(Coord cord) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -136,11 +135,11 @@ public class GameController implements MenuStarter {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<String> showPlant(Cord cord) {
+    public Result<String> showPlant(Coord cord) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<Void> fertilizePlant(Fertilizer fertilizer, Cord cord) {
+    public Result<Void> fertilizePlant(Fertilizer fertilizer, Coord cord) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

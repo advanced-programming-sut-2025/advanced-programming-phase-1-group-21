@@ -1,7 +1,7 @@
 package controllers;
 
 import models.App;
-import models.Menus.Menu;
+import models.Menu;
 
 public class AllMenuController {
     RegisterMenuController registerMenuController = new RegisterMenuController();

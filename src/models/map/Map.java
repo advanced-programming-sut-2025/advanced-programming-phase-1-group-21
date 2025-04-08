@@ -8,12 +8,12 @@ public class Map {
     private int id;
     List<Tile> tiles;
 
-    public int calculateDistance(Cord start, Cord end) {
+    public int calculateDistance(Coord start, Coord end) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     //TODO
-    public Result<String> printMap(Cord center, int radius) {
+    public Result<String> printMap(Coord center, int radius) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

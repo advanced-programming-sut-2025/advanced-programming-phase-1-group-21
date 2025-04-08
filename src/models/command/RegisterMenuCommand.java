@@ -4,6 +4,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum RegisterMenuCommand implements Command {
+    register(""),
+    pickQuestion("")
     ;
     public final Pattern pattern;
     RegisterMenuCommand(String input) {
