@@ -1,5 +1,6 @@
 package controllers;
 
+import java.security.PublicKey;
 import java.util.List;
 
 import models.crop.Seed;
@@ -90,6 +91,8 @@ public class GameController implements MenuStarter {
     public Result<Energy> showEnergy() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    public Result<Void> helpReadingMap() {throw new UnsupportedOperationException("Not supported yet.");}
 
     public Result<Energy> setEnergyCheat(int energyValue) {
         throw new UnsupportedOperationException("Not supported yet.");

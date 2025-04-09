@@ -19,6 +19,19 @@ public enum GameMenuCommand implements Command {
     WEATHER("weather"),
     WEATHER_FORECAST("weather forecast"),
     CHEAT_WEATHER_SET("cheat weather set (?<type).*)"),
+    WALK("walk -l "),
+    PRINT_MAP("print map -l <x, y> -s <size>"),
+    HELP_READING_MAP("help reading map"),
+    ENERGY_SHOW("energy show"),
+    CHEAT_ENERGY_SET("energy set -v (?<value>.*)"),
+    CHEAT_ENERGY_UNLIMITED("energy unlimited"),
+    INVENTORY_SHOW("inventory show"),
+    INVENTOR_TRASH("inventory trash -i (?<item’s name>.*) -n (?<number>.*)"),
+    TOOLS_EQUIP("tools equip (?<toolName>.*)"),
+    TOOL_SHOW_CURRENT("tool show current"),
+    TOOLS_SHOW_AVAILABLE("tools show available"),
+    TOOLS_UPGRADE("tools upgrade (?<toolName>.*)>"),
+    TOOL_USE("tool use -d (?<direction>.*)>"),
     ;
     public final Pattern pattern;
     GameMenuCommand(String input) {

@@ -2,6 +2,8 @@ package models.game;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import models.result.Result;
 import models.user.User;
 
 public class Inventory {

@@ -15,4 +15,5 @@ public class Coord {
 
     public int getY() {
         return y;
+    }
 }
