@@ -1,5 +1,9 @@
 package models.user;
 
+import models.game.Inventory;
+import models.game.Recipe;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -11,6 +15,8 @@ public class User {
     private Hash hash;
     private String securityQuestion;
     private String securityAnswer;
+    private Inventory myInventory;
+    private ArrayList<Recipe> myRecipes;
 
     public static final List<String> SECURITY_QUESTIONS = List.of(
         "What is your mother's maiden name?",

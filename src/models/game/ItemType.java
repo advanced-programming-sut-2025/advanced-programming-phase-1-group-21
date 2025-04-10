@@ -5,7 +5,8 @@ public enum ItemType {
     TOOL,
     CONSUMABLE,
     ;
-    String name;
+
+    public String name;
     ItemType(String name) {
         this.name = name;
     }

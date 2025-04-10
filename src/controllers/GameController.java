@@ -1,8 +1,10 @@
 package controllers;
 
 import java.security.PublicKey;
+import java.util.ArrayList;
 import java.util.List;
 
+import models.crop.FertilizerType;
 import models.crop.Seed;
 import models.game.*;
 import models.map.Building;
@@ -142,7 +144,7 @@ public class GameController implements MenuStarter {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<Void> fertilizePlant(Fertilizer fertilizer, Coord cord) {
+    public Result<Void> fertilizePlant(FertilizerType fertilizer, Coord cord) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -151,7 +153,7 @@ public class GameController implements MenuStarter {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<List<Recipe>> showRecipes() {
+    public Result<List<Recipe>> craftingShowRecipes() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -167,6 +169,22 @@ public class GameController implements MenuStarter {
     public Result<Item> addItemCheat(String itemName, int quantity) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    public Result<Void> cookingRefrigerator(Consumable consumable) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<ArrayList<Recipe>> cookingShowRecipes() {
+        //this function should show list all the recipes
+        //this function should show that what recipes are available and what recipes are not
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> eat(Consumable food){
+        //some foods can give power to the user.
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 
 
     @Override

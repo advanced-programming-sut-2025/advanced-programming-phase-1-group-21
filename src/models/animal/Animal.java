@@ -1,4 +1,8 @@
 package models.animal;
 
-public interface Animal {
+public class Animal {
+    public String name;
+    public AnimalTypes animalType;
+    public int friendship;
+    public int produceStage;
 }

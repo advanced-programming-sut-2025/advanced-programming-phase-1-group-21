@@ -32,6 +32,14 @@ public enum GameMenuCommand implements Command {
     TOOLS_SHOW_AVAILABLE("tools show available"),
     TOOLS_UPGRADE("tools upgrade (?<toolName>.*)>"),
     TOOL_USE("tool use -d (?<direction>.*)>"),
+    CRAFTINFO("craftinfo -n <craft_name>"),
+    CRAFTING_SHOW_RECIPES("crafting show recipes"),
+    CRAFTING("crafting craft (?<item_name>.*"),
+    PLACE_ITEM("place item -n (?<item_name>.*) -d (?<direction>.*)"),
+    CHEAT_ADD_ITEM("cheat add item -n (?<item_name>.*) -c (?<count>.*)"),
+    COOKING_REFRIGERATOR("cooking refrigerator [put/pick] (<item>.*)"),
+    COOKING_SHOW_RECIPES("cooking show recipes"),
+    EAT("eat (?<food_name>.*)"),
     ;
     public final Pattern pattern;
     GameMenuCommand(String input) {
