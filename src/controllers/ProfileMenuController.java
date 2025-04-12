@@ -2,11 +2,8 @@ package controllers;
 
 import models.result.Result;
 
-public class ProfileMenuController implements MenuStarter {
-    @Override
-    public void start() {
+public class ProfileMenuController{
 
-    }
 
     public Result<Void> changeUsername(String currentUsername, String newUsername) {
         throw new UnsupportedOperationException("Not supported yet.");

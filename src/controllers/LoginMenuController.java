@@ -4,12 +4,7 @@ import models.result.Result;
 import models.user.User;
 import models.user.UserRepository;
 
-public class LoginMenuController implements MenuStarter {
-
-    @Override
-    public void start() {
-
-    }
+public class LoginMenuController{
 
     private UserRepository userRepository;
 

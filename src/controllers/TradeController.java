@@ -8,10 +8,7 @@ import models.user.User;
 
 import java.util.ArrayList;
 
-public class TradeController implements MenuStarter {
-    @Override
-    public void start() {}
-
+public class TradeController{
 
     public Result<Trade> trade(Player player, String offerItemName, int offerAmount, int requestedPrice) {
         throw new UnsupportedOperationException("Not supported yet.");

@@ -2,11 +2,7 @@ package controllers;
 
 import models.result.Result;
 
-public class MainMenuController implements MenuStarter {
-    @Override
-    public void start() {
-
-    }
+public class MainMenuController{
 
     private Result<Void> enterMenu(String menu) {throw new UnsupportedOperationException("Not supported yet.");}
 

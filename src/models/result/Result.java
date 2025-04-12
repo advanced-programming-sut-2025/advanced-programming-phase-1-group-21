@@ -5,7 +5,7 @@ public class Result<T> {
     private final Error error;
     private final String message;
 
-    private Result(T data, Error error, String message) {
+    public Result(T data, Error error, String message) {
         this.data = data;
         this.error = error;
         this.message = message;

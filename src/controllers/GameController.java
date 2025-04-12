@@ -18,7 +18,7 @@ import models.result.Result;
 import models.time.Season;
 import models.user.User;
 
-public class GameController implements MenuStarter {
+public class GameController{
 
     public Result<Game> createGame(List<User> users) {
         throw new UnsupportedOperationException("Not supported yet.");
@@ -47,12 +47,15 @@ public class GameController implements MenuStarter {
     public Result<String> getTime() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
     public Result<String> getDate() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
     public Result<String> getDateTime() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
     public Result<String> getDayWeek() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -336,18 +339,5 @@ public class GameController implements MenuStarter {
 
     public Result<Item> finishQuest(int questID){
         throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-
-
-
-
-
-
-
-
-
-    @Override
-    public void start() {
     }
 }

@@ -7,9 +7,6 @@ public enum ItemType {
     ;
 
     public String name;
-    ItemType(String name) {
-        this.name = name;
-    }
 
     public String getName() {
         return name;
