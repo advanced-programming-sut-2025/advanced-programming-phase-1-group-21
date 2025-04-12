@@ -3,14 +3,14 @@ package controllers;
 import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SplittableRandom;
 
+import models.animal.Animal;
+import models.animal.AnimalProducts;
 import models.crop.FertilizerType;
 import models.crop.Seed;
 import models.game.*;
-import models.map.Building;
-import models.map.Coord;
-import models.map.Direction;
-import models.map.Weather;
+import models.map.*;
 import models.result.Result;
 import models.time.Season;
 import models.user.User;
@@ -184,6 +184,77 @@ public class GameController implements MenuStarter {
         //some foods can give power to the user.
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    private Result<Barn> buildBarn(Coord cord) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    private Result<Coop> buildCoop(Coord cord) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> buildBarnOrCoop(String buildingName , Coord cord) {
+        if(buildingName.equals("Barn"))
+            buildBarn(cord);
+        if(buildingName.equals("Coop"))
+            buildCoop(cord);
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Animal> buyAnimal(String animal , String name){
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> pet(String name){
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> cheatFriendship(String name , int amount){
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> showAnimals(){
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> shepherdAnimals(String name , Coord cord){
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> feedHay(String animalName){
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> showProduces(){
+        //this function should show Products with their quality
+        //show which animals have unjamavari products
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<AnimalProducts> collectProducts(String animalName) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> sellAnimal(SplittableRandom animalName){
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> fishing(String fishingPole){
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Item> artisanUse(String artisanName , String item) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Item> artisanGet(String artisanName) {
+        //this function should get products from artisans
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+
+
+
 
 
 

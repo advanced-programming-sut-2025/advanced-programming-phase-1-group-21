@@ -40,6 +40,17 @@ public enum GameMenuCommand implements Command {
     COOKING_REFRIGERATOR("cooking refrigerator [put/pick] (<item>.*)"),
     COOKING_SHOW_RECIPES("cooking show recipes"),
     EAT("eat (?<food_name>.*)"),
+    BUILD("build -a <building_name> -l <x , y>"),
+    BUY_ANIMAL("buy animal -a <animal> -n <name>"),
+    PET("pet -n <name>"),
+    CHEAT_FRIENDSHIP("cheat set friendship -n <animal name> -c <amount>"),
+    SHEPHERD_ANIMALS("shepherd animals -n <animal name> -l <x , y>"),
+    FEED_HAY("feed hay -n <animal name>"),
+    COLLECT_PRODUCE("collect produce -n <name>"),
+    SELL_ANIMAL("sell animal -n <name>"),
+    FISHING("fishing -p <fishing pole>"),
+    ARTISAN_USE("artisan use <artisan_name> <item1_name>"),
+
     ;
     public final Pattern pattern;
     GameMenuCommand(String input) {
