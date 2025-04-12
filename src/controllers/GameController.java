@@ -325,6 +325,20 @@ public class GameController implements MenuStarter {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    public Result<ArrayList<NPCFriendship>> showFriendShipNPCList(){
+        //this function should show NPC relations
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<ArrayList<String>> showQuestList(){
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Item> finishQuest(int questID){
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+
 
 
 
