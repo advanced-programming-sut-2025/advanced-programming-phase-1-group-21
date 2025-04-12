@@ -1,9 +1,12 @@
 package controllers;
 
+import java.awt.geom.RectangularShape;
+import java.awt.image.AreaAveragingScaleFilter;
 import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.SplittableRandom;
+import java.util.concurrent.locks.ReentrantLock;
 
 import models.animal.Animal;
 import models.animal.AnimalProducts;
@@ -225,7 +228,7 @@ public class GameController implements MenuStarter {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<Void> showProduces(){
+    public Result<Void> showAnimalProduces(){
         //this function should show Products with their quality
         //show which animals have unjamavari products
         throw new UnsupportedOperationException("Not supported yet.");
@@ -235,7 +238,7 @@ public class GameController implements MenuStarter {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<Void> sellAnimal(SplittableRandom animalName){
+    public Result<Void> sellAnimal(String animalName){
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -251,6 +254,78 @@ public class GameController implements MenuStarter {
         //this function should get products from artisans
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    public Result<Void> crowAttack() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<ArrayList<Item>> showAllproducts() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<ArrayList<Item>> showAvailableProducts() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> purchase(Item product, int count) {
+        // What is the Result??
+
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> addMoneyCheat(int amount) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> sell(Item product, int count) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> talk(Player player, String massege) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> talkHistory(Player player) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> sendGift(Player player, Item item, int amount) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<ArrayList<Item>> giftList() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> giftRate(int giftID, double rate) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<ArrayList<Gift>> giftHistory(Player player) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> hug(Player player) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> sendFlower(Player player) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> askMarriage(Player player, Item ring) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> respondMarriage(Boolean respond, Player player) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> startTrade() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+
 
 
 

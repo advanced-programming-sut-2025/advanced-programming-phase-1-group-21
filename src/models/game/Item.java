@@ -1,9 +1,9 @@
 package models.game;
 
 public class Item {
-    String name;
-    ItemType itemType;
-    int cost;
+    protected String name;
+    private ItemType itemType;
+    private int cost, amount;
 
     public Item(String name, ItemType itemType, int cost) {
         this.name = name;

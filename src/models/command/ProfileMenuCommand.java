@@ -16,11 +16,7 @@ public enum ProfileMenuCommand implements Command {
     }
 
     @Override
-    public Matcher getMatcher(String input) {
-        Matcher matcher = pattern.matcher(input);
-        if (matcher.matches()) {
-            return matcher;
-        }
+    public Pattern getPattern() {
         return null;
     }
 }

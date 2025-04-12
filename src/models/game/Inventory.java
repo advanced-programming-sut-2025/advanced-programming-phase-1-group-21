@@ -4,19 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.result.Result;
-import models.user.User;
 
 public class Inventory {
     static final int MAXIMUM_SIZE = 12;
     List<Item> items;
     InventoryType inventoryType;
-    TrashcanType trashcanType;
+    FishingPoleType trashcanType;
     Player owner;
 
     public Inventory(Player owner) {
         items = new ArrayList<>();
         inventoryType = InventoryType.PRIMITIVE;
-        trashcanType = TrashcanType.PRIMITIVE;
+        trashcanType = FishingPoleType.EDUCATIONAL;
         this.owner = owner;
     }
 
@@ -24,7 +23,7 @@ public class Inventory {
         this.inventoryType = inventoryType;
     }
 
-    public void upgradeTrashcan(TrashcanType trashcanType) {
+    public void upgradeTrashcan(FishingPoleType trashcanType) {
         this.trashcanType = trashcanType;
     }
 
