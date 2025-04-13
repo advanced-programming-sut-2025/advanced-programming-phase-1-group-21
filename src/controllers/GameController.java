@@ -20,6 +20,7 @@ import models.user.User;
 
 public class GameController{
 
+
     public Result<Game> createGame(List<User> users) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -68,8 +69,12 @@ public class GameController{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<Void> struckByThorCheat(Coord cord) {
+    public Result<Void> struckByThor(Coord cord) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> struckByThorCheat(Coord cord) {
+        return struckByThor(cord);
     }
 
     public Result<Weather> getWeather() {
@@ -340,4 +345,18 @@ public class GameController{
     public Result<Item> finishQuest(int questID){
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    public Result<Void> updateGameSecond() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> updateGameNight() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> updateGameMonth() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+
 }

@@ -7,6 +7,11 @@ import java.util.List;
 public class Map {
     private int id;
     List<Tile> tiles;
+    List<House> houses;
+    List<Lake> lakes;
+    List<Mines> mines;
+    List<GreenHouse> greenHouses;
+
 
     public int calculateDistance(Coord start, Coord end) {
         throw new UnsupportedOperationException("Not supported yet.");

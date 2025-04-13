@@ -31,6 +31,9 @@ public class Player {
     public void setItemInHand(Item item) {
         this.itemInHand = item;
     }
-    
+
+    public void faint() {
+
+    }
     
 }

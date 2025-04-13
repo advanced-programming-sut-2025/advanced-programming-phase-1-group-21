@@ -6,4 +6,10 @@ public enum Weather {
     STORM,
     SNOW;
 
+    public static Weather getWeather(String name) {
+        for (Weather weather : Weather.values())
+            if (weather.name().equalsIgnoreCase(name))
+                return weather;
+        return null;
+    }
 }
