@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral() // Required for Apache Commons Lang
+}
+
+dependencies {
+    implementation 'org.openjfx:javafx-base:20'
+    implementation 'org.apache.commons:commons-lang3:3.14.0' // For Pair class
+    testImplementation 'junit:junit:4.13.2' // Optional: for testing
+}
+
+test {
+    useJUnitPlatform()
+}
+
+application {
+    mainClass = 'Main'  // Replace with your main class
+}
