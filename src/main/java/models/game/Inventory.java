@@ -41,10 +41,10 @@ public class Inventory {
         */
     }
 
-    public void removeItem(Item item) {
-        owner.addCoins(trashcanType.getRepay(item.getCost()));
-        items.remove(item);
-    }
+//    public void removeItem(Item item) {
+//        owner.addCoins(trashcanType.getRepay(item.getCost()));
+//        items.remove(item);
+//    }
 
     public Item getItemByName(String name) {
         for (Item item : items) {

@@ -1,8 +1,11 @@
+import views.menu.AppView;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("TEST");
+        AppView appView = new AppView();
+        appView.run();
     }
+
 }
 
 // merge sortx

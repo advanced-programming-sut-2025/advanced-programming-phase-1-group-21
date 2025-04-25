@@ -7,6 +7,7 @@ import models.result.errorTypes.UserError;
 import models.user.User;
 import models.user.UserRepository;
 
+import javax.xml.crypto.dsig.spec.XSLTTransformParameterSpec;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,11 +40,13 @@ public class RegisterMenuController{
         //Random Password (balad naboodam)
 
         User user = new User(username , password , email , nickname , getGenderByName(gender) , null , null);
-        return new Result<>(user , null , null);
+        return new Result<>(user , null , "User Registered");
     }
 
     public Result<Void> pickQuestion(String answer, String repeatAnswer, int id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if(answer.equals(repeatAnswer))
+            return new Result<>(null , null , "Answer successfully sets");
+        return new Result<>(null , null , "Answer not set");
     }
 
     private boolean usernameValidation(String username) {
@@ -55,6 +58,9 @@ public class RegisterMenuController{
         String emailGetter = "(?<username>\\S+)@(?<domain>\\S+)";
         String emailUsernameRegex = "(?!.*\\.\\..*)[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]";
         String domainRegex = "[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]\\.[a-zA-Z]{2,}";
+        String invalidCharactersRegex = "(?!.*\\?.*)(?!.*>.*)(?!.*<.*)(?!.*,.*)(?!.*\".*)(?!.*'.*)(?!.*;.*)(?!.*:.*)" +
+                "(?!.*\\/.*)(?!.*\\|.*)(?!.*\\].*)(?!.*\\[.*)(?!.*\\}.*)(?!.*\\{.*)(?!.*\\+.*)(?!.*=.*)(?!.*\\).*)" +
+                "(?!.*\\(.*)(?!.*\\*.*)(?!.*&.*)(?!.*\\^.*)(?!.*%.*)(?!.*\\$.*)(?!.*#.*)(?!.*\\!.*)\\S+";
         Matcher matcher;
 
         matcher = Pattern.compile(emailGetter).matcher(email);
@@ -63,6 +69,8 @@ public class RegisterMenuController{
         if(!Pattern.compile(emailUsernameRegex).matcher(matcher.group("username")).matches())
             return false;
         if(!Pattern.compile(domainRegex).matcher(matcher.group("domain")).matches())
+            return false;
+        if(!Pattern.compile(invalidCharactersRegex).matcher(email).matches())
             return false;
         return true;
 

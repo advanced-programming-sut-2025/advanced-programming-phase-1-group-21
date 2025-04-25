@@ -8,7 +8,7 @@ public enum RegisterMenuCommand implements Command {
     SHOW_CURRENT_MENU("\\s*show\\s*current\\s*menu\\s*"),
     register("\\s*register -u (?<username>\\S+) -p (?<password>\\S+) (?<passwordConfirm>\\S+) -n (?<nickname>\\S+)" +
             " -e (?<email>\\S+) -g (?<gender>\\S+)\\s*"),
-    pickQuestion("")
+    pickQuestion("\\s*pick question -q (?<questionNumber>\\d+) -a (?<answer>\\S+) -c (?<answerConfirm>\\S+)")
     ;
     public final Pattern pattern;
     RegisterMenuCommand(String input) {

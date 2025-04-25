@@ -11,7 +11,9 @@ public class RegisterMenuView {
 
     public void Result(String command){
         if((matcher = RegisterMenuCommand.register.getMatcher(command)) != null){
-            throw new UnsupportedOperationException("Not supported yet.");
+            System.out.println(registerMenuController.register(matcher.group("username") , matcher.group("password")
+                    , matcher.group("passwordConfirm") , matcher.group("nickname") , matcher.group("email")
+                    , matcher.group("gender")).getMessage());
         }
 
         if((matcher = RegisterMenuCommand.pickQuestion.getMatcher(command)) != null){
