@@ -4,6 +4,11 @@ plugins {
 }
 
 version = '1.0-SNAPSHOT'
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(23)
+    }
+}
 
 repositories {
     mavenCentral()
@@ -19,4 +24,8 @@ test {
 
 application {
     mainClass = 'Main'
+}
+
+run {
+    standardInput = System.in
 }
