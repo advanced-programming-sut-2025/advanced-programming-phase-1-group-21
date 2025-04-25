@@ -18,5 +18,9 @@ public class RegisterMenuView {
             throw new UnsupportedOperationException("Not supported yet.");
         }
 
+        if((matcher = RegisterMenuCommand.SHOW_CURRENT_MENU.getMatcher(command)) != null){
+            System.out.println(registerMenuController.showCurrentMenu().getMessage());
+        }
+
     }
 }

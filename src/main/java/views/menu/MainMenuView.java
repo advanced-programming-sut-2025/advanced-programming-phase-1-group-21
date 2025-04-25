@@ -25,7 +25,7 @@ public class MainMenuView {
             throw new UnsupportedOperationException("Not supported yet.");
         }
 
-        if((matcher = MainMenuCommand.MENU_EXIT.getMatcher(command)) != null){
+        if((matcher = MainMenuCommand.EXIT_MENU.getMatcher(command)) != null){
             throw new UnsupportedOperationException("Not supported yet.");
         }
     }

@@ -3,8 +3,13 @@ package models.result.errorTypes;
 import models.result.Error;
 
 public enum AuthError implements Error {
-    INVALID_CREDENTIALS("Invalid username or password"),
+    INVALID_USERNAME("Invalid username"),
     USER_NOT_FOUND("User not found"),
+    PASSWORD_LENGTH("Password too short"),
+    PASSWORD_SPECIAL_CHARACTERS("Password must contain special characters"),
+    PASSWORD_ALPHABET("Password must contain alphabet"),
+    PASSWORD_NUMBERS("Password must contain numbers"),
+    PASSWORD_CONFIRM_ERROR("Password does not equal confirm password"),
     USER_ALREADY_EXISTS("User already exists"),
     PASSWORD_TOO_WEAK("Password does not meet security requirements"),
     EMAIL_ALREADY_REGISTERED("Email is already registered"),

@@ -24,6 +24,11 @@ public class UserRepository {
     }
     
     public User findUserByUsername(String username) {
-        throw new UnsupportedOperationException("");
+        for(User user : users) {
+            if(user.getUsername().equals(username)) {
+                return user;
+            }
+        }
+        return null;
     }
 }

@@ -3,8 +3,8 @@ package models.command;
 import java.util.regex.Pattern;
 
 public enum MainMenuCommand implements Command {
-    ENTER_MENU("menu enter (?<menu_name>.*)"),
-    MENU_EXIT("menu exit"),
+    ENTER_MENU("\\s*menu\\s*enter\\s*(?<menuName>\\S+)\\s*"),
+    EXIT_MENU("menu exit"),
     SHOW_CURRENT_MENU("show current menu"),
     LOGOUT("user logout"),
     ;
