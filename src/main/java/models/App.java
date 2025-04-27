@@ -8,5 +8,6 @@ public class App {
     public static boolean play = true;
     public static UserRepository userRepository;
     public static User registeredUser;
+    public static User logedInUser;
 
 }

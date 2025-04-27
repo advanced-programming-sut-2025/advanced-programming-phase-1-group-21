@@ -3,11 +3,7 @@ package controllers;
 import models.App;
 import models.result.Result;
 import models.result.errorTypes.AuthError;
-import models.result.errorTypes.UserError;
 import models.user.User;
-import models.user.UserRepository;
-
-import javax.xml.crypto.dsig.spec.XSLTTransformParameterSpec;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -43,9 +39,12 @@ public class RegisterMenuController{
         return new Result<>(user , null , "User Registered");
     }
 
-    public Result<Void> pickQuestion(String answer, String repeatAnswer, int id) {
-        if(answer.equals(repeatAnswer))
+    public Result<Void> pickQuestion(String answer, String answerConfirm, String questionNumber) {
+        if(answer.equals(answerConfirm)) {
+            App.registeredUser.setSecurityQuestionID(Integer.parseInt(questionNumber));
+            App.registeredUser.setSecurityAnswer(answer);
             return new Result<>(null , null , "Answer successfully sets");
+        }
         return new Result<>(null , null , "Answer not set");
     }
 

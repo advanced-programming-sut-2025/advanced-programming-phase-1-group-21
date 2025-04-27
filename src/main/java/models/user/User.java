@@ -13,7 +13,7 @@ public class User {
     private String nickname;
     private Gender gender;
     private Hash hash;
-    private Integer securityQuestion;
+    private Integer securityQuestionID;
     private String securityAnswer;
     private Inventory myInventory;
     private ArrayList<Recipe> myRecipes;
@@ -25,6 +25,14 @@ public class User {
         "What is your favorite book?"
     );
 
+    public void setSecurityQuestionID(Integer securityQuestionID) {
+        this.securityQuestionID = securityQuestionID;
+    }
+
+    public void setSecurityAnswer(String securityAnswer) {
+        this.securityAnswer = securityAnswer;
+    }
+
     public User(String username, String password, String email, String nickname, Gender gender, Integer securityQuestionID, String securityAnswer) {
         this.username = username;
         this.password = password;
@@ -32,7 +40,7 @@ public class User {
         this.nickname = nickname;
         this.gender = gender;
         this.hash = new Hash(password);
-        this.securityQuestion = securityQuestionID;
+        this.securityQuestionID = securityQuestionID;
         this.securityAnswer = securityAnswer;
     }
 
@@ -60,8 +68,8 @@ public class User {
         return hash;
     }
 
-    public Integer getSecurityQuestion() {
-        return securityQuestion;
+    public Integer getSecurityQuestionID() {
+        return securityQuestionID;
     }
 
     public boolean validateSecurityAnswer(String answer) {

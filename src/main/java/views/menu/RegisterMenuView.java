@@ -24,5 +24,13 @@ public class RegisterMenuView {
             System.out.println(registerMenuController.showCurrentMenu().getMessage());
         }
 
+        if((matcher = RegisterMenuCommand.pickQuestion.getMatcher(command)) != null){
+            System.out.println(registerMenuController.pickQuestion(matcher.group("answer") ,
+                    matcher.group("answerConfirm") , matcher.group("questionNumber")).getMessage());
+        }
+
+        else
+            System.out.println("invalid command");
+
     }
 }

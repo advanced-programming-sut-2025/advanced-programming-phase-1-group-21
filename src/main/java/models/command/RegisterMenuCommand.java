@@ -18,6 +18,6 @@ public enum RegisterMenuCommand implements Command {
 
     @Override
     public Pattern getPattern() {
-        return null;
+        return pattern;
     }
 }
