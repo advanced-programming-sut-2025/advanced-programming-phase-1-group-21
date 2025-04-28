@@ -39,7 +39,6 @@ public class User {
         this.email = email;
         this.nickname = nickname;
         this.gender = gender;
-        this.hash = new Hash(password);
         this.securityQuestionID = securityQuestionID;
         this.securityAnswer = securityAnswer;
     }
