@@ -10,7 +10,11 @@ public class Seed extends Item {
     int day;
 
     public Seed(String name, ItemType itemType, int cost) {
-        super(name, itemType, cost);
+        super(name, itemType, cost, 1);
+    }
+
+    public Seed(String name, ItemType itemType, int cost, int amount) {
+        super(name, itemType, cost, amount);
     }
 
     public void plant() {

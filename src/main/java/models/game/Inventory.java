@@ -34,28 +34,28 @@ public class Inventory {
 
     public Result<Item> addItem(Item item) {
         for (Item i : items) {
-            if (i.name.equals(item.name)) {
+            if (i.getName().equals(item.getName())) {
                 int newSize = Math.min(i.getAmount() + item.getAmount(), MAXIMUM_ITEM_PER_SLOT);
                 int remains = item.getAmount() + i.getAmount() - newSize;
                 i.setAmount(newSize);
                 item.setAmount(remains);
                 if (item.getAmount() == 0) {
-                    return Result.success("Adding " + item.name + " to the inventory was successful.");
+                    return Result.success("Adding " + item.getName() + " to the inventory was successful.");
                 }
             }
         }
         if (items.size() == inventoryType.getMaximumSize()) {
-            return Result.success(item, "Adding " + item.name + " to the inventory was not completely. " + item.getAmount() + " remains.");
+            return Result.success(item, "Adding " + item.getName() + " to the inventory was not completely. " + item.getAmount() + " remains.");
         }
         items.add(item);
-        return Result.success("Adding " + item.name + " to the inventory was successful.");
+        return Result.success("Adding " + item.getName() + " to the inventory was successful.");
     }
 
     public void removeItem(Item item) {
         // If you're using TrashCan, don't forget to get the money and use it in the player object;
 
         for (Item i : items)
-            if (i.name.equals(item.name)) {
+            if (i.getName().equals(item.getName())) {
                 int del = Math.min(i.getAmount(), item.getAmount());
                 item.changeAmount(-del);
                 i.changeAmount(-del);
