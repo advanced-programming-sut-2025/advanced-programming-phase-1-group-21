@@ -11,7 +11,7 @@ public class Player {
     private Game game;
     private Energy energy;
     private Inventory inventory;
-    private TrashCan
+    private TrashCanType trashCanType;
     private int coins;
     private Item itemInHand;
     private ArrayList<Relation> relations;
