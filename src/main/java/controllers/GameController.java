@@ -1,5 +1,6 @@
 package controllers;
 
+import models.Tool.Tool;
 import models.animal.Animal;
 import models.animal.AnimalProducts;
 import models.crop.FertilizerType;
@@ -10,7 +11,6 @@ import models.result.Result;
 import models.time.Season;
 import models.user.User;
 
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.List;
 
