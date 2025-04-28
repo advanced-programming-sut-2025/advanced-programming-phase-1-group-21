@@ -1,7 +1,7 @@
 package models.map;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Building {
-    protected List<Tile> tiles;
+    protected ArrayList<Tile> tiles;
 }

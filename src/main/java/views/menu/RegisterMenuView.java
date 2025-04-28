@@ -1,5 +1,6 @@
 package views.menu;
 
+import controllers.GameController;
 import controllers.RegisterMenuController;
 import models.command.RegisterMenuCommand;
 
@@ -9,6 +10,7 @@ import java.util.regex.Matcher;
 public class RegisterMenuView {
     Matcher matcher;
     RegisterMenuController registerMenuController = new RegisterMenuController();
+    GameController gameController = new GameController();
 
     public void Result(String command) throws IOException {
         if((matcher = RegisterMenuCommand.register.getMatcher(command)) != null){
@@ -17,17 +19,21 @@ public class RegisterMenuView {
                     , matcher.group("gender")).getMessage());
         }
 
-        if((matcher = RegisterMenuCommand.pickQuestion.getMatcher(command)) != null){
+        else if((matcher = RegisterMenuCommand.pickQuestion.getMatcher(command)) != null){
             throw new UnsupportedOperationException("Not supported yet.");
         }
 
-        if((matcher = RegisterMenuCommand.SHOW_CURRENT_MENU.getMatcher(command)) != null){
+        else if((matcher = RegisterMenuCommand.SHOW_CURRENT_MENU.getMatcher(command)) != null){
             System.out.println(registerMenuController.showCurrentMenu().getMessage());
         }
 
-        if((matcher = RegisterMenuCommand.pickQuestion.getMatcher(command)) != null){
+        else if((matcher = RegisterMenuCommand.pickQuestion.getMatcher(command)) != null){
             System.out.println(registerMenuController.pickQuestion(matcher.group("answer") ,
                     matcher.group("answerConfirm") , matcher.group("questionNumber")).getMessage());
+        }
+
+        else if((matcher = RegisterMenuCommand.PRINT_MAP.getMatcher(command)) != null){
+            gameController.printMap();
         }
 
         else

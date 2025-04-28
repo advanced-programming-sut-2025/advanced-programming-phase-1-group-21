@@ -10,6 +10,7 @@ import models.result.Result;
 import models.time.Season;
 import models.user.User;
 
+import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,8 +93,9 @@ public class GameController{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<String> printMap() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public ArrayList<String> printMap() {
+        Map map = new Map(1);
+        return map.printMap(new Coord(1 , 1) , 1);
     }
 
     public Result<Energy> showEnergy() {
