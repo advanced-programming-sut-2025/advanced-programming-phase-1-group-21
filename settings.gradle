@@ -11,20 +11,3 @@ develocity {
 }
 
 rootProject.name = "AP_Project"
-
-//plugins {
-//	id "com.gradle.develocity" version "4.0.1"
-//}
-//
-//develocity {
-//	buildScan {
-//		termsOfUseUrl = "https://gradle.com/help/legal-terms-of-use"
-//		termsOfUseAgree = "yes"
-//	}
-//}
-
-//WARNING: The following functionality has been deprecated and will be removed in the next major release of the Develocity Gradle plugin. Run with '-Ddevelocity.deprecation.captureOrigin=true' to see where the deprecated functionality is being used. For assistance with migration, see https://gradle.com/help/gradle-plugin-develocity-migration.
-//- The deprecated "gradleEnterprise.buildScan.termsOfServiceUrl" API has been replaced by "develocity.buildScan.termsOfUseUrl"
-//- The deprecated "gradleEnterprise.buildScan.termsOfServiceAgree" API has been replaced by "develocity.buildScan.termsOfUseAgree"
-//- The deprecated "gradleEnterprise.buildScan.publishOnFailure" API has been replaced by "develocity.buildScan.publishing.onlyIf { !it.buildResult.failures.empty }"
-//- The "com.gradle.enterprise" plugin has been replaced by "com.gradle.develocity"
