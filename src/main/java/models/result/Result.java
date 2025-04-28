@@ -12,11 +12,15 @@ public class Result<T> {
     }
 
     public static <T> Result<T> success(T data) {
-        return new Result<>(data, null, "");
+        return new Result<>(data, null, null);
     }
 
     public static <T> Result<T> success(T data, String message) {
         return new Result<>(data, null, message);
+    }
+
+    public static <T> Result<T> success(String message) {
+        return new Result<>(null, null, message);
     }
 
     public static <T> Result<T> failure(Error error) {
@@ -42,7 +46,11 @@ public class Result<T> {
     }
 
     public String getMessage() {
-        return message;
+        if (message != null)
+            return message;
+        if (error != null)
+            return error.getMessage();
+        return "This result has no message!";
     }
 
     public boolean isSuccess() {
