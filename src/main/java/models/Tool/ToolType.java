@@ -1,4 +1,4 @@
-package models.game;
+package models.Tool;
 
 public enum ToolType {
     AXE,

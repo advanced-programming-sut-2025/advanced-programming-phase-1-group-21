@@ -1,0 +1,22 @@
+package models.Tool;
+
+import models.game.Item;
+import models.map.Coord;
+import models.result.Result;
+
+public class FishingPole extends Tool {
+	ToolMaterialType toolMaterialType;
+	public FishingPole() {
+		super(ToolType.FISHING_POLE);
+	}
+
+	@Override
+	protected Result<Item> use(Coord coord) {
+		return null;
+	}
+
+	@Override
+	public ToolMaterialType getToolMaterialType() {
+		return toolMaterialType;
+	}
+}

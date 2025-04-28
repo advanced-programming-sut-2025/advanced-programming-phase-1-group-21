@@ -1,7 +1,7 @@
 package models.game;
 
 public class Item {
-    protected final String name;
+    private final String name;
     private final ItemType itemType;
     private final int cost;
     private int amount;
@@ -14,6 +14,9 @@ public class Item {
     }
 
     public int getCost() {
+        if (itemType == ItemType.TOOL) {
+            return -1;
+        }
         return cost;
     }
 
