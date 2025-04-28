@@ -3,7 +3,10 @@ package models.result.errorTypes;
 import models.result.Error;
 
 public enum UserError implements Error {
-    USER_NOT_FOUND("User not found");
+    USER_NOT_FOUND("User not found"),
+    PASSWORD_DOESNT_MATCH("Password does not match with this username"),
+    INCORRECT_ANSWER("Answer is incorrect")
+    ;
 
     private final String message;
 

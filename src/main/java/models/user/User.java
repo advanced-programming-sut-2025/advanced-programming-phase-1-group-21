@@ -71,6 +71,14 @@ public class User {
         return securityQuestionID;
     }
 
+    public String getSecurityAnswer() {
+        return securityAnswer;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public boolean validateSecurityAnswer(String answer) {
         return this.securityAnswer.equalsIgnoreCase(answer);
     }

@@ -1,17 +1,132 @@
 package controllers;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import models.App;
+import models.Menu;
 import models.result.Result;
+import models.result.errorTypes.AuthError;
+import models.result.errorTypes.UserError;
 import models.user.User;
+import views.menu.AppView;
+import views.menu.LoginMenuView;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class LoginMenuController{
     public Result<User> login(String username, String password) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if(findUserByUsername(username) == null)
+            return Result.failure(UserError.USER_NOT_FOUND);
+        if(!findUserByUsername(username).getPassword().equals(password))
+            return Result.failure(UserError.PASSWORD_DOESNT_MATCH);
+
+        //TODO
+        //Stay Logged In
+
+        App.logedInUser = findUserByUsername(username);
+        return Result.success(App.logedInUser , "User logged in successfully");
     }
 
-    public Result<Void> forgetPassword(String username) {throw new UnsupportedOperationException("Not supported yet.");}
+    public Result<Void> forgetPassword(String username) throws IOException {
+        if(findUserByUsername(username) == null)
+            return Result.failure(UserError.USER_NOT_FOUND);
+        String answer = LoginMenuView.getAnswer();
+        if(!answer.equals(findUserByUsername(username).getSecurityAnswer()))
+            return Result.failure(UserError.INCORRECT_ANSWER);
+        String password = LoginMenuView.getPassword();
+        if(checkPassword(password).isError())
+            return checkPassword(password);
 
-    private Result<Void> answer(String answer) {throw new UnsupportedOperationException("Not supported yet.");}
+        String passwordConfirm = LoginMenuView.getConfirmPassword();
+        if(!password.equals(passwordConfirm))
+            return Result.failure(AuthError.PASSWORD_CONFIRM_ERROR);
 
-    private Result<Void> userLogout() {throw new UnsupportedOperationException("Not supported yet.");}
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        ArrayList<User> users = readAllUsers(gson , "Users.json");
+        for(User user : users){
+            if(user.getUsername().equals(username))
+                user.setPassword(password);
+        }
+
+        try (FileWriter writer = new FileWriter("Users.json")) {
+            gson.toJson(users, writer);
+        } catch (IOException e) {
+            System.err.println("error" + e.getMessage());
+            throw e;
+        }
+
+        return new Result<>(null , null , "Password changed successfully");
+
+    }
+
+    public Result<Void> changeMenu(String menu){
+        if(menu.equals(Menu.RegisterMenu.toString())){
+            App.currentMenu = Menu.RegisterMenu;
+            return new Result<>(null , null , "Now you are in register menu");
+        }
+
+        if(menu.equals(Menu.MainMenu.toString())){
+            App.currentMenu = Menu.MainMenu;
+            return new Result<>(null , null , "Now you are in main menu");
+        }
+
+        else
+            return new Result<>(null , null , "You Can't move to this menu");
+    }
+
+    private ArrayList<User> readAllUsers(Gson gson , String filePath){
+        File file = new File(filePath);
+        if (!file.exists() || file.length() == 0) {
+            return new ArrayList<>();
+        }
+
+        try (FileReader reader = new FileReader(file)) {
+            Type listType = new TypeToken<ArrayList<User>>(){}.getType();
+            ArrayList<User> existingData = gson.fromJson(reader, listType);
+            return existingData != null ? existingData : new ArrayList<>();
+        } catch (IOException e) {
+            System.err.println("error in reading file" + e.getMessage());
+            return new ArrayList<>();
+        }
+    }
+
+    private User findUserByUsername(String username) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        ArrayList<User> users = readAllUsers(gson , "Users.json");
+        for(User user : users)
+            if (user.getUsername().equals(username))
+                return user;
+        return null;
+    }
+
+    private Result<Void> checkPassword(String password) {
+        if(password.length() < 8)
+            return new Result<>(null , AuthError.PASSWORD_LENGTH , AuthError.PASSWORD_LENGTH.getMessage());
+
+        String specialCharacters = "(?!.*\\?.*)(?!.*>.*)(?!.*<.*)(?!.*,.*)(?!.*\".*)(?!.*'.*)(?!.*;.*)(?!.*:.*)(?!.*\\/.*)" +
+                "(?!.*\\|.*)(?!.*\\].*)(?!.*\\[.*)(?!.*\\}.*)(?!.*\\{.*)(?!.*\\+.*)(?!.*=.*)(?!.*\\).*)(?!.*\\(.*)(?!.*\\*.*)" +
+                "(?!.*&.*)(?!.*\\^.*)(?!.*%.*)(?!.*\\$.*)(?!.*#.*)(?!.*\\!.*)\\S+";
+
+        if(Pattern.compile(specialCharacters).matcher(password).matches())
+            return new Result<>(null , AuthError.PASSWORD_SPECIAL_CHARACTERS , AuthError.PASSWORD_SPECIAL_CHARACTERS.getMessage());
+
+        String containAlphabet = "(?!.*[a-zA-Z].*)\\S+";
+        if(Pattern.compile(containAlphabet).matcher(password).matches())
+            return new Result<>(null , AuthError.PASSWORD_ALPHABET , AuthError.PASSWORD_ALPHABET.getMessage());
+
+        String containNumber = "(?!.*[0-9].*)\\S+";
+        if(Pattern.compile(containNumber).matcher(password).matches())
+            return new Result<>(null , AuthError.PASSWORD_NUMBERS , AuthError.PASSWORD_NUMBERS.getMessage());
+
+        return new Result<>(null , null , null);
+
+    }
 
 }

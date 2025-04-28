@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class AppView {
-    Scanner scanner = new Scanner(System.in);
+    static Scanner scanner = new Scanner(System.in);
     GameTerminalView gameTerminalView = new GameTerminalView();
     LoginMenuView loginMenuView = new LoginMenuView();
     MainMenuView mainMenuView = new MainMenuView();
