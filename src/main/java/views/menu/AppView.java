@@ -3,6 +3,7 @@ package views.menu;
 import models.App;
 import models.Menu;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class AppView {
@@ -13,7 +14,7 @@ public class AppView {
     ProfileMenuView profileMenuView = new ProfileMenuView();
     RegisterMenuView registerMenuView = new RegisterMenuView();
 
-    public void run(){
+    public void run() throws IOException {
         while (App.play){
             String command = scanner.nextLine();
             if(App.currentMenu.equals(Menu.RegisterMenu))

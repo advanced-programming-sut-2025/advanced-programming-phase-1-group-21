@@ -1,9 +1,13 @@
 package controllers;
 
+import com.google.gson.GsonBuilder;
 import models.App;
 import models.result.Result;
 import models.result.errorTypes.AuthError;
 import models.user.User;
+import com.google.gson.Gson;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,9 +20,9 @@ public class RegisterMenuController{
         return new Result<>(null , null , "Register Menu");
     }
 
-    public Result<User> register(String username, String password,String passwordConfirm, String nickname , String email, String gender) {
-        if(App.userRepository.findUserByUsername(username) != null)
-            return new Result<>(null , AuthError.USER_ALREADY_EXISTS , AuthError.USER_ALREADY_EXISTS.getMessage());
+    public Result<User> register(String username, String password,String passwordConfirm, String nickname , String email, String gender) throws IOException {
+//        if(App.userRepository.findUserByUsername(username) != null)
+//            return new Result<>(null , AuthError.USER_ALREADY_EXISTS , AuthError.USER_ALREADY_EXISTS.getMessage());
 
         if(!usernameValidation(username))
             return new Result<>(null , AuthError.INVALID_USERNAME , AuthError.INVALID_USERNAME.getMessage());
@@ -36,6 +40,14 @@ public class RegisterMenuController{
         //Random Password (balad naboodam)
 
         User user = new User(username , password , email , nickname , getGenderByName(gender) , null , null);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try (FileWriter writer = new FileWriter("users.json")) {
+            // تبدیل شیء به JSON و ذخیره در فایل
+            gson.toJson(user, writer);
+            System.out.println("good");
+        } catch (IOException e) {
+            System.err.println("ajibe " + e.getMessage());
+        }
         return new Result<>(user , null , "User Registered");
     }
 
