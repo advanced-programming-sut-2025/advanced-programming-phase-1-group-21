@@ -17,7 +17,6 @@ public class AppView {
     public void run() throws IOException {
         while (App.play){
             String command = scanner.nextLine();
-            System.out.println("TEST");
             if(App.currentMenu.equals(Menu.RegisterMenu))
                 registerMenuView.Result(command);
             else if(App.currentMenu.equals(Menu.LoginMenu))
