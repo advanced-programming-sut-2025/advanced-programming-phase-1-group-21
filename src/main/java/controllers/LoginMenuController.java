@@ -2,16 +2,8 @@ package controllers;
 
 import models.result.Result;
 import models.user.User;
-import models.user.UserRepository;
 
 public class LoginMenuController{
-
-    private UserRepository userRepository;
-
-    public LoginMenuController() {
-        userRepository = UserRepository.getInstance();
-    }
-
     public Result<User> login(String username, String password) {
         throw new UnsupportedOperationException("Not supported yet.");
     }

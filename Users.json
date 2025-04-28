@@ -1,0 +1,81 @@
+[
+  {
+    "username": "sobhan",
+    "password": "\u003cpassword1\u003e",
+    "email": "sobhan@gmail.com",
+    "nickname": "\u003cnickname\u003e",
+    "gender": "MALE"
+  },
+  {
+    "username": "sobi",
+    "password": "\u003cpassword1\u003e",
+    "email": "sobhan@gmail.com",
+    "nickname": "\u003cnickname\u003e",
+    "gender": "MALE"
+  },
+  {
+    "username": "sana",
+    "password": "\u003cpassword1\u003e",
+    "email": "sobhan@gmail.com",
+    "nickname": "\u003cnickname\u003e",
+    "gender": "MALE"
+  },
+  {
+    "username": "shayan",
+    "password": "\u003cpassword1\u003e",
+    "email": "shayan@gmail.com",
+    "nickname": "\u003cnickname\u003e",
+    "gender": "MALE"
+  },
+  {
+    "username": "ali",
+    "password": "\u003cpassword1\u003e",
+    "email": "ali@gmail.com",
+    "nickname": "\u003cnickname\u003e",
+    "gender": "MALE"
+  },
+  {
+    "username": "amin",
+    "password": "\u003cpassword1\u003e",
+    "email": "ali@gmail.com",
+    "nickname": "\u003cn",
+    "gender": "MALE"
+  },
+  {
+    "username": "amir",
+    "password": "\u003cpassword1\u003e",
+    "email": "ali@gmail.com",
+    "nickname": "\u003cn",
+    "gender": "MALE",
+    "securityQuestionID": 1,
+    "securityAnswer": "\u003canswer\u003e"
+  },
+  {
+    "username": "alii",
+    "password": "\u003cpassword1\u003e",
+    "email": "sobhan@gmail.com",
+    "nickname": "\u003cnickname\u003e",
+    "gender": "FEMALE"
+  },
+  {
+    "username": "aliii",
+    "password": "\u003cpassword1\u003e",
+    "email": "sobhan@gmail.com",
+    "nickname": "\u003cnickname\u003e",
+    "gender": "FEMALE"
+  },
+  {
+    "username": "aali",
+    "password": "\u003cpassword1\u003e",
+    "email": "sobhan@gmail.com",
+    "nickname": "\u003cnickname\u003e",
+    "gender": "FEMALE"
+  },
+  {
+    "username": "alli",
+    "password": "\u003cpassword1\u003e",
+    "email": "sobhan@gmail.com",
+    "nickname": "\u003cnickname\u003e",
+    "gender": "FEMALE"
+  }
+]
