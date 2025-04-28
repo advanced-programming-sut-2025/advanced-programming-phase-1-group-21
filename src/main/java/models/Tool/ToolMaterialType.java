@@ -1,11 +1,16 @@
-package models.game;
+package models.Tool;
 
 public enum ToolMaterialType {
     PRIMITIVE,
     COPPER,
     STEEL,
     GOLD,
-    IRIDIUM;
+    IRIDIUM,
+
+    EDUCATIONAL,
+    BAMBOO,
+    FIBERGLASS;
+    // Fishing Pole has IRIDIUM Material as well.
 
     public String getName() {
         return name();

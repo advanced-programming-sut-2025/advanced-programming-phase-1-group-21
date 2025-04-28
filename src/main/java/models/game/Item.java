@@ -1,17 +1,22 @@
 package models.game;
 
 public class Item {
-    protected String name;
-    private ItemType itemType;
-    private int cost, amount;
+    private final String name;
+    private final ItemType itemType;
+    private final int cost;
+    private int amount;
 
-    public Item(String name, ItemType itemType, int cost) {
+    public Item(String name, ItemType itemType, int cost, int amount) {
         this.name = name;
         this.itemType = itemType;
         this.cost = cost;
+        this.amount = amount;
     }
 
     public int getCost() {
+        if (itemType == ItemType.TOOL) {
+            return -1;
+        }
         return cost;
     }
 
@@ -21,5 +26,17 @@ public class Item {
 
     public ItemType getItemType() {
         return itemType;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public void changeAmount(int change) {
+        amount += change;
     }
 }
