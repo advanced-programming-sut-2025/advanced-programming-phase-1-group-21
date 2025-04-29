@@ -7,6 +7,7 @@ import models.App;
 import models.Menu;
 import models.result.Result;
 import models.result.errorTypes.AuthError;
+import models.result.errorTypes.MenuError;
 import models.result.errorTypes.UserError;
 import models.user.User;
 import views.menu.AppView;
@@ -62,23 +63,21 @@ public class LoginMenuController{
             throw e;
         }
 
-        return new Result<>(null , null , "Password changed successfully");
-
+        return Result.success(null, "Password changed successfully");
     }
 
     public Result<Void> changeMenu(String menu){
         if(menu.equals(Menu.RegisterMenu.toString())){
             App.currentMenu = Menu.RegisterMenu;
-            return new Result<>(null , null , "Now you are in register menu");
+            return Result.success(null);
         }
 
         if(menu.equals(Menu.MainMenu.toString())){
             App.currentMenu = Menu.MainMenu;
-            return new Result<>(null , null , "Now you are in main menu");
+            return Result.success(null);
         }
-
         else
-            return new Result<>(null , null , "You Can't move to this menu");
+            return Result.failure(MenuError.MENU_ACCESS_DENIED);
     }
 
     private ArrayList<User> readAllUsers(Gson gson , String filePath){
@@ -108,25 +107,24 @@ public class LoginMenuController{
 
     private Result<Void> checkPassword(String password) {
         if(password.length() < 8)
-            return new Result<>(null , AuthError.PASSWORD_LENGTH , AuthError.PASSWORD_LENGTH.getMessage());
+            return Result.failure(AuthError.PASSWORD_LENGTH);
 
         String specialCharacters = "(?!.*\\?.*)(?!.*>.*)(?!.*<.*)(?!.*,.*)(?!.*\".*)(?!.*'.*)(?!.*;.*)(?!.*:.*)(?!.*\\/.*)" +
                 "(?!.*\\|.*)(?!.*\\].*)(?!.*\\[.*)(?!.*\\}.*)(?!.*\\{.*)(?!.*\\+.*)(?!.*=.*)(?!.*\\).*)(?!.*\\(.*)(?!.*\\*.*)" +
                 "(?!.*&.*)(?!.*\\^.*)(?!.*%.*)(?!.*\\$.*)(?!.*#.*)(?!.*\\!.*)\\S+";
 
         if(Pattern.compile(specialCharacters).matcher(password).matches())
-            return new Result<>(null , AuthError.PASSWORD_SPECIAL_CHARACTERS , AuthError.PASSWORD_SPECIAL_CHARACTERS.getMessage());
+            return Result.failure(AuthError.PASSWORD_SPECIAL_CHARACTERS);
 
         String containAlphabet = "(?!.*[a-zA-Z].*)\\S+";
         if(Pattern.compile(containAlphabet).matcher(password).matches())
-            return new Result<>(null , AuthError.PASSWORD_ALPHABET , AuthError.PASSWORD_ALPHABET.getMessage());
+            return Result.failure(AuthError.PASSWORD_ALPHABET);
 
         String containNumber = "(?!.*[0-9].*)\\S+";
         if(Pattern.compile(containNumber).matcher(password).matches())
-            return new Result<>(null , AuthError.PASSWORD_NUMBERS , AuthError.PASSWORD_NUMBERS.getMessage());
+            return Result.failure(AuthError.PASSWORD_CONFIRM_ERROR);
 
-        return new Result<>(null , null , null);
-
+        return Result.success(null);
     }
 
 }
