@@ -49,5 +49,8 @@ public class GameTerminalView {
         if((matcher = GameMenuCommand.PRINT_MAP.getMatcher(command)) != null) {
             printWithColor(gameController.printMap());
         }
+
+        else
+            System.out.println("Invalid command");
     }
 }

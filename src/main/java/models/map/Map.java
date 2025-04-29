@@ -4,6 +4,7 @@ import models.result.Result;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Map {
     protected ArrayList<ArrayList<Tile>> tiles = new ArrayList<>();
@@ -46,6 +47,103 @@ public class Map {
                 for(int j = 23 ; j < 27 ; j++){
                     tiles.get(i).get(j).setLake(true);
                 }
+            }
+        }
+
+        if(id == 2){
+            for(int i = 0 ; i < 30 ; i++){
+                ArrayList<Tile> thisRowTiles = new ArrayList<>();
+                for(int j = 0 ; j < 50 ; j++){
+                    thisRowTiles.add(new Tile(new Coord(j , i) , null , false , false ,
+                            false , false , null , null));
+                }
+                tiles.add(thisRowTiles);
+            }
+
+            for(int i = 1 ; i < 5 ; i++){
+                for(int j = 1 ; j < 5 ; j++){
+                    tiles.get(i).get(j).setHouse(true);
+                }
+            }
+
+            for(int i = 1 ; i < 6 ; i++ ){
+                for(int j = 45 ; j < 49 ; j++){
+                    tiles.get(i).get(j).setGreenHouse(true);
+                }
+            }
+
+            for(int i = 20 ; i < 29 ; i++){
+                for(int j = 1 ; j < 10 ; j++){
+                    tiles.get(i).get(j).setMines(true);
+                }
+            }
+
+            for(int i = 24 ; i < 29 ; i ++){
+                for(int j = 23 ; j < 27 ; j++){
+                    tiles.get(i).get(j).setLake(true);
+                }
+            }
+
+            for(int i = 15 ; i < 18 ; i ++){
+                for(int j = 45 ; j < 48 ; j++){
+                    tiles.get(i).get(j).setLake(true);
+                }
+            }
+        }
+
+        if(id == 3){
+            for(int i = 0 ; i < 30 ; i++){
+                ArrayList<Tile> thisRowTiles = new ArrayList<>();
+                for(int j = 0 ; j < 50 ; j++){
+                    thisRowTiles.add(new Tile(new Coord(j , i) , null , false , false ,
+                            false , false , null , null));
+                }
+                tiles.add(thisRowTiles);
+            }
+
+            for(int i = 13 ; i < 17 ; i++){
+                for(int j = 23 ; j < 27 ; j++){
+                    tiles.get(i).get(j).setHouse(true);
+                }
+            }
+
+            for(int i = 1 ; i < 6 ; i++ ){
+                for(int j = 45 ; j < 49 ; j++){
+                    tiles.get(i).get(j).setGreenHouse(true);
+                }
+            }
+
+            for(int i = 20 ; i < 29 ; i++){
+                for(int j = 1 ; j < 10 ; j++){
+                    tiles.get(i).get(j).setMines(true);
+                }
+            }
+
+            for(int i = 1 ; i < 5 ; i ++){
+                for(int j = 1 ; j < 5 ; j++){
+                    tiles.get(i).get(j).setLake(true);
+                }
+            }
+
+            for(int i = 26 ; i < 29 ; i ++){
+                for(int j = 45 ; j < 49 ; j++){
+                    tiles.get(i).get(j).setLake(true);
+                }
+            }
+        }
+
+        int randomForagingNumber = 20;
+        Random random = new Random();
+        while(randomForagingNumber > 0){
+            ArrayList<Foraging> foragings = new ArrayList<>();
+            foragings.add(Foraging.TREE);
+            foragings.add(Foraging.ROCK);
+            foragings.add(Foraging.MARIJUANA);
+            int randomTileIndex = random.nextInt(1500);
+            Tile thisTile = tiles.get(randomTileIndex/50).get(randomTileIndex%50);
+            if(!thisTile.isHouse() && !thisTile.isGreenHouse() && !thisTile.isMines() && !thisTile.isLake() && (thisTile.getForaging() == null)){
+                thisTile.setForaging(foragings.get(random.nextInt(foragings.size())));
+                randomForagingNumber--;
             }
         }
     }

@@ -94,7 +94,7 @@ public class GameController{
     }
 
     public ArrayList<String> printMap() {
-        Map map = new Map(1);
+        Map map = new Map(3);
         return map.printMap(new Coord(1 , 1) , 1);
     }
 
