@@ -3,7 +3,7 @@ package models.command;
 import java.util.regex.Pattern;
 
 public enum MainMenuCommand implements Command {
-    ENTER_MENU("\\s*menu\\s*enter\\s*(?<menuName>\\S+)\\s*"),
+    ENTER_MENU("\\s*menu\\s+enter\\s+(?<menu>\\S+)\\s*"),
     EXIT_MENU("menu exit"),
     SHOW_CURRENT_MENU("show current menu"),
     LOGOUT("user logout"),
@@ -15,6 +15,6 @@ public enum MainMenuCommand implements Command {
 
     @Override
     public Pattern getPattern() {
-        return null;
+        return pattern;
     }
 }

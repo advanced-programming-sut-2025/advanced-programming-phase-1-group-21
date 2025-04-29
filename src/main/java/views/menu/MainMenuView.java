@@ -17,17 +17,20 @@ public class MainMenuView {
             throw new UnsupportedOperationException("Not supported yet.");
         }
 
-        if((matcher = MainMenuCommand.SHOW_CURRENT_MENU.getMatcher(command)) != null){
+        else if((matcher = MainMenuCommand.SHOW_CURRENT_MENU.getMatcher(command)) != null){
             throw new UnsupportedOperationException("Not supported yet.");
         }
 
-        if((matcher = MainMenuCommand.ENTER_MENU.getMatcher(command)) != null){
+        else if((matcher = MainMenuCommand.ENTER_MENU.getMatcher(command)) != null){
+            System.out.println(mainMenuController.enterMenu(matcher.group("menu").trim()).getMessage());
+        }
+
+        else if((matcher = MainMenuCommand.EXIT_MENU.getMatcher(command)) != null){
             throw new UnsupportedOperationException("Not supported yet.");
         }
 
-        if((matcher = MainMenuCommand.EXIT_MENU.getMatcher(command)) != null){
-            throw new UnsupportedOperationException("Not supported yet.");
-        }
+        else
+            System.out.println("invalid command");
     }
 
 }
