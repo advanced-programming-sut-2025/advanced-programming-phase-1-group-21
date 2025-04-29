@@ -6,6 +6,7 @@ import models.App;
 import models.Menu;
 import models.result.Result;
 import models.result.errorTypes.AuthError;
+import models.result.errorTypes.UserError;
 import models.user.User;
 import com.google.gson.Gson;
 
@@ -23,25 +24,26 @@ import static models.user.Gender.getGenderByName;
 public class RegisterMenuController{
 
 
+    //TODO WTF is this (should return String)
     public Result<Void> showCurrentMenu(){
-        return new Result<>(null , null , "Register Menu");
+        return Result.success(null, "Register Menu");
     }
 
     public Result<User> register(String username, String password,String passwordConfirm, String nickname , String email, String gender) throws IOException {
         if(findUserByUsername(username) != null)
-            return new Result<>(null , AuthError.USER_ALREADY_EXISTS , AuthError.USER_ALREADY_EXISTS.getMessage());
+            return Result.failure(AuthError.USER_ALREADY_EXISTS);
 
         if(!usernameValidation(username))
-            return new Result<>(null , AuthError.INVALID_USERNAME , AuthError.INVALID_USERNAME.getMessage());
+            return Result.failure(AuthError.INVALID_USERNAME);
 
         if(!emailValidation(email))
-            return new Result<>(null , AuthError.INVALID_EMAIL_FORMAT , AuthError.INVALID_EMAIL_FORMAT.getMessage());
+            return Result.failure(AuthError.INVALID_EMAIL_FORMAT);
 
         if(checkPassword(password).isError())
             return checkPassword(password);
 
         if(!password.equals(passwordConfirm))
-            return new Result<>(null , AuthError.PASSWORD_CONFIRM_ERROR , AuthError.PASSWORD_CONFIRM_ERROR.getMessage());
+            return Result.failure(AuthError.PASSWORD_CONFIRM_ERROR);
 
         //TODO
         //Random Password (balad naboodam)
@@ -57,7 +59,7 @@ public class RegisterMenuController{
             System.err.println("error" + e.getMessage());
             throw e;
         }
-        return new Result<>(user , null , "User Registered");
+        return Result.success(null, "User Registered");
     }
 
     public Result<Void> pickQuestion(String answer, String answerConfirm, String questionNumber) throws IOException {
@@ -78,9 +80,9 @@ public class RegisterMenuController{
                 System.err.println("error" + e.getMessage());
                 throw e;
             }
-            return new Result<>(null , null , "Answer successfully sets");
+            return Result.success(null, "Answer successfully set!");
         }
-        return new Result<>(null , null , "Answer not set");
+        return Result.failure(UserError.ANSWER_NOT_SET);
     }
 
     private boolean usernameValidation(String username) {
@@ -112,25 +114,24 @@ public class RegisterMenuController{
 
     private Result<User> checkPassword(String password) {
         if(password.length() < 8)
-            return new Result<>(null , AuthError.PASSWORD_LENGTH , AuthError.PASSWORD_LENGTH.getMessage());
+            return Result.failure(AuthError.PASSWORD_LENGTH);
 
         String specialCharacters = "(?!.*\\?.*)(?!.*>.*)(?!.*<.*)(?!.*,.*)(?!.*\".*)(?!.*'.*)(?!.*;.*)(?!.*:.*)(?!.*\\/.*)" +
                 "(?!.*\\|.*)(?!.*\\].*)(?!.*\\[.*)(?!.*\\}.*)(?!.*\\{.*)(?!.*\\+.*)(?!.*=.*)(?!.*\\).*)(?!.*\\(.*)(?!.*\\*.*)" +
                 "(?!.*&.*)(?!.*\\^.*)(?!.*%.*)(?!.*\\$.*)(?!.*#.*)(?!.*\\!.*)\\S+";
 
         if(Pattern.compile(specialCharacters).matcher(password).matches())
-            return new Result<>(null , AuthError.PASSWORD_SPECIAL_CHARACTERS , AuthError.PASSWORD_SPECIAL_CHARACTERS.getMessage());
+            return Result.failure(AuthError.PASSWORD_SPECIAL_CHARACTERS);
 
         String containAlphabet = "(?!.*[a-zA-Z].*)\\S+";
         if(Pattern.compile(containAlphabet).matcher(password).matches())
-            return new Result<>(null , AuthError.PASSWORD_ALPHABET , AuthError.PASSWORD_ALPHABET.getMessage());
+            return Result.failure(AuthError.PASSWORD_ALPHABET);
 
         String containNumber = "(?!.*[0-9].*)\\S+";
         if(Pattern.compile(containNumber).matcher(password).matches())
-            return new Result<>(null , AuthError.PASSWORD_NUMBERS , AuthError.PASSWORD_NUMBERS.getMessage());
+            return Result.failure(AuthError.PASSWORD_NUMBERS);
 
-        return new Result<>(null , null , null);
-
+        return Result.success(null);
     }
 
     private ArrayList<User> readAllUsers(Gson gson , String filePath){
@@ -151,7 +152,7 @@ public class RegisterMenuController{
 
     public Result<Void> goToLogin(){
         App.currentMenu = Menu.LoginMenu;
-        return new Result<>(null , null , "Now you are in login menu");
+        return Result.success(null);
     }
 
     private User findUserByUsername(String username) {
