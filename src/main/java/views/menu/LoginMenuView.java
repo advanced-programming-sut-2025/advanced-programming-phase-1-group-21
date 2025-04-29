@@ -31,7 +31,7 @@ public class LoginMenuView {
         }
 
         else if((matcher = LoginMenuCommand.LOGIN.getMatcher(command)) != null){
-            System.out.println(loginMenuController.login(matcher.group("username") , matcher.group("password")));
+            System.out.println(loginMenuController.login(matcher.group("username") , matcher.group("password")).getMessage());
         }
 
         else if((matcher = LoginMenuCommand.ENTER_MENU.getMatcher(command)) != null){
