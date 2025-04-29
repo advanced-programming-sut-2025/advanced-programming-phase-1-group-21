@@ -135,14 +135,14 @@ public class Map {
         int randomForagingNumber = 20;
         Random random = new Random();
         while(randomForagingNumber > 0){
-            ArrayList<Foraging> foragings = new ArrayList<>();
-            foragings.add(Foraging.TREE);
-            foragings.add(Foraging.ROCK);
-            foragings.add(Foraging.MARIJUANA);
+            ArrayList<Foraging> foraging = new ArrayList<>();
+            foraging.add(Foraging.TREE);
+            foraging.add(Foraging.ROCK);
+            foraging.add(Foraging.MARIJUANA);
             int randomTileIndex = random.nextInt(1500);
             Tile thisTile = tiles.get(randomTileIndex/50).get(randomTileIndex%50);
             if(!thisTile.isHouse() && !thisTile.isGreenHouse() && !thisTile.isMines() && !thisTile.isLake() && (thisTile.getForaging() == null)){
-                thisTile.setForaging(foragings.get(random.nextInt(foragings.size())));
+                thisTile.setForaging(foraging.get(random.nextInt(foraging.size())));
                 randomForagingNumber--;
             }
         }
@@ -152,11 +152,11 @@ public class Map {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    //TODO
     public ArrayList<String> printMap(Coord center, int radius) {
         ArrayList<String> output = new ArrayList<>();
-        for(ArrayList<Tile> rowTiles : tiles) {
-            for(Tile tile : rowTiles) {
+        for(int i = center.getY() ; i < Math.min(center.getY() + radius , 30) ; i++){
+            for(int j = center.getX() ; j < Math.min(center.getX() + radius , 50)  ; j++){
+                Tile tile = tiles.get(i).get(j);
                 if(tile.isHouse())
                     output.add("H");
                 else if(tile.isGreenHouse())

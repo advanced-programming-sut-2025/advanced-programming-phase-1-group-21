@@ -20,7 +20,7 @@ public enum GameMenuCommand implements Command {
 //    WEATHER_FORECAST("weather forecast"),
 //    CHEAT_WEATHER_SET("cheat weather set (?<type).*)"),
 //    WALK("walk -l "),
-    PRINT_MAP("print map"),
+    PRINT_MAP("print\\s+map\\s+-l\\s+\\((?<x>\\d+),(?<y>\\d+)\\)\\s+-s\\s+(?<size>\\d+)"),
 //    HELP_READING_MAP("help reading map"),
 //    ENERGY_SHOW("energy show"),
 //    CHEAT_ENERGY_SET("energy set -v (?<value>.*)"),
