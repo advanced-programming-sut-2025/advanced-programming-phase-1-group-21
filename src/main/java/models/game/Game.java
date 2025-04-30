@@ -1,19 +1,22 @@
 package models.game;
 
+import models.map.Map;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import models.map.Weather;
 import models.time.*;
 
 public class Game {
-    private List<Player> players;
+    private ArrayList<Player> players;
     private Player currentPlayer;
     private int roundCount = 0;
     private Date gameDate;
     private Season gameSeason;
     private Weather gameWeather;
-    private Weather forecastCheat;   
-    
+    private Weather forecastCheat;
+
     public Game(List<Player> players) {
         this.players = players;
         this.currentPlayer = players.get(0);
@@ -70,15 +73,29 @@ public class Game {
     private void endOfRound() {
 
     }
+    private ArrayList<Map> maps;
+
+    public Game(Player currentPlayer, ArrayList<Player> players) {
+        this.currentPlayer = currentPlayer;
+        this.players = players;
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
 
     public void nextTurn() {
         Player nextPlayer = getNextPlayer();
-        
+
         if (players.indexOf(nextPlayer) == 0) {
             roundCount++;
             endOfRound();
         }
-        
+
         currentPlayer = nextPlayer;
     }
 

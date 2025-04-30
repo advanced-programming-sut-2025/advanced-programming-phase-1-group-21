@@ -20,6 +20,10 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class LoginMenuController{
+    public Result<String> showCurrentMenu(){
+        return Result.success("login menu");
+    }
+
     public Result<User> login(String username, String password) {
         if(findUserByUsername(username) == null)
             return Result.failure(UserError.USER_NOT_FOUND);
@@ -71,6 +75,8 @@ public class LoginMenuController{
         }
 
         if(menu.equals("mainmenu")){
+            if(App.logedInUser == null)
+                return Result.failure(UserError.SHOULD_LOGIN_FIRST , UserError.SHOULD_LOGIN_FIRST.getMessage());
             App.currentMenu = Menu.MainMenu;
             return Result.success(null);
         }

@@ -8,22 +8,66 @@ import models.crop.Seed;
 import models.game.*;
 import models.map.*;
 import models.result.Result;
+import models.result.errorTypes.AuthError;
+import models.result.errorTypes.UserError;
 import models.time.Season;
 import models.user.User;
+import views.menu.GameTerminalView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameController{
-    Game game; //remember to init this
 
-    public Result<Game> createGame(List<User> users) {
-        //remember to fill this.game
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Result<String> showCurrentMenu(){
+        return Result.success("game");
     }
 
-    public Result<Void> selectMap() {
-        throw new UnsupportedOperationException("Not supported yet.");
+
+    public Result<Game> createGame(String username1 , String username2 , String username3) throws IOException {
+        if((DataBaseController.findUserByUsername(username1) == null) || (DataBaseController.findUserByUsername(username2)
+                == null) || (DataBaseController.findUserByUsername(username3) == null)) {
+            return Result.failure(UserError.USER_NOT_FOUND);
+        }
+
+        ArrayList<User> users = new ArrayList<>();
+        users.add(App.logedInUser);
+        users.add(DataBaseController.findUserByUsername(username1));
+        users.add(DataBaseController.findUserByUsername(username2));
+        users.add(DataBaseController.findUserByUsername(username3));
+
+        for(User user : users) {
+            if(user.isInAGame())
+                return Result.failure(AuthError.IN_GAME_USER);
+        }
+
+        for(User user : users) {
+            user.setInAGame(true);
+            DataBaseController.editUser(user);
+        }
+
+        ArrayList<Player> players = new ArrayList<>();
+        for(User user : users) {
+            players.add(new Player(user));
+        }
+
+        for(Player player : players) {
+            while(true) {
+                int mapID = GameTerminalView.getMap(player);
+                if ((mapID < 1) || (mapID > 3))
+                    System.out.println("Invalid map ID");
+                else {
+                    player.setThisPlayerMap(new Map(mapID));
+                    player.setCurrentPlayerMap(player.getThisPlayerMap());
+                    break;
+                }
+            }
+        }
+
+        Game game = new Game(players.getFirst() , players);
+        App.game = game;
+        return Result.success(game , "Game created");
     }
 
     public Result<Game> loadGame() {
@@ -31,11 +75,25 @@ public class GameController{
     }
 
     public Result<Void> exitGame() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
+        //Save Game
+        App.game = null;
+        App.play = false;
+        return Result.success("Exit Game ...");
     }
 
     public Result<Void> nextTurn() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if(App.game == null)
+            return Result.failure(AuthError.GAME_NOT_CREATED , "Game not created");
+        int currentPlayerIndex = 0;
+        for(int i = 0 ; i < 4 ; i ++){
+            if(App.game.getPlayers().get(i).equals(App.game.getCurrentPlayer()))
+                currentPlayerIndex = i;
+        }
+
+        App.game.setCurrentPlayer(App.game.getPlayers().get((currentPlayerIndex + 1)%4));
+        return Result.success("Now its " + App.game.getCurrentPlayer().getUser().getUsername() + "'s turn");
+
     }
 
     public Result<Void> terminateGame() {
@@ -104,15 +162,17 @@ public class GameController{
     }
 
     public ArrayList<String> printMap(int x, int y , int size) {
-        Map map = new Map(3);
-        return map.printMap(new Coord(x , y) , size);
+        return App.game.getCurrentPlayer().getCurrentPlayerMap().printMap(new Coord(x , y) , size);
     }
 
     public Result<Energy> showEnergy() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<Void> helpReadingMap() {throw new UnsupportedOperationException("Not supported yet.");}
+    public Result<Void> helpReadingMap() {
+        GameTerminalView.helpReadingMap();
+        return Result.success("Help Reading Map");
+    }
 
     public Result<Energy> setEnergyCheat(int energyValue) {
         throw new UnsupportedOperationException("Not supported yet.");

@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 public enum MainMenuCommand implements Command {
     ENTER_MENU("\\s*menu\\s+enter\\s+(?<menu>\\S+)\\s*"),
     EXIT_MENU("menu exit"),
-    SHOW_CURRENT_MENU("show current menu"),
+    SHOW_CURRENT_MENU("\\s*show\\s+current\\s+menu\\s*"),
     LOGOUT("user logout"),
     ;
     public final Pattern pattern;
