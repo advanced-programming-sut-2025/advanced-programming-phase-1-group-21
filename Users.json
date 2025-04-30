@@ -21,7 +21,7 @@
     "email": "sobhan@gmail.com",
     "nickname": "a",
     "gender": "MALE",
-    "isInAGame": true
+    "isInAGame": false
   },
   {
     "username": "shayan",
@@ -29,7 +29,7 @@
     "email": "sobhan@gmail.com",
     "nickname": "a",
     "gender": "MALE",
-    "isInAGame": false
+    "isInAGame": true
   },
   {
     "username": "sana",

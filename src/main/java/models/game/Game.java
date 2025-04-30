@@ -15,6 +15,13 @@ public class Game {
         this.players = players;
     }
 
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
 
     public void nextTurn() {
         throw new UnsupportedOperationException("Not supported yet.");

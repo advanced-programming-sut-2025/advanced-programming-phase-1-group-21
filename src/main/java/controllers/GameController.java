@@ -55,7 +55,7 @@ public class GameController{
 
         for(Player player : players) {
             while(true) {
-                int mapID = GameTerminalView.getMap();
+                int mapID = GameTerminalView.getMap(player);
                 if ((mapID < 1) || (mapID > 3))
                     System.out.println("Invalid map ID");
                 else {
@@ -70,10 +70,6 @@ public class GameController{
         return Result.success(game , "Game created");
     }
 
-    public Result<Void> selectMap() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
     public Result<Game> loadGame() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -83,7 +79,17 @@ public class GameController{
     }
 
     public Result<Void> nextTurn() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if(App.game == null)
+            return Result.failure(AuthError.GAME_NOT_CREATED , "Game not created");
+        int currentPlayerIndex = 0;
+        for(int i = 0 ; i < 4 ; i ++){
+            if(App.game.getPlayers().get(i).equals(App.game.getCurrentPlayer()))
+                currentPlayerIndex = i;
+        }
+
+        App.game.setCurrentPlayer(App.game.getPlayers().get((currentPlayerIndex + 1)%4));
+        return Result.success("Now its " + App.game.getCurrentPlayer().getUser().getUsername() + "'s turn");
+
     }
 
     public Result<Void> terminateGame() {

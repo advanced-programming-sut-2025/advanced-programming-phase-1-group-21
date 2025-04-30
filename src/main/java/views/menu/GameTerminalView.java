@@ -3,6 +3,7 @@ package views.menu;
 import controllers.GameController;
 import models.App;
 import models.command.GameMenuCommand;
+import models.game.Player;
 import models.map.GreenHouse;
 
 import java.io.IOException;
@@ -47,8 +48,8 @@ public class GameTerminalView {
         }
     }
 
-    public static int getMap(){
-        System.out.print("Select your map ID: ");
+    public static int getMap(Player player){
+        System.out.print(player.getUser().getUsername() + " ,Select your map ID: ");
         return AppView.scanner.nextInt();
     }
 
@@ -63,6 +64,10 @@ public class GameTerminalView {
 
         else if((matcher = GameMenuCommand.NEW_GAME.getMatcher(command)) != null) {
             System.out.println(gameController.createGame(matcher.group("username1") , matcher.group("username2") , matcher.group("username3")).getMessage());
+        }
+
+        else if((matcher = GameMenuCommand.NEXT_TURN.getMatcher(command)) != null) {
+            System.out.println(gameController.nextTurn().getMessage());
         }
 
         else
