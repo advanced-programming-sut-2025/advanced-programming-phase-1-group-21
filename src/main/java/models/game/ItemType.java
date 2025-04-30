@@ -4,6 +4,7 @@ public enum ItemType {
     SEED,
     TOOL,
     CONSUMABLE,
+    COIN
     ;
 
     public String name;
