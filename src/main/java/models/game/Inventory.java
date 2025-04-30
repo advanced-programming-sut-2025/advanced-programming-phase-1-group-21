@@ -71,13 +71,21 @@ public class Inventory {
         return removeItemFromList(item, items);
     }
 
-    public boolean canRemoveItemList(List<Item> itemsToRemove) {
-        List<Item> items = new ArrayList<>(this.items);
-        for (Item i : items) {
+    public static boolean removeItemsList(List<Item> itemsToRemove, List<Item> items) {
+        for (Item i : itemsToRemove) {
             if (!removeItemFromList(i, items))
                 return false;
         }
         return true;
+    }
+
+    public void removeItemList(List<Item> itemsToRemove) {
+        boolean can = removeItemsList(itemsToRemove, items);
+        if (!can) throw new RuntimeException("Can't remove items from the inventory.");
+    }
+
+    public boolean canRemoveItemList(List<Item> itemsToRemove) {
+        return removeItemsList(itemsToRemove, new ArrayList<>(items));
     }
 
     public Item getItem(String name) {

@@ -1,22 +1,63 @@
 package models.game;
 
 import models.map.*;
+import models.map.Coord;
+import models.map.Map;
 import models.user.User;
 
 import java.util.ArrayList;
 
 public class Player {
+    static final int MAX_ENERGY = 200;
+
     private User user;
     private Map thisPlayerMap;
     private Map currentPlayerMap;
     private Coord coord = new Coord(0 , 0);
     private Map map;
+    private Energy energy;
     private Inventory inventory;
     private TrashCanType trashCanType;
     private Item itemInHand;
     private ArrayList<Relation> relations;
     private ArrayList<NPCFriendship> npcFriendships;
-    private Energy energy;
+    private ArrayList<Recipe> craftingRecipe = new ArrayList<>();
+
+    public ArrayList<Recipe> getCraftingRecipe() {
+        return craftingRecipe;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void addCraftRecipe(Recipe recipe) {
+        craftingRecipe.add(recipe);
+    }
+
+    public Recipe getRecipeByName(String name) {
+        for (Recipe recipe : craftingRecipe) {
+            if (recipe.getRecipeName().equals(name)) {
+                return recipe;
+            }
+        }
+        return null;
+    }
+
+    public int getCurrentEnergy() {
+        return currentEnergy;
+    }
+
+    public int getMaxEnergy() {
+        return maxEnergy;
+    }
+
+    public void decreaseEnergy(int amount) {
+        if (currentEnergy < amount) {
+            throw new IllegalArgumentException("You can't decrease energy by " + amount);
+        }
+        currentEnergy -= amount;
+    }
 
     public Player(User user) {
         this.user = user;
@@ -69,6 +110,10 @@ public class Player {
             return currentPlayerMap.getTiles();
         if(currentPlayerMap.getCurrentLocation().equals(LocationsOnMap.House))
             return currentPlayerMap.getHouse().getTiles();
+        if(currentPlayerMap.getCurrentLocation().equals(LocationsOnMap.GreenHouse))
+            return currentPlayerMap.getGreenHouses().getTiles();
+        if(currentPlayerMap.getCurrentLocation().equals(LocationsOnMap.Mines))
+            return currentPlayerMap.getMines().getTiles();
         return null;
     }
 

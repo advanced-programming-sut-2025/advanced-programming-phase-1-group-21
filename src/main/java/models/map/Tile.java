@@ -15,6 +15,7 @@ public class Tile {
     private Tree tree = null;
     private Foraging foraging = null;
     private Refrigerator refrigerator = null;
+    private boolean isDoor = false;
 
     public Tile(Coord cord, Animal animal, boolean isHouse, boolean isGreenHouse, boolean isLake, boolean isMines, Tree tree, Foraging foraging) {
         this.cord = cord;
@@ -97,5 +98,13 @@ public class Tile {
 
     public Refrigerator getRefrigerator() {
         return refrigerator;
+    }
+
+    public void setDoor(boolean door) {
+        isDoor = door;
+    }
+
+    public boolean isDoor() {
+        return isDoor;
     }
 }
