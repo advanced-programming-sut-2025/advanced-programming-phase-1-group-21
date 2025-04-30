@@ -228,8 +228,13 @@ public class GameController{
          return Result.success(App.game.getCurrentPlayer().getInventory().toString());
     }
 
-    public Result<Inventory> removeFromInventory(String itemName, int numberOfItems) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Result<Void> removeFromInventory(String itemName, int numberOfItems) {
+        Inventory inventory = App.game.getCurrentPlayer().getInventory();
+        //TODO improve this by changing itemName to a general Item then remove that
+        if (inventory.removeItem(new Item(itemName, null, 0, numberOfItems)))
+            return Result.success(null);
+        else
+            return Result.failure(GameError.NOT_ENOUGH_ITEMS);
     }
 
     public Result<Tool> equipTool(String toolName) {
