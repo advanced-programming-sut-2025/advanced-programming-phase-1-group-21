@@ -44,21 +44,6 @@ public class Player {
         return null;
     }
 
-    public int getCurrentEnergy() {
-        return currentEnergy;
-    }
-
-    public int getMaxEnergy() {
-        return maxEnergy;
-    }
-
-    public void decreaseEnergy(int amount) {
-        if (currentEnergy < amount) {
-            throw new IllegalArgumentException("You can't decrease energy by " + amount);
-        }
-        currentEnergy -= amount;
-    }
-
     public Player(User user) {
         this.user = user;
         this.inventory = new Inventory(this);
