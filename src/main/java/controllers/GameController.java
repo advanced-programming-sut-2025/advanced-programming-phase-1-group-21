@@ -181,8 +181,8 @@ public class GameController{
         return App.game.getCurrentPlayer().getCurrentPlayerMap().printMap(new Coord(x , y) , size);
     }
 
-    public Result<Energy> showEnergy() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public int showEnergy() {
+        return game.getCurrentPlayer().getEnergy();
     }
 
     public Result<Void> helpReadingMap() {
@@ -190,12 +190,14 @@ public class GameController{
         return Result.success("Help Reading Map");
     }
 
-    public Result<Energy> setEnergyCheat(int energyValue) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Result<Void> setEnergyCheat(int energyValue) {
+        game.getCurrentPlayer().setEnergy(energyValue);
+        return Result.success(null);
     }
 
     public Result<Energy> setEnergyUnlimited() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        game.getCurrentPlayer().setEnergy(Integer.MAX_VALUE);
+        return Result.success(null);
     }
 
     public Result<Inventory> showInventory() {

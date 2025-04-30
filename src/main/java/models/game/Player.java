@@ -44,6 +44,10 @@ public class Player {
         energy.decreaseEnergy(amount);
     }
 
+    public void setEnergy(int energyValue) {
+        energy.setEnergy(energyValue);
+    }
+
     public User getUser() {
         return user;
     }

@@ -43,4 +43,7 @@ public class Energy {
         this.remainingDays = days;
     }
 
+    public void setEnergy(int energy) {
+        currentEnergy = energy;
+    }
 }
