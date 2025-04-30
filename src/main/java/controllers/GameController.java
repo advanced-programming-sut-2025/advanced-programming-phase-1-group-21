@@ -21,6 +21,8 @@ import java.util.List;
 
 public class GameController{
 
+    Game game = null;
+
     public Result<String> showCurrentMenu(){
         return Result.success("game");
     }
@@ -86,13 +88,7 @@ public class GameController{
     public Result<Void> nextTurn() {
         if(App.game == null)
             return Result.failure(AuthError.GAME_NOT_CREATED , "Game not created");
-        int currentPlayerIndex = 0;
-        for(int i = 0 ; i < 4 ; i ++){
-            if(App.game.getPlayers().get(i).equals(App.game.getCurrentPlayer()))
-                currentPlayerIndex = i;
-        }
-
-        App.game.setCurrentPlayer(App.game.getPlayers().get((currentPlayerIndex + 1)%4));
+        game.nextTurn();
         return Result.success("Now its " + App.game.getCurrentPlayer().getUser().getUsername() + "'s turn");
 
     }
@@ -102,27 +98,35 @@ public class GameController{
     }
 
     public Result<String> getTime() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Result.success("" + game.getGameDate().getHourInDay());
     }
 
     public Result<String> getDate() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Result.success(
+            "Day " + game.getGameDate().getDay() + ", " +
+            game.getSeason()
+        );
     }
 
     public Result<String> getDateTime() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Result.success(
+            "Day " + game.getGameDate().getDay() + ", " +
+            game.getSeason() + ", " +
+            "Time: " + game.getGameDate().getHourInDay() + ":00"
+        );
     }
 
     public Result<String> getDayWeek() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Result.success(game.getGameDate().getCurrentDayOfWeek());
     }
 
     public Result<Void> advanceTimeCheat(int days, int hours) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        game.advanceTime(days, hours);
+        return Result.success(null);
     }
 
-    public Result<Season> getSeason() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Result<Season> getSeasonName() {
+        return Result.success(game.getSeason().toString());
     }
 
     public Result<Void> struckByThor(Coord cord) {
@@ -134,15 +138,16 @@ public class GameController{
     }
 
     public Result<Weather> getWeather() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Result.success(game.getWeather().toString());
     }
 
     public Result<Weather> getWeatherForecast() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Result.success(game.getNextWeather().toString());
     }
 
-    public Result<Weather> setWeatherCheat(Weather weather) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Result<Void> setWeatherCheat(Weather weather) {
+        game.setForecastWeather(weather);
+        return Result.success(null);
     }
 
     public Result<Building> buildGreenHouse() {
@@ -416,6 +421,4 @@ public class GameController{
     public Result<Void> updateGameMonth() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
-
 }

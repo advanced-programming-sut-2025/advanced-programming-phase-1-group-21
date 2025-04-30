@@ -45,6 +45,14 @@ public class Date {
         return hour;
     }
 
+    public long getHourInDay() {
+        return hour % HOURS_IN_DAY;
+    }
+
+    public long getDay() {
+        return hour / HOURS_IN_DAY;
+    }
+
     public void advance(long hours) {
         hour += hours;
     }
