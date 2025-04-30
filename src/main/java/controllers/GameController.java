@@ -75,7 +75,11 @@ public class GameController{
     }
 
     public Result<Void> exitGame() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
+        //Save Game
+        App.game = null;
+        App.play = false;
+        return Result.success("Exit Game ...");
     }
 
     public Result<Void> nextTurn() {

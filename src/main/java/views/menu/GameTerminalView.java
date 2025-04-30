@@ -70,6 +70,10 @@ public class GameTerminalView {
             System.out.println(gameController.nextTurn().getMessage());
         }
 
+        else if((matcher = GameMenuCommand.EXIT_GAME.getMatcher(command)) != null) {
+            System.out.println(gameController.exitGame().getMessage());
+        }
+
         else
             System.out.println("Invalid command");
     }
