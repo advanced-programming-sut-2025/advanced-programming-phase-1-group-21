@@ -1,0 +1,6 @@
+go to login menu
+menu enter mainmenu
+login -u sobhan -p <password1>
+menu enter mainmenu
+menu enter game
+new game sobhan sobi maryam
