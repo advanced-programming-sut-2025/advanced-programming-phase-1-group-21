@@ -31,7 +31,7 @@ public enum GameMenuCommand implements Command {
     ENERGY_SHOW("energy show"),
     CHEAT_ENERGY_SET("energy set -v (?<value>.*)"),
     CHEAT_ENERGY_UNLIMITED("energy unlimited"),
-//    INVENTORY_SHOW("inventory show"),
+    INVENTORY_SHOW("inventory show"),
 //    INVENTOR_TRASH("inventory trash -i (?<item’s name>.*) -n (?<number>.*)"),
 //    TOOLS_EQUIP("tools equip (?<toolName>.*)"),
 //    TOOL_SHOW_CURRENT("tool show current"),

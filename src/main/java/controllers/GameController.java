@@ -224,8 +224,8 @@ public class GameController{
         return Result.success(null);
     }
 
-    public Result<Inventory> showInventory() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Result<String> showInventory() {
+         return Result.success(App.game.getCurrentPlayer().getInventory().toString());
     }
 
     public Result<Inventory> removeFromInventory(String itemName, int numberOfItems) {

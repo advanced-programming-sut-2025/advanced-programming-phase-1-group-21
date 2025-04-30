@@ -114,6 +114,10 @@ public class GameTerminalView {
             System.out.println(gameController.craftInfo(matcher.group("craftName")).getMessage());
         }
 
+        else if ((matcher = GameMenuCommand.INVENTORY_SHOW.getMatcher(command)) != null) {
+            System.out.println(gameController.showInventory().getData());
+        }
+
         else
             System.out.println("Invalid command");
     }
