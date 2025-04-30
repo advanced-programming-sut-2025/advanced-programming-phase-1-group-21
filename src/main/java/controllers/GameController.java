@@ -60,6 +60,7 @@ public class GameController{
                     System.out.println("Invalid map ID");
                 else {
                     player.setThisPlayerMap(new Map(mapID));
+                    player.setCurrentPlayerMap(player.getThisPlayerMap());
                     break;
                 }
             }

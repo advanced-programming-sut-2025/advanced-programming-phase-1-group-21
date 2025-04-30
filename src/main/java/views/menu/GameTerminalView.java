@@ -58,7 +58,7 @@ public class GameTerminalView {
             printWithColor(gameController.printMap(Integer.parseInt(matcher.group("x")), Integer.parseInt(matcher.group("y")), Integer.parseInt(matcher.group("size"))));
         }
 
-        if((matcher = GameMenuCommand.SHOW_CURRENT_MENU.getMatcher(command)) != null) {
+        else if((matcher = GameMenuCommand.SHOW_CURRENT_MENU.getMatcher(command)) != null) {
             System.out.println(gameController.showCurrentMenu().getMessage());
         }
 

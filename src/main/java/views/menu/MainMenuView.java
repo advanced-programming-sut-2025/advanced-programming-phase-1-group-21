@@ -18,7 +18,7 @@ public class MainMenuView {
         }
 
         else if((matcher = MainMenuCommand.SHOW_CURRENT_MENU.getMatcher(command)) != null){
-            throw new UnsupportedOperationException("Not supported yet.");
+            System.out.println(mainMenuController.showCurrentMenu().getMessage());
         }
 
         else if((matcher = MainMenuCommand.SHOW_CURRENT_MENU.getMatcher(command)) != null){
