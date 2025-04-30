@@ -2,7 +2,6 @@ package models.map;
 
 import models.animal.Animal;
 import models.crop.Tree;
-import models.game.Player;
 import models.game.Refrigerator;
 
 public class Tile {
@@ -12,18 +11,16 @@ public class Tile {
     private boolean isGreenHouse = false;
     private boolean isLake = false;
     private boolean isMines = false;
+    private boolean isBarn = false;
+    private boolean isCoop = false;
     private Tree tree = null;
     private Foraging foraging = null;
     private Refrigerator refrigerator = null;
     private boolean isDoor = false;
 
-    public Tile(Coord cord, Animal animal, boolean isHouse, boolean isGreenHouse, boolean isLake, boolean isMines, Tree tree, Foraging foraging) {
+    public Tile(Coord cord, Animal animal, Tree tree, Foraging foraging) {
         this.cord = cord;
         this.animal = animal;
-        this.isHouse = isHouse;
-        this.isGreenHouse = isGreenHouse;
-        this.isLake = isLake;
-        this.isMines = isMines;
         this.tree = tree;
         this.foraging = foraging;
     }
@@ -106,5 +103,43 @@ public class Tile {
 
     public boolean isDoor() {
         return isDoor;
+    }
+
+    public void setBarn(boolean barn) {
+        isBarn = barn;
+    }
+
+    public void setCoop(boolean coop) {
+        isCoop = coop;
+    }
+
+    public boolean isBarn() {
+        return isBarn;
+    }
+
+    public boolean isCoop() {
+        return isCoop;
+    }
+
+    public boolean tileIsEmpty(){
+        if(tree!=null)
+            return false;
+        if(animal!=null)
+            return false;
+        if(isMines)
+            return false;
+        if(isGreenHouse)
+            return false;
+        if(isHouse)
+            return false;
+        if(isLake)
+            return false;
+        if(foraging!=null)
+            return false;
+        if(isBarn)
+            return false;
+        if(isCoop)
+            return false;
+        return true;
     }
 }

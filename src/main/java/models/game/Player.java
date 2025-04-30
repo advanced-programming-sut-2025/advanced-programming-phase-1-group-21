@@ -1,5 +1,7 @@
 package models.game;
 
+import models.App;
+import models.animal.Animal;
 import models.map.*;
 import models.map.Coord;
 import models.map.Map;
@@ -14,7 +16,7 @@ public class Player {
     private Map thisPlayerMap;
     private Map currentPlayerMap;
     private Coord coord = new Coord(0 , 0);
-    private Map map;
+    private ArrayList<Animal> animals = new ArrayList<>();
     private Energy energy;
     private Inventory inventory;
     private TrashCanType trashCanType;
@@ -102,6 +104,32 @@ public class Player {
         return null;
     }
 
+    public ArrayList<Tile> neighborTiles(){
+        ArrayList<Tile> output = new ArrayList<>();
+        Coord playerCord = App.game.getCurrentPlayer().getCoord();
+        for(Direction direction : Direction.values()){
+            if(direction.getDx() + playerCord.getX() < 0){
+                continue;
+            }
+
+            if(direction.getDx() + playerCord.getX() >= App.game.getCurrentPlayer().currentLocationTiles().get(0).size()){
+                continue;
+            }
+
+            if(direction.getDy() + playerCord.getY() < 0){
+                continue;
+            }
+
+            if(direction.getDy() + playerCord.getY() >= App.game.getCurrentPlayer().currentLocationTiles().size()){
+                continue;
+            }
+
+            output.add(App.game.getCurrentPlayer().currentLocationTiles().get(playerCord.getY() + direction.getDy()).get(playerCord.getX() + direction.getDx()));
+        }
+        return output;
+    }
+
+
     public void setCurrentPlayerMap(Map currentPlayerMap) {
         this.currentPlayerMap = currentPlayerMap;
     }
@@ -132,5 +160,9 @@ public class Player {
 
     public void setCoord(Coord coord) {
         this.coord = coord;
+    }
+
+    public ArrayList<Animal> getAnimals() {
+        return animals;
     }
 }

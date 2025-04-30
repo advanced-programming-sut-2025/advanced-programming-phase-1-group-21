@@ -8,6 +8,8 @@ public enum GameError implements Error {
     CANT_STAND_ON_FRIDGE("you cant walk on fridge"),
     CANT_STAND_ON_LAKE("you cant walk on a lake"),
     CRAFT_RECIPE_NOT_FOUND("Recipe not found"),
+    NOT_ENOUGH_COINS("You do not have enough coins"),
+    ANIMAL_NOT_FOUND("Animal not found"),
     NOT_ENOUGH_ITEMS("Not enough items");
 
 

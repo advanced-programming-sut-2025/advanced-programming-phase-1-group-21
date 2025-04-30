@@ -21,8 +21,8 @@ public class Map {
             for(int i = 0 ; i < 30 ; i++){
                 ArrayList<Tile> thisRowTiles = new ArrayList<>();
                 for(int j = 0 ; j < 50 ; j++){
-                    thisRowTiles.add(new Tile(new Coord(j , i) , null , false , false ,
-                            false , false , null , null));
+                    thisRowTiles.add(new Tile(new Coord(j , i) , null ,
+                            null , null));
                 }
                 tiles.add(thisRowTiles);
             }
@@ -57,8 +57,8 @@ public class Map {
             for(int i = 0 ; i < 30 ; i++){
                 ArrayList<Tile> thisRowTiles = new ArrayList<>();
                 for(int j = 0 ; j < 50 ; j++){
-                    thisRowTiles.add(new Tile(new Coord(j , i) , null , false , false ,
-                            false , false , null , null));
+                    thisRowTiles.add(new Tile(new Coord(j , i) , null ,
+                            null , null));
                 }
                 tiles.add(thisRowTiles);
             }
@@ -100,8 +100,8 @@ public class Map {
             for(int i = 0 ; i < 30 ; i++){
                 ArrayList<Tile> thisRowTiles = new ArrayList<>();
                 for(int j = 0 ; j < 50 ; j++){
-                    thisRowTiles.add(new Tile(new Coord(j , i) , null , false , false ,
-                            false , false , null , null));
+                    thisRowTiles.add(new Tile(new Coord(j , i) , null ,
+                            null , null));
                 }
                 tiles.add(thisRowTiles);
             }
@@ -144,8 +144,8 @@ public class Map {
             for(int i = 0 ; i < 8 ; i++){
                 ArrayList<Tile> thisRowTiles = new ArrayList<>();
                 for(int j = 0 ; j < 16 ; j++){
-                    thisRowTiles.add(new Tile(new Coord(j , i) , null , false , false ,
-                            false , false , null , null));
+                    thisRowTiles.add(new Tile(new Coord(j , i) , null ,
+                            null , null));
                 }
                 tiles.add(thisRowTiles);
             }
@@ -190,6 +190,10 @@ public class Map {
                     output.add("~");
                 else if(tile.isMines())
                     output.add("M");
+                else if(tile.isBarn())
+                    output.add("B");
+                else if(tile.isCoop())
+                    output.add("C");
                 else if(tile.getForaging() != null) {
                     if (tile.getForaging().equals(Foraging.ROCK))
                         output.add("R");
