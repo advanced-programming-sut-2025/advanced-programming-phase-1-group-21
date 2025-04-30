@@ -39,4 +39,9 @@ public class Item {
     public void changeAmount(int change) {
         amount += change;
     }
+
+    @Override
+    public String toString() {
+        return name + " * " + amount;
+    }
 }
