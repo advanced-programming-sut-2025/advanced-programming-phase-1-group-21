@@ -98,6 +98,18 @@ public class GameTerminalView {
             gameController.walk(Integer.parseInt(matcher.group("x")) , Integer.parseInt(matcher.group("y")));
         }
 
+        else if ((matcher = GameMenuCommand.ENERGY_SHOW.getMatcher(command)) != null) {
+            System.out.println("Players Energy is: " + gameController.showEnergy());
+        }
+
+        else if ((matcher = GameMenuCommand.CHEAT_ENERGY_SET.getMatcher(command)) != null) {
+            gameController.setEnergyCheat(Integer.parseInt(matcher.group("value")));
+        }
+
+        else if ((matcher = GameMenuCommand.CHEAT_ENERGY_UNLIMITED.getMatcher(command)) != null) {
+            gameController.setEnergyUnlimited();
+        }
+
         else
             System.out.println("Invalid command");
     }
