@@ -32,7 +32,7 @@ public class Game {
     }
 
     public void advanceTime(int day, int hour) {
-        gameDate = gameDate.advance(day, hour);
+        gameDate.advance(day, hour);
     }
 
     public Player getNextPlayer() {
