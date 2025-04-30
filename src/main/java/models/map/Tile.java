@@ -3,16 +3,18 @@ package models.map;
 import models.animal.Animal;
 import models.crop.Tree;
 import models.game.Player;
+import models.game.Refrigerator;
 
 public class Tile {
     private Coord cord;
     private Animal animal = null;
-    private boolean isHouse;
-    private boolean isGreenHouse;
-    private boolean isLake;
-    private boolean isMines;
+    private boolean isHouse = false;
+    private boolean isGreenHouse = false;
+    private boolean isLake = false;
+    private boolean isMines = false;
     private Tree tree = null;
     private Foraging foraging = null;
+    private Refrigerator refrigerator = null;
 
     public Tile(Coord cord, Animal animal, boolean isHouse, boolean isGreenHouse, boolean isLake, boolean isMines, Tree tree, Foraging foraging) {
         this.cord = cord;
@@ -87,5 +89,13 @@ public class Tile {
 
     public void setForaging(Foraging foraging) {
         this.foraging = foraging;
+    }
+
+    public void setRefrigerator(Refrigerator refrigerator) {
+        this.refrigerator = refrigerator;
+    }
+
+    public Refrigerator getRefrigerator() {
+        return refrigerator;
     }
 }
