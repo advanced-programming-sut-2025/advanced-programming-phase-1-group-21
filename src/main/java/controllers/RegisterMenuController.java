@@ -48,7 +48,7 @@ public class RegisterMenuController{
         //TODO
         //Random Password (balad naboodam)
 
-        User user = new User(username , password , email , nickname , getGenderByName(gender) , null , null);
+        User user = new User(username , password , email , nickname , getGenderByName(gender) , null , null , false);
         App.registeredUser = user;
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         ArrayList<User> users = readAllUsers(gson, "Users.json");

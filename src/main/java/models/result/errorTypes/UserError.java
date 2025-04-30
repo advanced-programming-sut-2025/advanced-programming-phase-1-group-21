@@ -7,6 +7,7 @@ public enum UserError implements Error {
     PASSWORD_DOESNT_MATCH("Password does not match with this username"),
     INCORRECT_ANSWER("Answer is incorrect"),
     ANSWER_NOT_SET("Answer is not set"),
+    SHOULD_LOGIN_FIRST("You should login first"),
     ;
 
     private final String message;

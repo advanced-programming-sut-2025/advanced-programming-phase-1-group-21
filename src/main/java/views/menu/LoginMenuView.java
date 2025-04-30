@@ -30,6 +30,10 @@ public class LoginMenuView {
             System.out.println(loginMenuController.forgetPassword(matcher.group("username")).getMessage());
         }
 
+        else if((matcher = LoginMenuCommand.SHOW_CURRENT_MENU.getMatcher(command)) != null){
+            System.out.println(loginMenuController.showCurrentMenu().getMessage());
+        }
+
         else if((matcher = LoginMenuCommand.LOGIN.getMatcher(command)) != null){
             System.out.println(loginMenuController.login(matcher.group("username") ,
                     matcher.group("password")).getMessage());
