@@ -38,7 +38,7 @@ public enum GameMenuCommand implements Command {
 //    TOOLS_SHOW_AVAILABLE("tools show available"),
 //    TOOLS_UPGRADE("tools upgrade (?<toolName>.*)>"),
 //    TOOL_USE("tool use -d (?<direction>.*)>"),
-//    CRAFTINFO("craftinfo -n <craft_name>"),
+    CRAFTINFO("craftinfo -n (?<craftName>.+)"),
 //    CRAFTING_SHOW_RECIPES("crafting show recipes"),
 //    CRAFTING("crafting craft (?<item_name>.*"),
 //    PLACE_ITEM("place item -n (?<item_name>.*) -d (?<direction>.*)"),

@@ -3,15 +3,18 @@ package controllers;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import models.crops.SeedSource;
 import models.result.Result;
+import models.time.Season;
 import models.user.User;
+import models.crop.*;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class DataBaseController {
     public static ArrayList<User> readAllUsers(Gson gson , String filePath){
@@ -56,5 +59,72 @@ public class DataBaseController {
             System.err.println("error" + e.getMessage());
             throw e;
         }
+    }
+
+    public static List<models.crops.SeedSource> loadCropsFromCSV(String filePath) {
+        List<models.crops.SeedSource> crops = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            // Skip header line
+            br.readLine();
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+
+                String name = values[0];
+                String source = values[1];
+
+                List<Integer> stages = Arrays.stream(values[2].split("-"))
+                        .map(Integer::parseInt)
+                        .collect(Collectors.toList());
+
+                int totalHarvestTime = Integer.parseInt(values[3]);
+                boolean oneTime = Boolean.parseBoolean(values[4]);
+
+                Integer regrowthTime = values[5].equals("-") ? null : Integer.parseInt(values[5]);
+
+                int baseSellPrice = Integer.parseInt(values[6]);
+                boolean isEdible = Boolean.parseBoolean(values[7]);
+
+                Integer energy = values[8].equals("-") ? null : Integer.parseInt(values[8]);
+                Integer baseHealth = values[9].equals("-") ? null : Integer.parseInt(values[9]);
+
+                List<Season> seasons = parseSeasons(values[10]);
+
+                boolean canBecomeGiant = Boolean.parseBoolean(values[11]);
+
+                crops.add(new SeedSource(name, source, stages, totalHarvestTime, oneTime, regrowthTime,
+                        baseSellPrice, isEdible, energy, baseHealth, seasons, canBecomeGiant));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return crops;
+    }
+
+    private static List<Season> parseSeasons(String seasonStr) {
+        List<Season> seasons = new ArrayList<>();
+        String[] parts = seasonStr.split(" & ");
+
+        for (String part : parts) {
+            switch (part.toUpperCase()) {
+                case "SPRING":
+                    seasons.add(Season.SPRING);
+                    break;
+                case "SUMMER":
+                    seasons.add(Season.SUMMER);
+                    break;
+                case "FALL":
+                case "AUTUMN":
+                    seasons.add(Season.AUTUMN);
+                    break;
+                case "WINTER":
+                    seasons.add(Season.WINTER);
+                    break;
+            }
+        }
+        return seasons;
     }
 }
