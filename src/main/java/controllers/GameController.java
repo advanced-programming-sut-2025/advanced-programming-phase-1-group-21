@@ -10,6 +10,7 @@ import models.game.*;
 import models.map.*;
 import models.result.Result;
 import models.result.errorTypes.AuthError;
+import models.result.errorTypes.GameError;
 import models.result.errorTypes.UserError;
 import models.time.Season;
 import models.user.User;
@@ -229,12 +230,20 @@ public class GameController{
     }
 
     public Result<List<Recipe>> craftingShowRecipes() {
-        return Result.success(game.getCurrentPlayer().getLearntRecipes());
+        return Result.success(game.getCurrentPlayer().getCraftingRecipe());
     }
 
-    //TODO_SOBHAN
-    public Result<Item> craft(String recipeName) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Result<Void> craft(String recipeName) {
+        Recipe recipe = game.getCurrentPlayer().getRecipeByName(recipeName);
+        if (recipe == null) {
+            return Result.failure(GameError.CRAFT_RECIPE_NOT_FOUND);
+        }
+        Inventory inventory = game.getCurrentPlayer().getInventory();
+        if (!inventory.canRemoveItemList(recipe.getItems()))
+            return Result.failure(GameError.NOT_ENOUGH_ITEMS);
+        inventory.removeItemList(recipe.getItems());
+        inventory.addItem(recipe.getResult());
+        return Result.success(null);
     }
 
     public Result<Void> placeItem(Item item, Direction direction) {

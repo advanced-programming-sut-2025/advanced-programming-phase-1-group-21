@@ -3,11 +3,33 @@ package models.game;
 import java.util.List;
 
 public class Recipe {
+    private String recipeName;
     private final List<Item> items;
     private Item result;
 
-    public Recipe(List<Item> items, Item result) {
+    public Recipe(String name, List<Item> items, Item result) {
+        this.recipeName = name;
         this.items = items;
+        this.result = result;
+    }
+
+    public String getRecipeName() {
+        return recipeName;
+    }
+
+    public void setRecipeName(String recipeName) {
+        this.recipeName = recipeName;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public Item getResult() {
+        return result;
+    }
+
+    public void setResult(Item result) {
         this.result = result;
     }
 
