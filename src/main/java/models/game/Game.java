@@ -2,12 +2,62 @@ package models.game;
 
 import java.util.List;
 
+import models.time.*;
+
 public class Game {
     private List<Player> players;
     private Player currentPlayer;
+    private int roundCount = 0;
+    private Date gameDate;
+    private Season gameSeason;
+    
+    
+    public Game(List<Player> players) {
+        this.players = players;
+        this.currentPlayer = players.get(0);
+        this.gameDate = Date.createBias();
+        this.gameSeason = Season.SPRING;
+    }
+
+    public Season getSeason() {
+        return gameSeason;
+    }
+
+    public void advanceSeason() {
+        gameSeason = gameSeason.nextSeason();
+    }
+
+    public Date getGameDate() {
+        return gameDate;
+    }
+
+    public void advanceTimeByHour(int hour) {
+        gameDate = gameDate.advance(hour);
+    }
+
+    public void advanceTimeByDay(int day) {
+        gameDate = gameDate.advance(day, 0);
+    }
+
+    public Player getNextPlayer() {
+        int currentIndex = players.indexOf(currentPlayer);
+        int nextIndex = (currentIndex + 1) % players.size();
+        return players.get(nextIndex);
+    }
+
+    private void endOfRound() {
+
+    }
 
     public void nextTurn() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Player nextPlayer = getNextPlayer();
+        
+        if (players.indexOf(nextPlayer) == 0) {
+            roundCount++;
+            endOfRound();
+        }
+        
+        currentPlayer = nextPlayer;
     }
 
     public void endGame() {
