@@ -4,6 +4,7 @@ import models.result.Error;
 
 public enum AuthError implements Error {
     INVALID_USERNAME("Invalid username"),
+    IN_GAME_USER("this username is already in a game"),
     USER_NOT_FOUND("User not found"),
     PASSWORD_LENGTH("Password too short"),
     PASSWORD_SPECIAL_CHARACTERS("Password must contain special characters"),

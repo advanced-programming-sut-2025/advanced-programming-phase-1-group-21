@@ -1,5 +1,6 @@
 package controllers;
 
+import models.App;
 import models.Tool.Tool;
 import models.animal.Animal;
 import models.animal.AnimalProducts;
@@ -8,17 +9,68 @@ import models.crop.Seed;
 import models.game.*;
 import models.map.*;
 import models.result.Result;
+import models.result.errorTypes.AuthError;
+import models.result.errorTypes.UserError;
 import models.time.Season;
 import models.user.User;
+import views.menu.GameTerminalView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameController{
 
+    public Result<String> showCurrentMenu(){
+        return Result.success("game");
+    }
 
-    public Result<Game> createGame(List<User> users) {
-        throw new UnsupportedOperationException("Not supported yet.");
+
+    public Result<Game> createGame(String username1 , String username2 , String username3) throws IOException {
+        if((DataBaseController.findUserByUsername(username1) == null) || (DataBaseController.findUserByUsername(username2)
+                == null) || (DataBaseController.findUserByUsername(username3) == null)) {
+            return Result.failure(UserError.USER_NOT_FOUND);
+        }
+
+        ArrayList<User> users = new ArrayList<>();
+        users.add(App.logedInUser);
+        users.add(DataBaseController.findUserByUsername(username1));
+        users.add(DataBaseController.findUserByUsername(username2));
+        users.add(DataBaseController.findUserByUsername(username3));
+
+        for(User user : users) {
+            if(user.isInAGame())
+                return Result.failure(AuthError.IN_GAME_USER);
+        }
+
+        for(User user : users) {
+            user.setInAGame(true);
+            DataBaseController.editUser(user);
+        }
+
+        ArrayList<Player> players = new ArrayList<>();
+        for(User user : users) {
+            players.add(new Player(user));
+        }
+
+        for(Player player : players) {
+            while(true) {
+                int mapID = GameTerminalView.getMap();
+                if ((mapID < 1) || (mapID > 3))
+                    System.out.println("Invalid map ID");
+                else {
+                    player.setThisPlayerMap(new Map(mapID));
+                    printMap(0 , 0 , 50);
+                    break;
+                }
+            }
+        }
+
+        Game game = new Game(players.getFirst() , players);
+        if(players.getFirst().getUser().equals(App.logedInUser)) {
+            System.out.println("my job here is done");
+        }
+        return Result.success(game , "Game created");
     }
 
     public Result<Void> selectMap() {

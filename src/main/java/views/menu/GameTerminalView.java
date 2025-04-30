@@ -45,6 +45,11 @@ public class GameTerminalView {
         }
     }
 
+    public static int getMap(){
+        System.out.print("Select your map ID: ");
+        return AppView.scanner.nextInt();
+    }
+
     public void Result(String command) {
         if((matcher = GameMenuCommand.PRINT_MAP.getMatcher(command)) != null) {
             printWithColor(gameController.printMap(Integer.parseInt(matcher.group("x")), Integer.parseInt(matcher.group("y")), Integer.parseInt(matcher.group("size"))));

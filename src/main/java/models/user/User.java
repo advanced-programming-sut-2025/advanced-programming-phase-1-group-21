@@ -12,6 +12,7 @@ public class User {
     private String email;
     private String nickname;
     private Gender gender;
+    private boolean isInAGame;
     private Hash hash;
     private Integer securityQuestionID;
     private String securityAnswer;
@@ -19,10 +20,10 @@ public class User {
     private ArrayList<Recipe> myRecipes;
 
     public static final List<String> SECURITY_QUESTIONS = List.of(
-        "What is your mother's maiden name?",
-        "What was the name of your first pet?",
-        "What city were you born in?",
-        "What is your favorite book?"
+            "What is your mother's maiden name?",
+            "What was the name of your first pet?",
+            "What city were you born in?",
+            "What is your favorite book?"
     );
 
     public void setSecurityQuestionID(Integer securityQuestionID) {
@@ -33,7 +34,7 @@ public class User {
         this.securityAnswer = securityAnswer;
     }
 
-    public User(String username, String password, String email, String nickname, Gender gender, Integer securityQuestionID, String securityAnswer) {
+    public User(String username, String password, String email, String nickname, Gender gender, Integer securityQuestionID, String securityAnswer , boolean isInAGame) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -41,10 +42,19 @@ public class User {
         this.gender = gender;
         this.securityQuestionID = securityQuestionID;
         this.securityAnswer = securityAnswer;
+        this.isInAGame = isInAGame;
+    }
+
+    public boolean isInAGame() {
+        return isInAGame;
     }
 
     public String getUsername() {
         return username;
+    }
+
+    public void setInAGame(boolean inAGame) {
+        isInAGame = inAGame;
     }
 
     public String getPassword() {
