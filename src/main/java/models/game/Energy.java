@@ -10,7 +10,7 @@ public class Energy {
 
     public Energy() {
         maxEnergy = MAX_ENERGY;
-        currentEnergy = 0;
+        currentEnergy = maxEnergy;
         remainingDays = -1;
     }
 
