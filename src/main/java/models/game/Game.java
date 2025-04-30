@@ -31,12 +31,8 @@ public class Game {
         return gameDate;
     }
 
-    public void advanceTimeByHour(int hour) {
-        gameDate = gameDate.advance(hour);
-    }
-
-    public void advanceTimeByDay(int day) {
-        gameDate = gameDate.advance(day, 0);
+    public void advanceTime(int day, int hour) {
+        gameDate = gameDate.advance(day, hour);
     }
 
     public Player getNextPlayer() {
