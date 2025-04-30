@@ -206,7 +206,7 @@ public class GameController{
     }
 
     public int showEnergy() {
-        return game.getCurrentPlayer().getEnergy();
+        return App.game.getCurrentPlayer().getEnergy();
     }
 
     public Result<Void> helpReadingMap() {
@@ -215,12 +215,12 @@ public class GameController{
     }
 
     public Result<Void> setEnergyCheat(int energyValue) {
-        game.getCurrentPlayer().setEnergy(energyValue);
+        App.game.getCurrentPlayer().setEnergy(energyValue);
         return Result.success(null);
     }
 
     public Result<Energy> setEnergyUnlimited() {
-        game.getCurrentPlayer().setEnergy(Integer.MAX_VALUE);
+        App.game.getCurrentPlayer().setEnergy(Integer.MAX_VALUE);
         return Result.success(null);
     }
 
