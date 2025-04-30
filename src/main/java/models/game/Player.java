@@ -1,6 +1,8 @@
 package models.game;
 
 import models.map.*;
+import models.map.Coord;
+import models.map.Map;
 import models.user.User;
 
 import java.util.ArrayList;
@@ -20,6 +22,28 @@ public class Player {
     private Item itemInHand;
     private ArrayList<Relation> relations;
     private ArrayList<NPCFriendship> npcFriendships;
+    private ArrayList<Recipe> craftingRecipe = new ArrayList<>();
+
+    public ArrayList<Recipe> getCraftingRecipe() {
+        return craftingRecipe;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void addCraftRecipe(Recipe recipe) {
+        craftingRecipe.add(recipe);
+    }
+
+    public Recipe getRecipeByName(String name) {
+        for (Recipe recipe : craftingRecipe) {
+            if (recipe.getRecipeName().equals(name)) {
+                return recipe;
+            }
+        }
+        return null;
+    }
 
     public int getCurrentEnergy() {
         return currentEnergy;
