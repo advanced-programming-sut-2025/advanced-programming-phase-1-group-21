@@ -43,7 +43,7 @@ public class GameController{
     }
 
     public Result<String> getTime() {
-        return Result.success(game.getGameDate().getHourInDay().toString());
+        return Result.success("" + game.getGameDate().getHourInDay());
     }
 
     public Result<String> getDate() {
@@ -66,7 +66,8 @@ public class GameController{
     }
 
     public Result<Void> advanceTimeCheat(int days, int hours) {
-        return Result.success(game.advanceTime(days, hours));
+        game.advanceTime(days, hours);
+        return Result.success(null);
     }
 
     public Result<Season> getSeason() {
