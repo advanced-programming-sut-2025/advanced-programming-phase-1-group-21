@@ -93,9 +93,9 @@ public class GameController{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public ArrayList<String> printMap() {
-        Map map = new Map(1);
-        return map.printMap(new Coord(1 , 1) , 1);
+    public ArrayList<String> printMap(int x, int y , int size) {
+        Map map = new Map(3);
+        return map.printMap(new Coord(x , y) , size);
     }
 
     public Result<Energy> showEnergy() {

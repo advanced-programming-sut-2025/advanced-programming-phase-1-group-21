@@ -47,7 +47,10 @@ public class GameTerminalView {
 
     public void Result(String command) {
         if((matcher = GameMenuCommand.PRINT_MAP.getMatcher(command)) != null) {
-            printWithColor(gameController.printMap());
+            printWithColor(gameController.printMap(Integer.parseInt(matcher.group("x")), Integer.parseInt(matcher.group("y")), Integer.parseInt(matcher.group("size"))));
         }
+
+        else
+            System.out.println("Invalid command");
     }
 }

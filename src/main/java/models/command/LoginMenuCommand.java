@@ -16,6 +16,6 @@ public enum LoginMenuCommand implements Command {
 
     @Override
     public Pattern getPattern() {
-        return null;
+        return pattern;
     }
 }

@@ -10,9 +10,7 @@ import models.result.errorTypes.AuthError;
 import models.result.errorTypes.MenuError;
 import models.result.errorTypes.UserError;
 import models.user.User;
-import views.menu.AppView;
 import views.menu.LoginMenuView;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -72,7 +70,7 @@ public class LoginMenuController{
             return Result.success(null);
         }
 
-        if(menu.equals(Menu.MainMenu.toString())){
+        if(menu.equals("mainmenu")){
             App.currentMenu = Menu.MainMenu;
             return Result.success(null);
         }
