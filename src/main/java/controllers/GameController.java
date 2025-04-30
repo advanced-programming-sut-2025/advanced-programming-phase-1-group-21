@@ -15,9 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameController{
-
+    Game game; //remember to init this
 
     public Result<Game> createGame(List<User> users) {
+        //remember to fill this.game
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -42,27 +43,34 @@ public class GameController{
     }
 
     public Result<String> getTime() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Result.success(game.getGameDate().getHourInDay().toString());
     }
 
     public Result<String> getDate() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Result.success(
+            "Day " + game.getGameDate().getDay() + ", " +
+            game.getSeason()
+        );
     }
 
     public Result<String> getDateTime() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Result.success(
+            "Day " + game.getGameDate().getDay() + ", " +
+            game.getSeason() + ", " +
+            "Time: " + game.getGameDate().getHourInDay() + ":00"
+        );
     }
 
     public Result<String> getDayWeek() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Result.success(game.getGameDate().getCurrentDayOfWeek());
     }
 
     public Result<Void> advanceTimeCheat(int days, int hours) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Result.success(game.advanceTime(days, hours));
     }
 
     public Result<Season> getSeason() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Result.success(game.getSeason().toString());
     }
 
     public Result<Void> struckByThor(Coord cord) {
@@ -354,6 +362,4 @@ public class GameController{
     public Result<Void> updateGameMonth() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
-
 }
