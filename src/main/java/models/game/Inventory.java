@@ -114,4 +114,30 @@ public class Inventory {
         }
         return amount;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Inventory {\n");
+        sb.append("  Type: ").append(inventoryType).append("\n");
+        sb.append("  Size: ").append(items.size()).append("/").append(getMaximumSize()).append("\n");
+        sb.append("  Trashcan Tier: ").append(trashcanType).append("\n");
+        sb.append("  Items: [\n");
+
+        if (items.isEmpty()) {
+            sb.append("    (empty)\n");
+        } else {
+            for (Item item : items) {
+                sb.append("    ").append(item.getName())
+                        .append(": ").append(item.getAmount())
+                        .append("/").append(MAXIMUM_ITEM_PER_SLOT)
+                        .append(" (").append(item.getItemType()).append(")\n");
+            }
+        }
+
+        sb.append("  ]\n");
+        sb.append("}");
+
+        return sb.toString();
+    }
 }
