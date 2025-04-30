@@ -10,7 +10,8 @@ public enum GameError implements Error {
     CRAFT_RECIPE_NOT_FOUND("Recipe not found"),
     NOT_ENOUGH_COINS("You do not have enough coins"),
     ANIMAL_NOT_FOUND("Animal not found"),
-    NOT_ENOUGH_ITEMS("Not enough items");
+    NOT_ENOUGH_ITEMS("Not enough items"),
+    SEED_NOT_FOUND("Seed not found");
 
 
     private final String message;
