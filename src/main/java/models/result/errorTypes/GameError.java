@@ -3,6 +3,8 @@ package models.result.errorTypes;
 import models.result.Error;
 
 public enum GameError implements Error {
+    COORDINATE_DOESNT_EXISTS("this coordinate does not exist in this location"),
+    CANT_STAND_ON_FORAGING("you cant walk on a foraging"),
     CRAFT_RECIPE_NOT_FOUND("Recipe not found"),
     NOT_ENOUGH_ITEMS("Not enough items");
 

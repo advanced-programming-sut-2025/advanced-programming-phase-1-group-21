@@ -1,5 +1,6 @@
 package models.game;
 
+import models.map.*;
 import models.map.Coord;
 import models.map.Map;
 import models.user.User;
@@ -12,7 +13,7 @@ public class Player {
     private User user;
     private Map thisPlayerMap;
     private Map currentPlayerMap;
-    private Coord coord;
+    private Coord coord = new Coord(0 , 0);
     private Map map;
     private int currentEnergy;
     private int maxEnergy;
@@ -82,6 +83,14 @@ public class Player {
         return currentPlayerMap;
     }
 
+    public ArrayList<ArrayList<Tile>> currentLocationTiles(){
+        if(currentPlayerMap.getCurrentLocation().equals(LocationsOnMap.Farm))
+            return currentPlayerMap.getTiles();
+        if(currentPlayerMap.getCurrentLocation().equals(LocationsOnMap.House))
+            return currentPlayerMap.getHouse().getTiles();
+        return null;
+    }
+
     public void setCurrentPlayerMap(Map currentPlayerMap) {
         this.currentPlayerMap = currentPlayerMap;
     }
@@ -108,5 +117,9 @@ public class Player {
 
     public Coord getCoord() {
         return coord;
+    }
+
+    public void setCoord(Coord coord) {
+        this.coord = coord;
     }
 }

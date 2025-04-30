@@ -8,6 +8,7 @@ public enum GameMenuCommand implements Command {
     NEXT_TURN("\\s*next\\s+turn\\s*"),
     EXIT_GAME("\\s*exit\\s+game\\s*"),
     HELP_READING_MAP("\\s*help\\s+reading\\s+map\\s*"),
+    WALK("\\s*walk\\s+-l\\s+\\((?<x>\\d+),(?<y>\\d+)\\)\\s*"),
 //    ENTER_MENU("\\s*menu\\s*enter\\s*(?<menuName>\\S+)\\s*"),
 //    GAME_NEW(""),
 //    GAME_MAP("game map (?<map_number>.*)"),

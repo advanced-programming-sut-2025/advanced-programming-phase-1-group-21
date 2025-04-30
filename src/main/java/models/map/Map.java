@@ -1,17 +1,19 @@
 package models.map;
 
+import models.App;
 import models.result.Result;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class Map {
     protected ArrayList<ArrayList<Tile>> tiles = new ArrayList<>();
-    protected House houses;
-    protected ArrayList<Lake> lakes;
-    protected Mines mines;
-    protected GreenHouse greenHouses;
+    protected House house = new House();
+    protected ArrayList<Lake> lakes = new ArrayList<>();
+    protected Mines mines = new Mines();
+    protected GreenHouse greenHouses = new GreenHouse();
+    protected LocationsOnMap currentLocation = LocationsOnMap.Farm;
+
 
 
     public Map(int id) {
@@ -48,6 +50,7 @@ public class Map {
                     tiles.get(i).get(j).setLake(true);
                 }
             }
+            this.lakes.add(new Lake());
         }
 
         if(id == 2){
@@ -83,12 +86,14 @@ public class Map {
                     tiles.get(i).get(j).setLake(true);
                 }
             }
+            this.lakes.add(new Lake());
 
             for(int i = 15 ; i < 18 ; i ++){
                 for(int j = 45 ; j < 48 ; j++){
                     tiles.get(i).get(j).setLake(true);
                 }
             }
+            this.lakes.add(new Lake());
         }
 
         if(id == 3){
@@ -124,13 +129,32 @@ public class Map {
                     tiles.get(i).get(j).setLake(true);
                 }
             }
+            this.lakes.add(new Lake());
 
             for(int i = 26 ; i < 29 ; i ++){
                 for(int j = 45 ; j < 49 ; j++){
                     tiles.get(i).get(j).setLake(true);
                 }
             }
+            this.lakes.add(new Lake());
         }
+
+        //this map is fot house
+        if(id == 4){
+            for(int i = 0 ; i < 8 ; i++){
+                ArrayList<Tile> thisRowTiles = new ArrayList<>();
+                for(int j = 0 ; j < 16 ; j++){
+                    thisRowTiles.add(new Tile(new Coord(j , i) , null , false , false ,
+                            false , false , null , null));
+                }
+                tiles.add(thisRowTiles);
+            }
+
+        }
+
+        this.greenHouses = new GreenHouse();
+        this.house = new House();
+        this.mines = new Mines();
 
         int randomForagingNumber = 20;
         Random random = new Random();
@@ -154,9 +178,10 @@ public class Map {
 
     public ArrayList<String> printMap(Coord center, int radius) {
         ArrayList<String> output = new ArrayList<>();
-        for(int i = center.getY() ; i < Math.min(center.getY() + radius , 30) ; i++){
-            for(int j = center.getX() ; j < Math.min(center.getX() + radius , 50)  ; j++){
-                Tile tile = tiles.get(i).get(j);
+        ArrayList<ArrayList<Tile>> tilesToPrint = App.game.getCurrentPlayer().currentLocationTiles();
+        for(int i = center.getY() ; i < Math.min(center.getY() + radius , tilesToPrint.size()) ; i++){
+            for(int j = center.getX() ; j < Math.min(center.getX() + radius , tilesToPrint.get(0).size())  ; j++){
+                Tile tile = tilesToPrint.get(i).get(j);
                 if(tile.isHouse())
                     output.add("H");
                 else if(tile.isGreenHouse())
@@ -173,12 +198,44 @@ public class Map {
                     else if (tile.getForaging().equals(Foraging.MARIJUANA))
                         output.add("*");
                 }
+                else if((App.game.getCurrentPlayer().getCoord().getX() == j) && (App.game.getCurrentPlayer().getCoord().getY() == i))
+                    output.add("@");
+                else if(tile.getRefrigerator() != null)
+                    output.add("F");
                 else
                     output.add("#");
             }
             output.add("\n");
         }
         return output;
+    }
+
+    public ArrayList<ArrayList<Tile>> getTiles() {
+        return tiles;
+    }
+
+    public House getHouse() {
+        return house;
+    }
+
+    public LocationsOnMap getCurrentLocation() {
+        return currentLocation;
+    }
+
+    public void setCurrentLocation(LocationsOnMap currentLocation) {
+        this.currentLocation = currentLocation;
+    }
+
+    public ArrayList<Lake> getLakes() {
+        return lakes;
+    }
+
+    public Mines getMines() {
+        return mines;
+    }
+
+    public GreenHouse getGreenHouses() {
+        return greenHouses;
     }
 
     public static Result<String> helpReadingMap() {

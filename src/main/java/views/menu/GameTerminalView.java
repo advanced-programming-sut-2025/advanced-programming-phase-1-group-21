@@ -43,6 +43,10 @@ public class GameTerminalView {
                 System.out.print(GREEN + line + GREEN);
             else if(line.equals("T"))
                 System.out.print(GREEN + line + GREEN);
+            else if(line.equals("@"))
+                System.out.print(RED + line + RED);
+            else if(line.equals("F"))
+                System.out.print(BLACK + line + BLACK);
             else
                 System.out.print(line);
         }
@@ -88,6 +92,10 @@ public class GameTerminalView {
 
         else if((matcher = GameMenuCommand.HELP_READING_MAP.getMatcher(command)) != null) {
             gameController.helpReadingMap();
+        }
+
+        else if((matcher = GameMenuCommand.WALK.getMatcher(command)) != null) {
+            gameController.walk(Integer.parseInt(matcher.group("x")) , Integer.parseInt(matcher.group("y")));
         }
 
         else

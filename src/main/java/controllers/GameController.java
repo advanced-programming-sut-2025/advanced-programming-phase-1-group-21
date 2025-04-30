@@ -155,8 +155,26 @@ public class GameController{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<Player> walk(Coord cord) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Result<Player> walk(int x , int y) {
+        if(y >= App.game.getCurrentPlayer().currentLocationTiles().size())
+            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS , GameError.COORDINATE_DOESNT_EXISTS.getMessage());
+        if(x >= App.game.getCurrentPlayer().currentLocationTiles().get(0).size())
+            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS , GameError.COORDINATE_DOESNT_EXISTS.getMessage());
+
+        if(App.game.getCurrentPlayer().getCurrentPlayerMap().getTiles().get(y).get(x).getForaging() != null)
+            return Result.failure(GameError.CANT_STAND_ON_FORAGING , GameError.CANT_STAND_ON_FORAGING.getMessage());
+
+        if(App.game.getCurrentPlayer().currentLocationTiles().get(y).get(x).isHouse()){
+            App.game.getCurrentPlayer().getCurrentPlayerMap().setCurrentLocation(LocationsOnMap.House);
+            App.game.getCurrentPlayer().setCoord(new Coord(0, 0));
+            GameTerminalView.printWithColor(printMap(0 , 0 , 50));
+        }
+        else{
+            App.game.getCurrentPlayer().setCoord(new Coord(x, y));
+            GameTerminalView.printWithColor(printMap(0 , 0 , 50));
+        }
+        return Result.success(null);
+
     }
 
     public ArrayList<String> printMap(int x, int y , int size) {
