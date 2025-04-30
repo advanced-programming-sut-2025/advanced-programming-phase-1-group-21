@@ -22,8 +22,6 @@ import java.util.List;
 
 public class GameController{
 
-    Game game = null;
-
     public Result<String> showCurrentMenu(){
         return Result.success("game");
     }
@@ -89,7 +87,9 @@ public class GameController{
     public Result<Void> nextTurn() {
         if(App.game == null)
             return Result.failure(AuthError.GAME_NOT_CREATED , "Game not created");
-        game.nextTurn();
+
+        App.game.nextTurn();
+
         return Result.success("Now its " + App.game.getCurrentPlayer().getUser().getUsername() + "'s turn");
 
     }
@@ -99,35 +99,35 @@ public class GameController{
     }
 
     public Result<String> getTime() {
-        return Result.success("" + game.getGameDate().getHourInDay());
+        return Result.success("" + App.game.getGameDate().getHourInDay());
     }
 
     public Result<String> getDate() {
         return Result.success(
-            "Day " + game.getGameDate().getDay() + ", " +
-            game.getSeason()
+            "Day " + App.game.getGameDate().getDay() + ", " +
+            App.game.getSeason()
         );
     }
 
     public Result<String> getDateTime() {
         return Result.success(
-            "Day " + game.getGameDate().getDay() + ", " +
-            game.getSeason() + ", " +
-            "Time: " + game.getGameDate().getHourInDay() + ":00"
+            "Day " + App.game.getGameDate().getDay() + ", " +
+            App.game.getSeason() + ", " +
+            "Time: " + App.game.getGameDate().getHourInDay() + ":00"
         );
     }
 
     public Result<String> getDayWeek() {
-        return Result.success(game.getGameDate().getCurrentDayOfWeek());
+        return Result.success(App.game.getGameDate().getCurrentDayOfWeek());
     }
 
     public Result<Void> advanceTimeCheat(int days, int hours) {
-        game.advanceTime(days, hours);
+        App.game.advanceTime(days, hours);
         return Result.success(null);
     }
 
     public Result<Season> getSeasonName() {
-        return Result.success(game.getSeason().toString());
+        return Result.success(App.game.getSeason().toString());
     }
 
     public Result<Void> struckByThor(Coord cord) {
@@ -139,15 +139,15 @@ public class GameController{
     }
 
     public Result<Weather> getWeather() {
-        return Result.success(game.getWeather().toString());
+        return Result.success(App.game.getWeather().toString());
     }
 
     public Result<Weather> getWeatherForecast() {
-        return Result.success(game.getNextWeather().toString());
+        return Result.success(App.game.getNextWeather().toString());
     }
 
     public Result<Void> setWeatherCheat(Weather weather) {
-        game.setForecastWeather(weather);
+        App.game.setForecastWeather(weather);
         return Result.success(null);
     }
 
@@ -164,8 +164,32 @@ public class GameController{
         if(App.game.getCurrentPlayer().getCurrentPlayerMap().getTiles().get(y).get(x).getForaging() != null)
             return Result.failure(GameError.CANT_STAND_ON_FORAGING , GameError.CANT_STAND_ON_FORAGING.getMessage());
 
+        if(App.game.getCurrentPlayer().getCurrentPlayerMap().getTiles().get(y).get(x).getRefrigerator() != null)
+            return Result.failure(GameError.CANT_STAND_ON_FRIDGE , GameError.CANT_STAND_ON_FRIDGE.getMessage());
+
+        if(App.game.getCurrentPlayer().getCurrentPlayerMap().getTiles().get(y).get(x).isLake())
+            return Result.failure(GameError.CANT_STAND_ON_LAKE , GameError.CANT_STAND_ON_LAKE.getMessage());
+
         if(App.game.getCurrentPlayer().currentLocationTiles().get(y).get(x).isHouse()){
             App.game.getCurrentPlayer().getCurrentPlayerMap().setCurrentLocation(LocationsOnMap.House);
+            App.game.getCurrentPlayer().setCoord(new Coord(0, 0));
+            GameTerminalView.printWithColor(printMap(0 , 0 , 50));
+        }
+
+        else if(App.game.getCurrentPlayer().currentLocationTiles().get(y).get(x).isGreenHouse()){
+            App.game.getCurrentPlayer().getCurrentPlayerMap().setCurrentLocation(LocationsOnMap.GreenHouse);
+            App.game.getCurrentPlayer().setCoord(new Coord(0, 0));
+            GameTerminalView.printWithColor(printMap(0 , 0 , 50));
+        }
+
+        else if(App.game.getCurrentPlayer().currentLocationTiles().get(y).get(x).isMines()){
+            App.game.getCurrentPlayer().getCurrentPlayerMap().setCurrentLocation(LocationsOnMap.Mines);
+            App.game.getCurrentPlayer().setCoord(new Coord(0, 0));
+            GameTerminalView.printWithColor(printMap(0 , 0 , 50));
+        }
+
+        else if(App.game.getCurrentPlayer().currentLocationTiles().get(y).get(x).isDoor()){
+            App.game.getCurrentPlayer().getCurrentPlayerMap().setCurrentLocation(LocationsOnMap.Farm);
             App.game.getCurrentPlayer().setCoord(new Coord(0, 0));
             GameTerminalView.printWithColor(printMap(0 , 0 , 50));
         }
@@ -248,15 +272,15 @@ public class GameController{
     }
 
     public Result<List<Recipe>> craftingShowRecipes() {
-        return Result.success(game.getCurrentPlayer().getCraftingRecipe());
+        return Result.success(App.game.getCurrentPlayer().getCraftingRecipe());
     }
 
     public Result<Void> craft(String recipeName) {
-        Recipe recipe = game.getCurrentPlayer().getRecipeByName(recipeName);
+        Recipe recipe = App.game.getCurrentPlayer().getRecipeByName(recipeName);
         if (recipe == null) {
             return Result.failure(GameError.CRAFT_RECIPE_NOT_FOUND);
         }
-        Inventory inventory = game.getCurrentPlayer().getInventory();
+        Inventory inventory = App.game.getCurrentPlayer().getInventory();
         if (!inventory.canRemoveItemList(recipe.getItems()))
             return Result.failure(GameError.NOT_ENOUGH_ITEMS);
         inventory.removeItemList(recipe.getItems());

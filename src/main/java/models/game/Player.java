@@ -88,6 +88,10 @@ public class Player {
             return currentPlayerMap.getTiles();
         if(currentPlayerMap.getCurrentLocation().equals(LocationsOnMap.House))
             return currentPlayerMap.getHouse().getTiles();
+        if(currentPlayerMap.getCurrentLocation().equals(LocationsOnMap.GreenHouse))
+            return currentPlayerMap.getGreenHouses().getTiles();
+        if(currentPlayerMap.getCurrentLocation().equals(LocationsOnMap.Mines))
+            return currentPlayerMap.getMines().getTiles();
         return null;
     }
 

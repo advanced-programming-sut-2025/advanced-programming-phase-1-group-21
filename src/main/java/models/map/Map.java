@@ -202,6 +202,8 @@ public class Map {
                     output.add("@");
                 else if(tile.getRefrigerator() != null)
                     output.add("F");
+                else if(tile.isDoor())
+                    output.add("+");
                 else
                     output.add("#");
             }

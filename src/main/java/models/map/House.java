@@ -17,6 +17,7 @@ public class House extends Building {
             }
             tiles.add(thisRowTiles);
         }
+        this.tiles.get(9).get(19).setDoor(true);
         this.tiles.get(0).get(5).setRefrigerator(refrigerator);
     }
 

@@ -5,8 +5,11 @@ import models.result.Error;
 public enum GameError implements Error {
     COORDINATE_DOESNT_EXISTS("this coordinate does not exist in this location"),
     CANT_STAND_ON_FORAGING("you cant walk on a foraging"),
+    CANT_STAND_ON_FRIDGE("you cant walk on fridge"),
+    CANT_STAND_ON_LAKE("you cant walk on a lake"),
     CRAFT_RECIPE_NOT_FOUND("Recipe not found"),
     NOT_ENOUGH_ITEMS("Not enough items");
+
 
     private final String message;
 
