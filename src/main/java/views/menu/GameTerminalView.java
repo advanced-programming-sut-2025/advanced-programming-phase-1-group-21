@@ -1,9 +1,11 @@
 package views.menu;
 
 import controllers.GameController;
+import models.App;
 import models.command.GameMenuCommand;
 import models.map.GreenHouse;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,7 +24,7 @@ public class GameTerminalView {
     public static final String CYAN = "\u001B[36m";
     public static final String WHITE = "\u001B[37m";
 
-    public void printWithColor(ArrayList<String> output) {
+    public static void printWithColor(ArrayList<String> output) {
         for(String line : output) {
             if(line.equals("#"))
                 System.out.print(WHITE + line + WHITE);
@@ -50,9 +52,17 @@ public class GameTerminalView {
         return AppView.scanner.nextInt();
     }
 
-    public void Result(String command) {
+    public void Result(String command) throws IOException {
         if((matcher = GameMenuCommand.PRINT_MAP.getMatcher(command)) != null) {
             printWithColor(gameController.printMap(Integer.parseInt(matcher.group("x")), Integer.parseInt(matcher.group("y")), Integer.parseInt(matcher.group("size"))));
+        }
+
+        if((matcher = GameMenuCommand.SHOW_CURRENT_MENU.getMatcher(command)) != null) {
+            System.out.println(gameController.showCurrentMenu().getMessage());
+        }
+
+        else if((matcher = GameMenuCommand.NEW_GAME.getMatcher(command)) != null) {
+            System.out.println(gameController.createGame(matcher.group("username1") , matcher.group("username2") , matcher.group("username3")).getMessage());
         }
 
         else

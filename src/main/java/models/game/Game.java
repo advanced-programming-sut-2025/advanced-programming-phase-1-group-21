@@ -16,7 +16,6 @@ public class Game {
     }
 
 
-
     public void nextTurn() {
         throw new UnsupportedOperationException("Not supported yet.");
     }

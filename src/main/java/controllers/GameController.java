@@ -60,16 +60,13 @@ public class GameController{
                     System.out.println("Invalid map ID");
                 else {
                     player.setThisPlayerMap(new Map(mapID));
-                    printMap(0 , 0 , 50);
                     break;
                 }
             }
         }
 
         Game game = new Game(players.getFirst() , players);
-        if(players.getFirst().getUser().equals(App.logedInUser)) {
-            System.out.println("my job here is done");
-        }
+        App.game = game;
         return Result.success(game , "Game created");
     }
 
@@ -146,8 +143,7 @@ public class GameController{
     }
 
     public ArrayList<String> printMap(int x, int y , int size) {
-        Map map = new Map(3);
-        return map.printMap(new Coord(x , y) , size);
+        return App.game.getCurrentPlayer().getCurrentPlayerMap().printMap(new Coord(x , y) , size);
     }
 
     public Result<Energy> showEnergy() {

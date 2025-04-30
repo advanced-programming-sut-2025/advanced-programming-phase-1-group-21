@@ -3,6 +3,8 @@ package models.command;
 import java.util.regex.Pattern;
 
 public enum GameMenuCommand implements Command {
+    SHOW_CURRENT_MENU("\\s*show\\s+current\\s+menu\\s*"),
+    NEW_GAME("\\s*new\\s+game\\s+(?<username1>\\S+)\\s+(?<username2>\\S+)\\s+(?<username3>\\S+)\\s*"),
 //    ENTER_MENU("\\s*menu\\s*enter\\s*(?<menuName>\\S+)\\s*"),
 //    GAME_NEW(""),
 //    GAME_MAP("game map (?<map_number>.*)"),

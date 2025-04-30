@@ -5,7 +5,7 @@
     "email": "sobhan@gmail.com",
     "nickname": "\u003cnickname\u003e",
     "gender": "MALE",
-    "isInAGame": false
+    "isInAGame": true
   },
   {
     "username": "sobi",
@@ -13,7 +13,7 @@
     "email": "sobhan@gmail.com",
     "nickname": "a",
     "gender": "MALE",
-    "isInAGame": false
+    "isInAGame": true
   },
   {
     "username": "maryam",
@@ -21,7 +21,7 @@
     "email": "sobhan@gmail.com",
     "nickname": "a",
     "gender": "MALE",
-    "isInAGame": false
+    "isInAGame": true
   },
   {
     "username": "shayan",
@@ -37,6 +37,6 @@
     "email": "sobhan@gmail.com",
     "nickname": "a",
     "gender": "MALE",
-    "isInAGame": false
+    "isInAGame": true
   }
 ]

@@ -32,6 +32,14 @@ public class Player {
         this.thisPlayerMap = thisPlayerMap;
     }
 
+    public Map getThisPlayerMap() {
+        return thisPlayerMap;
+    }
+
+    public Map getCurrentPlayerMap() {
+        return currentPlayerMap;
+    }
+
     public void setCurrentPlayerMap(Map currentPlayerMap) {
         this.currentPlayerMap = currentPlayerMap;
     }
