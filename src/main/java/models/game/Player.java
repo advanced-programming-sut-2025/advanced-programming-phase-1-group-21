@@ -15,8 +15,7 @@ public class Player {
     private Map currentPlayerMap;
     private Coord coord = new Coord(0 , 0);
     private Map map;
-    private int currentEnergy;
-    private int maxEnergy;
+    private Energy energy;
     private Inventory inventory;
     private TrashCanType trashCanType;
     private Item itemInHand;
@@ -45,26 +44,34 @@ public class Player {
         return null;
     }
 
-    public int getCurrentEnergy() {
-        return currentEnergy;
+    public Player(User user) {
+        this.user = user;
+        this.inventory = new Inventory(this);
+        inventory.addItem(Game.getCoinItem(0));
+        energy = new Energy();
+    }
+
+    /*
+        Set max energy to X for D days
+     */
+    public void setMaxEnergy(int maxEnergy, int days) {
+        energy.setMaxEnergy(maxEnergy, days);
     }
 
     public int getMaxEnergy() {
-        return maxEnergy;
+        return energy.getMaxEnergy();
+    }
+
+    public int getEnergy() {
+        return energy.getCurrentEnergy();
     }
 
     public void decreaseEnergy(int amount) {
-        if (currentEnergy < amount) {
-            throw new IllegalArgumentException("You can't decrease energy by " + amount);
-        }
-        currentEnergy -= amount;
+        energy.decreaseEnergy(amount);
     }
 
-    public Player(User user) {
-        this.user = user;
-        this.maxEnergy = MAX_ENERGY;
-        this.inventory = new Inventory(this);
-        inventory.addItem(Game.getCoinItem(0));
+    public void setEnergy(int energyValue) {
+        energy.setEnergy(energyValue);
     }
 
     public User getUser() {
