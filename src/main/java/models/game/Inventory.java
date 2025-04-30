@@ -51,7 +51,7 @@ public class Inventory {
         return Result.success("Adding " + item.getName() + " to the inventory was successful.");
     }
 
-    public void removeItem(Item item) {
+    private static boolean removeItemFromList(Item item, List<Item> items) {
         // If you're using TrashCan, don't forget to get the money and use it in the player object;
 
         for (Item i : items)
@@ -64,6 +64,20 @@ public class Inventory {
                 if (item.getAmount() == 0)
                     break;
             }
+        return item.getAmount() == 0; //If == 0 -> All were removed
+    }
+
+    public boolean removeItem(Item item) {
+        return removeItemFromList(item, items);
+    }
+
+    public boolean canRemoveItemList(List<Item> itemsToRemove) {
+        List<Item> items = new ArrayList<>(this.items);
+        for (Item i : items) {
+            if (!removeItemFromList(i, items))
+                return false;
+        }
+        return true;
     }
 
     public Item getItem(String name) {
@@ -81,5 +95,15 @@ public class Inventory {
             if (item.getItemType() == itemType)
                 itemsByType.add(item);
         return itemsByType;
+    }
+
+    //can be used for getting number of coins
+    public int getAmountByType(ItemType itemType) {
+        List<Item> items = getItemsByType(itemType);
+        int amount = 0;
+        for (Item item : items) {
+            amount += item.getAmount();
+        }
+        return amount;
     }
 }

@@ -18,7 +18,7 @@ public class Game {
     private Weather gameWeather;
     private Weather forecastCheat;
 
-    public Game(List<Player> players) {
+    public Game(ArrayList<Player> players) {
         this.players = players;
         this.currentPlayer = players.get(0);
         this.gameDate = Date.createBias();
@@ -110,5 +110,9 @@ public class Game {
 
     public Player getCurrentPlayer() {
         return currentPlayer;
+    }
+
+    public static Item getCoinItem(int amount) {
+        return new Item("coin", ItemType.COIN, 1, amount);
     }
 }
