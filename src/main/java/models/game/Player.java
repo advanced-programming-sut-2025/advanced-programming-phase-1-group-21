@@ -8,6 +8,8 @@ import models.user.User;
 import java.util.ArrayList;
 
 public class Player {
+    static final int MAX_ENERGY = 200;
+
     private User user;
     private Map thisPlayerMap;
     private Map currentPlayerMap;
@@ -17,7 +19,6 @@ public class Player {
     private int maxEnergy;
     private Inventory inventory;
     private TrashCanType trashCanType;
-    private int coins;
     private Item itemInHand;
     private ArrayList<Relation> relations;
     private ArrayList<NPCFriendship> npcFriendships;
@@ -37,10 +38,11 @@ public class Player {
         currentEnergy -= amount;
     }
 
-
-
     public Player(User user) {
         this.user = user;
+        this.maxEnergy = MAX_ENERGY;
+        this.inventory = new Inventory(this);
+        inventory.addItem(Game.getCoinItem(0));
     }
 
     public User getUser() {
@@ -64,11 +66,11 @@ public class Player {
     }
 
     public void addCoins(int coins) {
-        this.coins += coins;
+        inventory.addItem(Game.getCoinItem(coins));
     }
 
     public int getCoins() {
-        return coins;
+        return inventory.getAmountByType(ItemType.COIN);
     }
 
     public Item getItemInHand() {

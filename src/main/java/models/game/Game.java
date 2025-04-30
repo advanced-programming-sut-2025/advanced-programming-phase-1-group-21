@@ -111,4 +111,8 @@ public class Game {
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
+
+    public static Item getCoinItem(int amount) {
+        return new Item("coin", ItemType.COIN, 1, amount);
+    }
 }
