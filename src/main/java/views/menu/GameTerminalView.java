@@ -48,6 +48,18 @@ public class GameTerminalView {
         }
     }
 
+    public static void helpReadingMap() {
+        System.out.println(WHITE + "#" + WHITE + " :An empty tile");
+        System.out.println(YELLOW + "H" + YELLOW + WHITE + " :House" + WHITE);
+        System.out.println(GREEN + "G" + GREEN + WHITE + " :Greenhouse" + WHITE);
+        System.out.println(BLACK + "M" + BLACK + WHITE + " :Mines" + WHITE);
+        System.out.println(BLUE + "~" + BLUE + WHITE + " :Lake" + WHITE);
+        System.out.println(GREEN + "T" + GREEN + WHITE + " :Tree" + WHITE);
+        System.out.println(GREEN + "*" + GREEN + WHITE + " :Marijuana" + WHITE);
+        System.out.println(BLACK + "R" + BLACK + WHITE + " :Rock" + WHITE);
+        System.out.println(RED + "@" + RED + WHITE + " :Your avatar" + WHITE);
+    }
+
     public static int getMap(Player player){
         System.out.print(player.getUser().getUsername() + " ,Select your map ID: ");
         return AppView.scanner.nextInt();
@@ -72,6 +84,10 @@ public class GameTerminalView {
 
         else if((matcher = GameMenuCommand.EXIT_GAME.getMatcher(command)) != null) {
             System.out.println(gameController.exitGame().getMessage());
+        }
+
+        else if((matcher = GameMenuCommand.HELP_READING_MAP.getMatcher(command)) != null) {
+            gameController.helpReadingMap();
         }
 
         else

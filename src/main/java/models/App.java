@@ -4,7 +4,7 @@ import models.game.Game;
 import models.user.User;
 
 public class App {
-    public static Menu currentMenu = Menu.RegisterMenu;
+    public static Menu currentMenu = Menu.Game;
     public static Game game = null;
     public static boolean play = true;
     public static User registeredUser;

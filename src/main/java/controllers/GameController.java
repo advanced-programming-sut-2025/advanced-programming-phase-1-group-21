@@ -161,7 +161,10 @@ public class GameController{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<Void> helpReadingMap() {throw new UnsupportedOperationException("Not supported yet.");}
+    public Result<Void> helpReadingMap() {
+        GameTerminalView.helpReadingMap();
+        return Result.success("Help Reading Map");
+    }
 
     public Result<Energy> setEnergyCheat(int energyValue) {
         throw new UnsupportedOperationException("Not supported yet.");
