@@ -22,6 +22,15 @@ public class Player {
     private Item itemInHand;
     private ArrayList<Relation> relations;
     private ArrayList<NPCFriendship> npcFriendships;
+    private ArrayList<Recipe> learntRecipes = new ArrayList<>();
+
+    public ArrayList<Recipe> getLearntRecipes() {
+        return learntRecipes;
+    }
+
+    public void addRecipe(Recipe recipe) {
+        learntRecipes.add(recipe);
+    }
 
     public int getCurrentEnergy() {
         return currentEnergy;

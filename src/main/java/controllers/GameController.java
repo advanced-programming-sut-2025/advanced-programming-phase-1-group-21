@@ -229,7 +229,7 @@ public class GameController{
     }
 
     public Result<List<Recipe>> craftingShowRecipes() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Result.success(game.getCurrentPlayer().getLearntRecipes());
     }
 
     //TODO_SOBHAN
