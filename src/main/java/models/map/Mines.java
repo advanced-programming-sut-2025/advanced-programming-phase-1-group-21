@@ -9,8 +9,8 @@ public class Mines extends Building {
         for(int i = 0 ; i < 15 ; i++){
             ArrayList<Tile> thisRowTiles = new ArrayList<>();
             for(int j = 0 ; j < 25 ; j++){
-                thisRowTiles.add(new Tile(new Coord(j , i) , null , false , false ,
-                        false , false , null , null));
+                thisRowTiles.add(new Tile(new Coord(j , i) , null ,
+                        null , null));
             }
             tiles.add(thisRowTiles);
         }

@@ -47,8 +47,21 @@ public class GameTerminalView {
                 System.out.print(RED + line + RED);
             else if(line.equals("F"))
                 System.out.print(BLACK + line + BLACK);
+            else if(line.equals("+"))
+                System.out.print(RED + line + RED);
+            else if(line.equals("B"))
+                System.out.print(CYAN + line + CYAN);
+            else if(line.equals("C"))
+                System.out.print(RED + line + RED);
+
             else
                 System.out.print(line);
+        }
+    }
+
+    public static void printArrayList(ArrayList<String> output) {
+        for(String line : output) {
+            System.out.println(line);
         }
     }
 
@@ -57,10 +70,13 @@ public class GameTerminalView {
         System.out.println(YELLOW + "H" + YELLOW + WHITE + " :House" + WHITE);
         System.out.println(GREEN + "G" + GREEN + WHITE + " :Greenhouse" + WHITE);
         System.out.println(BLACK + "M" + BLACK + WHITE + " :Mines" + WHITE);
+        System.out.println(CYAN + "B" + CYAN + WHITE + " :Barn" + WHITE);
+        System.out.println(RED + "C" + RED + WHITE + " :Coop" + WHITE);
         System.out.println(BLUE + "~" + BLUE + WHITE + " :Lake" + WHITE);
         System.out.println(GREEN + "T" + GREEN + WHITE + " :Tree" + WHITE);
         System.out.println(GREEN + "*" + GREEN + WHITE + " :Marijuana" + WHITE);
         System.out.println(BLACK + "R" + BLACK + WHITE + " :Rock" + WHITE);
+        System.out.println(RED + "+" + RED + WHITE + " :exit way" + WHITE);
         System.out.println(RED + "@" + RED + WHITE + " :Your avatar" + WHITE);
     }
 
@@ -108,6 +124,18 @@ public class GameTerminalView {
 
         else if ((matcher = GameMenuCommand.CHEAT_ENERGY_UNLIMITED.getMatcher(command)) != null) {
             gameController.setEnergyUnlimited();
+        }
+        else if((matcher = GameMenuCommand.PET.getMatcher(command)) != null) {
+            System.out.println(gameController.pet(matcher.group("name")).getMessage());
+        }
+
+        else if((matcher = GameMenuCommand.CHEAT_ANIMAL_FRIENDSHIP.getMatcher(command)) != null) {
+            System.out.println(gameController.cheatFriendship(matcher.group("name") , Integer.parseInt(matcher.
+                    group("amount"))).getMessage());
+        }
+
+        else if((matcher = GameMenuCommand.ANIMAL.getMatcher(command)) != null) {
+            printArrayList(gameController.showAnimals().getData());
         }
 
         else if ((matcher = GameMenuCommand.CRAFTINFO.getMatcher(command)) != null) {

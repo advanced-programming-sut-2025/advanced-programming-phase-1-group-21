@@ -330,12 +330,37 @@ public class GameController{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<Void> buildBarnOrCoop(String buildingName , Coord cord) {
-        if(buildingName.equals("Barn"))
-            buildBarn(cord);
-        if(buildingName.equals("Coop"))
-            buildCoop(cord);
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Result<Void> buildBarnOrCoop(String buildingName , int x , int y) {
+        if((x >= 46) || (y >= 26))
+            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS , "this coordinate is out of bounds");
+        for(int i = y ; i < y+5 ; i++){
+            for(int j = x ; j < x+5 ; j++){
+                if(!App.game.getCurrentPlayer().getThisPlayerMap().getTiles().get(i).get(j).tileIsEmpty())
+                    return Result.failure(GameError.COORDINATE_DOESNT_EXISTS , "this coordinate is not empty");
+            }
+        }
+
+        if(App.game.getCurrentPlayer().getInventory().getAmountByType(ItemType.COIN) < 1000)
+            return Result.failure(GameError.NOT_ENOUGH_COINS , GameError.NOT_ENOUGH_COINS.getMessage());
+
+
+
+        if(buildingName.equals("Barn")){
+            for(int i = y ; i < y+5 ; i++){
+                for(int j = x ; j < x+5 ; j++)
+                    App.game.getCurrentPlayer().getThisPlayerMap().getTiles().get(i).get(j).setBarn(true);
+            }
+            return Result.success("Barn build successfully");
+        }
+        if(buildingName.equals("Coop")){
+            for(int i = y ; i < y+5 ; i++){
+                for(int j = x ; j < x+5 ; j++)
+                    App.game.getCurrentPlayer().getThisPlayerMap().getTiles().get(i).get(j).setCoop(true);
+            }
+            return Result.success("Coop build successfully");
+        }
+        return Result.success(null);
+
     }
 
     public Result<Animal> buyAnimal(String animal , String name){
@@ -343,15 +368,56 @@ public class GameController{
     }
 
     public Result<Void> pet(String name){
-        throw new UnsupportedOperationException("Not supported yet.");
+        Coord playerCord = App.game.getCurrentPlayer().getCoord();
+        for(Direction direction : Direction.values()){
+            if(direction.getDx() + playerCord.getX() < 0){
+                continue;
+            }
+
+            if(direction.getDx() + playerCord.getX() >= App.game.getCurrentPlayer().currentLocationTiles().get(0).size()){
+                continue;
+            }
+
+            if(direction.getDy() + playerCord.getY() < 0){
+                continue;
+            }
+
+            if(direction.getDy() + playerCord.getY() >= App.game.getCurrentPlayer().currentLocationTiles().size()){
+                continue;
+            }
+
+            if(App.game.getCurrentPlayer().currentLocationTiles().get(playerCord.getY() + direction.getDy()).
+                    get(playerCord.getX() + direction.getDx()).getAnimal() == null)
+                continue;
+
+            if(App.game.getCurrentPlayer().currentLocationTiles().get(playerCord.getY() + direction.getDy()).
+                    get(playerCord.getX() + direction.getDx()).getAnimal().getName().equals(name)){
+                App.game.getCurrentPlayer().currentLocationTiles().get(playerCord.getY() + direction.getDy()).
+                        get(playerCord.getX() + direction.getDx()).getAnimal().pet();
+                return Result.success("goooogooli");
+            }
+        }
+        return Result.failure(GameError.ANIMAL_NOT_FOUND , "kojaie pas heyvoon");
     }
 
     public Result<Void> cheatFriendship(String name , int amount){
-        throw new UnsupportedOperationException("Not supported yet.");
+        for(Animal animal : App.game.getCurrentPlayer().getAnimals()){
+            if(animal.getName().equals(name)) {
+                animal.setFriendship(amount);
+                return Result.success("Now your friendship with " + name + " is " + animal.getFriendship());
+            }
+        }
+        return Result.failure(GameError.ANIMAL_NOT_FOUND , "You dont own animal with this name");
+
     }
 
-    public Result<Void> showAnimals(){
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Result<ArrayList<String>> showAnimals(){
+        ArrayList<String> output = new ArrayList<>();
+        output.add("Animals:");
+        for(Animal animal : App.game.getCurrentPlayer().getAnimals()){
+            output.add(animal.getName() + " - " + animal.getFriendship());
+        }
+        return Result.success(output , "okay");
     }
 
     public Result<Void> shepherdAnimals(String name , Coord cord){
