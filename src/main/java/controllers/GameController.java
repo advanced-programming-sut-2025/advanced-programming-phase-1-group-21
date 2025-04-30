@@ -87,12 +87,12 @@ public class GameController{
     }
 
     public Result<Weather> getWeatherForecast() {
-        return Result.success(game.getNextWeather().toString())
+        return Result.success(game.getNextWeather().toString());
     }
 
     public Result<Void> setWeatherCheat(Weather weather) {
         game.setForecastWeather(weather);
-        throw Result.success(null);
+        return Result.success(null);
     }
 
     public Result<Building> buildGreenHouse() {
