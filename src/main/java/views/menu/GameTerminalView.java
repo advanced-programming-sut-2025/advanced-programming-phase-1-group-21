@@ -110,6 +110,10 @@ public class GameTerminalView {
             gameController.setEnergyUnlimited();
         }
 
+        else if ((matcher = GameMenuCommand.CRAFTINFO.getMatcher(command)) != null) {
+            System.out.println(gameController.craftInfo(matcher.group("craftName")).getMessage());
+        }
+
         else
             System.out.println("Invalid command");
     }
