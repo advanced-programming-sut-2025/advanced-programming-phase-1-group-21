@@ -70,7 +70,7 @@ public class GameController{
         return Result.success(null);
     }
 
-    public Result<Season> getSeason() {
+    public Result<Season> getSeasonName() {
         return Result.success(game.getSeason().toString());
     }
 
@@ -83,15 +83,16 @@ public class GameController{
     }
 
     public Result<Weather> getWeather() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Result.success(game.getWeather().toString());
     }
 
     public Result<Weather> getWeatherForecast() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Result.success(game.getNextWeather().toString())
     }
 
-    public Result<Weather> setWeatherCheat(Weather weather) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Result<Void> setWeatherCheat(Weather weather) {
+        game.setForecastWeather(weather);
+        throw Result.success(null);
     }
 
     public Result<Building> buildGreenHouse() {

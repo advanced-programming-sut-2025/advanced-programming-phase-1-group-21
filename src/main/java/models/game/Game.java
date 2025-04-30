@@ -2,6 +2,7 @@ package models.game;
 
 import java.util.List;
 
+import models.map.Weather;
 import models.time.*;
 
 public class Game {
@@ -10,13 +11,32 @@ public class Game {
     private int roundCount = 0;
     private Date gameDate;
     private Season gameSeason;
-    
+    private Weather gameWeather;
+    private Weather forecastCheat;   
     
     public Game(List<Player> players) {
         this.players = players;
         this.currentPlayer = players.get(0);
         this.gameDate = Date.createBias();
         this.gameSeason = Season.SPRING;
+        this.gameWeather = Weather.SUNNY;
+        this.forecastCheat = null;
+    }
+
+    //Calculate randomly based on sth?
+    public Weather getNextWeather() {
+        if (forecastCheat != null) {
+            return forecastCheat;
+        }
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void setForecastWeather(Weather newWeather) {
+        forecastCheat = newWeather;
+    }
+
+    public Weather getWeather() {
+        return gameWeather;
     }
 
     public Season getSeason() {
@@ -39,6 +59,12 @@ public class Game {
         int currentIndex = players.indexOf(currentPlayer);
         int nextIndex = (currentIndex + 1) % players.size();
         return players.get(nextIndex);
+    }
+
+    public void advanceDay() {
+        gameWeather = getNextWeather();
+        forecastCheat = null;
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     private void endOfRound() {
