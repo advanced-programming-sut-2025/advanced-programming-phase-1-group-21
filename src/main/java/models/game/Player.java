@@ -12,7 +12,6 @@ public class Player {
     private Map thisPlayerMap;
     private Map currentPlayerMap;
     private Coord coord;
-    private Energy energy;
     private Map map;
     private int currentEnergy;
     private int maxEnergy;

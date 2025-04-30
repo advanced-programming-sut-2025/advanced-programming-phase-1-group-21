@@ -1,5 +1,6 @@
 package controllers;
 
+import models.App;
 import models.Tool.Tool;
 import models.animal.Animal;
 import models.animal.AnimalProducts;
@@ -19,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameController{
+
+    Game game = null;
 
     public Result<String> showCurrentMenu(){
         return Result.success("game");
@@ -85,13 +88,7 @@ public class GameController{
     public Result<Void> nextTurn() {
         if(App.game == null)
             return Result.failure(AuthError.GAME_NOT_CREATED , "Game not created");
-        int currentPlayerIndex = 0;
-        for(int i = 0 ; i < 4 ; i ++){
-            if(App.game.getPlayers().get(i).equals(App.game.getCurrentPlayer()))
-                currentPlayerIndex = i;
-        }
-
-        App.game.setCurrentPlayer(App.game.getPlayers().get((currentPlayerIndex + 1)%4));
+        game.nextTurn();
         return Result.success("Now its " + App.game.getCurrentPlayer().getUser().getUsername() + "'s turn");
 
     }
