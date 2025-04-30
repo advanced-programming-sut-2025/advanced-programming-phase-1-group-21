@@ -253,7 +253,11 @@ public class GameController{
     }
 
     public Result<String> craftInfo(String craftName) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        models.crops.SeedSource seedSource = App.getSeedSourceByName(craftName);
+        if (seedSource == null) {
+            return Result.failure(GameError.SEED_NOT_FOUND);
+        }
+        return Result.success(seedSource.toString());
     }
 
     public Result<Seed> plantSeed(Seed seed, Direction direction) {
