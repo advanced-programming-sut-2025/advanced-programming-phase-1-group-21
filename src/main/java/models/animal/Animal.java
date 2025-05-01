@@ -17,6 +17,10 @@ public class Animal {
         this.friendship += 15;
     }
 
+    public void shepherd(){
+        this.friendship += 8;
+    }
+
     public AnimalTypes getAnimalType() {
         return animalType;
     }
@@ -36,4 +40,6 @@ public class Animal {
     public void setFriendship(int friendship) {
         this.friendship = friendship;
     }
+
+
 }
