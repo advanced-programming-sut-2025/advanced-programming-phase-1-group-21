@@ -29,7 +29,7 @@ public enum GameMenuCommand implements Command {
     WEATHER("weather"),
     WEATHER_FORECAST("weather forecast"),
     CHEAT_WEATHER("\\s*cheat\\s+weather\\s+set\\s+(?<type>\\S+)\\s*"),
-//    ENTER_MENU("\\s*menu\\s*enter\\s*(?<menuName>\\S+)\\s*"),
+    //    ENTER_MENU("\\s*menu\\s*enter\\s*(?<menuName>\\S+)\\s*"),
 //    GAME_NEW(""),
 //    GAME_MAP("game map (?<map_number>.*)"),
 //    LOAD_GAME("load game"),
@@ -47,13 +47,13 @@ public enum GameMenuCommand implements Command {
 //    CHEAT_WEATHER_SET("cheat weather set (?<type).*)"),
 //    WALK("walk -l "),
     PRINT_MAP("print\\s+map\\s+-l\\s+\\((?<x>\\d+),(?<y>\\d+)\\)\\s+-s\\s+(?<size>\\d+)"),
-//    HELP_READING_MAP("help reading map"),
+    //    HELP_READING_MAP("help reading map"),
     ENERGY_SHOW("energy show"),
     CHEAT_ENERGY_SET("energy set -v (?<value>.*)"),
     CHEAT_ENERGY_UNLIMITED("energy unlimited"),
     INVENTORY_SHOW("inventory show"),
     INVENTOR_TRASH("inventory trash -i (?<name>.+) -n (?<number>\\d+)"),
-//    TOOLS_EQUIP("tools equip (?<toolName>.*)"),
+    //    TOOLS_EQUIP("tools equip (?<toolName>.*)"),
 //    TOOL_SHOW_CURRENT("tool show current"),
 //    TOOLS_SHOW_AVAILABLE("tools show available"),
 //    TOOLS_UPGRADE("tools upgrade (?<toolName>.*)>"),
@@ -76,8 +76,8 @@ public enum GameMenuCommand implements Command {
 //    SELL_ANIMAL("sell animal -n <name>"),
 //    FISHING("fishing -p <fishing pole>"),
 //    ARTISAN_USE("artisan use <artisan_name> <item1_name>"),
-
     ;
+
     public final Pattern pattern;
     GameMenuCommand(String input) {
         pattern = Pattern.compile(input);
