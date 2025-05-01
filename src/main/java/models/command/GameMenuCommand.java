@@ -76,8 +76,8 @@ public enum GameMenuCommand implements Command {
 //    SELL_ANIMAL("sell animal -n <name>"),
 //    FISHING("fishing -p <fishing pole>"),
 //    ARTISAN_USE("artisan use <artisan_name> <item1_name>"),
-
     ;
+
     public final Pattern pattern;
     GameMenuCommand(String input) {
         pattern = Pattern.compile(input);
