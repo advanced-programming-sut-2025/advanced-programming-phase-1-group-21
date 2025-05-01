@@ -19,7 +19,7 @@ public abstract class Tool extends Item {
 
 	abstract public ToolMaterialType getToolMaterialType();
 
-	abstract protected Result<?> use(Coord coord);
+	abstract protected Result<Item> use(Coord coord);
 
 
 }

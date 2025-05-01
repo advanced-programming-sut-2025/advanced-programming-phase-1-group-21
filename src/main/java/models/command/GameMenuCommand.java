@@ -56,6 +56,7 @@ public enum GameMenuCommand implements Command {
     EQUIP_TOOL("\\s*equip\\s+tool\\s+-t\\s+(?<toolName>\\S+)\\s*"),
     SHOW_CURRENT_TOOL("show current tool"),
     SHOW_AVAILABLE_TOOL("show available tools"),
+    USE_TOOL("\\s*use\\s+tool\\s+-d\\s+(?<direction>\\S+)\\s*"),
 //    TOOL_SHOW_CURRENT("tool show current"),
 //    TOOLS_SHOW_AVAILABLE("tools show available"),
 //    TOOLS_UPGRADE("tools upgrade (?<toolName>.*)>"),

@@ -13,6 +13,7 @@ public class Tile {
     private boolean isMines = false;
     private boolean isBarn = false;
     private boolean isCoop = false;
+    private boolean shokhmi = false;
     private Tree tree = null;
     private Foraging foraging = null;
     private Refrigerator refrigerator = null;
@@ -119,6 +120,10 @@ public class Tile {
 
     public boolean isCoop() {
         return isCoop;
+    }
+
+    public void setShokhmi(boolean shokhmi) {
+        this.shokhmi = shokhmi;
     }
 
     public boolean tileIsEmpty(){
