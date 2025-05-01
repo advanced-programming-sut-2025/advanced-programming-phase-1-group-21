@@ -2,9 +2,15 @@ package views.menu;
 
 import controllers.GameController;
 import models.App;
+import models.Tool.Axe;
+import models.Tool.Tool;
+import models.Tool.ToolMaterialType;
 import models.command.GameMenuCommand;
+import models.game.Item;
 import models.game.Player;
+import models.map.Coord;
 import models.map.GreenHouse;
+import models.result.Result;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -143,11 +149,11 @@ public class GameTerminalView {
         }
 
         else if ((matcher = GameMenuCommand.INVENTORY_SHOW.getMatcher(command)) != null) {
-            System.out.println(gameController.showInventory().getData());
+            printArrayList(gameController.showInventory().getData());
         }
 
         else if ((matcher = GameMenuCommand.INVENTOR_TRASH.getMatcher(command)) != null) {
-            System.out.println(gameController.removeFromInventory(matcher.group("name"), Integer.parseInt(matcher.group("number"))));
+            System.out.println(gameController.removeFromInventory(matcher.group("name"), Integer.parseInt(matcher.group("number"))).getMessage());
         }
 
         else if((matcher = GameMenuCommand.SHEPHERD.getMatcher(command)) != null) {
@@ -156,6 +162,18 @@ public class GameTerminalView {
 
         else if((matcher = GameMenuCommand.BUILD_GREENHOUSE.getMatcher(command)) != null) {
             System.out.println(gameController.buildGreenHouse().getMessage());
+        }
+
+        else if((matcher = GameMenuCommand.EQUIP_TOOL.getMatcher(command)) != null) {
+            System.out.println(gameController.equipTool(matcher.group("toolName")).getMessage());
+        }
+
+        else if((matcher = GameMenuCommand.SHOW_CURRENT_TOOL.getMatcher(command)) != null) {
+            System.out.println(gameController.showCurrentTool().getMessage());
+        }
+
+        else if((matcher = GameMenuCommand.SHOW_AVAILABLE_TOOL.getMatcher(command)) != null) {
+            printArrayList(gameController.showAvailableTools().getData());
         }
 
         else

@@ -16,6 +16,10 @@ public class Player {
     private Map thisPlayerMap;
     private Map currentPlayerMap;
     private Coord coord = new Coord(0 , 0);
+    private int agronomicAbility = 0;
+    private int miningAbility = 0;
+    private int foragingAbility = 0;
+    private int fishingAbility = 0;
     private ArrayList<Animal> animals = new ArrayList<>();
     private Energy energy;
     private Inventory inventory;
@@ -48,7 +52,7 @@ public class Player {
 
     public Player(User user) {
         this.user = user;
-        this.inventory = new Inventory(this);
+        this.inventory = new Inventory();
         inventory.addItem(Game.getCoinItem(0));
         energy = new Energy();
     }
@@ -174,4 +178,35 @@ public class Player {
         return -1;
     }
 
+    public int getAgronomicAbility() {
+        return agronomicAbility;
+    }
+
+    public int getMiningAbility() {
+        return miningAbility;
+    }
+
+    public int getForagingAbility() {
+        return foragingAbility;
+    }
+
+    public int getFishingAbility() {
+        return fishingAbility;
+    }
+
+    public void raiseAgronomicAbility() {
+        this.agronomicAbility += 5;
+    }
+
+    public void raiseMiningAbility() {
+        this.miningAbility += 10;
+    }
+
+    public void raiseForagingAbility() {
+        this.foragingAbility += 10;
+    }
+
+    public void setFishingAbility() {
+        this.fishingAbility += 5;
+    }
 }

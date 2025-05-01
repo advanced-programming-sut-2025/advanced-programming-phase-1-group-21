@@ -38,5 +38,15 @@
     "nickname": "a",
     "gender": "MALE",
     "isInAGame": true
+  },
+  {
+    "username": "ali",
+    "password": "!aaaaaaaaaaa1",
+    "email": "sobhan@gmail.com",
+    "nickname": "a",
+    "gender": "FEMALE",
+    "isInAGame": false,
+    "securityQuestionID": 1,
+    "securityAnswer": "azina"
   }
 ]
