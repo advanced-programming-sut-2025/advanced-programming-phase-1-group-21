@@ -12,6 +12,7 @@ public enum GameError implements Error {
     ANIMAL_NOT_FOUND("Animal not found"),
     NOT_ENOUGH_ITEMS("Not enough items"),
     TILE_IS_NOT_EMPTY("This tile is not empty"),
+    GREENHOUSE_IS_NOT_YET_BUILT("Greenhouse is not yet built"),
     SEED_NOT_FOUND("Seed not found");
 
 
