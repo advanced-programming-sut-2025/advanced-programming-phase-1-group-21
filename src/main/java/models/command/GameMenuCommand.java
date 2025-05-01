@@ -13,6 +13,7 @@ public enum GameMenuCommand implements Command {
     PET("\\s*pet\\s+-n\\s+(?<name>\\S+)\\s*"),
     CHEAT_ANIMAL_FRIENDSHIP("\\s*cheat\\s+set\\s+friendship\\s+-n\\s+(?<name>\\S+)\\s+-c\\s+(?<amount>\\d+)\\s*"),
     ANIMAL("show my animals"),
+    SHEPHERD("\\s*shepherd\\s+animals\\s+-n\\s+(?<animalName>\\S+)\\s+-l\\s+\\((?<x>\\d+),(?<y>\\d+)\\)\\s*"),
 //    ENTER_MENU("\\s*menu\\s*enter\\s*(?<menuName>\\S+)\\s*"),
 //    GAME_NEW(""),
 //    GAME_MAP("game map (?<map_number>.*)"),

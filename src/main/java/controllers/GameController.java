@@ -322,14 +322,6 @@ public class GameController{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    private Result<Barn> buildBarn(Coord cord) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    private Result<Coop> buildCoop(Coord cord) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
     public Result<Void> buildBarnOrCoop(String buildingName , int x , int y) {
         if((x >= 46) || (y >= 26))
             return Result.failure(GameError.COORDINATE_DOESNT_EXISTS , "this coordinate is out of bounds");
@@ -420,8 +412,21 @@ public class GameController{
         return Result.success(output , "okay");
     }
 
-    public Result<Void> shepherdAnimals(String name , Coord cord){
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Result<Void> shepherdAnimals(String name , int x , int y){
+        if((x >= 50) || (y >= 30))
+            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS , GameError.COORDINATE_DOESNT_EXISTS.getMessage());
+        if(!App.game.getCurrentPlayer().getThisPlayerMap().getTiles().get(y).get(x).tileIsEmpty())
+            return Result.failure(GameError.TILE_IS_NOT_EMPTY , GameError.TILE_IS_NOT_EMPTY.getMessage());
+
+        int thisAnimalIndex = App.game.getCurrentPlayer().getAnimalIndex(name);
+        if(thisAnimalIndex == -1)
+            return Result.failure(GameError.ANIMAL_NOT_FOUND , "animal not found");
+
+
+        App.game.getCurrentPlayer().getAnimals().get(thisAnimalIndex).shepherd();
+        App.game.getCurrentPlayer().getThisPlayerMap().getTiles().get(y).get(x).setAnimal(App.game.getCurrentPlayer().getAnimals().get(thisAnimalIndex));
+
+        return Result.success(name + " is on tile (" + x + ", " + y + ")");
     }
 
     public Result<Void> feedHay(String animalName){

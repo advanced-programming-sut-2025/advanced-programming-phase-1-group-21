@@ -165,4 +165,13 @@ public class Player {
     public ArrayList<Animal> getAnimals() {
         return animals;
     }
+
+    public int getAnimalIndex(String name){
+        for(int i = 0 ; i < animals.size(); i++){
+            if(animals.get(i).getName().equals(name))
+                return i;
+        }
+        return -1;
+    }
+
 }

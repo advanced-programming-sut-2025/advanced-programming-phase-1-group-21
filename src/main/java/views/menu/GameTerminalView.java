@@ -150,6 +150,10 @@ public class GameTerminalView {
             System.out.println(gameController.removeFromInventory(matcher.group("name"), Integer.parseInt(matcher.group("number"))));
         }
 
+        else if((matcher = GameMenuCommand.SHEPHERD.getMatcher(command)) != null) {
+            System.out.println(gameController.shepherdAnimals(matcher.group("animalName") , Integer.parseInt(matcher.group("x")) , Integer.parseInt(matcher.group("y"))));
+        }
+
         else
             System.out.println("Invalid command");
     }
