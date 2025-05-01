@@ -111,7 +111,7 @@ public class GameTerminalView {
         }
 
         else if((matcher = GameMenuCommand.WALK.getMatcher(command)) != null) {
-            gameController.walk(Integer.parseInt(matcher.group("x")) , Integer.parseInt(matcher.group("y")));
+            System.out.println(gameController.walk(Integer.parseInt(matcher.group("x")) , Integer.parseInt(matcher.group("y"))).getMessage());
         }
 
         else if ((matcher = GameMenuCommand.ENERGY_SHOW.getMatcher(command)) != null) {
@@ -152,6 +152,10 @@ public class GameTerminalView {
 
         else if((matcher = GameMenuCommand.SHEPHERD.getMatcher(command)) != null) {
             System.out.println(gameController.shepherdAnimals(matcher.group("animalName") , Integer.parseInt(matcher.group("x")) , Integer.parseInt(matcher.group("y"))));
+        }
+
+        else if((matcher = GameMenuCommand.BUILD_GREENHOUSE.getMatcher(command)) != null) {
+            System.out.println(gameController.buildGreenHouse().getMessage());
         }
 
         else
