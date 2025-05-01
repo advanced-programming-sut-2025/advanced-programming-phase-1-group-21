@@ -1,10 +1,7 @@
 package models.game;
 
 import models.App;
-import models.Tool.Axe;
-import models.Tool.Tool;
-import models.Tool.ToolMaterialType;
-import models.Tool.ToolType;
+import models.Tool.*;
 import models.result.Result;
 import models.result.errorTypes.GameError;
 
@@ -22,6 +19,8 @@ public class Inventory {
 
     public Inventory() {
         items = new ArrayList<>();
+        items.add(new Hoe());
+        items.add(new Pickaxe());
         inventoryType = InventoryType.PRIMITIVE;
         trashcanType = ToolMaterialType.PRIMITIVE;
     }

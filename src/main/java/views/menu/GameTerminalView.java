@@ -176,6 +176,10 @@ public class GameTerminalView {
             printArrayList(gameController.showAvailableTools().getData());
         }
 
+        else if((matcher = GameMenuCommand.USE_TOOL.getMatcher(command)) != null) {
+            System.out.println(gameController.useTool(matcher.group("direction")).getMessage());
+        }
+
         else
             System.out.println("Invalid command");
     }
