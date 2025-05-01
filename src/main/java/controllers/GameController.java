@@ -152,7 +152,10 @@ public class GameController{
     }
 
     public Result<Building> buildGreenHouse() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO for building the greenhouse the player should pay 1000 coins and 500 amounts of wood
+
+        App.game.getCurrentPlayer().getThisPlayerMap().getGreenHouses().setBuild(true);
+        return Result.success("now you can use your greenhouse");
     }
 
     public Result<Player> walk(int x , int y) {
@@ -177,9 +180,14 @@ public class GameController{
         }
 
         else if(App.game.getCurrentPlayer().currentLocationTiles().get(y).get(x).isGreenHouse()){
-            App.game.getCurrentPlayer().getCurrentPlayerMap().setCurrentLocation(LocationsOnMap.GreenHouse);
-            App.game.getCurrentPlayer().setCoord(new Coord(0, 0));
-            GameTerminalView.printWithColor(printMap(0 , 0 , 50));
+            if(App.game.getCurrentPlayer().getThisPlayerMap().getGreenHouses().isBuild()) {
+                App.game.getCurrentPlayer().getCurrentPlayerMap().setCurrentLocation(LocationsOnMap.GreenHouse);
+                App.game.getCurrentPlayer().setCoord(new Coord(0, 0));
+                GameTerminalView.printWithColor(printMap(0, 0, 50));
+            }
+            else{
+                return Result.failure(GameError.GREENHOUSE_IS_NOT_YET_BUILT , GameError.GREENHOUSE_IS_NOT_YET_BUILT.getMessage());
+            }
         }
 
         else if(App.game.getCurrentPlayer().currentLocationTiles().get(y).get(x).isMines()){
