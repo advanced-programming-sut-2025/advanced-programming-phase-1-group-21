@@ -200,10 +200,12 @@ public class GameController{
             App.game.getCurrentPlayer().setCoord(new Coord(0, 0));
             GameTerminalView.printWithColor(printMap(0 , 0 , 50));
         }
+
         else{
             App.game.getCurrentPlayer().setCoord(new Coord(x, y));
             GameTerminalView.printWithColor(printMap(0 , 0 , 50));
         }
+
         return Result.success(null);
 
     }
@@ -528,6 +530,18 @@ public class GameController{
 
     public Result<Void> sell(Item product, int count) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> goToVillage(){
+        App.game.getCurrentPlayer().setCurrentPlayerMap(App.game.getVillage());
+        App.game.getCurrentPlayer().setCoord(new Coord(0,0));
+        return Result.success("Now you are in village");
+    }
+
+    public Result<Void> backToHome(){
+        App.game.getCurrentPlayer().setCurrentPlayerMap(App.game.getCurrentPlayer().getThisPlayerMap());
+        App.game.getCurrentPlayer().setCoord(new Coord(0,0));
+        return Result.success("Now you are back to home");
     }
 
     public Result<Void> talk(Player player, String massege) {

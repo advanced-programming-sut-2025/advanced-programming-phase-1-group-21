@@ -11,12 +11,12 @@ public class Map {
     protected ArrayList<ArrayList<Tile>> tiles = new ArrayList<>();
     protected House house = new House();
     protected ArrayList<Lake> lakes = new ArrayList<>();
+    protected ArrayList<Shop> shops = new ArrayList<>();
     protected Mines mines = new Mines();
     protected GreenHouse greenHouses = new GreenHouse();
     protected Barn barn;
     protected Coop coop;
     protected LocationsOnMap currentLocation = LocationsOnMap.Farm;
-
 
 
     public Map(int id) {
@@ -142,32 +142,70 @@ public class Map {
             this.lakes.add(new Lake());
         }
 
-        //this map is fot house
+        //this map is for village
         if(id == 4){
-            for(int i = 0 ; i < 8 ; i++){
+            for(int i = 0 ; i < 30 ; i++){
                 ArrayList<Tile> thisRowTiles = new ArrayList<>();
-                for(int j = 0 ; j < 16 ; j++){
+                for(int j = 0 ; j < 50 ; j++){
                     thisRowTiles.add(new Tile(new Coord(j , i) , null ,
                             null , null));
                 }
                 tiles.add(thisRowTiles);
             }
 
+            for(int i = 2 ; i < 8 ; i++){
+                for(int j = 4 ; j < 14 ; j++){
+                    tiles.get(i).get(j).setBlackSmith(true);
+                }
+            }
+
+            for(int i = 12 ; i < 18 ; i++){
+                for(int j = 4 ; j < 14 ; j++){
+                    tiles.get(i).get(j).setJojaMarta(true);
+                }
+            }
+
+            for(int i = 22 ; i < 28 ; i++){
+                for(int j = 4 ; j < 14 ; j++){
+                    tiles.get(i).get(j).setPierreStore(true);
+                }
+            }
+
+            for(int i = 2 ; i < 8 ; i++){
+                for(int j = 36 ; j < 46 ; j++){
+                    tiles.get(i).get(j).setCarpenter(true);
+                }
+            }
+
+            for(int i = 12 ; i < 18 ; i++){
+                for(int j = 36 ; j < 46 ; j++){
+                    tiles.get(i).get(j).setFishShop(true);
+                }
+            }
+
+            for(int i = 22 ; i < 28 ; i++){
+                for(int j = 36 ; j < 46 ; j++){
+                    tiles.get(i).get(j).setMarnieRanch(true);
+                }
+            }
+
+            for(int i = 12 ; i < 18 ; i++) {
+                for (int j = 20; j < 30; j++)
+                    tiles.get(i).get(j).setStardropSaloon(true);
+            }
         }
 
-        this.greenHouses = new GreenHouse();
-        this.house = new House();
-        this.mines = new Mines();
-
-        int randomForagingNumber = 20;
-        Random random = new Random();
-        while(randomForagingNumber > 0){
-            ArrayList<Foraging> foraging = new ArrayList<>(Arrays.asList(Foraging.values()));
-            int randomTileIndex = random.nextInt(1500);
-            Tile thisTile = tiles.get(randomTileIndex/50).get(randomTileIndex%50);
-            if(thisTile.tileIsEmpty()){
-                thisTile.setForaging(foraging.get(random.nextInt(foraging.size())));
-                randomForagingNumber--;
+        if(id != 4) {
+            int randomForagingNumber = 20;
+            Random random = new Random();
+            while (randomForagingNumber > 0) {
+                ArrayList<Foraging> foraging = new ArrayList<>(Arrays.asList(Foraging.values()));
+                int randomTileIndex = random.nextInt(1500);
+                Tile thisTile = tiles.get(randomTileIndex / 50).get(randomTileIndex % 50);
+                if (thisTile.tileIsEmpty()) {
+                    thisTile.setForaging(foraging.get(random.nextInt(foraging.size())));
+                    randomForagingNumber--;
+                }
             }
         }
     }
@@ -216,6 +254,20 @@ public class Map {
                     output.add("F");
                 else if(tile.isDoor())
                     output.add("+");
+                else if(tile.isBlackSmith())
+                    output.add("B");
+                else if(tile.isJojaMarta())
+                    output.add("J");
+                else if(tile.isPierreStore())
+                    output.add("P");
+                else if(tile.isCarpenter())
+                    output.add("C");
+                else if(tile.isFishShop())
+                    output.add("F");
+                else if(tile.isMarnieRanch())
+                    output.add("M");
+                else if(tile.isStardropSaloon())
+                    output.add("S");
                 else
                     output.add("#");
             }
