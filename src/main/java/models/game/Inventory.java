@@ -22,6 +22,7 @@ public class Inventory {
         items.add(new Hoe());
         items.add(new Pickaxe());
         items.add(new Axe());
+        items.add(new Scythe());
         inventoryType = InventoryType.PRIMITIVE;
         trashcanType = ToolMaterialType.PRIMITIVE;
     }

@@ -13,6 +13,8 @@ public class Map {
     protected ArrayList<Lake> lakes = new ArrayList<>();
     protected Mines mines = new Mines();
     protected GreenHouse greenHouses = new GreenHouse();
+    protected Barn barn;
+    protected Coop coop;
     protected LocationsOnMap currentLocation = LocationsOnMap.Farm;
 
 
@@ -163,7 +165,7 @@ public class Map {
             ArrayList<Foraging> foraging = new ArrayList<>(Arrays.asList(Foraging.values()));
             int randomTileIndex = random.nextInt(1500);
             Tile thisTile = tiles.get(randomTileIndex/50).get(randomTileIndex%50);
-            if(!thisTile.isHouse() && !thisTile.isGreenHouse() && !thisTile.isMines() && !thisTile.isLake() && (thisTile.getForaging() == null)){
+            if(thisTile.tileIsEmpty()){
                 thisTile.setForaging(foraging.get(random.nextInt(foraging.size())));
                 randomForagingNumber--;
             }
