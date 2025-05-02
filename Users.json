@@ -21,7 +21,7 @@
     "email": "sobhan@gmail.com",
     "nickname": "a",
     "gender": "MALE",
-    "isInAGame": false
+    "isInAGame": true
   },
   {
     "username": "shayan",
@@ -29,7 +29,7 @@
     "email": "sobhan@gmail.com",
     "nickname": "a",
     "gender": "MALE",
-    "isInAGame": true
+    "isInAGame": false
   },
   {
     "username": "sana",
@@ -38,5 +38,15 @@
     "nickname": "a",
     "gender": "MALE",
     "isInAGame": true
+  },
+  {
+    "username": "ali",
+    "password": "!aaaaaaaaaaa1",
+    "email": "sobhan@gmail.com",
+    "nickname": "a",
+    "gender": "FEMALE",
+    "isInAGame": false,
+    "securityQuestionID": 1,
+    "securityAnswer": "azina"
   }
 ]

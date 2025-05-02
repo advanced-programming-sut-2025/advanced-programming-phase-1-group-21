@@ -11,8 +11,11 @@ public enum GameError implements Error {
     NOT_ENOUGH_COINS("You do not have enough coins"),
     ANIMAL_NOT_FOUND("Animal not found"),
     NOT_ENOUGH_ITEMS("Not enough items"),
+    TOOL_NOT_FOUND("Tool not found"),
     TILE_IS_NOT_EMPTY("This tile is not empty"),
     GREENHOUSE_IS_NOT_YET_BUILT("Greenhouse is not yet built"),
+    HERE_IS_NOT_FARM("Here is not your farm"),
+    YOU_CANT_USE_PICKAXE_HERE("You can't use pickaxe here to use"),
     SEED_NOT_FOUND("Seed not found");
 
 

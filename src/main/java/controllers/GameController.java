@@ -1,7 +1,7 @@
 package controllers;
 
 import models.App;
-import models.Tool.Tool;
+import models.Tool.*;
 import models.animal.Animal;
 import models.animal.AnimalProducts;
 import models.crop.FertilizerType;
@@ -232,37 +232,69 @@ public class GameController{
         return Result.success(null);
     }
 
-    public Result<String> showInventory() {
-         return Result.success(App.game.getCurrentPlayer().getInventory().toString());
+    public Result<ArrayList<String>> showInventory() {
+         return Result.success(App.game.getCurrentPlayer().getInventory().showInventory());
     }
 
     public Result<Void> removeFromInventory(String itemName, int numberOfItems) {
-        Inventory inventory = App.game.getCurrentPlayer().getInventory();
-        //TODO improve this by changing itemName to a general Item then remove that
-        if (inventory.removeItem(new Item(itemName, null, 0, numberOfItems)))
-            return Result.success(null);
-        else
-            return Result.failure(GameError.NOT_ENOUGH_ITEMS);
+        return Result.success(App.game.getCurrentPlayer().getInventory().removeItem(itemName , numberOfItems));
     }
 
     public Result<Tool> equipTool(String toolName) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if(App.game.getCurrentPlayer().getInventory().toolEquip(toolName)) {
+            return Result.success("Now " + toolName + " is in your hands");
+        }
+
+        return Result.failure(GameError.TOOL_NOT_FOUND , GameError.TOOL_NOT_FOUND.getMessage());
     }
 
-    public Result<List<Tool>> showAvailableTools() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Result<String> showCurrentTool() {
+        if(App.game.getCurrentPlayer().getItemInHand() == null)
+            return Result.success("nothing is in your hands");
+        return Result.success(App.game.getCurrentPlayer().getItemInHand().getName());
     }
 
-    public Result<Tool> showToolInHand() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Result<ArrayList<String>> showAvailableTools() {
+        return Result.success(App.game.getCurrentPlayer().getInventory().showAvailableTools());
     }
 
     public Result<Tool> upgradeTool(String toolName) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<Void> useTool(Direction direction) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Result<Void> useTool(String direction) {
+        Direction d = Direction.stringToDirection(direction);
+        if(d == null)
+            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS , GameError.COORDINATE_DOESNT_EXISTS.getMessage());
+
+        Coord playerCoord = App.game.getCurrentPlayer().getCoord();
+        if(playerCoord.getY() + d.getDy() < 0)
+            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS , GameError.COORDINATE_DOESNT_EXISTS.getMessage());
+        if(playerCoord.getY() + d.getDy() >= App.game.getCurrentPlayer().currentLocationTiles().size())
+            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS , GameError.COORDINATE_DOESNT_EXISTS.getMessage());
+        if(playerCoord.getX() + d.getDx() < 0)
+            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS , GameError.COORDINATE_DOESNT_EXISTS.getMessage());
+        if(playerCoord.getX() + d.getDx() >= App.game.getCurrentPlayer().currentLocationTiles().get(0).size())
+            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS , GameError.COORDINATE_DOESNT_EXISTS.getMessage());
+
+        Coord destinyTile = new Coord(playerCoord.getX() + d.getDx(), playerCoord.getY() + d.getDy());
+
+        if(!App.game.getCurrentPlayer().getItemInHand().getItemType().equals(ItemType.TOOL))
+            return Result.failure(GameError.TOOL_NOT_FOUND , GameError.TOOL_NOT_FOUND.getMessage());
+
+        Tool tool = (Tool) App.game.getCurrentPlayer().getItemInHand();
+        if(tool.getToolType().equals(ToolType.HOE)) {
+            System.out.println("HOE");
+            Hoe hoe = (Hoe) App.game.getCurrentPlayer().getItemInHand();
+            return Result.success(hoe.use(destinyTile).getMessage());
+        }
+        if(tool.getToolType().equals(ToolType.PICKAXE)) {
+            System.out.println("PICKAXE");
+            Pickaxe pickaxe = (Pickaxe) App.game.getCurrentPlayer().getItemInHand();
+            return Result.success(pickaxe.use(destinyTile).getMessage());
+        }
+
+        return Result.success("wtf");
     }
 
     public Result<String> craftInfo(String craftName) {

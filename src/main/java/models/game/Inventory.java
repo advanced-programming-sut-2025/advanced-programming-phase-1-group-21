@@ -1,23 +1,28 @@
 package models.game;
 
-import models.Tool.ToolMaterialType;
+import models.App;
+import models.Tool.*;
 import models.result.Result;
+import models.result.errorTypes.GameError;
 
+import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Inventory {
     public static final int MAXIMUM_ITEM_PER_SLOT = 999;
     List<Item> items;
     InventoryType inventoryType;
     ToolMaterialType trashcanType;
-    Player owner;
+    ArrayList<Tool> tools;
 
-    public Inventory(Player owner) {
+    public Inventory() {
         items = new ArrayList<>();
+        items.add(new Hoe());
+        items.add(new Pickaxe());
         inventoryType = InventoryType.PRIMITIVE;
         trashcanType = ToolMaterialType.PRIMITIVE;
-        this.owner = owner;
     }
 
     public void upgradeSize(InventoryType inventoryType) {
@@ -67,9 +72,9 @@ public class Inventory {
         return item.getAmount() == 0; //If == 0 -> All were removed
     }
 
-    public boolean removeItem(Item item) {
-        return removeItemFromList(item, items);
-    }
+//    public boolean removeItem(Item item) {
+//        return removeItemFromList(item, items);
+//    }
 
     public static boolean removeItemsList(List<Item> itemsToRemove, List<Item> items) {
         for (Item i : itemsToRemove) {
@@ -115,29 +120,56 @@ public class Inventory {
         return amount;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Inventory {\n");
-        sb.append("  Type: ").append(inventoryType).append("\n");
-        sb.append("  Size: ").append(items.size()).append("/").append(getMaximumSize()).append("\n");
-        sb.append("  Trashcan Tier: ").append(trashcanType).append("\n");
-        sb.append("  Items: [\n");
 
-        if (items.isEmpty()) {
-            sb.append("    (empty)\n");
-        } else {
-            for (Item item : items) {
-                sb.append("    ").append(item.getName())
-                        .append(": ").append(item.getAmount())
-                        .append("/").append(MAXIMUM_ITEM_PER_SLOT)
-                        .append(" (").append(item.getItemType()).append(")\n");
+    public ArrayList<String> showInventory() {
+        ArrayList<String> output = new ArrayList<>();
+        output.add(App.game.getCurrentPlayer().getUser().getUsername() + "'s Inventory Items:");
+        for (Item item : items) {
+            output.add("name :" + item.getName());
+            output.add("amount :" + item.getAmount());
+            output.add("-----------------");
+        }
+        return output;
+    }
+
+    public String removeItem(String itemName , int amount) {
+        for(Item item : items) {
+            if(item.getName().equals(itemName)) {
+                if(item.getAmount() < amount)
+                    return GameError.NOT_ENOUGH_ITEMS.getMessage();
+                else {
+                    item.setAmount(Math.max(item.getAmount() - amount, 0));
+                    if(amount == 0)
+                        items.remove(item);
+                    return amount + " amounts of " + itemName + " removed.";
+                }
             }
         }
 
-        sb.append("  ]\n");
-        sb.append("}");
+        return "There is no item with this name in the inventory.";
+    }
 
-        return sb.toString();
+    public boolean toolEquip(String toolName){
+        for(Item item : items) {
+            if(item.getName().equals(toolName)) {
+                App.game.getCurrentPlayer().setItemInHand(item);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public ArrayList<String> showAvailableTools(){
+        ArrayList<String> output = new ArrayList<>();
+        output.add(App.game.getCurrentPlayer().getUser().getUsername() + "'s Available Tools:");
+        for(Item item : items) {
+            if(item.getItemType().equals(ItemType.TOOL)){
+                output.add("name :" + item.getName());
+                output.add("amount :" + item.getAmount());
+            }
+        }
+
+        return output;
     }
 }

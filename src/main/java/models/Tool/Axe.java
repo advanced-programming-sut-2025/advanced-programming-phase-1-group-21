@@ -11,7 +11,7 @@ public class Axe extends Tool {
 	}
 
 	@Override
-	protected Result<Item> use(Coord coord) {
+    public Result<Item> use(Coord coord) {
 		return null;
 	}
 
