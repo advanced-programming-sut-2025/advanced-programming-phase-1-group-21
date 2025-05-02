@@ -205,7 +205,7 @@ public class Map {
                         output.add("I");
                     else if (tile.getForaging().equals(Foraging.TREE))
                         output.add("T");
-                    else if (tile.getForaging().equals(Foraging.MARIJUANA))
+                    else if (tile.getForaging().equals(Foraging.LEAF))
                         output.add("*");
                 }
                 else if((App.game.getCurrentPlayer().getCoord().getX() == j) && (App.game.getCurrentPlayer().getCoord().getY() == i))

@@ -26,92 +26,95 @@ public class Pickaxe extends Tool {
 			App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setShokhmi(false);
 			use = 1;
 		}
-		if(this.toolMaterialType.equals(ToolMaterialType.IRIDIUM)) {
-			if(App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.SIMPLE_ROCK)) {
-				use = 2;
-				App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
-			}
-			if(App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.COPPER_ROCK)) {
-				use = 2;
-				App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
-			}
-			if(App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.STEEL_ROCK)) {
-				use = 2;
-				App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
-			}
-			if(App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.GOLD_ROCK)) {
-				use = 2;
-				App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
-			}
-			if(App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.IRIDIUM_ROCK)) {
-				use = 2;
-				App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
-			}
-		}
-		if(this.toolMaterialType.equals(ToolMaterialType.GOLD)) {
-			if(App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.SIMPLE_ROCK)) {
-				use = 2;
-				App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
-			}
-			if(App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.COPPER_ROCK)) {
-				use = 2;
-				App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
-			}
-			if(App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.STEEL_ROCK)) {
-				use = 2;
-				App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
-			}
-			if(App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.GOLD_ROCK)) {
-				use = 2;
-				App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
-			}
-			if(App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.IRIDIUM_ROCK)) {
-				use = 2;
-				App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
-			}
-		}
-		if(this.toolMaterialType.equals(ToolMaterialType.STEEL)) {
-			if(App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.SIMPLE_ROCK)) {
-				use = 2;
-				App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
-			}
-			if(App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.COPPER_ROCK)) {
-				use = 2;
-				App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
-			}
-			if(App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.STEEL_ROCK)) {
-				use = 2;
-				App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
-			}
-			if(App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.GOLD_ROCK)) {
-				use = 2;
-				App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
-			}
-		}
 
-		if(this.toolMaterialType.equals(ToolMaterialType.COPPER)) {
-			if(App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.SIMPLE_ROCK)) {
-				use = 2;
-				App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
+		if(App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging() != null) {
+			if (this.toolMaterialType.equals(ToolMaterialType.IRIDIUM)) {
+				if (App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.SIMPLE_ROCK)) {
+					use = 2;
+					App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
+				}
+				else if (App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.COPPER_ROCK)) {
+					use = 2;
+					App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
+				}
+				else if (App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.STEEL_ROCK)) {
+					use = 2;
+					App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
+				}
+				else if (App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.GOLD_ROCK)) {
+					use = 2;
+					App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
+				}
+				else if (App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.IRIDIUM_ROCK)) {
+					use = 2;
+					App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
+				}
 			}
-			if(App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.COPPER_ROCK)) {
-				use = 2;
-				App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
+			else if (this.toolMaterialType.equals(ToolMaterialType.GOLD)) {
+				if (App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.SIMPLE_ROCK)) {
+					use = 2;
+					App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
+				}
+				else if (App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.COPPER_ROCK)) {
+					use = 2;
+					App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
+				}
+				else if (App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.STEEL_ROCK)) {
+					use = 2;
+					App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
+				}
+				else if (App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.GOLD_ROCK)) {
+					use = 2;
+					App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
+				}
+				else if (App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.IRIDIUM_ROCK)) {
+					use = 2;
+					App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
+				}
 			}
-			if(App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.STEEL_ROCK)) {
-				use = 2;
-				App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
+			else if (this.toolMaterialType.equals(ToolMaterialType.STEEL)) {
+				if (App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.SIMPLE_ROCK)) {
+					use = 2;
+					App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
+				}
+				else if (App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.COPPER_ROCK)) {
+					use = 2;
+					App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
+				}
+				else if (App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.STEEL_ROCK)) {
+					use = 2;
+					App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
+				}
+				else if (App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.GOLD_ROCK)) {
+					use = 2;
+					App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
+				}
 			}
-		}
 
-		if(this.toolMaterialType.equals(ToolMaterialType.PRIMITIVE)) {
-			if(App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.SIMPLE_ROCK)) {
-				use = 2;
-				App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
+			else if (this.toolMaterialType.equals(ToolMaterialType.COPPER)) {
+				if (App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.SIMPLE_ROCK)) {
+					use = 2;
+					App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
+				}
+				else if (App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.COPPER_ROCK)) {
+					use = 2;
+					App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
+				}
+				else if (App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.STEEL_ROCK)) {
+					use = 2;
+					App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
+				}
 			}
-			if(App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.COPPER_ROCK)) {
-				use = 2;
-				App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
+
+			else if (this.toolMaterialType.equals(ToolMaterialType.PRIMITIVE)) {
+				if (App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.SIMPLE_ROCK)) {
+					use = 2;
+					App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
+				}
+				else if (App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.COPPER_ROCK)) {
+					use = 2;
+					App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
+				}
 			}
 		}
 
