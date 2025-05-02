@@ -4,8 +4,7 @@ import models.App;
 import models.Tool.*;
 import models.animal.Animal;
 import models.animal.AnimalProducts;
-import models.crop.FertilizerType;
-import models.crop.Seed;
+import models.crop.*;
 import models.game.*;
 import models.map.*;
 import models.result.Result;
@@ -298,7 +297,7 @@ public class GameController{
     }
 
     public Result<String> craftInfo(String craftName) {
-        models.crops.SeedSource seedSource = App.getSeedSourceByName(craftName);
+        SeedInfo seedSource = App.getSeedInfoByName(craftName);
         if (seedSource == null) {
             return Result.failure(GameError.SEED_NOT_FOUND);
         }

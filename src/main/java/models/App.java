@@ -1,6 +1,7 @@
 package models;
 
 import controllers.DataBaseController;
+import models.crop.SeedInfo;
 import models.game.Game;
 import models.game.Item;
 import models.user.User;
@@ -15,14 +16,9 @@ public class App {
     public static User registeredUser;
     public static User logedInUser;
 
-    public final static List<models.crops.SeedSource> crops = DataBaseController.loadCropsFromCSV("crops.csv");
+    public final static List<SeedInfo> crops = DataBaseController.loadCropsFromCSV("crops.csv");
 
-    public static models.crops.SeedSource getSeedSourceByName(String seedName) {
-        for (models.crops.SeedSource crop : crops) {
-            if (crop.getName().equals(seedName)) {
-                return crop;
-            }
-        }
-        return null;
+    public static SeedInfo getSeedInfoByName(String seedName) {
+        return SeedInfo.getSeedInfo(seedName);
     }
 }
