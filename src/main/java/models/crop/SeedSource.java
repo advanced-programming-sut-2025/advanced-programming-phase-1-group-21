@@ -1,4 +1,4 @@
-package models.crops;
+package models.crop;
 
 import models.time.Season;
 import java.util.List;

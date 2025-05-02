@@ -4,7 +4,7 @@ import models.game.Item;
 import models.game.ItemType;
 
 public class Seed extends Item {
-    models.crops.SeedSource seedSource;
+    SeedSource seedSource;
     FertilizerType fertilizerType;
     int stage;
     int day;
