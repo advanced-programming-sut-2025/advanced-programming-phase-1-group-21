@@ -4,6 +4,7 @@ import models.App;
 import models.result.Result;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class Map {
@@ -159,10 +160,7 @@ public class Map {
         int randomForagingNumber = 20;
         Random random = new Random();
         while(randomForagingNumber > 0){
-            ArrayList<Foraging> foraging = new ArrayList<>();
-            foraging.add(Foraging.TREE);
-            foraging.add(Foraging.ROCK);
-            foraging.add(Foraging.MARIJUANA);
+            ArrayList<Foraging> foraging = new ArrayList<>(Arrays.asList(Foraging.values()));
             int randomTileIndex = random.nextInt(1500);
             Tile thisTile = tiles.get(randomTileIndex/50).get(randomTileIndex%50);
             if(!thisTile.isHouse() && !thisTile.isGreenHouse() && !thisTile.isMines() && !thisTile.isLake() && (thisTile.getForaging() == null)){
@@ -195,8 +193,16 @@ public class Map {
                 else if(tile.isCoop())
                     output.add("C");
                 else if(tile.getForaging() != null) {
-                    if (tile.getForaging().equals(Foraging.ROCK))
+                    if (tile.getForaging().equals(Foraging.SIMPLE_ROCK))
                         output.add("R");
+                    else if (tile.getForaging().equals(Foraging.STEEL_ROCK))
+                        output.add("R");
+                    else if (tile.getForaging().equals(Foraging.GOLD_ROCK))
+                        output.add("g");
+                    else if (tile.getForaging().equals(Foraging.COPPER_ROCK))
+                        output.add("R");
+                    else if (tile.getForaging().equals(Foraging.IRIDIUM_ROCK))
+                        output.add("I");
                     else if (tile.getForaging().equals(Foraging.TREE))
                         output.add("T");
                     else if (tile.getForaging().equals(Foraging.MARIJUANA))

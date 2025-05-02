@@ -126,6 +126,10 @@ public class Tile {
         this.shokhmi = shokhmi;
     }
 
+    public boolean isShokhmi() {
+        return shokhmi;
+    }
+
     public boolean tileIsEmpty(){
         if(tree!=null)
             return false;
