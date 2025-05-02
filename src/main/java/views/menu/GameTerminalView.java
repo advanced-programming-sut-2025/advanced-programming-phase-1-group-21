@@ -59,6 +59,10 @@ public class GameTerminalView {
                 System.out.print(CYAN + line + CYAN);
             else if(line.equals("C"))
                 System.out.print(RED + line + RED);
+            else if(line.equals("g"))
+                System.out.print(YELLOW + line + YELLOW);
+            else if(line.equals("I"))
+                System.out.print(BLUE + line + BLUE);
 
             else
                 System.out.print(line);
