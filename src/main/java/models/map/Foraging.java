@@ -7,6 +7,6 @@ public enum Foraging {
     STEEL_ROCK,
     GOLD_ROCK,
     IRIDIUM_ROCK,
-    MARIJUANA
+    LEAF
     ;
 }

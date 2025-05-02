@@ -288,10 +288,15 @@ public class GameController{
             Hoe hoe = (Hoe) App.game.getCurrentPlayer().getItemInHand();
             return Result.success(hoe.use(destinyTile).getMessage());
         }
-        if(tool.getToolType().equals(ToolType.PICKAXE)) {
+        else if(tool.getToolType().equals(ToolType.PICKAXE)) {
             System.out.println("PICKAXE");
             Pickaxe pickaxe = (Pickaxe) App.game.getCurrentPlayer().getItemInHand();
             return Result.success(pickaxe.use(destinyTile).getMessage());
+        }
+        else if(tool.getToolType().equals(ToolType.AXE)) {
+            System.out.println("AXE");
+            Axe axe = (Axe) App.game.getCurrentPlayer().getItemInHand();
+            return Result.success(axe.use(destinyTile).getMessage());
         }
 
         return Result.success("wtf");
