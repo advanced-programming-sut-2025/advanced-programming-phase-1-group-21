@@ -2,31 +2,27 @@ package models.crop;
 
 import models.game.Item;
 import models.game.ItemType;
+import models.map.Tile;
 
 public class Seed extends Item {
-    SeedSource seedSource;
-    FertilizerType fertilizerType;
-    int stage;
-    int day;
+    SeedInfo seedInfo;
 
-    public Seed(String name, ItemType itemType, int cost) {
-        super(name, itemType, cost, 1);
+
+    public Seed(String name) {
+        super(name, ItemType.SEED, 0, 1);
+        seedInfo = SeedInfo.getSeedInfo(name);
+    }
+    public Seed(String name, int amount) {
+        super(name, ItemType.SEED, 0, amount);
+        seedInfo = SeedInfo.getSeedInfo(name);
     }
 
-    public Seed(String name, ItemType itemType, int cost, int amount) {
-        super(name, itemType, cost, amount);
+    public PlantedSeed plant(Tile tile) {
+        PlantedSeed plantedSeed = new PlantedSeed(seedInfo);
+//        tile.setPlantedSeed(plantedSeed); // Not done yet
+        return plantedSeed;
     }
 
-    public void plant() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 
-    public void water() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public void harvest() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 
 }

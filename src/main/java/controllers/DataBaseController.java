@@ -3,7 +3,6 @@ package controllers;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import models.crops.SeedSource;
 import models.result.Result;
 import models.time.Season;
 import models.user.User;
@@ -61,8 +60,8 @@ public class DataBaseController {
         }
     }
 
-    public static List<models.crops.SeedSource> loadCropsFromCSV(String filePath) {
-        List<models.crops.SeedSource> crops = new ArrayList<>();
+    public static List<SeedInfo> loadCropsFromCSV(String filePath) {
+        List<SeedInfo> crops = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             // Skip header line
@@ -94,7 +93,7 @@ public class DataBaseController {
 
                 boolean canBecomeGiant = Boolean.parseBoolean(values[11]);
 
-                crops.add(new SeedSource(name, source, stages, totalHarvestTime, oneTime, regrowthTime,
+                crops.add(new SeedInfo(name, source, stages, totalHarvestTime, oneTime, regrowthTime,
                         baseSellPrice, isEdible, energy, baseHealth, seasons, canBecomeGiant));
             }
         } catch (IOException e) {

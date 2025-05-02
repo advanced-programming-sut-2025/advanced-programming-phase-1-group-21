@@ -6,6 +6,7 @@ public enum ItemType {
     CONSUMABLE,
     COIN,
     WOOD,
+    SALABLE,
 
     ;
 }
