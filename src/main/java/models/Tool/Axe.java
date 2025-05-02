@@ -2,6 +2,7 @@ package models.Tool;
 
 import models.App;
 import models.game.Item;
+import models.game.ItemType;
 import models.map.Coord;
 import models.map.Direction;
 import models.map.Foraging;
@@ -24,6 +25,7 @@ public class Axe extends Tool {
 		if(App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.TREE)) {
 			use = true;
 			App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setForaging(null);
+			App.game.getCurrentPlayer().getInventory().addItem(new Item("wood" , ItemType.WOOD , 5 , 10));
 		}
 
 		if(use){
@@ -40,6 +42,7 @@ public class Axe extends Tool {
 
 			return Result.success("to yek derakht ro koshti");
 		}
+
 		App.game.getCurrentPlayer().setEnergy(App.game.getCurrentPlayer().getEnergy() - 1);
 		return Result.success("tabaret khata raft");
 	}

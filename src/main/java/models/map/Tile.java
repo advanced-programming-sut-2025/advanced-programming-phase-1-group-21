@@ -1,6 +1,7 @@
 package models.map;
 
 import models.animal.Animal;
+import models.crop.Seed;
 import models.crop.Tree;
 import models.game.Refrigerator;
 
@@ -14,6 +15,7 @@ public class Tile {
     private boolean isBarn = false;
     private boolean isCoop = false;
     private boolean shokhmi = false;
+    private Seed seed = null;
     private Tree tree = null;
     private Foraging foraging = null;
     private Refrigerator refrigerator = null;
@@ -130,8 +132,18 @@ public class Tile {
         return shokhmi;
     }
 
+    public Seed getSeed() {
+        return seed;
+    }
+
+    public void setSeed(Seed seed) {
+        this.seed = seed;
+    }
+
     public boolean tileIsEmpty(){
         if(tree!=null)
+            return false;
+        if(seed!=null)
             return false;
         if(animal!=null)
             return false;
