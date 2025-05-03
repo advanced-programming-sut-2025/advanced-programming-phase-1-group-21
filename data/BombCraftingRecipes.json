@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Cherry Bomb",
+    "description": "Destroys everything within a 3 tile radius.",
+    "radius": 3,
+    "ingredients-type": ["Copper Ore", "Coal"],
+    "ingredients-amount": [4, 1],
+    "skill-type": "Mining",
+    "skill-level": 1,
+    "price": 50
+  },
+  {
+    "name": "Bomb",
+    "description": "Destroys everything within a 5 tile radius.",
+    "radius": 5,
+    "ingredients-type": ["Iron Ore", "Coal"],
+    "ingredients-amount": [4, 1],
+    "skill-type": "Mining",
+    "skill-level": 2,
+    "price": 50
+  },
+  {
+    "name": "Mega Bomb",
+    "description": "Destroys everything within a 7 tile radius.",
+    "radius": 7,
+    "ingredients-type": ["Gold Ore", "Coal"],
+    "ingredients-amount": [4, 1],
+    "skill-type": "Mining",
+    "skill-level": 3,
+    "price": 50
+  }
+]

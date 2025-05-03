@@ -1,0 +1,175 @@
+[
+  {
+    "name": "Fried egg",
+    "Ingredient": "1 egg",
+    "energy": "50",
+    "source": "Starter",
+    "Sell Price": "35g"
+  },
+  {
+    "name": "Baked Fish",
+    "Ingredient": "1 Sardine + 1 Salmon + 1 wheat",
+    "energy": "75",
+    "Source": "Starter",
+    "Sell Price": "100g"
+  },
+  {
+    "name": "Salad",
+    "Ingredient": "1 leek + 1 dandelion",
+    "energy": "113",
+    "Source": "Starter",
+    "Sell Price": "110g"
+  },
+  {
+    "name": "Olmelet",
+    "Ingredient": "1 egg + 1 milk",
+    "energy": "100",
+    "Source": "Stardrop Saloon",
+    "Sell Price": "125g"
+  },
+  {
+    "name": "pumpkin pie",
+    "Ingredient": "1 pumpking + 1 wheat flour + \n1 milk + 1 sugar",
+    "energy": "225",
+    "Source": "Stardrop Saloon",
+    "Sell Price": "385g"
+  },
+  {
+    "name": "spaghetti",
+    "Ingredient": "1 wheat flour + 1 tomato",
+    "energy": "75",
+    "Source": "Stardrop Saloon",
+    "Sell Price": "120g"
+  },
+  {
+    "name": "pizza",
+    "Ingredient": "1 wheat flour + 1 tomato + \n1 cheese",
+    "energy": "150",
+    "Source": "Stardrop Saloon",
+    "Sell Price": "300g"
+  },
+  {
+    "name": "Tortilla",
+    "Ingredient": "1 corn",
+    "energy": "50",
+    "Source": "Stardrop Saloon",
+    "Sell Price": "50g"
+  },
+  {
+    "name": "Maki Roll",
+    "Ingredient": "1 any fish + 1 rice + 1 fiber",
+    "energy": "100",
+    "Source": "Stardrop Saloon",
+    "Sell Price": "220g"
+  },
+  {
+    "name": "Triple Shot Espresso",
+    "Ingredient": "3 coffee",
+    "energy": "200",
+    "Buff": "Max energy + 100 (5 hours)",
+    "Source": "Stardrop Saloon",
+    "Sell Price": "450g"
+  },
+  {
+    "name": "Cookie",
+    "Ingredient": "1 wheat flour + 1 sugar + 1 egg",
+    "energy": "90",
+    "Source": "Stardrop Saloon",
+    "Sell Price": "140g"
+  },
+  {
+    "name": "hash browns",
+    "Ingredient": "1 potato + 1 oil",
+    "energy": "90",
+    "Buff": "Farming (5 hours)",
+    "Source": "Stardrop Saloon",
+    "Sell Price": "120g"
+  },
+  {
+    "name": "pancakes",
+    "Ingredient": "1 wheat flour + 1 egg",
+    "energy": "90",
+    "Buff": "Foraging (11 hours)",
+    "Source": "Stardrop Saloon",
+    "Sell Price": "80g"
+  },
+  {
+    "name": "fruit salad",
+    "Ingredient": "1 blueberry + 1 melon + 1 apricot",
+    "energy": "263",
+    "Source": "Stardrop Saloon",
+    "Sell Price": "450g"
+  },
+  {
+    "name": "red plate",
+    "Ingredient": "1 red cabbage + 1 radish",
+    "energy": "240",
+    "Buff": "max energy +50 (3 hours)",
+    "Source": "Stardrop Saloon",
+    "Sell Price": "400g"
+  },
+  {
+    "name": "bread",
+    "Ingredient": "1 wheat flour",
+    "energy": "50",
+    "Source": "Stardrop Saloon",
+    "Sell Price": "60g"
+  },
+  {
+    "name": "salmon dinner",
+    "Ingredient": "1 salmon + 1 Amaranth + 1 Kale",
+    "energy": "125",
+    "Source": "Leah reward",
+    "Sell Price": "300g"
+  },
+  {
+    "name": "vegetable medley",
+    "Ingredient": "1 tomato + 1 beet",
+    "energy": "165",
+    "Source": "Foraging Level 2",
+    "Sell Price": "120g"
+  },
+  {
+    "name": "farmer's lunch",
+    "Ingredient": "1 omelet + 1 parsnip",
+    "energy": "200",
+    "Buff": "Farming (5 hours)",
+    "Source": "Farming level 1",
+    "Sell Price": "150g"
+  },
+  {
+    "name": "Survival Burger",
+    "ingredient-type": ["Bread", "Carrot", "Eggplant"],
+    "ingredient-amount": [1, 1, 1],
+    "energy": 125,
+    "buff-type": "Foraging",
+    "buff-time": 5,
+    "skill-type": "Foraging",
+    "skill-level": 3,
+    "price": 180
+  },
+  {
+    "name": "dish O' the Sea",
+    "Ingredient": "2 sardines + 1 hash browns",
+    "energy": "150",
+    "Buff": "Fishing (5 hours)",
+    "Source": "Fishing level 2",
+    "Sell Price": "220g"
+  },
+  {
+    "name": "seaform Pudding",
+    "Ingredient": "1 Flounder + 1 midnight carp",
+    "energy": "175",
+    "Buff": "Fishing (10 hours)",
+    "Source": "Fishing level 3",
+    "Sell Price": "300g"
+  },
+  {
+    "name": "miner's treat",
+    "Ingredient": "2 carrot + 1 suger +. 1 milk",
+    "energy": "125",
+    "Buff": "Mining (5 hours)",
+    "Source": "Mining level 1",
+    "Sell Price": "200g"
+  }
+]
