@@ -3,7 +3,6 @@ package models.crop;
 import models.game.Consumable;
 import models.game.Item;
 import models.game.ItemType;
-import models.map.Tile;
 
 public class PlantedSeed {
 	private FertilizerType fertilizerType = null; // not implemented yet.
@@ -17,11 +16,13 @@ public class PlantedSeed {
 		this.seedInfo = seedInfo;
 	}
 
-	protected void water() {
+	public void water() {
+		// This method is supposed to be called by its tile.
+
 		waterStage = 2;
 	}
 
-	protected Item harvest() {
+	public Item harvest() {
 		// This method is supposed to be called by its tile.
 
 		if (lastHarvest == -1) {
@@ -33,7 +34,7 @@ public class PlantedSeed {
 				return new Consumable(seedInfo.getResultName(), seedInfo.getEnergy(), seedInfo.getBaseSellPrice());
 			}
 		}
-		if (day - lastHarvest > seedInfo.getRegrowthTime()) {
+		else if (day - lastHarvest > seedInfo.getRegrowthTime()) {
 			lastHarvest = day;
 			if (seedInfo.getEnergy() == null) {
 				return new Item(seedInfo.getResultName(), ItemType.SALABLE, seedInfo.getBaseSellPrice(), 1);
@@ -43,7 +44,9 @@ public class PlantedSeed {
 		return null;
 	}
 
-	protected boolean nextDay() {
+	public boolean nextDay() {
+		// This method is supposed to be called by its tile.
+
 		waterStage--;
 		if (waterStage < 0)
 			return false;
@@ -51,5 +54,9 @@ public class PlantedSeed {
 		day++;
 		stage = seedInfo.getStage(day);
 		return true;
+	}
+
+	public boolean isOneTime() {
+		return seedInfo.isOneTime();
 	}
 }

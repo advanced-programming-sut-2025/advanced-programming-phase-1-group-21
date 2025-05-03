@@ -1,8 +1,10 @@
 package models.map;
 
 import models.animal.Animal;
+import models.crop.PlantedSeed;
 import models.crop.Seed;
 import models.crop.Tree;
+import models.game.Item;
 import models.game.Refrigerator;
 
 public class Tile {
@@ -22,7 +24,7 @@ public class Tile {
     private boolean isFishShop = false;
     private boolean isMarnieRanch = false;
     private boolean isStardropSaloon = false;
-    private Seed seed = null;
+    private PlantedSeed plantedSeed = null;
     private Tree tree = null;
     private Foraging foraging = null;
     private Refrigerator refrigerator = null;
@@ -139,12 +141,12 @@ public class Tile {
         return shokhmi;
     }
 
-    public Seed getSeed() {
-        return seed;
+    public PlantedSeed getPlantedSeed() {
+        return plantedSeed;
     }
 
-    public void setSeed(Seed seed) {
-        this.seed = seed;
+    public void setPlantedSeed(PlantedSeed plantedSeed) {
+        this.plantedSeed = plantedSeed;
     }
 
     public boolean isBlackSmith() {
@@ -206,7 +208,7 @@ public class Tile {
     public boolean tileIsEmpty(){
         if(tree!=null)
             return false;
-        if(seed!=null)
+        if(plantedSeed!=null)
             return false;
         if(animal!=null)
             return false;
@@ -225,5 +227,29 @@ public class Tile {
         if(isCoop)
             return false;
         return true;
+    }
+
+    public void water() {
+        if (plantedSeed != null) {
+            plantedSeed.water();
+        }
+    }
+
+    public Item harvest() {
+        if (plantedSeed != null) {
+            Item result = plantedSeed.harvest();
+            if (plantedSeed.isOneTime())
+                plantedSeed = null;
+            return result;
+        }
+        return null;
+    }
+
+    public void nextDay() {
+        if (plantedSeed != null) {
+            boolean result = plantedSeed.nextDay();
+            if (!result)
+                plantedSeed = null;
+        }
     }
 }
