@@ -13,8 +13,10 @@ public class Player {
     static final int MAX_ENERGY = 200;
 
     private User user;
-    private Map thisPlayerMap;
-    private Map currentPlayerMap;
+
+    private Map map;
+    private Map defaultMap;
+
     private Coord coord = new Coord(0 , 0);
     private int agronomicAbility = 0;
     private int miningAbility = 0;
@@ -57,9 +59,17 @@ public class Player {
         energy = new Energy();
     }
 
+    public Map getDefaultMap() {
+        return defaultMap;
+    }
+
+    public void setDefaultMap(Map defaultMap) {
+        this.defaultMap = defaultMap;
+    }
+
     /*
-        Set max energy to X for D days
-     */
+            Set max energy to X for D days
+         */
     public void setMaxEnergy(int maxEnergy, int days) {
         energy.setMaxEnergy(maxEnergy, days);
     }
@@ -84,46 +94,26 @@ public class Player {
         return user;
     }
 
-    public void setThisPlayerMap(Map thisPlayerMap) {
-        this.thisPlayerMap = thisPlayerMap;
+    public void setMap(Map map) {
+        this.map = map;
     }
 
-    public Map getThisPlayerMap() {
-        return thisPlayerMap;
-    }
-
-    public Map getCurrentPlayerMap() {
-        return currentPlayerMap;
-    }
-
-    public ArrayList<ArrayList<Tile>> currentLocationTiles(){
-        LocationsOnMap loc = currentPlayerMap.getCurrentLocation();
-        if(loc == LocationsOnMap.Farm)
-            return currentPlayerMap.getTiles();
-        if(loc == LocationsOnMap.House)
-            return currentPlayerMap.getHouse().getTiles();
-        if(loc == LocationsOnMap.GreenHouse)
-            return currentPlayerMap.getGreenHouses().getTiles();
-        if(loc == LocationsOnMap.Mines)
-            return currentPlayerMap.getMines().getTiles();
-        return null;
+    public Map getMap() {
+        return map;
     }
 
     public ArrayList<Tile> getNeighborTiles(){
         ArrayList<Tile> output = new ArrayList<>();
         Coord playerCord = App.game.getCurrentPlayer().getCoord();
         for(Direction direction : Direction.values()) {
-            if (direction.getCoord().addCoord(playerCord).getValidCoord() == null)
+            Tile tile = App.game.getCurrentPlayerMap().getTile(direction.getCoord().addCoord(playerCord));
+            if (tile == null)
                 continue;
-            output.add(App.game.getCurrentPlayer().currentLocationTiles().get(playerCord.getY() + direction.getDy()).get(playerCord.getX() + direction.getDx()));
+            output.add(tile);
         }
         return output;
     }
 
-
-    public void setCurrentPlayerMap(Map currentPlayerMap) {
-        this.currentPlayerMap = currentPlayerMap;
-    }
 
     public void addCoins(int coins) {
         inventory.addItem(Game.getCoinItem(coins));
@@ -157,12 +147,12 @@ public class Player {
         return animals;
     }
 
-    public int getAnimalIndex(String name){
-        for(int i = 0 ; i < animals.size(); i++){
-            if(animals.get(i).getName().equals(name))
-                return i;
+    public Animal getAnimalByName(String name) {
+        for (Animal animal : animals) {
+            if (animal.getName().equalsIgnoreCase(name))
+                return animal;
         }
-        return -1;
+        return null;
     }
 
     public int getAgronomicAbility() {

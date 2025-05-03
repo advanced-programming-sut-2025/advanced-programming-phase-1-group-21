@@ -59,17 +59,12 @@ public class GameController{
             players.add(new Player(user));
         }
 
+        MapBuilder mapBuilder = new MapBuilder();
+
         for(Player player : players) {
-            while(true) {
-                int mapID = GameTerminalView.getMap(player);
-                if ((mapID < 1) || (mapID > 3))
-                    System.out.println("Invalid map ID");
-                else {
-                    player.setThisPlayerMap(new Map(mapID));
-                    player.setCurrentPlayerMap(player.getThisPlayerMap());
-                    break;
-                }
-            }
+            Map map = mapBuilder.buildFarm();
+            player.setMap(map);
+            player.setDefaultMap(map);
         }
 
         Game game = new Game(players.getFirst() , players);
@@ -159,53 +154,57 @@ public class GameController{
     public Result<Building> buildGreenHouse() {
         //TODO for building the greenhouse the player should pay 1000 coins and 500 amounts of wood
 
-        App.game.getCurrentPlayer().getThisPlayerMap().getGreenHouses().setBuild(true);
+        App.game.getCurrentPlayerMap().getGreenHouses().setBuild(true);
         return Result.success("now you can use your greenhouse");
     }
 
     public Result<Void> walk(int x , int y) {
-        if ((new Coord(x, y)).getValidCoord() == null)
-            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
+        Coord coord = new Coord(x, y);
 
         Player player = App.game.getCurrentPlayer();
-        Tile tile = player.getCurrentPlayerMap().getTiles().get(y).get(x);
-        Tile curTile = App.game.getCurrentPlayer().currentLocationTiles().get(y).get(x);
+        Tile tile = player.getMap().getTile(coord);
 
-        if(tile.getForaging() != null)
+        if (tile == null)
+            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
+
+        if(tile.getTileType().isForaging())
             return Result.failure(GameError.CANT_STAND_ON_FORAGING);
-        else if(tile.getRefrigerator() != null)
+        else if(tile.getTileType() == TileType.REFRIGERATOR)
             return Result.failure(GameError.CANT_STAND_ON_FRIDGE);
-        else if(tile.isLake())
+        else if(tile.getTileType() == TileType.LAKE)
             return Result.failure(GameError.CANT_STAND_ON_LAKE);
-        else if(tile.isHouse()){
-            player.getCurrentPlayerMap().setCurrentLocation(LocationsOnMap.House);
+        else if(tile.getTileType() == TileType.HOUSE) {
+            House house = tile.getPlacable(House.class);
+            player.setMap(house.getMap());
             player.setCoord(new Coord(0, 0));
             GameTerminalView.printWithColor(printMap(0 , 0 , 50));
         }
-        else if(curTile.isGreenHouse()){
-            if(App.game.getCurrentPlayer().getThisPlayerMap().getGreenHouses().isBuild()) {
-                App.game.getCurrentPlayer().getCurrentPlayerMap().setCurrentLocation(LocationsOnMap.GreenHouse);
+        else if(tile.getTileType() == TileType.GREEN_HOUSE) {
+            GreenHouse house = tile.getPlacable(GreenHouse.class);
+            if(house.isBuild()) {
+                player.setMap(house.getMap());
                 App.game.getCurrentPlayer().setCoord(new Coord(0, 0));
                 GameTerminalView.printWithColor(printMap(0, 0, 50));
             }
-            else{
+            else {
                 return Result.failure(GameError.GREENHOUSE_IS_NOT_YET_BUILT);
             }
         }
-        else if(curTile.isMines()){
-            App.game.getCurrentPlayer().getCurrentPlayerMap().setCurrentLocation(LocationsOnMap.Mines);
+        else if(tile.getTileType() == TileType.MINES) {
+            Mines mines = tile.getPlacable(Mines.class);
+            player.setMap(mines.getMap());
             App.game.getCurrentPlayer().setCoord(new Coord(0, 0));
             GameTerminalView.printWithColor(printMap(0 , 0 , 50));
         }
-        else if(curTile.isDoor()){
-            App.game.getCurrentPlayer().getCurrentPlayerMap().setCurrentLocation(LocationsOnMap.Farm);
+        else if(tile.getTileType() == TileType.DOOR) {
+            player.setMap(player.getDefaultMap());
             App.game.getCurrentPlayer().setCoord(new Coord(0, 0));
             GameTerminalView.printWithColor(printMap(0 , 0 , 50));
         }
-        else if(curTile.isBlackSmith()){
+        else if(tile.getTileType() == TileType.BLACKSMITH){
             App.game.getVillage().getShops().get(0).showProducts(); //TODO ?:(
         }
-        else{
+        else {
             App.game.getCurrentPlayer().setCoord(new Coord(x, y));
             GameTerminalView.printWithColor(printMap(0 , 0 , 50));
         }
@@ -213,7 +212,7 @@ public class GameController{
     }
 
     public ArrayList<String> printMap(int x, int y , int size) {
-        return App.game.getCurrentPlayer().getCurrentPlayerMap().printMap(new Coord(x , y) , size);
+        return App.game.getCurrentPlayerMap().printMap(new Coord(x , y) , size);
     }
 
     public int showEnergy() {
@@ -265,15 +264,12 @@ public class GameController{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<Void> useTool(String direction) {
+    public Result<Item> useTool(String direction) {
         Direction d = Direction.stringToDirection(direction);
         if(d == null)
             return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
 
-        Coord destinyTile = App.game.getCurrentPlayer().getCoord().addCoord(d.getCoord()).getValidCoord();
-
-        if (destinyTile == null)
-            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
+        Coord destinyTile = App.game.getCurrentPlayer().getCoord().addCoord(d.getCoord());
 
         if(!App.game.getCurrentPlayer().getItemInHand().getItemType().equals(ItemType.TOOL))
             return Result.failure(GameError.TOOL_NOT_FOUND);
@@ -282,19 +278,18 @@ public class GameController{
         if(tool.getToolType().equals(ToolType.HOE)) {
             System.out.println("HOE");
             Hoe hoe = (Hoe) App.game.getCurrentPlayer().getItemInHand();
-            return Result.success(hoe.use(destinyTile).getMessage());
+            return hoe.use(destinyTile);
         }
         else if(tool.getToolType().equals(ToolType.PICKAXE)) {
             System.out.println("PICKAXE");
             Pickaxe pickaxe = (Pickaxe) App.game.getCurrentPlayer().getItemInHand();
-            return Result.success(pickaxe.use(destinyTile).getMessage());
+            return pickaxe.use(destinyTile);
         }
         else if(tool.getToolType().equals(ToolType.AXE)) {
             System.out.println("AXE");
             Axe axe = (Axe) App.game.getCurrentPlayer().getItemInHand();
-            return Result.success(axe.use(destinyTile).getMessage());
+            return axe.use(destinyTile);
         }
-
         return Result.success("wtf");
     }
 
@@ -368,32 +363,15 @@ public class GameController{
             return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
         for(int i = y ; i < y+5 ; i++){
             for(int j = x ; j < x+5 ; j++){
-                if(!App.game.getCurrentPlayer().getThisPlayerMap().getTiles().get(i).get(j).tileIsEmpty())
+                if(!App.game.getCurrentPlayerMap().getTile(new Coord(i, j)).isEmpty())
                     return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
             }
         }
 
         if(App.game.getCurrentPlayer().getInventory().getAmountByType(ItemType.COIN) < 1000)
             return Result.failure(GameError.NOT_ENOUGH_COINS);
-
-
-
-        if(buildingName.equals("Barn")){
-            for(int i = y ; i < y+5 ; i++){
-                for(int j = x ; j < x+5 ; j++)
-                    App.game.getCurrentPlayer().getThisPlayerMap().getTiles().get(i).get(j).setBarn(true);
-            }
-            return Result.success("Barn build successfully");
-        }
-        if(buildingName.equals("Coop")){
-            for(int i = y ; i < y+5 ; i++){
-                for(int j = x ; j < x+5 ; j++)
-                    App.game.getCurrentPlayer().getThisPlayerMap().getTiles().get(i).get(j).setCoop(true);
-            }
-            return Result.success("Coop build successfully");
-        }
-        return Result.success(null);
-
+        //TODO
+        return Result.failure(GameError.NOT_IMPLEMENTED);
     }
 
     public Result<Animal> buyAnimal(String animal , String name){
@@ -404,7 +382,7 @@ public class GameController{
         List<Tile> neigh = App.game.getCurrentPlayer().getNeighborTiles();
 
         for (Tile tile : neigh) {
-            Animal animal = tile.getAnimal();
+            Animal animal = tile.getPlacable(Animal.class);
             if(animal == null)
                 continue;
 
@@ -436,19 +414,20 @@ public class GameController{
         return Result.success(output);
     }
 
-    public Result<Void> shepherdAnimals(String name , int x , int y){
-        if((x >= 50) || (y >= 30))
+    public Result<Void> shepherdAnimals(String name , int x , int y) {
+        Tile tile = App.game.getCurrentPlayerMap().getTile(new Coord(x, y));
+        if (tile == null)
             return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
-        if(!App.game.getCurrentPlayer().getThisPlayerMap().getTiles().get(y).get(x).tileIsEmpty())
+        if (!tile.isEmpty())
             return Result.failure(GameError.TILE_IS_NOT_EMPTY);
 
-        int thisAnimalIndex = App.game.getCurrentPlayer().getAnimalIndex(name);
-        if(thisAnimalIndex == -1)
+        Animal animal = App.game.getCurrentPlayer().getAnimalByName(name);
+        if (animal == null)
             return Result.failure(GameError.ANIMAL_NOT_FOUND);
 
 
-        App.game.getCurrentPlayer().getAnimals().get(thisAnimalIndex).shepherd();
-        App.game.getCurrentPlayer().getThisPlayerMap().getTiles().get(y).get(x).setAnimal(App.game.getCurrentPlayer().getAnimals().get(thisAnimalIndex));
+        animal.shepherd(); //TODO
+        App.game.getCurrentPlayerMap().getTile(new Coord(x, y)).setPlacable(animal);
 
         return Result.success(name + " is on tile (" + x + ", " + y + ")");
     }
@@ -511,13 +490,13 @@ public class GameController{
     }
 
     public Result<Void> goToVillage(){
-        App.game.getCurrentPlayer().setCurrentPlayerMap(App.game.getVillage());
+        App.game.getCurrentPlayer().setMap(App.game.getVillage());
         App.game.getCurrentPlayer().setCoord(new Coord(0,0));
         return Result.success("Now you are in village");
     }
 
     public Result<Void> backToHome(){
-        App.game.getCurrentPlayer().setCurrentPlayerMap(App.game.getCurrentPlayer().getThisPlayerMap());
+        App.game.getCurrentPlayer().setMap(App.game.getCurrentPlayer().getDefaultMap());
         App.game.getCurrentPlayer().setCoord(new Coord(0,0));
         return Result.success("Now you are back to home");
     }
