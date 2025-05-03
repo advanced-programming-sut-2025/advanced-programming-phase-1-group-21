@@ -30,13 +30,6 @@ public class Result<T> {
         return new Result<>(null, error, error.toString());
     }
 
-    public static <T> Result<T> failure(Error error, String message) {
-        if (error == null) {
-            throw new IllegalArgumentException("Error cannot be null for a failed result");
-        }
-        return new Result<>(null, error, message);
-    }
-
     public T getData() {
         return data;
     }

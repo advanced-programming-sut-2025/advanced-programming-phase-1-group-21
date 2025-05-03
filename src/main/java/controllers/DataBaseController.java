@@ -3,6 +3,7 @@ package controllers;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import models.game.Item;
 import models.result.Result;
 import models.time.Season;
 import models.user.User;
@@ -126,4 +127,21 @@ public class DataBaseController {
         }
         return seasons;
     }
+
+    public static ArrayList<Item> readShopProducts(Gson gson, String filePath) {
+        File file = new File(filePath);
+        if (!file.exists() || file.length() == 0) {
+            return new ArrayList<>();
+        }
+
+        try (FileReader reader = new FileReader(file)) {
+            Type listType = new TypeToken<ArrayList<Item>>(){}.getType();
+            ArrayList<Item> existingData = gson.fromJson(reader, listType);
+            return existingData != null ? existingData : new ArrayList<>();
+        } catch (IOException e) {
+            System.err.println("error in reading file" + e.getMessage());
+            return new ArrayList<>();
+        }
+    }
+
 }

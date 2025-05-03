@@ -30,36 +30,46 @@ public class GameTerminalView {
     public static final String PURPLE = "\u001B[35m";
     public static final String CYAN = "\u001B[36m";
     public static final String WHITE = "\u001B[37m";
+    public static final String BROWN = "\u001B[38;5;94m";
 
     public static void printWithColor(ArrayList<String> output) {
         for(String line : output) {
             if(line.equals("#"))
-                System.out.print(WHITE + line + WHITE);
+                System.out.print(WHITE + line + RESET);
             else if(line.equals("H"))
-                System.out.print(YELLOW + line + YELLOW);
+                System.out.print(YELLOW + line + RESET);
             else if(line.equals("~"))
-                System.out.print(BLUE + line + BLUE);
+                System.out.print(BLUE + line + RESET);
             else if(line.equals("M"))
-                System.out.print(BLACK + line + BLACK);
+                System.out.print(BLACK + line + RESET);
             else if(line.equals("R"))
-                System.out.print(BLACK + line + BLACK);
+                System.out.print(BLACK + line + RESET);
             else if(line.equals("G"))
-                System.out.print(GREEN + line + GREEN);
+                System.out.print(GREEN + line + RESET);
             else if(line.equals("*"))
-                System.out.print(GREEN + line + GREEN);
+                System.out.print(GREEN + line + RESET);
             else if(line.equals("T"))
-                System.out.print(GREEN + line + GREEN);
+                System.out.print(GREEN + line + RESET);
             else if(line.equals("@"))
-                System.out.print(RED + line + RED);
+                System.out.print(RED + line + RESET);
             else if(line.equals("F"))
-                System.out.print(BLACK + line + BLACK);
+                System.out.print(BLACK + line + RESET);
             else if(line.equals("+"))
-                System.out.print(RED + line + RED);
+                System.out.print(RED + line + RESET);
             else if(line.equals("B"))
-                System.out.print(CYAN + line + CYAN);
+                System.out.print(CYAN + line + RESET);
             else if(line.equals("C"))
-                System.out.print(RED + line + RED);
-
+                System.out.print(RED + line + RESET);
+            else if(line.equals("g"))
+                System.out.print(YELLOW + line + RESET);
+            else if(line.equals("I"))
+                System.out.print(BLUE + line + RESET);
+            else if(line.equals("J"))
+                System.out.print(BROWN + line + RESET);
+            else if(line.equals("P"))
+                System.out.print(GREEN + line + RESET);
+            else if(line.equals("S"))
+                System.out.print(RED + line + RESET);
             else
                 System.out.print(line);
         }
@@ -178,6 +188,14 @@ public class GameTerminalView {
 
         else if((matcher = GameMenuCommand.USE_TOOL.getMatcher(command)) != null) {
             System.out.println(gameController.useTool(matcher.group("direction")).getMessage());
+        }
+
+        else if((matcher = GameMenuCommand.BACK_HOME.getMatcher(command)) != null) {
+            System.out.println(gameController.backToHome().getMessage());
+        }
+
+        else if((matcher = GameMenuCommand.GO_TO_VILLAGE.getMatcher(command)) != null) {
+            System.out.println(gameController.goToVillage().getMessage());
         }
 
         else

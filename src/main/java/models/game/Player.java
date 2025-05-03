@@ -97,37 +97,24 @@ public class Player {
     }
 
     public ArrayList<ArrayList<Tile>> currentLocationTiles(){
-        if(currentPlayerMap.getCurrentLocation().equals(LocationsOnMap.Farm))
+        LocationsOnMap loc = currentPlayerMap.getCurrentLocation();
+        if(loc == LocationsOnMap.Farm)
             return currentPlayerMap.getTiles();
-        if(currentPlayerMap.getCurrentLocation().equals(LocationsOnMap.House))
+        if(loc == LocationsOnMap.House)
             return currentPlayerMap.getHouse().getTiles();
-        if(currentPlayerMap.getCurrentLocation().equals(LocationsOnMap.GreenHouse))
+        if(loc == LocationsOnMap.GreenHouse)
             return currentPlayerMap.getGreenHouses().getTiles();
-        if(currentPlayerMap.getCurrentLocation().equals(LocationsOnMap.Mines))
+        if(loc == LocationsOnMap.Mines)
             return currentPlayerMap.getMines().getTiles();
         return null;
     }
 
-    public ArrayList<Tile> neighborTiles(){
+    public ArrayList<Tile> getNeighborTiles(){
         ArrayList<Tile> output = new ArrayList<>();
         Coord playerCord = App.game.getCurrentPlayer().getCoord();
-        for(Direction direction : Direction.values()){
-            if(direction.getDx() + playerCord.getX() < 0){
+        for(Direction direction : Direction.values()) {
+            if (direction.getCoord().addCoord(playerCord).getValidCoord() == null)
                 continue;
-            }
-
-            if(direction.getDx() + playerCord.getX() >= App.game.getCurrentPlayer().currentLocationTiles().get(0).size()){
-                continue;
-            }
-
-            if(direction.getDy() + playerCord.getY() < 0){
-                continue;
-            }
-
-            if(direction.getDy() + playerCord.getY() >= App.game.getCurrentPlayer().currentLocationTiles().size()){
-                continue;
-            }
-
             output.add(App.game.getCurrentPlayer().currentLocationTiles().get(playerCord.getY() + direction.getDy()).get(playerCord.getX() + direction.getDx()));
         }
         return output;

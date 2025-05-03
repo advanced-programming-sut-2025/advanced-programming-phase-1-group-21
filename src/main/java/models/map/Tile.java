@@ -1,6 +1,7 @@
 package models.map;
 
 import models.animal.Animal;
+import models.crop.Seed;
 import models.crop.Tree;
 import models.game.Refrigerator;
 
@@ -14,6 +15,14 @@ public class Tile {
     private boolean isBarn = false;
     private boolean isCoop = false;
     private boolean shokhmi = false;
+    private boolean isBlackSmith = false;
+    private boolean isJojaMarta = false;
+    private boolean isPierreStore = false;
+    private boolean isCarpenter = false;
+    private boolean isFishShop = false;
+    private boolean isMarnieRanch = false;
+    private boolean isStardropSaloon = false;
+    private Seed seed = null;
     private Tree tree = null;
     private Foraging foraging = null;
     private Refrigerator refrigerator = null;
@@ -126,8 +135,78 @@ public class Tile {
         this.shokhmi = shokhmi;
     }
 
+    public boolean isShokhmi() {
+        return shokhmi;
+    }
+
+    public Seed getSeed() {
+        return seed;
+    }
+
+    public void setSeed(Seed seed) {
+        this.seed = seed;
+    }
+
+    public boolean isBlackSmith() {
+        return isBlackSmith;
+    }
+
+    public boolean isJojaMarta() {
+        return isJojaMarta;
+    }
+
+    public boolean isPierreStore() {
+        return isPierreStore;
+    }
+
+    public boolean isCarpenter() {
+        return isCarpenter;
+    }
+
+    public boolean isFishShop() {
+        return isFishShop;
+    }
+
+    public boolean isMarnieRanch() {
+        return isMarnieRanch;
+    }
+
+    public boolean isStardropSaloon() {
+        return isStardropSaloon;
+    }
+
+    public void setBlackSmith(boolean blackSmith) {
+        isBlackSmith = blackSmith;
+    }
+
+    public void setJojaMarta(boolean jojaMarta) {
+        isJojaMarta = jojaMarta;
+    }
+
+    public void setPierreStore(boolean pierreStore) {
+        isPierreStore = pierreStore;
+    }
+
+    public void setCarpenter(boolean carpenter) {
+        isCarpenter = carpenter;
+    }
+
+    public void setFishShop(boolean fishShop) {
+        isFishShop = fishShop;
+    }
+
+    public void setMarnieRanch(boolean marnieRanch) {
+        isMarnieRanch = marnieRanch;
+    }
+
+    public void setStardropSaloon(boolean stardropSaloon) {
+        isStardropSaloon = stardropSaloon;
+    }
+
     public boolean tileIsEmpty(){
         if(tree!=null)
+            return false;
+        if(seed!=null)
             return false;
         if(animal!=null)
             return false;

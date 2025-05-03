@@ -12,11 +12,13 @@ import models.time.*;
 public class Game {
     private ArrayList<Player> players;
     private Player currentPlayer;
+    private Map village = new Map(4);
     private int roundCount = 0;
     private Date gameDate;
     private Season gameSeason;
     private Weather gameWeather;
     private Weather forecastCheat;
+
 
     public Game(ArrayList<Player> players) {
         this.players = players;
@@ -114,5 +116,9 @@ public class Game {
 
     public static Item getCoinItem(int amount) {
         return new Item("coin", ItemType.COIN, 1, amount);
+    }
+
+    public Map getVillage() {
+        return village;
     }
 }

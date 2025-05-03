@@ -1,5 +1,7 @@
 package controllers;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import models.App;
 import models.Tool.*;
 import models.animal.Animal;
@@ -15,9 +17,13 @@ import models.time.Season;
 import models.user.User;
 import views.menu.GameTerminalView;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static models.game.ItemType.stringToItemType;
+import static models.user.Gender.getGenderByName;
 
 public class GameController{
 
@@ -85,7 +91,7 @@ public class GameController{
 
     public Result<Void> nextTurn() {
         if(App.game == null)
-            return Result.failure(AuthError.GAME_NOT_CREATED , "Game not created");
+            return Result.failure(AuthError.GAME_NOT_CREATED);
 
         App.game.nextTurn();
 
@@ -157,55 +163,53 @@ public class GameController{
         return Result.success("now you can use your greenhouse");
     }
 
-    public Result<Player> walk(int x , int y) {
-        if(y >= App.game.getCurrentPlayer().currentLocationTiles().size())
-            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS , GameError.COORDINATE_DOESNT_EXISTS.getMessage());
-        if(x >= App.game.getCurrentPlayer().currentLocationTiles().get(0).size())
-            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS , GameError.COORDINATE_DOESNT_EXISTS.getMessage());
+    public Result<Void> walk(int x , int y) {
+        if ((new Coord(x, y)).getValidCoord() == null)
+            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
 
-        if(App.game.getCurrentPlayer().getCurrentPlayerMap().getTiles().get(y).get(x).getForaging() != null)
-            return Result.failure(GameError.CANT_STAND_ON_FORAGING , GameError.CANT_STAND_ON_FORAGING.getMessage());
+        Player player = App.game.getCurrentPlayer();
+        Tile tile = player.getCurrentPlayerMap().getTiles().get(y).get(x);
+        Tile curTile = App.game.getCurrentPlayer().currentLocationTiles().get(y).get(x);
 
-        if(App.game.getCurrentPlayer().getCurrentPlayerMap().getTiles().get(y).get(x).getRefrigerator() != null)
-            return Result.failure(GameError.CANT_STAND_ON_FRIDGE , GameError.CANT_STAND_ON_FRIDGE.getMessage());
-
-        if(App.game.getCurrentPlayer().getCurrentPlayerMap().getTiles().get(y).get(x).isLake())
-            return Result.failure(GameError.CANT_STAND_ON_LAKE , GameError.CANT_STAND_ON_LAKE.getMessage());
-
-        if(App.game.getCurrentPlayer().currentLocationTiles().get(y).get(x).isHouse()){
-            App.game.getCurrentPlayer().getCurrentPlayerMap().setCurrentLocation(LocationsOnMap.House);
-            App.game.getCurrentPlayer().setCoord(new Coord(0, 0));
+        if(tile.getForaging() != null)
+            return Result.failure(GameError.CANT_STAND_ON_FORAGING);
+        else if(tile.getRefrigerator() != null)
+            return Result.failure(GameError.CANT_STAND_ON_FRIDGE);
+        else if(tile.isLake())
+            return Result.failure(GameError.CANT_STAND_ON_LAKE);
+        else if(tile.isHouse()){
+            player.getCurrentPlayerMap().setCurrentLocation(LocationsOnMap.House);
+            player.setCoord(new Coord(0, 0));
             GameTerminalView.printWithColor(printMap(0 , 0 , 50));
         }
-
-        else if(App.game.getCurrentPlayer().currentLocationTiles().get(y).get(x).isGreenHouse()){
+        else if(curTile.isGreenHouse()){
             if(App.game.getCurrentPlayer().getThisPlayerMap().getGreenHouses().isBuild()) {
                 App.game.getCurrentPlayer().getCurrentPlayerMap().setCurrentLocation(LocationsOnMap.GreenHouse);
                 App.game.getCurrentPlayer().setCoord(new Coord(0, 0));
                 GameTerminalView.printWithColor(printMap(0, 0, 50));
             }
             else{
-                return Result.failure(GameError.GREENHOUSE_IS_NOT_YET_BUILT , GameError.GREENHOUSE_IS_NOT_YET_BUILT.getMessage());
+                return Result.failure(GameError.GREENHOUSE_IS_NOT_YET_BUILT);
             }
         }
-
-        else if(App.game.getCurrentPlayer().currentLocationTiles().get(y).get(x).isMines()){
+        else if(curTile.isMines()){
             App.game.getCurrentPlayer().getCurrentPlayerMap().setCurrentLocation(LocationsOnMap.Mines);
             App.game.getCurrentPlayer().setCoord(new Coord(0, 0));
             GameTerminalView.printWithColor(printMap(0 , 0 , 50));
         }
-
-        else if(App.game.getCurrentPlayer().currentLocationTiles().get(y).get(x).isDoor()){
+        else if(curTile.isDoor()){
             App.game.getCurrentPlayer().getCurrentPlayerMap().setCurrentLocation(LocationsOnMap.Farm);
             App.game.getCurrentPlayer().setCoord(new Coord(0, 0));
             GameTerminalView.printWithColor(printMap(0 , 0 , 50));
+        }
+        else if(curTile.isBlackSmith()){
+            App.game.getVillage().getShops().get(0).showProducts(); //TODO ?:(
         }
         else{
             App.game.getCurrentPlayer().setCoord(new Coord(x, y));
             GameTerminalView.printWithColor(printMap(0 , 0 , 50));
         }
         return Result.success(null);
-
     }
 
     public ArrayList<String> printMap(int x, int y , int size) {
@@ -244,7 +248,7 @@ public class GameController{
             return Result.success("Now " + toolName + " is in your hands");
         }
 
-        return Result.failure(GameError.TOOL_NOT_FOUND , GameError.TOOL_NOT_FOUND.getMessage());
+        return Result.failure(GameError.TOOL_NOT_FOUND);
     }
 
     public Result<String> showCurrentTool() {
@@ -264,22 +268,15 @@ public class GameController{
     public Result<Void> useTool(String direction) {
         Direction d = Direction.stringToDirection(direction);
         if(d == null)
-            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS , GameError.COORDINATE_DOESNT_EXISTS.getMessage());
+            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
 
-        Coord playerCoord = App.game.getCurrentPlayer().getCoord();
-        if(playerCoord.getY() + d.getDy() < 0)
-            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS , GameError.COORDINATE_DOESNT_EXISTS.getMessage());
-        if(playerCoord.getY() + d.getDy() >= App.game.getCurrentPlayer().currentLocationTiles().size())
-            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS , GameError.COORDINATE_DOESNT_EXISTS.getMessage());
-        if(playerCoord.getX() + d.getDx() < 0)
-            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS , GameError.COORDINATE_DOESNT_EXISTS.getMessage());
-        if(playerCoord.getX() + d.getDx() >= App.game.getCurrentPlayer().currentLocationTiles().get(0).size())
-            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS , GameError.COORDINATE_DOESNT_EXISTS.getMessage());
+        Coord destinyTile = App.game.getCurrentPlayer().getCoord().addCoord(d.getCoord()).getValidCoord();
 
-        Coord destinyTile = new Coord(playerCoord.getX() + d.getDx(), playerCoord.getY() + d.getDy());
+        if (destinyTile == null)
+            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
 
         if(!App.game.getCurrentPlayer().getItemInHand().getItemType().equals(ItemType.TOOL))
-            return Result.failure(GameError.TOOL_NOT_FOUND , GameError.TOOL_NOT_FOUND.getMessage());
+            return Result.failure(GameError.TOOL_NOT_FOUND);
 
         Tool tool = (Tool) App.game.getCurrentPlayer().getItemInHand();
         if(tool.getToolType().equals(ToolType.HOE)) {
@@ -287,10 +284,15 @@ public class GameController{
             Hoe hoe = (Hoe) App.game.getCurrentPlayer().getItemInHand();
             return Result.success(hoe.use(destinyTile).getMessage());
         }
-        if(tool.getToolType().equals(ToolType.PICKAXE)) {
+        else if(tool.getToolType().equals(ToolType.PICKAXE)) {
             System.out.println("PICKAXE");
             Pickaxe pickaxe = (Pickaxe) App.game.getCurrentPlayer().getItemInHand();
             return Result.success(pickaxe.use(destinyTile).getMessage());
+        }
+        else if(tool.getToolType().equals(ToolType.AXE)) {
+            System.out.println("AXE");
+            Axe axe = (Axe) App.game.getCurrentPlayer().getItemInHand();
+            return Result.success(axe.use(destinyTile).getMessage());
         }
 
         return Result.success("wtf");
@@ -363,16 +365,16 @@ public class GameController{
 
     public Result<Void> buildBarnOrCoop(String buildingName , int x , int y) {
         if((x >= 46) || (y >= 26))
-            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS , "this coordinate is out of bounds");
+            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
         for(int i = y ; i < y+5 ; i++){
             for(int j = x ; j < x+5 ; j++){
                 if(!App.game.getCurrentPlayer().getThisPlayerMap().getTiles().get(i).get(j).tileIsEmpty())
-                    return Result.failure(GameError.COORDINATE_DOESNT_EXISTS , "this coordinate is not empty");
+                    return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
             }
         }
 
         if(App.game.getCurrentPlayer().getInventory().getAmountByType(ItemType.COIN) < 1000)
-            return Result.failure(GameError.NOT_ENOUGH_COINS , GameError.NOT_ENOUGH_COINS.getMessage());
+            return Result.failure(GameError.NOT_ENOUGH_COINS);
 
 
 
@@ -399,36 +401,19 @@ public class GameController{
     }
 
     public Result<Void> pet(String name){
-        Coord playerCord = App.game.getCurrentPlayer().getCoord();
-        for(Direction direction : Direction.values()){
-            if(direction.getDx() + playerCord.getX() < 0){
-                continue;
-            }
+        List<Tile> neigh = App.game.getCurrentPlayer().getNeighborTiles();
 
-            if(direction.getDx() + playerCord.getX() >= App.game.getCurrentPlayer().currentLocationTiles().get(0).size()){
-                continue;
-            }
-
-            if(direction.getDy() + playerCord.getY() < 0){
-                continue;
-            }
-
-            if(direction.getDy() + playerCord.getY() >= App.game.getCurrentPlayer().currentLocationTiles().size()){
-                continue;
-            }
-
-            if(App.game.getCurrentPlayer().currentLocationTiles().get(playerCord.getY() + direction.getDy()).
-                    get(playerCord.getX() + direction.getDx()).getAnimal() == null)
+        for (Tile tile : neigh) {
+            Animal animal = tile.getAnimal();
+            if(animal == null)
                 continue;
 
-            if(App.game.getCurrentPlayer().currentLocationTiles().get(playerCord.getY() + direction.getDy()).
-                    get(playerCord.getX() + direction.getDx()).getAnimal().getName().equals(name)){
-                App.game.getCurrentPlayer().currentLocationTiles().get(playerCord.getY() + direction.getDy()).
-                        get(playerCord.getX() + direction.getDx()).getAnimal().pet();
-                return Result.success("goooogooli");
+            if(animal.getName().equals(name)){
+                animal.pet();
+                return Result.success(null);
             }
         }
-        return Result.failure(GameError.ANIMAL_NOT_FOUND , "kojaie pas heyvoon");
+        return Result.failure(GameError.ANIMAL_NOT_FOUND);
     }
 
     public Result<Void> cheatFriendship(String name , int amount){
@@ -438,7 +423,7 @@ public class GameController{
                 return Result.success("Now your friendship with " + name + " is " + animal.getFriendship());
             }
         }
-        return Result.failure(GameError.ANIMAL_NOT_FOUND , "You dont own animal with this name");
+        return Result.failure(GameError.ANIMAL_NOT_FOUND);
 
     }
 
@@ -448,18 +433,18 @@ public class GameController{
         for(Animal animal : App.game.getCurrentPlayer().getAnimals()){
             output.add(animal.getName() + " - " + animal.getFriendship());
         }
-        return Result.success(output , "okay");
+        return Result.success(output);
     }
 
     public Result<Void> shepherdAnimals(String name , int x , int y){
         if((x >= 50) || (y >= 30))
-            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS , GameError.COORDINATE_DOESNT_EXISTS.getMessage());
+            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
         if(!App.game.getCurrentPlayer().getThisPlayerMap().getTiles().get(y).get(x).tileIsEmpty())
-            return Result.failure(GameError.TILE_IS_NOT_EMPTY , GameError.TILE_IS_NOT_EMPTY.getMessage());
+            return Result.failure(GameError.TILE_IS_NOT_EMPTY);
 
         int thisAnimalIndex = App.game.getCurrentPlayer().getAnimalIndex(name);
         if(thisAnimalIndex == -1)
-            return Result.failure(GameError.ANIMAL_NOT_FOUND , "animal not found");
+            return Result.failure(GameError.ANIMAL_NOT_FOUND);
 
 
         App.game.getCurrentPlayer().getAnimals().get(thisAnimalIndex).shepherd();
@@ -523,6 +508,18 @@ public class GameController{
 
     public Result<Void> sell(Item product, int count) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> goToVillage(){
+        App.game.getCurrentPlayer().setCurrentPlayerMap(App.game.getVillage());
+        App.game.getCurrentPlayer().setCoord(new Coord(0,0));
+        return Result.success("Now you are in village");
+    }
+
+    public Result<Void> backToHome(){
+        App.game.getCurrentPlayer().setCurrentPlayerMap(App.game.getCurrentPlayer().getThisPlayerMap());
+        App.game.getCurrentPlayer().setCoord(new Coord(0,0));
+        return Result.success("Now you are back to home");
     }
 
     public Result<Void> talk(Player player, String massege) {
@@ -593,4 +590,5 @@ public class GameController{
     public Result<Void> updateGameMonth() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
 }

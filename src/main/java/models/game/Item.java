@@ -14,9 +14,9 @@ public class Item {
     }
 
     public int getCost() {
-        if (itemType == ItemType.TOOL) {
-            return -1;
-        }
+//        if (itemType == ItemType.TOOL) {
+//            return -1;
+//        }
         return cost;
     }
 

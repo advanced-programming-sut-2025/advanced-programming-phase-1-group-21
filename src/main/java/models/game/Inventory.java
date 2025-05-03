@@ -21,6 +21,8 @@ public class Inventory {
         items = new ArrayList<>();
         items.add(new Hoe());
         items.add(new Pickaxe());
+        items.add(new Axe());
+        items.add(new Scythe());
         inventoryType = InventoryType.PRIMITIVE;
         trashcanType = ToolMaterialType.PRIMITIVE;
     }
@@ -167,6 +169,8 @@ public class Inventory {
             if(item.getItemType().equals(ItemType.TOOL)){
                 output.add("name :" + item.getName());
                 output.add("amount :" + item.getAmount());
+                output.add("tool material :" + ((Tool) item).getToolMaterialType());
+                output.add("--------------");
             }
         }
 
