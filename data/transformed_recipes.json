@@ -1,0 +1,217 @@
+[
+  {
+    "name": "Fried Egg",
+    "ingredient-type": ["Egg"],
+    "ingredient-amount": [1],
+    "energy": 50,
+    "price": 35,
+    "source": "Starter"
+  },
+  {
+    "name": "Baked Fish",
+    "ingredient-type": ["Sardine", "Salmon", "Wheat"],
+    "ingredient-amount": [1, 1, 1],
+    "energy": 75,
+    "price": 100,
+    "source": "Starter"
+  },
+  {
+    "name": "Salad",
+    "ingredient-type": ["Leek", "Dandelion"],
+    "ingredient-amount": [1, 1],
+    "energy": 113,
+    "price": 110,
+    "source": "Starter"
+  },
+  {
+    "name": "Olmelet",
+    "ingredient-type": ["Egg", "Milk"],
+    "ingredient-amount": [1, 1],
+    "energy": 100,
+    "price": 125,
+    "source": "Stardrop Saloon"
+  },
+  {
+    "name": "Pumpkin Pie",
+    "ingredient-type": ["Pumpking", "Wheat Flour", "Milk", "Sugar"],
+    "ingredient-amount": [1, 1, 1, 1],
+    "energy": 225,
+    "price": 385,
+    "source": "Stardrop Saloon"
+  },
+  {
+    "name": "Spaghetti",
+    "ingredient-type": ["Wheat Flour", "Tomato"],
+    "ingredient-amount": [1, 1],
+    "energy": 75,
+    "price": 120,
+    "source": "Stardrop Saloon"
+  },
+  {
+    "name": "Pizza",
+    "ingredient-type": ["Wheat Flour", "Tomato", "Cheese"],
+    "ingredient-amount": [1, 1, 1],
+    "energy": 150,
+    "price": 300,
+    "source": "Stardrop Saloon"
+  },
+  {
+    "name": "Tortilla",
+    "ingredient-type": ["Corn"],
+    "ingredient-amount": [1],
+    "energy": 50,
+    "price": 50,
+    "source": "Stardrop Saloon"
+  },
+  {
+    "name": "Maki Roll",
+    "ingredient-type": ["Any Fish", "Rice", "Fiber"],
+    "ingredient-amount": [1, 1, 1],
+    "energy": 100,
+    "price": 220,
+    "source": "Stardrop Saloon"
+  },
+  {
+    "name": "Triple Shot Espresso",
+    "ingredient-type": ["Coffee"],
+    "ingredient-amount": [3],
+    "energy": 200,
+    "price": 450,
+    "buff-type": "Max Energy",
+    "buff-amount": 100,
+    "buff-time": 5,
+    "source": "Stardrop Saloon"
+  },
+  {
+    "name": "Cookie",
+    "ingredient-type": ["Wheat Flour", "Sugar", "Egg"],
+    "ingredient-amount": [1, 1, 1],
+    "energy": 90,
+    "price": 140,
+    "source": "Stardrop Saloon"
+  },
+  {
+    "name": "Hash Browns",
+    "ingredient-type": ["Potato", "Oil"],
+    "ingredient-amount": [1, 1],
+    "energy": 90,
+    "price": 120,
+    "buff-type": "Farming",
+    "buff-time": 5,
+    "source": "Stardrop Saloon"
+  },
+  {
+    "name": "Pancakes",
+    "ingredient-type": ["Wheat Flour", "Egg"],
+    "ingredient-amount": [1, 1],
+    "energy": 90,
+    "price": 80,
+    "buff-type": "Foraging",
+    "buff-time": 11,
+    "source": "Stardrop Saloon"
+  },
+  {
+    "name": "Fruit Salad",
+    "ingredient-type": ["Blueberry", "Melon", "Apricot"],
+    "ingredient-amount": [1, 1, 1],
+    "energy": 263,
+    "price": 450,
+    "source": "Stardrop Saloon"
+  },
+  {
+    "name": "Red Plate",
+    "ingredient-type": ["Red Cabbage", "Radish"],
+    "ingredient-amount": [1, 1],
+    "energy": 240,
+    "price": 400,
+    "buff-type": "Max Energy",
+    "buff-amount": 50,
+    "buff-time": 3,
+    "source": "Stardrop Saloon"
+  },
+  {
+    "name": "Bread",
+    "ingredient-type": ["Wheat Flour"],
+    "ingredient-amount": [1],
+    "energy": 50,
+    "price": 60,
+    "source": "Stardrop Saloon"
+  },
+  {
+    "name": "Salmon Dinner",
+    "ingredient-type": ["Salmon", "Amaranth", "Kale"],
+    "ingredient-amount": [1, 1, 1],
+    "energy": 125,
+    "price": 300,
+    "source": "Stardrop Saloon"
+  },
+  {
+    "name": "Vegetable Medley",
+    "ingredient-type": ["Tomato", "Beet"],
+    "ingredient-amount": [1, 1],
+    "energy": 165,
+    "price": 120,
+    "skill-type": "Foraging",
+    "skill-level": 2,
+    "source": null
+  },
+  {
+    "name": "Farmer'S Lunch",
+    "ingredient-type": ["Omelet", "Parsnip"],
+    "ingredient-amount": [1, 1],
+    "energy": 200,
+    "price": 150,
+    "buff-type": "Farming",
+    "buff-time": 5,
+    "skill-type": "Farming",
+    "skill-level": 1,
+    "source": null
+  },
+  {
+    "name": "Survival Burger",
+    "ingredient-type": ["Bread", "Carrot", "Eggplant"],
+    "ingredient-amount": [1, 1, 1],
+    "energy": 125,
+    "buff-type": "Foraging",
+    "buff-time": 5,
+    "skill-type": "Foraging",
+    "skill-level": 3,
+    "price": 180
+  },
+  {
+    "name": "Dish O' The Sea",
+    "ingredient-type": ["Sardines", "Hash Browns"],
+    "ingredient-amount": [2, 1],
+    "energy": 150,
+    "price": 220,
+    "buff-type": "Fishing",
+    "buff-time": 5,
+    "skill-type": "Fishing",
+    "skill-level": 2,
+    "source": null
+  },
+  {
+    "name": "Seaform Pudding",
+    "ingredient-type": ["Flounder", "Midnight Carp"],
+    "ingredient-amount": [1, 1],
+    "energy": 175,
+    "price": 300,
+    "buff-type": "Fishing",
+    "buff-time": 10,
+    "skill-type": "Fishing",
+    "skill-level": 3,
+    "source": null
+  },
+  {
+    "name": "Miner'S Treat",
+    "ingredient-type": ["Carrot", "Suger"],
+    "ingredient-amount": [2, 1],
+    "energy": 125,
+    "price": 200,
+    "buff-type": "Mining",
+    "buff-time": 5,
+    "skill-type": "Mining",
+    "skill-level": 1,
+    "source": null
+  }
+]

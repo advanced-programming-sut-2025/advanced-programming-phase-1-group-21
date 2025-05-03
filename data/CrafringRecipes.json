@@ -1,0 +1,136 @@
+[
+  {
+    "name": "Charcoal Kiln",
+    "description": "Turns 10 wood into 1 charcoal",
+    "ingredient-type": ["Wood", "Copper Bar"],
+    "ingredient-amount": [20, 2],
+    "skill-type": "Foraging",
+    "skill-level": 1,
+    "Salable": false,
+    "place": "House"
+  },
+  {
+    "name": "Furnace",
+    "description": "Turns ores into bars",
+    "ingredient-type": ["Copper Ore", "Stone"],
+    "ingredient-amount": [20, 25],
+    "skill-type": null,
+    "skill-level": null,
+    "Salable": false,
+    "place": "House"
+  },
+  {
+    "name": "Bee House",
+    "description": "Produces honey when placed on the farm",
+    "ingredient-type": ["Wood", "Coal", "Iron Bar"],
+    "ingredient-amount": [40, 8, 1],
+    "skill-type": "Farming",
+    "skill-level": 1,
+    "Salable": false,
+    "place": "Farm"
+  },
+  {
+    "name": "Cheese Press",
+    "description": "Turns milk into cheese",
+    "ingredient-type": ["Wood", "Stone", "Copper Bar"],
+    "ingredient-amount": [45, 45, 1],
+    "skill-type": "Farming",
+    "skill-level": 2,
+    "Salable": false,
+    "place": "House"
+  },
+  {
+    "name": "Keg",
+    "description": "Turns fruits and vegetables into beverages",
+    "ingredient-type": ["Wood", "Copper Bar", "Iron Bar"],
+    "ingredient-amount": [30, 1, 1],
+    "skill-type": "Farming",
+    "skill-level": 3,
+    "Salable": false,
+    "place": "House"
+  },
+  {
+    "name": "Loom",
+    "description": "Turns wool into cloth",
+    "ingredient-type": ["Wood", "Fiber"],
+    "ingredient-amount": [60, 30],
+    "skill-type": "Farming",
+    "skill-level": 3,
+    "Salable": false,
+    "place": "House"
+  },
+  {
+    "name": "Mayonnaise Machine",
+    "description": "Turns eggs into mayonnaise",
+    "ingredient-type": ["Wood", "Stone", "Copper Bar"],
+    "ingredient-amount": [15, 15, 1],
+    "skill-type": null,
+    "skill-level": null,
+    "Salable": false,
+    "place": "House"
+  },
+  {
+    "name": "Oil Maker",
+    "description": "Turns truffle into oil",
+    "ingredient-type": ["Wood", "Gold Bar", "Iron Bar"],
+    "ingredient-amount": [100, 1, 1],
+    "skill-type": "Farming",
+    "skill-level": 3,
+    "Salable": false,
+    "place": "House"
+  },
+  {
+    "name": "Preserves Jar",
+    "description": "Turns vegetables into pickles and fruits into jam",
+    "ingredient-type": ["Wood", "Stone", "Coal"],
+    "ingredient-amount": [50, 40, 8],
+    "skill-type": "Farming",
+    "skill-level": 2,
+    "Salable": false,
+    "place": "House"
+  },
+  {
+    "name": "Dehydrator",
+    "description": "Dries fruits or mushrooms",
+    "ingredient-type": ["Wood", "Stone", "Fiber"],
+    "ingredient-amount": [30, 20, 30],
+    "source": "Pierre's General Store",
+    "skill-type": null,
+    "skill-level": null,
+    "Salable": false,
+    "place": "House"
+  },
+  {
+    "name": "Grass Starter",
+    "description": "When placed, grass starts growing at that spot",
+    "ingredient-type": ["Wood", "Fiber"],
+    "ingredient-amount": [1, 1],
+    "source": "Pierre's General Store",
+    "skill-type": null,
+    "skill-level": null,
+    "Salable": false,
+    "place": "Farm"
+  },
+  {
+    "name": "Fish Smoker",
+    "description": "Turns any fish into smoked fish with preserved quality using one coal",
+    "ingredient-type": ["Wood", "Iron Bar", "Coal"],
+    "ingredient-amount": [50, 3, 10],
+    "source": "Fish Shop",
+    "skill-type": null,
+    "skill-level": null,
+    "Salable": false,
+    "place": "House"
+  },
+  {
+    "name": "Mystic Tree Seed",
+    "description": "Can be planted to grow a mystic tree",
+    "ingredient-type": ["Acorn", "Maple Seed", "Pine Cone", "Mahogany Seed"],
+    "ingredient-amount": [5, 5, 5, 5],
+    "skill-type": "Foraging",
+    "skill-level": 4,
+    "Salable": true,
+    "price": 100,
+    "place": "Farm"
+  }
+]
