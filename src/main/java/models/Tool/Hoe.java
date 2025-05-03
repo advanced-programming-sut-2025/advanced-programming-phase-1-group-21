@@ -2,6 +2,7 @@ package models.Tool;
 
 import models.App;
 import models.game.Item;
+import models.game.Player;
 import models.map.Coord;
 import models.map.LocationsOnMap;
 import models.result.Result;
@@ -15,23 +16,24 @@ public class Hoe extends Tool {
 
 	@Override
 	public Result<Item> use(Coord coord) {
-		if(((Tool) App.game.getCurrentPlayer().getItemInHand()).getToolMaterialType().equals(ToolMaterialType.PRIMITIVE))
-			App.game.getCurrentPlayer().setEnergy(App.game.getCurrentPlayer().getEnergy() - 5);
-		if(((Tool) App.game.getCurrentPlayer().getItemInHand()).getToolMaterialType().equals(ToolMaterialType.COPPER))
-			App.game.getCurrentPlayer().setEnergy(App.game.getCurrentPlayer().getEnergy() - 4);
-		if(((Tool) App.game.getCurrentPlayer().getItemInHand()).getToolMaterialType().equals(ToolMaterialType.STEEL))
-			App.game.getCurrentPlayer().setEnergy(App.game.getCurrentPlayer().getEnergy() - 3);
-		if(((Tool) App.game.getCurrentPlayer().getItemInHand()).getToolMaterialType().equals(ToolMaterialType.GOLD))
-			App.game.getCurrentPlayer().setEnergy(App.game.getCurrentPlayer().getEnergy() - 2);
-		if(((Tool) App.game.getCurrentPlayer().getItemInHand()).getToolMaterialType().equals(ToolMaterialType.IRIDIUM))
-			App.game.getCurrentPlayer().setEnergy(App.game.getCurrentPlayer().getEnergy() - 1);
+		Player player = App.game.getCurrentPlayer();
+		ToolMaterialType type = ((Tool) App.game.getCurrentPlayer().getItemInHand()).getToolMaterialType();
+		if(type == ToolMaterialType.PRIMITIVE)
+			player.decreaseEnergy(5);
+		if(type == ToolMaterialType.COPPER)
+			player.decreaseEnergy(4);
+		if (type == ToolMaterialType.STEEL)
+			player.decreaseEnergy(3);
+		if (type == ToolMaterialType.GOLD)
+			player.decreaseEnergy(2);
+		if (type == ToolMaterialType.IRIDIUM)
+			player.decreaseEnergy(1);
 
-		if(App.game.getCurrentPlayer().getCurrentPlayerMap().getCurrentLocation() != LocationsOnMap.Farm)
+		if(player.getCurrentPlayerMap().getCurrentLocation() != LocationsOnMap.Farm)
 			return Result.failure(GameError.HERE_IS_NOT_FARM);
-		if(!App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).tileIsEmpty())
+		if(!player.currentLocationTiles().get(coord.getY()).get(coord.getX()).tileIsEmpty())
 			return Result.failure(GameError.TILE_IS_NOT_EMPTY);
-
-		App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setShokhmi(true);
+		player.currentLocationTiles().get(coord.getY()).get(coord.getX()).setShokhmi(true);
 
 		return Result.success("zamin shokhmi shod");
 	}
