@@ -2,6 +2,7 @@ package models.user;
 
 import models.game.Inventory;
 import models.game.Recipe;
+import models.result.Result;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,35 +92,6 @@ public class User {
 
     public boolean validateSecurityAnswer(String answer) {
         return this.securityAnswer.equalsIgnoreCase(answer);
-    }
-
-    public String toJson() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public static User fromJson(String json) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-
-    public static boolean isUsernameValid(String username) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public static boolean isPasswordValid(String password) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public static boolean isEmailValid(String email) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public static boolean isNicknameValid(String nickname) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public static boolean isGenderValid(String gender) {
-        return Gender.getGenderByName(gender) != null;
     }
 
     public static String generateRandomPassword(int length) {
