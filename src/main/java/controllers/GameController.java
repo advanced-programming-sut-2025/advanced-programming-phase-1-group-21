@@ -201,6 +201,11 @@ public class GameController{
             GameTerminalView.printWithColor(printMap(0 , 0 , 50));
         }
 
+        else if(App.game.getCurrentPlayer().currentLocationTiles().get(y).get(x).isBlackSmith()){
+            App.game.getVillage().getShops().get(0).showProducts();
+        }
+
+
         else{
             App.game.getCurrentPlayer().setCoord(new Coord(x, y));
             GameTerminalView.printWithColor(printMap(0 , 0 , 50));
