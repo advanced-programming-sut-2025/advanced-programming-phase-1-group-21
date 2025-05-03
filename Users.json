@@ -3,50 +3,8 @@
     "username": "sobhan",
     "password": "\u003cpassword1\u003e",
     "email": "sobhan@gmail.com",
-    "nickname": "\u003cnickname\u003e",
+    "nickname": "sobi",
     "gender": "MALE",
-    "isInAGame": true
-  },
-  {
-    "username": "sobi",
-    "password": "\u003cpassword1\u003e",
-    "email": "sobhan@gmail.com",
-    "nickname": "a",
-    "gender": "MALE",
-    "isInAGame": true
-  },
-  {
-    "username": "maryam",
-    "password": "\u003cpassword1\u003e",
-    "email": "sobhan@gmail.com",
-    "nickname": "a",
-    "gender": "MALE",
-    "isInAGame": true
-  },
-  {
-    "username": "shayan",
-    "password": "\u003cpassword1\u003e",
-    "email": "sobhan@gmail.com",
-    "nickname": "a",
-    "gender": "MALE",
-    "isInAGame": true
-  },
-  {
-    "username": "sana",
-    "password": "\u003cpassword1\u003e",
-    "email": "sobhan@gmail.com",
-    "nickname": "a",
-    "gender": "MALE",
-    "isInAGame": true
-  },
-  {
-    "username": "ali",
-    "password": "!aaaaaaaaaaa1",
-    "email": "sobhan@gmail.com",
-    "nickname": "a",
-    "gender": "FEMALE",
-    "isInAGame": false,
-    "securityQuestionID": 1,
-    "securityAnswer": "azina"
+    "isInAGame": false
   }
 ]

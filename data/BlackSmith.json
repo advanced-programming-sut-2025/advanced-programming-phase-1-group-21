@@ -1,0 +1,93 @@
+[
+  {
+    "name": "Copper Ore",
+    "itemType": "ORE",
+    "cost": 75,
+    "amount": 100000000
+  },
+
+  {
+    "name": "CopperOre",
+    "itemType": "ORE",
+    "cost": 75,
+    "amount": 100000000
+  },
+
+  {
+    "name": "Iron Ore",
+    "itemType": "ORE",
+    "cost": 150,
+    "amount": 100000000
+  },
+
+  {
+    "name": "Coal",
+    "itemType": "FUEL",
+    "cost": 150,
+    "amount": 100000000
+  },
+
+  {
+    "name": "Gold Ore",
+    "itemType": "ORE",
+    "cost": 400,
+    "amount": 100000000
+  },
+
+  {
+    "name": "Copper Tool",
+    "itemType": "TOOL",
+    "cost": 2000,
+    "amount": 1
+  },
+
+  {
+    "name": "Steel Tool",
+    "itemType": "TOOL",
+    "cost": 5000,
+    "amount": 1
+  },
+
+  {
+    "name": "Gold Tool",
+    "itemType": "TOOL",
+    "cost": 10000,
+    "amount": 1
+  },
+
+  {
+    "name": "Iridium Tool",
+    "itemType": "TOOL",
+    "cost": 25000,
+    "amount": 1
+  },
+
+  {
+    "name": "Copper Trash Can",
+    "itemType": "TOOL",
+    "cost": 1000,
+    "amount": 1
+  },
+
+  {
+    "name": "Steel Trash Can",
+    "itemType": "TOOL",
+    "cost": 2500,
+    "amount": 1
+  },
+
+  {
+    "name": "Gold Trash Can",
+    "itemType": "TOOL",
+    "cost": 5000,
+    "amount": 1
+  },
+
+  {
+    "name": "Iridium Trash Can",
+    "itemType": "TOOL",
+    "cost": 12500,
+    "amount": 1
+  }
+
+]
