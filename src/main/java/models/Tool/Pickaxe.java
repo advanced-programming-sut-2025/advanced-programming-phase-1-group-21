@@ -18,7 +18,7 @@ public class Pickaxe extends Tool {
 	public Result<Item> use(Coord coord) {
 		if(App.game.getCurrentPlayer().getCurrentPlayerMap().getCurrentLocation() != LocationsOnMap.Farm) {
 			if(App.game.getCurrentPlayer().getCurrentPlayerMap().getCurrentLocation() != LocationsOnMap.Mines)
-				return Result.failure(GameError.YOU_CANT_USE_PICKAXE_HERE, GameError.YOU_CANT_USE_PICKAXE_HERE.getMessage());
+				return Result.failure(GameError.YOU_CANT_USE_PICKAXE_HERE);
 		}
 
 		int use = 0;

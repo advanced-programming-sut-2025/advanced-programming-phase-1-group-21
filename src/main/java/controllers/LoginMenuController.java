@@ -76,7 +76,7 @@ public class LoginMenuController{
 
         if(menu.equals("mainmenu")){
             if(App.logedInUser == null)
-                return Result.failure(UserError.SHOULD_LOGIN_FIRST , UserError.SHOULD_LOGIN_FIRST.getMessage());
+                return Result.failure(UserError.SHOULD_LOGIN_FIRST);
             App.currentMenu = Menu.MainMenu;
             return Result.success(null);
         }
