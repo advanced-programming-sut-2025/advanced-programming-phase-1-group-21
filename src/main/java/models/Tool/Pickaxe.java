@@ -70,7 +70,6 @@ public class Pickaxe extends Tool {
 					tile.setForaging(null);
 				}
 			}
-
 			else if (this.toolMaterialType.equals(ToolMaterialType.COPPER)) {
 				if (tile.getForaging().equals(Foraging.SIMPLE_ROCK)) {
 					use = 2;
