@@ -1,229 +1,76 @@
 package models.map;
 
+import models.DailyUpdate;
 import models.animal.Animal;
-import models.crop.Seed;
+import models.crop.Harvestable;
+import models.crop.PlantedSeed;
 import models.crop.Tree;
-import models.game.Refrigerator;
+import models.game.Item;
 
 public class Tile {
-    private Coord cord;
-    private Animal animal = null;
-    private boolean isHouse = false;
-    private boolean isGreenHouse = false;
-    private boolean isLake = false;
-    private boolean isMines = false;
-    private boolean isBarn = false;
-    private boolean isCoop = false;
-    private boolean shokhmi = false;
-    private boolean isBlackSmith = false;
-    private boolean isJojaMarta = false;
-    private boolean isPierreStore = false;
-    private boolean isCarpenter = false;
-    private boolean isFishShop = false;
-    private boolean isMarnieRanch = false;
-    private boolean isStardropSaloon = false;
-    private Seed seed = null;
-    private Tree tree = null;
-    private Foraging foraging = null;
-    private Refrigerator refrigerator = null;
-    private boolean isDoor = false;
+    private TileType tileType;
+    private Placable placable;
 
-    public Tile(Coord cord, Animal animal, Tree tree, Foraging foraging) {
-        this.cord = cord;
-        this.animal = animal;
-        this.tree = tree;
-        this.foraging = foraging;
+    private Tile(TileType tileType, Placable placable) {
+        this.tileType = tileType;
+        this.placable = placable;
     }
 
-    public Coord getCord() {
-        return cord;
+    public static Tile createEmpty() {
+        return new Tile(TileType.UNPLOWED, null);
     }
 
-    public Animal getAnimal() {
-        return animal;
+    public boolean isEmpty() {
+        return placable == null && tileType == TileType.UNPLOWED;
     }
 
-    public boolean isHouse() {
-        return isHouse;
+    public boolean isWalkable() {
+        return placable == null || placable.isWalkable();
     }
 
-    public boolean isGreenHouse() {
-        return isGreenHouse;
+    public void water() {
+        if (placable instanceof PlantedSeed) {
+            ((PlantedSeed) placable).water();
+        }
     }
 
-    public boolean isLake() {
-        return isLake;
+    public Item harvest() {
+        if (placable instanceof Harvestable) {
+            Item item = ((Harvestable) placable).harvest();
+            if (placable instanceof PlantedSeed && ((PlantedSeed) placable).isOneTime()) {
+                placable = null;
+            }
+            return item;
+        }
+        return null;
     }
 
-    public boolean isMines() {
-        return isMines;
+    public void nextDay() {
+        if (placable instanceof DailyUpdate) {
+            boolean shouldRemove = ((DailyUpdate) placable).nextDay();
+            if (shouldRemove) {
+                placable = null;
+            }
+        }
     }
 
-    public Tree getTree() {
-        return tree;
+    public TileType getTileType() {
+        return tileType;
     }
 
-    public Foraging getForaging() {
-        return foraging;
+    public void setTileType(TileType tileType) {
+        this.tileType = tileType;
     }
 
-    public void setCord(Coord cord) {
-        this.cord = cord;
+    public <T extends Placable> T getPlacable(Class<T> type) {
+        return type.isInstance(placable) ? type.cast(placable) : null;
     }
 
-    public void setAnimal(Animal animal) {
-        this.animal = animal;
+    public void setPlacable(Placable placable) {
+        this.placable = placable;
     }
 
-    public void setHouse(boolean house) {
-        isHouse = house;
-    }
-
-    public void setGreenHouse(boolean greenHouse) {
-        isGreenHouse = greenHouse;
-    }
-
-    public void setLake(boolean lake) {
-        isLake = lake;
-    }
-
-    public void setMines(boolean mines) {
-        isMines = mines;
-    }
-
-    public void setTree(Tree tree) {
-        this.tree = tree;
-    }
-
-    public void setForaging(Foraging foraging) {
-        this.foraging = foraging;
-    }
-
-    public void setRefrigerator(Refrigerator refrigerator) {
-        this.refrigerator = refrigerator;
-    }
-
-    public Refrigerator getRefrigerator() {
-        return refrigerator;
-    }
-
-    public void setDoor(boolean door) {
-        isDoor = door;
-    }
-
-    public boolean isDoor() {
-        return isDoor;
-    }
-
-    public void setBarn(boolean barn) {
-        isBarn = barn;
-    }
-
-    public void setCoop(boolean coop) {
-        isCoop = coop;
-    }
-
-    public boolean isBarn() {
-        return isBarn;
-    }
-
-    public boolean isCoop() {
-        return isCoop;
-    }
-
-    public void setShokhmi(boolean shokhmi) {
-        this.shokhmi = shokhmi;
-    }
-
-    public boolean isShokhmi() {
-        return shokhmi;
-    }
-
-    public Seed getSeed() {
-        return seed;
-    }
-
-    public void setSeed(Seed seed) {
-        this.seed = seed;
-    }
-
-    public boolean isBlackSmith() {
-        return isBlackSmith;
-    }
-
-    public boolean isJojaMarta() {
-        return isJojaMarta;
-    }
-
-    public boolean isPierreStore() {
-        return isPierreStore;
-    }
-
-    public boolean isCarpenter() {
-        return isCarpenter;
-    }
-
-    public boolean isFishShop() {
-        return isFishShop;
-    }
-
-    public boolean isMarnieRanch() {
-        return isMarnieRanch;
-    }
-
-    public boolean isStardropSaloon() {
-        return isStardropSaloon;
-    }
-
-    public void setBlackSmith(boolean blackSmith) {
-        isBlackSmith = blackSmith;
-    }
-
-    public void setJojaMarta(boolean jojaMarta) {
-        isJojaMarta = jojaMarta;
-    }
-
-    public void setPierreStore(boolean pierreStore) {
-        isPierreStore = pierreStore;
-    }
-
-    public void setCarpenter(boolean carpenter) {
-        isCarpenter = carpenter;
-    }
-
-    public void setFishShop(boolean fishShop) {
-        isFishShop = fishShop;
-    }
-
-    public void setMarnieRanch(boolean marnieRanch) {
-        isMarnieRanch = marnieRanch;
-    }
-
-    public void setStardropSaloon(boolean stardropSaloon) {
-        isStardropSaloon = stardropSaloon;
-    }
-
-    public boolean tileIsEmpty(){
-        if(tree!=null)
-            return false;
-        if(seed!=null)
-            return false;
-        if(animal!=null)
-            return false;
-        if(isMines)
-            return false;
-        if(isGreenHouse)
-            return false;
-        if(isHouse)
-            return false;
-        if(isLake)
-            return false;
-        if(foraging!=null)
-            return false;
-        if(isBarn)
-            return false;
-        if(isCoop)
-            return false;
-        return true;
+    public String getSprite() {
+        return "" + tileType.getSymbol();
     }
 }
