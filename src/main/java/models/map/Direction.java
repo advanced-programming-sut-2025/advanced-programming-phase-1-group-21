@@ -63,5 +63,8 @@ public enum Direction {
         return dy;
     }
 
+    public Coord getCoord() {
+        return new Coord(dx, dy);
+    }
         
 }
