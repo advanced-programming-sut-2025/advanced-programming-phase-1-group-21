@@ -1,0 +1,248 @@
+{
+  "Bee House": [
+    {
+      "name": "Honey",
+      "description": "It's a sweet syrup produced by bees.",
+      "Energy": "75",
+      "Processing Time": "4 Days",
+      "Ingredients": "-",
+      "Sell Price": "350g"
+    }
+  ],
+  "Cheese Press": [
+    {
+      "name": "Cheese",
+      "description": "It's your basic cheese.",
+      "Energy": "100",
+      "Processing Time": "3 Hours",
+      "Ingredients": "Milk or\n Large Milk",
+      "Sell Price": "230g\n345g"
+    },
+    {
+      "name": "Goat Cheese",
+      "description": "Soft cheese made from goat's milk.",
+      "Energy": "100",
+      "Processing Time": "3 Hours",
+      "Ingredients": "Goat Milk or\nLarge Goat Milk",
+      "Sell Price": "400g\n600g"
+    }
+  ],
+  "Keg": [
+    {
+      "name": "Beer",
+      "description": "Drink in moderation.",
+      "Energy": "50",
+      "Processing Time": "1 Day",
+      "Ingredients": "Wheat",
+      "Sell Price": "200g"
+    },
+    {
+      "name": "Vinegar",
+      "description": "An aged fermented liquid used in many cooking recipes.",
+      "Energy": "13",
+      "Processing Time": "10 Hours",
+      "Ingredients": "Rice",
+      "Sell Price": "100g"
+    },
+    {
+      "name": "Coffee",
+      "description": "It smells delicious. This is sure to give you a boost.",
+      "Energy": "75",
+      "Processing Time": "2 Hours",
+      "Ingredients": "Coffee Bean (5)",
+      "Sell Price": "150g"
+    },
+    {
+      "name": "Juice",
+      "description": "A sweet, nutritious beverage.",
+      "Energy": "2 × Base Ingredient Energy",
+      "Processing Time": "4 Days",
+      "Ingredients": "Any Vegetable",
+      "Sell Price": "2.25 × Ingredient Base Price"
+    },
+    {
+      "name": "Mead",
+      "description": "A fermented beverage made from honey.\nDrink in moderation.",
+      "Energy": "100",
+      "Processing Time": "10 hours",
+      "Ingredients": "Honey",
+      "Sell Price": "300g"
+    },
+    {
+      "name": "Pale Ale",
+      "description": "Drink in moderation.",
+      "Energy": "50",
+      "Processing Time": "3 Days",
+      "Ingredients": "Hops",
+      "Sell Price": "300g"
+    },
+    {
+      "name": "Wine",
+      "description": "Drink in moderation.",
+      "Energy": "1.75 × Base Fruit Energy",
+      "Processing Time": "7 Days",
+      "Ingredients": "Any Fruit",
+      "Sell Price": "3 × Fruit Base Price"
+    }
+  ],
+  "Loom": [
+    {
+      "name": "Cloth",
+      "description": "A bolt of fine wool cloth.",
+      "Energy": "Inedible",
+      "Processing Time": "4 Hours",
+      "Ingredients": "Wool",
+      "Sell Price": "470g"
+    }
+  ],
+  "Mayonnaise Machine": [
+    {
+      "name": "Mayonnaise",
+      "description": "It looks spreadable.",
+      "Energy": "50",
+      "Processing Time": "3 Hours",
+      "Ingredients": "Egg or\nLarge Egg",
+      "Sell Price": "190g\n237g"
+    },
+    {
+      "name": "Duck Mayonnaise",
+      "description": "It's a rich, yellow mayonnaise.",
+      "Energy": "75",
+      "Processing Time": "3 Hours",
+      "Ingredients": "Duck Egg",
+      "Sell Price": "37g"
+    },
+    {
+      "name": "Dinosaur Mayonnaise",
+      "description": "It's thick and creamy, with a vivid green hue.\n It smells like grass and leather.",
+      "Energy": "125",
+      "Processing Time": "3 Hours",
+      "Ingredients": "Dinosaur Egg",
+      "Sell Price": "800g"
+    }
+  ],
+  "Oil Maker": [
+    {
+      "name": "Truffle Oil",
+      "description": "A gourmet cooking ingredient.",
+      "Energy": "38",
+      "Processing Time": "6 Hours",
+      "Ingredients": "Truffle",
+      "Sell Price": "1065g"
+    },
+    {
+      "name": "Oil",
+      "description": "All purpose cooking oil.",
+      "Energy": "13",
+      "Processing Time": "6 Hours\n2 Days\n1 Hour",
+      "Ingredients": "Corn or\nSunflower Seeds or\nSunflower",
+      "Sell Price": "100g"
+    }
+  ],
+  "Preserves Jar": [
+    {
+      "name": "Pickles",
+      "description": "A jar of your home-made pickles.",
+      "Energy": "1.75 × Base Ingredient Energy",
+      "Processing Time": "6 Hours",
+      "Ingredients": "Any vegetable",
+      "Sell Price": "2 × Base Price + 50"
+    },
+    {
+      "name": "Jelly",
+      "description": "Gooey.",
+      "Energy": "2 × Base Fruit Energy",
+      "Processing Time": "3 Days",
+      "Ingredients": "Any fruit",
+      "Sell Price": "2 × Base Fruit Price + 50"
+    }
+  ],
+  "Fish Smoker": [
+    {
+      "name": "Smoked Fish",
+      "description": "A whole fish, smoked to perfection.",
+      "Energy": "1.5 × Fish Energy",
+      "Processing Time": "1 Hour",
+      "Ingredients": "Any Fish +\nCoal",
+      "Sell Price": "2 × Fish Price"
+    }
+  ],
+  "Dehydrator": [
+    {
+      "name": "Dried Mushrooms",
+      "description": "A package of gourmet mushrooms.",
+      "Energy": "50",
+      "Processing Time": "Ready the next morning",
+      "Ingredients": "Any Mushroom (5)",
+      "Sell Price": "7.5 × Mushroom Base Price\n + 25g"
+    },
+    {
+      "name": "Dried Fruit",
+      "description": "Chewy pieces of dried fruit.",
+      "Energy": "75",
+      "Processing Time": "Ready the next morning",
+      "Ingredients": "5 of Any Fruit \n(except Grapes)",
+      "Sell Price": "7.5 × Fruit Base Price + 25g"
+    },
+    {
+      "name": "Raisins",
+      "description": "It's said to be the Junimos' favorite food.",
+      "Energy": "125",
+      "Processing Time": "Ready the next morning",
+      "Ingredients": "Grapes (5)",
+      "Sell Price": "600g"
+    }
+  ],
+  "Charcoal Kiln": [
+    {
+      "name": "Coal",
+      "description": "Turns 10 pieces of wood into one piece of coal.",
+      "Energy": "Inedible",
+      "Processing Time": "1 Hour",
+      "Ingredients": "Wood (10)",
+      "Sell Price": "50"
+    }
+  ],
+  "Furnace": [
+    {
+      "name": "Copper Bar",
+      "description": "Turns ore and coal into metal bars.",
+      "Energy": "Inedible",
+      "Processing Time": "4 Hour",
+      "Ingredients": "Any Ore (5) +\nCoal",
+      "Sell Price": "10 × Ore Price"
+    },
+    {
+      "name": "Any metal bar",
+      "description": "Turns ore and coal into metal bars.",
+      "Energy": "Inedible",
+      "Processing Time": "4 Hour",
+      "Ingredients": "Any Ore (5) +\nCoal",
+      "Sell Price": "10 × Ore Price"
+    },
+    {
+      "name": "Any metal bar",
+      "description": "Turns ore and coal into metal bars.",
+      "Energy": "Inedible",
+      "Processing Time": "4 Hour",
+      "Ingredients": "Any Ore (5) +\nCoal",
+      "Sell Price": "10 × Ore Price"
+    },
+    {
+      "name": "Any metal bar",
+      "description": "Turns ore and coal into metal bars.",
+      "Energy": "Inedible",
+      "Processing Time": "4 Hour",
+      "Ingredients": "Any Ore (5) +\nCoal",
+      "Sell Price": "10 × Ore Price"
+    },
+    {
+      "name": "Any metal bar",
+      "description": "Turns ore and coal into metal bars.",
+      "Energy": "Inedible",
+      "Processing Time": "4 Hour",
+      "Ingredients": "Any Ore (5) +\nCoal",
+      "Sell Price": "10 × Ore Price"
+    }
+  ]
+}
