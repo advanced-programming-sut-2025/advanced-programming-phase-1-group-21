@@ -1,0 +1,18 @@
+[
+  {
+    "Season": "spring",
+    "Possible Crops": ["Cauliflower", "Parsnip", "Potato", "Blue Jazz", "Tulip"]
+  },
+  {
+    "Season": "summer",
+    "Possible Crops": ["Corn", "Hot Pepper", "Radish", "Wheat", "Poppy", "Sunflower", "Summer Spangle"]
+  },
+  {
+    "Season": "autumn",
+    "Possible Crops": ["Artichoke", "Corn", "Eggplant", "Pumpkin", "Sunflower", "Fairy Rose"]
+  },
+  {
+    "Season": "winter",
+    "Possible Crops": ["Powdermelon"]
+  }
+]
