@@ -29,7 +29,7 @@ public class RegisterMenuController{
         return Result.success(null, "Register Menu");
     }
 
-    public Result<User> register(String username, String password,String passwordConfirm, String nickname , String email, String gender) throws IOException {
+    public Result<Void> register(String username, String password, String passwordConfirm, String nickname , String email, String gender) throws IOException {
         if(findUserByUsername(username) != null)
             return Result.failure(AuthError.USER_ALREADY_EXISTS);
 
@@ -112,7 +112,7 @@ public class RegisterMenuController{
 
     }
 
-    private Result<User> checkPassword(String password) {
+    public static Result<Void> checkPassword(String password) {
         if(password.length() < 8)
             return Result.failure(AuthError.PASSWORD_LENGTH);
 

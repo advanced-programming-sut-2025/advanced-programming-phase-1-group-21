@@ -85,19 +85,7 @@ public class LoginMenuController{
     }
 
     private ArrayList<User> readAllUsers(Gson gson , String filePath){
-        File file = new File(filePath);
-        if (!file.exists() || file.length() == 0) {
-            return new ArrayList<>();
-        }
-
-        try (FileReader reader = new FileReader(file)) {
-            Type listType = new TypeToken<ArrayList<User>>(){}.getType();
-            ArrayList<User> existingData = gson.fromJson(reader, listType);
-            return existingData != null ? existingData : new ArrayList<>();
-        } catch (IOException e) {
-            System.err.println("error in reading file" + e.getMessage());
-            return new ArrayList<>();
-        }
+        return DataBaseController.readAllUsers(gson, filePath);
     }
 
     private User findUserByUsername(String username) {
@@ -110,25 +98,7 @@ public class LoginMenuController{
     }
 
     private Result<Void> checkPassword(String password) {
-        if(password.length() < 8)
-            return Result.failure(AuthError.PASSWORD_LENGTH);
-
-        String specialCharacters = "(?!.*\\?.*)(?!.*>.*)(?!.*<.*)(?!.*,.*)(?!.*\".*)(?!.*'.*)(?!.*;.*)(?!.*:.*)(?!.*\\/.*)" +
-                "(?!.*\\|.*)(?!.*\\].*)(?!.*\\[.*)(?!.*\\}.*)(?!.*\\{.*)(?!.*\\+.*)(?!.*=.*)(?!.*\\).*)(?!.*\\(.*)(?!.*\\*.*)" +
-                "(?!.*&.*)(?!.*\\^.*)(?!.*%.*)(?!.*\\$.*)(?!.*#.*)(?!.*\\!.*)\\S+";
-
-        if(Pattern.compile(specialCharacters).matcher(password).matches())
-            return Result.failure(AuthError.PASSWORD_SPECIAL_CHARACTERS);
-
-        String containAlphabet = "(?!.*[a-zA-Z].*)\\S+";
-        if(Pattern.compile(containAlphabet).matcher(password).matches())
-            return Result.failure(AuthError.PASSWORD_ALPHABET);
-
-        String containNumber = "(?!.*[0-9].*)\\S+";
-        if(Pattern.compile(containNumber).matcher(password).matches())
-            return Result.failure(AuthError.PASSWORD_CONFIRM_ERROR);
-
-        return Result.success(null);
+        return RegisterMenuController.checkPassword(password);
     }
 
 }

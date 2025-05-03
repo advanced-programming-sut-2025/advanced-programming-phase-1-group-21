@@ -26,7 +26,6 @@ public class Pickaxe extends Tool {
 			App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setShokhmi(false);
 			use = 1;
 		}
-
 		if(App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging() != null) {
 			if (this.toolMaterialType.equals(ToolMaterialType.IRIDIUM)) {
 				if (App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).getForaging().equals(Foraging.SIMPLE_ROCK)) {
