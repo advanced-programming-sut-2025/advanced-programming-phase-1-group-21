@@ -27,9 +27,9 @@ public class Hoe extends Tool {
 			App.game.getCurrentPlayer().setEnergy(App.game.getCurrentPlayer().getEnergy() - 1);
 
 		if(App.game.getCurrentPlayer().getCurrentPlayerMap().getCurrentLocation() != LocationsOnMap.Farm)
-			return Result.failure(GameError.HERE_IS_NOT_FARM , "You are not in the farm");
+			return Result.failure(GameError.HERE_IS_NOT_FARM);
 		if(!App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).tileIsEmpty())
-			return Result.failure(GameError.TILE_IS_NOT_EMPTY , GameError.TILE_IS_NOT_EMPTY.getMessage());
+			return Result.failure(GameError.TILE_IS_NOT_EMPTY);
 
 		App.game.getCurrentPlayer().currentLocationTiles().get(coord.getY()).get(coord.getX()).setShokhmi(true);
 
