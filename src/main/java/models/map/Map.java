@@ -193,6 +193,8 @@ public class Map {
                 for (int j = 20; j < 30; j++)
                     tiles.get(i).get(j).setStardropSaloon(true);
             }
+
+            shops.add(new Shop(ShopType.BLACKSMITH));
         }
 
         if(id != 4) {
@@ -302,6 +304,18 @@ public class Map {
 
     public GreenHouse getGreenHouses() {
         return greenHouses;
+    }
+
+    public ArrayList<Shop> getShops() {
+        return shops;
+    }
+
+    public Barn getBarn() {
+        return barn;
+    }
+
+    public Coop getCoop() {
+        return coop;
     }
 
     public static Result<String> helpReadingMap() {

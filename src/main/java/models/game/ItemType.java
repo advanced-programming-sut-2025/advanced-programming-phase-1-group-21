@@ -7,6 +7,16 @@ public enum ItemType {
     COIN,
     WOOD,
     SALABLE,
-
+    ORE,
+    FUEL,
     ;
+
+    public static ItemType stringToItemType(String itemType) {
+        for(ItemType item : ItemType.values()) {
+            if(item.name().equalsIgnoreCase(itemType)) {
+                return item;
+            }
+        }
+        return null;
+    }
 }

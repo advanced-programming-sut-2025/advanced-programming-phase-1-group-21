@@ -1,5 +1,7 @@
 package controllers;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import models.App;
 import models.Tool.*;
 import models.animal.Animal;
@@ -15,9 +17,13 @@ import models.time.Season;
 import models.user.User;
 import views.menu.GameTerminalView;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static models.game.ItemType.stringToItemType;
+import static models.user.Gender.getGenderByName;
 
 public class GameController{
 
@@ -200,6 +206,11 @@ public class GameController{
             App.game.getCurrentPlayer().setCoord(new Coord(0, 0));
             GameTerminalView.printWithColor(printMap(0 , 0 , 50));
         }
+
+        else if(App.game.getCurrentPlayer().currentLocationTiles().get(y).get(x).isBlackSmith()){
+            App.game.getVillage().getShops().get(0).showProducts();
+        }
+
 
         else{
             App.game.getCurrentPlayer().setCoord(new Coord(x, y));
@@ -612,4 +623,5 @@ public class GameController{
     public Result<Void> updateGameMonth() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
 }

@@ -31,6 +31,7 @@ public enum GameMenuCommand implements Command {
     CHEAT_WEATHER("\\s*cheat\\s+weather\\s+set\\s+(?<type>\\S+)\\s*"),
     GO_TO_VILLAGE("go to village"),
     BACK_HOME("back home"),
+    ADD_ITEM("\\s*add\\s+item\\s+(?<name>\\S+)\\s+(?<itemType>\\S+)\\s+(?<cost>\\d+)\\s+(?<amount>\\d+)\\s*"),
     //    ENTER_MENU("\\s*menu\\s*enter\\s*(?<menuName>\\S+)\\s*"),
 //    GAME_NEW(""),
 //    GAME_MAP("game map (?<map_number>.*)"),
