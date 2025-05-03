@@ -1,0 +1,163 @@
+[
+  {
+    "name": "Common Mushroom",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "price": 40,
+    "is-edible": true,
+    "energy": 38
+  },
+  {
+    "name": "Daffodil",
+    "seasons": ["spring"],
+    "price": 30,
+    "is-edible": false,
+    "energy": null
+  },
+  {
+    "name": "Dandelion",
+    "seasons": ["spring"],
+    "price": 40,
+    "is-edible": true,
+    "energy": 25
+  },
+  {
+    "name": "Leek",
+    "seasons": ["spring"],
+    "price": 60,
+    "is-edible": true,
+    "energy": 40
+  },
+  {
+    "name": "Morel",
+    "seasons": ["spring"],
+    "price": 150,
+    "is-edible": true,
+    "energy": 20
+  },
+  {
+    "name": "Salmonberry",
+    "seasons": ["spring"],
+    "price": 5,
+    "is-edible": true,
+    "energy": 25
+  },
+  {
+    "name": "spring Onion",
+    "seasons": ["spring"],
+    "price": 8,
+    "is-edible": true,
+    "energy": 13
+  },
+  {
+    "name": "Wild Horseradish",
+    "seasons": ["spring"],
+    "price": 50,
+    "is-edible": true,
+    "energy": 13
+  },
+  {
+    "name": "Fiddlehead Fern",
+    "seasons": ["summer"],
+    "price": 90,
+    "is-edible": true,
+    "energy": 25
+  },
+  {
+    "name": "Grape",
+    "seasons": ["summer"],
+    "price": 80,
+    "is-edible": true,
+    "energy": 38
+  },
+  {
+    "name": "Red Mushroom",
+    "seasons": ["summer"],
+    "price": 75,
+    "is-edible": true,
+    "energy": -50
+  },
+  {
+    "name": "Spice Berry",
+    "seasons": ["summer"],
+    "price": 80,
+    "is-edible": true,
+    "energy": 25
+  },
+  {
+    "name": "Sweet Pea",
+    "seasons": ["summer"],
+    "price": 50,
+    "is-edible": false,
+    "energy": null
+  },
+  {
+    "name": "Blackberry",
+    "seasons": ["autumn"],
+    "price": 25,
+    "is-edible": true,
+    "energy": 25
+  },
+  {
+    "name": "Chanterelle",
+    "seasons": ["autumn"],
+    "price": 160,
+    "is-edible": true,
+    "energy": 75
+  },
+  {
+    "name": "Hazelnut",
+    "seasons": ["autumn"],
+    "price": 40,
+    "is-edible": true,
+    "energy": 38
+  },
+  {
+    "name": "Purple Mushroom",
+    "seasons": ["autumn"],
+    "price": 90,
+    "is-edible": true,
+    "energy": 30
+  },
+  {
+    "name": "Wild Plum",
+    "seasons": ["autumn"],
+    "price": 80,
+    "is-edible": true,
+    "energy": 25
+  },
+  {
+    "name": "Crocus",
+    "seasons": ["winter"],
+    "price": 60,
+    "is-edible": false,
+    "energy": null
+  },
+  {
+    "name": "Crystal Fruit",
+    "seasons": ["winter"],
+    "price": 150,
+    "is-edible": true,
+    "energy": 63
+  },
+  {
+    "name": "Holly",
+    "seasons": ["winter"],
+    "price": 80,
+    "is-edible": true,
+    "energy": -37
+  },
+  {
+    "name": "Snow Yam",
+    "seasons": ["winter"],
+    "price": 100,
+    "is-edible": true,
+    "energy": 30
+  },
+  {
+    "name": "winter Root",
+    "seasons": ["winter"],
+    "price": 70,
+    "is-edible": true,
+    "energy": 25
+  }
+]
