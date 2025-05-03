@@ -1,10 +1,5 @@
 package models.map;
 
-import models.App;
-import models.game.Player;
-
-import java.util.ArrayList;
-
 public enum Direction {
     NORTH(0, -1),
     EAST(1, 0),
@@ -24,36 +19,19 @@ public enum Direction {
         this.dy = dy;
     }
 
-    public static Direction stringToDirection(String direction) {
-        if(direction.equals("north")) {
-            return NORTH;
-        }
-        else if(direction.equals("east")) {
-            return EAST;
-        }
-        else if(direction.equals("south")) {
-            return SOUTH;
-        }
-        else if(direction.equals("west")) {
-            return WEST;
-        }
-        else if(direction.equals("north-east")) {
-            return NORTH_EAST;
-        }
-        else if(direction.equals("north-west")) {
-            return NORTH_WEST;
-        }
-        else if(direction.equals("south-east")) {
-            return SOUTH_EAST;
-        }
-        else if(direction.equals("south-west")) {
-            return SOUTH_WEST;
-        }
-        else {
-            return null;
-        }
+    public static Direction getDirection(String direction) {
+		return switch (direction) {
+			case "N" -> NORTH;
+			case "E" -> EAST;
+			case "S" -> SOUTH;
+			case "W" -> WEST;
+			case "NE" -> NORTH_EAST;
+			case "NW" -> NORTH_WEST;
+			case "SE" -> SOUTH_EAST;
+			case "SW" -> SOUTH_WEST;
+			default -> null;
+		};
     }
-
 
     public int getDx() {
         return dx;

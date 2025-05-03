@@ -43,7 +43,7 @@ public class Result<T> {
             return message;
         if (error != null)
             return error.getMessage();
-        return "This result has no message!";
+        return "";
     }
 
     public boolean isSuccess() {
@@ -52,5 +52,10 @@ public class Result<T> {
 
     public boolean isError() {
         return error != null;
+    }
+
+    @Override
+    public String toString() {
+        return getMessage();
     }
 }

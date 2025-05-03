@@ -6,19 +6,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SeedInfo {
-    private static List<SeedInfo> seedInfoList = new ArrayList<>();
-    private String resultName;
-    private String seedName;
-    private List<Integer> stages;
-    private int totalHarvestTime;
-    private boolean oneTime;
-    private Integer regrowthTime;
-    private int baseSellPrice;
-    private boolean isEdible;
-    private Integer energy;
-    private Integer baseHealth;
-    private List<Season> seasons;
-    private boolean canBecomeGiant;
+    private final static List<SeedInfo> seedInfoList = new ArrayList<>();
+    private final String resultName;
+    private final String seedName;
+    private final List<Integer> stages;
+    private final int totalHarvestTime;
+    private final boolean oneTime;
+    private final Integer regrowthTime;
+    private final int baseSellPrice;
+    private final boolean isEdible;
+    private final Integer energy;
+    private final Integer baseHealth;
+    private final List<Season> seasons;
+    private final boolean canBecomeGiant;
 
     public SeedInfo(String resultName, String seedName, List<Integer> stages, int totalHarvestTime, boolean oneTime,
                     Integer regrowthTime, int baseSellPrice, boolean isEdible, Integer energy, Integer baseHealth,
@@ -71,19 +71,31 @@ public class SeedInfo {
 
     @Override
     public String toString() {
-        return "Crop{" +
-                "resultName='" + resultName + '\'' +
-                ", seedName='" + seedName + '\'' +
-                ", stages=" + stages +
-                ", totalHarvestTime=" + totalHarvestTime +
-                ", oneTime=" + oneTime +
-                ", regrowthTime=" + regrowthTime +
-                ", baseSellPrice=" + baseSellPrice +
-                ", isEdible=" + isEdible +
-                ", energy=" + energy +
-                ", baseHealth=" + baseHealth +
-                ", seasons=" + seasons +
-                ", canBecomeGiant=" + canBecomeGiant +
-                '}';
+        String result = "Crop{" +
+                "Name: " + resultName + "\n" +
+                "Source: " + seedName + "\n" +
+                "stages: ";
+
+        for (int x: stages) {
+            result += x;
+            if (x != stages.get(stages.size() - 1)) result += '-';
+        }
+
+        result += "\n" +
+                "totalHarvestTime: " + totalHarvestTime +
+                "oneTime: " + oneTime +
+                "regrowthTime: " + regrowthTime +
+                "baseSellPrice: " + baseSellPrice +
+                "isEdible: " + isEdible +
+                "energy: " + energy +
+                "baseHealth: " + baseHealth +
+                "seasons: ";
+
+        for (Season season: seasons)
+            result += season.toString().toLowerCase() + " ";
+        result += "\n" +
+                "canBecomeGiant: " + canBecomeGiant;
+
+        return result;
     }
 }

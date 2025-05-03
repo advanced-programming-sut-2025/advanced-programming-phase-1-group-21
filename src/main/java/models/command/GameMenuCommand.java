@@ -48,7 +48,7 @@ public enum GameMenuCommand implements Command {
 //    WEATHER("weather"),
 //    WEATHER_FORECAST("weather forecast"),
 //    CHEAT_WEATHER_SET("cheat weather set (?<type).*)"),
-//    WALK("walk -l "),
+//    WALK("walk -l "   ),
     PRINT_MAP("print\\s+map\\s+-l\\s+\\((?<x>\\d+),(?<y>\\d+)\\)\\s+-s\\s+(?<size>\\d+)"),
     //    HELP_READING_MAP("help reading map"),
     ENERGY_SHOW("energy show"),
@@ -82,6 +82,8 @@ public enum GameMenuCommand implements Command {
 //    SELL_ANIMAL("sell animal -n <name>"),
 //    FISHING("fishing -p <fishing pole>"),
 //    ARTISAN_USE("artisan use <artisan_name> <item1_name>"),
+        WATER("\\s*water\\s+-l\\s+\\((?<x>\\d+),(?<y>\\d+)\\)\\s*"),
+    PLANT("^\\s*plant\\s+-s\\s+(?<seedName>.*)\\s+-d\\s+(?<direction>(N)|(E)|(S)|(W)|(NE)|(NW)|(SE)|(SW))\\s*$"),
     ;
 
     public final Pattern pattern;
