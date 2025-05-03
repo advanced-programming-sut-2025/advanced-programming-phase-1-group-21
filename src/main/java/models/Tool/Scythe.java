@@ -20,7 +20,7 @@ public class Scythe extends Tool {
 		player.decreaseEnergy(2);
 		Tile tile = player.currentLocationTiles().get(coord.getY()).get(coord.getX());
 
-		if(tile.getForaging() == null && tile.getSeed() == null)
+		if(tile.getForaging() == null && tile.getPlantedSeed() == null)
 			return Result.success("inja ke chizi nist");
 
 		if(tile.getForaging() == Foraging.LEAF){
@@ -28,8 +28,8 @@ public class Scythe extends Tool {
 			return Result.success("the leaf removed from the ground");
 		}
 
-		if(tile.getSeed() != null){
-			tile.setSeed(null);
+		if(tile.getPlantedSeed() != null){
+			tile.setPlantedSeed(null);
 			return Result.success("The crop has now been harvested");
 		}
 
