@@ -16,7 +16,6 @@ public class Game {
     private Map village = (new MapBuilder()).buildVillage();
     private int roundCount = 0;
     private Date gameDate;
-    private Season gameSeason;
     private Weather gameWeather;
     private Weather forecastCheat;
 
@@ -25,7 +24,6 @@ public class Game {
         this.players = players;
         this.currentPlayer = players.get(0);
         this.gameDate = Date.createBias();
-        this.gameSeason = Season.SPRING;
         this.gameWeather = Weather.SUNNY;
         this.forecastCheat = null;
     }
@@ -35,7 +33,32 @@ public class Game {
         if (forecastCheat != null) {
             return forecastCheat;
         }
-        throw new UnsupportedOperationException("Not supported yet.");
+        int random = (int) (Math.random() * 100);
+
+        switch (getSeason()) {
+            case SPRING:
+                if (random < 60) return Weather.SUNNY;
+                if (random < 90) return Weather.RAINY;
+                return Weather.STORM;
+
+            case SUMMER:
+                if (random < 70) return Weather.SUNNY;
+                if (random < 95) return Weather.RAINY;
+                return Weather.STORM;
+
+            case AUTUMN:
+                if (random < 40) return Weather.SUNNY;
+                if (random < 90) return Weather.RAINY;
+                return Weather.STORM;
+
+            case WINTER:
+                if (random < 30) return Weather.SUNNY;
+                if (random < 70) return Weather.RAINY;
+                if (random < 95) return Weather.SNOW;
+                return Weather.STORM;
+            default:
+                return Weather.SUNNY;
+        }
     }
 
     public Map getCurrentPlayerMap() {
@@ -51,11 +74,7 @@ public class Game {
     }
 
     public Season getSeason() {
-        return gameSeason;
-    }
-
-    public void advanceSeason() {
-        gameSeason = gameSeason.nextSeason();
+        return gameDate.getCurrentSeason();
     }
 
     public Date getGameDate() {
@@ -63,7 +82,10 @@ public class Game {
     }
 
     public void advanceTime(int day, int hour) {
-        gameDate.advance(day, hour);
+        gameDate.advanceHours(hour);
+        for (int i = 0; i < day; ++i) {
+            advanceDay();
+        }
     }
 
     public Player getNextPlayer() {
@@ -75,12 +97,13 @@ public class Game {
     public void advanceDay() {
         gameWeather = getNextWeather();
         forecastCheat = null;
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     private void endOfRound() {
+        //TODO everyone should sleep
 
     }
+
     private ArrayList<Map> maps;
 
     public Game(Player currentPlayer, ArrayList<Player> players) {
