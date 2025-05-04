@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Chicken",
+    "house": "Coop",
+    "house-type": ["Normal", "Big", "Deluxe"],
+    "products": ["Egg", "Big Egg"],
+    "product-time": 1,
+    "price": 800
+  },
+  {
+    "name": "Duck",
+    "house": "Coop",
+    "house-type": ["Big", "Deluxe"],
+    "products": ["Duck Egg", "Duck Feather"],
+    "product-time": 2,
+    "price": 1200
+  },
+  {
+    "name": "Rabbit",
+    "house": "Coop",
+    "house-type": ["Deluxe"],
+    "products": ["Wool", "Rabbit foot"],
+    "product-time": 4,
+    "price": 8000
+  },
+  {
+    "name": "Dinosaur",
+    "house": "Coop",
+    "house-type": ["Big", "Deluxe"],
+    "products": ["Dinosaur Egg"],
+    "product-time": 7,
+    "price": 14000
+  },
+  {
+    "name": "Cow",
+    "house": "Barn",
+    "house-type": ["Normal", "Big", "Deluxe"],
+    "products": ["Milk", "Large Milk"],
+    "price": 1500
+  },
+  {
+    "name": "Goat",
+    "house": "Barn",
+    "house-type": ["Big", "Deluxe"],
+    "products": ["Goat Milk", "Large Goat Milk"],
+    "price": 4000
+  },
+  {
+    "name": "Sheep",
+    "house": "Barn",
+    "house-type": ["Deluxe"],
+    "products": ["Wool"],
+    "price": 8000
+  },
+  {
+    "name": "Pig",
+    "house": "Barn",
+    "house-type": ["Deluxe"],
+    "products": ["Truffle"],
+    "price": 16000
+  }
+]

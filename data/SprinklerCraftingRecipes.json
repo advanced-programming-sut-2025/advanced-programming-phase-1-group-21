@@ -8,8 +8,7 @@
       [0, -1],
       [0, 1]
     ],
-    "ingredients-type": ["Copper Bar", "Iron Bar"],
-    "ingredients-amount": [1, 1],
+    "ingredients": {"Copper Bar": 1, "Iron Bar": 1},
     "skill-type": "Farming",
     "skill-level": 1
   },
@@ -26,8 +25,7 @@
       [1, 0],
       [1, 1]
     ],
-    "ingredients-type": ["Iron Bar", "Gold Bar"],
-    "ingredients-amount": [1, 1],
+    "ingredients": {"Iron Bar": 1, "Gold Bar": 1},
     "skill-type": "Farming",
     "skill-level": 2
   },
@@ -60,8 +58,7 @@
       [2, 1],
       [2, 2]
     ],
-    "ingredients-type": ["Gold Bar", "Iridium Bar"],
-    "ingredients-amount": [1, 1],
+    "ingredients": {"Gold Bar": 1, "Iridium Bar": 1},
     "skill-type": "Farming",
     "skill-level": 3
   }

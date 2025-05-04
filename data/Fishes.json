@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Salmon",
+    "type": "Normal",
+    "price": 75,
+    "seasons": "autumn"
+  },
+  {
+    "name": "Sardine",
+    "type": "Normal",
+    "price": 40,
+    "seasons": "autumn"
+  },
+  {
+    "name": "Shad",
+    "type": "Normal",
+    "price": 60,
+    "seasons": "autumn"
+  },
+  {
+    "name": "Blue Discus",
+    "type": "Normal",
+    "price": 120,
+    "seasons": "autumn"
+  },
+  {
+    "name": "Midnight Carp",
+    "type": "Normal",
+    "price": 150,
+    "seasons": "winter"
+  },
+  {
+    "name": "Squid",
+    "type": "Normal",
+    "price": 80,
+    "seasons": "winter"
+  },
+  {
+    "name": "Tuna",
+    "type": "Normal",
+    "price": 100,
+    "seasons": "winter"
+  },
+  {
+    "name": "Perch",
+    "type": "Normal",
+    "price": 55,
+    "seasons": "winter"
+  },
+  {
+    "name": "Flounder",
+    "type": "Normal",
+    "price": 100,
+    "seasons": "spring"
+  },
+  {
+    "name": "Lionfish",
+    "type": "Normal",
+    "price": 100,
+    "seasons": "spring"
+  },
+  {
+    "name": "Herring",
+    "type": "Normal",
+    "price": 30,
+    "seasons": "spring"
+  },
+  {
+    "name": "Ghostfish",
+    "type": "Normal",
+    "price": 45,
+    "seasons": "spring"
+  },
+  {
+    "name": "Tilapia",
+    "type": "Normal",
+    "price": 75,
+    "seasons": "summer"
+  },
+  {
+    "name": "Dorado",
+    "type": "Normal",
+    "price": 100,
+    "seasons": "summer"
+  },
+  {
+    "name": "Sunfish",
+    "type": "Normal",
+    "price": 30,
+    "seasons": "summer"
+  },
+  {
+    "name": "Rainbow Trout",
+    "type": "Normal",
+    "price": 65,
+    "seasons": "summer"
+  },
+  {
+    "name": "Legend",
+    "type": "Legendary",
+    "price": 5000,
+    "seasons": "spring"
+  },
+  {
+    "name": "Glacierfish",
+    "type": "Legendary",
+    "price": 1000,
+    "seasons": "winter"
+  },
+  {
+    "name": "Angler",
+    "type": "Legendary",
+    "price": 900,
+    "seasons": "autumn"
+  },
+  {
+    "name": "Crimsonfish",
+    "type": "Legendary",
+    "price": 1500,
+    "seasons": "summer"
+  }
+]
