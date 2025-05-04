@@ -1,6 +1,7 @@
 package models.game;
 
 import models.App;
+import models.DailyUpdate;
 import models.map.Map;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import models.map.MapBuilder;
 import models.map.Weather;
 import models.time.*;
 
-public class Game {
+public class Game implements DailyUpdate {
     private ArrayList<Player> players;
     private Player currentPlayer;
     private Map village = (new MapBuilder()).buildVillage();
@@ -100,8 +101,11 @@ public class Game {
     }
 
     private void endOfRound() {
-        //TODO everyone should sleep
-
+        //TODO IF everyone should sleep
+        if (gameDate.getHour() == 22) {
+            nextDay();
+            roundCount++;
+        }
     }
 
     private ArrayList<Map> maps;
@@ -122,10 +126,8 @@ public class Game {
     public void nextTurn() {
         Player nextPlayer = getNextPlayer();
 
-        if (players.indexOf(nextPlayer) == 0) {
-            roundCount++;
+        if (players.indexOf(nextPlayer) == 0)
             endOfRound();
-        }
 
         currentPlayer = nextPlayer;
     }
@@ -148,5 +150,13 @@ public class Game {
 
     public Map getVillage() {
         return village;
+    }
+
+    @Override
+    public boolean nextDay() {
+        for (Player player : players)
+            player.nextDay();
+        gameDate.goToNextDay();
+        return false;
     }
 }
