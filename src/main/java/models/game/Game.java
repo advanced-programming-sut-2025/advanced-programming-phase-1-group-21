@@ -23,7 +23,7 @@ public class Game implements DailyUpdate {
 
     public Game(ArrayList<Player> players) {
         this.players = players;
-        this.currentPlayer = players.get(0);
+        this.currentPlayer = players.getFirst();
         this.gameDate = Date.createBias();
         this.gameWeather = Weather.SUNNY;
         this.forecastCheat = null;
@@ -109,11 +109,6 @@ public class Game implements DailyUpdate {
     }
 
     private ArrayList<Map> maps;
-
-    public Game(Player currentPlayer, ArrayList<Player> players) {
-        this.currentPlayer = currentPlayer;
-        this.players = players;
-    }
 
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;

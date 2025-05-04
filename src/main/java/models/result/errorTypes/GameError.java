@@ -17,7 +17,8 @@ public enum GameError implements Error {
     HERE_IS_NOT_FARM("Here is not your farm"),
     YOU_CANT_USE_PICKAXE_HERE("You can't use pickaxe here to use"),
     SEED_NOT_FOUND("Seed not found"),
-    NOT_IMPLEMENTED("Not implemented");
+    NOT_IMPLEMENTED("Not implemented"),
+    NO_GAME_RUNNING("No game running");
 
 
     private final String message;
