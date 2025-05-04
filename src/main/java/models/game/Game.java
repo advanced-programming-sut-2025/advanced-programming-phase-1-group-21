@@ -19,6 +19,7 @@ public class Game implements DailyUpdate {
     private final Date gameDate;
     private Weather gameWeather;
     private Weather forecastCheat;
+    private Weather nextDayWeather;
 
 
     public Game(ArrayList<Player> players) {
@@ -27,14 +28,10 @@ public class Game implements DailyUpdate {
         this.gameDate = Date.createBias();
         this.gameWeather = Weather.SUNNY;
         this.forecastCheat = null;
-        System.err.println("GAMEDATE: " + gameDate);
+        this.nextDayWeather = calculateRandomWeather();
     }
 
-    //Calculate randomly based on sth?
-    public Weather getNextWeather() {
-        if (forecastCheat != null) {
-            return forecastCheat;
-        }
+    private Weather calculateRandomWeather() {
         int random = (int) (Math.random() * 100);
 
         switch (getSeason()) {
@@ -61,6 +58,17 @@ public class Game implements DailyUpdate {
             default:
                 return Weather.SUNNY;
         }
+    }
+
+    public Weather getNextWeather() {
+        if (forecastCheat != null) {
+            return forecastCheat;
+        }
+        return nextDayWeather;
+    }
+
+    public Weather getNextDayWeather() {
+        return nextDayWeather;
     }
 
     public Map getCurrentPlayerMap() {
