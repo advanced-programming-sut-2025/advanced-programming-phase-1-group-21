@@ -314,8 +314,8 @@ public class GameController{
     }
 
     public Result<Void> water(Coord coord) {
-        Map map = App.game.getCurrentPlayer().getCurrentPlayerMap();
-        Tile tile = map.getTiles().get(coord.getX()).get(coord.getY());
+        Map map = App.game.getCurrentPlayerMap();
+        Tile tile = map.getTile(coord);
         tile.water();
         return Result.success(null);
     }

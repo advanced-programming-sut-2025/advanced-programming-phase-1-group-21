@@ -21,7 +21,7 @@ public class App {
     public static User registeredUser;
     public static User logedInUser;
 
-    public final static List<SeedInfo> crops = DataBaseController.loadCropsFromCSV("crops.csv");
+    public final static List<SeedInfo> crops = null;
 
     public static SeedInfo getSeedInfoByName(String seedName) {
         return SeedInfo.getSeedInfo(seedName);
