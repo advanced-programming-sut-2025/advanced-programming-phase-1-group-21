@@ -1,0 +1,339 @@
+{
+  "backpacks": [
+    {
+      "name": "Large Pack",
+      "description": "Unlocks the 2nd row of inventory (12 more slots, total 24).",
+      "price": 2000,
+      "required": null,
+      "daily-limit": 1
+    },
+    {
+      "name": "Deluxe Pack",
+      "description": "Unlocks the 3rd row of inventory (infinite slots).",
+      "price": 10000,
+      "required": "Large Pack",
+      "daily-limit": 1
+    }
+  ],
+  "stock": [
+    {
+      "name": "Rice",
+      "description": "A basic grain often served under vegetables.",
+      "price": [200, 200, 200, 200],
+      "daily-limit": -1
+    },
+    {
+      "name": "Wheat Flour",
+      "description": "A common cooking ingredient made from crushed wheat seeds.",
+      "price": [100, 100, 100, 100],
+      "daily-limit": -1
+    },
+    {
+      "name": "Bouquet",
+      "description": "A gift that shows your romantic interest. (Unlocked after reaching level 2 friendship with a player)",
+      "price": [1000, 1000, 1000, 1000],
+      "daily-limit": 2
+    },
+    {
+      "name": "Wedding Ring",
+      "description": "It's used to ask for another farmer's hand in marriage. (Unlocked after reaching level 3 friendship with a player)",
+      "price": [10000, 10000, 10000, 10000],
+      "daily-limit": 2
+    },
+    {
+      "name": "Dehydrator (Recipe)",
+      "description": "A recipe to make Dehydrator",
+      "price": [10000, 10000, 10000, 10000],
+      "daily-limit": 1
+    },
+    {
+      "name": "Grass Starter (Recipe)",
+      "description": "A recipe to make Grass Starter",
+      "price": [1000, 1000, 1000, 1000],
+      "daily-limit": 1
+    },
+    {
+      "name": "Sugar",
+      "description": "Adds sweetness to pastries and candies. Too much can be unhealthy.",
+      "price": [100, 100, 100, 100],
+      "daily-limit": -1
+    },
+    {
+      "name": "Oil",
+      "description": "All purpose cooking oil.",
+      "price": [200, 200, 200, 200],
+      "daily-limit": -1
+    },
+    {
+      "name": "Vinegar",
+      "description": "An aged fermented liquid used in many cooking recipes.",
+      "price": [200, 200, 200, 200],
+      "daily-limit": -1
+    },
+    {
+      "name": "Deluxe Retaining Soil",
+      "description": "This soil has a 100% chance of staying watered overnight. Mix into tilled soil.",
+      "price": [150, 150, 150, 150],
+      "daily-limit": -1
+    },
+    {
+      "name": "Grass Starter",
+      "description": "Place this on your farm to start a new patch of grass.",
+      "price": [100, 100, 100, 100],
+      "daily-limit": -1
+    },
+    {
+      "name": "Speed-Gro",
+      "description": "Makes the plants grow 1 day earlier.",
+      "price": [100, 100, 100, 100],
+      "daily-limit": -1
+    },
+    {
+      "name": "Apple Sapling",
+      "description": "Takes 28 days to produce a mature Apple tree. Bears fruit in the fall. Only grows if the 8 surrounding \"tiles\" are empty.",
+      "price": [4000, 4000, 4000, 4000],
+      "daily-limit": -1
+    },
+    {
+      "name": "Apricot Sapling",
+      "description": "Takes 28 days to produce a mature Apricot tree. Bears fruit in the spring. Only grows if the 8 surrounding \"tiles\" are empty.",
+      "price": [2000, 2000, 2000, 2000],
+      "daily-limit": -1
+    },
+    {
+      "name": "Cherry Sapling",
+      "description": "Takes 28 days to produce a mature Cherry tree. Bears fruit in the spring. Only grows if the 8 surrounding \"tiles\" are empty.",
+      "price": [3400, 3400, 3400, 3400],
+      "daily-limit": -1
+    },
+    {
+      "name": "Orange Sapling",
+      "description": "Takes 28 days to produce a mature Orange tree. Bears fruit in the summer. Only grows if the 8 surrounding \"tiles\" are empty.",
+      "price": [4000, 4000, 4000, 4000],
+      "daily-limit": -1
+    },
+    {
+      "name": "Peach Sapling",
+      "description": "Takes 28 days to produce a mature Peach tree. Bears fruit in the summer. Only grows if the 8 surrounding \"tiles\" are empty.",
+      "price": [6000, 6000, 6000, 6000],
+      "daily-limit": -1
+    },
+    {
+      "name": "Pomegranate Sapling",
+      "description": "Takes 28 days to produce a mature Pomegranate tree. Bears fruit in the fall. Only grows if the 8 surrounding \"tiles\" are empty.",
+      "price": [6000, 6000, 6000, 6000],
+      "daily-limit": -1
+    },
+    {
+      "name": "Basic Retaining Soil",
+      "description": "This soil has a chance of staying watered overnight. Mix into tilled soil.",
+      "price": [100, 100, 100, 100],
+      "daily-limit": -1
+    },
+    {
+      "name": "Quality Retaining Soil",
+      "description": "This soil has a good chance of staying watered overnight. Mix into tilled soil.",
+      "price": [150, 150, 150, 150],
+      "daily-limit": -1
+    },
+    {
+      "backpacks": "Parsnip Seeds",
+      "description": "Plant these in the spring. Takes 4 days to mature.",
+      "price": [20, 30, 30, 30],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Bean Starter",
+      "description": "Plant these in the spring. Takes 10 days to mature, but keeps producing after that. Grows on a trellis.",
+      "price": [60, 90, 90, 90],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Cauliflower Seeds",
+      "description": "Plant these in the spring. Takes 12 days to produce a large cauliflower.",
+      "price": [80, 120, 120, 120],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Potato Seeds",
+      "description": "Plant these in the spring. Takes 6 days to mature, and has a chance of yielding multiple potatoes at harvest.",
+      "price": [50, 70, 70, 70],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Tulip Bulb",
+      "description": "Plant in spring. Takes 6 days to produce a colorful flower. Assorted colors.",
+      "price": [20, 30, 30, 30],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Kale Seeds",
+      "description": "Plant these in the spring. Takes 6 days to mature. Harvest with the scythe.",
+      "price": [70, 105, 105, 105],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Jazz Seeds",
+      "description": "Plant in spring. Takes 7 days to produce a blue puffball flower.",
+      "price": [30, 45, 45, 45],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Garlic Seeds",
+      "description": "Plant these in the spring. Takes 4 days to mature.",
+      "price": [40, 60, 60, 60],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Rice Shoot",
+      "description": "Plant these in the spring. Takes 8 days to mature. Grows faster if planted near a body of water. \nHarvest with the scythe.",
+      "price": [60, 40, 40, 40],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Melon Seeds",
+      "description": "Plant these in the summer. Takes 12 days to mature.",
+      "price": [120, 80, 120, 120],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Tomato Seeds",
+      "description": "Plant these in the summer. Takes 11 days to mature, and continues to produce after first harvest.",
+      "price": [75, 50, 75, 75],
+      "daily-limit": "5"
+    },
+    {
+      "backpacks": "Blueberry Seeds",
+      "description": "Plant these in the summer. Takes 13 days to mature, and continues to produce after first harvest.",
+      "price": [120, 80, 120, 120],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Pepper Seeds",
+      "description": "Plant these in the summer. Takes 5 days to mature, and continues to produce after first harvest.",
+      "price": [60, 40, 60, 60],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Wheat Seeds",
+      "description": "Plant these in the summer or fall. Takes 4 days to mature. Harvest with the scythe.",
+      "price": [15, 10, 15, 15],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Radish Seeds",
+      "description": "Plant these in the summer. Takes 6 days to mature.",
+      "price": [60, 40, 60, 60],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Poppy Seeds",
+      "description": "Plant in summer. Produces a bright red flower in 7 days.",
+      "price": [150, 100, 150, 150],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Spangle Seeds",
+      "description": "Plant in summer. Takes 8 days to produce a vibrant tropical flower. Assorted colors.",
+      "price": [75, 50, 75, 75],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Hops Starter",
+      "description": "Plant these in the summer. Takes 11 days to grow, but keeps producing after that. Grows on a trellis.",
+      "price": [90, 60, 90, 90],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Corn Seeds",
+      "description": "Plant these in the summer or fall. Takes 14 days to mature, and continues to produce after first harvest.",
+      "price": [225, 150, 225, 225],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Sunflower Seeds",
+      "description": "Plant in summer or fall. Takes 8 days to produce a large sunflower. Yields more seeds at harvest.",
+      "price": [300, 200, 300, 300],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Red Cabbage Seeds",
+      "description": "Plant these in the summer. Takes 9 days to mature.",
+      "price": [150, 100, 150, 150],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Eggplant Seeds",
+      "description": "Plant these in the fall. Takes 5 days to mature, and continues to produce after first harvest.",
+      "price": [30, 30, 20, 30],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Corn Seeds",
+      "description": "Plant these in the summer or fall. Takes 14 days to mature, and continues to produce after first harvest.",
+      "price": [225, 225, 150, 225],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Pumpkin Seeds",
+      "description": "Plant these in the fall. Takes 13 days to mature.",
+      "price": [150, 150, 100, 150],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Bok Choy Seeds",
+      "description": "Plant these in the fall. Takes 4 days to mature.",
+      "price": [75, 75, 50, 75],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Yam Seeds",
+      "description": "Plant these in the fall. Takes 10 days to mature.",
+      "price": [90, 90, 60, 90],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Cranberry Seeds",
+      "description": "Plant these in the fall. Takes 7 days to mature, and continues to produce after first harvest.",
+      "price": [360, 360, 240, 360],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Sunflower Seeds",
+      "description": "Plant in summer or fall. Takes 8 days to produce a large sunflower. Yields more seeds at harvest.",
+      "price": [300, 300, 200, 300],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Fairy Seeds",
+      "description": "Plant in fall. Takes 12 days to produce a mysterious flower. Assorted Colors.",
+      "price": [300, 300, 200, 300],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Amaranth Seeds",
+      "description": "Plant these in the fall. Takes 7 days to grow. Harvest with the scythe.",
+      "price": [105, 105, 70, 105],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Grape Starter",
+      "description": "Plant these in the fall. Takes 10 days to grow, but keeps producing after that. Grows on a trellis.",
+      "field8": "60g",
+      "field9": "90g",
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Wheat Seeds",
+      "description": "Plant these in the summer or fall. Takes 4 days to mature. Harvest with the scythe.",
+      "price": [15, 15, 10, 15],
+      "daily-limit": 5
+    },
+    {
+      "backpacks": "Artichoke Seeds",
+      "description": "Plant these in the fall. Takes 8 days to mature.",
+      "price": [45, 45, 30, 45],
+      "daily-limit": 5
+    }
+  ]
+}

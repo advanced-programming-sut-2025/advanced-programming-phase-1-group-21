@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Sprinkler",
+    "description": "Gives water to 4 adjacent tiles.",
+    "tiles": [
+      [-1, 0],
+      [1, 0],
+      [0, -1],
+      [0, 1]
+    ],
+    "ingredients": {"Copper Bar": 1, "Iron Bar": 1},
+    "skill-type": "Farming",
+    "skill-level": 1
+  },
+  {
+    "name": "Quality Sprinkler",
+    "description": "Gives water to 8 adjacent tiles.",
+    "tiles": [
+      [-1, -1],
+      [-1, 0],
+      [-1, 1],
+      [0, -1],
+      [0, 1],
+      [1, -1],
+      [1, 0],
+      [1, 1]
+    ],
+    "ingredients": {"Iron Bar": 1, "Gold Bar": 1},
+    "skill-type": "Farming",
+    "skill-level": 2
+  },
+  {
+    "name": "Iridium Sprinkler",
+    "description": "Gives water to 24 adjacent tiles.",
+    "tiles": [
+      [-2, -2],
+      [-2, -1],
+      [-2, 0],
+      [-2, 1],
+      [-2, 2],
+      [-1, -2],
+      [-1, -1],
+      [-1, 0],
+      [-1, 1],
+      [-1, 2],
+      [0, -2],
+      [0, -1],
+      [0, 1],
+      [0, 2],
+      [1, -2],
+      [1, -1],
+      [1, 0],
+      [1, 1],
+      [1, 2],
+      [2, -2],
+      [2, -1],
+      [2, 0],
+      [2, 1],
+      [2, 2]
+    ],
+    "ingredients": {"Gold Bar": 1, "Iridium Bar": 1},
+    "skill-type": "Farming",
+    "skill-level": 3
+  }
+]

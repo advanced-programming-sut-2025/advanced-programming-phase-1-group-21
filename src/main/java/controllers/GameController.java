@@ -1,7 +1,5 @@
 package controllers;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import models.App;
 import models.Tool.*;
 import models.animal.Animal;
@@ -17,13 +15,9 @@ import models.time.Season;
 import models.user.User;
 import views.menu.GameTerminalView;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static models.game.ItemType.stringToItemType;
-import static models.user.Gender.getGenderByName;
 
 public class GameController{
 
@@ -266,7 +260,7 @@ public class GameController{
     }
 
     public Result<Item> useTool(String direction) {
-        Direction d = Direction.stringToDirection(direction);
+        Direction d = Direction.getDirection(direction);
         if(d == null)
             return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
 
@@ -302,7 +296,7 @@ public class GameController{
         return Result.success(seedSource.toString());
     }
 
-    public Result<Seed> plantSeed(Seed seed, Direction direction) {
+    public Result<Seed> plantSeed(String seedName, Direction direction) { // After MAP
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -317,6 +311,13 @@ public class GameController{
     public Result<Integer> howMuchWater() {
         //GET WATER_CAN FROM INVENTORY
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Result<Void> water(Coord coord) {
+        Map map = App.game.getCurrentPlayer().getCurrentPlayerMap();
+        Tile tile = map.getTiles().get(coord.getX()).get(coord.getY());
+        tile.water();
+        return Result.success(null);
     }
 
     public Result<List<Recipe>> craftingShowRecipes() {
