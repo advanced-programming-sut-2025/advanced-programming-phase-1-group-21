@@ -9,6 +9,7 @@ public enum ItemType {
     SALABLE,
     ORE,
     FUEL,
+    FLOWER
     ;
 
     public static ItemType stringToItemType(String itemType) {

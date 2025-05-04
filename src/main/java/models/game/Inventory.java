@@ -7,6 +7,7 @@ import models.result.errorTypes.GameError;
 
 import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -58,25 +59,51 @@ public class Inventory {
         return Result.success("Adding " + item.getName() + " to the inventory was successful.");
     }
 
-    private static boolean removeItemFromList(Item item, List<Item> items) {
-        // If you're using TrashCan, don't forget to get the money and use it in the player object;
+    private static boolean removeItemFromList(Item itemToRemove, List<Item> items) {
+        if (itemToRemove == null || items == null) return false;
 
-        for (Item i : items)
-            if (i.getName().equals(item.getName())) {
-                int del = Math.min(i.getAmount(), item.getAmount());
-                item.changeAmount(-del);
-                i.changeAmount(-del);
-                if (i.getAmount() == 0)
-                    items.remove(i);
-                if (item.getAmount() == 0)
-                    break;
+        Iterator<Item> iterator = items.iterator();
+        while (iterator.hasNext() && itemToRemove.getAmount() > 0) {
+            Item existingItem = iterator.next();
+            if (existingItem.getName().equals(itemToRemove.getName())) {
+                int removeAmount = Math.min(existingItem.getAmount(), itemToRemove.getAmount());
+                existingItem.changeAmount(-removeAmount);
+                itemToRemove.changeAmount(-removeAmount);
+
+                if (existingItem.getAmount() == 0) {
+                    iterator.remove();
+                }
             }
-        return item.getAmount() == 0; //If == 0 -> All were removed
+        }
+        return itemToRemove.getAmount() == 0;
     }
 
-//    public boolean removeItem(Item item) {
-//        return removeItemFromList(item, items);
-//    }
+    public boolean removeItemsByType(ItemType type, int amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Amount must be positive");
+        }
+
+        int totalAvailable = getAmountByType(type);
+        if (totalAvailable < amount) {
+            return false;
+        }
+
+        Iterator<Item> iterator = items.iterator();
+        while (iterator.hasNext() && amount > 0) {
+            Item item = iterator.next();
+            if (item.getItemType() == type) {
+                int removeAmount = Math.min(item.getAmount(), amount);
+                item.changeAmount(-removeAmount);
+                amount -= removeAmount;
+
+                if (item.getAmount() == 0) {
+                    iterator.remove();
+                }
+            }
+        }
+
+        return true;
+    }
 
     public static boolean removeItemsList(List<Item> itemsToRemove, List<Item> items) {
         for (Item i : itemsToRemove) {
