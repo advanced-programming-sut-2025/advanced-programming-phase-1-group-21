@@ -6,6 +6,7 @@ import models.map.Map;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import models.map.MapBuilder;
 import models.map.Weather;
@@ -20,7 +21,7 @@ public class Game implements DailyUpdate {
     private Weather gameWeather;
     private Weather forecastCheat;
     private Weather nextDayWeather;
-
+    private final Random random = new Random();
 
     public Game(ArrayList<Player> players) {
         this.players = players;
@@ -32,28 +33,28 @@ public class Game implements DailyUpdate {
     }
 
     private Weather calculateRandomWeather() {
-        int random = (int) (Math.random() * 100);
+        int rnd = random.nextInt(100);
 
         switch (getSeason()) {
             case SPRING:
-                if (random < 60) return Weather.SUNNY;
-                if (random < 90) return Weather.RAINY;
+                if (rnd < 60) return Weather.SUNNY;
+                if (rnd < 90) return Weather.RAINY;
                 return Weather.STORM;
 
             case SUMMER:
-                if (random < 70) return Weather.SUNNY;
-                if (random < 95) return Weather.RAINY;
+                if (rnd < 70) return Weather.SUNNY;
+                if (rnd < 95) return Weather.RAINY;
                 return Weather.STORM;
 
             case AUTUMN:
-                if (random < 40) return Weather.SUNNY;
-                if (random < 90) return Weather.RAINY;
+                if (rnd < 40) return Weather.SUNNY;
+                if (rnd < 90) return Weather.RAINY;
                 return Weather.STORM;
 
             case WINTER:
-                if (random < 30) return Weather.SUNNY;
-                if (random < 70) return Weather.RAINY;
-                if (random < 95) return Weather.SNOW;
+                if (rnd < 30) return Weather.SUNNY;
+                if (rnd < 70) return Weather.RAINY;
+                if (rnd < 95) return Weather.SNOW;
                 return Weather.STORM;
             default:
                 return Weather.SUNNY;
@@ -156,6 +157,7 @@ public class Game implements DailyUpdate {
     public boolean nextDay() {
         gameWeather = getNextWeather();
         forecastCheat = null;
+        nextDayWeather = calculateRandomWeather();
 
         for (Player player : players)
             player.nextDay();
