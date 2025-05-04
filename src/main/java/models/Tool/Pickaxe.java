@@ -3,14 +3,40 @@ package models.Tool;
 import models.App;
 import models.game.Item;
 import models.game.Player;
-import models.map.Coord;
-import models.map.Foraging;
-import models.map.LocationsOnMap;
-import models.map.Tile;
+import models.map.*;
 import models.result.Result;
 import models.result.errorTypes.GameError;
 
+import java.util.Map;
+import java.util.Set;
+
 public class Pickaxe extends Tool {
+	public static final Set<TileType> HARVESTABLE_TILE_TYPES = Set.of(
+			TileType.SIMPLE_ROCK,
+			TileType.COPPER_ROCK,
+			TileType.STEEL_ROCK,
+			TileType.GOLD_ROCK,
+			TileType.IRIDIUM_ROCK
+	);
+
+	public static final Map<ToolMaterialType, Set<TileType>> FORAGING_BY_TOOL = Map.of(
+			ToolMaterialType.STEEL, Set.of(
+					TileType.SIMPLE_ROCK,
+					TileType.COPPER_ROCK,
+					TileType.STEEL_ROCK,
+					TileType.GOLD_ROCK
+			),
+			ToolMaterialType.COPPER, Set.of(
+					TileType.SIMPLE_ROCK,
+					TileType.COPPER_ROCK,
+					TileType.STEEL_ROCK
+			),
+			ToolMaterialType.PRIMITIVE, Set.of(
+					TileType.SIMPLE_ROCK,
+					TileType.COPPER_ROCK
+			)
+	);
+
 	private ToolMaterialType toolMaterialType = ToolMaterialType.PRIMITIVE;
 	public Pickaxe() {
 		super(ToolType.PICKAXE);
@@ -19,105 +45,50 @@ public class Pickaxe extends Tool {
 	@Override
 	public Result<Item> use(Coord coord) {
 		Player player = App.game.getCurrentPlayer();
-		LocationsOnMap loc = player.getCurrentPlayerMap().getCurrentLocation();
-		if(loc != LocationsOnMap.Farm && loc != LocationsOnMap.Mines)
-				return Result.failure(GameError.YOU_CANT_USE_PICKAXE_HERE);
+		MapType mapType = player.getMap().mapType;
 
+		if (mapType != MapType.FARM && mapType != MapType.MINES)
+			return Result.failure(GameError.YOU_CANT_USE_PICKAXE_HERE);
+
+		Tile tile = player.getMap().getTile(coord);
+		TileType tileType = tile.getTileType();
 		int use = 0;
-		Tile tile = player.currentLocationTiles().get(coord.getY()).get(coord.getX());
-		if(tile.isShokhmi()) {
-			tile.setShokhmi(false);
+
+		if (tileType == TileType.PLOWED) {
+			tile.setTileType(TileType.UNPLOWED);
 			use = 1;
 		}
-		if(tile.getForaging() != null) {
-			if (toolMaterialType == ToolMaterialType.IRIDIUM || toolMaterialType == ToolMaterialType.GOLD) {
-				if (tile.getForaging().equals(Foraging.SIMPLE_ROCK)) {
+		else if (tileType.isForaging()) {
+			if (toolMaterialType == ToolMaterialType.GOLD || toolMaterialType == ToolMaterialType.IRIDIUM) {
+				if (HARVESTABLE_TILE_TYPES.contains(tileType)) {
+					tile.setTileType(TileType.UNPLOWED);
 					use = 2;
-					tile.setForaging(null);
 				}
-				else if (tile.getForaging().equals(Foraging.COPPER_ROCK)) {
+			} else {
+				Set<TileType> allowedTypes = FORAGING_BY_TOOL.get(toolMaterialType);
+				if (allowedTypes != null && allowedTypes.contains(tileType)) {
+					tile.setPlacable(null);
+					tile.setTileType(TileType.UNPLOWED);
 					use = 2;
-					tile.setForaging(null);
-				}
-				else if (tile.getForaging().equals(Foraging.STEEL_ROCK)) {
-					use = 2;
-					tile.setForaging(null);
-				}
-				else if (tile.getForaging().equals(Foraging.GOLD_ROCK)) {
-					use = 2;
-					tile.setForaging(null);
-				}
-				else if (tile.getForaging().equals(Foraging.IRIDIUM_ROCK)) {
-					use = 2;
-					tile.setForaging(null);
-				}
-			}
-			else if (this.toolMaterialType.equals(ToolMaterialType.STEEL)) {
-				if (tile.getForaging().equals(Foraging.SIMPLE_ROCK)) {
-					use = 2;
-					tile.setForaging(null);
-				}
-				else if (tile.getForaging().equals(Foraging.COPPER_ROCK)) {
-					use = 2;
-					tile.setForaging(null);
-				}
-				else if (tile.getForaging().equals(Foraging.STEEL_ROCK)) {
-					use = 2;
-					tile.setForaging(null);
-				}
-				else if (tile.getForaging().equals(Foraging.GOLD_ROCK)) {
-					use = 2;
-					tile.setForaging(null);
-				}
-			}
-			else if (this.toolMaterialType.equals(ToolMaterialType.COPPER)) {
-				if (tile.getForaging().equals(Foraging.SIMPLE_ROCK)) {
-					use = 2;
-					tile.setForaging(null);
-				}
-				else if (tile.getForaging().equals(Foraging.COPPER_ROCK)) {
-					use = 2;
-					tile.setForaging(null);
-				}
-				else if (tile.getForaging().equals(Foraging.STEEL_ROCK)) {
-					use = 2;
-					tile.setForaging(null);
-				}
-			}
-
-			else if (this.toolMaterialType.equals(ToolMaterialType.PRIMITIVE)) {
-				if (tile.getForaging().equals(Foraging.SIMPLE_ROCK)) {
-					use = 2;
-					tile.setForaging(null);
-				}
-				else if (tile.getForaging().equals(Foraging.COPPER_ROCK)) {
-					use = 2;
-					tile.setForaging(null);
 				}
 			}
 		}
 
-		if(use != 0) {
-			if(this.toolMaterialType.equals(ToolMaterialType.PRIMITIVE))
-				player.decreaseEnergy(5);
-			else if(this.toolMaterialType.equals(ToolMaterialType.COPPER))
-				player.decreaseEnergy(4);
-			else if(this.toolMaterialType.equals(ToolMaterialType.STEEL))
-				player.decreaseEnergy(3);
-			else if(this.toolMaterialType.equals(ToolMaterialType.GOLD))
-				player.decreaseEnergy(2);
-			else if(this.toolMaterialType.equals(ToolMaterialType.IRIDIUM))
-				player.decreaseEnergy(1);
-		}
-		else {
-			player.decreaseEnergy(1);
+		int energyCost = switch (toolMaterialType) {
+			case PRIMITIVE -> 5;
+			case COPPER -> 4;
+			case STEEL -> 3;
+			case GOLD -> 2;
+			case IRIDIUM -> 1;
+			default -> 0;
+        };
+		player.decreaseEnergy(use != 0 ? energyCost : 1);
+
+		if (use == 0)
 			return Result.success("kolang hich kari nakard");
-		}
-		if(use == 1)
+		if (use == 1)
 			return Result.success("zamin gheir shokhmi shod");
-
 		return Result.success("the Rock removed from the ground");
-
 	}
 
 	@Override

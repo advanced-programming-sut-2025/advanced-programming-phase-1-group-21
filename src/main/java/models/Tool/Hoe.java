@@ -4,7 +4,8 @@ import models.App;
 import models.game.Item;
 import models.game.Player;
 import models.map.Coord;
-import models.map.LocationsOnMap;
+import models.map.MapType;
+import models.map.TileType;
 import models.result.Result;
 import models.result.errorTypes.GameError;
 
@@ -29,11 +30,11 @@ public class Hoe extends Tool {
 		if (type == ToolMaterialType.IRIDIUM)
 			player.decreaseEnergy(1);
 
-		if(player.getCurrentPlayerMap().getCurrentLocation() != LocationsOnMap.Farm)
+		if(player.getMap().mapType != MapType.FARM)
 			return Result.failure(GameError.HERE_IS_NOT_FARM);
-		if(!player.currentLocationTiles().get(coord.getY()).get(coord.getX()).tileIsEmpty())
+		if(!player.getMap().getTile(coord).isEmpty())
 			return Result.failure(GameError.TILE_IS_NOT_EMPTY);
-		player.currentLocationTiles().get(coord.getY()).get(coord.getX()).setShokhmi(true);
+		player.getMap().getTile(coord).setTileType(TileType.PLOWED);
 
 		return Result.success("zamin shokhmi shod");
 	}

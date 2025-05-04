@@ -22,20 +22,15 @@ public class Coord {
         return y;
     }
 
-    public static Coord getValidCoord(int x, int y) {
-        Coord coord = new Coord(x, y);
-        if (coord.getX() < 0 || coord.getY() < 0) return null;
-        ArrayList<ArrayList<Tile>> tiles = App.game.getCurrentPlayer().currentLocationTiles();
-        if(y >= tiles.size() || x >= tiles.get(0).size())
-            return null;
-        return coord;
-    }
-
-    public Coord getValidCoord() {
-        return getValidCoord(x, y);
-    }
-
     public Coord addCoord(Coord coord) {
         return new Coord(x + coord.getX(), y + coord.getY());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Coord coord = (Coord) o;
+        return x == coord.x && y == coord.y;
     }
 }

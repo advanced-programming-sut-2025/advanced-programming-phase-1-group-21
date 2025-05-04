@@ -19,7 +19,7 @@ public class Seed extends Item {
 
     public PlantedSeed plant(Tile tile) {
         PlantedSeed plantedSeed = new PlantedSeed(seedInfo);
-        tile.setPlantedSeed(plantedSeed);
+        tile.setPlacable(plantedSeed);
         return plantedSeed;
     }
 }

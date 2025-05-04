@@ -5,6 +5,22 @@
     "email": "sobhan@gmail.com",
     "nickname": "sobi",
     "gender": "MALE",
-    "isInAGame": false
+    "isInAGame": true
+  },
+  {
+    "username": "sobi",
+    "password": "\u003cpassword1\u003e",
+    "email": "sobhan@gmail.com",
+    "nickname": "sobi",
+    "gender": "MALE",
+    "isInAGame": true
+  },
+  {
+    "username": "maryam",
+    "password": "\u003cpassword1\u003e",
+    "email": "sobhan@gmail.com",
+    "nickname": "sobi",
+    "gender": "MALE",
+    "isInAGame": true
   }
 ]

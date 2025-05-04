@@ -6,13 +6,14 @@ import models.map.Map;
 import java.util.ArrayList;
 import java.util.List;
 
+import models.map.MapBuilder;
 import models.map.Weather;
 import models.time.*;
 
 public class Game {
     private ArrayList<Player> players;
     private Player currentPlayer;
-    private Map village = new Map(4);
+    private Map village = (new MapBuilder()).buildVillage();
     private int roundCount = 0;
     private Date gameDate;
     private Season gameSeason;
@@ -35,6 +36,10 @@ public class Game {
             return forecastCheat;
         }
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Map getCurrentPlayerMap() {
+        return currentPlayer.getMap();
     }
 
     public void setForecastWeather(Weather newWeather) {

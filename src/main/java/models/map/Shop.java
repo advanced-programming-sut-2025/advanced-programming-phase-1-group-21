@@ -8,15 +8,17 @@ import models.result.Result;
 import java.util.ArrayList;
 
 public class Shop extends Building {
-	private ArrayList<Item> items;
-	private ShopType shopType;
+	private ArrayList<Item> items = new ArrayList<>();
+	private TileType shopType;
 
 
-	public Shop(ShopType shopType) {
+	public Shop(TileType shopType) {
+		if (!shopType.isShop())
+			throw new IllegalArgumentException("shop type must be a shop");
+
 		this.shopType = shopType;
-		Gson gson = new Gson();
-		if(shopType.equals(ShopType.BLACKSMITH))
-			items = DataBaseController.readShopProducts(gson , "data/BlackSmith.json");
+		if (shopType == shopType.BLACKSMITH)
+			items = DataBaseController.readShopProducts(new Gson() , "data/BlackSmith.json");
 	}
 
 	public ArrayList<String> showProducts(){
@@ -29,7 +31,6 @@ public class Shop extends Building {
 			output.add("amount: " + item.getAmount());
 			output.add("---------------");
 		}
-
 		return output;
 	}
 }

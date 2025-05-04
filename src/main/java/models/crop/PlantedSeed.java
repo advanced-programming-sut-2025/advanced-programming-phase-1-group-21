@@ -3,8 +3,9 @@ package models.crop;
 import models.game.Consumable;
 import models.game.Item;
 import models.game.ItemType;
+import models.map.Placable;
 
-public class PlantedSeed {
+public class PlantedSeed implements Placable {
 	private FertilizerType fertilizerType = null; // not implemented yet.
 	private int stage = 0;
 	private int day = 1;
@@ -58,5 +59,15 @@ public class PlantedSeed {
 
 	public boolean isOneTime() {
 		return seedInfo.isOneTime();
+	}
+
+	@Override
+	public boolean isWalkable() {
+		return false;
+	}
+
+	@Override
+	public String getSprite() {
+		return "S";
 	}
 }

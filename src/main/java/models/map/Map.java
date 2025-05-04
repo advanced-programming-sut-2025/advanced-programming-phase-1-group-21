@@ -5,211 +5,59 @@ import models.result.Result;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class Map {
-    protected ArrayList<ArrayList<Tile>> tiles = new ArrayList<>();
-    protected House house = new House();
-    protected ArrayList<Lake> lakes = new ArrayList<>();
-    protected ArrayList<Shop> shops = new ArrayList<>();
-    protected Mines mines = new Mines();
-    protected GreenHouse greenHouses = new GreenHouse();
-    protected Barn barn;
-    protected Coop coop;
-    protected LocationsOnMap currentLocation = LocationsOnMap.Farm;
+    public ArrayList<ArrayList<Tile>> tiles = new ArrayList<>();
+    public ArrayList<Building> buildings;
 
+    private House house;
+    private ArrayList<Lake> lakes = new ArrayList<>();
+    private ArrayList<Shop> shops = new ArrayList<>();
+    private Mines mines;
+    private GreenHouse greenHouses;
+    private Barn barn;
+    private Coop coop;
+    public final MapType mapType;
 
-    public Map(int id) {
-        if(id == 1){
-            for(int i = 0 ; i < 30 ; i++){
-                ArrayList<Tile> thisRowTiles = new ArrayList<>();
-                for(int j = 0 ; j < 50 ; j++){
-                    thisRowTiles.add(new Tile(new Coord(j , i) , null ,
-                            null , null));
-                }
-                tiles.add(thisRowTiles);
-            }
+    public Map(MapType mapType) {
+        this.mapType = mapType;
+    }
 
-            for(int i = 1 ; i < 5 ; i++){
-                for(int j = 45 ; j < 49 ; j++){
-                    tiles.get(i).get(j).setHouse(true);
-                }
-            }
-
-            for(int i = 10 ; i < 15 ; i++ ){
-                for(int j = 1 ; j < 5 ; j++){
-                    tiles.get(i).get(j).setGreenHouse(true);
-                }
-            }
-
-            for(int i = 1 ; i < 7 ; i++){
-                for(int j = 1 ; j < 7 ; j++){
-                    tiles.get(i).get(j).setMines(true);
-                }
-            }
-
-            for(int i = 24 ; i < 29 ; i ++){
-                for(int j = 23 ; j < 27 ; j++){
-                    tiles.get(i).get(j).setLake(true);
-                }
-            }
-            this.lakes.add(new Lake());
+    private static <T> T getElementOrNull(List<T> list, int index) {
+        if (list != null && index >= 0 && index < list.size()) {
+            return list.get(index);
         }
+        return null;
+    }
 
-        if(id == 2){
-            for(int i = 0 ; i < 30 ; i++){
-                ArrayList<Tile> thisRowTiles = new ArrayList<>();
-                for(int j = 0 ; j < 50 ; j++){
-                    thisRowTiles.add(new Tile(new Coord(j , i) , null ,
-                            null , null));
-                }
-                tiles.add(thisRowTiles);
-            }
+    public void buildHouse(House house) {
+        this.house = house;
+    }
 
-            for(int i = 1 ; i < 5 ; i++){
-                for(int j = 1 ; j < 5 ; j++){
-                    tiles.get(i).get(j).setHouse(true);
-                }
-            }
+    public void buildLakes(Lake lake) {
+        this.lakes.add(lake);
+    }
 
-            for(int i = 1 ; i < 6 ; i++ ){
-                for(int j = 45 ; j < 49 ; j++){
-                    tiles.get(i).get(j).setGreenHouse(true);
-                }
-            }
+    public void buildCoop(Coop coop) {
+        this.coop = coop;
+    }
 
-            for(int i = 20 ; i < 29 ; i++){
-                for(int j = 1 ; j < 10 ; j++){
-                    tiles.get(i).get(j).setMines(true);
-                }
-            }
+    public void buildShop(Shop shop) {
+        this.shops.add(shop);
+    }
 
-            for(int i = 24 ; i < 29 ; i ++){
-                for(int j = 23 ; j < 27 ; j++){
-                    tiles.get(i).get(j).setLake(true);
-                }
-            }
-            this.lakes.add(new Lake());
+    public void buildMines(Mines mines) {
+        this.mines = mines;
+    }
 
-            for(int i = 15 ; i < 18 ; i ++){
-                for(int j = 45 ; j < 48 ; j++){
-                    tiles.get(i).get(j).setLake(true);
-                }
-            }
-            this.lakes.add(new Lake());
-        }
+    public void buildGreenHouses(GreenHouse greenHouses) {
+        this.greenHouses = greenHouses;
+    }
 
-        if(id == 3){
-            for(int i = 0 ; i < 30 ; i++){
-                ArrayList<Tile> thisRowTiles = new ArrayList<>();
-                for(int j = 0 ; j < 50 ; j++){
-                    thisRowTiles.add(new Tile(new Coord(j , i) , null ,
-                            null , null));
-                }
-                tiles.add(thisRowTiles);
-            }
-
-            for(int i = 13 ; i < 17 ; i++){
-                for(int j = 23 ; j < 27 ; j++){
-                    tiles.get(i).get(j).setHouse(true);
-                }
-            }
-
-            for(int i = 1 ; i < 6 ; i++ ){
-                for(int j = 45 ; j < 49 ; j++){
-                    tiles.get(i).get(j).setGreenHouse(true);
-                }
-            }
-
-            for(int i = 20 ; i < 29 ; i++){
-                for(int j = 1 ; j < 10 ; j++){
-                    tiles.get(i).get(j).setMines(true);
-                }
-            }
-
-            for(int i = 1 ; i < 5 ; i ++){
-                for(int j = 1 ; j < 5 ; j++){
-                    tiles.get(i).get(j).setLake(true);
-                }
-            }
-            this.lakes.add(new Lake());
-
-            for(int i = 26 ; i < 29 ; i ++){
-                for(int j = 45 ; j < 49 ; j++){
-                    tiles.get(i).get(j).setLake(true);
-                }
-            }
-            this.lakes.add(new Lake());
-        }
-
-        //this map is for village
-        if(id == 4){
-            for(int i = 0 ; i < 30 ; i++){
-                ArrayList<Tile> thisRowTiles = new ArrayList<>();
-                for(int j = 0 ; j < 50 ; j++){
-                    thisRowTiles.add(new Tile(new Coord(j , i) , null ,
-                            null , null));
-                }
-                tiles.add(thisRowTiles);
-            }
-
-            for(int i = 2 ; i < 8 ; i++){
-                for(int j = 4 ; j < 14 ; j++){
-                    tiles.get(i).get(j).setBlackSmith(true);
-                }
-            }
-
-            for(int i = 12 ; i < 18 ; i++){
-                for(int j = 4 ; j < 14 ; j++){
-                    tiles.get(i).get(j).setJojaMarta(true);
-                }
-            }
-
-            for(int i = 22 ; i < 28 ; i++){
-                for(int j = 4 ; j < 14 ; j++){
-                    tiles.get(i).get(j).setPierreStore(true);
-                }
-            }
-
-            for(int i = 2 ; i < 8 ; i++){
-                for(int j = 36 ; j < 46 ; j++){
-                    tiles.get(i).get(j).setCarpenter(true);
-                }
-            }
-
-            for(int i = 12 ; i < 18 ; i++){
-                for(int j = 36 ; j < 46 ; j++){
-                    tiles.get(i).get(j).setFishShop(true);
-                }
-            }
-
-            for(int i = 22 ; i < 28 ; i++){
-                for(int j = 36 ; j < 46 ; j++){
-                    tiles.get(i).get(j).setMarnieRanch(true);
-                }
-            }
-
-            for(int i = 12 ; i < 18 ; i++) {
-                for (int j = 20; j < 30; j++)
-                    tiles.get(i).get(j).setStardropSaloon(true);
-            }
-
-            shops.add(new Shop(ShopType.BLACKSMITH));
-        }
-
-        if(id != 4) {
-            int randomForagingNumber = 20;
-            Random random = new Random();
-            while (randomForagingNumber > 0) {
-                ArrayList<Foraging> foraging = new ArrayList<>(Arrays.asList(Foraging.values()));
-                int randomTileIndex = random.nextInt(1500);
-                Tile thisTile = tiles.get(randomTileIndex / 50).get(randomTileIndex % 50);
-                if (thisTile.tileIsEmpty()) {
-                    thisTile.setForaging(foraging.get(random.nextInt(foraging.size())));
-                    randomForagingNumber--;
-                }
-            }
-        }
+    public Tile getTile(Coord coord) {
+        return getElementOrNull(getElementOrNull(tiles, coord.getY()), coord.getX());
     }
 
     public int calculateDistance(Coord start, Coord end) {
@@ -217,63 +65,20 @@ public class Map {
     }
 
     public ArrayList<String> printMap(Coord center, int radius) {
+        System.err.println(tiles);
         ArrayList<String> output = new ArrayList<>();
-        ArrayList<ArrayList<Tile>> tilesToPrint = App.game.getCurrentPlayer().currentLocationTiles();
-        for(int i = center.getY() ; i < Math.min(center.getY() + radius , tilesToPrint.size()) ; i++){
-            for(int j = center.getX() ; j < Math.min(center.getX() + radius , tilesToPrint.get(0).size())  ; j++){
-                Tile tile = tilesToPrint.get(i).get(j);
-                if(tile.isHouse())
-                    output.add("H");
-                else if(tile.isGreenHouse())
-                    output.add("G");
-                else if(tile.isLake())
-                    output.add("~");
-                else if(tile.isMines())
-                    output.add("M");
-                else if(tile.isBarn())
-                    output.add("B");
-                else if(tile.isCoop())
-                    output.add("C");
-                else if(tile.getForaging() != null) {
-                    if (tile.getForaging().equals(Foraging.SIMPLE_ROCK))
-                        output.add("R");
-                    else if (tile.getForaging().equals(Foraging.STEEL_ROCK))
-                        output.add("R");
-                    else if (tile.getForaging().equals(Foraging.GOLD_ROCK))
-                        output.add("g");
-                    else if (tile.getForaging().equals(Foraging.COPPER_ROCK))
-                        output.add("R");
-                    else if (tile.getForaging().equals(Foraging.IRIDIUM_ROCK))
-                        output.add("I");
-                    else if (tile.getForaging().equals(Foraging.TREE))
-                        output.add("T");
-                    else if (tile.getForaging().equals(Foraging.LEAF))
-                        output.add("*");
-                }
-                else if((App.game.getCurrentPlayer().getCoord().getX() == j) && (App.game.getCurrentPlayer().getCoord().getY() == i))
+        for(int i = center.getY() ; i < center.getY() + radius ; i++) {
+            for(int j = center.getX() ; j < center.getX() + radius; j++) {
+                Coord coord = new Coord(i, j);
+                Tile tile = getTile(coord);
+                if (tile == null) continue;
+                if (App.game.getCurrentPlayer().getCoord().equals(coord))
                     output.add("@");
-                else if(tile.getRefrigerator() != null)
-                    output.add("F");
-                else if(tile.isDoor())
-                    output.add("+");
-                else if(tile.isBlackSmith())
-                    output.add("B");
-                else if(tile.isJojaMarta())
-                    output.add("J");
-                else if(tile.isPierreStore())
-                    output.add("P");
-                else if(tile.isCarpenter())
-                    output.add("C");
-                else if(tile.isFishShop())
-                    output.add("F");
-                else if(tile.isMarnieRanch())
-                    output.add("M");
-                else if(tile.isStardropSaloon())
-                    output.add("S");
                 else
-                    output.add("#");
+                    output.add(tile.getSprite());
             }
-            output.add("\n");
+            if (!output.isEmpty() && !output.getLast().equals("\n"))
+                output.add("\n");
         }
         return output;
     }
@@ -284,14 +89,6 @@ public class Map {
 
     public House getHouse() {
         return house;
-    }
-
-    public LocationsOnMap getCurrentLocation() {
-        return currentLocation;
-    }
-
-    public void setCurrentLocation(LocationsOnMap currentLocation) {
-        this.currentLocation = currentLocation;
     }
 
     public ArrayList<Lake> getLakes() {

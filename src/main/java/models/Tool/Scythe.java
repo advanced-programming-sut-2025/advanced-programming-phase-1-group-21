@@ -1,11 +1,13 @@
 package models.Tool;
 
 import models.App;
+import models.crop.PlantedSeed;
 import models.game.Item;
 import models.game.Player;
 import models.map.Coord;
 import models.map.Foraging;
 import models.map.Tile;
+import models.map.TileType;
 import models.result.Result;
 
 public class Scythe extends Tool {
@@ -18,21 +20,19 @@ public class Scythe extends Tool {
 	protected Result<Item> use(Coord coord) {
 		Player player = App.game.getCurrentPlayer();
 		player.decreaseEnergy(2);
-		Tile tile = player.currentLocationTiles().get(coord.getY()).get(coord.getX());
+		Tile tile = player.getMap().getTile(coord);
 
-		if(tile.getForaging() == null && tile.getPlantedSeed() == null)
+		if(!tile.getTileType().isForaging() && tile.getPlacable(PlantedSeed.class) == null)
 			return Result.success("inja ke chizi nist");
 
-		if(tile.getForaging() == Foraging.LEAF){
-			tile.setForaging(null);
+		if(tile.getTileType() == TileType.LEAF){
+			tile.setTileType(TileType.UNPLOWED);
 			return Result.success("the leaf removed from the ground");
 		}
-
-		if(tile.getPlantedSeed() != null){
-			tile.setPlantedSeed(null);
+		if(tile.getPlacable(PlantedSeed.class) != null){
+			tile.setPlacable(null);
 			return Result.success("The crop has now been harvested");
 		}
-
 		return Result.success(null);
 	}
 

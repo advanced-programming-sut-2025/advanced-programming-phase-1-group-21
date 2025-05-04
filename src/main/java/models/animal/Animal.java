@@ -1,8 +1,9 @@
 package models.animal;
 
+import models.map.Placable;
 import models.map.Tile;
 
-public class Animal {
+public class Animal implements Placable {
     private String name;
     private AnimalTypes animalType;
     private int friendship;
@@ -42,4 +43,13 @@ public class Animal {
     }
 
 
+    @Override
+    public boolean isWalkable() {
+        return false;
+    }
+
+    @Override
+    public String getSprite() {
+        return "A";
+    }
 }
