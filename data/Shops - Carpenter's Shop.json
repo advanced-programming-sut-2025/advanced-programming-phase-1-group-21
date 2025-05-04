@@ -19,8 +19,7 @@
       "type": "Normal",
       "animals": ["Cow"],
       "description": "Houses 4 barn-dwelling animals.",
-      "ingredient-type": ["Wood", "Stone"],
-      "ingredient-amount": [350, 150],
+      "ingredients": {"Wood": 350, "Stone": 150},
       "price": 6000,
       "size": [7, 4],
       "daily-limit": "1"
@@ -30,8 +29,7 @@
       "type": "Big",
       "animals": ["Cow", "Goat"],
       "description": "Houses 8 barn-dwelling animals. Unlocks goats.",
-      "ingredient-type": ["Wood", "Stone"],
-      "ingredient-amount": [400, 200],
+      "ingredients": {"Wood": 400, "Stone": 200},
       "price": 12000,
       "size": [7, 4],
       "daily-limit": "1"
@@ -41,8 +39,7 @@
       "type": "Deluxe",
       "animals": ["Cow", "Goat", "Sheep", "Pig"],
       "description": "Houses 12 barn-dwelling animals. Unlocks sheep and pigs.",
-      "ingredient-type": ["Wood", "Stone"],
-      "ingredient-amount": [550, 300],
+      "ingredients": {"Wood": 550, "Stone": 300},
       "price": 12000,
       "size": [7, 4],
       "daily-limit": "1"
@@ -52,8 +49,7 @@
       "type": "Normal",
       "animals": ["Chicken"],
       "description": "Houses 4 coop-dwelling animals.",
-      "ingredient-type": ["Wood", "Stone"],
-      "ingredient-amount": [300, 100],
+      "ingredients": {"Wood": 300, "Stone": 100},
       "price": 4000,
       "size": [6, 3],
       "daily-limit": "1"
@@ -63,8 +59,7 @@
       "type": "Big",
       "animals": ["Chicken", "Duck", "Dinosaur"],
       "description": "Houses 8 coop-dwelling animals. Unlocks ducks.",
-      "ingredient-type": ["Wood", "Stone"],
-      "ingredient-amount": [400, 150],
+      "ingredients": {"Wood": 400, "Stone": 150},
       "price": 10000,
       "size": [6, 3],
       "daily-limit": "1"
@@ -74,8 +69,7 @@
       "type": "Deluxe",
       "animals": ["Chicken", "Duck", "Dinosaur", "Rabbit"],
       "description": "Houses 12 coop-dwelling animals. Unlocks rabbits.",
-      "ingredient-type": ["Wood", "Stone"],
-      "ingredient-amount": [500, 200],
+      "ingredients": {"Wood": 500, "Stone": 200},
       "price": 20000,
       "size": [6, 3],
       "daily-limit": "1"
@@ -83,8 +77,7 @@
     {
       "Farm Buildings": "Well",
       "description": "Provides a place for you to refill your watering can.",
-      "ingredient-type": ["Stone"],
-      "ingredient-amount": [75],
+      "ingredients": {"Stone": 75},
       "price": 1000,
       "size": "[3, 3]",
       "daily-limit": "1"
@@ -92,8 +85,7 @@
     {
       "Farm Buildings": "Shipping Bin",
       "description": "Items placed in it will be included in the nightly shipment.",
-      "ingredient-type": ["Wood"],
-      "ingredient-amount": [150],
+      "ingredients": {"Wood": 150},
       "price": 250,
       "size": [1, 1],
       "daily-limit": "unlimited"
