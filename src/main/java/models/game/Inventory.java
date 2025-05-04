@@ -40,7 +40,7 @@ public class Inventory {
         return inventoryType.getMaximumSize();
     }
 
-    public Result<Item> addItem(Item item) {
+    public Result<Void> addItem(Item item) {
         for (Item i : items) {
             if (i.getName().equals(item.getName())) {
                 int newSize = Math.min(i.getAmount() + item.getAmount(), MAXIMUM_ITEM_PER_SLOT);
@@ -53,7 +53,7 @@ public class Inventory {
             }
         }
         if (items.size() == inventoryType.getMaximumSize()) {
-            return Result.success(item, "Adding " + item.getName() + " to the inventory was not completely. " + item.getAmount() + " remains.");
+            return Result.success("Adding " + item.getName() + " to the inventory was not completely. " + item.getAmount() + " remains.");
         }
         items.add(item);
         return Result.success("Adding " + item.getName() + " to the inventory was successful.");

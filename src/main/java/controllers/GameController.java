@@ -22,7 +22,7 @@ import java.util.List;
 public class GameController{
 
     public Result<String> showCurrentMenu(){
-        return Result.success("game");
+        return Result.success("game", "");
     }
 
 
@@ -94,9 +94,9 @@ public class GameController{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<String> getTime() {
+    public Result<Integer> getTime() {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        return Result.success("" + App.game.getGameDate().getHourInDay());
+        return Result.success(App.game.getGameDate().getHour());
     }
 
     public Result<String> getDate() {
@@ -104,6 +104,7 @@ public class GameController{
         return Result.success(
                 "Day " + App.game.getGameDate().getDay() + ", " +
                         App.game.getSeason()
+        , ""
         );
     }
 
@@ -112,13 +113,14 @@ public class GameController{
         return Result.success(
                 "Day " + App.game.getGameDate().getDay() + ", " +
                         App.game.getSeason() + ", " +
-                        "Time: " + App.game.getGameDate().getHourInDay() + ":00"
+                        "Time: " + App.game.getGameDate().getHourInDay() + ":00",
+                ""
         );
     }
 
     public Result<String> getDayWeek() {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        return Result.success(App.game.getGameDate().getCurrentDayOfWeek());
+        return Result.success(App.game.getGameDate().getCurrentDayOfWeek(), "");
     }
 
     public Result<Void> advanceTimeCheat(int days, int hours) {
@@ -127,9 +129,9 @@ public class GameController{
         return Result.success(null);
     }
 
-    public Result<Season> getSeasonName() {
+    public Result<String> getSeasonName() {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        return Result.success(App.game.getSeason().toString());
+        return Result.success(App.game.getSeason().name(), "");
     }
 
     public Result<Void> struckByThor(Coord cord) {
@@ -144,12 +146,12 @@ public class GameController{
 
     public Result<Weather> getWeather() {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        return Result.success(App.game.getWeather().toString());
+        return Result.success(App.game.getWeather());
     }
 
     public Result<Weather> getWeatherForecast() {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        return Result.success(App.game.getNextWeather().toString());
+        return Result.success(App.game.getNextWeather());
     }
 
     public Result<Void> setWeatherCheat(Weather weather) {

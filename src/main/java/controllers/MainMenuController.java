@@ -22,7 +22,7 @@ public class MainMenuController{
     private Result<Void> menuExit() {throw new UnsupportedOperationException("Not supported yet.");}
 
     public Result<String> showCurrentMenu(){
-        return Result.success("main menu");
+        return Result.success("main menu", "");
     }
 
 

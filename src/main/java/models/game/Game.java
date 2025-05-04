@@ -16,7 +16,7 @@ public class Game implements DailyUpdate {
     private Player currentPlayer;
     private Map village = (new MapBuilder()).buildVillage();
     private int roundCount = 0;
-    private Date gameDate;
+    private final Date gameDate;
     private Weather gameWeather;
     private Weather forecastCheat;
 
@@ -27,6 +27,7 @@ public class Game implements DailyUpdate {
         this.gameDate = Date.createBias();
         this.gameWeather = Weather.SUNNY;
         this.forecastCheat = null;
+        System.err.println("GAMEDATE: " + gameDate);
     }
 
     //Calculate randomly based on sth?

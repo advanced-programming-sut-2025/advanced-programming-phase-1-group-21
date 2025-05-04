@@ -36,7 +36,7 @@ public class Hoe extends Tool {
 			return Result.failure(GameError.TILE_IS_NOT_EMPTY);
 		player.getMap().getTile(coord).setTileType(TileType.PLOWED);
 
-		return Result.success("zamin shokhmi shod");
+		return Result.success(null, "zamin shokhmi shod");
 	}
 
 	@Override

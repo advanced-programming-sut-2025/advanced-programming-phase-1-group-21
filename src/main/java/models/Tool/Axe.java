@@ -22,7 +22,7 @@ public class Axe extends Tool {
 		}
 		if(!App.game.getCurrentPlayerMap().getTile(coord).getTileType().isForaging()) {
 			App.game.getCurrentPlayer().decreaseEnergy(1);
-			return Result.success("tabaret khata raft");
+			return Result.success(null, "tabaret khata raft");
 		}
 
 		if(tile.getTileType() == TileType.TREE) {
@@ -42,11 +42,11 @@ public class Axe extends Tool {
 				App.game.getCurrentPlayer().decreaseEnergy(2);
 			if(this.toolMaterialType.equals(ToolMaterialType.IRIDIUM))
 				App.game.getCurrentPlayer().decreaseEnergy(1);
-			return Result.success("to yek derakht ro koshti");
+			return Result.success(null, "to yek derakht ro koshti");
 		}
 
 		App.game.getCurrentPlayer().decreaseEnergy(1);
-		return Result.success("tabaret khata raft");
+		return Result.success(null, "tabaret khata raft");
 	}
 
 
