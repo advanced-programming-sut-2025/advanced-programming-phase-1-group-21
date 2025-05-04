@@ -159,4 +159,9 @@ public class Game implements DailyUpdate {
         gameDate.goToNextDay();
         return false;
     }
+
+    //this means game goes for 1 command
+    public void advance() {
+        gameDate.advanceHours(1);
+    }
 }

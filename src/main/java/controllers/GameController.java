@@ -560,19 +560,16 @@ public class GameController{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<Void> updateGameSecond() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public Result<Void> updateGameNight() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public Result<Void> updateGameMonth() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
     public String whereAmI() {
         return App.game.getCurrentPlayerMap().mapType.name();
+    }
+
+    public boolean isGameLockedDueToNight() {
+        return App.game.getGameDate().getHour() == 22;
+    }
+
+    //This means that we did 1 work... (you should advance game by 1 hour)
+    public void advance() {
+        App.game.advance();
     }
 }

@@ -95,6 +95,12 @@ public class GameTerminalView {
     }
 
     public void Result(String command) throws IOException {
+        if (gameController.isGameLockedDueToNight()) {
+            System.out.println("You are already locked due to night, Skipping turn...");
+            gameController.nextTurn();
+            return;
+        }
+
         if ((matcher = GameMenuCommand.PRINT_MAP.getMatcher(command)) != null) {
             printWithColor(gameController.printMap(Integer.parseInt(matcher.group("x")), Integer.parseInt(matcher.group("y")), Integer.parseInt(matcher.group("size"))));
         }
@@ -178,5 +184,7 @@ public class GameTerminalView {
         }
         else
             System.out.println("Invalid command");
+
+        gameController.advance();
     }
 }
