@@ -1,0 +1,296 @@
+[
+  {
+    "name": "Joja Cola",
+    "description": "The flagship product of Joja corporation.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "price": 75,
+    "daily-limit": -1
+  },
+  {
+    "name": "Ancient Seed",
+    "description": "Could these still grow?",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "price": 500,
+    "daily-limit": 1
+  },
+  {
+    "name": "Grass Starter",
+    "description": "Place this on your farm to start a new patch of grass.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "price": 125,
+    "daily-limit": -1
+  },
+  {
+    "name": "Sugar",
+    "description": "Adds sweetness to pastries and candies. Too much can be unhealthy.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "price": 125,
+    "daily-limit": -1
+  },
+  {
+    "name": "Wheat Flour",
+    "description": "A common cooking ingredient made from crushed wheat seeds.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "price": 125,
+    "daily-limit": -1
+  },
+  {
+    "name": "Rice",
+    "description": "A basic grain often served under vegetables.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "price": 250,
+    "daily-limit": -1
+  },
+  {
+    "name": "Parsnip Seeds",
+    "description": "Plant these in the spring. Takes 4 days to mature.",
+    "seasons": ["spring"],
+    "price": 25,
+    "daily-limit": 5
+  },
+  {
+    "name": "Bean Starter",
+    "description": "Plant these in the spring. Takes 10 days to mature, but keeps producing after that. Grows on a trellis.",
+    "seasons": ["spring"],
+    "price": 75,
+    "daily-limit": 5
+  },
+  {
+    "name": "Cauliflower Seeds",
+    "description": "Plant these in the spring. Takes 12 days to produce a large cauliflower.",
+    "seasons": ["spring"],
+    "price": 100,
+    "daily-limit": 5
+  },
+  {
+    "name": "Potato Seeds",
+    "description": "Plant these in the spring. Takes 6 days to mature, and has a chance of yielding multiple potatoes at harvest.",
+    "seasons": ["spring"],
+    "price": 62,
+    "daily-limit": 5
+  },
+  {
+    "name": "Strawberry Seeds",
+    "description": "Plant these in spring. Takes 8 days to mature, and keeps producing strawberries after that.",
+    "seasons": ["spring"],
+    "price": 100,
+    "daily-limit": 5
+  },
+  {
+    "name": "Tulip Bulb",
+    "description": "Plant in spring. Takes 6 days to produce a colorful flower. Assorted colors.",
+    "seasons": ["spring"],
+    "price": 25,
+    "daily-limit": 5
+  },
+  {
+    "name": "Kale Seeds",
+    "description": "Plant these in the spring. Takes 6 days to mature. Harvest with the scythe.",
+    "seasons": ["spring"],
+    "price": 87,
+    "daily-limit": 5
+  },
+  {
+    "name": "Coffee Beans",
+    "description": "Plant in summer or spring. Takes 10 days to grow, Then produces coffee Beans every other day.",
+    "seasons": ["spring"],
+    "price": 200,
+    "daily-limit": 1
+  },
+  {
+    "name": "Carrot Seeds",
+    "description": "Plant in the spring. Takes 3 days to grow.",
+    "seasons": ["spring"],
+    "price": 5,
+    "daily-limit": 10
+  },
+  {
+    "name": "Rhubarb Seeds",
+    "description": "Plant these in the spring. Takes 13 days to mature.",
+    "seasons": ["spring"],
+    "price": 100,
+    "daily-limit": 5
+  },
+  {
+    "name": "Jazz Seeds",
+    "description": "Plant in spring. Takes 7 days to produce a blue puffball flower.",
+    "seasons": ["spring"],
+    "price": 37,
+    "daily-limit": 5
+  },
+  {
+    "name": "Tomato Seeds",
+    "description": "Plant these in the summer. Takes 11 days to mature, and continues to produce after first harvest.",
+    "seasons": ["summer"],
+    "price": 62,
+    "daily-limit": 5
+  },
+  {
+    "name": "Pepper Seeds",
+    "description": "Plant these in the summer. Takes 5 days to mature, and continues to produce after first harvest.",
+    "seasons": ["summer"],
+    "price": 50,
+    "daily-limit": 5
+  },
+  {
+    "name": "Summer Squash Seeds",
+    "description": "Plant in the summer. Takes 6 days to grow, and continues to produce after first harvest.",
+    "seasons": ["summer"],
+    "price": 10,
+    "daily-limit": 10
+  },
+  {
+    "name": "Radish Seeds",
+    "description": "Plant these in the summer. Takes 6 days to mature.",
+    "seasons": ["summer"],
+    "price": 50,
+    "daily-limit": 5
+  },
+  {
+    "name": "Melon Seeds",
+    "description": "Plant these in the summer. Takes 12 days to mature.",
+    "seasons": ["summer"],
+    "price": 100,
+    "daily-limit": 5
+  },
+  {
+    "name": "Hops Starter",
+    "description": "Plant these in the summer. Takes 11 days to grow, but keeps producing after that. Grows on a trellis.",
+    "seasons": ["summer"],
+    "price": 75,
+    "daily-limit": 5
+  },
+  {
+    "name": "Poppy Seeds",
+    "description": "Plant in summer. Produces a bright red flower in 7 days.",
+    "seasons": ["summer"],
+    "price": 125,
+    "daily-limit": 5
+  },
+  {
+    "name": "Spangle Seeds",
+    "description": "Plant in summer. Takes 8 days to produce a vibrant tropical flower. Assorted colors.",
+    "seasons": ["summer"],
+    "price": 62,
+    "daily-limit": 5
+  },
+  {
+    "name": "Starfruit Seeds",
+    "description": "Plant these in the summer. Takes 13 days to mature.",
+    "seasons": ["summer"],
+    "price": 400,
+    "daily-limit": 5
+  },
+  {
+    "name": "Coffee Beans",
+    "description": "Plant in summer or spring. Takes 10 days to grow, Then produces coffee Beans every other day.",
+    "seasons": ["summer"],
+    "price": 200,
+    "daily-limit": 1
+  },
+  {
+    "name": "Sunflower Seeds",
+    "description": "Plant in summer or fall. Takes 8 days to produce a large sunflower. Yields more seeds at harvest.",
+    "seasons": ["summer", "autumn"],
+    "price": 125,
+    "daily-limit": 5
+  },
+  {
+    "name": "Corn Seeds",
+    "description": "Plant these in the summer or fall. Takes 14 days to mature, and continues to produce after first harvest.",
+    "seasons": ["summer", "autumn"],
+    "price": 187,
+    "daily-limit": 5
+  },
+  {
+    "name": "Eggplant Seeds",
+    "description": "Plant these in the fall. Takes 5 days to mature, and continues to produce after first harvest.",
+    "seasons": ["autumn"],
+    "price": 25,
+    "daily-limit": 5
+  },
+  {
+    "name": "Pumpkin Seeds",
+    "description": "Plant these in the fall. Takes 13 days to mature.",
+    "seasons": ["autumn"],
+    "price": 125,
+    "daily-limit": 5
+  },
+  {
+    "name": "Broccoli Seeds",
+    "description": "Plant in the fall. Takes 8 days to mature, and continues to produce after first harvest.",
+    "seasons": ["autumn"],
+    "price": 15,
+    "daily-limit": 5
+  },
+  {
+    "name": "Amaranth Seeds",
+    "description": "Plant these in the fall. Takes 7 days to grow. Harvest with the scythe.",
+    "seasons": ["autumn"],
+    "price": 87,
+    "daily-limit": 5
+  },
+  {
+    "name": "Grape Starter",
+    "description": "Plant these in the fall. Takes 10 days to grow, but keeps producing after that. Grows on a trellis.",
+    "seasons": ["autumn"],
+    "price": 75,
+    "daily-limit": 5
+  },
+  {
+    "name": "Beet Seeds",
+    "description": "Plant these in the fall. Takes 6 days to mature.",
+    "seasons": ["autumn"],
+    "price": 20,
+    "daily-limit": 5
+  },
+  {
+    "name": "Yam Seeds",
+    "description": "Plant these in the fall. Takes 10 days to mature.",
+    "seasons": ["autumn"],
+    "price": 75,
+    "daily-limit": 5
+  },
+  {
+    "name": "Bok Choy Seeds",
+    "description": "Plant these in the fall. Takes 4 days to mature.",
+    "seasons": ["autumn"],
+    "price": 62,
+    "daily-limit": 5
+  },
+  {
+    "name": "Cranberry Seeds",
+    "description": "Plant these in the fall. Takes 7 days to mature, and continues to produce after first harvest.",
+    "seasons": ["autumn"],
+    "price": 300,
+    "daily-limit": 5
+  },
+  {
+    "name": "Fairy Seeds",
+    "description": "Plant in fall. Takes 12 days to produce a mysterious flower. Assorted Colors.",
+    "seasons": ["autumn"],
+    "price": 250,
+    "daily-limit": 5
+  },
+  {
+    "name": "Rare Seed",
+    "description": "Sow in fall. Takes all season to grow.",
+    "seasons": ["autumn"],
+    "price": 1000,
+    "daily-limit": 1
+  },
+  {
+    "name": "Wheat Seeds",
+    "description": "Plant these in the summer or fall. Takes 4 days to mature. Harvest with the scythe.",
+    "seasons": ["summer", "autumn"],
+    "price": 12,
+    "daily-limit": 5
+  },
+  {
+    "name": "Powdermelon Seeds",
+    "description": "This special melon grows in the winter. Takes 7 days to grow.",
+    "seasons": ["winter"],
+    "price": 20,
+    "daily-limit": 10
+  }
+]
