@@ -83,9 +83,10 @@ public class Game implements DailyUpdate {
     }
 
     public void advanceTime(int day, int hour) {
-        gameDate.advanceHours(hour);
+        for (int i = 0; i < hour; i++)
+            advance();
         for (int i = 0; i < day; ++i) {
-            advanceDay();
+            nextDay();
         }
     }
 
@@ -93,11 +94,6 @@ public class Game implements DailyUpdate {
         int currentIndex = players.indexOf(currentPlayer);
         int nextIndex = (currentIndex + 1) % players.size();
         return players.get(nextIndex);
-    }
-
-    public void advanceDay() {
-        gameWeather = getNextWeather();
-        forecastCheat = null;
     }
 
     private void endOfRound() {
@@ -149,6 +145,9 @@ public class Game implements DailyUpdate {
 
     @Override
     public boolean nextDay() {
+        gameWeather = getNextWeather();
+        forecastCheat = null;
+
         for (Player player : players)
             player.nextDay();
         gameDate.goToNextDay();
