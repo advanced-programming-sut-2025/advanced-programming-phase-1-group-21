@@ -1,77 +1,106 @@
 package models.time;
 
 public class Date {
-    private long hour;
-    
+    private int hour;
+    private int day;
+    private int season;
+    private int year;
+
     private static final int HOURS_IN_DAY = 24;
     private static final int DAYS_IN_SEASON = 28;
     private static final int SEASONS_IN_YEAR = 4;
-    private static final int DAYS_IN_YEAR = DAYS_IN_SEASON * SEASONS_IN_YEAR;
-    
-    public Date(long hour) {
+    private static final int DEFAULT_START_HOUR = 9; // 9 AM
+
+    public Date(int hour, int day, int season, int year) {
         this.hour = hour;
+        this.day = day;
+        this.season = season;
+        this.year = year;
+        normalize();
     }
 
     public static Date createBias() {
-        return new Date(9);
+        return new Date(DEFAULT_START_HOUR, 1, 0, 1);
     }
 
-    public Date nextHour() {
-        return new Date(hour + 1);
+    private void normalize() {
+        if (hour >= HOURS_IN_DAY) {
+            day += hour / HOURS_IN_DAY;
+            hour %= HOURS_IN_DAY;
+        } else if (hour < 0) {
+            int daysToSubtract = (-hour + HOURS_IN_DAY - 1) / HOURS_IN_DAY;
+            day -= daysToSubtract;
+            hour = (hour + daysToSubtract * HOURS_IN_DAY) % HOURS_IN_DAY;
+        }
+        if (day > DAYS_IN_SEASON) {
+            season += (day - 1) / DAYS_IN_SEASON;
+            day = (day - 1) % DAYS_IN_SEASON + 1;
+        } else if (day < 1) {
+            int seasonsToSubtract = (-day) / DAYS_IN_SEASON + 1;
+            season -= seasonsToSubtract;
+            day = DAYS_IN_SEASON - (-day) % DAYS_IN_SEASON;
+        }
+        if (season >= SEASONS_IN_YEAR) {
+            year += season / SEASONS_IN_YEAR;
+            season %= SEASONS_IN_YEAR;
+        } else if (season < 0) {
+            int yearsToSubtract = (-season + SEASONS_IN_YEAR - 1) / SEASONS_IN_YEAR;
+            year -= yearsToSubtract;
+            season = (season + yearsToSubtract * SEASONS_IN_YEAR) % SEASONS_IN_YEAR;
+        }
     }
-    
-    public long getCurrentDay() {
-        return (hour / HOURS_IN_DAY) % DAYS_IN_YEAR + 1;
+
+    public void goToNextDay() {
+        day++;
+        hour = DEFAULT_START_HOUR;
+        normalize();
     }
-    
-    public int getCurrentMonth() {
-        return (int)(getCurrentDay() / (DAYS_IN_SEASON / 3)) % 12 + 1;
-    }
-    
+
     public Season getCurrentSeason() {
-        long day = getCurrentDay();
-        if (day < DAYS_IN_SEASON) {
-            return Season.SPRING;
-        } else if (day < DAYS_IN_SEASON * 2) {
-            return Season.SUMMER;
-        } else if (day < DAYS_IN_SEASON * 3) {
-            return Season.AUTUMN;
-        } else {
-            return Season.WINTER;
-        }
-    }
-    
-    public long getHour() {
-        return hour;
+        return Season.values()[season];
     }
 
-    public long getHourInDay() {
-        return hour % HOURS_IN_DAY;
-    }
-
-    public long getDay() {
-        return hour / HOURS_IN_DAY;
-    }
-
-    public void advance(long hours) {
-        hour += hours;
-    }
-
-    public void advance(long days, long hours) {
-        hour += days * HOURS_IN_DAY + hours;
-    }
-    
     public String getCurrentDayOfWeek() {
-        long dayOfWeek = ((hour / HOURS_IN_DAY) % 7) + 1;
-        switch ((int)dayOfWeek) {
-            case 1: return "Monday";
-            case 2: return "Tuesday";
-            case 3: return "Wednesday";
-            case 4: return "Thursday";
-            case 5: return "Friday";
-            case 6: return "Saturday";
-            case 7: return "Sunday";
-            default: return "Unknown";
-        }
+        int totalDays = (season * DAYS_IN_SEASON) + day - 1;
+        int dayOfWeek = totalDays % 7;
+
+        return switch (dayOfWeek) {
+            case 0 -> "Monday";
+            case 1 -> "Tuesday";
+            case 2 -> "Wednesday";
+            case 3 -> "Thursday";
+            case 4 -> "Friday";
+            case 5 -> "Saturday";
+            case 6 -> "Sunday";
+            default -> "Unknown";
+        };
+    }
+
+    public int getHour() { return hour; }
+    public int getDay() { return day; }
+    public int getSeason() { return season; }
+    public int getYear() { return year; }
+    public int getHourInDay() { return hour; }
+
+    public void advanceHours(int hours) {
+        hour += hours;
+        normalize();
+    }
+
+    public void advanceDays(int days) {
+        day += days;
+        hour = DEFAULT_START_HOUR;
+        normalize();
+    }
+
+    public void advanceSeasons(int seasons) {
+        season += seasons;
+        normalize();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Year %d, %s, Day %d, %02d:00 (%s)",
+                year, getCurrentSeason(), day, hour, getCurrentDayOfWeek());
     }
 }

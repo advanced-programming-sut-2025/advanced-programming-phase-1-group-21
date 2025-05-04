@@ -1,6 +1,7 @@
 package models.game;
 
 import models.App;
+import models.DailyUpdate;
 import models.animal.Animal;
 import models.map.*;
 import models.map.Coord;
@@ -9,7 +10,7 @@ import models.user.User;
 
 import java.util.ArrayList;
 
-public class Player {
+public class Player implements DailyUpdate {
     static final int MAX_ENERGY = 200;
 
     private User user;
@@ -185,5 +186,10 @@ public class Player {
 
     public void setFishingAbility() {
         this.fishingAbility += 5;
+    }
+
+    @Override
+    public boolean nextDay() {
+        return false;
     }
 }

@@ -1,6 +1,7 @@
 package models.game;
 
 import models.App;
+import models.DailyUpdate;
 import models.map.Map;
 
 import java.util.ArrayList;
@@ -10,22 +11,20 @@ import models.map.MapBuilder;
 import models.map.Weather;
 import models.time.*;
 
-public class Game {
+public class Game implements DailyUpdate {
     private ArrayList<Player> players;
     private Player currentPlayer;
     private Map village = (new MapBuilder()).buildVillage();
     private int roundCount = 0;
     private Date gameDate;
-    private Season gameSeason;
     private Weather gameWeather;
     private Weather forecastCheat;
 
 
     public Game(ArrayList<Player> players) {
         this.players = players;
-        this.currentPlayer = players.get(0);
+        this.currentPlayer = players.getFirst();
         this.gameDate = Date.createBias();
-        this.gameSeason = Season.SPRING;
         this.gameWeather = Weather.SUNNY;
         this.forecastCheat = null;
     }
@@ -35,7 +34,32 @@ public class Game {
         if (forecastCheat != null) {
             return forecastCheat;
         }
-        throw new UnsupportedOperationException("Not supported yet.");
+        int random = (int) (Math.random() * 100);
+
+        switch (getSeason()) {
+            case SPRING:
+                if (random < 60) return Weather.SUNNY;
+                if (random < 90) return Weather.RAINY;
+                return Weather.STORM;
+
+            case SUMMER:
+                if (random < 70) return Weather.SUNNY;
+                if (random < 95) return Weather.RAINY;
+                return Weather.STORM;
+
+            case AUTUMN:
+                if (random < 40) return Weather.SUNNY;
+                if (random < 90) return Weather.RAINY;
+                return Weather.STORM;
+
+            case WINTER:
+                if (random < 30) return Weather.SUNNY;
+                if (random < 70) return Weather.RAINY;
+                if (random < 95) return Weather.SNOW;
+                return Weather.STORM;
+            default:
+                return Weather.SUNNY;
+        }
     }
 
     public Map getCurrentPlayerMap() {
@@ -51,11 +75,7 @@ public class Game {
     }
 
     public Season getSeason() {
-        return gameSeason;
-    }
-
-    public void advanceSeason() {
-        gameSeason = gameSeason.nextSeason();
+        return gameDate.getCurrentSeason();
     }
 
     public Date getGameDate() {
@@ -63,7 +83,10 @@ public class Game {
     }
 
     public void advanceTime(int day, int hour) {
-        gameDate.advance(day, hour);
+        gameDate.advanceHours(hour);
+        for (int i = 0; i < day; ++i) {
+            advanceDay();
+        }
     }
 
     public Player getNextPlayer() {
@@ -75,18 +98,17 @@ public class Game {
     public void advanceDay() {
         gameWeather = getNextWeather();
         forecastCheat = null;
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     private void endOfRound() {
-
+        //TODO IF everyone should sleep
+        if (gameDate.getHour() == 22) {
+            nextDay();
+            roundCount++;
+        }
     }
+
     private ArrayList<Map> maps;
-
-    public Game(Player currentPlayer, ArrayList<Player> players) {
-        this.currentPlayer = currentPlayer;
-        this.players = players;
-    }
 
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
@@ -99,10 +121,8 @@ public class Game {
     public void nextTurn() {
         Player nextPlayer = getNextPlayer();
 
-        if (players.indexOf(nextPlayer) == 0) {
-            roundCount++;
+        if (players.indexOf(nextPlayer) == 0)
             endOfRound();
-        }
 
         currentPlayer = nextPlayer;
     }
@@ -125,5 +145,18 @@ public class Game {
 
     public Map getVillage() {
         return village;
+    }
+
+    @Override
+    public boolean nextDay() {
+        for (Player player : players)
+            player.nextDay();
+        gameDate.goToNextDay();
+        return false;
+    }
+
+    //this means game goes for 1 command
+    public void advance() {
+        gameDate.advanceHours(1);
     }
 }
