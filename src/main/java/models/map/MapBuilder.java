@@ -1,54 +1,62 @@
 package models.map;
 
 import models.game.Refrigerator;
-
+import org.apache.commons.lang3.tuple.Pair;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class MapBuilder {
-    private static final int MAP_WIDTH = 50;
-    private static final int MAP_HEIGHT = 30;
+    private static final int MAP_WIDTH = 30;
+    private static final int MAP_HEIGHT = 50;
     private final Random random = new Random();
 
-    public void setBuildingsRandomly(List<TileType> buildings, Map map) {
-        for (TileType spec : buildings) {
+    public boolean setBuildingsRandomly(List<Pair<TileType, Placable>> buildings, Map map) {
+        for (Pair<TileType, Placable> spec : buildings) {
             boolean placed = false;
             int attempts = 0;
-            int maxAttempts = 100;
+            while (!placed) {
+                if (attempts >= 50) {
+                    return false;
+                }
+                ++attempts;
+                int startX = random.nextInt(MAP_WIDTH - spec.getLeft().getDefaultWidth());
+                int startY = random.nextInt(MAP_HEIGHT - spec.getLeft().getDefaultHeight());
 
-            while (!placed && attempts < maxAttempts) {
-                attempts++;
-
-                int startX = random.nextInt(MAP_WIDTH - spec.getDefaultWidth());
-                int startY = random.nextInt(MAP_HEIGHT - spec.getDefaultHeight());
-
-                if (isAreaAvailable(map, startY, startX, spec.getDefaultHeight(), spec.getDefaultWidth())) {
-                    placeBuilding(map, spec, startY, startX, spec.getDefaultHeight(), spec.getDefaultWidth());
+                if (isAreaAvailable(map, startY, startX, spec.getLeft().getDefaultHeight(), spec.getLeft().getDefaultWidth())) {
+                    placeBuilding(map, spec, startY, startX, spec.getLeft().getDefaultHeight(), spec.getLeft().getDefaultWidth());
                     placed = true;
                 }
             }
         }
+        return true;
     }
 
     public Map buildFarm() {
-        Map map = new Map(MapType.FARM);
-        initializeEmptyMap(map);
+        while (true) {
+            Map map = new Map(MapType.FARM);
+            initializeEmptyMap(map);
 
-        List<TileType> buildings = Arrays.asList(
-                TileType.HOUSE,
-                TileType.GREEN_HOUSE,
-                TileType.MINES);
-        //TODO push LAKE
-        setBuildingsRandomly(buildings, map);
-        return map;
+            map.buildHouse(new House());
+            map.buildGreenHouses(new GreenHouse());
+            map.buildMines(new Mines());
+
+            List<Pair<TileType, Placable>> buildings = Arrays.asList(
+                    Pair.of(TileType.HOUSE, map.getHouse()),
+                    Pair.of(TileType.GREEN_HOUSE, map.getGreenHouses()),
+                    Pair.of(TileType.MINES, map.getMines())
+            );
+            //TODO push LAKE
+            if (setBuildingsRandomly(buildings, map))
+                return map;
+        }
     }
 
     private boolean isAreaAvailable(Map map, int startY, int startX, int height, int width) {
         for (int y = startY; y < startY + height; y++) {
             for (int x = startX; x < startX + width; x++) {
-                if (map.tiles.get(y).get(x).isEmpty()) {
+                if (!map.getTile(new Coord(x, y)).isEmpty()) {
                     return false;
                 }
             }
@@ -60,14 +68,14 @@ public class MapBuilder {
         Map map = new Map(MapType.VILLAGE);
         initializeEmptyMap(map);
 
-        List<TileType> buildings = Arrays.asList(
-                TileType.BLACKSMITH,
-                TileType.JOJAMART,
-                TileType.PIERR_STORE,
-                TileType.CARPENTER_SHOP,
-                TileType.FISH_SHOP,
-                TileType.MARINE_SHOP,
-                TileType.STARDROP_SALOON
+        List<Pair<TileType, Placable>> buildings = Arrays.asList(
+                Pair.of(TileType.BLACKSMITH, null),
+                Pair.of(TileType.JOJAMART, null),
+                Pair.of(TileType.PIERR_STORE, null),
+                Pair.of(TileType.CARPENTER_SHOP, null),
+                Pair.of(TileType.FISH_SHOP, null),
+                Pair.of(TileType.MARINE_SHOP, null),
+                Pair.of(TileType.STARDROP_SALOON, null)
         );
 
         setBuildingsRandomly(buildings, map);
@@ -84,11 +92,12 @@ public class MapBuilder {
         }
     }
 
-    private void placeBuilding(Map map, TileType type, int startY, int startX, int height, int width) {
+    private void placeBuilding(Map map, Pair<TileType, Placable> pair, int startY, int startX, int height, int width) {
         for (int y = startY; y < startY + height; y++) {
             for (int x = startX; x < startX + width; x++) {
-                Tile tile = map.tiles.get(y).get(x);
-                tile.setTileType(type);
+                Tile tile = map.getTile(new Coord(x, y));
+                tile.setTileType(pair.getLeft());
+                tile.setPlacable(pair.getRight());
             }
         }
     }

@@ -158,6 +158,10 @@ public class GameTerminalView {
             System.out.println(gameController.craftInfo(matcher.group("craftName")).getMessage());
         }
 
+        else if ((matcher = GameMenuCommand.WHERE_AM_I.getMatcher(command)) != null) {
+            System.out.println(gameController.whereAmI());
+        }
+
         else if ((matcher = GameMenuCommand.INVENTORY_SHOW.getMatcher(command)) != null) {
             printArrayList(gameController.showInventory().getData());
         }

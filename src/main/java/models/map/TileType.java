@@ -1,5 +1,9 @@
 package models.map;
 
+import models.animal.Animal;
+import models.crop.Tree;
+import models.game.Refrigerator;
+
 public enum TileType {
 	// Buildings
 	HOUSE(4, 4, true, 'H'),

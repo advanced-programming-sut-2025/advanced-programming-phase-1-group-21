@@ -12,13 +12,13 @@ public class Map {
     public ArrayList<ArrayList<Tile>> tiles = new ArrayList<>();
     public ArrayList<Building> buildings;
 
-    protected House house = new House();
-    protected ArrayList<Lake> lakes = new ArrayList<>();
-    protected ArrayList<Shop> shops = new ArrayList<>();
-    protected Mines mines = new Mines();
-    protected GreenHouse greenHouses = new GreenHouse();
-    protected Barn barn;
-    protected Coop coop;
+    private House house;
+    private ArrayList<Lake> lakes = new ArrayList<>();
+    private ArrayList<Shop> shops = new ArrayList<>();
+    private Mines mines;
+    private GreenHouse greenHouses;
+    private Barn barn;
+    private Coop coop;
     public final MapType mapType;
 
     public Map(MapType mapType) {
@@ -26,10 +26,34 @@ public class Map {
     }
 
     private static <T> T getElementOrNull(List<T> list, int index) {
-        if (index >= 0 && index < list.size()) {
+        if (list != null && index >= 0 && index < list.size()) {
             return list.get(index);
         }
         return null;
+    }
+
+    public void buildHouse(House house) {
+        this.house = house;
+    }
+
+    public void buildLakes(Lake lake) {
+        this.lakes.add(lake);
+    }
+
+    public void buildCoop(Coop coop) {
+        this.coop = coop;
+    }
+
+    public void buildShop(Shop shop) {
+        this.shops.add(shop);
+    }
+
+    public void buildMines(Mines mines) {
+        this.mines = mines;
+    }
+
+    public void buildGreenHouses(GreenHouse greenHouses) {
+        this.greenHouses = greenHouses;
     }
 
     public Tile getTile(Coord coord) {
@@ -41,6 +65,7 @@ public class Map {
     }
 
     public ArrayList<String> printMap(Coord center, int radius) {
+        System.err.println(tiles);
         ArrayList<String> output = new ArrayList<>();
         for(int i = center.getY() ; i < center.getY() + radius ; i++) {
             for(int j = center.getX() ; j < center.getX() + radius; j++) {
@@ -52,7 +77,8 @@ public class Map {
                 else
                     output.add(tile.getSprite());
             }
-            output.add("\n");
+            if (!output.isEmpty() && !output.getLast().equals("\n"))
+                output.add("\n");
         }
         return output;
     }

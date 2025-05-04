@@ -212,6 +212,7 @@ public class GameController{
     }
 
     public ArrayList<String> printMap(int x, int y , int size) {
+        if (App.game == null) throw new IllegalStateException("Game is null!");
         return App.game.getCurrentPlayerMap().printMap(new Coord(x , y) , size);
     }
 
@@ -570,4 +571,7 @@ public class GameController{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    public String whereAmI() {
+        return App.game.getCurrentPlayerMap().mapType.name();
+    }
 }
