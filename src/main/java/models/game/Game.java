@@ -19,7 +19,6 @@ public class Game implements DailyUpdate {
     private int roundCount = 0;
     private final Date gameDate;
     private Weather gameWeather;
-    private Weather forecastCheat;
     private Weather nextDayWeather;
     private final Random random = new Random();
 
@@ -28,7 +27,6 @@ public class Game implements DailyUpdate {
         this.currentPlayer = players.getFirst();
         this.gameDate = Date.createBias();
         this.gameWeather = Weather.SUNNY;
-        this.forecastCheat = null;
         this.nextDayWeather = calculateRandomWeather();
     }
 
@@ -62,9 +60,6 @@ public class Game implements DailyUpdate {
     }
 
     public Weather getNextWeather() {
-        if (forecastCheat != null) {
-            return forecastCheat;
-        }
         return nextDayWeather;
     }
 
@@ -76,8 +71,8 @@ public class Game implements DailyUpdate {
         return currentPlayer.getMap();
     }
 
-    public void setForecastWeather(Weather newWeather) {
-        forecastCheat = newWeather;
+    public void setNextDayWeather(Weather newWeather) {
+        nextDayWeather = newWeather;
     }
 
     public Weather getWeather() {
@@ -113,8 +108,6 @@ public class Game implements DailyUpdate {
             roundCount++;
         }
     }
-
-    private ArrayList<Map> maps;
 
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
@@ -155,8 +148,7 @@ public class Game implements DailyUpdate {
 
     @Override
     public boolean nextDay() {
-        gameWeather = getNextWeather();
-        forecastCheat = null;
+        gameWeather = nextDayWeather;
         nextDayWeather = calculateRandomWeather();
 
         for (Player player : players)

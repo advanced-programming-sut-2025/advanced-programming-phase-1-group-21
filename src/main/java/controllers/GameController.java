@@ -156,7 +156,7 @@ public class GameController{
 
     public Result<Void> setWeatherCheat(Weather weather) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        App.game.setForecastWeather(weather);
+        App.game.setNextDayWeather(weather);
         return Result.success(null);
     }
 
