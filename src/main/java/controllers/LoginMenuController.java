@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 
 public class LoginMenuController{
     public Result<String> showCurrentMenu(){
-        return Result.success("login menu");
+        return Result.success("login menu", "");
     }
 
     public Result<User> login(String username, String password) {

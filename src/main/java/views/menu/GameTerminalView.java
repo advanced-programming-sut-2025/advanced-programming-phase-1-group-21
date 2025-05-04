@@ -5,6 +5,7 @@ import models.command.GameMenuCommand;
 import models.game.Player;
 import models.map.Coord;
 import models.map.Direction;
+import models.map.Weather;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -181,6 +182,39 @@ public class GameTerminalView {
         }
         else if ((matcher = GameMenuCommand.WATER.getMatcher(command)) != null) {
             System.out.println(gameController.water(new Coord(Integer.parseInt(matcher.group("x")) , Integer.parseInt(matcher.group("y")))));
+        }
+        else if ((matcher = GameMenuCommand.TIME.getMatcher(command)) != null) {
+            System.out.println(gameController.getTime().getData());
+        }
+        else if ((matcher = GameMenuCommand.DATE.getMatcher(command)) != null) {
+            System.out.println(gameController.getDate().getData());
+        }
+        else if ((matcher = GameMenuCommand.DATE_TIME.getMatcher(command)) != null) {
+            System.out.println(gameController.getDateTime().getData());
+        }
+        else if ((matcher = GameMenuCommand.DAY_OF_THE_WEEK.getMatcher(command)) != null) {
+            System.out.println(gameController.getDayWeek().getData());
+        }
+        else if ((matcher = GameMenuCommand.TIME_CHEAT.getMatcher(command)) != null) {
+            System.out.println(gameController.advanceTimeCheat(0, Integer.parseInt(matcher.group("X"))));
+        }
+        else if ((matcher = GameMenuCommand.CHEAT_DATE.getMatcher(command)) != null) {
+            System.out.println(gameController.advanceTimeCheat(Integer.parseInt(matcher.group("X")), 0));
+        }
+        else if ((matcher = GameMenuCommand.SEASON.getMatcher(command)) != null) {
+            System.out.println(gameController.getSeasonName().getData());
+        }
+        else if ((matcher = GameMenuCommand.CHEAT_THOR.getMatcher(command)) != null) {
+            System.out.println(gameController.struckByThorCheat(new Coord(Integer.parseInt(matcher.group("x")), Integer.parseInt(matcher.group("y")))));
+        }
+        else if ((matcher = GameMenuCommand.WEATHER.getMatcher(command)) != null) {
+            System.out.println(gameController.getWeather().getData());
+        }
+        else if ((matcher = GameMenuCommand.WEATHER_FORECAST.getMatcher(command)) != null) {
+            System.out.println(gameController.getWeatherForecast().getData());
+        }
+        else if ((matcher = GameMenuCommand.CHEAT_WEATHER.getMatcher(command)) != null) {
+            System.out.println(gameController.setWeatherCheat(Weather.getWeather(matcher.group("type"))));
         }
         else
             System.out.println("Invalid command");

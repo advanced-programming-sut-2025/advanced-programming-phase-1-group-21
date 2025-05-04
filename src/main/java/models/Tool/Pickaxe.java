@@ -85,10 +85,10 @@ public class Pickaxe extends Tool {
 		player.decreaseEnergy(use != 0 ? energyCost : 1);
 
 		if (use == 0)
-			return Result.success("kolang hich kari nakard");
+			return Result.success(null, "kolang hich kari nakard");
 		if (use == 1)
-			return Result.success("zamin gheir shokhmi shod");
-		return Result.success("the Rock removed from the ground");
+			return Result.success(null, "zamin gheir shokhmi shod");
+		return Result.success(null, "the Rock removed from the ground");
 	}
 
 	@Override

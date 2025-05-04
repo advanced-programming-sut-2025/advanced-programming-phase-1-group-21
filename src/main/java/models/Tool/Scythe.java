@@ -23,17 +23,17 @@ public class Scythe extends Tool {
 		Tile tile = player.getMap().getTile(coord);
 
 		if(!tile.getTileType().isForaging() && tile.getPlacable(PlantedSeed.class) == null)
-			return Result.success("inja ke chizi nist");
+			return Result.success(null, "inja ke chizi nist");
 
 		if(tile.getTileType() == TileType.LEAF){
 			tile.setTileType(TileType.UNPLOWED);
-			return Result.success("the leaf removed from the ground");
+			return Result.success(null, "the leaf removed from the ground");
 		}
 		if(tile.getPlacable(PlantedSeed.class) != null){
 			tile.setPlacable(null);
-			return Result.success("The crop has now been harvested");
+			return Result.success(null, "The crop has now been harvested");
 		}
-		return Result.success(null);
+		return Result.success(null, "");
 	}
 
 	@Override
