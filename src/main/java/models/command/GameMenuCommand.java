@@ -82,8 +82,8 @@ public enum GameMenuCommand implements Command {
 //    SELL_ANIMAL("sell animal -n <name>"),
 //    FISHING("fishing -p <fishing pole>"),
 //    ARTISAN_USE("artisan use <artisan_name> <item1_name>"),
-      WHERE_AM_I("whereami")
-        WATER("\\s*water\\s+-l\\s+\\((?<x>\\d+),(?<y>\\d+)\\)\\s*"),
+    WHERE_AM_I("whereami"),
+    WATER("\\s*water\\s+-l\\s+\\((?<x>\\d+),(?<y>\\d+)\\)\\s*"),
     PLANT("^\\s*plant\\s+-s\\s+(?<seedName>.*)\\s+-d\\s+(?<direction>(N)|(E)|(S)|(W)|(NE)|(NW)|(SE)|(SW))\\s*$"),
     ;
 
