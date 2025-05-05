@@ -156,7 +156,8 @@
     "buff-time": 5,
     "skill-type": "Foraging",
     "skill-level": 3,
-    "price": 180
+    "price": 180,
+    "source": null
   },
   {
     "name": "Dish O' The Sea",

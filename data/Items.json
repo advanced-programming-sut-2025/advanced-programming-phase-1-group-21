@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Egg",
+    "type": "Consumable"
+  },
+  {
+    "name": "Large Egg",
+    "type": "Consumable"
+  },
+  {
+    "name": "Duck Egg",
+    "type": "Consumable"
+  }
+]

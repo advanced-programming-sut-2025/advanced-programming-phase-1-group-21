@@ -1,22 +1,22 @@
 [
   {
     "name": "Acorn",
-    "season": ["spring", "summer", "autumn", "winter"]
+    "seasons": ["spring", "summer", "autumn", "winter"]
   },
   {
     "name": "Maple Seed",
-    "season": ["spring", "summer", "autumn", "winter"]
+    "seasons": ["spring", "summer", "autumn", "winter"]
   },
   {
     "name": "Pine Cone",
-    "season": ["spring", "summer", "autumn", "winter"]
+    "seasons": ["spring", "summer", "autumn", "winter"]
   },
   {
     "name": "Mahogany Seed",
-    "season": ["spring", "summer", "autumn", "winter"]
+    "seasons": ["spring", "summer", "autumn", "winter"]
   },
   {
     "name": "Mushroom Tree Seed",
-    "season": ["spring", "summer", "autumn", "winter"]
+    "seasons": ["spring", "summer", "autumn", "winter"]
   }
 ]

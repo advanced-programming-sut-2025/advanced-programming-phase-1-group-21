@@ -60,22 +60,22 @@
     "price": 2000
   },
   {
-    "name": "Copper",
+    "name": "Copper Ore",
     "description": "A common ore that can be smelted into bars.",
     "price": 5
   },
   {
-    "name": "Iron",
+    "name": "Iron Ore",
     "description": "A fairly common ore that can be smelted into bars.",
     "price": 10
   },
   {
-    "name": "Gold",
+    "name": "Gold Ore",
     "description": "A precious ore that can be smelted into bars.",
     "price": 25
   },
   {
-    "name": "Iridium",
+    "name": "Iridium Ore",
     "description": "An exotic ore with many curious properties. Can be smelted into bars.",
     "price": 100
   },

@@ -5,6 +5,8 @@
     "house-type": ["Normal", "Big", "Deluxe"],
     "products": ["Egg", "Big Egg"],
     "product-time": 1,
+    "product-seasons": ["spring", "summer", "autumn", "winter"],
+    "tool": null,
     "price": 800
   },
   {
@@ -13,6 +15,8 @@
     "house-type": ["Big", "Deluxe"],
     "products": ["Duck Egg", "Duck Feather"],
     "product-time": 2,
+    "product-seasons": ["spring", "summer", "autumn", "winter"],
+    "tool": null,
     "price": 1200
   },
   {
@@ -21,6 +25,8 @@
     "house-type": ["Deluxe"],
     "products": ["Wool", "Rabbit foot"],
     "product-time": 4,
+    "product-seasons": ["spring", "summer", "autumn", "winter"],
+    "tool": null,
     "price": 8000
   },
   {
@@ -29,6 +35,8 @@
     "house-type": ["Big", "Deluxe"],
     "products": ["Dinosaur Egg"],
     "product-time": 7,
+    "product-seasons": ["spring", "summer", "autumn", "winter"],
+    "tool": null,
     "price": 14000
   },
   {
@@ -36,6 +44,9 @@
     "house": "Barn",
     "house-type": ["Normal", "Big", "Deluxe"],
     "products": ["Milk", "Large Milk"],
+    "product-time": 1,
+    "product-seasons": ["spring", "summer", "autumn", "winter"],
+    "tool": "MilkPail",
     "price": 1500
   },
   {
@@ -43,6 +54,9 @@
     "house": "Barn",
     "house-type": ["Big", "Deluxe"],
     "products": ["Goat Milk", "Large Goat Milk"],
+    "product-time": 2,
+    "product-seasons": ["spring", "summer", "autumn", "winter"],
+    "tool": "MilkPail",
     "price": 4000
   },
   {
@@ -50,6 +64,9 @@
     "house": "Barn",
     "house-type": ["Deluxe"],
     "products": ["Wool"],
+    "product-time": 3,
+    "product-seasons": ["spring", "summer", "autumn", "winter"],
+    "tool": "Shear",
     "price": 8000
   },
   {
@@ -57,6 +74,9 @@
     "house": "Barn",
     "house-type": ["Deluxe"],
     "products": ["Truffle"],
+    "product-time": 1,
+    "product-seasons": ["spring", "summer", "autumn"],
+    "tool": null,
     "price": 16000
   }
 ]
