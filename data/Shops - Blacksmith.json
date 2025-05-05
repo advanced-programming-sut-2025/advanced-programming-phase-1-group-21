@@ -1,78 +1,74 @@
-{
-  "stock": [
-    {
-      "Stock": "Copper Ore",
-      "description": "A common ore that can be smelted into bars.",
-      "price": 75,
-      "daily-limit": -1
-    },
-    {
-      "Stock": "Iron Ore",
-      "description": "A fairly common ore that can be smelted into bars.",
-      "price": 150,
-      "daily-limit": -1
-    },
-    {
-      "Stock": "Coal",
-      "description": "A combustible rock that is useful for crafting and smelting.",
-      "price": 150,
-      "daily-limit": -1
-    },
-    {
-      "Stock": "Gold Ore",
-      "description": "A precious ore that can be smelted into bars.",
-      "price": 400,
-      "daily-limit": -1
-    }
-  ],
-  "upgrade tools": [
-    {
-      "Upgrade Tools": "Copper Tool",
-      "ingredient": {"Copper Bar": 5},
-      "cost": 2000,
-      "daily-limit": 1
-    },
-    {
-      "Upgrade Tools": "Steel Tool",
-      "ingredient": {"Iron Bar": 5},
-      "cost": 5000,
-      "daily-limit": 1
-    },
-    {
-      "Upgrade Tools": "Gold Tool",
-      "ingredient": {"Gold Bar": 5},
-      "cost": 10000,
-      "daily-limit": 1
-    },
-    {
-      "Upgrade Tools": "Iridium Tool",
-      "ingredient": {"Iridium Bar": 5},
-      "cost": 25000,
-      "daily-limit": 1
-    },
-    {
-      "name": "Copper Trash Can",
-      "ingredient": {"Copper Bar": 5},
-      "cost": 1000,
-      "daily-limit": 1
-    },
-    {
-      "name": "Steel Trash Can",
-      "ingredient": {"Iron Bar": 5},
-      "cost": 2500,
-      "daily-limit": 1
-    },
-    {
-      "name": "Gold Trash Can",
-      "ingredient": {"Gold Bar": 5},
-      "cost": 5000,
-      "daily-limit": 1
-    },
-    {
-      "name": "Iridium Trash Can",
-      "ingredient": {"Iridium Bar": 5},
-      "cost": 12500,
-      "daily-limit": 1
-    }
-  ]
-}
+[
+  {
+    "name": "Copper Ore",
+    "description": "A common ore that can be smelted into bars.",
+    "price": 75,
+    "daily-limit": -1
+  },
+  {
+    "name": "Iron Ore",
+    "description": "A fairly common ore that can be smelted into bars.",
+    "price": 150,
+    "daily-limit": -1
+  },
+  {
+    "name": "Coal",
+    "description": "A combustible rock that is useful for crafting and smelting.",
+    "price": 150,
+    "daily-limit": -1
+  },
+  {
+    "name": "Gold Ore",
+    "description": "A precious ore that can be smelted into bars.",
+    "price": 400,
+    "daily-limit": -1
+  },
+  {
+    "name": "Copper Tool",
+    "ingredient": {"Copper Bar": 5},
+    "cost": 2000,
+    "daily-limit": 1
+  },
+  {
+    "name": "Steel Tool",
+    "ingredient": {"Iron Bar": 5},
+    "cost": 5000,
+    "daily-limit": 1
+  },
+  {
+    "name": "Gold Tool",
+    "ingredient": {"Gold Bar": 5},
+    "cost": 10000,
+    "daily-limit": 1
+  },
+  {
+    "name": "Iridium Tool",
+    "ingredient": {"Iridium Bar": 5},
+    "cost": 25000,
+    "daily-limit": 1
+  },
+  {
+    "name": "Copper Trash Can",
+    "ingredient": {"Copper Bar": 5},
+    "cost": 1000,
+    "daily-limit": 1
+  },
+  {
+    "name": "Steel Trash Can",
+    "ingredient": {"Iron Bar": 5},
+    "cost": 2500,
+    "daily-limit": 1
+  },
+  {
+    "name": "Gold Trash Can",
+    "ingredient": {"Gold Bar": 5},
+    "cost": 5000,
+    "daily-limit": 1
+  },
+  {
+    "name": "Iridium Trash Can",
+    "ingredient": {"Iridium Bar": 5},
+    "cost": 12500,
+    "daily-limit": 1
+  }
+]

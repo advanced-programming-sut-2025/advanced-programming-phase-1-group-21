@@ -1,18 +1,18 @@
 [
   {
-    "Season": "spring",
-    "Possible Crops": ["Cauliflower", "Parsnip", "Potato", "Blue Jazz", "Tulip"]
+    "season": "spring",
+    "possible-seeds": ["Cauliflower Seeds", "Parsnip Seeds", "Potato", "Jazz Seeds", "Tulip Bulb"]
   },
   {
-    "Season": "summer",
-    "Possible Crops": ["Corn", "Hot Pepper", "Radish", "Wheat", "Poppy", "Sunflower", "Summer Spangle"]
+    "season": "summer",
+    "possible-seeds": ["Corn Seeds", "Pepper Seeds", "Radish Seeds", "Wheat Seeds", "Poppy Seeds", "Sunflower Seeds", "Spangle Seeds"]
   },
   {
-    "Season": "autumn",
-    "Possible Crops": ["Artichoke", "Corn", "Eggplant", "Pumpkin", "Sunflower", "Fairy Rose"]
+    "season": "autumn",
+    "possible-seeds": ["Artichoke Seeds", "Corn Seeds", "Eggplant Seeds", "Pumpkin Seeds", "Sunflower Seeds", "Fairy Seeds"]
   },
   {
-    "Season": "winter",
-    "Possible Crops": ["Powdermelon"]
+    "season": "winter",
+    "possible-seeds": ["Powdermelon Seeds"]
   }
 ]

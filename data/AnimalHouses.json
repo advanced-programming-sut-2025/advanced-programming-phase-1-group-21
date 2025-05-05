@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Normal Barn",
+    "animals": ["Cow"]
+  },
+  {
+    "name": "Big Barn",
+    "animals": ["Cow", "Goat"]
+  },
+  {
+    "name": "Deluxe Barn",
+    "animals": ["Cow", "Goat", "Sheep", "Pig"]
+  },
+  {
+    "name": "Normal Coop",
+    "animals": ["Chicken"]
+  },
+  {
+    "name": "Big Coop",
+    "animals": ["Chicken", "Duck", "Dinosaur"]
+  },
+  {
+    "name": "Deluxe Coop",
+    "animals": ["Chicken", "Duck", "Dinosaur", "Rabbit"]
+  }
+]

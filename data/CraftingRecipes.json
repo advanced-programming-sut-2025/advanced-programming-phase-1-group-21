@@ -5,7 +5,7 @@
     "ingredients": {"Wood": 20, "Copper Bar": 2},
     "skill-type": "Foraging",
     "skill-level": 1,
-    "Salable": false,
+    "salable": false,
     "place": "House"
   },
   {
@@ -14,7 +14,7 @@
     "ingredients": {"Copper Ore": 20, "Stone": 25},
     "skill-type": null,
     "skill-level": null,
-    "Salable": false,
+    "salable": false,
     "place": "House"
   },
   {
@@ -23,7 +23,7 @@
     "ingredients": {"Wood": 40, "Coal": 8, "Iron Bar": 1},
     "skill-type": "Farming",
     "skill-level": 1,
-    "Salable": false,
+    "salable": false,
     "place": "Farm"
   },
   {
@@ -32,7 +32,7 @@
     "ingredients": {"Wood": 45, "Stone": 45, "Copper Bar": 1},
     "skill-type": "Farming",
     "skill-level": 2,
-    "Salable": false,
+    "salable": false,
     "place": "House"
   },
   {
@@ -41,7 +41,7 @@
     "ingredients": {"Wood": 30, "Copper Bar": 1, "Iron Bar": 1},
     "skill-type": "Farming",
     "skill-level": 3,
-    "Salable": false,
+    "salable": false,
     "place": "House"
   },
   {
@@ -50,7 +50,7 @@
     "ingredients": {"Wood": 60, "Fiber": 30},
     "skill-type": "Farming",
     "skill-level": 3,
-    "Salable": false,
+    "salable": false,
     "place": "House"
   },
   {
@@ -59,7 +59,7 @@
     "ingredients": {"Wood": 15, "Stone": 15, "Copper Bar": 1},
     "skill-type": null,
     "skill-level": null,
-    "Salable": false,
+    "salable": false,
     "place": "House"
   },
   {
@@ -68,7 +68,7 @@
     "ingredients": {"Wood": 100, "Gold Bar": 1, "Iron Bar": 1},
     "skill-type": "Farming",
     "skill-level": 3,
-    "Salable": false,
+    "salable": false,
     "place": "House"
   },
   {
@@ -77,7 +77,7 @@
     "ingredients": {"Wood": 50, "Stone": 40, "Coal": 8},
     "skill-type": "Farming",
     "skill-level": 2,
-    "Salable": false,
+    "salable": false,
     "place": "House"
   },
   {
@@ -87,7 +87,7 @@
     "source": "Pierre's General Store",
     "skill-type": null,
     "skill-level": null,
-    "Salable": false,
+    "salable": false,
     "place": "House"
   },
   {
@@ -97,7 +97,7 @@
     "source": "Pierre's General Store",
     "skill-type": null,
     "skill-level": null,
-    "Salable": false,
+    "salable": false,
     "place": "Farm"
   },
   {
@@ -107,7 +107,7 @@
     "source": "Fish Shop",
     "skill-type": null,
     "skill-level": null,
-    "Salable": false,
+    "salable": false,
     "place": "House"
   },
   {
@@ -116,7 +116,7 @@
     "ingredients": {"Acorn": 5, "Maple Seed": 5, "Pine Cone": 5, "Mahogany Seed": 5},
     "skill-type": "Foraging",
     "skill-level": 4,
-    "Salable": true,
+    "salable": true,
     "price": 100,
     "place": "Farm"
   }

@@ -1,94 +1,83 @@
-{
-  "permanent-stock": [
-    {
-      "name": "Wood",
-      "description": "A sturdy, yet flexible plant material with a wide variety of uses.",
-      "price": 10,
-      "daily-limit": -1
-    },
-    {
-      "name": "Stone",
-      "description": "A common material with many uses in crafting and building.",
-      "price": 20,
-      "daily-limit": 1
-    }
-  ],
-  "farm-buildings": [
-    {
-      "Farm Buildings": "Barn",
-      "type": "Normal",
-      "animals": ["Cow"],
-      "description": "Houses 4 barn-dwelling animals.",
-      "ingredients": {"Wood": 350, "Stone": 150},
-      "price": 6000,
-      "size": [7, 4],
-      "daily-limit": "1"
-    },
-    {
-      "Farm Buildings": "Barn",
-      "type": "Big",
-      "animals": ["Cow", "Goat"],
-      "description": "Houses 8 barn-dwelling animals. Unlocks goats.",
-      "ingredients": {"Wood": 400, "Stone": 200},
-      "price": 12000,
-      "size": [7, 4],
-      "daily-limit": "1"
-    },
-    {
-      "Farm Buildings": "Barn",
-      "type": "Deluxe",
-      "animals": ["Cow", "Goat", "Sheep", "Pig"],
-      "description": "Houses 12 barn-dwelling animals. Unlocks sheep and pigs.",
-      "ingredients": {"Wood": 550, "Stone": 300},
-      "price": 12000,
-      "size": [7, 4],
-      "daily-limit": "1"
-    },
-    {
-      "Farm Buildings": "Coop",
-      "type": "Normal",
-      "animals": ["Chicken"],
-      "description": "Houses 4 coop-dwelling animals.",
-      "ingredients": {"Wood": 300, "Stone": 100},
-      "price": 4000,
-      "size": [6, 3],
-      "daily-limit": "1"
-    },
-    {
-      "Farm Buildings": "Coop",
-      "type": "Big",
-      "animals": ["Chicken", "Duck", "Dinosaur"],
-      "description": "Houses 8 coop-dwelling animals. Unlocks ducks.",
-      "ingredients": {"Wood": 400, "Stone": 150},
-      "price": 10000,
-      "size": [6, 3],
-      "daily-limit": "1"
-    },
-    {
-      "Farm Buildings": "Coop",
-      "type": "Deluxe",
-      "animals": ["Chicken", "Duck", "Dinosaur", "Rabbit"],
-      "description": "Houses 12 coop-dwelling animals. Unlocks rabbits.",
-      "ingredients": {"Wood": 500, "Stone": 200},
-      "price": 20000,
-      "size": [6, 3],
-      "daily-limit": "1"
-    },
-    {
-      "Farm Buildings": "Well",
-      "description": "Provides a place for you to refill your watering can.",
-      "ingredients": {"Stone": 75},
-      "price": 1000,
-      "size": "[3, 3]",
-      "daily-limit": "1"
-    },
-    {
-      "Farm Buildings": "Shipping Bin",
-      "description": "Items placed in it will be included in the nightly shipment.",
-      "ingredients": {"Wood": 150},
-      "price": 250,
-      "size": [1, 1],
-      "daily-limit": "unlimited"
-    }
-  ]
-}
+[
+  {
+    "name": "Wood",
+    "type": "",
+    "description": "A sturdy, yet flexible plant material with a wide variety of uses.",
+    "ingredients": null,
+    "required": null,
+    "price": 10,
+    "daily-limit": -1
+  },
+  {
+    "name": "Stone",
+    "description": "A common material with many uses in crafting and building.",
+    "ingredients": null,
+    "required": null,
+    "price": 20,
+    "daily-limit": -1
+  },
+  {
+    "name": "Normal Barn",
+    "description": "Houses 4 barn-dwelling animals.",
+    "ingredients": {"Wood": 350, "Stone": 150},
+    "required": null,
+    "price": 6000,
+    "daily-limit": 1
+  },
+  {
+    "name": "Big Barn",
+    "description": "Houses 8 barn-dwelling animals. Unlocks goats.",
+    "ingredients": {"Wood": 400, "Stone": 200},
+    "required": "Normal Barn",
+    "price": 12000,
+    "daily-limit": 1
+  },
+  {
+    "name": "Deluxe Barn",
+    "description": "Houses 12 barn-dwelling animals. Unlocks sheep and pigs.",
+    "ingredients": {"Wood": 550, "Stone": 300},
+    "required": "Big Barn",
+    "price": 12000,
+    "daily-limit": 1
+  },
+  {
+    "name": "Normal Coop",
+    "description": "Houses 4 coop-dwelling animals.",
+    "ingredients": {"Wood": 300, "Stone": 100},
+    "required": null,
+    "price": 4000,
+    "daily-limit": 1
+  },
+  {
+    "name": "Big Coop",
+    "description": "Houses 8 coop-dwelling animals. Unlocks ducks.",
+    "ingredients": {"Wood": 400, "Stone": 150},
+    "required": "Normal Coop",
+    "price": 10000,
+    "daily-limit": 1
+  },
+  {
+    "name": "Deluxe Coop",
+    "description": "Houses 12 coop-dwelling animals. Unlocks rabbits.",
+    "ingredients": {"Wood": 500, "Stone": 200},
+    "required": "Big Coop",
+    "price": 20000,
+    "daily-limit": 1
+  },
+  {
+    "name": "Well",
+    "description": "Provides a place for you to refill your watering can.",
+    "ingredients": {"Stone": 75},
+    "required": null,
+    "price": 1000,
+    "daily-limit": 1
+  },
+  {
+    "name": "Shipping Bin",
+    "description": "Items placed in it will be included in the nightly shipment.",
+    "ingredients": {"Wood": 150},
+    "required": null,
+    "price": 250,
+    "daily-limit": -1
+  }
+]
