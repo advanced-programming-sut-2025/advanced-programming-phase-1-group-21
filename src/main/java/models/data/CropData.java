@@ -1,23 +1,19 @@
 package models.data;
 
-import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
 
-import java.io.FileReader;
-import java.lang.reflect.Type;
-import java.util.List;
+import java.util.ArrayList;
 
 public class CropData implements Data {
 	private static final String dataURL = "data/Crops.json";
-	private static List<CropData> cropData = null;
+	private static ArrayList<CropData> cropData = null;
 
 	@SerializedName("name")
 	private String name;
 	@SerializedName("seed-name")
 	private String seedName;
 	@SerializedName("stages")
-	private List<Integer> stages;
+	private ArrayList<Integer> stages;
 
 	@SerializedName("total-harvest-time")
 	private int totalHarvestTime;
@@ -41,29 +37,21 @@ public class CropData implements Data {
 	private int health;
 
 	@SerializedName("seasons")
-	private List<String> seasons;
+	private ArrayList<String> seasons;
 
 	@SerializedName("can-become-giant")
 	private boolean canBecomeGiant;
 
-	public static void load() {
-		Gson gson = new Gson();
-
-		try (FileReader reader = new FileReader(dataURL)) {
-			Type listType = new TypeToken<List<CropData>>(){}.getType();
-			cropData = gson.fromJson(reader, listType);
-			for (CropData a : cropData) {
-				a.fullConstruct();
-				System.out.println(a.name + " " + a.seedName + " " + a.price);
-			}
-		} catch (Exception e) {
-			System.out.println("Can't open Animals.json");
-			e.printStackTrace();
-		}
+	protected static String getDataURL() {
+		return dataURL;
 	}
 
-	private void fullConstruct() {
+	protected static void setData(ArrayList<CropData> cropData) {
+		CropData.cropData = cropData;
+	}
 
+	public void fullConstruct() {
+//		System.out.println(name + "\n" + seedName + "\n" + stages + "\n" + totalHarvestTime + "\n" + oneTime + "\n" + regrowthTime + "\n" + price + "\n" + isEdible + "\n" + energy + "\n" + health + "\n" + seasons + "\n" + canBecomeGiant + "\n------------------");
 	}
 
 	public String getName() {
@@ -74,7 +62,7 @@ public class CropData implements Data {
 		return seedName;
 	}
 
-	public List<Integer> getStages() {
+	public ArrayList<Integer> getStages() {
 		return stages;
 	}
 
@@ -106,7 +94,7 @@ public class CropData implements Data {
 		return health;
 	}
 
-	public List<String> getSeasons() {
+	public ArrayList<String> getSeasons() {
 		return seasons;
 	}
 

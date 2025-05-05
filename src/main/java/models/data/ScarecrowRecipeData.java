@@ -1,17 +1,13 @@
 package models.data;
 
-import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
 
-import java.io.FileReader;
-import java.lang.reflect.Type;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class ScarecrowRecipeData implements Data {
 	private static final String dataURL = "data/ScarecrowCraftingRecipes.json";
-	private static List<ScarecrowRecipeData> recipes = null;
+	private static ArrayList<ScarecrowRecipeData> recipes = null;
 
 	@SerializedName("name")
 	private String name;
@@ -30,24 +26,16 @@ public class ScarecrowRecipeData implements Data {
 	@SerializedName("radius")
 	private int radius;
 
-	public static void load() {
-		Gson gson = new Gson();
-
-		try (FileReader reader = new FileReader(dataURL)) {
-			Type listType = new TypeToken<List<ScarecrowRecipeData>>(){}.getType();
-			recipes = gson.fromJson(reader, listType);
-			for (ScarecrowRecipeData a : recipes) {
-				a.fullConstruct();
-				System.out.println(a.name + " " + a.description + " " + a.radius + " " + a.skillType);
-			}
-		} catch (Exception e) {
-			System.out.println("Can't open " + dataURL);
-			e.printStackTrace();
-		}
+	protected static String getDataURL() {
+		return dataURL;
 	}
 
-	private void fullConstruct() {
+	protected static void setData(ArrayList<ScarecrowRecipeData> recipes) {
+		ScarecrowRecipeData.recipes = recipes;
+	}
 
+	public void fullConstruct() {
+//		System.out.println(name + "\n" + description + "\n" + ingredients + "\n" + skillType + "\n" + skillLevel + "\n" + radius + "\n------------");
 	}
 
 	public String getName() {

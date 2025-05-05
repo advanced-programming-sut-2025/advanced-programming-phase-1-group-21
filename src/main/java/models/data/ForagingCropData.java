@@ -1,16 +1,12 @@
 package models.data;
 
-import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
 
-import java.io.FileReader;
-import java.lang.reflect.Type;
-import java.util.List;
+import java.util.ArrayList;
 
 public class ForagingCropData implements Data {
 	private static final String dataURL = "data/Crops.json";
-	private static List<ForagingCropData> cropData = null;
+	private static ArrayList<ForagingCropData> cropData = null;
 
 	@SerializedName("name")
 	private String name;
@@ -25,26 +21,18 @@ public class ForagingCropData implements Data {
 	private int energy;
 
 	@SerializedName("seasons")
-	private List<String> seasons;
+	private ArrayList<String> seasons;
 
-	public static void load() {
-		Gson gson = new Gson();
-
-		try (FileReader reader = new FileReader(dataURL)) {
-			Type listType = new TypeToken<List<ForagingCropData>>(){}.getType();
-			cropData = gson.fromJson(reader, listType);
-			for (ForagingCropData a : cropData) {
-				a.fullConstruct();
-				System.out.println(a.name + " " + a.price);
-			}
-		} catch (Exception e) {
-			System.out.println("Can't open Animals.json");
-			e.printStackTrace();
-		}
+	protected static String getDataURL() {
+		return dataURL;
 	}
 
-	private void fullConstruct() {
+	protected static void setData(ArrayList<ForagingCropData> cropData) {
+		ForagingCropData.cropData = cropData;
+	}
 
+	public void fullConstruct() {
+//		System.out.println(name + "\n" + price + "\n" + isEdible + "\n" + energy + "\n" + seasons);
 	}
 
 	public String getName() {
@@ -55,7 +43,7 @@ public class ForagingCropData implements Data {
 		return energy;
 	}
 
-	public List<String> getSeasons() {
+	public ArrayList<String> getSeasons() {
 		return seasons;
 	}
 

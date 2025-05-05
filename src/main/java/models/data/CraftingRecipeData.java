@@ -1,17 +1,13 @@
 package models.data;
 
-import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
 
-import java.io.FileReader;
-import java.lang.reflect.Type;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class CraftingRecipeData implements Data {
 	private static final String dataURL = "data/CraftingRecipes.json";
-	private static List<CraftingRecipeData> recipes = null;
+	private static ArrayList<CraftingRecipeData> recipes = null;
 
 	@SerializedName("name")
 	private String name;
@@ -32,24 +28,16 @@ public class CraftingRecipeData implements Data {
 	@SerializedName("salable")
 	private boolean salable;
 
-	public static void load() {
-		Gson gson = new Gson();
-
-		try (FileReader reader = new FileReader(dataURL)) {
-			Type listType = new TypeToken<List<CraftingRecipeData>>(){}.getType();
-			recipes = gson.fromJson(reader, listType);
-			for (CraftingRecipeData a : recipes) {
-				a.fullConstruct();
-				System.out.println(a.name + " " + a.description + " " + a.salable);
-			}
-		} catch (Exception e) {
-			System.out.println("Can't open Animals.json");
-			e.printStackTrace();
-		}
+	protected static String getDataURL() {
+		return dataURL;
 	}
 
-	private void fullConstruct() {
+	protected static void setData(ArrayList<CraftingRecipeData> recipes) {
+		CraftingRecipeData.recipes = recipes;
+	}
 
+	public void fullConstruct() {
+//		System.out.println(name + "\n" + description + "\n" + price + "\n" + ingredients + "\n" + skillType + "\n" + skillLevel + "\n" + salable + "\n----------------");
 	}
 
 	public String getName() {

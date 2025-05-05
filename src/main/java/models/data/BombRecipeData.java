@@ -1,17 +1,13 @@
 package models.data;
 
-import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
 
-import java.io.FileReader;
-import java.lang.reflect.Type;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class BombRecipeData implements Data {
 	private static final String dataURL = "data/BombCraftingRecipes.json";
-	private static List<BombRecipeData> recipes = null;
+	private static ArrayList<BombRecipeData> recipes = null;
 
 	@SerializedName("name")
 	private String name;
@@ -32,23 +28,15 @@ public class BombRecipeData implements Data {
 	@SerializedName("radius")
 	private int radius;
 
-	public static void load() {
-		Gson gson = new Gson();
-
-		try (FileReader reader = new FileReader(dataURL)) {
-			Type listType = new TypeToken<List<BombRecipeData>>(){}.getType();
-			recipes = gson.fromJson(reader, listType);
-			for (BombRecipeData a : recipes) {
-				a.fullConstruct();
-				System.out.println(a.name + " " + a.description + " " + a.price);
-			}
-		} catch (Exception e) {
-			System.out.println("Can't open " + dataURL);
-			e.printStackTrace();
-		}
+	protected static String getDataURL() {
+		return dataURL;
 	}
 
-	private void fullConstruct() {
+	protected static void setData(ArrayList<BombRecipeData> recipes) {
+		BombRecipeData.recipes = recipes;
+	}
+
+	public void fullConstruct() {
 
 	}
 

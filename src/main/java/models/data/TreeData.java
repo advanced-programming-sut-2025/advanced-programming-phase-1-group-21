@@ -1,23 +1,19 @@
 package models.data;
 
-import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
 
-import java.io.FileReader;
-import java.lang.reflect.Type;
-import java.util.List;
+import java.util.ArrayList;
 
 public class TreeData implements Data {
 	private static final String dataURL = "data/Trees.json";
-	private static List<TreeData> treeData = null;
+	private static ArrayList<TreeData> treeData = null;
 
 	@SerializedName("name")
 	private String name;
 	@SerializedName("seed-name")
 	private String seedName;
 	@SerializedName("stages")
-	private List<Integer> stages;
+	private ArrayList<Integer> stages;
 
 	@SerializedName("total-harvest-time")
 	private int totalHarvestTime;
@@ -41,26 +37,18 @@ public class TreeData implements Data {
 	private int health;
 
 	@SerializedName("seasons")
-	private List<String> seasons;
+	private ArrayList<String> seasons;
 
-	public static void load() {
-		Gson gson = new Gson();
-
-		try (FileReader reader = new FileReader(dataURL)) {
-			Type listType = new TypeToken<List<TreeData>>(){}.getType();
-			treeData = gson.fromJson(reader, listType);
-			for (TreeData a : treeData) {
-				a.fullConstruct();
-				System.out.println(a.name + " " + a.seedName + " " + a.price);
-			}
-		} catch (Exception e) {
-			System.out.println("Can't open " + dataURL);
-			e.printStackTrace();
-		}
+	protected static String getDataURL() {
+		return dataURL;
 	}
 
-	private void fullConstruct() {
+	protected static void setData(ArrayList<TreeData> treeData) {
+		TreeData.treeData = treeData;
+	}
 
+	public void fullConstruct() {
+//		System.out.println(name + "\n" + seedName + "\n" + stages + "\n" + totalHarvestTime + "\n" + fruit + "\n" + harvestCycle + "\n" + price + "\n" + isEdible + "\n" + energy + "\n" + health + "\n" + seasons + "\n---------");
 	}
 
 	public String getName() {
@@ -71,7 +59,7 @@ public class TreeData implements Data {
 		return seedName;
 	}
 
-	public List<Integer> getStages() {
+	public ArrayList<Integer> getStages() {
 		return stages;
 	}
 
@@ -103,7 +91,7 @@ public class TreeData implements Data {
 		return health;
 	}
 
-	public List<String> getSeasons() {
+	public ArrayList<String> getSeasons() {
 		return seasons;
 	}
 

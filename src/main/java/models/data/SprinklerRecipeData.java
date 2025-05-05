@@ -1,19 +1,13 @@
 package models.data;
 
-import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
 
-import java.io.FileReader;
-import java.lang.reflect.Array;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class SprinklerRecipeData implements Data {
 	private static final String dataURL = "data/SprinklerCraftingRecipes.json";
-	private static List<SprinklerRecipeData> recipes = null;
+	private static ArrayList<SprinklerRecipeData> recipes = null;
 
 	@SerializedName("name")
 	private String name;
@@ -33,24 +27,16 @@ public class SprinklerRecipeData implements Data {
 	@SerializedName("skill-level")
 	private int skillLevel;
 
-	public static void load() {
-		Gson gson = new Gson();
-
-		try (FileReader reader = new FileReader(dataURL)) {
-			Type listType = new TypeToken<List<SprinklerRecipeData>>(){}.getType();
-			recipes = gson.fromJson(reader, listType);
-			for (SprinklerRecipeData a : recipes) {
-				a.fullConstruct();
-				System.out.println(a.name + " " + a.description + " " + a.skillType + " " + a.skillLevel);
-			}
-		} catch (Exception e) {
-			System.out.println("Can't open " + dataURL);
-			e.printStackTrace();
-		}
+	protected static String getDataURL() {
+		return dataURL;
 	}
 
-	private void fullConstruct() {
+	protected static void setData(ArrayList<SprinklerRecipeData> recipes) {
+		SprinklerRecipeData.recipes = recipes;
+	}
 
+	public void fullConstruct() {
+//		System.out.println(name + "\n" + description + "\n" + tiles + "\n" + ingredients + "\n" + skillType + "\n" + skillLevel + "\n---------");
 	}
 
 	public String getName() {

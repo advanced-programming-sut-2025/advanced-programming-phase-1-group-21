@@ -1,17 +1,12 @@
 package models.data;
 
-import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
 
-import java.io.FileReader;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
 public class PierreStoreRecipeData implements Data {
 	private static final String dataURL = "data/Shops - Pierre's General Store.json";
-	private static List<PierreStoreRecipeData> recipes = null;
+	private static ArrayList<PierreStoreRecipeData> recipes = null;
 
 	@SerializedName("name")
 	private String name;
@@ -24,24 +19,16 @@ public class PierreStoreRecipeData implements Data {
 	@SerializedName("daily-limit")
 	private int dailyLimit;
 
-	public static void load() {
-		Gson gson = new Gson();
-
-		try (FileReader reader = new FileReader(dataURL)) {
-			Type listType = new TypeToken<List<PierreStoreRecipeData>>(){}.getType();
-			recipes = gson.fromJson(reader, listType);
-			for (PierreStoreRecipeData a : recipes) {
-				a.fullConstruct();
-				System.out.println(a.name + " " + a.price + " " + a.description + " " + a.dailyLimit);
-			}
-		} catch (Exception e) {
-			System.out.println("Can't open " + dataURL);
-			e.printStackTrace();
-		}
+	protected static String getDataURL() {
+		return dataURL;
 	}
 
-	private void fullConstruct() {
+	protected static void setData(ArrayList<PierreStoreRecipeData> recipes) {
+		PierreStoreRecipeData.recipes = recipes;
+	}
 
+	public void fullConstruct() {
+//		System.out.println(name + "\n" + description + "\n" + required + "\n" + dailyLimit + "\n" + price + "\n-----------");
 	}
 
 	public String getName() {

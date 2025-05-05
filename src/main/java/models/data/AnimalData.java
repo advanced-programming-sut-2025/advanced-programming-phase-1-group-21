@@ -1,52 +1,39 @@
 package models.data;
 
-import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
 
-import java.io.FileReader;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
 public class AnimalData implements Data {
 	private static final String dataURL = "data/Animals.json";
-	private static List<AnimalData> animals = null;
+	private static ArrayList<AnimalData> animals = null;
 
 	@SerializedName("name")
 	private String name;
 	@SerializedName("house")
 	private String house;
 	@SerializedName("house-type")
-	private List<String> houseType;
+	private ArrayList<String> houseType;
 	@SerializedName("products")
-	private List<String> products;
+	private ArrayList<String> products;
 	@SerializedName("product-time")
 	private int productTime;
 	@SerializedName("product-seasons")
-	private List<String> productSeasons;
+	private ArrayList<String> productSeasons;
 	@SerializedName("tool")
 	private String toolName;
 	@SerializedName("price")
 	private int price;
 
-	public static void load() {
-		Gson gson = new Gson();
-
-		try (FileReader reader = new FileReader(dataURL)) {
-			Type listType = new TypeToken<List<AnimalData>>(){}.getType();
-			animals = gson.fromJson(reader, listType);
-			for (AnimalData a : animals) {
-				a.fullConstruct();
-//				System.out.println(a.name + " lives in a " + a.house + " and costs " + a.price);
-			}
-		} catch (Exception e) {
-			System.out.println("Can't open " + dataURL);
-			e.printStackTrace();
-		}
+	protected static String getDataURL() {
+		return dataURL;
 	}
 
-	private void fullConstruct() {
+	protected static void setData(ArrayList<AnimalData> animals) {
+		AnimalData.animals = animals;
+	}
+
+	public void fullConstruct() {
 
 	}
 
@@ -58,11 +45,11 @@ public class AnimalData implements Data {
 		return house;
 	}
 
-	public List<String> getHouseType() {
+	public ArrayList<String> getHouseType() {
 		return houseType;
 	}
 
-	public List<String> getProducts() {
+	public ArrayList<String> getProducts() {
 		return products;
 	}
 
@@ -70,7 +57,7 @@ public class AnimalData implements Data {
 		return productTime;
 	}
 
-	public List<String> getProductSeasons() {
+	public ArrayList<String> getProductSeasons() {
 		return productSeasons;
 	}
 
