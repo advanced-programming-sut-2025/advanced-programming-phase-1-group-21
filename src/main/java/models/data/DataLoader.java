@@ -10,6 +10,7 @@ import java.util.List;
 
 public class DataLoader {
 	public static void load() {
+		ItemData.setData(loadEach(ItemData.getDataURL(), new TypeToken<List<ItemData>>(){}.getType()));
 		AnimalData.setData(loadEach(AnimalData.getDataURL(), new TypeToken<List<AnimalData>>(){}.getType()));
 		AnimalHouseData.setData(loadEach(AnimalHouseData.getDataURL(), new TypeToken<List<AnimalHouseData>>(){}.getType()));
 		BlackSmithRecipeData.setData(loadEach(BlackSmithRecipeData.getDataURL(), new TypeToken<List<BlackSmithRecipeData>>(){}.getType()));
