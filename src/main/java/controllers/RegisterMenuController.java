@@ -85,12 +85,12 @@ public class RegisterMenuController{
         return Result.failure(UserError.ANSWER_NOT_SET);
     }
 
-    private boolean usernameValidation(String username) {
+    static boolean usernameValidation(String username) {
         String usernameRegex = "^[a-zA-Z0-9-]{3,20}$";
         return Pattern.compile(usernameRegex).matcher(username).matches();
     }
 
-    private boolean emailValidation(String email) {
+    static boolean emailValidation(String email) {
         String emailGetter = "(?<username>\\S+)@(?<domain>\\S+)";
         String emailUsernameRegex = "(?!.*\\.\\..*)[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]";
         String domainRegex = "[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]\\.[a-zA-Z]{2,}";

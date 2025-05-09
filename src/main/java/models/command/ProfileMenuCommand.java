@@ -6,11 +6,11 @@ public enum ProfileMenuCommand implements Command {
     SHOW_CURRENT_MENU("\\s*show\\s+current\\s+menu\\s*"),
     ENTER_MENU("\\s*menu\\s*enter\\s*(?<menuName>\\S+)\\s*"),
     EXIT_MENU("menu exit"),
-    CHANGE_USERNAME(""),
-    CHANGE_PASSWORD(""),
-    CHANGE_EMAIL(""),
-    CHANGE_NICKNAME(""),
-    USERINFO("")
+    CHANGE_USERNAME("\\s*change\\s+username\\s+-u\\s+(?<newUsername>\\S+)\\s*"),
+    CHANGE_PASSWORD("\\s*change\\s+password\\s+-o\\s+(?<oldPassword>\\S+)\\s+-n\\s+(?<newPassword>\\S+)\\s*"),
+    CHANGE_EMAIL("\\s*change\\s+email\\s+-e\\s+(?<newEmail>\\S+)\\s*"),
+    CHANGE_NICKNAME("\\s*change\\s+nickname\\s+-n\\s+(?<newNickname>\\s+)\\s*"),
+    USERINFO("\\s*show\\s+my\\s+info\\s*"),
     ;
     public final Pattern pattern;
     ProfileMenuCommand(String input) {
