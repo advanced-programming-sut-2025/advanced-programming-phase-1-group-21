@@ -12,7 +12,7 @@ public class MainMenuController{
             return Result.success("Now you are in a game");
         }
 
-        if(menu.equals(Menu.ProfileMenu.toString())){
+        if(menu.equals("profile")){
             App.currentMenu = Menu.ProfileMenu;
             return Result.success("Now you are in profile menu");
         }

@@ -3,6 +3,7 @@ package views.menu;
 import controllers.ProfileMenuController;
 import models.command.ProfileMenuCommand;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 
 public class ProfileMenuView {
@@ -10,25 +11,34 @@ public class ProfileMenuView {
     Matcher matcher;
     ProfileMenuController profileMenuController = new ProfileMenuController();
 
-    public void Result(String command){
+    public void Result(String command) throws IOException {
         if((matcher = ProfileMenuCommand.USERINFO.getMatcher(command)) != null){
-            throw new UnsupportedOperationException("Not supported yet.");
+            for(String string : profileMenuController.userInfo().getData())
+                System.out.println(string);
         }
 
-        if((matcher = ProfileMenuCommand.CHANGE_USERNAME.getMatcher(command)) != null){
-            throw new UnsupportedOperationException("Not supported yet.");
+        else if((matcher = ProfileMenuCommand.CHANGE_USERNAME.getMatcher(command)) != null){
+            System.out.println(profileMenuController.changeUsername(matcher.group("newUsername")));
         }
 
-        if((matcher = ProfileMenuCommand.CHANGE_PASSWORD.getMatcher(command)) != null){
-            throw new UnsupportedOperationException("Not supported yet.");
+        else if((matcher = ProfileMenuCommand.CHANGE_PASSWORD.getMatcher(command)) != null){
+            System.out.println(profileMenuController.changePassword(matcher.group("oldPassword"),
+                    matcher.group("newPassword")));
         }
 
-        if((matcher = ProfileMenuCommand.CHANGE_EMAIL.getMatcher(command)) != null){
-            throw new UnsupportedOperationException("Not supported yet.");
+        else if((matcher = ProfileMenuCommand.CHANGE_EMAIL.getMatcher(command)) != null){
+            System.out.println(profileMenuController.changeEmail(matcher.group("newEmail")));
         }
 
-        if((matcher = ProfileMenuCommand.CHANGE_NICKNAME.getMatcher(command)) != null){
-            throw new UnsupportedOperationException("Not supported yet.");
+        else if((matcher = ProfileMenuCommand.CHANGE_NICKNAME.getMatcher(command)) != null){
+            System.out.println(profileMenuController.changeNickname(matcher.group("newNickname")));
         }
+
+        else if((matcher = ProfileMenuCommand.ENTER_MENU.getMatcher(command)) != null){
+            System.out.println(profileMenuController.menuEnter(matcher.group("menu")));
+        }
+
+        else
+            System.out.println("Invalid command");
     }
 }

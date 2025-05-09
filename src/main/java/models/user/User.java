@@ -90,6 +90,26 @@ public class User {
         this.password = password;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public void setHash(Hash hash) {
+        this.hash = hash;
+    }
+
     public boolean validateSecurityAnswer(String answer) {
         return this.securityAnswer.equalsIgnoreCase(answer);
     }
