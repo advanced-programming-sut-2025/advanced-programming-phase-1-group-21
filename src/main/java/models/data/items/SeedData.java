@@ -30,7 +30,7 @@ public class SeedData implements Data, ItemData {
 
 	@SerializedName("seasons")
 	private ArrayList<String> seasons;
-	private ArrayList<Season> cseasons;
+	private ArrayList<Season> cseasons = new ArrayList<>();
 
 	@SerializedName("can-become-giant")
 	private boolean canBecomeGiant;
