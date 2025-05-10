@@ -105,7 +105,7 @@ public class GameController{
         return Result.success(
                 "Day " + App.game.getGameDate().getDay() + ", " +
                         App.game.getSeason()
-        , ""
+                , ""
         );
     }
 
@@ -620,7 +620,8 @@ public class GameController{
             return Result.failure(GameError.FRIENDSHIP_LEVEL_IS_NOT_ENOUGH);
 
         List<Item> gift = new ArrayList<>();
-        Item item = new Item(itemName , null , 0 , amount);
+//        Item item = new Item(itemName , null , 0 , amount); Previews version
+        Item item = Item.build(itemName, amount);
         gift.add(item);
         if(!App.game.getCurrentPlayer().getInventory().canRemoveItemList(gift))
             return Result.failure(GameError.NOT_ENOUGH_ITEMS);
@@ -631,7 +632,7 @@ public class GameController{
         return Result.success(null);
     }
 
-//    What's its difference with gift history :/
+    //    What's its difference with gift history :/
     public Result<ArrayList<String>> giftList() {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
 
@@ -732,7 +733,8 @@ public class GameController{
             return Result.failure(GameError.FRIENDSHIP_LEVEL_IS_NOT_ENOUGH);
 
         List<Item> gift = new ArrayList<>();
-        Item item = new Item("Bouquet", null , 0 , 1);
+//        Item item = new Item("Bouquet", null , 0 , 1); Previews version
+        Item item = Item.build("Bouquet", 1);
         gift.add(item);
         if(!App.game.getCurrentPlayer().getInventory().canRemoveItemList(gift))
             return Result.failure(GameError.NOT_ENOUGH_ITEMS);
