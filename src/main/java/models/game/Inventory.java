@@ -203,4 +203,16 @@ public class Inventory {
 
         return output;
     }
+
+    @Override
+    public String toString() {
+        ArrayList<String> inventoryDetails = showInventory();
+
+        inventoryDetails.add("Inventory Type: " + inventoryType);
+        inventoryDetails.add("Trashcan Type: " + trashcanType);
+        inventoryDetails.add("Maximum Size: " + getMaximumSize());
+
+        return String.join("\n", inventoryDetails);
+    }
+
 }

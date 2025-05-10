@@ -152,4 +152,36 @@ public class Map implements DailyUpdate {
 
         return false;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("Map Summary:\n");
+        builder.append("Map Type: ").append(mapType).append("\n");
+
+        builder.append("House: ").append(house == null ? "null" : house).append("\n");
+
+        builder.append("Lakes: ").append(lakes == null ? "null" : lakes.isEmpty() ? "[]" : lakes).append("\n");
+
+        builder.append("Shops: ").append(shops == null ? "null" : shops.isEmpty() ? "[]" : shops).append("\n");
+
+        builder.append("Mines: ").append(mines == null ? "null" : mines).append("\n");
+
+        builder.append("Greenhouses: ").append(greenHouses == null ? "null" : greenHouses).append("\n");
+
+        builder.append("Barn: ").append(barn == null ? "null" : barn).append("\n");
+
+        builder.append("Coop: ").append(coop == null ? "null" : coop).append("\n");
+
+        builder.append("Tile Grid Size: ");
+        if (tiles == null || tiles.isEmpty() || tiles.get(0) == null) {
+            builder.append("null\n");
+        } else {
+            builder.append(getMaxY()).append(" rows × ").append(getMaxX()).append(" columns\n");
+        }
+
+        return builder.toString();
+    }
+
 }

@@ -82,9 +82,15 @@ public enum GameMenuCommand implements Command {
 //    SELL_ANIMAL("sell animal -n <name>"),
 //    FISHING("fishing -p <fishing pole>"),
 //    ARTISAN_USE("artisan use <artisan_name> <item1_name>"),
-    WHERE_AM_I("whereami"),
     WATER("\\s*water\\s+-l\\s+\\((?<x>\\d+),(?<y>\\d+)\\)\\s*"),
     PLANT("^\\s*plant\\s+-s\\s+(?<seedName>.*)\\s+-d\\s+(?<direction>(N)|(E)|(S)|(W)|(NE)|(NW)|(SE)|(SW))\\s*$"),
+
+    //THESE ARE DEBUG COMMANDS
+    WHERE_AM_I("whereami"),
+    TILE_STATUS("\\s*tile\\s+status\\s+-l\\s+\\((?<x>\\d+),(?<y>\\d+)\\)\\s*"),
+    WHO_AM_I("whoami"),
+    MAP_STATUS("map status"),
+    INVENTORY_STATUS("inventory status"),
     ;
 
     public final Pattern pattern;
