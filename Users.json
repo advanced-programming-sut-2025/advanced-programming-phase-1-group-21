@@ -30,5 +30,13 @@
     "nickname": "sobi",
     "gender": "FEMALE",
     "isInAGame": false
+  },
+  {
+    "username": "aliii",
+    "password": "%3@gDC",
+    "email": "ali@gmail.com",
+    "nickname": "alill",
+    "gender": "MALE",
+    "isInAGame": false
   }
 ]

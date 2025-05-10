@@ -16,6 +16,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,14 +42,16 @@ public class RegisterMenuController{
         if(!emailValidation(email))
             return Result.failure(AuthError.INVALID_EMAIL_FORMAT);
 
-        if(checkPassword(password).isError())
-            return checkPassword(password);
+        if (password.equals("random")) {
+            password = generateRandomPassword();
+        }
+        else {
+            if (checkPassword(password).isError())
+                return checkPassword(password);
 
-        if(!password.equals(passwordConfirm))
-            return Result.failure(AuthError.PASSWORD_CONFIRM_ERROR);
-
-        //TODO
-        //Random Password (balad naboodam)
+            if (!password.equals(passwordConfirm))
+                return Result.failure(AuthError.PASSWORD_CONFIRM_ERROR);
+        }
 
         User user = new User(username , password , email , nickname , getGenderByName(gender) , null , null , false);
         App.registeredUser = user;
@@ -59,7 +64,7 @@ public class RegisterMenuController{
             System.err.println("error" + e.getMessage());
             throw e;
         }
-        return Result.success(null, "User Registered");
+        return Result.success(null, "User Registered " + username + " " + password);
     }
 
     public Result<Void> pickQuestion(String answer, String answerConfirm, String questionNumber) throws IOException {
@@ -163,4 +168,36 @@ public class RegisterMenuController{
                 return user;
         return null;
     }
+
+    private String generateRandomPassword() {
+        Random random = new Random();
+
+        int length = random.nextInt(6) + 8;
+        String upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String lower = "abcdefghijklmnopqrstuvwxyz";
+        String digits = "0123456789";
+        String specials = "!@#$%^&*()-_=+[]{}";
+
+        List<Character> passwordChars = new ArrayList<>();
+
+        passwordChars.add(upper.charAt(random.nextInt(upper.length())));
+        passwordChars.add(lower.charAt(random.nextInt(lower.length())));
+        passwordChars.add(digits.charAt(random.nextInt(digits.length())));
+        passwordChars.add(specials.charAt(random.nextInt(specials.length())));
+
+        String all = upper + lower + digits + specials;
+        for (int i = 4; i < length; i++) {
+            passwordChars.add(all.charAt(random.nextInt(all.length())));
+        }
+
+        Collections.shuffle(passwordChars);
+
+        StringBuilder password = new StringBuilder();
+        for (char c : passwordChars) {
+            password.append(c);
+        }
+
+        return password.toString();
+    }
+
 }
