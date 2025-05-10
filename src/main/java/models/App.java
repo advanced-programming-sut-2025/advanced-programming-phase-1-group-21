@@ -1,5 +1,6 @@
 package models;
 
+import models.data.DataLoader;
 import models.game.Game;
 import models.user.User;
 
@@ -9,4 +10,8 @@ public class App {
     public static boolean play = true;
     public static User registeredUser;
     public static User logedInUser;
+
+    static {
+        DataLoader.load();
+    }
 }

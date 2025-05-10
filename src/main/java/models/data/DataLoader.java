@@ -57,7 +57,7 @@ public class DataLoader {
 				a.fullConstruct();
 			}
 		} catch (Exception e) {
-			System.out.println("Can't open Animals.json");
+			System.out.println("Can't open " + URL + ": " + e.getMessage());
 			e.printStackTrace();
 		}
 
