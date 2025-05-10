@@ -8,16 +8,14 @@ import java.util.ArrayList;
 
 public class Shop extends Building {
 	private ArrayList<Item> items = new ArrayList<>();
-	private TileType shopType;
-
+	private final TileType shopType;
 
 	public Shop(TileType shopType) {
 		if (!shopType.isShop())
 			throw new IllegalArgumentException("shop type must be a shop");
 
 		this.shopType = shopType;
-		if (shopType == shopType.BLACKSMITH)
-			items = DataBaseController.readShopProducts(new Gson() , "data/BlackSmith.json");
+		this.map = (new MapBuilder()).buildShop();
 	}
 
 	public ArrayList<String> showProducts(){
@@ -31,5 +29,14 @@ public class Shop extends Building {
 			output.add("---------------");
 		}
 		return output;
+	}
+
+	public TileType getShopType() {
+		return shopType;
+	}
+
+	@Override
+	public boolean canEnter() {
+		return true;
 	}
 }

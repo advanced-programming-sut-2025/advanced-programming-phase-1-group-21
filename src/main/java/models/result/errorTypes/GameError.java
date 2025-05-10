@@ -29,6 +29,9 @@ public enum GameError implements Error {
     RATE_MUST_BE_POSITIVE("Rate must be positive"),
     YOU_ARE_GIRL("You are girl"),
     YOUR_WIFE_CAN_NOT_BE_A_BOY("Your wife can't be a boy"),
+    CANT_ENTER("Cant enter"),
+    YOU_SHOULD_BE_ON_FARM("You should have been on farm"),
+    YOU_SHOULD_BE_ON_VILLAGE("You should have been on village"),
     ;
 
 
