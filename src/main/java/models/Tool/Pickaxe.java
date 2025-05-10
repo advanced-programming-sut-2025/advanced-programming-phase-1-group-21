@@ -37,7 +37,6 @@ public class Pickaxe extends Tool {
 			)
 	);
 
-	private ToolMaterialType toolMaterialType = ToolMaterialType.PRIMITIVE;
 	public Pickaxe() {
 		super(ToolType.PICKAXE);
 	}

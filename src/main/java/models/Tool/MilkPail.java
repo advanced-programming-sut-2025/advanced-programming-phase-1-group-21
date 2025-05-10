@@ -5,7 +5,6 @@ import models.map.Coord;
 import models.result.Result;
 
 public class MilkPail extends Tool {
-	protected ToolMaterialType toolMaterialType;
 	public MilkPail() {
 		super(ToolType.MILK_PAIL);
 	}

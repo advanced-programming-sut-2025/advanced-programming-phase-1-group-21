@@ -5,7 +5,6 @@ import models.map.Coord;
 import models.result.Result;
 
 public class FishingPole extends Tool {
-	ToolMaterialType toolMaterialType;
 	public FishingPole() {
 		super(ToolType.FISHING_POLE);
 	}

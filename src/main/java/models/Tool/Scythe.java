@@ -11,7 +11,6 @@ import models.map.TileType;
 import models.result.Result;
 
 public class Scythe extends Tool {
-	private ToolMaterialType toolMaterialType;
 	public Scythe() {
 		super(ToolType.SCYTHE);
 	}

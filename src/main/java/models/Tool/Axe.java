@@ -8,7 +8,6 @@ import models.result.Result;
 import models.result.errorTypes.GameError;
 
 public class Axe extends Tool {
-	private ToolMaterialType toolMaterialType = ToolMaterialType.PRIMITIVE;
 	public Axe() {
 		super(ToolType.AXE);
 	}

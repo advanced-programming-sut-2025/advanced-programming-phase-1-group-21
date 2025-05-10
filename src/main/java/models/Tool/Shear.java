@@ -5,7 +5,6 @@ import models.map.Coord;
 import models.result.Result;
 
 public class Shear extends Tool {
-	private ToolMaterialType toolMaterialType;
 	public Shear() {
 		super(ToolType.SHEAR);
 	}

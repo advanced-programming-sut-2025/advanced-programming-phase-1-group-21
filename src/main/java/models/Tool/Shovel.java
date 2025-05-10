@@ -5,7 +5,6 @@ import models.map.Coord;
 import models.result.Result;
 
 public class Shovel extends Tool {
-	private ToolMaterialType toolMaterialType;
 	public Shovel() {
 		super(ToolType.SHOVEL);
 	}
