@@ -17,7 +17,7 @@ public class Scythe extends Tool {
 	}
 
 	@Override
-	protected Result<Item> use(Coord coord) {
+	public Result<Item> use(Coord coord) {
 		Player player = App.game.getCurrentPlayer();
 		player.decreaseEnergy(2);
 		Tile tile = player.getMap().getTile(coord);
