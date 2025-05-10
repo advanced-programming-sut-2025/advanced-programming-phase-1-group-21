@@ -36,7 +36,7 @@ public class MixedSeedData implements Data {
 
 	public static MixedSeedData getSeedData(String season) {
 		for (MixedSeedData a : seedData)
-			if (a.getSeason().equals(season))
+			if (a.getSeason().equalsIgnoreCase(season))
 				return a;
 		return null;
 	}

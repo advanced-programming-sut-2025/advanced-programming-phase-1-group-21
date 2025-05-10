@@ -194,14 +194,12 @@ public class GameController{
             House house = tile.getPlacable(House.class);
             player.setMap(house.getMap());
             player.setCoord(new Coord(0, 0));
-            GameTerminalView.printWithColor(printMap(0 , 0 , 50));
         }
         else if(tile.getTileType() == TileType.GREEN_HOUSE) {
             GreenHouse house = tile.getPlacable(GreenHouse.class);
             if(house.isBuild()) {
                 player.setMap(house.getMap());
                 App.game.getCurrentPlayer().setCoord(new Coord(0, 0));
-                GameTerminalView.printWithColor(printMap(0, 0, 50));
             }
             else {
                 return Result.failure(GameError.GREENHOUSE_IS_NOT_YET_BUILT);
@@ -211,26 +209,23 @@ public class GameController{
             Mines mines = tile.getPlacable(Mines.class);
             player.setMap(mines.getMap());
             App.game.getCurrentPlayer().setCoord(new Coord(0, 0));
-            GameTerminalView.printWithColor(printMap(0 , 0 , 50));
         }
         else if(tile.getTileType() == TileType.DOOR) {
             player.setMap(player.getDefaultMap());
             App.game.getCurrentPlayer().setCoord(new Coord(0, 0));
-            GameTerminalView.printWithColor(printMap(0 , 0 , 50));
         }
         else if(tile.getTileType() == TileType.BLACKSMITH){
             App.game.getVillage().getShops().get(0).showProducts(); //TODO ?:(
         }
         else {
             App.game.getCurrentPlayer().setCoord(new Coord(x, y));
-            GameTerminalView.printWithColor(printMap(0 , 0 , 50));
         }
         return Result.success(null);
     }
 
-    public ArrayList<String> printMap(int x, int y , int size) {
-        if (App.game == null) throw new IllegalStateException("Game is null!");
-        return App.game.getCurrentPlayerMap().printMap(new Coord(x , y) , size);
+    public Result<ArrayList<String>> printMap(int x, int y , int size) {
+        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+        return Result.success(App.game.getCurrentPlayerMap().printMap(new Coord(x , y) , size));
     }
 
     public int showEnergy() {

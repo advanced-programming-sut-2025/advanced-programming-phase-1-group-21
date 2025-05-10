@@ -48,7 +48,7 @@ public class StardropSaloonRecipeData implements Data {
 
 	public static StardropSaloonRecipeData getRecipeData(String name) {
 		for (StardropSaloonRecipeData a : recipes)
-			if (a.getName().equals(name))
+			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}

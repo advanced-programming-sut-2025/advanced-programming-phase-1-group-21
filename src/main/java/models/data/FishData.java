@@ -47,7 +47,7 @@ public class FishData implements Data {
 
 	public static FishData getFishData(String name) {
 		for (FishData a : fishes)
-			if (a.getName().equals(name))
+			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}

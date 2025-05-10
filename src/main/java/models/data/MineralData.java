@@ -43,7 +43,7 @@ public class MineralData implements Data {
 
 	public static MineralData getMineralData(String name) {
 		for (MineralData a : mineralData)
-			if (a.getName().equals(name))
+			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}

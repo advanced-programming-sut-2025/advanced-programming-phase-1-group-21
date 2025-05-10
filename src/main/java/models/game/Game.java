@@ -29,7 +29,6 @@ public class Game implements DailyUpdate {
         this.gameDate = Date.createBias();
         this.gameWeather = Weather.SUNNY;
         this.nextDayWeather = calculateRandomWeather();
-        DataLoader.load();
 
         for(int i = 0 ; i < players.size() ; i++) {
             for(int j = i+1 ; j < players.size() ; j++) {
@@ -175,7 +174,7 @@ public class Game implements DailyUpdate {
     }
 
     public static Item getCoinItem(int amount) {
-        return Item.build("coin", 0);
+        return Item.build("Coin", 0);
     }
 
     public Map getVillage() {

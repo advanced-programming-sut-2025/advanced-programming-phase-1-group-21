@@ -55,7 +55,7 @@ public class BlackSmithRecipeData implements Data, ShopData {
 
 	public static BlackSmithRecipeData getBlackSmithRecipeData(String name) {
 		for (BlackSmithRecipeData a : recipes)
-			if (a.getName().equals(name))
+			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}

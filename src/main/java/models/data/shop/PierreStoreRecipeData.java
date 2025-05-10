@@ -55,7 +55,7 @@ public class PierreStoreRecipeData implements Data {
 
 	public static PierreStoreRecipeData getRecipeData(String name) {
 		for (PierreStoreRecipeData a : recipes)
-			if (a.getName().equals(name))
+			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}

@@ -7,6 +7,7 @@ import models.game.Player;
 import models.map.Coord;
 import models.map.Direction;
 import models.map.Weather;
+import models.result.Result;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -109,7 +110,11 @@ public class GameTerminalView {
         }
 
         if ((matcher = GameMenuCommand.PRINT_MAP.getMatcher(command)) != null) {
-            printWithColor(gameController.printMap(Integer.parseInt(matcher.group("x")), Integer.parseInt(matcher.group("y")), Integer.parseInt(matcher.group("size"))));
+            Result<ArrayList<String>> R = gameController.printMap(Integer.parseInt(matcher.group("x")), Integer.parseInt(matcher.group("y")), Integer.parseInt(matcher.group("size")));
+            if (R.isSuccess())
+                printWithColor(R.getData());
+            else
+                System.out.println(R.getMessage());
         }
         else if ((matcher = GameMenuCommand.SHOW_CURRENT_MENU.getMatcher(command)) != null) {
             System.out.println(gameController.showCurrentMenu());

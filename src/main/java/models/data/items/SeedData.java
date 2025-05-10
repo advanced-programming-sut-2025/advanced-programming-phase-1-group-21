@@ -30,7 +30,7 @@ public class SeedData implements Data, ItemData {
 
 	@SerializedName("seasons")
 	private ArrayList<String> seasons;
-	private ArrayList<Season> cseasons;
+	private ArrayList<Season> cseasons = new ArrayList<>();
 
 	@SerializedName("can-become-giant")
 	private boolean canBecomeGiant;
@@ -94,7 +94,7 @@ public class SeedData implements Data, ItemData {
 
 	public static SeedData getData(String name) {
 		for (SeedData a : seedData)
-			if (a.getName().equals(name))
+			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}

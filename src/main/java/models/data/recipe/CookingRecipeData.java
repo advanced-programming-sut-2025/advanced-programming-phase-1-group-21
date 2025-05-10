@@ -92,7 +92,7 @@ public class CookingRecipeData implements Data {
 
 	public static CookingRecipeData getRecipeData(String name) {
 		for (CookingRecipeData a : recipes)
-			if (a.getName().equals(name))
+			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}

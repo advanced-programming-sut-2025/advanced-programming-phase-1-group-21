@@ -66,7 +66,7 @@ public class SprinklerRecipeData implements Data {
 
 	public static SprinklerRecipeData getRecipeData(String name) {
 		for (SprinklerRecipeData a : recipes)
-			if (a.getName().equals(name))
+			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}

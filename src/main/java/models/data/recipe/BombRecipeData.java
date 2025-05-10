@@ -71,7 +71,7 @@ public class BombRecipeData implements Data {
 
 	public static BombRecipeData getBombRecipeData(String name) {
 		for (BombRecipeData a : recipes)
-			if (a.getName().equals(name))
+			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}

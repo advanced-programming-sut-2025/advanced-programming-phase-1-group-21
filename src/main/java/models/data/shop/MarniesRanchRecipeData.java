@@ -54,7 +54,7 @@ public class MarniesRanchRecipeData implements Data, ShopData {
 
 	public static MarniesRanchRecipeData getRecipeData(String name) {
 		for (MarniesRanchRecipeData a : recipes)
-			if (a.getName().equals(name))
+			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}

@@ -36,7 +36,7 @@ public class SalableData implements Data, ItemData {
 
 	public static SalableData getData(String name) {
 		for (SalableData a : items)
-			if (a.getName().equals(name))
+			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}

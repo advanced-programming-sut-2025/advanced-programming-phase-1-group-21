@@ -71,7 +71,7 @@ public class AnimalData implements Data {
 
 	public static AnimalData getAnimalData(String name) {
 		for (AnimalData a : animals)
-			if (a.getName().equals(name))
+			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}
