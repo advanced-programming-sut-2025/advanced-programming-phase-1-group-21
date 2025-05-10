@@ -20,6 +20,11 @@ public class Item {
         return cost;
     }
 
+    //TODO
+    public static Item buildItem(String name, int amount) {
+        return null;
+    }
+
     public String getName() {
         return name;
     }

@@ -160,6 +160,9 @@ public class GameTerminalView {
         else if ((matcher = GameMenuCommand.INVENTORY_STATUS.getMatcher(command)) != null) {
             System.out.println(gameController.getInventoryStatus());
         }
+        else if ((matcher = GameMenuCommand.CHEAT_ADD_ITEM.getMatcher(command)) != null) {
+            gameController.addItemCheat(matcher.group("name"), Integer.parseInt(matcher.group("amount")));
+        }
         else if ((matcher = GameMenuCommand.INVENTORY_SHOW.getMatcher(command)) != null) {
             printArrayList(gameController.showInventory().getData());
         }
