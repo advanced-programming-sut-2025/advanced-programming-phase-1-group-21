@@ -36,7 +36,7 @@ public class PlaceableData implements Data, ItemData {
 
 	public static PlaceableData getData(String name) {
 		for (PlaceableData a : items)
-			if (a.getName().equals(name))
+			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}

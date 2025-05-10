@@ -65,7 +65,7 @@ public class ScarecrowRecipeData implements Data {
 
 	public static ScarecrowRecipeData getRecipeData(String name) {
 		for (ScarecrowRecipeData a : recipes)
-			if (a.getName().equals(name))
+			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}

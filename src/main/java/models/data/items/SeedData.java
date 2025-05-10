@@ -94,7 +94,7 @@ public class SeedData implements Data, ItemData {
 
 	public static SeedData getData(String name) {
 		for (SeedData a : seedData)
-			if (a.getName().equals(name))
+			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}

@@ -57,7 +57,7 @@ public class ForagingCropData implements Data {
 
 	public static ForagingCropData getCropData(String name) {
 		for (ForagingCropData a : cropData)
-			if (a.getName().equals(name))
+			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}

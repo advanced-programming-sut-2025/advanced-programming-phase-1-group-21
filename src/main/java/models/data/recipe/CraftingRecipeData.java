@@ -71,7 +71,7 @@ public class CraftingRecipeData implements Data {
 
 	public static CraftingRecipeData getRecipeData(String name) {
 		for (CraftingRecipeData a : recipes)
-			if (a.getName().equals(name))
+			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}

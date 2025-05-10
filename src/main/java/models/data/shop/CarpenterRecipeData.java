@@ -62,7 +62,7 @@ public class CarpenterRecipeData implements Data, ShopData {
 
 	public static CarpenterRecipeData getRecipeData(String name) {
 		for (CarpenterRecipeData a : recipes)
-			if (a.getName().equals(name))
+			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}

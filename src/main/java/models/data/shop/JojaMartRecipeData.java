@@ -54,7 +54,7 @@ public class JojaMartRecipeData implements Data, ShopData {
 
 	public static JojaMartRecipeData getRecipeData(String name) {
 		for (JojaMartRecipeData a : recipes)
-			if (a.getName().equals(name))
+			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}

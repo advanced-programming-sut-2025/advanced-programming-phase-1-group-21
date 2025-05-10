@@ -50,7 +50,7 @@ public class AnimalHouseData implements Data {
 
 	public static AnimalHouseData getAnimalHouseData(String name) {
 		for (AnimalHouseData a : animalHouses)
-			if (a.getName().equals(name))
+			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}

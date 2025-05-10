@@ -174,7 +174,7 @@ public class Game implements DailyUpdate {
     }
 
     public static Item getCoinItem(int amount) {
-        return Item.build("coin", 0);
+        return Item.build("Coin", 0);
     }
 
     public Map getVillage() {

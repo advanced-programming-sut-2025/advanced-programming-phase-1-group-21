@@ -42,7 +42,7 @@ public class ConsumableData implements Data, ItemData {
 
 	public static ConsumableData getData(String name) {
 		for (ConsumableData a : items)
-			if (a.getName().equals(name))
+			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}

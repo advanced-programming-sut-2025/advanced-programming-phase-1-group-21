@@ -39,7 +39,7 @@ public class AllItemsData implements Data {
 
 	public static AllItemsData getData(String name) {
 		for (AllItemsData a : items)
-			if (a.getName().equals(name))
+			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}

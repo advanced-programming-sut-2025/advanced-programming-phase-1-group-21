@@ -36,7 +36,7 @@ public class ForagingSeedData implements Data {
 
 	public static ForagingSeedData getSeedData(String name) {
 		for (ForagingSeedData a : seedData)
-			if (a.getName().equals(name))
+			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}

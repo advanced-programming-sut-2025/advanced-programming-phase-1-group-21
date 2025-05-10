@@ -54,7 +54,7 @@ public class FishShopRecipeData implements Data, ShopData {
 
 	public static FishShopRecipeData getRecipeData(String name) {
 		for (FishShopRecipeData a : recipes)
-			if (a.getName().equals(name))
+			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}

@@ -36,7 +36,7 @@ public class ForagingTreeData implements Data {
 
 	public static ForagingTreeData getTreeData(String name) {
 		for (ForagingTreeData a : treeData)
-			if (a.getName().equals(name))
+			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}
