@@ -19,7 +19,8 @@ public enum GameError implements Error {
     SEED_NOT_FOUND("Seed not found"),
     NOT_IMPLEMENTED("Not implemented"),
     NO_GAME_RUNNING("No game running"),
-    YOU_CANT_DO_ACTION("You can't do that here");
+    YOU_CANT_DO_ACTION("You can't do that here"),
+    TILE_DOESNT_HAVE_WATER("Tile does not have water");
 
 
     private final String message;

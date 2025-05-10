@@ -69,4 +69,11 @@ public enum TileType {
 			default -> false;
 		};
 	}
+
+	public boolean isWater() {
+		return switch (this) {
+			case LAKE -> true;
+			default -> false;
+		};
+	}
 }
