@@ -32,6 +32,8 @@ public enum GameError implements Error {
     CANT_ENTER("Cant enter"),
     YOU_SHOULD_BE_ON_FARM("You should have been on farm"),
     YOU_SHOULD_BE_ON_VILLAGE("You should have been on village"),
+    RESPONSE_IS_NOT_SUPPORTED("Response is not supported"),
+    TRADE_ID_DOES_NOT_EXIST("Trade id does not exist"),
     ;
 
 
