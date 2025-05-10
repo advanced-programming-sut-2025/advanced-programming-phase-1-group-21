@@ -21,7 +21,9 @@ public enum GameError implements Error {
     NO_PLAYER_FOUND("No player found"),
     NOT_NEXT_TO_EACH_OTHER("You are not next to each other"),
     FRIENDSHIP_LEVEL_IS_NOT_ENOUGH("Friendship level is not enough to do this"),
-    NO_GAME_RUNNING("No game running");
+    NO_GAME_RUNNING("No game running"),
+    YOU_CANT_DO_ACTION("You can't do that here"),
+    TILE_DOESNT_HAVE_WATER("Tile does not have water");
 
 
     private final String message;
