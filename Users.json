@@ -22,5 +22,13 @@
     "nickname": "sobi",
     "gender": "MALE",
     "isInAGame": true
+  },
+  {
+    "username": "ali",
+    "password": "\u003cpassword1\u003e",
+    "email": "sobhan@gmail.com",
+    "nickname": "sobi",
+    "gender": "FEMALE",
+    "isInAGame": true
   }
 ]

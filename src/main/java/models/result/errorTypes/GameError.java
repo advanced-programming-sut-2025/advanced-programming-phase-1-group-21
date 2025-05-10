@@ -18,6 +18,9 @@ public enum GameError implements Error {
     YOU_CANT_USE_PICKAXE_HERE("You can't use pickaxe here to use"),
     SEED_NOT_FOUND("Seed not found"),
     NOT_IMPLEMENTED("Not implemented"),
+    NO_PLAYER_FOUND("No player found"),
+    NOT_NEXT_TO_EACH_OTHER("You are not next to each other"),
+    FRIENDSHIP_LEVEL_IS_NOT_ENOUGH("Friendship level is not enough to do this"),
     NO_GAME_RUNNING("No game running"),
     YOU_CANT_DO_ACTION("You can't do that here"),
     TILE_DOESNT_HAVE_WATER("Tile does not have water");
