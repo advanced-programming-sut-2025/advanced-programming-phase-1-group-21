@@ -301,22 +301,11 @@ public class GameController{
             return Result.failure(GameError.TOOL_NOT_FOUND);
 
         Tool tool = (Tool) App.game.getCurrentPlayer().getItemInHand();
-        if(tool.getToolType().equals(ToolType.HOE)) {
-            System.out.println("HOE");
-            Hoe hoe = (Hoe) App.game.getCurrentPlayer().getItemInHand();
-            return hoe.use(destinyTile);
+        Result<Item> item = tool.use(destinyTile);
+        if (item.isSuccess()) {
+            App.game.getCurrentPlayer().getInventory().addItem(item.getData());
         }
-        else if(tool.getToolType().equals(ToolType.PICKAXE)) {
-            System.out.println("PICKAXE");
-            Pickaxe pickaxe = (Pickaxe) App.game.getCurrentPlayer().getItemInHand();
-            return pickaxe.use(destinyTile);
-        }
-        else if(tool.getToolType().equals(ToolType.AXE)) {
-            System.out.println("AXE");
-            Axe axe = (Axe) App.game.getCurrentPlayer().getItemInHand();
-            return axe.use(destinyTile);
-        }
-        return Result.success("wtf");
+        return item;
     }
 
     public Result<String> craftInfo(String craftName) {
