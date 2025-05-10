@@ -1,1 +1,34 @@
-[{"username":"ali","password":"\u003cpassword2\u003e","email":"sobhan@gmail.com","nickname":"sobi","gender":"MALE","isInAGame":true},{"username":"sobi","password":"\u003cpassword1\u003e","email":"sobhan@gmail.com","nickname":"sobi","gender":"MALE","isInAGame":true},{"username":"maryam","password":"\u003cpassword1\u003e","email":"sobhan@gmail.com","nickname":"sobi","gender":"MALE","isInAGame":true}]
+[
+  {
+    "username": "sobhan",
+    "password": "\u003cpassword1\u003e",
+    "email": "sobhan@gmail.com",
+    "nickname": "sobi",
+    "gender": "MALE",
+    "isInAGame": true
+  },
+  {
+    "username": "sobi",
+    "password": "\u003cpassword1\u003e",
+    "email": "sobhan@gmail.com",
+    "nickname": "sobi",
+    "gender": "MALE",
+    "isInAGame": true
+  },
+  {
+    "username": "maryam",
+    "password": "\u003cpassword1\u003e",
+    "email": "sobhan@gmail.com",
+    "nickname": "sobi",
+    "gender": "MALE",
+    "isInAGame": true
+  },
+  {
+    "username": "ali",
+    "password": "\u003cpassword1\u003e",
+    "email": "sobhan@gmail.com",
+    "nickname": "sobi",
+    "gender": "FEMALE",
+    "isInAGame": true
+  }
+]

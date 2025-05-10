@@ -63,6 +63,7 @@ public class GameController{
 
         Game game = new Game(players);
         App.game = game;
+
         return Result.success(game , "Game created");
     }
 
@@ -565,14 +566,48 @@ public class GameController{
         return Result.success("Now you are back to home");
     }
 
-    public Result<Void> talk(Player player, String massege) {
+    public Result<ArrayList<String>> showFriendships(){
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+        ArrayList<String> output = new ArrayList<>();
+        output.add(App.game.getCurrentPlayer().getUser().getUsername() + "'s friendships :");
+        for(Relation relation : App.game.getMyRelations(App.game.getCurrentPlayer()))
+            output.add(relation.printRelation(App.game.getCurrentPlayer()));
+        return Result.success(output);
     }
 
-    public Result<Void> talkHistory(Player player) {
+    public Result<Void> talk(String username, String massage) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        if(App.game.getCurrentPlayer().getUser().getUsername().equals(username))
+            return Result.failure(GameError.NO_PLAYER_FOUND);
+
+        Player player = App.game.getPlayerByName(username);
+        if(player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
+
+//        if(!App.game.getCurrentPlayer().weAreNextToEachOther(player))
+//            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
+
+        App.game.getRelationOfUs(App.game.getCurrentPlayer(), player).addTalk(App.game.getCurrentPlayer().getUser().getUsername() + ": " + massage);
+        return Result.success(null);
+    }
+
+    public Result<ArrayList<String>> talkHistory(String username) {
+        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+
+        ArrayList<String> output = new ArrayList<>();
+
+        if(App.game.getCurrentPlayer().getUser().getUsername().equals(username))
+            return Result.failure(GameError.NO_PLAYER_FOUND);
+
+        Player player = App.game.getPlayerByName(username);
+        if(player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
+
+        Relation relation = App.game.getRelationOfUs(App.game.getCurrentPlayer(), player);
+        output.add("your chats with " + username + " :");
+        output.addAll(relation.getTalks());
+
+        return Result.success(output);
+
     }
 
     public Result<Void> sendGift(Player player, Item item, int amount) {
@@ -580,24 +615,60 @@ public class GameController{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<ArrayList<Item>> giftList() {
-        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+    //What's its difference with gift history :/
+//    public Result<ArrayList<Item>> giftList() {
+//        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+//
+//        for(Gift gift )
+//    }
 
     public Result<Void> giftRate(int giftID, double rate) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<ArrayList<Gift>> giftHistory(Player player) {
+    public Result<ArrayList<String>> giftHistory(String username) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        ArrayList<String> output = new ArrayList<>();
+
+        if(App.game.getCurrentPlayer().getUser().getUsername().equals(username))
+            return Result.failure(GameError.NO_PLAYER_FOUND);
+
+        Player player = App.game.getPlayerByName(username);
+        if(player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
+
+        Relation relation = App.game.getRelationOfUs(App.game.getCurrentPlayer(), player);
+        output.add("your gift history with " + username + " :");
+        for(Gift gift : relation.getGifts()) {
+            output.add("Item : " + gift.getItem().getName());
+            output.add("Sender : " + gift.getSender().getUser().getUsername());
+            output.add("Receiver : " + gift.getReceiver().getUser().getUsername());
+            output.add("-------------------");
+        }
+        return Result.success(output);
     }
 
-    public Result<Void> hug(Player player) {
+    public Result<Void> hug(String username) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        if(App.game.getCurrentPlayer().getUser().getUsername().equals(username))
+            return Result.failure(GameError.NO_PLAYER_FOUND);
+
+        Player player = App.game.getPlayerByName(username);
+        if(player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
+
+//        if(!App.game.getCurrentPlayer().weAreNextToEachOther(player))
+//            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
+
+        Relation relation = App.game.getRelationOfUs(App.game.getCurrentPlayer(), player);
+
+        if(relation.getLevel().getLevel() < 2)
+            return Result.failure(GameError.FRIENDSHIP_LEVEL_IS_NOT_ENOUGH);
+
+        relation.setFriendshipXP(relation.getFriendshipXP() + 60);
+        relation.checkOverFlow();
+        return Result.success(null);
     }
 
     public Result<Void> sendFlower(Player player) {

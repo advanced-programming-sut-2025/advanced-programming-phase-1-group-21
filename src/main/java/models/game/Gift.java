@@ -11,6 +11,23 @@ public class Gift {
         this.item = item;
     }
 
+    public Player getSender() {
+        return Sender;
+    }
 
+    public Player getReceiver() {
+        return Receiver;
+    }
 
+    public Double getRate() {
+        return rate;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setRate(Double rate) {
+        this.rate = rate;
+    }
 }

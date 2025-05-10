@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 
 public enum ProfileMenuCommand implements Command {
     SHOW_CURRENT_MENU("\\s*show\\s+current\\s+menu\\s*"),
-    ENTER_MENU("\\s*menu\\s*enter\\s*(?<menuName>\\S+)\\s*"),
+    ENTER_MENU("\\s*menu\\s*enter\\s*(?<menu>\\S+)\\s*"),
     EXIT_MENU("menu exit"),
     CHANGE_USERNAME("\\s*change\\s+username\\s+-u\\s+(?<newUsername>\\S+)\\s*"),
     CHANGE_PASSWORD("\\s*change\\s+password\\s+-o\\s+(?<oldPassword>\\S+)\\s+-n\\s+(?<newPassword>\\S+)\\s*"),

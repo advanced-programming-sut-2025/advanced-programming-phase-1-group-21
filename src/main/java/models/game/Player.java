@@ -28,7 +28,6 @@ public class Player implements DailyUpdate {
     private Inventory inventory;
     private TrashCanType trashCanType;
     private Item itemInHand;
-    private ArrayList<Relation> relations;
     private ArrayList<NPCFriendship> npcFriendships;
     private ArrayList<Recipe> craftingRecipe = new ArrayList<>();
 
@@ -113,6 +112,19 @@ public class Player implements DailyUpdate {
             output.add(tile);
         }
         return output;
+    }
+
+    public boolean weAreNextToEachOther(Player otherPlayer) {
+        if(!App.game.getCurrentPlayer().getMap().equals(otherPlayer.getMap()))
+            return false;
+        Coord otherPlayerCord = otherPlayer.getCoord();
+        Coord myCoord = App.game.getCurrentPlayer().getCoord();
+
+        if((otherPlayerCord.getX() - myCoord.getX()) * (otherPlayerCord.getX() - myCoord.getX()) > 1)
+            return false;
+        if((otherPlayerCord.getY() - myCoord.getY()) * (otherPlayerCord.getY() - myCoord.getY()) > 1)
+            return false;
+        return true;
     }
 
 

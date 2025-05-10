@@ -16,6 +16,8 @@ public enum FriendshipLevel {
 	public int getLevel() {
 		return level;
 	}
+
+
 	private boolean canMarry() {
 		return level == 3;
 	}

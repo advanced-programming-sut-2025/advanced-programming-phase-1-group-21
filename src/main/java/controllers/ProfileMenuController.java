@@ -1,6 +1,7 @@
 package controllers;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import models.App;
 import models.Menu;
 import models.result.Result;
@@ -16,7 +17,7 @@ import static controllers.DataBaseController.findUserByUsername;
 import static controllers.RegisterMenuController.*;
 
 public class ProfileMenuController{
-    Gson gson = new Gson();
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 
     public Result<Void> changeUsername(String newUsername) throws IOException {
