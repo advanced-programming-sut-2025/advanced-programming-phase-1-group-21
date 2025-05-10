@@ -10,7 +10,6 @@ import models.result.Result;
 import models.result.errorTypes.GameError;
 
 public class Hoe extends Tool {
-	private ToolMaterialType toolMaterialType = ToolMaterialType.PRIMITIVE;
 	public Hoe() {
 		super(ToolType.HOE);
 	}

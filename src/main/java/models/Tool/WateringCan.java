@@ -9,18 +9,28 @@ import models.result.Result;
 import models.result.errorTypes.GameError;
 
 public class WateringCan extends Tool {
-    private int capacity;
     private int currentWater;
 
-    private ToolMaterialType toolMaterialType;
     public WateringCan() {
         super(ToolType.WATERING_CAN);
     }
 
+    public int getCapacity() {
+        return switch (toolMaterialType) {
+            case PRIMITIVE -> 40;
+            case COPPER -> 55;
+            case STEEL -> 70;
+            case GOLD -> 85;
+            case IRIDIUM -> 100;
+            default -> 0;
+        };
+    }
+
+    static final int WATER_PER_TIME = 10;
     public void increaseWater() {
-        currentWater++;
-        if (currentWater >= capacity) {
-            currentWater = capacity;
+        currentWater += WATER_PER_TIME;
+        if (currentWater >= getCapacity()) {
+            currentWater = getCapacity();
         }
     }
 
@@ -33,6 +43,7 @@ public class WateringCan extends Tool {
         if (!tile.getTileType().isWater())
             return Result.failure(GameError.TILE_DOESNT_HAVE_WATER);
         increaseWater();
+        //calc energy TODO
         return Result.success(null);
     }
 
