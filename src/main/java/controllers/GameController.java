@@ -159,8 +159,14 @@ public class GameController{
 
     public Result<Building> buildGreenHouse() {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        //TODO for building the greenhouse the player should pay 1000 coins and 500 amounts of wood
-
+        List<Item> needed = List.of(
+                Item.buildItem("coin", 1000),
+                Item.buildItem("wood", 500)
+        );
+        Inventory inv = App.game.getCurrentPlayer().getInventory();
+        if (inv.canRemoveItemList(needed))
+            return Result.failure(GameError.NOT_ENOUGH_ITEMS);
+        inv.removeItemList(needed);
         App.game.getCurrentPlayerMap().getGreenHouses().setBuild(true);
         return Result.success("now you can use your greenhouse");
     }
@@ -375,9 +381,10 @@ public class GameController{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<Item> addItemCheat(String itemName, int quantity) {
+    public Result<Void> addItemCheat(String itemName, int quantity) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+        App.game.getCurrentPlayer().getInventory().addItem(Item.buildItem(itemName, quantity));
+        return Result.success(null);
     }
 
     public Result<Void> cookingRefrigerator(Consumable consumable) {
