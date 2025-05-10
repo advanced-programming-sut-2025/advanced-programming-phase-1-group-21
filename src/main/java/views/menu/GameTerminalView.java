@@ -96,6 +96,11 @@ public class GameTerminalView {
         return AppView.scanner.nextInt();
     }
 
+    public static String getResponse(Player player){
+        System.out.print(player.getUser().getUsername() + " ,What's your response? ");
+        return AppView.scanner.nextLine();
+    }
+
     public void Result(String command) throws IOException {
         if (gameController.isGameLockedDueToNight()) {
             System.out.println("You are already locked due to night, Skipping turn...");
@@ -246,6 +251,20 @@ public class GameTerminalView {
         }
         else if((matcher = GameMenuCommand.HUG.getMatcher(command)) != null) {
             System.out.println(gameController.hug(matcher.group("username")));
+        }
+        else if((matcher = GameMenuCommand.SEND_GIFT.getMatcher(command)) != null) {
+            System.out.println(gameController.sendGift(matcher.group("username") , matcher.group("itemName")
+                    , Integer.parseInt(matcher.group("amount"))));
+        }
+        else if((matcher = GameMenuCommand.LIST_GIFTS.getMatcher(command)) != null) {
+            printArrayList(gameController.giftList().getData());
+        }
+        else if((matcher = GameMenuCommand.GIFT_RATE.getMatcher(command)) != null) {
+            System.out.println(gameController.giftRate(matcher.group("username") , Integer.parseInt(matcher.
+                    group("giftID")) , Double.parseDouble(matcher.group("rate"))));
+        }
+        else if((matcher = GameMenuCommand.SEND_FLOWER.getMatcher(command)) != null) {
+            System.out.println(gameController.sendFlower(matcher.group("username")));
         }
         else
             System.out.println("Invalid command");

@@ -5,6 +5,7 @@ public enum Menu {
     LoginMenu,
     RegisterMenu,
     MainMenu,
+    TradeMenu,
     ProfileMenu;
 
 }
