@@ -145,6 +145,16 @@ public class Game implements DailyUpdate {
     public Map getVillage() {
         return village;
     }
+
+    public Player getPlayerByName(String username){
+        for(Player player : players) {
+            if(player.getUser().getUsername().equals(username))
+                return player;
+        }
+        return null;
+    }
+
+
     @Override
     public boolean nextDay() {
         gameWeather = nextDayWeather;
