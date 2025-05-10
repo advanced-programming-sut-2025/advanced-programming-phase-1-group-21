@@ -193,4 +193,48 @@ public class Player implements DailyUpdate {
         defaultMap.nextDay(); //DON'T UPDATE ANY OTHERRRR MAPPP !!! it's done recursivly in nextDay in map class
         return false;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Player Info:\n");
+        sb.append("Username: ").append(user.getUsername()).append("\n");
+        sb.append("Current Coordinates: ").append(coord).append("\n");
+        sb.append("Energy: ").append(energy.getCurrentEnergy()).append("/").append(energy.getMaxEnergy()).append("\n");
+        sb.append("Agronomic Ability: ").append(agronomicAbility).append("\n");
+        sb.append("Mining Ability: ").append(miningAbility).append("\n");
+        sb.append("Foraging Ability: ").append(foragingAbility).append("\n");
+        sb.append("Fishing Ability: ").append(fishingAbility).append("\n");
+        sb.append("Coins: ").append(getCoins()).append("\n");
+
+        sb.append("Animals Owned: ");
+        if (animals.isEmpty()) {
+            sb.append("None");
+        } else {
+            for (Animal animal : animals) {
+                sb.append(animal.getName()).append(" ");
+            }
+        }
+        sb.append("\n");
+
+        sb.append("Crafting Recipes: ");
+        if (craftingRecipe.isEmpty()) {
+            sb.append("None");
+        } else {
+            for (Recipe recipe : craftingRecipe) {
+                sb.append(recipe.getRecipeName()).append(" ");
+            }
+        }
+        sb.append("\n");
+
+        sb.append("Items in Hand: ").append(itemInHand != null ? itemInHand.getName() : "None").append("\n");
+
+        //TODO ADD THIS
+        //sb.append("Relations: ").append(relations.size()).append(" relations\n");
+        //sb.append("NPC Friendships: ").append(npcFriendships.size()).append(" friendships\n");
+
+        return sb.toString();
+    }
+
 }

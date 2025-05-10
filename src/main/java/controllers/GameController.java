@@ -633,11 +633,6 @@ public class GameController{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public String whereAmI() {
-        if (App.game == null) return "No game running";
-        return App.game.getCurrentPlayerMap().mapType.name();
-    }
-
     public boolean isGameLockedDueToNight() {
         return (App.game != null && App.game.getGameDate().getHour() == 22);
     }
@@ -646,5 +641,32 @@ public class GameController{
     public void advance() {
         if (App.game == null) return;
         App.game.advance();
+    }
+
+    //DEBUG COMMANDS:
+
+    public String whereAmI() {
+        if (App.game == null) return "No game running";
+        return App.game.getCurrentPlayerMap().mapType.name();
+    }
+
+    public String whoAmI() {
+        if (App.game == null) return "No game running";
+        return App.game.getCurrentPlayer().toString();
+    }
+
+    public String getTileStatus(Coord coord) {
+        if (App.game == null) return "No game running";
+        return App.game.getCurrentPlayerMap().getTile(coord).toString();
+    }
+
+    public String getMapStatus() {
+        if (App.game == null) return "No game running";
+        return App.game.getCurrentPlayerMap().toString();
+    }
+
+    public String getInventoryStatus() {
+        if (App.game == null) return "No game running";
+        return App.game.getCurrentPlayer().getInventory().toString();
     }
 }

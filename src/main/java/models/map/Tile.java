@@ -77,4 +77,13 @@ public class Tile {
     public String getSprite() {
         return "" + tileType.getSymbol();
     }
+
+    @Override
+    public String toString() {
+        return "Tile{" +
+                "tileType=" + tileType +
+                ", placable=" + (placable != null ? placable.getClass().getSimpleName() : "null") +
+                '}';
+    }
+
 }

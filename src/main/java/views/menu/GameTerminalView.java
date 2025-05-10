@@ -2,6 +2,7 @@ package views.menu;
 
 import controllers.GameController;
 import models.command.GameMenuCommand;
+import models.game.Game;
 import models.game.Player;
 import models.map.Coord;
 import models.map.Direction;
@@ -146,6 +147,18 @@ public class GameTerminalView {
         }
         else if ((matcher = GameMenuCommand.WHERE_AM_I.getMatcher(command)) != null) {
             System.out.println(gameController.whereAmI());
+        }
+        else if ((matcher = GameMenuCommand.WHO_AM_I.getMatcher(command)) != null) {
+            System.out.println(gameController.whoAmI());
+        }
+        else if ((matcher = GameMenuCommand.TILE_STATUS.getMatcher(command)) != null) {
+            System.out.println(gameController.getTileStatus(new Coord(Integer.parseInt(matcher.group("x")), Integer.parseInt(matcher.group("y")))));
+        }
+        else if ((matcher = GameMenuCommand.MAP_STATUS.getMatcher(command)) != null) {
+            System.out.println(gameController.getMapStatus());
+        }
+        else if ((matcher = GameMenuCommand.INVENTORY_STATUS.getMatcher(command)) != null) {
+            System.out.println(gameController.getInventoryStatus());
         }
         else if ((matcher = GameMenuCommand.INVENTORY_SHOW.getMatcher(command)) != null) {
             printArrayList(gameController.showInventory().getData());
