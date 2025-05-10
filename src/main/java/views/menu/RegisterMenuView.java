@@ -26,7 +26,7 @@ public class RegisterMenuView {
     }
 
     public void Result(String command) throws IOException {
-        if((matcher = RegisterMenuCommand.register.getMatcher(command)) != null){
+        if((matcher = RegisterMenuCommand.REGISTER.getMatcher(command)) != null){
             Result result = registerMenuController.register(matcher.group("username") , matcher.group("password")
                     , matcher.group("passwordConfirm") , matcher.group("nickname") , matcher.group("email")
                     , matcher.group("gender"));
@@ -35,7 +35,7 @@ public class RegisterMenuView {
                 printQuestions();
         }
 
-        else if((matcher = RegisterMenuCommand.pickQuestion.getMatcher(command)) != null){
+        else if((matcher = RegisterMenuCommand.PICK_QUESTION.getMatcher(command)) != null){
             System.out.println(registerMenuController.pickQuestion(matcher.group("answer") ,
                     matcher.group("answerConfirm") , matcher.group("questionNumber")).getMessage());
         }
