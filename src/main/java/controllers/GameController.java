@@ -602,21 +602,67 @@ public class GameController{
 
     }
 
-    public Result<Void> sendGift(Player player, Item item, int amount) {
+    public Result<Void> sendGift(String username , String itemName , int amount) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        if(App.game.getCurrentPlayer().getUser().getUsername().equals(username))
+            return Result.failure(GameError.NO_PLAYER_FOUND);
+
+        Player player = App.game.getPlayerByName(username);
+        if(player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
+
+//        if(!App.game.getCurrentPlayer().weAreNextToEachOther(player))
+//            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
+
+        Relation relation = App.game.getRelationOfUs(App.game.getCurrentPlayer(), player);
+        if(relation.getLevel().getLevel() == 0)
+            return Result.failure(GameError.FRIENDSHIP_LEVEL_IS_NOT_ENOUGH);
+
+        List<Item> gift = new ArrayList<>();
+        Item item = new Item(itemName , null , 0 , amount);
+        gift.add(item);
+        if(!App.game.getCurrentPlayer().getInventory().canRemoveItemList(gift))
+            return Result.failure(GameError.NOT_ENOUGH_ITEMS);
+
+        App.game.getCurrentPlayer().getInventory().removeItemList(gift);
+        player.getInventory().addItem(item);
+        relation.addGift(new Gift(App.game.getCurrentPlayer() , player , item , relation.getGifts().size()));
+        return Result.success(null);
     }
 
-    //What's its difference with gift history :/
-//    public Result<ArrayList<Item>> giftList() {
-//        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-//
-//        for(Gift gift )
-//    }
-
-    public Result<Void> giftRate(int giftID, double rate) {
+//    What's its difference with gift history :/
+    public Result<ArrayList<String>> giftList() {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        ArrayList<String> output = new ArrayList<>();
+        for(Player player : App.game.getPlayers()){
+            if(player.equals(App.game.getCurrentPlayer()))
+                continue;
+            output.addAll(giftHistory(player.getUser().getUsername()).getData());
+        }
+        return Result.success(output);
+    }
+
+    public Result<Void> giftRate(String username , int giftID , double rate) {
+        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+
+        if(App.game.getCurrentPlayer().getUser().getUsername().equals(username))
+            return Result.failure(GameError.NO_PLAYER_FOUND);
+
+        Player player = App.game.getPlayerByName(username);
+        if(player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
+
+        Relation relation = App.game.getRelationOfUs(App.game.getCurrentPlayer(), player);
+        if((relation.getGifts().size() <= giftID) || (giftID < 0))
+            return Result.failure(GameError.GIFT_ID_DOES_NOT_EXIST);
+
+        if((rate > 5) || (rate < 1))
+            return Result.failure(GameError.RATE_MUST_BE_POSITIVE);
+
+        relation.getGifts().get(giftID).setRate(rate);
+        relation.setFriendshipXP(relation.getFriendshipXP() + (int) ((rate - 3)*30 + 15));
+        relation.checkOverFlow();
+        return Result.success(null);
     }
 
     public Result<ArrayList<String>> giftHistory(String username) {
@@ -633,9 +679,14 @@ public class GameController{
         Relation relation = App.game.getRelationOfUs(App.game.getCurrentPlayer(), player);
         output.add("your gift history with " + username + " :");
         for(Gift gift : relation.getGifts()) {
+            output.add("Gift ID : " + gift.getId());
             output.add("Item : " + gift.getItem().getName());
             output.add("Sender : " + gift.getSender().getUser().getUsername());
             output.add("Receiver : " + gift.getReceiver().getUser().getUsername());
+            if(gift.getRate() == 0)
+                output.add("Rate : not rated yet!");
+            else
+                output.add("Rate : " + gift.getRate());
             output.add("-------------------");
         }
         return Result.success(output);
@@ -663,9 +714,33 @@ public class GameController{
         return Result.success(null);
     }
 
-    public Result<Void> sendFlower(Player player) {
+    public Result<Void> sendFlower(String username) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        if(App.game.getCurrentPlayer().getUser().getUsername().equals(username))
+            return Result.failure(GameError.NO_PLAYER_FOUND);
+
+        Player player = App.game.getPlayerByName(username);
+        if(player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
+
+//        if(!App.game.getCurrentPlayer().weAreNextToEachOther(player))
+//            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
+
+        Relation relation = App.game.getRelationOfUs(App.game.getCurrentPlayer(), player);
+        if(relation.getLevel().getLevel() == 0)
+            return Result.failure(GameError.FRIENDSHIP_LEVEL_IS_NOT_ENOUGH);
+
+        List<Item> gift = new ArrayList<>();
+        Item item = new Item("Bouquet", null , 0 , 1);
+        gift.add(item);
+        if(!App.game.getCurrentPlayer().getInventory().canRemoveItemList(gift))
+            return Result.failure(GameError.NOT_ENOUGH_ITEMS);
+
+        App.game.getCurrentPlayer().getInventory().removeItemList(gift);
+        player.getInventory().addItem(item);
+        relation.setFlower(true);
+        relation.checkOverFlow();
+        return Result.success(null);
     }
 
     public Result<Void> askMarriage(Player player, Item ring) {

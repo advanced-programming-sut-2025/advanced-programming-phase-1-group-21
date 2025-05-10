@@ -23,7 +23,11 @@ public enum GameError implements Error {
     FRIENDSHIP_LEVEL_IS_NOT_ENOUGH("Friendship level is not enough to do this"),
     NO_GAME_RUNNING("No game running"),
     YOU_CANT_DO_ACTION("You can't do that here"),
-    TILE_DOESNT_HAVE_WATER("Tile does not have water");
+    TILE_DOESNT_HAVE_WATER("Tile does not have water"),
+    NOT_ENOUGH_ITEM("Not enough items"),
+    GIFT_ID_DOES_NOT_EXIST("Gift id does not exist"),
+    RATE_MUST_BE_POSITIVE("Rate must be positive"),
+    ;
 
 
     private final String message;
