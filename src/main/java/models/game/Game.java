@@ -14,10 +14,11 @@ import models.time.*;
 
 public class Game implements DailyUpdate {
     private ArrayList<Player> players;
+    private ArrayList<Relation> relations = new ArrayList<>();
     private Player currentPlayer;
     private Map village = (new MapBuilder()).buildVillage();
     private int roundCount = 0;
-    private final Date gameDate;
+    private Date gameDate;
     private Weather gameWeather;
     private Weather nextDayWeather;
     private final Random random = new Random();
@@ -28,7 +29,41 @@ public class Game implements DailyUpdate {
         this.gameDate = Date.createBias();
         this.gameWeather = Weather.SUNNY;
         this.nextDayWeather = calculateRandomWeather();
+
+        for(int i = 0 ; i < players.size() ; i++) {
+            for(int j = i+1 ; j < players.size() ; j++) {
+                this.relations.add(new Relation(players.get(i), players.get(j)));
+            }
+        }
     }
+
+    public Relation getRelationOfUs(Player player1 , Player player2) {
+        for(Relation relation : relations) {
+            if(player1.equals(relation.getPlayer1()) && player2.equals(relation.getPlayer2())) {
+                return relation;
+            }
+            else if(player1.equals(relation.getPlayer2()) && player2.equals(relation.getPlayer1())) {
+                return relation;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Relation> getMyRelations(Player player) {
+        ArrayList<Relation> output = new ArrayList<>();
+        for(Relation relation : relations) {
+            if(player.equals(relation.getPlayer1()) || player.equals(relation.getPlayer2())) {
+                output.add(relation);
+            }
+        }
+
+        return output;
+    }
+
+    public ArrayList<Relation> getRelations() {
+        return relations;
+    }
+
 
     private Weather calculateRandomWeather() {
         int rnd = random.nextInt(100);

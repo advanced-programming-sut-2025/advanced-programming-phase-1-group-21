@@ -232,6 +232,21 @@ public class GameTerminalView {
         else if ((matcher = GameMenuCommand.CHEAT_WEATHER.getMatcher(command)) != null) {
             System.out.println(gameController.setWeatherCheat(Weather.getWeather(matcher.group("type"))));
         }
+        else if((matcher = GameMenuCommand.SHOW_FRIENDSHIP.getMatcher(command)) != null) {
+            printArrayList(gameController.showFriendships().getData());
+        }
+        else if((matcher = GameMenuCommand.TALK.getMatcher(command)) != null) {
+            System.out.println(gameController.talk(matcher.group("username") , matcher.group("message").trim()));
+        }
+        else if((matcher = GameMenuCommand.SHOW_TALK_HISTORY.getMatcher(command)) != null) {
+            printArrayList(gameController.talkHistory(matcher.group("username")).getData());
+        }
+        else if((matcher = GameMenuCommand.SHOW_GIFT_HISTORY.getMatcher(command)) != null) {
+            printArrayList(gameController.giftHistory(matcher.group("username")).getData());
+        }
+        else if((matcher = GameMenuCommand.HUG.getMatcher(command)) != null) {
+            System.out.println(gameController.hug(matcher.group("username")));
+        }
         else
             System.out.println("Invalid command");
 

@@ -20,7 +20,6 @@ public class App {
     public static boolean play = true;
     public static User registeredUser;
     public static User logedInUser;
-
     public final static List<SeedInfo> crops = null;
 
     public static SeedInfo getSeedInfoByName(String seedName) {
