@@ -8,4 +8,8 @@ public class Mines extends Building {
         map = (new MapBuilder()).buildMines();
     }
 
+    @Override
+    public boolean canEnter() {
+        return true;
+    }
 }

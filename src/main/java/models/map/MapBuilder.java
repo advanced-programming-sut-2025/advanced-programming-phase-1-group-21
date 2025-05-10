@@ -36,7 +36,6 @@ public class MapBuilder {
     public Map buildFarm() {
         while (true) {
             Map map = new Map(MapType.FARM);
-            initializeEmptyMap(map);
 
             map.buildHouse(new House());
             map.buildGreenHouses(new GreenHouse());
@@ -65,30 +64,24 @@ public class MapBuilder {
     }
 
     public Map buildVillage() {
-        Map map = new Map(MapType.VILLAGE);
-        initializeEmptyMap(map);
+        while (true) {
+            Map map = new Map(MapType.VILLAGE);
 
-        List<Pair<TileType, Placable>> buildings = Arrays.asList(
-                Pair.of(TileType.BLACKSMITH, null),
-                Pair.of(TileType.JOJAMART, null),
-                Pair.of(TileType.PIERR_STORE, null),
-                Pair.of(TileType.CARPENTER_SHOP, null),
-                Pair.of(TileType.FISH_SHOP, null),
-                Pair.of(TileType.MARINE_SHOP, null),
-                Pair.of(TileType.STARDROP_SALOON, null)
-        );
+            //TODO add shops like this into map:
+            // map.addShop();
 
-        setBuildingsRandomly(buildings, map);
-        return map;
-    }
+            List<Pair<TileType, Placable>> buildings = Arrays.asList(
+                    Pair.of(TileType.BLACKSMITH, map.getShopByType(TileType.BLACKSMITH)),
+                    Pair.of(TileType.JOJAMART, map.getShopByType(TileType.JOJAMART)),
+                    Pair.of(TileType.PIERR_STORE, map.getShopByType(TileType.PIERR_STORE)),
+                    Pair.of(TileType.CARPENTER_SHOP, map.getShopByType(TileType.CARPENTER_SHOP)),
+                    Pair.of(TileType.FISH_SHOP, map.getShopByType(TileType.FISH_SHOP)),
+                    Pair.of(TileType.MARINE_SHOP, map.getShopByType(TileType.MARINE_SHOP)),
+                    Pair.of(TileType.STARDROP_SALOON, map.getShopByType(TileType.STARDROP_SALOON))
+            );
 
-    private void initializeEmptyMap(Map map) {
-        for (int y = 0; y < MAP_HEIGHT; y++) {
-            ArrayList<Tile> row = new ArrayList<>();
-            for (int x = 0; x < MAP_WIDTH; x++) {
-                row.add(Tile.createEmpty());
-            }
-            map.tiles.add(row);
+            if (setBuildingsRandomly(buildings, map))
+                return map;
         }
     }
 
@@ -104,45 +97,27 @@ public class MapBuilder {
 
     public Map buildHouse(Refrigerator refrigerator) {
         Map map = new Map(MapType.HOUSE);
-        map.tiles = new ArrayList<>();
-        for(int i = 0 ; i < 10 ; i++){
-            ArrayList<Tile> thisRowTiles = new ArrayList<>();
-            for(int j = 0 ; j < 20 ; j++){
-                thisRowTiles.add(Tile.createEmpty());
-            }
-            map.tiles.add(thisRowTiles);
-        }
         map.tiles.get(9).get(19).setTileType(TileType.DOOR);
         map.tiles.get(0).get(5).setTileType(TileType.REFRIGERATOR);
-        map.tiles.get(9).get(19).setPlacable(refrigerator);
+        map.tiles.get(0).get(5).setPlacable(refrigerator);
         return map;
     }
 
     public Map buildMines() {
         Map map = new Map(MapType.MINES);
-        map.tiles = new ArrayList<>();
-        for(int i = 0 ; i < 15; i++) {
-                ArrayList<Tile> thisRowTiles = new ArrayList<>();
-                for(int j = 0 ; j < 25 ; j++) {
-                    thisRowTiles.add(Tile.createEmpty());
-                }
-                map.tiles.add(thisRowTiles);
-        }
         map.tiles.get(14).get(24).setTileType(TileType.DOOR);
         return map;
     }
 
     public Map buildGreenHouse() {
         Map map = new Map(MapType.GREEN_HOUSE);
-        map.tiles = new ArrayList<>();
-        for(int i = 0 ; i < 10 ; i++){
-            ArrayList<Tile> thisRowTiles = new ArrayList<>();
-            for(int j = 0 ; j < 20 ; j++){
-                thisRowTiles.add(Tile.createEmpty());
-            }
-            map.tiles.add(thisRowTiles);
-        }
         map.tiles.get(9).get(19).setTileType(TileType.DOOR);
+        return map;
+    }
+
+    public Map buildShop() {
+        Map map = new Map(MapType.SHOP);
+        map.tiles.get(7).get(7).setTileType(TileType.DOOR);
         return map;
     }
 }

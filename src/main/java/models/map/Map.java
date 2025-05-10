@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Map implements DailyUpdate {
-    public ArrayList<ArrayList<Tile>> tiles = new ArrayList<>();
+    public ArrayList<ArrayList<Tile>> tiles;
     public ArrayList<Building> buildings;
 
     private House house;
@@ -20,8 +20,20 @@ public class Map implements DailyUpdate {
     private Coop coop;
     public final MapType mapType;
 
+    private void createRectangularMap(int X, int Y) {
+        tiles = new ArrayList<>();
+        for (int y = 0; y < Y; ++y) {
+            ArrayList<Tile> row = new ArrayList<>();
+            for (int x = 0; x < X; ++x) {
+                row.add(Tile.createEmpty());
+            }
+            tiles.add(row);
+        }
+    }
+
     public Map(MapType mapType) {
         this.mapType = mapType;
+        createRectangularMap(mapType.getWidth(), mapType.getHeight());
     }
 
     private static <T> T getElementOrNull(List<T> list, int index) {
@@ -69,7 +81,6 @@ public class Map implements DailyUpdate {
     }
 
     public ArrayList<String> printMap(Coord center, int radius) {
-        System.err.println(tiles);
         ArrayList<String> output = new ArrayList<>();
         for(int i = center.getY() ; i < center.getY() + radius ; i++) {
             for(int j = center.getX() ; j < center.getX() + radius; j++) {
@@ -184,4 +195,17 @@ public class Map implements DailyUpdate {
         return builder.toString();
     }
 
+    public Shop getShopByType(TileType type) {
+        for (Shop shop : shops) {
+            if (shop.getShopType() == type)
+                return shop;
+        }
+        return null;
+    }
+
+    public void addShop(Shop shop) {
+        Shop oldShop = getShopByType(shop.getShopType());
+        if (oldShop != null) throw new IllegalArgumentException("Shop already exists in this Map");
+        shops.add(shop);
+    }
 }

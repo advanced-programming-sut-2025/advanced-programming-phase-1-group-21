@@ -2,12 +2,14 @@ package models.map;
 
 import java.util.ArrayList;
 
-public class Building implements Placable{
-    Map map;
+public abstract class Building implements Placable {
+    public Map map;
 
     public Map getMap() {
         return map;
     }
+
+    public abstract boolean canEnter();
 
     @Override
     public boolean isWalkable() {

@@ -16,4 +16,9 @@ public class GreenHouse extends Building {
     public boolean isBuild() {
         return isBuild;
     }
+
+    @Override
+    public boolean canEnter() {
+        return isBuild;
+    }
 }

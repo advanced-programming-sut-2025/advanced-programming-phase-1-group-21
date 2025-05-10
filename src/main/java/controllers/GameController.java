@@ -40,10 +40,12 @@ public class GameController{
         users.add(DataBaseController.findUserByUsername(username2));
         users.add(DataBaseController.findUserByUsername(username3));
 
+        /* TODO (DEBUG PURPOSE)
         for(User user : users) {
             if(user.isInAGame())
                 return Result.failure(AuthError.IN_GAME_USER);
         }
+         */
 
         for(User user : users) {
             user.setInAGame(true);
@@ -190,32 +192,21 @@ public class GameController{
             return Result.failure(GameError.CANT_STAND_ON_FRIDGE);
         else if(tile.getTileType() == TileType.LAKE)
             return Result.failure(GameError.CANT_STAND_ON_LAKE);
-        else if(tile.getTileType() == TileType.HOUSE) {
-            House house = tile.getPlacable(House.class);
-            player.setMap(house.getMap());
-            player.setCoord(new Coord(0, 0));
-        }
-        else if(tile.getTileType() == TileType.GREEN_HOUSE) {
-            GreenHouse house = tile.getPlacable(GreenHouse.class);
-            if(house.isBuild()) {
-                player.setMap(house.getMap());
-                App.game.getCurrentPlayer().setCoord(new Coord(0, 0));
-            }
-            else {
-                return Result.failure(GameError.GREENHOUSE_IS_NOT_YET_BUILT);
-            }
-        }
-        else if(tile.getTileType() == TileType.MINES) {
-            Mines mines = tile.getPlacable(Mines.class);
-            player.setMap(mines.getMap());
-            App.game.getCurrentPlayer().setCoord(new Coord(0, 0));
-        }
         else if(tile.getTileType() == TileType.DOOR) {
-            player.setMap(player.getDefaultMap());
+            if (player.getMap().mapType == MapType.SHOP)
+                player.setMap(App.game.getVillage());
+            else
+                player.setMap(player.getDefaultMap());
             App.game.getCurrentPlayer().setCoord(new Coord(0, 0));
         }
-        else if(tile.getTileType() == TileType.BLACKSMITH){
-            App.game.getVillage().getShops().get(0).showProducts(); //TODO ?:(
+        else if(tile.getPlacable(Building.class) != null) {
+            System.err.println("HERE");
+            Building building = tile.getPlacable(Building.class);
+            if (building.canEnter()) {
+                player.setMap(building.getMap());
+                player.setCoord(new Coord(0, 0));
+            }
+            else return Result.failure(GameError.CANT_ENTER);
         }
         else {
             App.game.getCurrentPlayer().setCoord(new Coord(x, y));
@@ -544,6 +535,8 @@ public class GameController{
 
     public Result<Void> goToVillage(){
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+        if (App.game.getCurrentPlayerMap().mapType != MapType.FARM)
+            return Result.failure(GameError.YOU_SHOULD_BE_ON_FARM);
         App.game.getCurrentPlayer().setMap(App.game.getVillage());
         App.game.getCurrentPlayer().setCoord(new Coord(0,0));
         return Result.success("Now you are in village");
@@ -551,6 +544,8 @@ public class GameController{
 
     public Result<Void> backToHome(){
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+        if (App.game.getCurrentPlayerMap().mapType != MapType.VILLAGE)
+            return Result.failure(GameError.YOU_SHOULD_BE_ON_VILLAGE);
         App.game.getCurrentPlayer().setMap(App.game.getCurrentPlayer().getDefaultMap());
         App.game.getCurrentPlayer().setCoord(new Coord(0,0));
         return Result.success("Now you are back to home");

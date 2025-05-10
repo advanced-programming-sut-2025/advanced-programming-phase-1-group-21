@@ -12,5 +12,8 @@ public class House extends Building {
         this.map = (new MapBuilder()).buildHouse(refrigerator);
     }
 
-
+    @Override
+    public boolean canEnter() {
+        return true;
+    }
 }
