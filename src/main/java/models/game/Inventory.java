@@ -40,6 +40,13 @@ public class Inventory {
         return inventoryType.getMaximumSize();
     }
 
+    public void setCoins(Item coin){
+        for(int i = 0 ; i < items.size(); i++){
+            if(items.get(i).getName().equals("coin"))
+                items.set(i, coin);
+        }
+    }
+
     public Result<Void> addItem(Item item) {
         for (Item i : items) {
             if (i.getName().equals(item.getName())) {

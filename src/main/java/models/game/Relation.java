@@ -104,6 +104,13 @@ public class Relation {
     }
 
     public void checkOverFlow(){
+        if(friendshipXP < 0){
+            if(Level.equals(FriendshipLevel.LEVEL0))
+                friendshipXP = 0;
+            levelDown();
+            friendshipXP = (Level.getLevel() + 1)*100 - friendshipXP;
+        }
+
         if(Level.getLevel() == 2){
             if(friendshipXP >= (Level.getLevel() + 1)*100){
                 if(isFlower)
@@ -119,13 +126,6 @@ public class Relation {
         else if(friendshipXP >= (Level.getLevel() + 1)*100) {
             friendshipXP -= (Level.getLevel() + 1)*100;
             levelUp();
-        }
-
-        if(friendshipXP < 0){
-            if(Level.equals(FriendshipLevel.LEVEL0))
-                friendshipXP = 0;
-            levelDown();
-            friendshipXP = (Level.getLevel() + 1)*100 - friendshipXP;
         }
     }
 

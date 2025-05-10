@@ -2,6 +2,7 @@ package controllers;
 
 import models.App;
 import models.Item.*;
+import models.Menu;
 import models.data.items.SeedData;
 import models.tool.*;
 import models.animal.Animal;
@@ -12,6 +13,7 @@ import models.result.Result;
 import models.result.errorTypes.AuthError;
 import models.result.errorTypes.GameError;
 import models.result.errorTypes.UserError;
+import models.user.Gender;
 import models.user.User;
 import views.menu.GameTerminalView;
 
@@ -746,19 +748,62 @@ public class GameController{
         return Result.success(null);
     }
 
-    public Result<Void> askMarriage(Player player, Item ring) {
+    public Result<Void> askMarriage(String username) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        if(App.game.getCurrentPlayer().getUser().getUsername().equals(username))
+            return Result.failure(GameError.NO_PLAYER_FOUND);
+
+        Player player = App.game.getPlayerByName(username);
+        if(player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
+
+//        if(!App.game.getCurrentPlayer().weAreNextToEachOther(player))
+//            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
+
+        Relation relation = App.game.getRelationOfUs(App.game.getCurrentPlayer(), player);
+        if(relation.getLevel().getLevel() < 3)
+            return Result.failure(GameError.FRIENDSHIP_LEVEL_IS_NOT_ENOUGH);
+        if(relation.getFriendshipXP() < 4*30 + 15)
+            return Result.failure(GameError.FRIENDSHIP_LEVEL_IS_NOT_ENOUGH);
+
+        List<Item> ring = new ArrayList<>();
+        Item item = Item.build("Ring", 1);
+        ring.add(item);
+        if(!App.game.getCurrentPlayer().getInventory().canRemoveItemList(ring))
+            return Result.failure(GameError.NOT_ENOUGH_ITEMS);
+
+        if(App.game.getCurrentPlayer().getUser().getGender().equals(Gender.FEMALE))
+            return Result.failure(GameError.YOU_ARE_GIRL);
+        if(player.getUser().getGender().equals(Gender.MALE))
+            return Result.failure(GameError.YOUR_WIFE_CAN_NOT_BE_A_BOY);
+
+        String response = GameTerminalView.getResponse(player);
+        if(response.equals("no")){
+            relation.setFriendshipXP(0);
+            relation.setLevel(FriendshipLevel.LEVEL0);
+            relation.setFlower(false);
+            return Result.success("aaaajaaaab rasmieeeeeh rasme zamoooneeehhh");
+        }
+
+        relation.setLevel(FriendshipLevel.LEVEL4);
+        App.game.getCurrentPlayer().getInventory().removeItemList(ring);
+        player.getInventory().addItem(item);
+        Item coin = Item.build("coin" , App.game.getCurrentPlayer().getCoins() + player.getCoins());
+        App.game.getCurrentPlayer().getInventory().setCoins(coin);
+        player.getInventory().setCoins(coin);
+        return Result.success(null);
     }
 
-    public Result<Void> respondMarriage(Boolean respond, Player player) {
-        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+    //this function is useful
+//    public Result<Void> respondMarriage(Boolean respond, Player player) {
+//        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+//        throw new UnsupportedOperationException("Not supported yet.");
+//    }
 
     public Result<Void> startTrade() {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+        App.currentMenu = Menu.TradeMenu;
+        return Result.success(null);
     }
 
     public Result<ArrayList<NPCFriendship>> showFriendShipNPCList(){
