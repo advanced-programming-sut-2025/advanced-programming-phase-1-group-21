@@ -266,6 +266,9 @@ public class GameTerminalView {
         else if((matcher = GameMenuCommand.SEND_FLOWER.getMatcher(command)) != null) {
             System.out.println(gameController.sendFlower(matcher.group("username")));
         }
+        else if((matcher = GameMenuCommand.START_TRADE.getMatcher(command)) != null) {
+            System.out.println(gameController.startTrade());
+        }
         else
             System.out.println("Invalid command");
 

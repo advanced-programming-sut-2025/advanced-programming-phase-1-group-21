@@ -29,6 +29,8 @@ public enum GameError implements Error {
     RATE_MUST_BE_POSITIVE("Rate must be positive"),
     YOU_ARE_GIRL("You are girl"),
     YOUR_WIFE_CAN_NOT_BE_A_BOY("Your wife can't be a boy"),
+    RESPONSE_IS_NOT_SUPPORTED("Response is not supported"),
+    TRADE_ID_DOES_NOT_EXIST("Trade id does not exist"),
     ;
 
 

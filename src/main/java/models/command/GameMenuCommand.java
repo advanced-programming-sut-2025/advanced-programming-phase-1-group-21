@@ -43,6 +43,15 @@ public enum GameMenuCommand implements Command {
     GIFT_RATE("\\s*gift\\s+rate\\s+-u\\s+(?<username>\\S+)\\s+-i\\s+(?<giftID>\\d+)\\s+-r\\s+(?<rate>.+)\\s*"),
     SEND_FLOWER("\\s*send\\s+flower\\s+-u\\s+(?<username>\\S+)\\s*"),
     ASK_MARRIAGE("\\s*ask\\s+marriage\\s+-u\\s+(?<username>\\S+)\\s*"),
+    TRADE_HISTORY("\\s*trade\\s+history\\s*"),
+    TRADE_RESPONSE("\\s*trade\\s+response\\s+-u\\s+(?<username>\\S+)\\s+-r\\s+(?<response>\\S+)\\s+-i\\s+(?<ID>\\d+)"),
+    START_TRADE("\\s*start\\s+trade\\s*"),
+    TRADE_WITH_MONEY("\\s*trade\\s+with\\s+money\\s+-u\\s+(?<username>\\S+)\\s+-t\\s+(?<type>\\S+)\\s+-i\\s+(?<ite" +
+            "m>\\S+)\\s+-a\\s+(?<amount>\\d+)\\s+-p\\s+(?<price>\\d+)\\s*"),
+    TRADE_WITH_ITEM("\\s*trade\\s+with\\s+money\\s+-u\\s+(?<username>\\S+)\\s+-t\\s+(?<type>\\S+)\\s+-i\\s+(?<ite" +
+            "m1>\\S+)\\s+-a\\s+(?<amount1>\\d+)\\s+-i\\s+(?<item2>\\S+)\\s+-a\\s+(?<amount2>)\\s*"),
+    TRADE_LIST("\\s*trade\\s+list\\s*"),
+    BACK_TO_THE_GAME("\\s*bach\\s+to\\s+the\\s+game\\s*"),
     //    ENTER_MENU("\\s*menu\\s*enter\\s*(?<menuName>\\S+)\\s*"),
 //    GAME_NEW(""),
 //    LOAD_GAME("load game"),
