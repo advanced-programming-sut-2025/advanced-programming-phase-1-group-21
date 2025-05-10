@@ -205,7 +205,7 @@ public class GameTerminalView {
             System.out.println(gameController.getSeasonName().getData());
         }
         else if ((matcher = GameMenuCommand.CHEAT_THOR.getMatcher(command)) != null) {
-            System.out.println(gameController.struckByThorCheat(new Coord(Integer.parseInt(matcher.group("x")), Integer.parseInt(matcher.group("y")))));
+            System.out.println(gameController.struckByThorCheat(new Coord(Integer.parseInt(matcher.group("x")), Integer.parseInt(matcher.group("y")))).getMessage());
         }
         else if ((matcher = GameMenuCommand.WEATHER.getMatcher(command)) != null) {
             System.out.println(gameController.getWeather().getData());

@@ -1,14 +1,13 @@
 package models.map;
 
 import models.App;
+import models.DailyUpdate;
 import models.result.Result;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
-public class Map {
+public class Map implements DailyUpdate {
     public ArrayList<ArrayList<Tile>> tiles = new ArrayList<>();
     public ArrayList<Building> buildings;
 
@@ -58,6 +57,11 @@ public class Map {
 
     public Tile getTile(Coord coord) {
         return getElementOrNull(getElementOrNull(tiles, coord.getY()), coord.getX());
+    }
+
+    public void setTile(Coord coord, Tile tile) {
+        if (getTile(coord) == null) return;
+        tiles.get(coord.getY()).set(coord.getX(), tile);
     }
 
     public int calculateDistance(Coord start, Coord end) {
@@ -117,5 +121,35 @@ public class Map {
 
     public static Result<String> helpReadingMap() {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public boolean thor(Coord coord) {
+        if (mapType != MapType.FARM)
+            return false;
+        Tile t = getTile(coord);
+        if (t == null || t.getPlacable(Building.class) != null) return false;
+        setTile(coord, Tile.createEmpty());
+        System.err.println("Tile with coord " + coord.toString() + " is hit by thor");
+        return true;
+    }
+
+    public int getMaxX() {
+        return tiles.get(0).size();
+    }
+
+    public int getMaxY() {
+        return tiles.size();
+    }
+
+    public Coord getRandomCoord() {
+        return Coord.getRandomCoord(getMaxX(), getMaxY());
+    }
+
+    static final int NUMBER_OF_THORS_PER_DAY = 3;
+    public boolean nextDay() {
+        for (int i = 0; i < NUMBER_OF_THORS_PER_DAY; i++)
+            thor(getRandomCoord());
+
+        return false;
     }
 }
