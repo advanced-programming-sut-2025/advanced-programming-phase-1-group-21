@@ -1,17 +1,16 @@
 package models.tool;
 
-import models.game.Item;
-import models.game.ItemType;
+import models.Item.Item;
+import models.Item.ItemType;
 import models.map.Coord;
 import models.result.Result;
 
-public abstract class Tool extends Item {
+public abstract class Tool implements Item {
     private final ToolType toolType;
 	public ToolMaterialType toolMaterialType = ToolMaterialType.PRIMITIVE;
 
 
 	public Tool(ToolType toolType) {
-        super(toolType.getName().replace("-", " ").toLowerCase(), ItemType.TOOL, -1, 1);
 		this.toolType = toolType;
 	}
 
@@ -26,4 +25,32 @@ public abstract class Tool extends Item {
 	abstract public ToolMaterialType getToolMaterialType();
 
 	abstract public Result<Item> use(Coord coord);
+
+	public String getName() {
+		return toolType.getName();
+	}
+
+	public ItemType getItemType() {
+		return ItemType.TOOL;
+	}
+
+	public int getAmount() {
+		return 1;
+	}
+
+	public void setAmount(int amount) {
+		throw new RuntimeException("HEY. You are not supposed to call this method. Because this is a tool: " + toolType.getName() + " and you can't set new amount for it.");
+	}
+
+	public void changeAmount(int change) {
+		throw new RuntimeException("HEY. You are not supposed to call this method. Because this is a tool: " + toolType.getName() + " and you can't change it's amount.");
+	}
+
+	public boolean isSalable() {
+		return false;
+	}
+
+	public int getPrice() {
+		return 0;
+	}
 }

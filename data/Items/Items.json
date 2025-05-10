@@ -1,5 +1,9 @@
 [
   {
+    "name": "Coin",
+    "type": "Salable"
+  },
+  {
     "name": "Duck Feather",
     "type": "Salable"
   },

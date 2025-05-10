@@ -2,6 +2,7 @@ package models.game;
 
 import models.App;
 import models.DailyUpdate;
+import models.Item.Item;
 import models.animal.Animal;
 import models.map.*;
 import models.map.Coord;
@@ -133,7 +134,7 @@ public class Player implements DailyUpdate {
     }
 
     public int getCoins() {
-        return inventory.getAmountByType(ItemType.COIN);
+        return inventory.getAmount("coin");
     }
 
     public Item getItemInHand() {

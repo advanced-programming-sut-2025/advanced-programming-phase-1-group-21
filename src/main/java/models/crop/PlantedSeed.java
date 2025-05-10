@@ -1,8 +1,9 @@
 package models.crop;
 
-import models.game.Consumable;
-import models.game.Item;
-import models.game.ItemType;
+import models.Item.Consumable;
+import models.Item.Item;
+import models.Item.ItemType;
+import models.data.items.SeedData;
 import models.map.Placable;
 
 public class PlantedSeed implements Placable {
@@ -11,10 +12,10 @@ public class PlantedSeed implements Placable {
 	private int day = 1;
 	private int lastHarvest = -1;
 	private int waterStage = 2;
-	SeedInfo seedInfo;
+	SeedData seedData;
 
-	protected PlantedSeed(SeedInfo seedInfo) {
-		this.seedInfo = seedInfo;
+	public PlantedSeed(SeedData seedData) {
+		this.seedData = seedData;
 	}
 
 	public void water() {
@@ -27,20 +28,14 @@ public class PlantedSeed implements Placable {
 		// This method is supposed to be called by its tile.
 
 		if (lastHarvest == -1) {
-			if (stage == seedInfo.getStages().size()) {
+			if (stage == seedData.getStages().size()) {
 				lastHarvest = day;
-				if (seedInfo.getEnergy() == null) {
-					return new Item(seedInfo.getResultName(), ItemType.SALABLE, seedInfo.getBaseSellPrice(), 1);
-				}
-				return new Consumable(seedInfo.getResultName(), seedInfo.getEnergy(), seedInfo.getBaseSellPrice());
+				return Item.build(seedData.getResultName(), 1);
 			}
 		}
-		else if (day - lastHarvest > seedInfo.getRegrowthTime()) {
+		else if (day - lastHarvest > seedData.getRegrowthTime()) {
 			lastHarvest = day;
-			if (seedInfo.getEnergy() == null) {
-				return new Item(seedInfo.getResultName(), ItemType.SALABLE, seedInfo.getBaseSellPrice(), 1);
-			}
-			return new Consumable(seedInfo.getResultName(), seedInfo.getBaseSellPrice());
+			return Item.build(seedData.getResultName(), 1);
 		}
 		return null;
 	}
@@ -53,12 +48,12 @@ public class PlantedSeed implements Placable {
 			return false;
 
 		day++;
-		stage = seedInfo.getStage(day);
+		stage = seedData.getStage(day);
 		return true;
 	}
 
 	public boolean isOneTime() {
-		return seedInfo.isOneTime();
+		return seedData.isOneTime();
 	}
 
 	@Override

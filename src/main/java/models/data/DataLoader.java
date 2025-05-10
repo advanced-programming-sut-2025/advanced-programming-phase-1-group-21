@@ -2,7 +2,6 @@ package models.data;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import models.crop.Tree;
 import models.data.items.*;
 import models.data.recipe.*;
 import models.data.shop.*;
@@ -15,7 +14,7 @@ import java.util.List;
 public class DataLoader {
 	public static void load() {
 		ConsumableData.setData(loadEach(ConsumableData.getDataURL(), new TypeToken<List<ConsumableData>>(){}.getType()));
-		ItemData.setData(loadEach(ItemData.getDataURL(), new TypeToken<List<ItemData>>(){}.getType()));
+		AllItemsData.setData(loadEach(AllItemsData.getDataURL(), new TypeToken<List<AllItemsData>>(){}.getType()));
 		PlaceableData.setData(loadEach(PlaceableData.getDataURL(), new TypeToken<List<PlaceableData>>(){}.getType()));
 		SalableData.setData(loadEach(SalableData.getDataURL(), new TypeToken<List<SalableData>>(){}.getType()));
 		SeedData.setData(loadEach(SeedData.getDataURL(), new TypeToken<List<SeedData>>(){}.getType()));

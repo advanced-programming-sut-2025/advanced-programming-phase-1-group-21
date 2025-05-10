@@ -1,15 +1,15 @@
 package models.crop;
 
-import models.game.Item;
-import models.game.ItemType;
+import models.Item.Item;
+import models.Item.ItemType;
 
-public class Tree extends Item implements Harvestable {
+public class Tree implements Harvestable {
 	public Tree(String name, ItemType itemType, int cost) {
-		super(name, itemType, cost, 1);
+//		super(name, itemType, cost, 1);
 	}
 
 	public Tree(String name, ItemType itemType, int cost, int amount) {
-		super(name, itemType, cost, amount);
+//		super(name, itemType, cost, amount);
 	}
 
 	@Override

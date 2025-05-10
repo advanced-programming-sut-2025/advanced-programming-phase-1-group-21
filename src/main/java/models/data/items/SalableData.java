@@ -5,7 +5,7 @@ import models.data.Data;
 
 import java.util.ArrayList;
 
-public class SalableData implements Data {
+public class SalableData implements Data, ItemData {
 	private static final String dataURL = "data/Items/Salable.json";
 	private static ArrayList<SalableData> items = null;
 
@@ -34,7 +34,7 @@ public class SalableData implements Data {
 		return price;
 	}
 
-	public static SalableData getItemData(String name) {
+	public static SalableData getData(String name) {
 		for (SalableData a : items)
 			if (a.getName().equals(name))
 				return a;

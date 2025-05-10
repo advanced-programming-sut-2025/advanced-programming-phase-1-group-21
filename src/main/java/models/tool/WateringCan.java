@@ -1,10 +1,9 @@
 package models.tool;
 
 import models.App;
-import models.game.Item;
+import models.Item.Item;
 import models.map.Coord;
 import models.map.Tile;
-import models.map.TileType;
 import models.result.Result;
 import models.result.errorTypes.GameError;
 

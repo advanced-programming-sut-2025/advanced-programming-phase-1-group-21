@@ -6,7 +6,7 @@ import models.data.Data;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class BlackSmithRecipeData implements Data {
+public class BlackSmithRecipeData implements Data, ShopData {
 	private static final String dataURL = "data/Shops - Blacksmith.json";
 	private static ArrayList<BlackSmithRecipeData> recipes = null;
 

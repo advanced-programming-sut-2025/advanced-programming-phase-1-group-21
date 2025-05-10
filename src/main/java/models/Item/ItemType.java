@@ -1,10 +1,10 @@
-package models.game;
+package models.Item;
 
 public enum ItemType {
     SEED,
+    SAPLING,
     TOOL,
     CONSUMABLE,
-    COIN,
     WOOD,
     SALABLE,
     ORE,

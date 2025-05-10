@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class CarpenterRecipeData implements Data {
+public class CarpenterRecipeData implements Data, ShopData {
 	private static final String dataURL = "data/Shops - Carpenter's Shop.json";
 	private static List<CarpenterRecipeData> recipes = null;
 

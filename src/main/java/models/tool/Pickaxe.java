@@ -1,7 +1,7 @@
 package models.tool;
 
 import models.App;
-import models.game.Item;
+import models.Item.Item;
 import models.game.Player;
 import models.map.*;
 import models.result.Result;

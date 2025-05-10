@@ -1,11 +1,9 @@
 package models.map;
 
 import models.DailyUpdate;
-import models.animal.Animal;
 import models.crop.Harvestable;
 import models.crop.PlantedSeed;
-import models.crop.Tree;
-import models.game.Item;
+import models.Item.Item;
 
 public class Tile {
     private TileType tileType;

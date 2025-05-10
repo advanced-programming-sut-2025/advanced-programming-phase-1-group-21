@@ -5,7 +5,7 @@ import models.data.Data;
 
 import java.util.ArrayList;
 
-public class PlaceableData implements Data {
+public class PlaceableData implements Data, ItemData {
 	private static final String dataURL = "data/Items/Placeable.json";
 	private static ArrayList<PlaceableData> items = null;
 
@@ -34,7 +34,7 @@ public class PlaceableData implements Data {
 		return location;
 	}
 
-	public static PlaceableData getItemData(String name) {
+	public static PlaceableData getData(String name) {
 		for (PlaceableData a : items)
 			if (a.getName().equals(name))
 				return a;

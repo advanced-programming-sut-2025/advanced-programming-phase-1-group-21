@@ -1,7 +1,7 @@
 package models.crop;
 
-import models.game.Item;
+import models.Item.Item;
 
 public interface Harvestable {
-    public Item harvest();
+    Item harvest();
 }

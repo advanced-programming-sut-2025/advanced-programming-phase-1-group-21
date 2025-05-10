@@ -5,7 +5,7 @@ import models.data.Data;
 
 import java.util.ArrayList;
 
-public class MarniesRanchRecipeData implements Data {
+public class MarniesRanchRecipeData implements Data, ShopData {
 	private static final String dataURL = "data/Shops - Marnie's Ranch.json";
 	private static ArrayList<MarniesRanchRecipeData> recipes = null;
 
