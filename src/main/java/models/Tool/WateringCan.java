@@ -17,6 +17,13 @@ public class WateringCan extends Tool {
         super(ToolType.WATERING_CAN);
     }
 
+    public void increaseWater() {
+        currentWater++;
+        if (currentWater >= capacity) {
+            currentWater = capacity;
+        }
+    }
+
     @Override
     public Result<Item> use(Coord coord) {
         Tile tile = App.game.getCurrentPlayerMap().getTile(coord);
@@ -25,7 +32,8 @@ public class WateringCan extends Tool {
         }
         if (!tile.getTileType().isWater())
             return Result.failure(GameError.TILE_DOESNT_HAVE_WATER);
-        return Result.success(Item.buildItem("water", 1));
+        increaseWater();
+        return Result.success(null);
     }
 
     @Override
