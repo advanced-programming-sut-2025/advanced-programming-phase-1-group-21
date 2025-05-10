@@ -190,6 +190,7 @@ public class Player implements DailyUpdate {
 
     @Override
     public boolean nextDay() {
+        defaultMap.nextDay(); //DON'T UPDATE ANY OTHERRRR MAPPP !!! it's done recursivly in nextDay in map class
         return false;
     }
 }

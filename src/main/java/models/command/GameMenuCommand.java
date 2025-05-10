@@ -25,7 +25,7 @@ public enum GameMenuCommand implements Command {
     TIME_CHEAT("\\s*cheat\\s+advance\\s+time\\s+(?<X>\\d+)h\\s*"),
     CHEAT_DATE("\\s*cheat\\s+advance\\s+date\\s+(?<X>\\d+)d\\s*"),
     SEASON("season"),
-    CHEAT_THOR("\\s*cheat\\s+Thor\\s+-l\\s+\\((?<x>\\d+),(?<y>\\d+)\\)\\s*"),
+    CHEAT_THOR("\\s*cheat\\s+Thor\\s+-l\\s+\\((?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\)\\s*"),
     WEATHER("weather"),
     WEATHER_FORECAST("weather forecast"),
     CHEAT_WEATHER("\\s*cheat\\s+weather\\s+set\\s+(?<type>\\S+)\\s*"),

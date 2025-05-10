@@ -66,6 +66,10 @@ public class Tile {
         return type.isInstance(placable) ? type.cast(placable) : null;
     }
 
+    public boolean isPlacable() {
+        return placable != null;
+    }
+
     public void setPlacable(Placable placable) {
         this.placable = placable;
     }

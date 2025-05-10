@@ -145,7 +145,6 @@ public class Game implements DailyUpdate {
     public Map getVillage() {
         return village;
     }
-
     @Override
     public boolean nextDay() {
         gameWeather = nextDayWeather;

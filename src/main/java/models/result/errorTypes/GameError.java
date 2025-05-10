@@ -18,7 +18,8 @@ public enum GameError implements Error {
     YOU_CANT_USE_PICKAXE_HERE("You can't use pickaxe here to use"),
     SEED_NOT_FOUND("Seed not found"),
     NOT_IMPLEMENTED("Not implemented"),
-    NO_GAME_RUNNING("No game running");
+    NO_GAME_RUNNING("No game running"),
+    YOU_CANT_DO_ACTION("You can't do that here");
 
 
     private final String message;

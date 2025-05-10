@@ -134,14 +134,11 @@ public class GameController{
         return Result.success(App.game.getSeason().name(), "");
     }
 
-    public Result<Void> struckByThor(Coord cord) {
+    public Result<Void> struckByThorCheat(Coord coord) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public Result<Void> struckByThorCheat(Coord cord) {
-        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        return struckByThor(cord);
+        if (App.game.getCurrentPlayerMap().thor(coord))
+            return Result.success("Thor was successful");
+        return Result.failure(GameError.YOU_CANT_DO_ACTION);
     }
 
     public Result<Weather> getWeather() {
