@@ -5,7 +5,7 @@ import models.data.Data;
 
 import java.util.ArrayList;
 
-public class FishShopRecipeData implements Data {
+public class FishShopRecipeData implements Data, ShopData {
 	private static final String dataURL = "data/Shops - Fish Shop.json";
 	private static ArrayList<FishShopRecipeData> recipes = null;
 

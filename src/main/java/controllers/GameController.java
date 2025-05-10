@@ -1,9 +1,10 @@
 package controllers;
 
 import models.App;
+import models.Item.*;
+import models.data.items.SeedData;
 import models.tool.*;
 import models.animal.Animal;
-import models.animal.AnimalProducts;
 import models.crop.*;
 import models.game.*;
 import models.map.*;
@@ -160,8 +161,8 @@ public class GameController{
     public Result<Building> buildGreenHouse() {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         List<Item> needed = List.of(
-                Item.buildItem("coin", 1000),
-                Item.buildItem("wood", 500)
+                Item.build("coin", 1000),
+                Item.build("wood", 500)
         );
         Inventory inv = App.game.getCurrentPlayer().getInventory();
         if (inv.canRemoveItemList(needed))
@@ -310,11 +311,11 @@ public class GameController{
 
     public Result<String> craftInfo(String craftName) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        SeedInfo seedSource = App.getSeedInfoByName(craftName);
-        if (seedSource == null) {
+        SeedData seedData = SeedData.getData(craftName);
+        if (seedData == null) {
             return Result.failure(GameError.SEED_NOT_FOUND);
         }
-        return Result.success(seedSource.toString());
+        return Result.success(seedData.toString());
     }
 
     public Result<Seed> plantSeed(String seedName, Direction direction) { // After MAP
@@ -372,7 +373,7 @@ public class GameController{
 
     public Result<Void> addItemCheat(String itemName, int quantity) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        App.game.getCurrentPlayer().getInventory().addItem(Item.buildItem(itemName, quantity));
+        App.game.getCurrentPlayer().getInventory().addItem(Item.build(itemName, quantity));
         return Result.success(null);
     }
 
@@ -405,7 +406,7 @@ public class GameController{
             }
         }
 
-        if(App.game.getCurrentPlayer().getInventory().getAmountByType(ItemType.COIN) < 1000)
+        if(App.game.getCurrentPlayer().getInventory().getAmount("name") < 1000)
             return Result.failure(GameError.NOT_ENOUGH_COINS);
         //TODO
         return Result.failure(GameError.NOT_IMPLEMENTED);
@@ -486,7 +487,7 @@ public class GameController{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<AnimalProducts> collectProducts(String animalName) {
+    public Result<Item> collectProducts(String animalName) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         throw new UnsupportedOperationException("Not supported yet.");
     }

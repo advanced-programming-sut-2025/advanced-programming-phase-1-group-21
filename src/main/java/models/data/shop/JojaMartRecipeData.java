@@ -5,7 +5,7 @@ import models.data.Data;
 
 import java.util.ArrayList;
 
-public class JojaMartRecipeData implements Data {
+public class JojaMartRecipeData implements Data, ShopData {
 	private static final String dataURL = "data/Shops - JojaMart.json";
 	private static ArrayList<JojaMartRecipeData> recipes = null;
 

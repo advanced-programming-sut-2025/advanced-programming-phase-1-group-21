@@ -1,5 +1,7 @@
 package models.game;
 
+import models.Item.Item;
+
 public class Gift {
     private final Player Sender, Receiver;
     private Double rate;

@@ -1,5 +1,7 @@
 package models.game;
 
+import models.Item.Item;
+
 import java.util.List;
 
 public class Recipe {

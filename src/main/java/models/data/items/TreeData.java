@@ -5,7 +5,7 @@ import models.data.Data;
 
 import java.util.ArrayList;
 
-public class TreeData implements Data {
+public class TreeData implements Data, ItemData {
 	private static final String dataURL = "data/Items/Sapling.json";
 	private static ArrayList<TreeData> treeData = null;
 
@@ -68,7 +68,7 @@ public class TreeData implements Data {
 		return seasons;
 	}
 
-	public static TreeData getTreeData(String name) {
+	public static TreeData getData(String name) {
 		for (TreeData a : treeData)
 			if (a.getName().equals(name))
 				return a;

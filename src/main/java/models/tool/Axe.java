@@ -1,8 +1,8 @@
 package models.tool;
 
 import models.App;
-import models.game.Item;
-import models.game.ItemType;
+import models.Item.Item;
+import models.Item.ItemType;
 import models.map.*;
 import models.result.Result;
 import models.result.errorTypes.GameError;
@@ -27,7 +27,7 @@ public class Axe extends Tool {
 		if(tile.getTileType() == TileType.TREE) {
 			use = true;
 			tile.setTileType(TileType.UNPLOWED);
-			App.game.getCurrentPlayer().getInventory().addItem(new Item("wood" , ItemType.WOOD , 5 , 10));
+			App.game.getCurrentPlayer().getInventory().addItem(Item.build("Wood", 10));
 		}
 
 		if(use){

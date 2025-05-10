@@ -2,11 +2,10 @@ package models.data.items;
 
 import com.google.gson.annotations.SerializedName;
 import models.data.Data;
-import models.game.ItemType;
 
 import java.util.ArrayList;
 
-public class ConsumableData implements Data {
+public class ConsumableData implements Data, ItemData {
 	private static final String dataURL = "data/Items/Consumable.json";
 	private static ArrayList<ConsumableData> items = null;
 
@@ -41,7 +40,7 @@ public class ConsumableData implements Data {
 		return energy;
 	}
 
-	public static ConsumableData getItemData(String name) {
+	public static ConsumableData getData(String name) {
 		for (ConsumableData a : items)
 			if (a.getName().equals(name))
 				return a;

@@ -1,6 +1,6 @@
 package models.tool;
 
-import models.game.Item;
+import models.Item.Item;
 import models.map.Coord;
 import models.result.Result;
 

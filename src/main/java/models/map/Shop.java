@@ -2,8 +2,7 @@ package models.map;
 
 import com.google.gson.Gson;
 import controllers.DataBaseController;
-import models.game.Item;
-import models.result.Result;
+import models.Item.Item;
 
 import java.util.ArrayList;
 
@@ -27,7 +26,7 @@ public class Shop extends Building {
 
 		for(Item item : items){
 			output.add("Item: " + item.getName());
-			output.add("price: " + item.getCost());
+			output.add("price: " + item.getPrice());
 			output.add("amount: " + item.getAmount());
 			output.add("---------------");
 		}

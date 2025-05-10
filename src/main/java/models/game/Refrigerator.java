@@ -1,5 +1,6 @@
 package models.game;
 
+import models.Item.Item;
 import models.map.Placable;
 
 import java.util.ArrayList;

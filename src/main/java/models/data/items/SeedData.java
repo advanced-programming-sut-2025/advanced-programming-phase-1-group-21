@@ -1,11 +1,14 @@
 package models.data.items;
 
 import com.google.gson.annotations.SerializedName;
+import models.Item.ItemType;
+import models.Item.Sapling;
 import models.data.Data;
+import models.time.Season;
 
 import java.util.ArrayList;
 
-public class SeedData implements Data {
+public class SeedData implements Data, ItemData {
 	private static final String dataURL = "data/Items/Seed.json";
 	private static ArrayList<SeedData> seedData = null;
 
@@ -27,6 +30,7 @@ public class SeedData implements Data {
 
 	@SerializedName("seasons")
 	private ArrayList<String> seasons;
+	private ArrayList<Season> cseasons;
 
 	@SerializedName("can-become-giant")
 	private boolean canBecomeGiant;
@@ -40,6 +44,9 @@ public class SeedData implements Data {
 	}
 
 	public void fullConstruct() {
+		for (String seasonName : seasons) {
+			cseasons.add(Season.valueOf(seasonName.toUpperCase()));
+		}
 //		System.out.println(name + "\n" + seedName + "\n" + stages + "\n" + totalHarvestTime + "\n" + oneTime + "\n" + regrowthTime + "\n" + price + "\n" + isEdible + "\n" + energy + "\n" + health + "\n" + seasons + "\n" + canBecomeGiant + "\n------------------");
 	}
 
@@ -55,11 +62,21 @@ public class SeedData implements Data {
 		return stages;
 	}
 
+	public int getStage(int day) {
+		int sum = 0, result = 0;
+		for (int stage: stages) {
+			sum += stage;
+			if (sum < day)
+				result++;
+		}
+		return result;
+	}
+
 	public int getTotalHarvestTime() {
 		return totalHarvestTime;
 	}
 
-	public boolean getOneTime() {
+	public boolean isOneTime() {
 		return oneTime;
 	}
 
@@ -67,18 +84,58 @@ public class SeedData implements Data {
 		return regrowthTime;
 	}
 
-	public ArrayList<String> getSeasons() {
-		return seasons;
+	public ArrayList<Season> getSeasons() {
+		return cseasons;
 	}
 
-	public boolean isCanBecomeGiant() {
+	public boolean canBecomeGiant() {
 		return canBecomeGiant;
 	}
 
-	public static SeedData getSeedData(String name) {
+	public static SeedData getData(String name) {
 		for (SeedData a : seedData)
 			if (a.getName().equals(name))
 				return a;
 		return null;
+	}
+
+	@Override
+	public String toString() {
+		String result = "Crop{" +
+				"Name: " + this.result + "\n" +
+				"Source: " + name + "\n" +
+				"stages: ";
+
+		for (int x: stages) {
+			result += x;
+			if (x != stages.get(stages.size() - 1)) result += '-';
+		}
+
+		result += "\ntotalHarvestTime: " + totalHarvestTime +
+				"\noneTime: " + oneTime +
+				"\nregrowthTime: " + regrowthTime;
+		AllItemsData itemData = AllItemsData.getData(result);
+		if (itemData == null) {
+			throw new NullPointerException("Item " + result + " does not exist!");
+		}
+		ItemType itemType = itemData.getType();
+		if (itemType == ItemType.CONSUMABLE) {
+			ConsumableData consumableData = ConsumableData.getData(result);
+			result += "\nbaseSellPrice: " + consumableData.getPrice() +
+					"\nisEdible: true" +
+					"\nenergy: " + consumableData.getEnergy();
+		}
+		else if (itemType == ItemType.SALABLE) {
+			SalableData salableData = SalableData.getData(result);
+			result += "\nbaseSellPrice: " + salableData.getPrice() +
+					"\nisEdible: false";
+		}
+		result += "\nseasons: ";
+
+		for (Season season: cseasons)
+			result += season.toString().toLowerCase() + " ";
+		result += "\ncanBecomeGiant: " + canBecomeGiant;
+
+		return result;
 	}
 }

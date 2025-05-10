@@ -1,6 +1,8 @@
 package models.game;
 
 import models.App;
+import models.Item.Item;
+import models.Item.ItemType;
 import models.tool.*;
 import models.result.Result;
 import models.result.errorTypes.GameError;
@@ -138,6 +140,7 @@ public class Inventory {
     }
 
     //can be used for getting number of coins
+    // Not anymore!! -Parsa
     public int getAmountByType(ItemType itemType) {
         List<Item> items = getItemsByType(itemType);
         int amount = 0;
@@ -145,6 +148,13 @@ public class Inventory {
             amount += item.getAmount();
         }
         return amount;
+    }
+
+    public int getAmount(String name) {
+        Item item = getItem(name);
+        if (item == null)
+            return 0;
+        return item.getAmount();
     }
 
 

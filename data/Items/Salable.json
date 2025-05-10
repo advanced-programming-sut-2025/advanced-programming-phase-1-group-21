@@ -1,5 +1,9 @@
 [
   {
+    "name": "Coin",
+    "price": 1
+  },
+  {
     "name": "Duck Feather",
     "price": 250
   },

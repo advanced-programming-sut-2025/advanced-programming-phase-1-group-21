@@ -2,7 +2,7 @@ package models.tool;
 
 import models.App;
 import models.crop.PlantedSeed;
-import models.game.Item;
+import models.Item.Item;
 import models.game.Player;
 import models.map.Coord;
 import models.map.Tile;
