@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 public class ForagingCropData implements Data {
-	private static final String dataURL = "data/Crops.json";
+	private static final String dataURL = "data/ForagingCrops.json";
 	private static ArrayList<ForagingCropData> cropData = null;
 
 	@SerializedName("name")
@@ -23,11 +23,11 @@ public class ForagingCropData implements Data {
 	@SerializedName("seasons")
 	private ArrayList<String> seasons;
 
-	protected static String getDataURL() {
+	public static String getDataURL() {
 		return dataURL;
 	}
 
-	protected static void setData(ArrayList<ForagingCropData> cropData) {
+	public static void setData(ArrayList<ForagingCropData> cropData) {
 		ForagingCropData.cropData = cropData;
 	}
 

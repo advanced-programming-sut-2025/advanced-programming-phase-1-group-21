@@ -1,15 +1,13 @@
 package models.game;
 
 import models.App;
-import models.Tool.*;
+import models.tool.*;
 import models.result.Result;
 import models.result.errorTypes.GameError;
 
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 public class Inventory {
     public static final int MAXIMUM_ITEM_PER_SLOT = 999;

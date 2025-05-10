@@ -1,0 +1,412 @@
+[
+  {
+    "name": "Jazz Seeds",
+    "result": "Blue Jazz",
+    "stages": [1, 2, 2, 2],
+    "total-harvest-time": 7,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["spring"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Carrot Seeds",
+    "result": "Carrot",
+    "stages": [1, 1, 1],
+    "total-harvest-time": 3,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["spring"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Cauliflower Seeds",
+    "result": "Cauliflower",
+    "stages": [1, 2, 4, 4, 1],
+    "total-harvest-time": 12,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["spring"],
+    "can-become-giant": true
+  },
+  {
+    "name": "Coffee Beans",
+    "result": "Coffee Beans",
+    "stages": [1, 2, 2, 3, 2],
+    "total-harvest-time": 10,
+    "one-time": false,
+    "regrowth-time": 2,
+    "seasons": ["spring", "summer"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Garlic Seeds",
+    "result": "Garlic",
+    "stages": [1, 1, 1, 1],
+    "total-harvest-time": 4,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["spring"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Bean Starter",
+    "result": "Green Bean",
+    "stages": [1, 1, 1, 3, 4],
+    "total-harvest-time": 10,
+    "one-time": false,
+    "regrowth-time": 3,
+    "seasons": ["spring"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Kale Seeds",
+    "result": "Kale",
+    "stages": [1, 2, 2, 1],
+    "total-harvest-time": 6,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["spring"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Parsnip Seeds",
+    "result": "Parsnip",
+    "stages": [1, 1, 1, 1],
+    "total-harvest-time": 4,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["spring"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Potato Seeds",
+    "result": "Potato",
+    "stages": [1, 1, 1, 2, 1],
+    "total-harvest-time": 6,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["spring"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Rhubarb Seeds",
+    "result": "Rhubarb",
+    "stages": [2, 2, 2, 3, 4],
+    "total-harvest-time": 13,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["spring"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Strawberry Seeds",
+    "result": "Strawberry",
+    "stages": [1, 1, 2, 2, 2],
+    "total-harvest-time": 8,
+    "one-time": false,
+    "regrowth-time": 4,
+    "seasons": ["spring"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Tulip Bulb",
+    "result": "Tulip",
+    "stages": [1, 1, 2, 2],
+    "total-harvest-time": 6,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["spring"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Rice Shoot",
+    "result": "Unmilled Rice",
+    "stages": [1, 2, 2, 3],
+    "total-harvest-time": 8,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["spring"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Blueberry Seeds",
+    "result": "Blueberry",
+    "stages": [1, 3, 3, 4, 2],
+    "total-harvest-time": 13,
+    "one-time": false,
+    "regrowth-time": 4,
+    "seasons": ["summer"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Corn Seeds",
+    "result": "Corn",
+    "stages": [2, 3, 3, 3, 3],
+    "total-harvest-time": 14,
+    "one-time": false,
+    "regrowth-time": 4,
+    "seasons": ["summer", "autumn"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Hops Starter",
+    "result": "Hops",
+    "stages": [1, 1, 2, 3, 4],
+    "total-harvest-time": 11,
+    "one-time": false,
+    "regrowth-time": 1,
+    "seasons": ["summer"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Pepper Seeds",
+    "result": "Hot Pepper",
+    "stages": [1, 1, 1, 1, 1],
+    "total-harvest-time": 5,
+    "one-time": false,
+    "regrowth-time": 3,
+    "seasons": ["summer"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Melon Seeds",
+    "result": "Melon",
+    "stages": [1, 2, 3, 3, 3],
+    "total-harvest-time": 12,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["summer"],
+    "can-become-giant": true
+  },
+  {
+    "name": "Poppy Seeds",
+    "result": "Poppy",
+    "stages": [1, 2, 2, 2],
+    "total-harvest-time": 7,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["summer"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Radish Seeds",
+    "result": "Radish",
+    "stages": [2, 1, 2, 1],
+    "total-harvest-time": 6,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["summer"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Red Cabbage Seeds",
+    "result": "Red Cabbage",
+    "stages": [2, 1, 2, 2, 2],
+    "total-harvest-time": 9,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["summer"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Starfruit Seeds",
+    "result": "Starfruit",
+    "stages": [2, 3, 2, 3, 3],
+    "total-harvest-time": 13,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["summer"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Spangle Seeds",
+    "result": "summer Spangle",
+    "stages": [1, 2, 3, 1],
+    "total-harvest-time": 8,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["summer"],
+    "can-become-giant": false
+  },
+  {
+    "name": "summer Squash Seeds",
+    "result": "summer Squash",
+    "stages": [1, 1, 1, 2, 1],
+    "total-harvest-time": 6,
+    "one-time": false,
+    "regrowth-time": 3,
+    "seasons": ["summer"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Sunflower Seeds",
+    "result": "Sunflower",
+    "stages": [1, 2, 3, 2],
+    "total-harvest-time": 8,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["summer", "autumn"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Tomato Seeds",
+    "result": "Tomato",
+    "stages": [2, 2, 2, 2, 3],
+    "total-harvest-time": 11,
+    "one-time": false,
+    "regrowth-time": 4,
+    "seasons": ["summer"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Wheat Seeds",
+    "result": "Wheat",
+    "stages": [1, 1, 1, 1],
+    "total-harvest-time": 4,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["summer", "autumn"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Amaranth Seeds",
+    "result": "Amaranth",
+    "stages": [1, 2, 2, 2],
+    "total-harvest-time": 7,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["autumn"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Artichoke Seeds",
+    "result": "Artichoke",
+    "stages": [2, 2, 1, 2, 1],
+    "total-harvest-time": 8,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["autumn"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Beet Seeds",
+    "result": "Beet",
+    "stages": [1, 1, 2, 2],
+    "total-harvest-time": 6,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["autumn"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Bok Choy Seeds",
+    "result": "Bok Choy",
+    "stages": [1, 1, 1, 1],
+    "total-harvest-time": 4,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["autumn"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Broccoli Seeds",
+    "result": "Broccoli",
+    "stages": [2, 2, 2, 2],
+    "total-harvest-time": 8,
+    "one-time": false,
+    "regrowth-time": 4,
+    "seasons": ["autumn"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Cranberry Seeds",
+    "result": "Cranberries",
+    "stages": [1, 2, 1, 1, 2],
+    "total-harvest-time": 7,
+    "one-time": false,
+    "regrowth-time": 5,
+    "seasons": ["autumn"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Eggplant Seeds",
+    "result": "Eggplant",
+    "stages": [1, 1, 1, 1],
+    "total-harvest-time": 5,
+    "one-time": false,
+    "regrowth-time": 5,
+    "seasons": ["autumn"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Fairy Seeds",
+    "result": "Fairy Rose",
+    "stages": [1, 4, 4, 3],
+    "total-harvest-time": 12,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["autumn"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Grape Starter",
+    "result": "Grape",
+    "stages": [1, 1, 2, 3, 3],
+    "total-harvest-time": 10,
+    "one-time": false,
+    "regrowth-time": 3,
+    "seasons": ["autumn"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Pumpkin Seeds",
+    "result": "Pumpkin",
+    "stages": [1, 2, 3, 4, 3],
+    "total-harvest-time": 13,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["autumn"],
+    "can-become-giant": true
+  },
+  {
+    "name": "Yam Seeds",
+    "result": "Yam",
+    "stages": [1, 3, 3, 3],
+    "total-harvest-time": 10,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["autumn"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Rare Seed",
+    "result": "Sweet Gem Berry",
+    "stages": [2, 4, 6, 6, 6],
+    "total-harvest-time": 24,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["autumn"],
+    "can-become-giant": false
+  },
+  {
+    "name": "Powdermelon Seeds",
+    "result": "Powdermelon",
+    "stages": [1, 2, 1, 2, 1],
+    "total-harvest-time": 7,
+    "one-time": true,
+    "regrowth-time": null,
+    "seasons": ["winter"],
+    "can-become-giant": true
+  },
+  {
+    "name": "Ancient Seeds",
+    "result": "Ancient Fruit",
+    "stages": [2, 7, 7, 7, 5],
+    "total-harvest-time": 28,
+    "one-time": false,
+    "regrowth-time": 7,
+    "seasons": ["spring", "summer", "autumn"],
+    "can-become-giant": false
+  }
+]

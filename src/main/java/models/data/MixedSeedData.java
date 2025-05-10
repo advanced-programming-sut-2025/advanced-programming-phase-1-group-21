@@ -14,11 +14,11 @@ public class MixedSeedData implements Data {
 	@SerializedName("possible-seeds")
 	private ArrayList<String> possibleSeeds;
 
-	protected static String getDataURL() {
+	public static String getDataURL() {
 		return dataURL;
 	}
 
-	protected static void setData(ArrayList<MixedSeedData> seedData) {
+	public static void setData(ArrayList<MixedSeedData> seedData) {
 		MixedSeedData.seedData = seedData;
 	}
 

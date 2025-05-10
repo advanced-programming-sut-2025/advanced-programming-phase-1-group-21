@@ -14,11 +14,11 @@ public class ForagingSeedData implements Data {
 	@SerializedName("seasons")
 	private ArrayList<String> seasons;
 
-	protected static String getDataURL() {
+	public static String getDataURL() {
 		return dataURL;
 	}
 
-	protected static void setData(ArrayList<ForagingSeedData> seedData) {
+	public static void setData(ArrayList<ForagingSeedData> seedData) {
 		ForagingSeedData.seedData = seedData;
 	}
 

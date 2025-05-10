@@ -1,0 +1,262 @@
+[
+  {
+    "name": "Duck Feather",
+    "price": 250
+  },
+  {
+    "name": "Wool",
+    "price": 340
+  },
+  {
+    "name": "Rabbit's foot",
+    "price": 565
+  },
+  {
+    "name": "Dinosaur Egg",
+    "price": 350
+  },
+  {
+    "name": "Salmon",
+    "price": 75
+  },
+  {
+    "name": "Sardine",
+    "price": 40
+  },
+  {
+    "name": "Shad",
+    "price": 60
+  },
+  {
+    "name": "Blue Discus",
+    "price": 120
+  },
+  {
+    "name": "Midnight Carp",
+    "price": 150
+  },
+  {
+    "name": "Squid",
+    "price": 80
+  },
+  {
+    "name": "Tuna",
+    "price": 100
+  },
+  {
+    "name": "Perch",
+    "price": 55
+  },
+  {
+    "name": "Flounder",
+    "price": 100
+  },
+  {
+    "name": "Lionfish",
+    "price": 100
+  },
+  {
+    "name": "Herring",
+    "price": 30
+  },
+  {
+    "name": "Ghostfish",
+    "price": 45
+  },
+  {
+    "name": "Tilapia",
+    "price": 75
+  },
+  {
+    "name": "Dorado",
+    "price": 100
+  },
+  {
+    "name": "Sunfish",
+    "price": 30
+  },
+  {
+    "name": "Rainbow Trout",
+    "price": 65
+  },
+  {
+    "name": "Legend",
+    "price": 5000
+  },
+  {
+    "name": "Glacierfish",
+    "price": 1000
+  },
+  {
+    "name": "Angler",
+    "price": 900
+  },
+  {
+    "name": "Crimsonfish",
+    "price": 1500
+  },
+  {
+    "name": "Coffee Beans",
+    "price": 15
+  },
+  {
+    "name": "Rhubarb",
+    "price": 220
+  },
+  {
+    "name": "Wheat",
+    "price": 25
+  },
+  {
+    "name": "Pumpkin",
+    "price": 320
+  },
+  {
+    "name": "Sweet Gem Berry",
+    "price": 3000
+  },
+  {
+    "name": "Ancient Fruit",
+    "price": 550
+  },
+  {
+    "name": "Daffodil",
+    "price": 30
+  },
+  {
+    "name": "Crocus",
+    "price": 60
+  },
+  {
+    "name": "Sweet Pea",
+    "price": 50
+  },
+  {
+    "name": "Quartz",
+    "price": 25
+  },
+  {
+    "name": "Earth Crystal",
+    "price": 50
+  },
+  {
+    "name": "Frozen Tear",
+    "price": 75
+  },
+  {
+    "name": "Fire Quartz",
+    "price": 100
+  },
+  {
+    "name": "Emerald",
+    "price": 250
+  },
+  {
+    "name": "Aquamarine",
+    "price": 180
+  },
+  {
+    "name": "Ruby",
+    "price": 250
+  },
+  {
+    "name": "Amethyst",
+    "price": 100
+  },
+  {
+    "name": "Topaz",
+    "price": 80
+  },
+  {
+    "name": "Jade",
+    "price": 200
+  },
+  {
+    "name": "Diamond",
+    "price": 750
+  },
+  {
+    "name": "Prismatic Shard",
+    "price": 2000
+  },
+  {
+    "name": "Copper Ore",
+    "price": 5
+  },
+  {
+    "name": "Iron Ore",
+    "price": 10
+  },
+  {
+    "name": "Gold Ore",
+    "price": 25
+  },
+  {
+    "name": "Iridium Ore",
+    "price": 100
+  },
+  {
+    "name": "Coal",
+    "price": 15
+  },
+  {
+    "name": "Copper Bar",
+    "price": 60
+  },
+  {
+    "name": "Iron Bar",
+    "price": 120
+  },
+  {
+    "name": "Gold Bar",
+    "price": 250
+  },
+  {
+    "name": "Iridium Bar",
+    "price": 1000
+  },
+  {
+    "name": "Wood",
+    "price": 1
+  },
+  {
+    "name": "Stone",
+    "price": 2
+  },
+  {
+    "name": "Suger",
+    "price": 40
+  },
+  {
+    "name": "Hay",
+    "price": 10
+  },
+  {
+    "name": "Oak Resin",
+    "price": 150
+  },
+  {
+    "name": "Maple Syrup",
+    "price": 200
+  },
+  {
+    "name": "Pine Tar",
+    "price": 100
+  },
+  {
+    "name": "Cloth",
+    "price": 470
+  },
+  {
+    "name": "Cherry Bomb",
+    "price": 50
+  },
+  {
+    "name": "Bomb",
+    "price": 50
+  },
+  {
+    "name": "Mega Bomb",
+    "price": 50
+  }
+]

@@ -1,26 +1,38 @@
 [
   {
-    "name": "Normal Barn",
+    "name": "Barn",
+    "type": "Normal",
+    "size": 4,
     "animals": ["Cow"]
   },
   {
     "name": "Big Barn",
+    "type": "Big",
+    "size": 8,
     "animals": ["Cow", "Goat"]
   },
   {
     "name": "Deluxe Barn",
+    "type": "Deluxe",
+    "size": 12,
     "animals": ["Cow", "Goat", "Sheep", "Pig"]
   },
   {
     "name": "Normal Coop",
+    "type": "Normal",
+    "size": 4,
     "animals": ["Chicken"]
   },
   {
     "name": "Big Coop",
+    "type": "Big",
+    "size": 8,
     "animals": ["Chicken", "Duck", "Dinosaur"]
   },
   {
     "name": "Deluxe Coop",
+    "type": "Deluxe",
+    "size": 12,
     "animals": ["Chicken", "Duck", "Dinosaur", "Rabbit"]
   }
 ]

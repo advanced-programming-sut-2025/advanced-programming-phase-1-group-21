@@ -1,7 +1,7 @@
 package controllers;
 
 import models.App;
-import models.Tool.*;
+import models.tool.*;
 import models.animal.Animal;
 import models.animal.AnimalProducts;
 import models.crop.*;
@@ -11,7 +11,6 @@ import models.result.Result;
 import models.result.errorTypes.AuthError;
 import models.result.errorTypes.GameError;
 import models.result.errorTypes.UserError;
-import models.time.Season;
 import models.user.User;
 import views.menu.GameTerminalView;
 
