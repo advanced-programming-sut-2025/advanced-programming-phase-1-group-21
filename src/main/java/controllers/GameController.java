@@ -249,7 +249,7 @@ public class GameController{
 
     public Result<Void> removeFromInventory(String itemName, int numberOfItems) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        return Result.success(App.game.getCurrentPlayer().getInventory().removeItem(itemName , numberOfItems));
+        return Result.success(App.game.getCurrentPlayer().getInventory().removeItem(Item.build(itemName , numberOfItems)));
     }
 
     public Result<Tool> equipTool(String toolName) {

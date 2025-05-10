@@ -27,6 +27,7 @@ public class AppView {
                 gameTerminalView.Result(command);
             else if(App.currentMenu.equals(Menu.MainMenu))
                 mainMenuView.Result(command);
+
         }
 
     }

@@ -5,7 +5,6 @@ import models.Item.Item;
 import models.Item.ItemType;
 import models.tool.*;
 import models.result.Result;
-import models.result.errorTypes.GameError;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -45,6 +44,21 @@ public class Inventory {
             if(items.get(i).getName().equals("coin"))
                 items.set(i, coin);
         }
+    }
+
+    public void changeCoin(int amount){
+        for (Item item : items) {
+            if (item.getName().equals("coin"))
+                item.setAmount(item.getAmount() + amount);
+        }
+    }
+
+    public Item getCoin() {
+        for(int i = 0 ; i < items.size(); i++){
+            if(items.get(i).getName().equals("coin"))
+                return items.get(i);
+        }
+        return null;
     }
 
     public Result<Void> addItem(Item item) {
@@ -125,8 +139,21 @@ public class Inventory {
         if (!can) throw new RuntimeException("Can't remove items from the inventory.");
     }
 
+    public String removeItem(Item item) {
+        List<Item> itemsToRemove = new ArrayList<>();
+        itemsToRemove.add(item);
+        removeItemList(itemsToRemove);
+        return null;
+    }
+
     public boolean canRemoveItemList(List<Item> itemsToRemove) {
         return removeItemsList(itemsToRemove, new ArrayList<>(items));
+    }
+
+    public boolean canRemoveItem(Item item) {
+        List<Item> itemsToRemove = new ArrayList<>();
+        itemsToRemove.add(item);
+        return canRemoveItemList(itemsToRemove);
     }
 
     public Item getItem(String name) {
@@ -176,22 +203,22 @@ public class Inventory {
         return output;
     }
 
-    public String removeItem(String itemName , int amount) {
-        for(Item item : items) {
-            if(item.getName().equals(itemName)) {
-                if(item.getAmount() < amount)
-                    return GameError.NOT_ENOUGH_ITEMS.getMessage();
-                else {
-                    item.setAmount(Math.max(item.getAmount() - amount, 0));
-                    if(amount == 0)
-                        items.remove(item);
-                    return amount + " amounts of " + itemName + " removed.";
-                }
-            }
-        }
-
-        return "There is no item with this name in the inventory.";
-    }
+//    public String removeItem(String itemName , int amount) {
+//        for(Item item : items) {
+//            if(item.getName().equals(itemName)) {
+//                if(item.getAmount() < amount)
+//                    return GameError.NOT_ENOUGH_ITEMS.getMessage();
+//                else {
+//                    item.setAmount(Math.max(item.getAmount() - amount, 0));
+//                    if(amount == 0)
+//                        items.remove(item);
+//                    return amount + " amounts of " + itemName + " removed.";
+//                }
+//            }
+//        }
+//
+//        return "There is no item with this name in the inventory.";
+//    }
 
     public boolean toolEquip(String toolName){
         for(Item item : items) {

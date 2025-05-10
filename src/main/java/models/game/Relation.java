@@ -52,11 +52,7 @@ public class Relation {
     }
 
     public void addGift(Gift gift) {
-
-    }
-
-    public void addFlower() {
-
+        this.gifts.add(gift);
     }
 
     public boolean isTodayCommunication() {
@@ -81,14 +77,11 @@ public class Relation {
 
     public void setFriendshipXP(int friendshipXP) {
         this.friendshipXP = friendshipXP;
+        checkOverFlow();
     }
 
-    public void setTrades(ArrayList<Trade> trades) {
-        this.trades = trades;
-    }
-
-    public void addGifts(Gift gift) {
-        this.gifts.add(gift);
+    public void addTrade(Trade trade) {
+        trades.add(trade);
     }
 
     public void setTodayCommunication(boolean todayCommunication) {
