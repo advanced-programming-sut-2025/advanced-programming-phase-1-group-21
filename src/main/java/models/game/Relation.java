@@ -10,6 +10,7 @@ public class Relation {
     private ArrayList<Trade> trades = new ArrayList<>();
     private boolean todayCommunication = false;
     private ArrayList<Gift> gifts = new ArrayList<>();
+    private boolean isFlower = false;
 
     public Relation(Player player1, Player player2) {
         this.player1 = player1;
@@ -18,8 +19,8 @@ public class Relation {
 
     public String printRelation(Player player) {
         if(!player1.equals(player))
-            return player1.getUser().getUsername() + " : " + "level-" + getLevel().toString() + "   " + "xp-" + getFriendshipXP();
-        return player2.getUser().getUsername() + " : " + "level-" + getLevel().toString() + "   " + "xp-" + getFriendshipXP();
+            return player1.getUser().getUsername() + " : " + "level=" + getLevel().toString() + "   " + "xp=" + getFriendshipXP();
+        return player2.getUser().getUsername() + " : " + "level=" + getLevel().toString() + "   " + "xp=" + getFriendshipXP();
     }
 
     public Player getPlayer1() {
@@ -86,20 +87,45 @@ public class Relation {
         this.trades = trades;
     }
 
-    public void setGifts(ArrayList<Gift> gifts) {
-        this.gifts = gifts;
+    public void addGifts(Gift gift) {
+        this.gifts.add(gift);
     }
 
     public void setTodayCommunication(boolean todayCommunication) {
         this.todayCommunication = todayCommunication;
     }
 
+    public boolean isFlower() {
+        return isFlower;
+    }
+
+    public void setFlower(boolean flower) {
+        isFlower = flower;
+    }
+
     public void checkOverFlow(){
-        if(Level.getLevel() > 2)
-            return;
-        if(friendshipXP > (Level.getLevel() + 1)*100) {
+        if(Level.getLevel() == 2){
+            if(friendshipXP >= (Level.getLevel() + 1)*100){
+                if(isFlower)
+                    levelUp();
+                else
+                    friendshipXP = (Level.getLevel() + 1)*100;
+            }
+        }
+        else if(Level.getLevel() == 3){
+            if(friendshipXP >= (Level.getLevel() + 1)*100)
+                friendshipXP = (Level.getLevel() + 1)*100;
+        }
+        else if(friendshipXP >= (Level.getLevel() + 1)*100) {
             friendshipXP -= (Level.getLevel() + 1)*100;
             levelUp();
+        }
+
+        if(friendshipXP < 0){
+            if(Level.equals(FriendshipLevel.LEVEL0))
+                friendshipXP = 0;
+            levelDown();
+            friendshipXP = (Level.getLevel() + 1)*100 - friendshipXP;
         }
     }
 
@@ -112,5 +138,16 @@ public class Relation {
             Level = FriendshipLevel.LEVEL3;
         else if(Level.equals(FriendshipLevel.LEVEL3))
             Level = FriendshipLevel.LEVEL4;
+    }
+
+    public void levelDown(){
+        if(Level.equals(FriendshipLevel.LEVEL1))
+            Level = FriendshipLevel.LEVEL0;
+        else if(Level.equals(FriendshipLevel.LEVEL2))
+            Level = FriendshipLevel.LEVEL1;
+        else if(Level.equals(FriendshipLevel.LEVEL3))
+            Level = FriendshipLevel.LEVEL2;
+        else if(Level.equals(FriendshipLevel.LEVEL4))
+            Level = FriendshipLevel.LEVEL3;
     }
 }
