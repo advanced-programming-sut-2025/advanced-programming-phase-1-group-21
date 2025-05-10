@@ -1,6 +1,7 @@
 package models.data;
 
 import com.google.gson.annotations.SerializedName;
+import models.map.AnimalHouseType;
 
 import java.util.ArrayList;
 
@@ -10,6 +11,12 @@ public class AnimalHouseData implements Data {
 
 	@SerializedName("name")
 	private String name;
+	@SerializedName("type")
+	private String type;
+	private AnimalHouseType ctype;
+
+	@SerializedName("size")
+	private int size;
 	@SerializedName("animals")
 	private ArrayList<String> animals;
 
@@ -22,7 +29,15 @@ public class AnimalHouseData implements Data {
 	}
 
 	public void fullConstruct() {
+		ctype = AnimalHouseType.valueOf(type.toUpperCase());
+	}
 
+	public AnimalHouseType getType() {
+		return ctype;
+	}
+
+	public int getSize() {
+		return size;
 	}
 
 	public String getName() {

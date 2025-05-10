@@ -17,11 +17,11 @@ public class FishData implements Data {
 	@SerializedName("price")
 	private int price;
 
-	protected static String getDataURL() {
+	public static String getDataURL() {
 		return dataURL;
 	}
 
-	protected static void setData(ArrayList<FishData> fishes) {
+	public static void setData(ArrayList<FishData> fishes) {
 		FishData.fishes = fishes;
 	}
 

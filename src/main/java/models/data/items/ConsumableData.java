@@ -1,0 +1,50 @@
+package models.data.items;
+
+import com.google.gson.annotations.SerializedName;
+import models.data.Data;
+import models.game.ItemType;
+
+import java.util.ArrayList;
+
+public class ConsumableData implements Data {
+	private static final String dataURL = "data/Items/Consumable.json";
+	private static ArrayList<ConsumableData> items = null;
+
+	@SerializedName("name")
+	private String name;
+	@SerializedName("price")
+	private int price;
+	@SerializedName("energy")
+	private int energy;
+
+	public static String getDataURL() {
+		return dataURL;
+	}
+
+	public static void setData(ArrayList<ConsumableData> items) {
+		ConsumableData.items = items;
+	}
+
+	public void fullConstruct() {
+//		System.out.println(name + "\n" + type + "\n------------");
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public int getEnergy() {
+		return energy;
+	}
+
+	public static ConsumableData getItemData(String name) {
+		for (ConsumableData a : items)
+			if (a.getName().equals(name))
+				return a;
+		return null;
+	}
+}

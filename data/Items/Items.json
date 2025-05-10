@@ -1,0 +1,966 @@
+[
+  {
+    "name": "Duck Feather",
+    "type": "Salable"
+  },
+  {
+    "name": "Wool",
+    "type": "Salable"
+  },
+  {
+    "name": "Rabbit's foot",
+    "type": "Salable"
+  },
+  {
+    "name": "Dinosaur Egg",
+    "type": "Salable"
+  },
+  {
+    "name": "Egg",
+    "type": "Consumable"
+  },
+  {
+    "name": "Big Egg",
+    "type": "Consumable"
+  },
+  {
+    "name": "Duck Egg",
+    "type": "Consumable"
+  },
+  {
+    "name": "Milk",
+    "type": "Consumable"
+  },
+  {
+    "name": "Large Milk",
+    "type": "Consumable"
+  },
+  {
+    "name": "Goat Milk",
+    "type": "Consumable"
+  },
+  {
+    "name": "Goat Milk",
+    "type": "Consumable"
+  },
+  {
+    "name": "Truffle",
+    "type": "Consumable"
+  },
+  {
+    "name": "Honey",
+    "type": "Consumable"
+  },
+  {
+    "name": "Cheese",
+    "type": "Consumable"
+  },
+  {
+    "name": "Goat Cheese",
+    "type": "Consumable"
+  },
+  {
+    "name": "Beer",
+    "type": "Consumable"
+  },
+  {
+    "name": "Vinegar",
+    "type": "Consumable"
+  },
+  {
+    "name": "Coffee",
+    "type": "Consumable"
+  },
+  {
+    "name": "Juice",
+    "type": "Consumable"
+  },
+  {
+    "name": "Mead",
+    "type": "Consumable"
+  },
+  {
+    "name": "Pale Ale",
+    "type": "Consumable"
+  },
+  {
+    "name": "Wine",
+    "type": "Consumable"
+  },
+  {
+    "name": "Mayonnaise",
+    "type": "Consumable"
+  },
+  {
+    "name": "Duck Mayonnaise",
+    "type": "Consumable"
+  },
+  {
+    "name": "Dinosaur Mayonnaise",
+    "type": "Consumable"
+  },
+  {
+    "name": "Truffle Oil",
+    "type": "Consumable"
+  },
+  {
+    "name": "Oil",
+    "type": "Consumable"
+  },
+  {
+    "name": "Pickles",
+    "type": "Consumable"
+  },
+  {
+    "name": "Jelly",
+    "type": "Consumable"
+  },
+  {
+    "name": "Smoked Fish",
+    "type": "Consumable"
+  },
+  {
+    "name": "Dried Mushrooms",
+    "type": "Consumable"
+  },
+  {
+    "name": "Dried Fruit",
+    "type": "Consumable"
+  },
+  {
+    "name": "Raisins",
+    "type": "Consumable"
+  },
+  {
+    "name": "Copper Ore",
+    "type": "Salable"
+  },
+  {
+    "name": "Iron Ore",
+    "type": "Salable"
+  },
+  {
+    "name": "Gold Ore",
+    "type": "Salable"
+  },
+  {
+    "name": "Iridium Ore",
+    "type": "Salable"
+  },
+  {
+    "name": "Coal",
+    "type": "Salable"
+  },
+  {
+    "name": "Copper Bar",
+    "type": "Salable"
+  },
+  {
+    "name": "Iron Bar",
+    "type": "Salable"
+  },
+  {
+    "name": "Gold Bar",
+    "type": "Salable"
+  },
+  {
+    "name": "Iridium Bar",
+    "type": "Salable"
+  },
+  {
+    "name": "Cloth",
+    "type": "Salable"
+  },
+  {
+    "name": "Cherry Bomb",
+    "type": "Salable"
+  },
+  {
+    "name": "Bomb",
+    "type": "Salable"
+  },
+  {
+    "name": "Mega Bomb",
+    "type": "Salable"
+  },
+  {
+    "name": "Fried Egg",
+    "type": "Consumable"
+  },
+  {
+    "name": "Baked Fish",
+    "type": "Consumable"
+  },
+  {
+    "name": "Salad",
+    "type": "Consumable"
+  },
+  {
+    "name": "Olmelet",
+    "type": "Consumable"
+  },
+  {
+    "name": "Pumpkin Pie",
+    "type": "Consumable"
+  },
+  {
+    "name": "Spaghetti",
+    "type": "Consumable"
+  },
+  {
+    "name": "Pizza",
+    "type": "Consumable"
+  },
+  {
+    "name": "Tortilla",
+    "type": "Consumable"
+  },
+  {
+    "name": "Maki Roll",
+    "type": "Consumable"
+  },
+  {
+    "name": "Triple Shot Espresso",
+    "type": "Consumable"
+  },
+  {
+    "name": "Cookie",
+    "type": "Consumable"
+  },
+  {
+    "name": "Hash Browns",
+    "type": "Consumable"
+  },
+  {
+    "name": "Pancakes",
+    "type": "Consumable"
+  },
+  {
+    "name": "Fruit Salad",
+    "type": "Consumable"
+  },
+  {
+    "name": "Red Plate",
+    "type": "Consumable"
+  },
+  {
+    "name": "Bread",
+    "type": "Consumable"
+  },
+  {
+    "name": "Salmon Dinner",
+    "type": "Consumable"
+  },
+  {
+    "name": "Vegetable Medley",
+    "type": "Consumable"
+  },
+  {
+    "name": "Farmer'S Lunch",
+    "type": "Consumable"
+  },
+  {
+    "name": "Survival Burger",
+    "type": "Consumable"
+  },
+  {
+    "name": "Dish O' The Sea",
+    "type": "Consumable"
+  },
+  {
+    "name": "Seaform Pudding",
+    "type": "Consumable"
+  },
+  {
+    "name": "Miner'S Treat",
+    "type": "Consumable"
+  },
+  {
+    "name": "Blue Jazz",
+    "type": "Consumable"
+  },
+  {
+    "name": "Carrot",
+    "type": "Consumable"
+  },
+  {
+    "name": "Cauliflower",
+    "type": "Consumable"
+  },
+  {
+    "name": "Garlic",
+    "type": "Consumable"
+  },
+  {
+    "name": "Green Bean",
+    "type": "Consumable"
+  },
+  {
+    "name": "Kale",
+    "type": "Consumable"
+  },
+  {
+    "name": "Parsnip",
+    "type": "Consumable"
+  },
+  {
+    "name": "Potato",
+    "type": "Consumable"
+  },
+  {
+    "name": "Strawberry",
+    "type": "Consumable"
+  },
+  {
+    "name": "Tulip",
+    "type": "Consumable"
+  },
+  {
+    "name": "Unmilled Rice",
+    "type": "Consumable"
+  },
+  {
+    "name": "Rice",
+    "type": "Consumable"
+  },
+  {
+    "name": "Blueberry",
+    "type": "Consumable"
+  },
+  {
+    "name": "Corn",
+    "type": "Consumable"
+  },
+  {
+    "name": "Hops",
+    "type": "Consumable"
+  },
+  {
+    "name": "Hot Pepper",
+    "type": "Consumable"
+  },
+  {
+    "name": "Melon",
+    "type": "Consumable"
+  },
+  {
+    "name": "Poppy",
+    "type": "Consumable"
+  },
+  {
+    "name": "Radish",
+    "type": "Consumable"
+  },
+  {
+    "name": "Red Cabbage",
+    "type": "Consumable"
+  },
+  {
+    "name": "Starfruit",
+    "type": "Consumable"
+  },
+  {
+    "name": "summer Spangle",
+    "type": "Consumable"
+  },
+  {
+    "name": "summer Squash",
+    "type": "Consumable"
+  },
+  {
+    "name": "Sunflower",
+    "type": "Consumable"
+  },
+  {
+    "name": "Tomato",
+    "type": "Consumable"
+  },
+  {
+    "name": "Amaranth",
+    "type": "Consumable"
+  },
+  {
+    "name": "Artichoke",
+    "type": "Consumable"
+  },
+  {
+    "name": "Beet",
+    "type": "Consumable"
+  },
+  {
+    "name": "Bok Choy",
+    "type": "Consumable"
+  },
+  {
+    "name": "Broccoli",
+    "type": "Consumable"
+  },
+  {
+    "name": "Cranberries",
+    "type": "Consumable"
+  },
+  {
+    "name": "Eggplant",
+    "type": "Consumable"
+  },
+  {
+    "name": "Fairy Rose",
+    "type": "Consumable"
+  },
+  {
+    "name": "Grape",
+    "type": "Consumable"
+  },
+  {
+    "name": "Yam",
+    "type": "Consumable"
+  },
+  {
+    "name": "Powdermelon",
+    "type": "Consumable"
+  },
+  {
+    "name": "Coffee Beans",
+    "type": "Salable"
+  },
+  {
+    "name": "Rhubarb",
+    "type": "Salable"
+  },
+  {
+    "name": "Wheat",
+    "type": "Salable"
+  },
+  {
+    "name": "Pumpkin",
+    "type": "Salable"
+  },
+  {
+    "name": "Sweet Gem Berry",
+    "type": "Salable"
+  },
+  {
+    "name": "Ancient Fruit",
+    "type": "Salable"
+  },
+  {
+    "name": "Jazz Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Carrot Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Cauliflower Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Garlic Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Bean Starter",
+    "type": "Seed"
+  },
+  {
+    "name": "Kale Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Parsnip Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Potato Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Rhubarb Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Strawberry Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Tulip Bulb",
+    "type": "Seed"
+  },
+  {
+    "name": "Rice Shoot",
+    "type": "Seed"
+  },
+  {
+    "name": "Blueberry Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Corn Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Hops Starter",
+    "type": "Seed"
+  },
+  {
+    "name": "Pepper Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Melon Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Poppy Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Radish Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Red Cabbage Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Starfruit Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Spangle Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "summer Squash Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Sunflower Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Tomato Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Wheat Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Amaranth Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Artichoke Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Beet Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Bok Choy Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Broccoli Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Cranberry Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Eggplant Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Fairy Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Grape Starter",
+    "type": "Seed"
+  },
+  {
+    "name": "Pumpkin Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Yam Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Rare Seed",
+    "type": "Seed"
+  },
+  {
+    "name": "Powdermelon Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Ancient Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Common Mushroom",
+    "type": "Consumable"
+  },
+  {
+    "name": "Daffodil",
+    "type": "Salable"
+  },
+  {
+    "name": "Dandelion",
+    "type": "Consumable"
+  },
+  {
+    "name": "Leek",
+    "type": "Consumable"
+  },
+  {
+    "name": "Morel",
+    "type": "Consumable"
+  },
+  {
+    "name": "Salmonberry",
+    "type": "Consumable"
+  },
+  {
+    "name": "spring Onion",
+    "type": "Consumable"
+  },
+  {
+    "name": "Wild Horseradish",
+    "type": "Consumable"
+  },
+  {
+    "name": "Fiddlehead Fern",
+    "type": "Consumable"
+  },
+  {
+    "name": "Grape",
+    "type": "Consumable"
+  },
+  {
+    "name": "Red Mushroom",
+    "type": "Consumable"
+  },
+  {
+    "name": "Spice Berry",
+    "type": "Consumable"
+  },
+  {
+    "name": "Sweet Pea",
+    "type": "Salable"
+  },
+  {
+    "name": "Blackberry",
+    "type": "Consumable"
+  },
+  {
+    "name": "Chanterelle",
+    "type": "Consumable"
+  },
+  {
+    "name": "Hazelnut",
+    "type": "Consumable"
+  },
+  {
+    "name": "Purple Mushroom",
+    "type": "Consumable"
+  },
+  {
+    "name": "Wild Plum",
+    "type": "Consumable"
+  },
+  {
+    "name": "Crocus",
+    "type": "Salable"
+  },
+  {
+    "name": "Crystal Fruit",
+    "type": "Consumable"
+  },
+  {
+    "name": "Holly",
+    "type": "Consumable"
+  },
+  {
+    "name": "Snow Yam",
+    "type": "Consumable"
+  },
+  {
+    "name": "winter Root",
+    "type": "Consumable"
+  },
+  {
+    "name": "Bee House",
+    "type": "Placeable"
+  },
+  {
+    "name": "Cheese Press",
+    "type": "Placeable"
+  },
+  {
+    "name": "Keg",
+    "type": "Placeable"
+  },
+  {
+    "name": "Loom",
+    "type": "Placeable"
+  },
+  {
+    "name": "Mayonnaise Machine",
+    "type": "Placeable"
+  },
+  {
+    "name": "Oil Maker",
+    "type": "Placeable"
+  },
+  {
+    "name": "Preserves Jar",
+    "type": "Placeable"
+  },
+  {
+    "name": "Fish Smoker",
+    "type": "Placeable"
+  },
+  {
+    "name": "Dehydrator",
+    "type": "Placeable"
+  },
+  {
+    "name": "Charcoal Kiln",
+    "type": "Placeable"
+  },
+  {
+    "name": "Furnace",
+    "type": "Placeable"
+  },
+  {
+    "name": "Scarecrow",
+    "type": "Placeable"
+  },
+  {
+    "name": "Deluxe Scarecrow",
+    "type": "Placeable"
+  },
+  {
+    "name": "Sprinkler",
+    "type": "Placeable"
+  },
+  {
+    "name": "Quality Sprinkler",
+    "type": "Placeable"
+  },
+  {
+    "name": "Iridium Sprinkler",
+    "type": "Placeable"
+  },
+  {
+    "name": "Suger",
+    "type": "Salable"
+  },
+  {
+    "name": "Joja Cola",
+    "type": "Consumable"
+  },
+  {
+    "name": "Hay",
+    "type": "Salable"
+  },
+  {
+    "name": "Apricot",
+    "type": "Consumable"
+  },
+  {
+    "name": "Cherry",
+    "type": "Consumable"
+  },
+  {
+    "name": "Banana",
+    "type": "Consumable"
+  },
+  {
+    "name": "Mango",
+    "type": "Consumable"
+  },
+  {
+    "name": "Orange",
+    "type": "Consumable"
+  },
+  {
+    "name": "Peach",
+    "type": "Consumable"
+  },
+  {
+    "name": "Apple",
+    "type": "Consumable"
+  },
+  {
+    "name": "Pomegranate",
+    "type": "Consumable"
+  },
+  {
+    "name": "Oak Resin",
+    "type": "Salable"
+  },
+  {
+    "name": "Maple Syrup",
+    "type": "Salable"
+  },
+  {
+    "name": "Pine Tar",
+    "type": "Salable"
+  },
+  {
+    "name": "Sap",
+    "type": "Consumable"
+  },
+  {
+    "name": "Common Mushroom",
+    "type": "Consumable"
+  },
+  {
+    "name": "Mystic Syrup",
+    "type": "Consumable"
+  },
+  {
+    "name": "Salmon",
+    "type": "Salable"
+  },
+  {
+    "name": "Sardine",
+    "type": "Salable"
+  },
+  {
+    "name": "Shad",
+    "type": "Salable"
+  },
+  {
+    "name": "Blue Discus",
+    "type": "Salable"
+  },
+  {
+    "name": "Midnight Carp",
+    "type": "Salable"
+  },
+  {
+    "name": "Squid",
+    "type": "Salable"
+  },
+  {
+    "name": "Tuna",
+    "type": "Salable"
+  },
+  {
+    "name": "Perch",
+    "type": "Salable"
+  },
+  {
+    "name": "Flounder",
+    "type": "Salable"
+  },
+  {
+    "name": "Lionfish",
+    "type": "Salable"
+  },
+  {
+    "name": "Herring",
+    "type": "Salable"
+  },
+  {
+    "name": "Ghostfish",
+    "type": "Salable"
+  },
+  {
+    "name": "Tilapia",
+    "type": "Salable"
+  },
+  {
+    "name": "Dorado",
+    "type": "Salable"
+  },
+  {
+    "name": "Sunfish",
+    "type": "Salable"
+  },
+  {
+    "name": "Rainbow Trout",
+    "type": "Salable"
+  },
+  {
+    "name": "Legend",
+    "type": "Salable"
+  },
+  {
+    "name": "Glacierfish",
+    "type": "Salable"
+  },
+  {
+    "name": "Angler",
+    "type": "Salable"
+  },
+  {
+    "name": "Crimsonfish",
+    "type": "Salable"
+  },
+  {
+    "name": "Quartz",
+    "type": "Salable"
+  },
+  {
+    "name": "Earth Crystal",
+    "type": "Salable"
+  },
+  {
+    "name": "Frozen Tear",
+    "type": "Salable"
+  },
+  {
+    "name": "Fire Quartz",
+    "type": "Salable"
+  },
+  {
+    "name": "Emerald",
+    "type": "Salable"
+  },
+  {
+    "name": "Aquamarine",
+    "type": "Salable"
+  },
+  {
+    "name": "Ruby",
+    "type": "Salable"
+  },
+  {
+    "name": "Amethyst",
+    "type": "Salable"
+  },
+  {
+    "name": "Topaz",
+    "type": "Salable"
+  },
+  {
+    "name": "Jade",
+    "type": "Salable"
+  },
+  {
+    "name": "Diamond",
+    "type": "Salable"
+  },
+  {
+    "name": "Prismatic Shard",
+    "type": "Salable"
+  },
+  {
+    "name": "Wood",
+    "type": "Salable"
+  },
+  {
+    "name": "Stone",
+    "type": "Salable"
+  }
+]

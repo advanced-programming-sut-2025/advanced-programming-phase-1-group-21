@@ -1,264 +1,272 @@
-{
-  "Bee House": [
-    {
-      "name": "Honey",
-      "description": "It's a sweet syrup produced by bees.",
-      "energy": 75,
-      "processing-time": [4, 0],
-      "ingredients": null,
-      "price": 350
-    }
-  ],
-  "Cheese Press": [
-    {
-      "name": "Cheese",
-      "description": "It's your basic cheese.",
-      "energy": 100,
-      "processing-time": [0, 3],
-      "ingredients": ["Milk", "Large Milk"],
-      "price": {"Milk": 230, "Large Milk": 345}
-    },
-    {
-      "name": "Goat Cheese",
-      "description": "Soft cheese made from goat's milk.",
-      "energy": 100,
-      "processing-time": [0, 3],
-      "ingredients": ["Goat Milk", "Large Goat Milk"],
-      "price": {"Goat Milk": 400, "Large Goat Milk": 600}
-    }
-  ],
-  "Keg": [
-    {
-      "name": "Beer",
-      "description": "Drink in moderation.",
-      "energy": 50,
-      "processing-time": [1, 0],
-      "ingredients": ["Wheat"],
-      "price": {"Wheat": 200}
-    },
-    {
-      "name": "Vinegar",
-      "description": "An aged fermented liquid used in many cooking recipes.",
-      "energy": 13,
-      "processing-time": [0, 10],
-      "ingredients": ["Rice"],
-      "price": {"Rice": 100}
-    },
-    {
-      "name": "Coffee",
-      "description": "It smells delicious. This is sure to give you a boost.",
-      "energy": 75,
-      "processing-time": [0, 2],
-      "ingredients": "Coffee Bean (5)",
-      "price": "150g"
-    },
-    {
-      "name": "Juice",
-      "description": "A sweet, nutritious beverage.",
-      "energy": "2 × Base Ingredient energy",
-      "processing-time": "4 Days",
-      "ingredients": "Any Vegetable",
-      "price": "2.25 × Ingredient Base price"
-    },
-    {
-      "name": "Mead",
-      "description": "A fermented beverage made from honey. Drink in moderation.",
-      "energy": 100,
-      "processing-time": [0, 10],
-      "ingredients": ["Honey"],
-      "price": {"Honey": 300}
-    },
-    {
-      "name": "Pale Ale",
-      "description": "Drink in moderation.",
-      "energy": 50,
-      "processing-time": [3, 0],
-      "ingredients": ["Hops"],
-      "price": {"Hops": 300}
-    },
-    {
-      "name": "Wine",
-      "description": "Drink in moderation.",
-      "energy": "1.75 × Base Fruit energy",
-      "processing-time": [7, 0],
-      "ingredients": "Any Fruit",
-      "price": "3 × Fruit Base price"
-    }
-  ],
-  "Loom": [
-    {
-      "name": "Cloth",
-      "description": "A bolt of fine wool cloth.",
-      "energy": "Inedible",
-      "processing-time": [0, 4],
-      "ingredients": "Wool",
-      "price": 470
-    }
-  ],
-  "Mayonnaise Machine": [
-    {
-      "name": "Mayonnaise",
-      "description": "It looks spreadable.",
-      "energy": 50,
-      "processing-time": [0, 3],
-      "ingredient": "Egg",
-      "price": 190
-    },
-    {
-      "name": "Mayonnaise",
-      "description": "It looks spreadable.",
-      "energy": 50,
-      "processing-time": [0, 3],
-      "ingredient": "Large Egg",
-      "price": 237
-    },
-    {
-      "name": "Duck Mayonnaise",
-      "description": "It's a rich, yellow mayonnaise.",
-      "energy": 75,
-      "processing-time": [0, 3],
-      "ingredients": "Duck Egg",
-      "price": 37
-    },
-    {
-      "name": "Dinosaur Mayonnaise",
-      "description": "It's thick and creamy, with a vivid green hue.\n It smells like grass and leather.",
-      "energy": 125,
-      "processing-time": [0, 3],
-      "ingredients": "Dinosaur Egg",
-      "price": 800
-    }
-  ],
-  "Oil Maker": [
-    {
-      "name": "Truffle Oil",
-      "description": "A gourmet cooking ingredient.",
-      "energy": 38,
-      "processing-time": [0, 6],
-      "ingredient": "Truffle",
-      "price": 1065
-    },
-    {
-      "name": "Oil",
-      "description": "All purpose cooking oil.",
-      "energy": 13,
-      "processing-time": [0, 6],
-      "ingredients": "Corn",
-      "price": 100
-    },
-    {
-      "name": "Oil",
-      "description": "All purpose cooking oil.",
-      "energy": 13,
-      "processing-time": [2, 0],
-      "ingredients": "Sunflower Seeds",
-      "price": 100
-    },
-    {
-      "name": "Oil",
-      "description": "All purpose cooking oil.",
-      "energy": 13,
-      "processing-time": [0, 1],
-      "ingredients": "Sunflower",
-      "price": 100
-    }
-  ],
-  "Preserves Jar": [
-    {
-      "name": "Pickles",
-      "description": "A jar of your home-made pickles.",
-      "energy": "1.75 × Base Ingredient energy",
-      "processing-time": "6 Hours",
-      "ingredients": "Any vegetable",
-      "price": "2 × Base price + 50"
-    },
-    {
-      "name": "Jelly",
-      "description": "Gooey.",
-      "energy": "2 × Base Fruit energy",
-      "processing-time": [3, 0],
-      "ingredients": "Any fruit",
-      "price": "2 × Base Fruit price + 50"
-    }
-  ],
-  "Fish Smoker": [
-    {
-      "name": "Smoked Fish",
-      "description": "A whole fish, smoked to perfection.",
-      "energy": "1.5 × Fish energy",
-      "processing-time": [0, 1],
-      "ingredients": "Any Fish + Coal",
-      "price": "2 × Fish price"
-    }
-  ],
-  "Dehydrator": [
-    {
-      "name": "Dried Mushrooms",
-      "description": "A package of gourmet mushrooms.",
-      "energy": 50,
-      "processing-time": [1, 0],
-      "ingredients": "Any Mushroom (5)",
-      "price": "7.5 × Mushroom Base price\n + 25g"
-    },
-    {
-      "name": "Dried Fruit",
-      "description": "Chewy pieces of dried fruit.",
-      "energy": 75,
-      "processing-time": [1, 0],
-      "ingredients": "5 of Any Fruit \n(except Grapes)",
-      "price": "7.5 × Fruit Base price + 25g"
-    },
-    {
-      "name": "Raisins",
-      "description": "It's said to be the Junimos' favorite food.",
-      "energy": 125,
-      "processing-time": "Ready the next morning",
-      "ingredients": "Grapes (5)",
-      "price": 600
-    }
-  ],
-  "Charcoal Kiln": [
-    {
-      "name": "Coal",
-      "description": "Turns 10 pieces of wood into one piece of coal.",
-      "energy": null,
-      "processing-time": [0, 1],
-      "ingredients": {"Wood": 10},
-      "price": 50
-    }
-  ],
-  "Furnace": [
-    {
-      "name": "Copper Bar",
-      "description": "Turns Copper ores and coal into Copper bar.",
-      "energy": null,
-      "processing-time": [0, 4],
-      "ingredients": {"Copper Ore": 5, "Coal": 1},
-      "price": "10 × Ore price"
-    },
-    {
-      "name": "Iron Bar",
-      "description": "Turns Iron ores and coal into Iron bar.",
-      "energy": null,
-      "processing-time": [0, 4],
-      "ingredients": {"Iron Ore": 5, "Coal": 1},
-      "price": "10 × Ore price"
-    },
-    {
-      "name": "Gold Bar",
-      "description": "Turns Gold ores and coal into Gold bar.",
-      "energy": null,
-      "processing-time": [0, 4],
-      "ingredients": {"Gold Ore": 5, "Coal": 1},
-      "price": "10 × Ore price"
-    },
-    {
-      "name": "Iridium Bar",
-      "description": "Turns Iridium ores and coal into Iridium bar.",
-      "energy": null,
-      "processing-time": [0, 4],
-      "ingredients": {"Iridium Ore": 5, "Coal": 1},
-      "price": "10 × Ore price"
-    }
-  ]
-}
+[
+  {
+    "artisan": "Bee House",
+    "name": "Honey",
+    "description": "It's a sweet syrup produced by bees.",
+    "energy": 75,
+    "processing-time": [4, 0],
+    "ingredients": null,
+    "price": 350
+  },
+  {
+    "artisan": "Cheese Press",
+    "name": "Cheese",
+    "description": "It's your basic cheese.",
+    "energy": 100,
+    "processing-time": [0, 3],
+    "ingredients": ["Milk", "Large Milk"],
+    "price": {"Milk": 230, "Large Milk": 345}
+  },
+  {
+    "artisan": "Cheese Press",
+    "name": "Goat Cheese",
+    "description": "Soft cheese made from goat's milk.",
+    "energy": 100,
+    "processing-time": [0, 3],
+    "ingredients": ["Goat Milk", "Large Goat Milk"],
+    "price": {"Goat Milk": 400, "Large Goat Milk": 600}
+  },
+  {
+    "artisan": "Keg",
+    "name": "Beer",
+    "description": "Drink in moderation.",
+    "energy": 50,
+    "processing-time": [1, 0],
+    "ingredients": ["Wheat"],
+    "price": {"Wheat": 200}
+  },
+  {
+    "artisan": "Keg",
+    "name": "Vinegar",
+    "description": "An aged fermented liquid used in many cooking recipes.",
+    "energy": 13,
+    "processing-time": [0, 10],
+    "ingredients": ["Rice"],
+    "price": {"Rice": 100}
+  },
+  {
+    "artisan": "Keg",
+    "name": "Coffee",
+    "description": "It smells delicious. This is sure to give you a boost.",
+    "energy": 75,
+    "processing-time": [0, 2],
+    "ingredients": "Coffee Bean (5)",
+    "price": "150g"
+  },
+  {
+    "artisan": "Keg",
+    "name": "Juice",
+    "description": "A sweet, nutritious beverage.",
+    "energy": "2 × Base Ingredient energy",
+    "processing-time": "4 Days",
+    "ingredients": "Any Vegetable",
+    "price": "2.25 × Ingredient Base price"
+  },
+  {
+    "artisan": "Keg",
+    "name": "Mead",
+    "description": "A fermented beverage made from honey. Drink in moderation.",
+    "energy": 100,
+    "processing-time": [0, 10],
+    "ingredients": ["Honey"],
+    "price": {"Honey": 300}
+  },
+  {
+    "artisan": "Bee House",
+    "name": "Pale Ale",
+    "description": "Drink in moderation.",
+    "energy": 50,
+    "processing-time": [3, 0],
+    "ingredients": ["Hops"],
+    "price": {"Hops": 300}
+  },
+  {
+    "artisan": "Bee House",
+    "name": "Wine",
+    "description": "Drink in moderation.",
+    "energy": "1.75 × Base Fruit energy",
+    "processing-time": [7, 0],
+    "ingredients": "Any Fruit",
+    "price": "3 × Fruit Base price"
+  },
+  {
+    "artisan": "Loom",
+    "name": "Cloth",
+    "description": "A bolt of fine wool cloth.",
+    "energy": "Inedible",
+    "processing-time": [0, 4],
+    "ingredients": "Wool",
+    "price": 470
+  },
+  {
+    "artisan": "Mayonnaise Machine",
+    "name": "Mayonnaise",
+    "description": "It looks spreadable.",
+    "energy": 50,
+    "processing-time": [0, 3],
+    "ingredient": "Egg",
+    "price": 190
+  },
+  {
+    "artisan": "Mayonnaise Machine",
+    "name": "Mayonnaise",
+    "description": "It looks spreadable.",
+    "energy": 50,
+    "processing-time": [0, 3],
+    "ingredient": "Large Egg",
+    "price": 237
+  },
+  {
+    "artisan": "Mayonnaise Machine",
+    "name": "Duck Mayonnaise",
+    "description": "It's a rich, yellow mayonnaise.",
+    "energy": 75,
+    "processing-time": [0, 3],
+    "ingredients": "Duck Egg",
+    "price": 37
+  },
+  {
+    "artisan": "Mayonnaise Machine",
+    "name": "Dinosaur Mayonnaise",
+    "description": "It's thick and creamy, with a vivid green hue.\n It smells like grass and leather.",
+    "energy": 125,
+    "processing-time": [0, 3],
+    "ingredients": "Dinosaur Egg",
+    "price": 800
+  },
+  {
+    "artisan": "Oil Maker",
+    "name": "Truffle Oil",
+    "description": "A gourmet cooking ingredient.",
+    "energy": 38,
+    "processing-time": [0, 6],
+    "ingredient": "Truffle",
+    "price": 1065
+  },
+  {
+    "artisan": "Oil Maker",
+    "name": "Oil",
+    "description": "All purpose cooking oil.",
+    "energy": 13,
+    "processing-time": [0, 6],
+    "ingredients": "Corn",
+    "price": 100
+  },
+  {
+    "artisan": "Oil Maker",
+    "name": "Oil",
+    "description": "All purpose cooking oil.",
+    "energy": 13,
+    "processing-time": [2, 0],
+    "ingredients": "Sunflower Seeds",
+    "price": 100
+  },
+  {
+    "artisan": "Oil Maker",
+    "name": "Oil",
+    "description": "All purpose cooking oil.",
+    "energy": 13,
+    "processing-time": [0, 1],
+    "ingredients": "Sunflower",
+    "price": 100
+  },
+  {
+    "artisan": "Preserves Jar",
+    "name": "Pickles",
+    "description": "A jar of your home-made pickles.",
+    "energy": "1.75 × Base Ingredient energy",
+    "processing-time": "6 Hours",
+    "ingredients": "Any vegetable",
+    "price": "2 × Base price + 50"
+  },
+  {
+    "artisan": "Preserves Jar",
+    "name": "Jelly",
+    "description": "Gooey.",
+    "energy": "2 × Base Fruit energy",
+    "processing-time": [3, 0],
+    "ingredients": "Any fruit",
+    "price": "2 × Base Fruit price + 50"
+  },
+  {
+    "artisan": "Bee House",
+    "name": "Smoked Fish",
+    "description": "A whole fish, smoked to perfection.",
+    "energy": "1.5 × Fish energy",
+    "processing-time": [0, 1],
+    "ingredients": "Any Fish + Coal",
+    "price": "2 × Fish price"
+  },
+  {
+    "artisan": "Dehydrator",
+    "name": "Dried Mushrooms",
+    "description": "A package of gourmet mushrooms.",
+    "energy": 50,
+    "processing-time": [1, 0],
+    "ingredients": "Any Mushroom (5)",
+    "price": "7.5 × Mushroom Base price\n + 25g"
+  },
+  {
+    "artisan": "Dehydrator",
+    "name": "Dried Fruit",
+    "description": "Chewy pieces of dried fruit.",
+    "energy": 75,
+    "processing-time": [1, 0],
+    "ingredients": "5 of Any Fruit \n(except Grapes)",
+    "price": "7.5 × Fruit Base price + 25g"
+  },
+  {
+    "artisan": "Dehydrator",
+    "name": "Raisins",
+    "description": "It's said to be the Junimos' favorite food.",
+    "energy": 125,
+    "processing-time": "Ready the next morning",
+    "ingredients": "Grapes (5)",
+    "price": 600
+  },
+  {
+    "artisan": "Charcoal Kiln",
+    "name": "Coal",
+    "description": "Turns 10 pieces of wood into one piece of coal.",
+    "energy": null,
+    "processing-time": [0, 1],
+    "ingredients": {"Wood": 10},
+    "price": 50
+  },
+  {
+    "artisan": "Furnace",
+    "name": "Copper Bar",
+    "description": "Turns Copper ores and coal into Copper bar.",
+    "energy": null,
+    "processing-time": [0, 4],
+    "ingredients": {"Copper Ore": 5, "Coal": 1},
+    "price": "10 × Ore price"
+  },
+  {
+    "artisan": "Furnace",
+    "name": "Iron Bar",
+    "description": "Turns Iron ores and coal into Iron bar.",
+    "energy": null,
+    "processing-time": [0, 4],
+    "ingredients": {"Iron Ore": 5, "Coal": 1},
+    "price": "10 × Ore price"
+  },
+  {
+    "artisan": "Furnace",
+    "name": "Gold Bar",
+    "description": "Turns Gold ores and coal into Gold bar.",
+    "energy": null,
+    "processing-time": [0, 4],
+    "ingredients": {"Gold Ore": 5, "Coal": 1},
+    "price": "10 × Ore price"
+  },
+  {
+    "artisan": "Furnace",
+    "name": "Iridium Bar",
+    "description": "Turns Iridium ores and coal into Iridium bar.",
+    "energy": null,
+    "processing-time": [0, 4],
+    "ingredients": {"Iridium Ore": 5, "Coal": 1},
+    "price": "10 × Ore price"
+  }
+]

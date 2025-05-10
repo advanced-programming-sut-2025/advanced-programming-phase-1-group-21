@@ -1,0 +1,502 @@
+[
+  {
+    "name": "Egg",
+    "price": 50,
+    "energy": 25
+  },
+  {
+    "name": "Big Egg",
+    "price": 95,
+    "energy": 38
+  },
+  {
+    "name": "Duck Egg",
+    "price": 95,
+    "energy": 38
+  },
+  {
+    "name": "Milk",
+    "price": 125,
+    "energy": 38
+  },
+  {
+    "name": "Large Milk",
+    "price": 190,
+    "energy": 50
+  },
+  {
+    "name": "Goat Milk",
+    "price": 225,
+    "energy": 63
+  },
+  {
+    "name": "Goat Milk",
+    "price": 345,
+    "energy": 88
+  },
+  {
+    "name": "Truffle",
+    "price": 625,
+    "energy": 13
+  },
+  {
+    "name": "Blue Jazz",
+    "price": 50,
+    "energy": 45
+  },
+  {
+    "name": "Carrot",
+    "price": 35,
+    "energy": 75
+  },
+  {
+    "name": "Cauliflower",
+    "price": 175,
+    "energy": 75
+  },
+  {
+    "name": "Garlic",
+    "price": 60,
+    "energy": 20
+  },
+  {
+    "name": "Green Bean",
+    "price": 40,
+    "energy": 25
+  },
+  {
+    "name": "Kale",
+    "price": 110,
+    "energy": 50
+  },
+  {
+    "name": "Parsnip",
+    "price": 35,
+    "energy": 25
+  },
+  {
+    "name": "Potato",
+    "price": 80,
+    "energy": 25
+  },
+  {
+    "name": "Strawberry",
+    "price": 120,
+    "energy": 50
+  },
+  {
+    "name": "Tulip",
+    "price": 30,
+    "energy": 45
+  },
+  {
+    "name": "Unmilled Rice",
+    "price": 30,
+    "energy": 3
+  },
+  {
+    "name": "Blueberry",
+    "price": 50,
+    "energy": 25
+  },
+  {
+    "name": "Corn",
+    "price": 50,
+    "energy": 25
+  },
+  {
+    "name": "Hops",
+    "price": 25,
+    "energy": 45
+  },
+  {
+    "name": "Hot Pepper",
+    "price": 40,
+    "energy": 13
+  },
+  {
+    "name": "Melon",
+    "price": 250,
+    "energy": 113
+  },
+  {
+    "name": "Poppy",
+    "price": 140,
+    "energy": 45
+  },
+  {
+    "name": "Radish",
+    "price": 90,
+    "energy": 45
+  },
+  {
+    "name": "Red Cabbage",
+    "price": 260,
+    "energy": 75
+  },
+  {
+    "name": "Starfruit",
+    "price": 750,
+    "energy": 125
+  },
+  {
+    "name": "summer Spangle",
+    "price": 90,
+    "energy": 45
+  },
+  {
+    "name": "summer Squash",
+    "price": 45,
+    "energy": 63
+  },
+  {
+    "name": "Sunflower",
+    "price": 80,
+    "energy": 45
+  },
+  {
+    "name": "Tomato",
+    "price": 60,
+    "energy": 20
+  },
+  {
+    "name": "Amaranth",
+    "price": 150,
+    "energy": 50
+  },
+  {
+    "name": "Artichoke",
+    "price": 160,
+    "energy": 30
+  },
+  {
+    "name": "Beet",
+    "price": 100,
+    "energy": 30
+  },
+  {
+    "name": "Bok Choy",
+    "price": 80,
+    "energy": 25
+  },
+  {
+    "name": "Broccoli",
+    "price": 70,
+    "energy": 63
+  },
+  {
+    "name": "Cranberries",
+    "price": 75,
+    "energy": 38
+  },
+  {
+    "name": "Eggplant",
+    "price": 60,
+    "energy": 20
+  },
+  {
+    "name": "Fairy Rose",
+    "price": 290,
+    "energy": 45
+  },
+  {
+    "name": "Grape",
+    "price": 80,
+    "energy": 38
+  },
+  {
+    "name": "Yam",
+    "price": 160,
+    "energy": 45
+  },
+  {
+    "name": "Powdermelon",
+    "price": 60,
+    "energy": 63
+  },
+  {
+    "name": "Common Mushroom",
+    "price": 40,
+    "energy": 38
+  },
+  {
+    "name": "Dandelion",
+    "price": 40,
+    "energy": 25
+  },
+  {
+    "name": "Leek",
+    "price": 60,
+    "energy": 40
+  },
+  {
+    "name": "Morel",
+    "price": 150,
+    "energy": 20
+  },
+  {
+    "name": "Salmonberry",
+    "price": 5,
+    "energy": 25
+  },
+  {
+    "name": "spring Onion",
+    "price": 8,
+    "energy": 13
+  },
+  {
+    "name": "Wild Horseradish",
+    "price": 50,
+    "energy": 13
+  },
+  {
+    "name": "Fiddlehead Fern",
+    "price": 90,
+    "energy": 25
+  },
+  {
+    "name": "Grape",
+    "price": 80,
+    "energy": 38
+  },
+  {
+    "name": "Red Mushroom",
+    "price": 75,
+    "energy": -50
+  },
+  {
+    "name": "Spice Berry",
+    "price": 80,
+    "energy": 25
+  },
+  {
+    "name": "Blackberry",
+    "price": 25,
+    "energy": 25
+  },
+  {
+    "name": "Chanterelle",
+    "price": 160,
+    "energy": 75
+  },
+  {
+    "name": "Hazelnut",
+    "price": 40,
+    "energy": 38
+  },
+  {
+    "name": "Purple Mushroom",
+    "price": 90,
+    "energy": 30
+  },
+  {
+    "name": "Wild Plum",
+    "price": 80,
+    "energy": 25
+  },
+  {
+    "name": "Crystal Fruit",
+    "price": 150,
+    "energy": 63
+  },
+  {
+    "name": "Holly",
+    "price": 80,
+    "energy": -37
+  },
+  {
+    "name": "Snow Yam",
+    "price": 100,
+    "energy": 30
+  },
+  {
+    "name": "winter Root",
+    "price": 70,
+    "energy": 25
+  },
+  {
+    "name": "Joja Cola",
+    "price": 25,
+    "energy": 13
+  },
+  {
+    "name": "Rice",
+    "price": 100,
+    "energy": 13
+  },
+  {
+    "name": "Beer",
+    "price": 200,
+    "energy": 50
+  },
+  {
+    "name": "Salad",
+    "price": 100,
+    "energy": 113
+  },
+  {
+    "name": "Bread",
+    "price": 60,
+    "energy": 50
+  },
+  {
+    "name": "Spaghetti",
+    "price": 120,
+    "energy": 75
+  },
+  {
+    "name": "Pizza",
+    "price": 300,
+    "energy": 150
+  },
+  {
+    "name": "Coffee",
+    "price": 150,
+    "energy": 3
+  },
+  {
+    "name": "Apricot",
+    "price": 59,
+    "energy": 38
+  },
+  {
+    "name": "Cherry",
+    "price": 80,
+    "energy": 38
+  },
+  {
+    "name": "Banana",
+    "price": 150,
+    "energy": 75
+  },
+  {
+    "name": "Mango",
+    "price": 130,
+    "energy": 100
+  },
+  {
+    "name": "Orange",
+    "price": 100,
+    "energy": 38
+  },
+  {
+    "name": "Peach",
+    "price": 140,
+    "energy": 38
+  },
+  {
+    "name": "Apple",
+    "price": 100,
+    "energy": 38
+  },
+  {
+    "name": "Pomegranate",
+    "price": 140,
+    "energy": 38
+  },
+  {
+    "name": "Sap",
+    "price": 2,
+    "energy": -2
+  },
+  {
+    "name": "Common Mushroom",
+    "price": 40,
+    "energy": 38
+  },
+  {
+    "name": "Mystic Syrup",
+    "price": 1000,
+    "energy": 500
+  },
+  {
+    "name": "Honey",
+    "price": 350,
+    "energy": 75
+  },
+  {
+    "name": "Cheese",
+    "price": 1000,
+    "energy": 500
+  },
+  {
+    "name": "Goat Cheese",
+    "price": 1000,
+    "energy": 500
+  },
+  {
+    "name": "Beer",
+    "price": 1000,
+    "energy": 500
+  },
+  {
+    "name": "Vinegar",
+    "price": 1000,
+    "energy": 500
+  },
+  {
+    "name": "Coffee",
+    "price": 1000,
+    "energy": 500
+  },
+  {
+    "name": "Juice",
+    "type": "Consumable"
+  },
+  {
+    "name": "Mead",
+    "type": "Consumable"
+  },
+  {
+    "name": "Pale Ale",
+    "type": "Consumable"
+  },
+  {
+    "name": "Wine",
+    "type": "Consumable"
+  },
+  {
+    "name": "Mayonnaise",
+    "type": "Consumable"
+  },
+  {
+    "name": "Duck Mayonnaise",
+    "type": "Consumable"
+  },
+  {
+    "name": "Dinosaur Mayonnaise",
+    "type": "Consumable"
+  },
+  {
+    "name": "Truffle Oil",
+    "type": "Consumable"
+  },
+  {
+    "name": "Oil",
+    "type": "Consumable"
+  },
+  {
+    "name": "Pickles",
+    "type": "Consumable"
+  },
+  {
+    "name": "Jelly",
+    "type": "Consumable"
+  },
+  {
+    "name": "Smoked Fish",
+    "type": "Consumable"
+  },
+  {
+    "name": "Dried Mushrooms",
+    "type": "Consumable"
+  },
+  {
+    "name": "Dried Fruit",
+    "type": "Consumable"
+  },
+  {
+    "name": "Raisins",
+    "type": "Consumable"
+  }
+]

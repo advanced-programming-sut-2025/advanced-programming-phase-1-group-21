@@ -91,16 +91,6 @@
     "place": "House"
   },
   {
-    "name": "Grass Starter",
-    "description": "When placed, grass starts growing at that spot",
-    "ingredients": {"Wood": 1, "Fiber": 1},
-    "source": "Pierre's General Store",
-    "skill-type": null,
-    "skill-level": null,
-    "salable": false,
-    "place": "Farm"
-  },
-  {
     "name": "Fish Smoker",
     "description": "Turns any fish into smoked fish with preserved quality using one coal",
     "ingredients": {"Wood": 50, "Iron Bar": 3, "Coal": 10},
@@ -109,15 +99,5 @@
     "skill-level": null,
     "salable": false,
     "place": "House"
-  },
-  {
-    "name": "Mystic Tree Seed",
-    "description": "Can be planted to grow a mystic tree",
-    "ingredients": {"Acorn": 5, "Maple Seed": 5, "Pine Cone": 5, "Mahogany Seed": 5},
-    "skill-type": "Foraging",
-    "skill-level": 4,
-    "salable": true,
-    "price": 100,
-    "place": "Farm"
   }
 ]

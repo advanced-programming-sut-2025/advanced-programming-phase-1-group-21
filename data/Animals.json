@@ -23,7 +23,7 @@
     "name": "Rabbit",
     "house": "Coop",
     "house-type": ["Deluxe"],
-    "products": ["Wool", "Rabbit foot"],
+    "products": ["Wool", "Rabbit's foot"],
     "product-time": 4,
     "product-seasons": ["spring", "summer", "autumn", "winter"],
     "tool": null,

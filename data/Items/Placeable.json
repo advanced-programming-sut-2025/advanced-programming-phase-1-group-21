@@ -1,0 +1,66 @@
+[
+  {
+    "name": "Bee House",
+    "location": "Farm"
+  },
+  {
+    "name": "Cheese Press",
+    "location": "House"
+  },
+  {
+    "name": "Keg",
+    "location": "House"
+  },
+  {
+    "name": "Loom",
+    "location": "House"
+  },
+  {
+    "name": "Mayonnaise Machine",
+    "location": "House"
+  },
+  {
+    "name": "Oil Maker",
+    "location": "House"
+  },
+  {
+    "name": "Preserves Jar",
+    "location": "House"
+  },
+  {
+    "name": "Fish Smoker",
+    "location": "House"
+  },
+  {
+    "name": "Dehydrator",
+    "location": "House"
+  },
+  {
+    "name": "Charcoal Kiln",
+    "location": "House"
+  },
+  {
+    "name": "Furnace",
+    "location": "House"
+  },
+  {
+    "name": "Scarecrow",
+    "location": "Farm"
+  },
+  {
+    "name": "Deluxe Scarecrow",
+    "location": "Farm"
+  },
+  {
+    "name": "Sprinkler",
+    "location": "Farm"
+  },
+  {
+    "name": "Quality Sprinkler",
+    "location": "Farm"
+  },
+  {
+    "name": "Iridium Sprinkler",
+    "location": "Farm"
+  }
+]
