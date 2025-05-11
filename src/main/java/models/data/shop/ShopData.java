@@ -5,6 +5,7 @@ import models.data.Data;
 import models.time.Season;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class ShopData implements Data {
@@ -128,5 +129,13 @@ public class ShopData implements Data {
 			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
+	}
+
+	public static List<ShopData> getRecipeByShop(String shop) {
+		List<ShopData> r = new ArrayList<>();
+		for (ShopData a : recipes)
+			if (a.getShop().equalsIgnoreCase(shop))
+				r.add(a);
+		return r;
 	}
 }
