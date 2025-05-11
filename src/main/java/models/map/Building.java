@@ -15,9 +15,4 @@ public abstract class Building implements Placable {
     public boolean isWalkable() {
         return false;
     }
-
-    @Override
-    public String getSprite() {
-        return "H";
-    }
 }

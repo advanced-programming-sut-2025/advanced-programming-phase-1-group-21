@@ -39,4 +39,9 @@ public class Shop extends Building {
 	public boolean canEnter() {
 		return true;
 	}
+
+	@Override
+	public String getSprite() {
+		return "" + shopType.getSymbol();
+	}
 }

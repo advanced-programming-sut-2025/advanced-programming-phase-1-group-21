@@ -12,4 +12,9 @@ public class Barn extends Building{
     public boolean canEnter() {
         return true;
     }
+
+    @Override
+    public String getSprite() {
+        return "B";
+    }
 }
