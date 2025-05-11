@@ -41,5 +41,7 @@ public class Shop extends Building {
 	}
 
 	@Override
-	public String getS
+	public String getSprite() {
+		return "" + shopType.getSymbol();
+	}
 }
