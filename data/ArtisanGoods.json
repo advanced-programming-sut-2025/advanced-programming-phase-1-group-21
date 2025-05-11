@@ -41,7 +41,7 @@
     "description": "An aged fermented liquid used in many cooking recipes.",
     "energy": 13,
     "processing-time": [0, 10],
-    "ingredients": ["Rice"],
+    "ingredients": {"Rice": 1},
     "price": {"Rice": 100}
   },
   {
@@ -50,7 +50,7 @@
     "description": "It smells delicious. This is sure to give you a boost.",
     "energy": 75,
     "processing-time": [0, 2],
-    "ingredients": "Coffee Bean (5)",
+    "ingredients": {"Coffee Beans": 5},
     "price": "150g"
   },
   {

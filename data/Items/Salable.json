@@ -100,10 +100,6 @@
     "price": 1500
   },
   {
-    "name": "Coffee Beans",
-    "price": 15
-  },
-  {
     "name": "Rhubarb",
     "price": 220
   },
@@ -262,5 +258,13 @@
   {
     "name": "Mega Bomb",
     "price": 50
+  },
+  {
+    "name": "Bouquet",
+    "price": 500
+  },
+  {
+    "name": "Wedding Ring",
+    "price": 5000
   }
 ]

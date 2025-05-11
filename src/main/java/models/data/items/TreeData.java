@@ -70,7 +70,7 @@ public class TreeData implements Data, ItemData {
 
 	public static TreeData getData(String name) {
 		for (TreeData a : treeData)
-			if (a.getName().equalsIgnoreCase(name))
+			if (a.getName().equalsIgnoreCase(name) || a.getSeedName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}
