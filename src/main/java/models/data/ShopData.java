@@ -1,7 +1,6 @@
-package models.data.shop;
+package models.data;
 
 import com.google.gson.annotations.SerializedName;
-import models.data.Data;
 import models.time.Season;
 
 import java.util.ArrayList;

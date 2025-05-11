@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Sebastian",
+    "favorites": ["Wool","Pumpkin Pie", "Pizza"],
+    "tasks": [
+      {
+        "request-item": "Iron Bar",
+        "request-amount": 50,
+        "reward-item": "Diamond",
+        "reward-amount": 2
+      },
+      {
+        "request-item": "Pumpkin Pie",
+        "request-amount": 1,
+        "reward-item": "Coin",
+        "reward-amount": 5000
+      },
+      {
+        "request-item": "Stone",
+        "request-amount": 150,
+        "reward-item": "Quartz",
+        "reward-amount": 50
+      }
+    ]
+  },
+  {
+    "name": "Abigail",
+    "favorites": ["Stone","Iron Ore", "Coffee"],
+    "tasks": [
+      {
+        "request-item": "Gold Bar",
+        "request-amount": 1,
+        "reward-item": "Friendship",
+        "reward-amount": 1
+      },
+      {
+        "request-item": "Pumpkin",
+        "request-amount": 1,
+        "reward-item": "Coin",
+        "reward-amount": 500
+      },
+      {
+        "request-item": "Wheat",
+        "request-amount": 50,
+        "reward-item": "Iridium Sprinkler",
+        "reward-amount": 1
+      }
+    ]
+  },
+  {
+    "name": "Harvey",
+    "favorites": ["Coffee","Pickle", "Wine"],
+    "tasks": [
+      {
+        "request-item": "Vegetable",
+        "request-amount": 12,
+        "reward-item": "Coin",
+        "reward-amount": 750
+      },
+      {
+        "request-item": "Salmon",
+        "request-amount": 1,
+        "reward-item": "Friendship",
+        "reward-amount": 1
+      },
+      {
+        "request-item": "Wine",
+        "request-amount": 1,
+        "reward-item": "Salad",
+        "reward-amount": 5
+      }
+    ]
+  },
+  {
+    "name": "Leah",
+    "favorites": ["Salad","Grape", "Wine"],
+    "tasks": [
+      {
+        "request-item": "Wood",
+        "request-amount": 10,
+        "reward-item": "Coin",
+        "reward-amount": 500
+      },
+      {
+        "request-item": "Salmon",
+        "request-amount": 1,
+        "reward-item": "Dinner Salmon Recipe",
+        "reward-amount": 1
+      },
+      {
+        "request-item": "Wood",
+        "request-amount": 200,
+        "reward-item": "Deluxe Scarecrow",
+        "reward-amount": 3
+      }
+    ]
+  },
+  {
+    "name": "Robin",
+    "favorites": ["Spaghetti","Wood", "Iron Bar"],
+    "tasks": [
+      {
+        "request-item": "Wood",
+        "request-amount": 80,
+        "reward-item": "Coin",
+        "reward-amount": 1000
+      },
+      {
+        "request-item": "Iron Bar",
+        "request-amount": 10,
+        "reward-item": "Bee House",
+        "reward-amount": 3
+      },
+      {
+        "request-item": "Wood",
+        "request-amount": 1000,
+        "reward-item": "Coin",
+        "reward-amount": 25000
+      }
+    ]
+  }
+]
