@@ -7,10 +7,7 @@
       [1, 0],
       [0, -1],
       [0, 1]
-    ],
-    "ingredients": {"Copper Bar": 1, "Iron Bar": 1},
-    "skill-type": "Farming",
-    "skill-level": 1
+    ]
   },
   {
     "name": "Quality Sprinkler",
@@ -24,10 +21,7 @@
       [1, -1],
       [1, 0],
       [1, 1]
-    ],
-    "ingredients": {"Iron Bar": 1, "Gold Bar": 1},
-    "skill-type": "Farming",
-    "skill-level": 2
+    ]
   },
   {
     "name": "Iridium Sprinkler",
@@ -57,9 +51,6 @@
       [2, 0],
       [2, 1],
       [2, 2]
-    ],
-    "ingredients": {"Gold Bar": 1, "Iridium Bar": 1},
-    "skill-type": "Farming",
-    "skill-level": 3
+    ]
   }
 ]

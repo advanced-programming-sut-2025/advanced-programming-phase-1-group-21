@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Scarecrow",
+    "description": "Prevents crow attacks up to an 8 tile radius.",
+    "radius": 8
+  },
+  {
+    "name": "Deluxe Scarecrow",
+    "description": "Prevents crow attacks up to an 8 tile radius.",
+    "radius": 12
+  }
+]

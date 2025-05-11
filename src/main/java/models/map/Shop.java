@@ -1,11 +1,9 @@
 package models.map;
 
-import com.google.gson.Gson;
-import controllers.DataBaseController;
 import models.App;
 import models.DailyUpdate;
 import models.Item.Item;
-import models.data.shop.ShopData;
+import models.data.ShopData;
 import models.game.Inventory;
 import models.result.Result;
 import models.result.errorTypes.GameError;
