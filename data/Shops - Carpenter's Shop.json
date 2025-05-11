@@ -1,7 +1,6 @@
 [
   {
     "name": "Wood",
-    "type": "",
     "description": "A sturdy, yet flexible plant material with a wide variety of uses.",
     "ingredients": null,
     "required": null,
@@ -63,21 +62,5 @@
     "required": "Big Coop",
     "price": 20000,
     "daily-limit": 1
-  },
-  {
-    "name": "Well",
-    "description": "Provides a place for you to refill your watering can.",
-    "ingredients": {"Stone": 75},
-    "required": null,
-    "price": 1000,
-    "daily-limit": 1
-  },
-  {
-    "name": "Shipping Bin",
-    "description": "Items placed in it will be included in the nightly shipment.",
-    "ingredients": {"Wood": 150},
-    "required": null,
-    "price": 250,
-    "daily-limit": -1
   }
 ]

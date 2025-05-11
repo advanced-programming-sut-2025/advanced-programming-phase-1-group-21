@@ -26,13 +26,13 @@ public class DataLoader {
 		ScarecrowRecipeData.setData(loadEach(ScarecrowRecipeData.getDataURL(), new TypeToken<List<ScarecrowRecipeData>>(){}.getType()));
 		SprinklerRecipeData.setData(loadEach(SprinklerRecipeData.getDataURL(), new TypeToken<List<SprinklerRecipeData>>(){}.getType()));
 
-		BlackSmithRecipeData.setData(loadEach(BlackSmithRecipeData.getDataURL(), new TypeToken<List<BlackSmithRecipeData>>(){}.getType()));
-		CarpenterRecipeData.setData(loadEach(CarpenterRecipeData.getDataURL(), new TypeToken<List<CarpenterRecipeData>>(){}.getType()));
-		FishShopRecipeData.setData(loadEach(FishShopRecipeData.getDataURL(), new TypeToken<List<FishShopRecipeData>>(){}.getType()));
-		JojaMartRecipeData.setData(loadEach(JojaMartRecipeData.getDataURL(), new TypeToken<List<JojaMartRecipeData>>(){}.getType()));
-		MarniesRanchRecipeData.setData(loadEach(MarniesRanchRecipeData.getDataURL(), new TypeToken<List<MarniesRanchRecipeData>>(){}.getType()));
-		PierreStoreRecipeData.setData(loadEach(PierreStoreRecipeData.getDataURL(), new TypeToken<List<PierreStoreRecipeData>>(){}.getType()));
-		StardropSaloonRecipeData.setData(loadEach(StardropSaloonRecipeData.getDataURL(), new TypeToken<List<StardropSaloonRecipeData>>(){}.getType()));
+//		BlackSmithRecipeData.setData(loadEach(BlackSmithRecipeData.getDataURL(), new TypeToken<List<BlackSmithRecipeData>>(){}.getType()));
+//		CarpenterRecipeData.setData(loadEach(CarpenterRecipeData.getDataURL(), new TypeToken<List<CarpenterRecipeData>>(){}.getType()));
+//		FishShopRecipeData.setData(loadEach(FishShopRecipeData.getDataURL(), new TypeToken<List<FishShopRecipeData>>(){}.getType()));
+//		JojaMartRecipeData.setData(loadEach(JojaMartRecipeData.getDataURL(), new TypeToken<List<JojaMartRecipeData>>(){}.getType()));
+//		MarniesRanchRecipeData.setData(loadEach(MarniesRanchRecipeData.getDataURL(), new TypeToken<List<MarniesRanchRecipeData>>(){}.getType()));
+		ShopData.setData(loadEach(ShopData.getDataURL(), new TypeToken<List<ShopData>>(){}.getType()));
+//		StardropSaloonRecipeData.setData(loadEach(StardropSaloonRecipeData.getDataURL(), new TypeToken<List<StardropSaloonRecipeData>>(){}.getType()));
 
 		AnimalData.setData(loadEach(AnimalData.getDataURL(), new TypeToken<List<AnimalData>>(){}.getType()));
 		AnimalHouseData.setData(loadEach(AnimalHouseData.getDataURL(), new TypeToken<List<AnimalHouseData>>(){}.getType()));
