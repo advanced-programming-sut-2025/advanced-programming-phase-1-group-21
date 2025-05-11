@@ -136,7 +136,7 @@ public class Inventory {
 
     public void removeItemList(List<Item> itemsToRemove) {
         boolean can = removeItemsList(itemsToRemove, items);
-        if (!can) throw new RuntimeException("Can't remove items from the inventory.");
+        if (!can) System.out.println("cant");;
     }
 
     public String removeItem(Item item) {
