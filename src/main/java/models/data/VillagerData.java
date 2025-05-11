@@ -29,12 +29,12 @@ public class VillagerData implements Data {
 		if (tasks == null) {
 			throw new NullPointerException("tasks (in VillagerDate) is null");
 		}
-		System.out.println("name: " + name);
-		System.out.println("favorites: " + favorites);
-
-		for (VillagerTask task : tasks) {
-			System.out.println("task: " + task.getRequestItem() + " " + task.getRequestAmount() + " " + task.getRewardItem() + " " + task.getRewardAmount());
-		}
+//		System.out.println("name: " + name);
+//		System.out.println("favorites: " + favorites);
+//
+//		for (VillagerTask task : tasks) {
+//			System.out.println("task: " + task.getRequestItem() + " " + task.getRequestAmount() + " " + task.getRewardItem() + " " + task.getRewardAmount());
+//		}
 	}
 
 	public String getName() {
