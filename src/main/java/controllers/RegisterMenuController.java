@@ -170,9 +170,7 @@ public class RegisterMenuController{
     }
 
     private String generateRandomPassword() {
-        Random random = new Random();
-
-        int length = random.nextInt(6) + 8;
+        int length = App.random.nextInt(6) + 8;
         String upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String lower = "abcdefghijklmnopqrstuvwxyz";
         String digits = "0123456789";
@@ -180,14 +178,14 @@ public class RegisterMenuController{
 
         List<Character> passwordChars = new ArrayList<>();
 
-        passwordChars.add(upper.charAt(random.nextInt(upper.length())));
-        passwordChars.add(lower.charAt(random.nextInt(lower.length())));
-        passwordChars.add(digits.charAt(random.nextInt(digits.length())));
-        passwordChars.add(specials.charAt(random.nextInt(specials.length())));
+        passwordChars.add(upper.charAt(App.random.nextInt(upper.length())));
+        passwordChars.add(lower.charAt(App.random.nextInt(lower.length())));
+        passwordChars.add(digits.charAt(App.random.nextInt(digits.length())));
+        passwordChars.add(specials.charAt(App.random.nextInt(specials.length())));
 
         String all = upper + lower + digits + specials;
         for (int i = 4; i < length; i++) {
-            passwordChars.add(all.charAt(random.nextInt(all.length())));
+            passwordChars.add(all.charAt(App.random.nextInt(all.length())));
         }
 
         Collections.shuffle(passwordChars);
