@@ -44,7 +44,7 @@
     "type": "Consumable"
   },
   {
-    "name": "Goat Milk",
+    "name": "Large Goat Milk",
     "type": "Consumable"
   },
   {
@@ -200,7 +200,7 @@
     "type": "Consumable"
   },
   {
-    "name": "Olmelet",
+    "name": "Omelet",
     "type": "Consumable"
   },
   {
@@ -272,7 +272,7 @@
     "type": "Consumable"
   },
   {
-    "name": "Seaform Pudding",
+    "name": "Seafoam Pudding",
     "type": "Consumable"
   },
   {
@@ -644,10 +644,6 @@
     "type": "Consumable"
   },
   {
-    "name": "Grape",
-    "type": "Consumable"
-  },
-  {
     "name": "Red Mushroom",
     "type": "Consumable"
   },
@@ -824,10 +820,6 @@
     "type": "Consumable"
   },
   {
-    "name": "Common Mushroom",
-    "type": "Consumable"
-  },
-  {
     "name": "Mystic Syrup",
     "type": "Consumable"
   },
@@ -965,6 +957,14 @@
   },
   {
     "name": "Stone",
+    "type": "Salable"
+  },
+  {
+    "name": "Bouquet",
+    "type": "Salable"
+  },
+  {
+    "name": "Wedding Ring",
     "type": "Salable"
   }
 ]

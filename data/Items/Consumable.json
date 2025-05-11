@@ -30,7 +30,7 @@
     "energy": 63
   },
   {
-    "name": "Goat Milk",
+    "name": "Large Goat Milk",
     "price": 345,
     "energy": 88
   },
@@ -215,11 +215,6 @@
     "energy": 63
   },
   {
-    "name": "Common Mushroom",
-    "price": 40,
-    "energy": 38
-  },
-  {
     "name": "Dandelion",
     "price": 40,
     "energy": 25
@@ -253,11 +248,6 @@
     "name": "Fiddlehead Fern",
     "price": 90,
     "energy": 25
-  },
-  {
-    "name": "Grape",
-    "price": 80,
-    "energy": 38
   },
   {
     "name": "Red Mushroom",
@@ -416,87 +406,187 @@
   },
   {
     "name": "Cheese",
-    "price": 1000,
-    "energy": 500
+    "price": 230,
+    "energy": 125
   },
   {
     "name": "Goat Cheese",
-    "price": 1000,
-    "energy": 500
-  },
-  {
-    "name": "Beer",
-    "price": 1000,
-    "energy": 500
+    "price": 400,
+    "energy": 125
   },
   {
     "name": "Vinegar",
-    "price": 1000,
-    "energy": 500
-  },
-  {
-    "name": "Coffee",
-    "price": 1000,
-    "energy": 500
+    "price": 100,
+    "energy": 13
   },
   {
     "name": "Juice",
-    "type": "Consumable"
+    "price": 200,
+    "energy": 100
   },
   {
     "name": "Mead",
-    "type": "Consumable"
+    "price": 300,
+    "energy": 75
   },
   {
     "name": "Pale Ale",
-    "type": "Consumable"
+    "price": 300,
+    "energy": 50
   },
   {
     "name": "Wine",
-    "type": "Consumable"
+    "price": 300,
+    "energy": 0
   },
   {
     "name": "Mayonnaise",
-    "type": "Consumable"
+    "price": 190,
+    "energy": 50
   },
   {
     "name": "Duck Mayonnaise",
-    "type": "Consumable"
+    "price": 375,
+    "energy": 75
   },
   {
     "name": "Dinosaur Mayonnaise",
-    "type": "Consumable"
+    "price": 800,
+    "energy": 125
   },
   {
     "name": "Truffle Oil",
-    "type": "Consumable"
+    "price": 1065,
+    "energy": 38
   },
   {
     "name": "Oil",
-    "type": "Consumable"
+    "price": 100,
+    "energy": 13
   },
   {
-    "name": "Pickles",
-    "type": "Consumable"
+    "name": "Pickle",
+    "price": 300,
+    "energy": 125
   },
   {
     "name": "Jelly",
-    "type": "Consumable"
+    "price": 250,
+    "energy": 100
   },
   {
     "name": "Smoked Fish",
-    "type": "Consumable"
+    "price": 350,
+    "energy": 140
   },
   {
     "name": "Dried Mushrooms",
-    "type": "Consumable"
+    "price": 150,
+    "energy": 75
   },
   {
     "name": "Dried Fruit",
-    "type": "Consumable"
+    "price": 225,
+    "energy": 120
   },
   {
     "name": "Raisins",
-    "type": "Consumable"
+    "price": 125,
+    "energy": 600
+  },
+  {
+    "name": "Fried Egg",
+    "price": 35,
+    "energy": 50
+  },
+  {
+    "name": "Baked Fish",
+    "price": 100,
+    "energy": 75
+  },
+  {
+    "name": "Omelet",
+    "price": 125,
+    "energy": 100
+  },
+  {
+    "name": "Pumpkin Pie",
+    "price": 385,
+    "energy": 225
+  },
+  {
+    "name": "Tortilla",
+    "price": 50,
+    "energy": 50
+  },
+  {
+    "name": "Maki Roll",
+    "price": 220,
+    "energy": 100
+  },
+  {
+    "name": "Triple Shot Espresso",
+    "price": 450,
+    "energy": 8
+  },
+  {
+    "name": "Cookie",
+    "price": 140,
+    "energy": 90
+  },
+  {
+    "name": "Hash Browns",
+    "price": 120,
+    "energy": 90
+  },
+  {
+    "name": "Pancakes",
+    "price": 80,
+    "energy": 90
+  },
+  {
+    "name": "Fruit Salad",
+    "price": 450,
+    "energy": 263
+  },
+  {
+    "name": "Red Plate",
+    "price": 400,
+    "energy": 240
+  },
+  {
+    "name": "Salmon Dinner",
+    "price": 300,
+    "energy": 125
+  },
+  {
+    "name": "Vegetable Medley",
+    "price": 120,
+    "energy": 165
+  },
+  {
+    "name": "Farmer'S Lunch",
+    "price": 150,
+    "energy": 200
+  },
+  {
+    "name": "Survival Burger",
+    "price": 180,
+    "energy": 125
+  },
+  {
+    "name": "Dish O' The Sea",
+    "price": 220,
+    "energy": 150
+  },
+  {
+    "name": "Seafoam Pudding",
+    "price": 300,
+    "energy": 175
+  },
+  {
+    "name": "Miner'S Treat",
+    "price": 200,
+    "energy": 125
   }
 ]

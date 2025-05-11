@@ -1,0 +1,833 @@
+[
+  {
+    "shop": "Pierre's General Store",
+
+    "name": "Large Pack",
+    "description": "Unlocks the 2nd row of inventory (12 more slots, total 24).",
+
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [2000, 2000, 2000, 2000],
+
+    "ingredients": null,
+
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+
+    "daily-limit": 1
+  },
+  {
+    "shop": "Pierre's General Store",
+
+    "name": "Deluxe Pack",
+    "description": "Unlocks the 3rd row of inventory (infinite slots).",
+
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [10000, 10000, 10000, 10000],
+
+    "ingredients": null,
+
+    "backpack-required": "Large Pack",
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+
+    "daily-limit": 1
+  },
+  {
+    "shop": "Pierre's General Store",
+
+    "name": "Rice",
+    "description": "A basic grain often served under vegetables.",
+
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [200, 200, 200, 200],
+
+    "ingredients": null,
+
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+
+    "daily-limit": -1
+  },
+  {
+    "shop": "Pierre's General Store",
+
+    "name": "Wheat Flour",
+    "description": "A common cooking ingredient made from crushed wheat seeds.",
+
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [100, 100, 100, 100],
+
+    "ingredients": null,
+
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+
+    "daily-limit": -1
+  },
+  {
+    "shop": "Pierre's General Store",
+
+    "name": "Bouquet",
+    "description": "A gift that shows your romantic interest. (Unlocked after reaching level 2 friendship with a player)",
+
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [1000, 1000, 1000, 1000],
+
+    "ingredients": null,
+
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+
+    "daily-limit": 2
+  },
+  {
+    "shop": "Pierre's General Store",
+
+    "name": "Wedding Ring",
+    "description": "It's used to ask for another farmer's hand in marriage. (Unlocked after reaching level 3 friendship with a player)",
+
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [10000, 10000, 10000, 10000],
+
+    "ingredients": null,
+
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+
+    "daily-limit": 2
+  },
+  {
+    "shop": "Pierre's General Store",
+
+    "name": "Dehydrator (Recipe)",
+    "description": "A recipe to make Dehydrator",
+
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [10000, 10000, 10000, 10000],
+
+    "ingredients": null,
+
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+
+    "daily-limit": 1
+  },
+  {
+    "shop": "Pierre's General Store",
+
+    "name": "Grass Starter (Recipe)",
+    "description": "A recipe to make Grass Starter",
+
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [1000, 1000, 1000, 1000],
+
+    "ingredients": null,
+
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+
+    "daily-limit": 1
+  },
+  {
+    "shop": "Pierre's General Store",
+
+    "name": "Sugar",
+    "description": "Adds sweetness to pastries and candies. Too much can be unhealthy.",
+
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [100, 100, 100, 100],
+
+    "ingredients": null,
+
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+
+    "daily-limit": -1
+  },
+  {
+    "shop": "Pierre's General Store",
+
+    "name": "Oil",
+    "description": "All purpose cooking oil.",
+
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [200, 200, 200, 200],
+
+    "ingredients": null,
+
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+
+    "daily-limit": -1
+  },
+  {
+    "shop": "Pierre's General Store",
+
+    "name": "Vinegar",
+    "description": "An aged fermented liquid used in many cooking recipes.",
+
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [200, 200, 200, 200],
+
+    "ingredients": null,
+
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+
+    "daily-limit": -1
+  },
+  {
+    "shop": "Pierre's General Store",
+
+    "name": "Deluxe Retaining Soil",
+    "description": "This soil has a 100% chance of staying watered overnight. Mix into tilled soil.",
+
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [150, 150, 150, 150],
+
+    "ingredients": null,
+
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+
+    "daily-limit": -1
+  },
+  {
+    "shop": "Pierre's General Store",
+
+    "name": "Grass Starter",
+    "description": "Place this on your farm to start a new patch of grass.",
+
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [100, 100, 100, 100],
+
+    "ingredients": null,
+
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+
+    "daily-limit": -1
+  },
+  {
+    "shop": "Pierre's General Store",
+
+    "name": "Speed-Gro",
+    "description": "Makes the plants grow 1 day earlier.",
+
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [100, 100, 100, 100],
+
+    "ingredients": null,
+
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+
+    "daily-limit": -1
+  },
+  {
+    "shop": "Pierre's General Store",
+
+    "name": "Apple Sapling",
+    "description": "Takes 28 days to produce a mature Apple tree. Bears fruit in the fall. Only grows if the 8 surrounding \"tiles\" are empty.",
+
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [4000, 4000, 4000, 4000],
+
+    "ingredients": null,
+
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+
+    "daily-limit": -1
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Apricot Sapling",
+    "description": "Takes 28 days to produce a mature Apricot tree. Bears fruit in the spring. Only grows if the 8 surrounding \"tiles\" are empty.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [2000, 2000, 2000, 2000],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": -1
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Cherry Sapling",
+    "description": "Takes 28 days to produce a mature Cherry tree. Bears fruit in the spring. Only grows if the 8 surrounding \"tiles\" are empty.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [3400, 3400, 3400, 3400],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": -1
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Orange Sapling",
+    "description": "Takes 28 days to produce a mature Orange tree. Bears fruit in the summer. Only grows if the 8 surrounding \"tiles\" are empty.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [4000, 4000, 4000, 4000],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": -1
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Peach Sapling",
+    "description": "Takes 28 days to produce a mature Peach tree. Bears fruit in the summer. Only grows if the 8 surrounding \"tiles\" are empty.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [6000, 6000, 6000, 6000],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": -1
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Pomegranate Sapling",
+    "description": "Takes 28 days to produce a mature Pomegranate tree. Bears fruit in the fall. Only grows if the 8 surrounding \"tiles\" are empty.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [6000, 6000, 6000, 6000],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": -1
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Basic Retaining Soil",
+    "description": "This soil has a chance of staying watered overnight. Mix into tilled soil.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [100, 100, 100, 100],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": -1
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Quality Retaining Soil",
+    "description": "This soil has a good chance of staying watered overnight. Mix into tilled soil.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [150, 150, 150, 150],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": -1
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Parsnip Seeds",
+    "description": "Plant these in the spring. Takes 4 days to mature.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [20, 30, 30, 30],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Bean Starter",
+    "description": "Plant these in the spring. Takes 10 days to mature, but keeps producing after that. Grows on a trellis.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [60, 90, 90, 90],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Cauliflower Seeds",
+    "description": "Plant these in the spring. Takes 12 days to produce a large cauliflower.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [80, 120, 120, 120],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Potato Seeds",
+    "description": "Plant these in the spring. Takes 6 days to mature, and has a chance of yielding multiple potatoes at harvest.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [50, 70, 70, 70],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Tulip Bulb",
+    "description": "Plant in spring. Takes 6 days to produce a colorful flower. Assorted colors.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [20, 30, 30, 30],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Kale Seeds",
+    "description": "Plant these in the spring. Takes 6 days to mature. Harvest with the scythe.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [70, 105, 105, 105],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Jazz Seeds",
+    "description": "Plant in spring. Takes 7 days to produce a blue puffball flower.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [30, 45, 45, 45],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Garlic Seeds",
+    "description": "Plant these in the spring. Takes 4 days to mature.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [40, 60, 60, 60],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Rice Shoot",
+    "description": "Plant these in the spring. Takes 8 days to mature. Grows faster if planted near a body of water. \nHarvest with the scythe.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [60, 40, 40, 40],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Melon Seeds",
+    "description": "Plant these in the summer. Takes 12 days to mature.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [120, 80, 120, 120],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Tomato Seeds",
+    "description": "Plant these in the summer. Takes 11 days to mature, and continues to produce after first harvest.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [75, 50, 75, 75],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": "5"
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Blueberry Seeds",
+    "description": "Plant these in the summer. Takes 13 days to mature, and continues to produce after first harvest.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [120, 80, 120, 120],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Pepper Seeds",
+    "description": "Plant these in the summer. Takes 5 days to mature, and continues to produce after first harvest.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [60, 40, 60, 60],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Wheat Seeds",
+    "description": "Plant these in the summer or fall. Takes 4 days to mature. Harvest with the scythe.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [15, 10, 10, 15],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Radish Seeds",
+    "description": "Plant these in the summer. Takes 6 days to mature.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [60, 40, 60, 60],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Poppy Seeds",
+    "description": "Plant in summer. Produces a bright red flower in 7 days.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [150, 100, 150, 150],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Spangle Seeds",
+    "description": "Plant in summer. Takes 8 days to produce a vibrant tropical flower. Assorted colors.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [75, 50, 75, 75],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Hops Starter",
+    "description": "Plant these in the summer. Takes 11 days to grow, but keeps producing after that. Grows on a trellis.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [90, 60, 90, 90],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Corn Seeds",
+    "description": "Plant these in the summer or fall. Takes 14 days to mature, and continues to produce after first harvest.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [225, 150, 225, 225],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Sunflower Seeds",
+    "description": "Plant in summer or fall. Takes 8 days to produce a large sunflower. Yields more seeds at harvest.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [300, 200, 300, 300],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Red Cabbage Seeds",
+    "description": "Plant these in the summer. Takes 9 days to mature.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [150, 100, 150, 150],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Eggplant Seeds",
+    "description": "Plant these in the fall. Takes 5 days to mature, and continues to produce after first harvest.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [30, 30, 20, 30],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Corn Seeds",
+    "description": "Plant these in the summer or fall. Takes 14 days to mature, and continues to produce after first harvest.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [225, 225, 150, 225],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Pumpkin Seeds",
+    "description": "Plant these in the fall. Takes 13 days to mature.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [150, 150, 100, 150],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Bok Choy Seeds",
+    "description": "Plant these in the fall. Takes 4 days to mature.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [75, 75, 50, 75],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Yam Seeds",
+    "description": "Plant these in the fall. Takes 10 days to mature.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [90, 90, 60, 90],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Cranberry Seeds",
+    "description": "Plant these in the fall. Takes 7 days to mature, and continues to produce after first harvest.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [360, 360, 240, 360],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Sunflower Seeds",
+    "description": "Plant in summer or fall. Takes 8 days to produce a large sunflower. Yields more seeds at harvest.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [300, 300, 200, 300],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Fairy Seeds",
+    "description": "Plant in fall. Takes 12 days to produce a mysterious flower. Assorted Colors.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [300, 300, 200, 300],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Amaranth Seeds",
+    "description": "Plant these in the fall. Takes 7 days to grow. Harvest with the scythe.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [105, 105, 70, 105],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Grape Starter",
+    "description": "Plant these in the fall. Takes 10 days to grow, but keeps producing after that. Grows on a trellis.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [90, 90, 60, 90],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  },
+  {
+    "shop": "Pierre's General Store",
+    "name": "Artichoke Seeds",
+    "description": "Plant these in the fall. Takes 8 days to mature.",
+    "seasons": ["spring", "summer", "autumn", "winter"],
+    "prices": [45, 45, 30, 45],
+    "ingredients": null,
+    "backpack-required": null,
+    "item-required": null,
+    "building-required": null,
+    "skill-type-required": null,
+    "skill-level-required": null,
+    "daily-limit": 5
+  }
+]
