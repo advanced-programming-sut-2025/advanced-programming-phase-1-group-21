@@ -424,10 +424,6 @@
     "type": "Consumable"
   },
   {
-    "name": "Coffee Beans",
-    "type": "Salable"
-  },
-  {
     "name": "Rhubarb",
     "type": "Salable"
   },
@@ -457,6 +453,10 @@
   },
   {
     "name": "Cauliflower Seeds",
+    "type": "Seed"
+  },
+  {
+    "name": "Coffee Beans",
     "type": "Seed"
   },
   {
@@ -966,5 +966,65 @@
   {
     "name": "Wedding Ring",
     "type": "Salable"
+  },
+  {
+    "name": "Wheat Flour",
+    "type": "Consumable"
+  },
+  {
+    "name": "Apricot Sapling",
+    "type": "Sapling"
+  },
+  {
+    "name": "Cherry Sapling",
+    "type": "Sapling"
+  },
+  {
+    "name": "Banana Sapling",
+    "type": "Sapling"
+  },
+  {
+    "name": "Mango Sapling",
+    "type": "Sapling"
+  },
+  {
+    "name": "Orange Sapling",
+    "type": "Sapling"
+  },
+  {
+    "name": "Peach Sapling",
+    "type": "Sapling"
+  },
+  {
+    "name": "Apple Sapling",
+    "type": "Sapling"
+  },
+  {
+    "name": "Pomegranate Sapling",
+    "type": "Sapling"
+  },
+  {
+    "name": "Acorns",
+    "type": "Sapling"
+  },
+  {
+    "name": "Maple Seeds",
+    "type": "Sapling"
+  },
+  {
+    "name": "Pine Cones",
+    "type": "Sapling"
+  },
+  {
+    "name": "Mahogany Seeds",
+    "type": "Sapling"
+  },
+  {
+    "name": "Mushroom Tree Seeds",
+    "type": "Sapling"
+  },
+  {
+    "name": "Mystic Tree Seeds",
+    "type": "Sapling"
   }
 ]
