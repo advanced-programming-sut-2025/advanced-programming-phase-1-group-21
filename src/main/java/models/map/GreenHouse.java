@@ -21,4 +21,9 @@ public class GreenHouse extends Building {
     public boolean canEnter() {
         return isBuild;
     }
+
+    @Override
+    public String getSprite() {
+        return "G";
+    }
 }

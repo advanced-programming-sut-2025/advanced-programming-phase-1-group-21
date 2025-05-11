@@ -5,4 +5,9 @@ public class Lake extends Building {
     public boolean canEnter() {
         return false;
     }
+
+    @Override
+    public String getSprite() {
+        return "~";
+    }
 }
