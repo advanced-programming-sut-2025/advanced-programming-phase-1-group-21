@@ -12,6 +12,34 @@ public class MapBuilder {
     private static final int MAP_WIDTH = 30;
     private static final int MAP_HEIGHT = 50;
 
+    public void buildRandomForaging(Map map) {
+        List<TileType> foragingTypes = Arrays.asList(
+                TileType.SIMPLE_ROCK,
+                TileType.COPPER_ROCK,
+                TileType.STEEL_ROCK,
+                TileType.GOLD_ROCK,
+                TileType.IRIDIUM_ROCK,
+                TileType.LEAF
+        );
+
+        int foragingCount = App.random.nextInt(20, 31); // 20 to 30 inclusive
+        int placed = 0;
+        int attempts = 0;
+
+        while (placed < foragingCount && attempts < foragingCount * 10) {
+            System.out.println(attempts + " " + foragingCount);
+            ++attempts;
+
+            Tile tile = map.getTile(Coord.getRandomCoord(map.getMaxX(), map.getMaxY()));
+
+            if (tile != null && tile.isEmpty()) {
+                TileType randomForaging = foragingTypes.get(App.random.nextInt(foragingTypes.size()));
+                tile.setTileType(randomForaging);
+                placed++;
+            }
+        }
+    }
+
     public boolean setBuildingsRandomly(List<Pair<TileType, Placable>> buildings, Map map) {
         for (Pair<TileType, Placable> spec : buildings) {
             boolean placed = false;
@@ -54,8 +82,9 @@ public class MapBuilder {
             for (Lake lake: map.getLakes())
                 buildings.add(Pair.of(TileType.LAKE, lake));
 
-            if (setBuildingsRandomly(buildings, map))
-                return map;
+            if (!setBuildingsRandomly(buildings, map)) continue;
+            buildRandomForaging(map);
+            return map;
         }
     }
 
