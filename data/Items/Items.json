@@ -424,6 +424,10 @@
     "type": "Consumable"
   },
   {
+    "name": "Coffee Beans",
+    "type": "Salable"
+  },
+  {
     "name": "Rhubarb",
     "type": "Salable"
   },
@@ -453,10 +457,6 @@
   },
   {
     "name": "Cauliflower Seeds",
-    "type": "Seed"
-  },
-  {
-    "name": "Coffee Beans",
     "type": "Seed"
   },
   {

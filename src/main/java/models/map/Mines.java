@@ -12,4 +12,9 @@ public class Mines extends Building {
     public boolean canEnter() {
         return true;
     }
+
+    @Override
+    public String getSprite() {
+        return "M";
+    }
 }

@@ -1,5 +1,6 @@
 package models.game;
 
+import models.App;
 import models.DailyUpdate;
 import models.Item.Item;
 import models.data.DataLoader;
@@ -21,7 +22,6 @@ public class Game implements DailyUpdate {
     private Date gameDate;
     private Weather gameWeather;
     private Weather nextDayWeather;
-    private final Random random = new Random();
 
     public Game(ArrayList<Player> players) {
         this.players = players;
@@ -66,7 +66,7 @@ public class Game implements DailyUpdate {
 
 
     private Weather calculateRandomWeather() {
-        int rnd = random.nextInt(100);
+        int rnd = App.random.nextInt(100);
 
         switch (getSeason()) {
             case SPRING:

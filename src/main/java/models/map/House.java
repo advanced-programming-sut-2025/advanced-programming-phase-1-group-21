@@ -16,4 +16,9 @@ public class House extends Building {
     public boolean canEnter() {
         return true;
     }
+
+    @Override
+    public String getSprite() {
+        return "H";
+    }
 }

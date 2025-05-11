@@ -73,6 +73,7 @@ public class Tile {
     }
 
     public String getSprite() {
+        if (placable != null) return placable.getSprite();
         return "" + tileType.getSymbol();
     }
 

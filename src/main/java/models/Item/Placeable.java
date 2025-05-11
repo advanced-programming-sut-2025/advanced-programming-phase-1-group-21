@@ -2,8 +2,9 @@ package models.Item;
 
 import models.data.items.ItemData;
 import models.data.items.PlaceableData;
+import models.map.Placable;
 
-public class Placeable implements Item {
+public class Placeable implements Item, Placable {
 	private final PlaceableData data;
 	private final ItemType itemType;
 	private int amount;
@@ -60,5 +61,15 @@ public class Placeable implements Item {
 	@Override
 	public String toString() {
 		return data.getName() + " * " + amount;
+	}
+
+	@Override
+	public boolean isWalkable() {
+		return false;
+	}
+
+	@Override
+	public String getSprite() {
+		return "P";
 	}
 }

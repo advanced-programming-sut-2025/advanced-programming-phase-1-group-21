@@ -36,9 +36,8 @@ public class Coord {
     }
 
     public static Coord getRandomCoord(int maxX, int maxY) {
-        Random random = new Random();
-        int x = random.nextInt(maxX); // [0, maxX]
-        int y = random.nextInt(maxY); // [0, maxY]
+        int x = App.random.nextInt(maxX); // [0, maxX]
+        int y = App.random.nextInt(maxY); // [0, maxY]
         return new Coord(x, y);
     }
 
