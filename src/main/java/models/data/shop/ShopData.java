@@ -138,4 +138,23 @@ public class ShopData implements Data {
 				r.add(a);
 		return r;
 	}
+
+	@Override
+	public String toString() {
+		return "ShopData{" +
+				"shop='" + shop + '\'' +
+				", name='" + name + '\'' +
+				", description='" + description + '\'' +
+				", seasons=" + seasons +
+				", cseasons=" + cseasons +
+				", prices=" + price +
+				", ingredients=" + ingredients +
+				", backpackRequired='" + backpackRequired + '\'' +
+				", itemRequired='" + itemRequired + '\'' +
+				", buildingRequired='" + buildingRequired + '\'' +
+				", skillTypeRequired='" + skillTypeRequired + '\'' +
+				", skillLevelRequired=" + skillLevelRequired +
+				", dailyLimit=" + dailyLimit +
+				'}';
+	}
 }

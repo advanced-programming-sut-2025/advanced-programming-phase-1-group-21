@@ -2,6 +2,8 @@ package models.map;
 
 import com.google.gson.Gson;
 import controllers.DataBaseController;
+import models.App;
+import models.DailyUpdate;
 import models.Item.Item;
 import models.data.shop.ShopData;
 
@@ -9,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Shop extends Building {
-	private List<ShopData> items;
+	private List<ShopItemInstance> items = new ArrayList<>();
 	private final TileType shopType;
 
 	public Shop(TileType shopType) {
@@ -18,7 +20,11 @@ public class Shop extends Building {
 
 		this.shopType = shopType;
 		this.map = (new MapBuilder()).buildShop();
-		items = ShopData.getRecipeByShop(getShopName());
+
+		List<ShopData> list = ShopData.getRecipeByShop(getShopName());
+		for (ShopData shopData : list) {
+			items.add(new ShopItemInstance(shopData));
+		}
 	}
 
 	public String getShopName() {
@@ -52,12 +58,35 @@ public class Shop extends Building {
 	}
 
 
-	public ArrayList<String> showProducts(){
-		ArrayList<String > output = new ArrayList<>();
-		output.add(shopType.toString() + " :");
+	private String showProducts(List<ShopItemInstance> items){
+		StringBuilder products = new StringBuilder();
+		for (ShopItemInstance item : items) {
+			products.append(item.toString() + "\n");
+		}
+		return products.toString();
+	}
 
-		//TODO
-		return output;
+	public String showProducts(){
+		return showProducts(items);
+	}
+
+	public boolean isItemAvailable(ShopItemInstance item){
+		if (!item.canSellMore()) return false;
+		ShopData shopData = item.getData();
+		if (shopData.getPrice(App.game.getSeason()) == -1) return false;
+		return true;
+	}
+
+	public List<ShopItemInstance> getAvailableItems() {
+		List<ShopItemInstance> available = new ArrayList<>();
+		for (ShopItemInstance item : available) {
+			if (isItemAvailable(item)) available.add(item);
+		}
+		return available;
+	}
+
+	public String showAvailableItems() {
+		return showProducts(getAvailableItems());
 	}
 
 	public TileType getShopType() {
@@ -73,4 +102,47 @@ public class Shop extends Building {
 	public String getSprite() {
 		return "" + shopType.getSymbol();
 	}
+
+	private static class ShopItemInstance implements DailyUpdate {
+		private final ShopData data;
+		private int soldToday;
+
+		public ShopItemInstance(ShopData data) {
+			this.data = data;
+			this.soldToday = 0;
+		}
+
+		public ShopData getData() {
+			return data;
+		}
+
+		public int getSoldToday() {
+			return soldToday;
+		}
+
+		public void incrementSold(int amount) {
+			this.soldToday += amount;
+		}
+
+		public void resetDailyLimit() {
+			this.soldToday = 0;
+		}
+
+		public boolean canSellMore() {
+			return soldToday < data.getDailyLimit();
+		}
+
+		@Override
+		public boolean nextDay() {
+			resetDailyLimit();
+			return true;
+		}
+		@Override
+		public String toString() {
+			return data.toString() +
+					" | Sold Today: " + soldToday + "/" + data.getDailyLimit();
+		}
+
+	}
+
 }

@@ -16,6 +16,7 @@ public class Player implements DailyUpdate {
 
     private User user;
 
+    private Building building;
     private Map map;
     private Map defaultMap;
 
@@ -96,11 +97,13 @@ public class Player implements DailyUpdate {
     }
 
     public void setMap(Map map) {
+        building = null;
         this.map = map;
     }
 
     public Map getMap() {
-        return map;
+        if (building == null) return map;
+        return building.getMap();
     }
 
     public ArrayList<Tile> getNeighborTiles(){
@@ -250,4 +253,8 @@ public class Player implements DailyUpdate {
         return sb.toString();
     }
 
+    public void enterBuilding(Building building) {
+        this.building = building;
+        setCoord(new Coord(0, 0));
+    }
 }

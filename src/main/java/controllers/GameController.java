@@ -203,8 +203,7 @@ public class GameController{
             System.err.println("HERE");
             Building building = tile.getPlacable(Building.class);
             if (building.canEnter()) {
-                player.setMap(building.getMap());
-                player.setCoord(new Coord(0, 0));
+                player.enterBuilding(building);
             }
             else return Result.failure(GameError.CANT_ENTER);
         }
