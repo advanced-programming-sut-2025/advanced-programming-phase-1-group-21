@@ -1,29 +1,17 @@
-package models.data.recipe;
+package models.data;
 
 import com.google.gson.annotations.SerializedName;
-import models.data.Data;
 
 import java.util.ArrayList;
-import java.util.Map;
 
-public class ScarecrowRecipeData implements Data {
+public class ScarecrowData implements Data {
 	private static final String dataURL = "data/ScarecrowCraftingRecipes.json";
-	private static ArrayList<ScarecrowRecipeData> recipes = null;
+	private static ArrayList<ScarecrowData> data = null;
 
 	@SerializedName("name")
 	private String name;
 	@SerializedName("description")
 	private String description;
-
-	@SerializedName("ingredients")
-	private Map<String, Integer> ingredients;
-
-	@SerializedName("skill-type")
-	private String skillType;
-
-	@SerializedName("skill-level")
-	private int skillLevel;
-
 	@SerializedName("radius")
 	private int radius;
 
@@ -31,8 +19,8 @@ public class ScarecrowRecipeData implements Data {
 		return dataURL;
 	}
 
-	public static void setData(ArrayList<ScarecrowRecipeData> recipes) {
-		ScarecrowRecipeData.recipes = recipes;
+	public static void setData(ArrayList<ScarecrowData> data) {
+		ScarecrowData.data = data;
 	}
 
 	public void fullConstruct() {
@@ -47,24 +35,12 @@ public class ScarecrowRecipeData implements Data {
 		return description;
 	}
 
-	public Map<String, Integer> getIngredients() {
-		return ingredients;
-	}
-
-	public String getSkillType() {
-		return skillType;
-	}
-
-	public int getSkillLevel() {
-		return skillLevel;
-	}
-
 	public int getRadius() {
 		return radius;
 	}
 
-	public static ScarecrowRecipeData getRecipeData(String name) {
-		for (ScarecrowRecipeData a : recipes)
+	public static ScarecrowData getData(String name) {
+		for (ScarecrowData a : data)
 			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
