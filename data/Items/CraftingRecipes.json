@@ -1,0 +1,132 @@
+[
+  {
+    "name": "Charcoal Kiln Recipe",
+    "description": "Turns 10 wood into 1 charcoal",
+    "result-name": "Charcoal Kiln",
+    "ingredients": {"Wood": 20, "Copper Bar": 2},
+    "skill-type": "Foraging",
+    "skill-level": 1
+  },
+  {
+    "name": "Furnace Recipe",
+    "description": "Turns ores into bars",
+    "result-name": "Furnace",
+    "ingredients": {"Copper Ore": 20, "Stone": 25},
+    "skill-type": null,
+    "skill-level": null
+  },
+  {
+    "name": "Bee House Recipe",
+    "description": "Produces honey when placed on the farm",
+    "result-name": "Bee House",
+    "ingredients": {"Wood": 40, "Coal": 8, "Iron Bar": 1},
+    "skill-type": "Farming",
+    "skill-level": 1
+  },
+  {
+    "name": "Cheese Press Recipe",
+    "description": "Turns milk into cheese",
+    "result-name": "Cheese Press",
+    "ingredients": {"Wood": 45, "Stone": 45, "Copper Bar": 1},
+    "skill-type": "Farming",
+    "skill-level": 2
+  },
+  {
+    "name": "Keg Recipe",
+    "description": "Turns fruits and vegetables into beverages",
+    "result-name": "Keg",
+    "ingredients": {"Wood": 30, "Copper Bar": 1, "Iron Bar": 1},
+    "skill-type": "Farming",
+    "skill-level": 3
+  },
+  {
+    "name": "Loom Recipe",
+    "description": "Turns wool into cloth",
+    "result-name": "Loom",
+    "ingredients": {"Wood": 60, "Fiber": 30},
+    "skill-type": "Farming",
+    "skill-level": 3
+  },
+  {
+    "name": "Mayonnaise Machine Recipe",
+    "description": "Turns eggs into mayonnaise",
+    "result-name": "Mayonnaise Machine",
+    "ingredients": {"Wood": 15, "Stone": 15, "Copper Bar": 1},
+    "skill-type": null,
+    "skill-level": null
+  },
+  {
+    "name": "Oil Maker Recipe",
+    "description": "Turns truffle into oil",
+    "result-name": "Oil Maker",
+    "ingredients": {"Wood": 100, "Gold Bar": 1, "Iron Bar": 1},
+    "skill-type": "Farming",
+    "skill-level": 3
+  },
+  {
+    "name": "Preserves Jar Recipe",
+    "description": "Turns vegetables into pickles and fruits into jam",
+    "result-name": "Preserves Jar",
+    "ingredients": {"Wood": 50, "Stone": 40, "Coal": 8},
+    "skill-type": "Farming",
+    "skill-level": 2
+  },
+  {
+    "name": "Dehydrator Recipe",
+    "description": "Dries fruits or mushrooms",
+    "result-name": "Dehydrator",
+    "ingredients": {"Wood": 30, "Stone": 20, "Fiber": 30},
+    "source": "Pierre's General Store",
+    "skill-type": null,
+    "skill-level": null
+  },
+  {
+    "name": "Fish Smoker Recipe",
+    "description": "Turns any fish into smoked fish with preserved quality using one coal",
+    "result-name": "Fish Smoker",
+    "ingredients": {"Wood": 50, "Iron Bar": 3, "Coal": 10},
+    "source": "Fish Shop",
+    "skill-type": null,
+    "skill-level": null
+  },
+  {
+    "name": "Scarecrow Recipe",
+    "description": "Prevents crow attacks up to an 8 tile radius.",
+    "result-name": "Scarecrow",
+    "ingredients": {"Wood": 50, "Coal": 1, "Fiber": 20},
+    "skill-type": null,
+    "skill-level": null
+  },
+  {
+    "name": "Deluxe Scarecrow Recipe",
+    "description": "Prevents crow attacks up to an 8 tile radius.",
+    "result-name": "Deluxe Scarecrow",
+    "ingredients": {"Wood": 50, "Coal": 1, "Fiber": 20, "Iridium Ore": 1},
+    "skill-type": "Farming",
+    "skill-level": 2
+  },
+  {
+    "name": "Sprinkler Recipe",
+    "description": "Gives water to 4 adjacent tiles.",
+    "result-name": "Sprinkler",
+    "ingredients": {"Copper Bar": 1, "Iron Bar": 1},
+    "skill-type": "Farming",
+    "skill-level": 1
+  },
+  {
+    "name": "Quality Sprinkler Recipe",
+    "description": "Gives water to 8 adjacent tiles.",
+    "result-name": "Quality Sprinkler",
+    "ingredients": {"Iron Bar": 1, "Gold Bar": 1},
+    "skill-type": "Farming",
+    "skill-level": 2
+  },
+  {
+    "name": "Iridium Sprinkler Recipe",
+    "description": "Gives water to 24 adjacent tiles.",
+    "result-name": "Iridium Sprinkler",
+    "ingredients": {"Gold Bar": 1, "Iridium Bar": 1},
+    "skill-type": "Farming",
+    "skill-level": 3
+  }
+]

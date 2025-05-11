@@ -21,11 +21,9 @@ public class DataLoader {
 
 		RecipeData.setCookingData(loadEach(RecipeData.getCookingDataURL(), new TypeToken<List<RecipeData>>(){}.getType()));
 		RecipeData.setCraftingData(loadEach(RecipeData.getCraftingDataURL(), new TypeToken<List<RecipeData>>(){}.getType()));
-//		BombRecipeData.setData(loadEach(BombRecipeData.getDataURL(), new TypeToken<List<BombRecipeData>>(){}.getType()));
-//		CookingRecipeData.setData(loadEach(CookingRecipeData.getDataURL(), new TypeToken<List<CookingRecipeData>>(){}.getType()));
-//		CraftingRecipeData.setData(loadEach(CraftingRecipeData.getDataURL(), new TypeToken<List<CraftingRecipeData>>(){}.getType()));
-//		ScarecrowRecipeData.setData(loadEach(ScarecrowRecipeData.getDataURL(), new TypeToken<List<ScarecrowRecipeData>>(){}.getType()));
-//		SprinklerRecipeData.setData(loadEach(SprinklerRecipeData.getDataURL(), new TypeToken<List<SprinklerRecipeData>>(){}.getType()));
+
+		ScarecrowData.setData(loadEach(ScarecrowData.getDataURL(), new TypeToken<List<ScarecrowData>>(){}.getType()));
+		SprinklerData.setData(loadEach(SprinklerData.getDataURL(), new TypeToken<List<SprinklerData>>(){}.getType()));
 
 		ShopData.setData(loadEach(ShopData.getDataURL(), new TypeToken<List<ShopData>>(){}.getType()));
 

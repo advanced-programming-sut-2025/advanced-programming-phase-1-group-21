@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 public class SprinklerData implements Data {
-	private static final String dataURL = "data/SprinklerCraftingRecipes.json";
+	private static final String dataURL = "data/Sprinklers.json";
 	private static ArrayList<SprinklerData> data = null;
 
 	@SerializedName("name")
@@ -24,7 +24,9 @@ public class SprinklerData implements Data {
 	}
 
 	public void fullConstruct() {
-//		System.out.println(name + "\n" + description + "\n" + tiles + "\n" + ingredients + "\n" + skillType + "\n" + skillLevel + "\n---------");
+//		System.out.println("name: " + name);
+//		System.out.println("description: " + description);
+//		System.out.println("tiles: " + tiles);
 	}
 
 	public String getName() {

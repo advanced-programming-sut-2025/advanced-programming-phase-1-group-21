@@ -4,6 +4,9 @@ import models.data.items.ConsumableData;
 import models.data.items.ItemData;
 import models.data.items.RecipeData;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 public class Recipe implements Item {
     private final RecipeData data;
     private final ItemType itemType;
@@ -52,6 +55,18 @@ public class Recipe implements Item {
     @Override
     public void changeAmount(int change) {
         amount += change;
+    }
+
+    public Item getResult() {
+        return Item.build(data.getResultName(), 1);
+    }
+
+    public ArrayList<Item> getItems() {
+        ArrayList<Item> items = new ArrayList<>();
+        Map <String, Integer> ingredients = data.getIngredients();
+        for (String itemName: ingredients.keySet())
+            items.add(Item.build(itemName, ingredients.get(itemName)));
+        return items;
     }
 
     @Override

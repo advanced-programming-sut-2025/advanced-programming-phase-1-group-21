@@ -4,12 +4,12 @@ import models.Item.Item;
 
 import java.util.List;
 
-public class Recipe {
+public class Recipse {
     private String recipeName;
     private final List<Item> items;
     private Item result;
 
-    public Recipe(String name, List<Item> items, Item result) {
+    public Recipse(String name, List<Item> items, Item result) {
         this.recipeName = name;
         this.items = items;
         this.result = result;

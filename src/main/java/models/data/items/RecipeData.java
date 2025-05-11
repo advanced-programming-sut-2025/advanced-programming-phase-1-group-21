@@ -17,7 +17,7 @@ public class RecipeData implements Data, ItemData {
 	@SerializedName("description")
 	private String description;
 	@SerializedName("result-name")
-	private int resultName;
+	private String resultName;
 	@SerializedName("ingredients")
 	private Map<String, Integer> ingredients;
 	@SerializedName("skill-type")
@@ -42,7 +42,13 @@ public class RecipeData implements Data, ItemData {
 	}
 
 	public void fullConstruct() {
-//		System.out.println(name + "\n" + energy + "\n" + price + "\n" + ingredients + "\n" + buffType + "\n" + buffAmount + "\n" + buffTime + "\n" + skillType + "\n" + skillLevel + "\n" + source + "\n-------------------");
+//		System.out.println("name: " + name);
+//		System.out.println("description: " + description);
+//		System.out.println("result-name: " + resultName);
+//		System.out.println("ingredients: " + ingredients);
+//		System.out.println("skill-type: " + skillType);
+//		System.out.println("skill-level: " + skillLevel);
+//		System.out.println("-------------------------------");
 	}
 
 	@Override
@@ -54,7 +60,7 @@ public class RecipeData implements Data, ItemData {
 		return description;
 	}
 
-	public int getResultName() {
+	public String getResultName() {
 		return resultName;
 	}
 

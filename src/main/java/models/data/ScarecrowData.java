@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 public class ScarecrowData implements Data {
-	private static final String dataURL = "data/ScarecrowCraftingRecipes.json";
+	private static final String dataURL = "data/Scarecrows.json";
 	private static ArrayList<ScarecrowData> data = null;
 
 	@SerializedName("name")
@@ -24,7 +24,9 @@ public class ScarecrowData implements Data {
 	}
 
 	public void fullConstruct() {
-//		System.out.println(name + "\n" + description + "\n" + ingredients + "\n" + skillType + "\n" + skillLevel + "\n" + radius + "\n------------");
+//		System.out.println("name: " + name);
+//		System.out.println("description: " + description);
+//		System.out.println("radius: " + radius);
 	}
 
 	public String getName() {
