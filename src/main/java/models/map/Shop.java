@@ -6,6 +6,9 @@ import models.App;
 import models.DailyUpdate;
 import models.Item.Item;
 import models.data.shop.ShopData;
+import models.game.Inventory;
+import models.result.Result;
+import models.result.errorTypes.GameError;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,6 +87,57 @@ public class Shop extends Building {
 		}
 		return available;
 	}
+
+	public Result<Void> purchaseItem(String itemName, int amount) {
+		Inventory inventory = App.game.getCurrentPlayer().getInventory();
+
+		for (ShopItemInstance itemInstance : items) {
+			ShopData data = itemInstance.getData();
+
+			if (data.getName().equalsIgnoreCase(itemName)) {
+
+				if (!isItemAvailable(itemInstance)) return Result.failure(GameError.ITEM_IS_NOT_AVAILABLE);
+
+				int pricePerItem = data.getPrice(App.game.getSeason());
+
+				int remaining = data.getDailyLimit() - itemInstance.getSoldToday();
+				if (amount > remaining)
+					return Result.failure(GameError.ITEM_IS_NOT_AVAILABLE);
+
+				int totalPrice = pricePerItem * amount;
+				Item coin = inventory.getCoin();
+
+				if (coin == null || coin.getAmount() < totalPrice)
+					return Result.failure(GameError.NOT_ENOUGH_COINS);
+
+				java.util.Map<String, Integer> baseIngredients = data.getIngredients();
+				List<Item> requiredItems = new ArrayList<>();
+				for (java.util.Map.Entry<String, Integer> entry : baseIngredients.entrySet()) {
+					String ingredientName = entry.getKey();
+					int totalRequired = entry.getValue() * amount;
+					Item inventoryItem = inventory.getItem(ingredientName);
+
+					if (inventoryItem == null || inventoryItem.getAmount() < totalRequired) {
+						return Result.failure(GameError.NOT_ENOUGH_ITEMS);
+					}
+					Item required = Item.build(inventoryItem.getName(), totalRequired); // assuming Item has a copy constructor
+					requiredItems.add(required);
+				}
+
+				inventory.changeCoin(-totalPrice);
+				inventory.removeItemList(requiredItems);
+
+				Item resultItem = Item.build(itemName, amount); // fetch from item database
+				inventory.addItem(resultItem);
+
+				itemInstance.incrementSold(amount);
+
+				return Result.success(null);
+			}
+		}
+		return Result.failure(GameError.ITEM_IS_NOT_AVAILABLE);
+	}
+
 
 	public String showAvailableItems() {
 		return showProducts(getAvailableItems());

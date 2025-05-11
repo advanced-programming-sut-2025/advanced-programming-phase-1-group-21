@@ -257,4 +257,8 @@ public class Player implements DailyUpdate {
         this.building = building;
         setCoord(new Coord(0, 0));
     }
+
+    public Building getBuilding() {
+        return building;
+    }
 }
