@@ -106,8 +106,10 @@ public class Relation {
 
         if(Level.getLevel() == 2){
             if(friendshipXP >= (Level.getLevel() + 1)*100){
-                if(isFlower)
+                if(isFlower) {
+                    friendshipXP = 0;
                     levelUp();
+                }
                 else
                     friendshipXP = (Level.getLevel() + 1)*100;
             }

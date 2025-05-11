@@ -572,7 +572,10 @@ public class GameController{
 //        if(!App.game.getCurrentPlayer().weAreNextToEachOther(player))
 //            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
 
-        App.game.getRelationOfUs(App.game.getCurrentPlayer(), player).addTalk(App.game.getCurrentPlayer().getUser().getUsername() + ": " + massage);
+        App.game.getRelationOfUs(App.game.getCurrentPlayer(), player).addTalk(App.game.getCurrentPlayer().getUser().
+                getUsername() + ": " + massage);
+        App.game.getRelationOfUs(App.game.getCurrentPlayer(), player).setFriendshipXP(App.game.getRelationOfUs(App.game
+                .getCurrentPlayer(), player).getFriendshipXP() + 20);
         return Result.success(null);
     }
 

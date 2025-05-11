@@ -13,6 +13,7 @@ public class AppView {
     MainMenuView mainMenuView = new MainMenuView();
     ProfileMenuView profileMenuView = new ProfileMenuView();
     RegisterMenuView registerMenuView = new RegisterMenuView();
+    TradeMenuView tradeMenuView = new TradeMenuView();
 
     public void run() throws IOException {
         while (App.play){
@@ -27,6 +28,8 @@ public class AppView {
                 gameTerminalView.Result(command);
             else if(App.currentMenu.equals(Menu.MainMenu))
                 mainMenuView.Result(command);
+            else if(App.currentMenu.equals(Menu.TradeMenu))
+                tradeMenuView.Result(command);
 
         }
 
