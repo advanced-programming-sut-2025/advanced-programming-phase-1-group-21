@@ -274,6 +274,18 @@ public class GameTerminalView {
         else if((matcher = GameMenuCommand.START_TRADE.getMatcher(command)) != null) {
             System.out.println(gameController.startTrade());
         }
+        else if ((matcher = GameMenuCommand.SHOP_SHOW_ALL_PRODUCTS.getMatcher(command)) != null) {
+            System.out.println(gameController.showAllShopProducts().getMessage());
+        }
+        else if ((matcher = GameMenuCommand.SHOP_SHOW_ALL_AVAILABLE_PRODUCTS.getMatcher(command)) != null) {
+            System.out.println(gameController.showAvailableShopProducts().getMessage());
+        }
+        else if ((matcher = GameMenuCommand.SHOP_PURCHASE.getMatcher(command)) != null) {
+            System.out.println(gameController.purchaseItem(matcher.group("name"), Integer.parseInt(matcher.group("number"))));
+        }
+        else if ((matcher = GameMenuCommand.CHEAT_ADD_DOLLARS.getMatcher(command)) != null) {
+            gameController.addDollarsCheat(Integer.parseInt(matcher.group("number")));
+        }
         else
             System.out.println("Invalid command");
 

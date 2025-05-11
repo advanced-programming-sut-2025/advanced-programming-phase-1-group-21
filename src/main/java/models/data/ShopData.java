@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import models.time.Season;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class ShopData implements Data {
@@ -127,5 +128,32 @@ public class ShopData implements Data {
 			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
+	}
+
+	public static List<ShopData> getRecipeByShop(String shop) {
+		List<ShopData> r = new ArrayList<>();
+		for (ShopData a : recipes)
+			if (a.getShop().equalsIgnoreCase(shop))
+				r.add(a);
+		return r;
+	}
+
+	@Override
+	public String toString() {
+		return "ShopData{" +
+				"shop='" + shop + '\'' +
+				", name='" + name + '\'' +
+				", description='" + description + '\'' +
+				", seasons=" + seasons +
+				", cseasons=" + cseasons +
+				", prices=" + price +
+				", ingredients=" + ingredients +
+				", backpackRequired='" + backpackRequired + '\'' +
+				", itemRequired='" + itemRequired + '\'' +
+				", buildingRequired='" + buildingRequired + '\'' +
+				", skillTypeRequired='" + skillTypeRequired + '\'' +
+				", skillLevelRequired=" + skillLevelRequired +
+				", dailyLimit=" + dailyLimit +
+				'}';
 	}
 }

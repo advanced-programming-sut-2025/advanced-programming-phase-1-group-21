@@ -104,18 +104,13 @@ public class MapBuilder {
         while (true) {
             Map map = new Map(MapType.VILLAGE);
 
-            //TODO add shops like this into map:
-            // map.addShop();
 
-            List<Pair<TileType, Placable>> buildings = Arrays.asList(
-                    Pair.of(TileType.BLACKSMITH, map.getShopByType(TileType.BLACKSMITH)),
-                    Pair.of(TileType.JOJAMART, map.getShopByType(TileType.JOJAMART)),
-                    Pair.of(TileType.PIERR_STORE, map.getShopByType(TileType.PIERR_STORE)),
-                    Pair.of(TileType.CARPENTER_SHOP, map.getShopByType(TileType.CARPENTER_SHOP)),
-                    Pair.of(TileType.FISH_SHOP, map.getShopByType(TileType.FISH_SHOP)),
-                    Pair.of(TileType.MARINE_SHOP, map.getShopByType(TileType.MARINE_SHOP)),
-                    Pair.of(TileType.STARDROP_SALOON, map.getShopByType(TileType.STARDROP_SALOON))
-            );
+            List<Pair<TileType, Placable>> buildings = new ArrayList<>();
+            for (TileType type : TileType.values()) if (type.isShop()) {
+                Shop shop = new Shop(type);
+                map.addShop(shop);
+                buildings.add(Pair.of(type, shop));
+            }
 
             if (setBuildingsRandomly(buildings, map))
                 return map;
