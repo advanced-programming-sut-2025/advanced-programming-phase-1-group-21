@@ -43,7 +43,7 @@ public class Result<T> {
             return message;
         if (error != null)
             return error.getMessage();
-        return "";
+        return (data != null ? data.toString() : "");
     }
 
     public boolean isSuccess() {

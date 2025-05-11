@@ -203,8 +203,7 @@ public class GameController{
             System.err.println("HERE");
             Building building = tile.getPlacable(Building.class);
             if (building.canEnter()) {
-                player.setMap(building.getMap());
-                player.setCoord(new Coord(0, 0));
+                player.enterBuilding(building);
             }
             else return Result.failure(GameError.CANT_ENTER);
         }
@@ -847,5 +846,33 @@ public class GameController{
     public String getInventoryStatus() {
         if (App.game == null) return "No game running";
         return App.game.getCurrentPlayer().getInventory().toString();
+    }
+
+    public Result<String> showAllShopProducts() {
+        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+        Building building = App.game.getCurrentPlayer().getBuilding();
+        if (!(building instanceof Shop)) return Result.failure(GameError.YOU_SHOULD_BE_ON_SHOP);
+        Shop shop = (Shop) building;
+        return Result.success(shop.showProducts());
+    }
+
+    public Result<String> showAvailableShopProducts() {
+        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+        Building building = App.game.getCurrentPlayer().getBuilding();
+        if (!(building instanceof Shop)) return Result.failure(GameError.YOU_SHOULD_BE_ON_SHOP);
+        Shop shop = (Shop) building;
+        return Result.success(shop.showAvailableItems());
+    }
+
+    public Result<Void> purchaseItem(String name, int number) {
+        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+        Building building = App.game.getCurrentPlayer().getBuilding();
+        if (!(building instanceof Shop)) return Result.failure(GameError.YOU_SHOULD_BE_ON_SHOP);
+        Shop shop = (Shop) building;
+        return shop.purchaseItem(name, number);
+    }
+
+    public void addDollarsCheat(int number) {
+        App.game.getCurrentPlayer().addCoins(number);
     }
 }

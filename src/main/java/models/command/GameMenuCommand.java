@@ -92,6 +92,12 @@ public enum GameMenuCommand implements Command {
     WATER("\\s*water\\s+-l\\s+\\((?<x>\\d+),(?<y>\\d+)\\)\\s*"),
     PLANT("^\\s*plant\\s+-s\\s+(?<seedName>.*)\\s+-d\\s+(?<direction>(N)|(E)|(S)|(W)|(NE)|(NW)|(SE)|(SW))\\s*$"),
 
+    //SHOP
+    SHOP_SHOW_ALL_PRODUCTS("show all products"),
+    SHOP_SHOW_ALL_AVAILABLE_PRODUCTS("show all available products"),
+    SHOP_PURCHASE("purchase (?<name>.+) -n (?<number>\\d+)"),
+    CHEAT_ADD_DOLLARS("cheat add (?<number>\\d+) dollars"),
+
     //THESE ARE DEBUG COMMANDS
     WHERE_AM_I("whereami"),
     TILE_STATUS("\\s*tile\\s+status\\s+-l\\s+\\((?<x>\\d+),(?<y>\\d+)\\)\\s*"),
