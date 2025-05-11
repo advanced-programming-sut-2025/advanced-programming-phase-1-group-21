@@ -588,5 +588,10 @@
     "name": "Miner'S Treat",
     "price": 200,
     "energy": 125
+  },
+  {
+    "name": "Wheat Flour",
+    "price": 50,
+    "energy": 13
   }
 ]
