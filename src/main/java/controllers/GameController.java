@@ -3,6 +3,7 @@ package controllers;
 import models.App;
 import models.Item.*;
 import models.Menu;
+import models.animal.AnimalTypes;
 import models.data.items.SeedData;
 import models.tool.*;
 import models.animal.Animal;
@@ -576,9 +577,51 @@ public class GameController{
         return Result.success(output);
     }
 
-    public Result<Item> collectProducts(String animalName) {
+    public Result<Item> collectProducts(String name) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        Animal animal = App.game.getCurrentPlayer().getAnimalByName(name);
+        if (animal == null)
+            return Result.failure(GameError.ANIMAL_NOT_FOUND);
+
+        if(animal.collectProduce() == null)
+            return Result.failure(GameError.ANIMAL_NOT_FOUND);
+
+        if(animal.getAnimalType().equals(AnimalTypes.COW)){
+            if(App.game.getCurrentPlayer().getInventory().canRemoveItem(Item.build("milk pail" , 1))) {
+                animal.setTodayProduct(null);
+                App.game.getCurrentPlayer().getInventory().addItem(animal.collectProduce());
+            }
+        }
+
+        else if(animal.getAnimalType().equals(AnimalTypes.GOAT)){
+            if(App.game.getCurrentPlayer().getInventory().canRemoveItem(Item.build("milk pail" , 1))) {
+                animal.setTodayProduct(null);
+                App.game.getCurrentPlayer().getInventory().addItem(animal.collectProduce());
+            }
+        }
+
+        else if(animal.getAnimalType().equals(AnimalTypes.SHEEP)){
+            if(App.game.getCurrentPlayer().getInventory().canRemoveItem(Item.build("sheer" , 1))) {
+                animal.setTodayProduct(null);
+                App.game.getCurrentPlayer().getInventory().addItem(animal.collectProduce());
+            }
+        }
+
+        else if(animal.getAnimalType().equals(AnimalTypes.RABBIT)){
+            if(App.game.getCurrentPlayer().getInventory().canRemoveItem(Item.build("sheer" , 1))) {
+                animal.setTodayProduct(null);
+                App.game.getCurrentPlayer().getInventory().addItem(animal.collectProduce());
+            }
+        }
+
+        else {
+            animal.setTodayProduct(null);
+            App.game.getCurrentPlayer().getInventory().addItem(animal.collectProduce());
+            return Result.success(animal.collectProduce());
+        }
+
+        return Result.success(animal.collectProduce());
     }
 
     public Result<Void> sellAnimal(String name){

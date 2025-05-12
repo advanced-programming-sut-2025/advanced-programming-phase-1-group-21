@@ -1,5 +1,6 @@
 package models.animal;
 
+import models.Item.Item;
 import models.map.Placable;
 import models.map.Tile;
 
@@ -75,6 +76,12 @@ public class Animal implements Placable {
 
     public void setFriendship(int friendship) {
         this.friendship = friendship;
+    }
+
+    public Item collectProduce(){
+        if(todayProduct == null)
+            return null;
+        return Item.build(todayProduct , 1);
     }
 
 
