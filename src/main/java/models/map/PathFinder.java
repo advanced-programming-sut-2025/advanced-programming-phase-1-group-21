@@ -62,15 +62,16 @@ public class PathFinder {
                     neighborNode.gScore = tentativeGScore;
                     neighborNode.fScore = tentativeGScore + heuristic(neighborCoord, target);
 
-                    if (!openSet.contains(neighborNode)) {
-                        openSet.add(neighborNode);
-                    }
+                    // Remove and re-add to update position in priority queue
+                    openSet.remove(neighborNode);
+                    openSet.add(neighborNode);
+
                     allNodes.put(neighborCoord, neighborNode);
                 }
             }
         }
 
-        return path; // No path found
+        return null; // No path found
     }
 
     private List<PathStep> reconstructPath(Node endNode, int maxEnergy) {
@@ -121,6 +122,7 @@ public class PathFinder {
             this.cameFrom = cameFrom;
             this.gScore = gScore;
             this.fScore = fScore;
+            this.direction = null;
         }
 
         @Override

@@ -18,6 +18,7 @@ import models.user.User;
 import views.menu.GameTerminalView;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -200,7 +201,7 @@ public class GameController{
                 player.setMap(App.game.getVillage());
             else
                 player.setMap(player.getDefaultMap());
-            App.game.getCurrentPlayer().setCoord(new Coord(0, 0));
+            player.setCoord(new Coord(0, 0));
         }
         else if(tile.getPlacable(Building.class) != null) {
             if (!isNeigh) return Result.failure(GameError.YOU_ARE_DISTANT);
@@ -211,8 +212,14 @@ public class GameController{
             else return Result.failure(GameError.CANT_ENTER);
         }
         else {
+            PathFinder pf = new PathFinder(player);
+            List<PathFinder.PathStep> steps = pf.findPathTo(coord);
 
-            App.game.getCurrentPlayer().setCoord(coord);
+            if (steps == null) {
+                return Result.failure(GameError.NO_PATH);
+            }
+            //TODO
+            player.setCoord(coord);
         }
         return Result.success(null);
     }
