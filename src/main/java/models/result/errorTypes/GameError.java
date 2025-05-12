@@ -36,6 +36,8 @@ public enum GameError implements Error {
     RESPONSE_IS_NOT_SUPPORTED("Response is not supported"),
     TRADE_ID_DOES_NOT_EXIST("Trade id does not exist"),
     ITEM_IS_NOT_AVAILABLE("Item is not available"),
+    THIS_NPC_DOES_NOT_EXIST("This NPC does not exist"),
+    YOU_CANT_GIFT_A_TOOL("You can't gift a tool"),
     ;
 
 

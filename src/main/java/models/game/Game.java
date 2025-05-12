@@ -15,6 +15,7 @@ import models.time.*;
 
 public class Game implements DailyUpdate {
     private ArrayList<Player> players;
+    private ArrayList<NPC> npcs = new ArrayList<>();
     private ArrayList<Relation> relations = new ArrayList<>();
     private Player currentPlayer;
     private Map village = (new MapBuilder()).buildVillage();
@@ -47,6 +48,19 @@ public class Game implements DailyUpdate {
             }
         }
         return null;
+    }
+
+    public void addNPC(){
+        NPC sebastian = new NPC("Sebastian" , players);
+        NPC abigail = new NPC("Abigail" , players);
+        NPC harvey = new NPC("Harvey" ,players);
+        NPC leah = new NPC("Leah" , players);
+        NPC robin = new NPC("Robin" , players);
+        npcs.add(sebastian);
+        npcs.add(abigail);
+        npcs.add(harvey);
+        npcs.add(leah);
+        npcs.add(robin);
     }
 
     public ArrayList<Relation> getMyRelations(Player player) {
@@ -190,10 +204,26 @@ public class Game implements DailyUpdate {
     }
 
 
+
+    public ArrayList<NPC> getNpcs() {
+        return npcs;
+    }
+
     @Override
     public boolean nextDay() {
         gameWeather = nextDayWeather;
         nextDayWeather = calculateRandomWeather();
+
+        for(Relation relation : relations) {
+            relation.setTodayCommunication(false);
+        }
+
+        for(NPC npc : npcs) {
+            for(NPCFriendship friendship : npc.getFriendships()) {
+                friendship.setTodayMeet(false);
+                friendship.setTodayGift(false);
+            }
+        }
 
         for (Player player : players)
             player.nextDay();
@@ -204,5 +234,13 @@ public class Game implements DailyUpdate {
     //this means game goes for 1 command
     public void advance() {
         gameDate.advanceHours(1);
+    }
+
+    public NPC getNPCByName(String name) {
+        for(NPC npc : npcs) {
+            if(npc.getName().equals(name))
+                return npc;
+        }
+        return null;
     }
 }

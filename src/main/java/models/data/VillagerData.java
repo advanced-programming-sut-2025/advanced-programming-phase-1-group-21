@@ -13,9 +13,9 @@ public class VillagerData implements Data {
 	@SerializedName("name")
 	private String name;
 	@SerializedName("favorites")
-	private List<String> favorites;
+	private ArrayList<String> favorites;
 	@SerializedName("tasks")
-	private List<VillagerTask> tasks;
+	private ArrayList<VillagerTask> tasks;
 
 	public static String getDataURL() {
 		return dataURL;
@@ -41,11 +41,11 @@ public class VillagerData implements Data {
 		return name;
 	}
 
-	public List<String> getFavorites() {
+	public ArrayList<String> getFavorites() {
 		return favorites;
 	}
 
-	public List<VillagerTask> getTasks() {
+	public ArrayList<VillagerTask> getTasks() {
 		return tasks;
 	}
 
@@ -55,36 +55,4 @@ public class VillagerData implements Data {
 				return a;
 		return null;
 	}
-}
-
-class VillagerTask {
-	@SerializedName("request-item")
-	private String requestItem;
-
-	@SerializedName("request-amount")
-	private int requestAmount;
-
-	@SerializedName("reward-item")
-	private String rewardItem;
-
-	@SerializedName("reward-amount")
-	private int rewardAmount;
-
-	public String getRequestItem() {
-		return requestItem;
-	}
-
-	public int getRequestAmount() {
-		return requestAmount;
-	}
-
-	public String getRewardItem() {
-		return rewardItem;
-	}
-
-	public int getRewardAmount() {
-		return rewardAmount;
-	}
-
-
 }

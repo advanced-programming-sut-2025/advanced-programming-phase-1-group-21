@@ -286,6 +286,19 @@ public class GameTerminalView {
         else if ((matcher = GameMenuCommand.CHEAT_ADD_DOLLARS.getMatcher(command)) != null) {
             gameController.addDollarsCheat(Integer.parseInt(matcher.group("number")));
         }
+        else if((matcher = GameMenuCommand.MEET_NPC.getMatcher(command)) != null) {
+            System.out.println(gameController.meetNPC(matcher.group("npcName")).getMessage());
+        }
+        else if((matcher = GameMenuCommand.FRIENDSHIP_NPC_LIST.getMatcher(command)) != null) {
+            printArrayList(gameController.friendShipNPCList().getData());
+        }
+        else if((matcher = GameMenuCommand.QUESTS_LIST.getMatcher(command)) != null) {
+            printArrayList(gameController.showQuestList().getData());
+        }
+        else if((matcher = GameMenuCommand.QUEST_FINISH.getMatcher(command)) != null) {
+            System.out.println(gameController.finishQuest(matcher.group("npcName") ,
+                    Integer.parseInt(matcher.group("questID"))));
+        }
         else
             System.out.println("Invalid command");
 
