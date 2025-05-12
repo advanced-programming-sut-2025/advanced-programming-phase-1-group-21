@@ -85,4 +85,18 @@ public class Tile {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Tile other = (Tile) obj;
+
+        if (tileType != other.tileType) return false;
+        if (placable == null && other.placable == null) return true;
+        if (placable != null && other.placable != null) {
+            return placable.equals(other.placable);
+        }
+        return false;
+    }
 }

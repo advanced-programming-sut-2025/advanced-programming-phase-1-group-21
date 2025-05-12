@@ -45,4 +45,10 @@ public class Coord {
     public String toString() {
         return "(" + x + ", " + y + ")";
     }
+
+    public boolean isNeighbor(Coord other) {
+        int dx = Math.abs(this.x - other.x);
+        int dy = Math.abs(this.y - other.y);
+        return (dx + dy) == 1;
+    }
 }

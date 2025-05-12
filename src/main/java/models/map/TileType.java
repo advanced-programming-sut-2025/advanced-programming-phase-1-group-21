@@ -72,4 +72,12 @@ public enum TileType {
 			default -> false;
 		};
 	}
+
+	public boolean isWalkable() {
+		return switch (this) {
+			case PLOWED, UNPLOWED -> true;
+			default -> false;
+		};
+	}
+
 }

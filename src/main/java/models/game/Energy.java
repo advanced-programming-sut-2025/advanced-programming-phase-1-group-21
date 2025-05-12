@@ -24,7 +24,7 @@ public class Energy {
 
     public void decreaseEnergy(int amount) {
         if (currentEnergy < amount) {
-            throw new IllegalArgumentException("You can't decrease energy by " + amount);
+            currentEnergy = 0;
         }
         currentEnergy -= amount;
     }

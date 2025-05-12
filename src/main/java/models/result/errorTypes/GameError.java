@@ -38,6 +38,8 @@ public enum GameError implements Error {
     ITEM_IS_NOT_AVAILABLE("Item is not available"),
     THIS_NPC_DOES_NOT_EXIST("This NPC does not exist"),
     YOU_CANT_GIFT_A_TOOL("You can't gift a tool"),
+    YOU_ARE_DISTANT("You should be near to do action"),
+    NO_PATH("There is no path to the destination"),
     ;
 
 

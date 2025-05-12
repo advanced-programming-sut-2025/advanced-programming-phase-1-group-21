@@ -18,6 +18,7 @@ import models.user.User;
 import views.menu.GameTerminalView;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -180,6 +181,7 @@ public class GameController{
     public Result<Void> walk(int x , int y) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         Coord coord = new Coord(x, y);
+        boolean isNeigh = App.game.getCurrentPlayer().getCoord().isNeighbor(coord);
 
         Player player = App.game.getCurrentPlayer();
         Tile tile = player.getMap().getTile(coord);
@@ -194,14 +196,15 @@ public class GameController{
         else if(tile.getTileType() == TileType.LAKE)
             return Result.failure(GameError.CANT_STAND_ON_LAKE);
         else if(tile.getTileType() == TileType.DOOR) {
+            if (!isNeigh) return Result.failure(GameError.YOU_ARE_DISTANT);
             if (player.getMap().mapType == MapType.SHOP)
                 player.setMap(App.game.getVillage());
             else
                 player.setMap(player.getDefaultMap());
-            App.game.getCurrentPlayer().setCoord(new Coord(0, 0));
+            player.setCoord(new Coord(0, 0));
         }
         else if(tile.getPlacable(Building.class) != null) {
-            System.err.println("HERE");
+            if (!isNeigh) return Result.failure(GameError.YOU_ARE_DISTANT);
             Building building = tile.getPlacable(Building.class);
             if (building.canEnter()) {
                 player.enterBuilding(building);
@@ -209,9 +212,24 @@ public class GameController{
             else return Result.failure(GameError.CANT_ENTER);
         }
         else {
-            App.game.getCurrentPlayer().setCoord(new Coord(x, y));
+            PathFinder pf = new PathFinder(player);
+            List<PathFinder.PathStep> steps = pf.findPathTo(coord);
+
+            if (steps == null) {
+                return Result.failure(GameError.NO_PATH);
+            }
+            for (PathFinder.PathStep step : steps) {
+                player.decreaseEnergy(step.energyCost());
+                player.setCoord(step.coord());
+                printMapFull();
+                if (player.isFainted()) return Result.success(null);
+            }
         }
         return Result.success(null);
+    }
+
+    public void printMapFull() {
+        GameTerminalView.printWithColor(printMap(0, 0, 50).getData());
     }
 
     public Result<ArrayList<String>> printMap(int x, int y , int size) {
@@ -964,6 +982,12 @@ public class GameController{
     }
 
     public void addDollarsCheat(int number) {
+        if (App.game == null) return;
         App.game.getCurrentPlayer().addCoins(number);
+    }
+
+    public boolean isFainted() {
+        if (App.game == null) return false;
+        return App.game.getCurrentPlayer().isFainted();
     }
 }
