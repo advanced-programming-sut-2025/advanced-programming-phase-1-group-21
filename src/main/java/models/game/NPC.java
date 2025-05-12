@@ -1,15 +1,11 @@
 package models.game;
 
-import models.App;
 import models.Item.Item;
-import models.data.VillagerData;
-import models.data.VillagerTask;
+import models.data.*;
 import models.map.Coord;
-import org.apache.commons.lang3.tuple.Pair;
 import models.map.Building;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class NPC {
     private String name;

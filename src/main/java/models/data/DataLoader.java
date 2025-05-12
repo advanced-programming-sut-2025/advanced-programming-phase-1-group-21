@@ -3,7 +3,6 @@ package models.data;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import models.data.items.*;
-import models.data.recipe.*;
 
 import java.io.FileReader;
 import java.lang.reflect.Type;
@@ -21,6 +20,8 @@ public class DataLoader {
 
 		RecipeData.setCookingData(loadEach(RecipeData.getCookingDataURL(), new TypeToken<List<RecipeData>>(){}.getType()));
 		RecipeData.setCraftingData(loadEach(RecipeData.getCraftingDataURL(), new TypeToken<List<RecipeData>>(){}.getType()));
+
+		ArtisanGoodsData.setData(loadEach(ArtisanGoodsData.getDataURL(), new TypeToken<List<ArtisanGoodsData>>(){}.getType()));
 
 		ScarecrowData.setData(loadEach(ScarecrowData.getDataURL(), new TypeToken<List<ScarecrowData>>(){}.getType()));
 		SprinklerData.setData(loadEach(SprinklerData.getDataURL(), new TypeToken<List<SprinklerData>>(){}.getType()));
