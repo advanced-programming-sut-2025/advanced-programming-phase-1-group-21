@@ -1,6 +1,8 @@
 package models.data.items;
 
 import com.google.gson.annotations.SerializedName;
+import models.Item.Recipe;
+import models.Item.RecipeType;
 import models.data.Data;
 
 import java.util.ArrayList;
@@ -98,5 +100,11 @@ public class RecipeData implements Data, ItemData {
 			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
+	}
+
+	public static Recipe getRecipe(String name, RecipeType type) {
+		RecipeData recipeData = (type == RecipeType.COOKING ? getCookingRecipeData(name) : getCraftingRecipeData(name));
+		if (recipeData == null) return null;
+		return new Recipe(recipeData, type, 1);
 	}
 }

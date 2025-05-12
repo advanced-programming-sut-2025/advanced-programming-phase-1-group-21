@@ -4,6 +4,7 @@ import models.App;
 import models.DailyUpdate;
 import models.Item.Item;
 import models.Item.Recipe;
+import models.Item.RecipeType;
 import models.animal.Animal;
 import models.map.*;
 import models.map.Coord;
@@ -32,23 +33,29 @@ public class Player implements DailyUpdate {
     private TrashCanType trashCanType;
     private Item itemInHand;
     private ArrayList<NPCFriendship> npcFriendships;
-    private ArrayList<Recipe> craftingRecipe = new ArrayList<>();
+    private ArrayList<Recipe> recipes = new ArrayList<>();
 
-    public ArrayList<Recipe> getCraftingRecipe() {
-        return craftingRecipe;
+    public ArrayList<Recipe> getRecipes(RecipeType type) {
+        ArrayList<Recipe> recipes = new ArrayList<>();
+        for (Recipe recipe : recipes) {
+            if (recipe.getType() == type) {
+                recipes.add(recipe);
+            }
+        }
+        return recipes;
     }
 
     public Inventory getInventory() {
         return inventory;
     }
 
-    public void addCraftRecipe(Recipe recipe) {
-        craftingRecipe.add(recipe);
+    public void addRecipes(Recipe recipe) {
+        recipes.add(recipe);
     }
 
-    public Recipe getRecipeByName(String name) {
-        for (Recipe recipe : craftingRecipe) {
-            if (recipe.getName().equals(name)) {
+    public Recipe getRecipeByName(String name, RecipeType type) {
+        for (Recipe recipe : recipes) {
+            if (recipe.getName().equals(name) && recipe.getType() == type) {
                 return recipe;
             }
         }
@@ -249,10 +256,10 @@ public class Player implements DailyUpdate {
         sb.append("\n");
 
         sb.append("Crafting Recipes: ");
-        if (craftingRecipe.isEmpty()) {
+        if (getRecipes(RecipeType.CRAFTING).isEmpty()) {
             sb.append("None");
         } else {
-            for (Recipe recipe : craftingRecipe) {
+            for (Recipe recipe : getRecipes(RecipeType.CRAFTING)) {
                 sb.append(recipe.getName()).append(" ");
             }
         }

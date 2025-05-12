@@ -423,12 +423,12 @@ public class GameController{
 
     public Result<List<Recipe>> showCraftingRecipes() {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        return Result.success(App.game.getCurrentPlayer().getCraftingRecipe());
+        return Result.success(App.game.getCurrentPlayer().getRecipes(RecipeType.CRAFTING));
     }
 
     public Result<Void> craft(String recipeName) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        Recipe recipe = App.game.getCurrentPlayer().getRecipeByName(recipeName);
+        Recipe recipe = App.game.getCurrentPlayer().getRecipeByName(recipeName, RecipeType.CRAFTING);
         if (recipe == null) {
             return Result.failure(GameError.CRAFT_RECIPE_NOT_FOUND);
         }
@@ -458,11 +458,9 @@ public class GameController{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<ArrayList<Recipe>> cookingShowRecipes() {
+    public Result<ArrayList<Recipe>> showCookingRecipes() {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        //this function should show list all the recipes
-        //this function should show that what recipes are available and what recipes are not
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Result.success(App.game.getCurrentPlayer().getRecipes(RecipeType.COOKING));
     }
 
     public Result<Void> eat(Consumable food){

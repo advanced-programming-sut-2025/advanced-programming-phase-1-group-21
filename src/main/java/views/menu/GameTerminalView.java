@@ -174,6 +174,9 @@ public class GameTerminalView {
         else if ((matcher = GameMenuCommand.COOKING_REFRIGERATOR.getMatcher(command)) != null) {
             System.out.println(gameController.actOnRefrigerator(matcher.group("item"), matcher.group("action")));
         }
+        else if ((matcher = GameMenuCommand.COOKING_SHOW_RECIPES.getMatcher(command)) != null) {
+            System.out.println(gameController.showCookingRecipes());
+        }
         else if ((matcher = GameMenuCommand.WHERE_AM_I.getMatcher(command)) != null) {
             System.out.println(gameController.whereAmI());
         }

@@ -7,7 +7,7 @@ public enum ItemType {
     CONSUMABLE,
     SALABLE,
     PLACEABLE,
-    RECIPE
+    RECIPE,
     ;
 
     public static ItemType stringToItemType(String itemType) {
