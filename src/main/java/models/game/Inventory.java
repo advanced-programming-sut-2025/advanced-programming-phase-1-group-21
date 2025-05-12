@@ -15,7 +15,6 @@ public class Inventory {
     List<Item> items;
     InventoryType inventoryType;
     ToolMaterialType trashcanType;
-    ArrayList<Tool> tools;
 
     public Inventory() {
         items = new ArrayList<>();
@@ -26,6 +25,10 @@ public class Inventory {
         items.add(new WateringCan());
         inventoryType = InventoryType.PRIMITIVE;
         trashcanType = ToolMaterialType.PRIMITIVE;
+    }
+
+    public int getSize() {
+        return items.size();
     }
 
     public void upgradeSize(InventoryType inventoryType) {
@@ -74,7 +77,7 @@ public class Inventory {
                 }
             }
         }
-        if (items.size() == inventoryType.getMaximumSize()) {
+        if (!canAdd()) {
             return Result.success("Adding " + item.getName() + " to the inventory was not completely. " + item.getAmount() + " remains.");
         }
         items.add(item);
@@ -258,4 +261,7 @@ public class Inventory {
         return String.join("\n", inventoryDetails);
     }
 
+    public boolean canAdd() {
+        return getSize() < inventoryType.getMaximumSize();
+    }
 }

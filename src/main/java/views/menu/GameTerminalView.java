@@ -1,6 +1,8 @@
 package views.menu;
 
 import controllers.GameController;
+import models.Item.Item;
+import models.Item.Recipe;
 import models.command.GameMenuCommand;
 import models.game.Game;
 import models.game.Player;
@@ -11,6 +13,7 @@ import models.result.Result;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 
 public class GameTerminalView {
@@ -161,6 +164,12 @@ public class GameTerminalView {
         }
         else if ((matcher = GameMenuCommand.CRAFTINFO.getMatcher(command)) != null) {
             System.out.println(gameController.craftInfo(matcher.group("craftName")));
+        }
+        else if ((matcher = GameMenuCommand.CRAFTING_SHOW_RECIPES.getMatcher(command)) != null) {
+            System.out.println(gameController.showCraftingRecipes());
+        }
+        else if ((matcher = GameMenuCommand.CRAFTING.getMatcher(command)) != null) {
+            System.out.println(gameController.craft(matcher.group("name")));
         }
         else if ((matcher = GameMenuCommand.WHERE_AM_I.getMatcher(command)) != null) {
             System.out.println(gameController.whereAmI());
