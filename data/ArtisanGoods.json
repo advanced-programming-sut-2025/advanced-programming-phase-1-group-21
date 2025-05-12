@@ -4,7 +4,7 @@
     "name": "Honey",
     "description": "It's a sweet syrup produced by bees.",
     "energy": 75,
-    "processing-time": [4, 0],
+    "processing-time": 96,
     "ingredients": null,
     "price": 350
   },
@@ -12,261 +12,381 @@
     "artisan": "Cheese Press",
     "name": "Cheese",
     "description": "It's your basic cheese.",
-    "energy": 100,
-    "processing-time": [0, 3],
-    "ingredients": ["Milk", "Large Milk"],
-    "price": {"Milk": 230, "Large Milk": 345}
+    "ingredients": [
+      [{"Milk": 1}],
+      [{"Large Milk": 1}]
+    ],
+    "processing-time": 3
   },
   {
     "artisan": "Cheese Press",
     "name": "Goat Cheese",
     "description": "Soft cheese made from goat's milk.",
-    "energy": 100,
-    "processing-time": [0, 3],
-    "ingredients": ["Goat Milk", "Large Goat Milk"],
-    "price": {"Goat Milk": 400, "Large Goat Milk": 600}
+    "ingredients": [
+      [{"Goat Milk": 1}],
+      [{"Large Goat Milk": 1}]
+    ],
+    "processing-time": 3
   },
   {
     "artisan": "Keg",
     "name": "Beer",
     "description": "Drink in moderation.",
-    "energy": 50,
-    "processing-time": [1, 0],
-    "ingredients": ["Wheat"],
-    "price": {"Wheat": 200}
+    "ingredients": [
+      [{"Wheat": 1}]
+    ],
+    "processing-time": 24
   },
   {
     "artisan": "Keg",
     "name": "Vinegar",
     "description": "An aged fermented liquid used in many cooking recipes.",
-    "energy": 13,
-    "processing-time": [0, 10],
-    "ingredients": {"Rice": 1},
-    "price": {"Rice": 100}
+    "ingredients": [
+      [{"Rice": 1}]
+    ],
+    "processing-time": 10
   },
   {
     "artisan": "Keg",
     "name": "Coffee",
     "description": "It smells delicious. This is sure to give you a boost.",
-    "energy": 75,
-    "processing-time": [0, 2],
-    "ingredients": {"Coffee Beans": 5},
-    "price": "150g"
+    "ingredients": [
+      [{"Coffee Beans": 5}]
+    ],
+    "processing-time": 2
   },
   {
     "artisan": "Keg",
     "name": "Juice",
     "description": "A sweet, nutritious beverage.",
-    "energy": "2 × Base Ingredient energy",
-    "processing-time": "4 Days",
-    "ingredients": "Any Vegetable",
-    "price": "2.25 × Ingredient Base price"
+    "ingredients": [
+      [{"Amaranth": 1}],
+      [{"Artichoke": 1}],
+      [{"Beet": 1}],
+      [{"Bok Choy": 1}],
+      [{"Broccoli": 1}],
+      [{"Carrot": 1}],
+      [{"Cauliflower": 1}],
+      [{"Corn": 1}],
+      [{"Eggplant": 1}],
+      [{"Fiddlehead Fern": 1}],
+      [{"Garlic": 1}],
+      [{"Green Bean": 1}],
+      [{"Hops": 1}],
+      [{"Kale": 1}],
+      [{"Parsnip": 1}],
+      [{"Potato": 1}],
+      [{"Pumpkin": 1}],
+      [{"Radish": 1}],
+      [{"Red Cabbage": 1}],
+      [{"Summer Squash": 1}],
+      [{"Tomato": 1}],
+      [{"Unmilled Rice": 1}],
+      [{"Wheat": 1}],
+      [{"Yam": 1}]
+    ],
+    "processing-time": 96
   },
   {
     "artisan": "Keg",
     "name": "Mead",
     "description": "A fermented beverage made from honey. Drink in moderation.",
-    "energy": 100,
-    "processing-time": [0, 10],
-    "ingredients": ["Honey"],
-    "price": {"Honey": 300}
+    "ingredients": [
+      [{"Honey": 1}]
+    ],
+    "processing-time": 10
   },
   {
     "artisan": "Bee House",
+    "description": "Drink in moderation.",
     "name": "Pale Ale",
-    "description": "Drink in moderation.",
-    "energy": 50,
-    "processing-time": [3, 0],
-    "ingredients": ["Hops"],
-    "price": {"Hops": 300}
+    "ingredients": [
+      [{"Hops": 1}]
+    ],
+    "processing-time": 72
   },
   {
     "artisan": "Bee House",
-    "name": "Wine",
     "description": "Drink in moderation.",
-    "energy": "1.75 × Base Fruit energy",
-    "processing-time": [7, 0],
-    "ingredients": "Any Fruit",
-    "price": "3 × Fruit Base price"
+    "name": "Wine",
+    "ingredients": [
+      [{"Ancient Fruit": 1}],
+      [{"Apple": 1}],
+      [{"Apricot": 1}],
+      [{"Banana": 1}],
+      [{"Blackberry": 1}],
+      [{"Blueberry": 1}],
+      [{"Cherry": 1}],
+      [{"Cranberries": 1}],
+      [{"Crystal Fruit": 1}],
+      [{"Grape": 1}],
+      [{"Hot Pepper": 1}],
+      [{"Mango": 1}],
+      [{"Melon": 1}],
+      [{"Orange": 1}],
+      [{"Peach": 1}],
+      [{"Pomegranate": 1}],
+      [{"Powdermelon": 1}],
+      [{"Rhubarb": 1}],
+      [{"Salmonberry": 1}],
+      [{"Spice Berry": 1}],
+      [{"Starfruit": 1}],
+      [{"Strawberry": 1}],
+      [{"Wild Plum": 1}]
+    ],
+    "processing-time": 168
   },
   {
     "artisan": "Loom",
-    "name": "Cloth",
     "description": "A bolt of fine wool cloth.",
-    "energy": "Inedible",
-    "processing-time": [0, 4],
-    "ingredients": "Wool",
-    "price": 470
+    "name": "Cloth",
+    "ingredients": [
+      [{"Wool": 1}]
+    ],
+    "processing-time": 4
   },
   {
     "artisan": "Mayonnaise Machine",
-    "name": "Mayonnaise",
     "description": "It looks spreadable.",
-    "energy": 50,
-    "processing-time": [0, 3],
-    "ingredient": "Egg",
-    "price": 190
-  },
-  {
-    "artisan": "Mayonnaise Machine",
     "name": "Mayonnaise",
-    "description": "It looks spreadable.",
-    "energy": 50,
-    "processing-time": [0, 3],
-    "ingredient": "Large Egg",
-    "price": 237
+    "ingredients": [
+      [{"Egg": 1}]
+    ],
+    "processing-time": 3
   },
   {
     "artisan": "Mayonnaise Machine",
-    "name": "Duck Mayonnaise",
+    "description": "It looks spreadable.",
+    "name": "Mayonnaise",
+    "ingredients": [
+      [{"Large Egg": 1}]
+    ],
+    "processing-time": 3
+  },
+  {
+    "artisan": "Mayonnaise Machine",
     "description": "It's a rich, yellow mayonnaise.",
-    "energy": 75,
-    "processing-time": [0, 3],
-    "ingredients": "Duck Egg",
-    "price": 37
+    "name": "Duck Mayonnaise",
+    "ingredients": [
+      [{"Duck Egg": 1}]
+    ],
+    "processing-time": 3
   },
   {
     "artisan": "Mayonnaise Machine",
+    "description": "It's thick and creamy, with a vivid green hue. It smells like grass and leather.",
     "name": "Dinosaur Mayonnaise",
-    "description": "It's thick and creamy, with a vivid green hue.\n It smells like grass and leather.",
-    "energy": 125,
-    "processing-time": [0, 3],
-    "ingredients": "Dinosaur Egg",
-    "price": 800
+    "ingredients": [
+      [{"Dinosaur Egg": 1}]
+    ],
+    "processing-time": 3
   },
   {
     "artisan": "Oil Maker",
-    "name": "Truffle Oil",
     "description": "A gourmet cooking ingredient.",
-    "energy": 38,
-    "processing-time": [0, 6],
-    "ingredient": "Truffle",
-    "price": 1065
+    "name": "Truffle Oil",
+    "ingredients": [
+      [{"Truffle": 1}]
+    ],
+    "processing-time": 6
   },
   {
     "artisan": "Oil Maker",
-    "name": "Oil",
     "description": "All purpose cooking oil.",
-    "energy": 13,
-    "processing-time": [0, 6],
-    "ingredients": "Corn",
-    "price": 100
-  },
-  {
-    "artisan": "Oil Maker",
     "name": "Oil",
-    "description": "All purpose cooking oil.",
-    "energy": 13,
-    "processing-time": [2, 0],
-    "ingredients": "Sunflower Seeds",
-    "price": 100
-  },
-  {
-    "artisan": "Oil Maker",
-    "name": "Oil",
-    "description": "All purpose cooking oil.",
-    "energy": 13,
-    "processing-time": [0, 1],
-    "ingredients": "Sunflower",
-    "price": 100
+    "ingredients": [
+      [{"Corn": 1}],
+      [{"Sunflower Seeds": 1}],
+      [{"Sunflower": 1}]
+    ],
+    "processing-time": 6
   },
   {
     "artisan": "Preserves Jar",
     "name": "Pickles",
     "description": "A jar of your home-made pickles.",
-    "energy": "1.75 × Base Ingredient energy",
-    "processing-time": "6 Hours",
-    "ingredients": "Any vegetable",
-    "price": "2 × Base price + 50"
+    "ingredients": [
+      [{"Amaranth": 1}],
+      [{"Artichoke": 1}],
+      [{"Beet": 1}],
+      [{"Bok Choy": 1}],
+      [{"Broccoli": 1}],
+      [{"Carrot": 1}],
+      [{"Cauliflower": 1}],
+      [{"Corn": 1}],
+      [{"Eggplant": 1}],
+      [{"Fiddlehead Fern": 1}],
+      [{"Garlic": 1}],
+      [{"Green Bean": 1}],
+      [{"Hops": 1}],
+      [{"Kale": 1}],
+      [{"Parsnip": 1}],
+      [{"Potato": 1}],
+      [{"Pumpkin": 1}],
+      [{"Radish": 1}],
+      [{"Red Cabbage": 1}],
+      [{"Summer Squash": 1}],
+      [{"Tomato": 1}],
+      [{"Unmilled Rice": 1}],
+      [{"Wheat": 1}],
+      [{"Yam": 1}]
+    ],
+    "processing-time": 6
   },
   {
     "artisan": "Preserves Jar",
-    "name": "Jelly",
     "description": "Gooey.",
-    "energy": "2 × Base Fruit energy",
-    "processing-time": [3, 0],
-    "ingredients": "Any fruit",
-    "price": "2 × Base Fruit price + 50"
+    "name": "Jelly",
+    "ingredients": [
+      [{"Ancient Fruit": 1}],
+      [{"Apple": 1}],
+      [{"Apricot": 1}],
+      [{"Banana": 1}],
+      [{"Blackberry": 1}],
+      [{"Blueberry": 1}],
+      [{"Cherry": 1}],
+      [{"Cranberries": 1}],
+      [{"Crystal Fruit": 1}],
+      [{"Grape": 1}],
+      [{"Hot Pepper": 1}],
+      [{"Mango": 1}],
+      [{"Melon": 1}],
+      [{"Orange": 1}],
+      [{"Peach": 1}],
+      [{"Pomegranate": 1}],
+      [{"Powdermelon": 1}],
+      [{"Rhubarb": 1}],
+      [{"Salmonberry": 1}],
+      [{"Spice Berry": 1}],
+      [{"Starfruit": 1}],
+      [{"Strawberry": 1}],
+      [{"Wild Plum": 1}]
+    ],
+    "processing-time": 72
   },
   {
     "artisan": "Bee House",
-    "name": "Smoked Fish",
     "description": "A whole fish, smoked to perfection.",
-    "energy": "1.5 × Fish energy",
-    "processing-time": [0, 1],
-    "ingredients": "Any Fish + Coal",
-    "price": "2 × Fish price"
+    "name": "Smoked Fish",
+    "ingredients": [
+      [{"Salmon": 1}, {"Coal": 1}],
+      [{"Sardine": 1}, {"Coal": 1}],
+      [{"Shad": 1}, {"Coal": 1}],
+      [{"Blue Discus": 1}, {"Coal": 1}],
+      [{"Midnight Carp": 1}, {"Coal": 1}],
+      [{"Squid": 1}, {"Coal": 1}],
+      [{"Tuna": 1}, {"Coal": 1}],
+      [{"Perch": 1}, {"Coal": 1}],
+      [{"Flounder": 1}, {"Coal": 1}],
+      [{"Lionfish": 1}, {"Coal": 1}],
+      [{"Herring": 1}, {"Coal": 1}],
+      [{"Ghostfish": 1}, {"Coal": 1}],
+      [{"Tilapia": 1}, {"Coal": 1}],
+      [{"Dorado": 1}, {"Coal": 1}],
+      [{"Sunfish": 1}, {"Coal": 1}],
+      [{"Rainbow Trout": 1}, {"Coal": 1}],
+      [{"Legend": 1}, {"Coal": 1}],
+      [{"Glacierfish": 1}, {"Coal": 1}],
+      [{"Angler": 1}, {"Coal": 1}],
+      [{"Crimsonfish": 1}, {"Coal": 1}]
+    ],
+    "processing-time": 1
   },
   {
     "artisan": "Dehydrator",
-    "name": "Dried Mushrooms",
     "description": "A package of gourmet mushrooms.",
-    "energy": 50,
-    "processing-time": [1, 0],
-    "ingredients": "Any Mushroom (5)",
-    "price": "7.5 × Mushroom Base price\n + 25g"
+    "name": "Dried Mushrooms",
+    "processing-time": 24,
+    "ingredients": [
+      [{"Common Mushroom": 5}],
+      [{"Red Mushroom": 5}],
+      [{"Purple Mushroom": 5}],
+      [{"Morel": 5}],
+      [{"Chanterelle": 5}]
+    ]
   },
   {
     "artisan": "Dehydrator",
-    "name": "Dried Fruit",
     "description": "Chewy pieces of dried fruit.",
-    "energy": 75,
-    "processing-time": [1, 0],
-    "ingredients": "5 of Any Fruit \n(except Grapes)",
-    "price": "7.5 × Fruit Base price + 25g"
+    "name": "Dried Fruit",
+    "processing-time": 24,
+    "ingredients": [
+      [{"Ancient Fruit": 1}],
+      [{"Apple": 1}],
+      [{"Apricot": 1}],
+      [{"Banana": 1}],
+      [{"Blackberry": 1}],
+      [{"Blueberry": 1}],
+      [{"Cherry": 1}],
+      [{"Cranberries": 1}],
+      [{"Crystal Fruit": 1}],
+      [{"Hot Pepper": 1}],
+      [{"Mango": 1}],
+      [{"Melon": 1}],
+      [{"Orange": 1}],
+      [{"Peach": 1}],
+      [{"Pomegranate": 1}],
+      [{"Powdermelon": 1}],
+      [{"Rhubarb": 1}],
+      [{"Salmonberry": 1}],
+      [{"Spice Berry": 1}],
+      [{"Starfruit": 1}],
+      [{"Strawberry": 1}],
+      [{"Wild Plum": 1}]
+    ]
   },
   {
     "artisan": "Dehydrator",
-    "name": "Raisins",
     "description": "It's said to be the Junimos' favorite food.",
-    "energy": 125,
-    "processing-time": "Ready the next morning",
-    "ingredients": "Grapes (5)",
-    "price": 600
+    "name": "Raisins",
+    "processing-time": 24,
+    "ingredients": [
+      [{"Grape": 5}]
+    ]
   },
   {
     "artisan": "Charcoal Kiln",
-    "name": "Coal",
     "description": "Turns 10 pieces of wood into one piece of coal.",
-    "energy": null,
-    "processing-time": [0, 1],
-    "ingredients": {"Wood": 10},
-    "price": 50
+    "name": "Coal",
+    "processing-time": 1,
+    "ingredients": [
+      [{"Wood": 10}]
+    ]
   },
   {
     "artisan": "Furnace",
-    "name": "Copper Bar",
     "description": "Turns Copper ores and coal into Copper bar.",
-    "energy": null,
-    "processing-time": [0, 4],
-    "ingredients": {"Copper Ore": 5, "Coal": 1},
-    "price": "10 × Ore price"
+    "name": "Copper Bar",
+    "processing-time": 4,
+    "ingredients": [
+      [{"Copper Ore": 5}, {"Coal": 1}]
+    ]
   },
   {
     "artisan": "Furnace",
-    "name": "Iron Bar",
     "description": "Turns Iron ores and coal into Iron bar.",
-    "energy": null,
-    "processing-time": [0, 4],
-    "ingredients": {"Iron Ore": 5, "Coal": 1},
-    "price": "10 × Ore price"
+    "name": "Iron Bar",
+    "processing-time": 4,
+    "ingredients": [
+      [{"Iron Ore": 5}, {"Coal": 1}]
+    ]
   },
   {
     "artisan": "Furnace",
-    "name": "Gold Bar",
     "description": "Turns Gold ores and coal into Gold bar.",
-    "energy": null,
-    "processing-time": [0, 4],
-    "ingredients": {"Gold Ore": 5, "Coal": 1},
-    "price": "10 × Ore price"
+    "name": "Gold Bar",
+    "processing-time": 4,
+    "ingredients": [
+      [{"Gold Ore": 5}, {"Coal": 1}]
+    ]
   },
   {
     "artisan": "Furnace",
-    "name": "Iridium Bar",
     "description": "Turns Iridium ores and coal into Iridium bar.",
-    "energy": null,
-    "processing-time": [0, 4],
-    "ingredients": {"Iridium Ore": 5, "Coal": 1},
-    "price": "10 × Ore price"
+    "name": "Iridium Bar",
+    "processing-time": 4,
+    "ingredients": [
+      [{"Iridium Ore": 5}, {"Coal": 1}]
+    ]
   }
 ]
