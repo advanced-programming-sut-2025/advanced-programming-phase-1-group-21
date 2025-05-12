@@ -2,6 +2,7 @@ package models.tool;
 
 import models.App;
 import models.Item.Item;
+import models.game.Player;
 import models.map.Coord;
 import models.map.Tile;
 import models.result.Result;
@@ -43,6 +44,17 @@ public class WateringCan extends Tool {
             return Result.failure(GameError.TILE_DOESNT_HAVE_WATER);
         increaseWater();
         //calc energy TODO
+        Tool waterCan = (Tool) App.game.getCurrentPlayer().getItemInHand();
+        Player player = App.game.getCurrentPlayer();
+        switch (waterCan.getToolMaterialType()) {
+            case PRIMITIVE -> player.decreaseEnergy(5);
+            case COPPER -> player.decreaseEnergy(4);
+            case STEEL -> player.decreaseEnergy(3);
+            case GOLD -> player.decreaseEnergy(2);
+            case IRIDIUM -> player.decreaseEnergy(1);
+        }
+        if(player.getSkill().getFarmingLevel() >= 4)
+            player.setEnergy(player.getEnergy() + 1);
         return Result.success(null);
     }
 

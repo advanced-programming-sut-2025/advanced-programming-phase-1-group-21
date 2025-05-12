@@ -639,7 +639,36 @@ public class GameController{
 
     public Result<Void> fishing(String fishingPole){
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        boolean isNearLake = false;
+        for(Tile tile : App.game.getCurrentPlayer().getNeighborTiles()){
+            if(tile.getPlacable(Lake.class) != null)
+                isNearLake = true;
+        }
+        if(!isNearLake)
+            return Result.failure(GameError.CANT_STAND_ON_LAKE);
+
+        if(!App.game.getCurrentPlayer().getInventory().canRemoveItem(Item.build(fishingPole , 1)))
+            return Result.failure(GameError.CANT_STAND_ON_LAKE);
+
+
+        double amount = Math.random() * (App.game.getCurrentPlayer().getSkill().getFishingSkill() + 2);
+        if(App.game.getWeather().equals(Weather.SUNNY))
+            amount *= 1.5;
+        if(App.game.getWeather().equals(Weather.RAINY))
+            amount *= 1.2;
+        if(App.game.getWeather().equals(Weather.STORM))
+            amount *= 0.5;
+        if(fishingPole.equals("training")){
+            App.game.getCurrentPlayer().getInventory().addItem(Item.build(FishingPole.getCheapestFish() , (int) amount));
+            return Result.success(null);
+        }
+        else if(fishingPole.equals("bamboo") || fishingPole.equals("iridium") || fishingPole.equals("fiberglass")){
+            App.game.getCurrentPlayer().getInventory().addItem(Item.build(FishingPole.randomFish() , (int) amount));
+            return Result.success(null);
+        }
+        return Result.failure(GameError.CANT_STAND_ON_LAKE);
+
     }
 
     public Result<Item> artisanUse(String artisanName , String item) {

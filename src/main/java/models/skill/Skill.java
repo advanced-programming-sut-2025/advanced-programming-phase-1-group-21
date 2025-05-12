@@ -1,23 +1,56 @@
 package models.skill;
 
 public class Skill {
-    private final String name;
-    private final int level;
-    private final int experience;
-    private final int requiredExperience;
-    private final SkillType skillType;
+    private int farmingSkill = 0;
+    private int miningSkill = 0;
+    private int natureSkill = 0;
+    private int fishingSkill = 0;
 
-    public Skill(String name, int level, int experience, int requiredExperience, SkillType skillType) {
-        this.name = name;
-        this.level = level;
-        this.experience = experience;
-        this.requiredExperience = requiredExperience;
-        this.skillType = skillType;
+    public void setFarmingSkill(int farmingSkill) {
+        this.farmingSkill = farmingSkill;
     }
 
-    public String getName() {
-        return name;
+    public void setMiningSkill(int miningSkill) {
+        this.miningSkill = miningSkill;
     }
-    
-    
+
+    public void setNatureSkill(int natureSkill) {
+        this.natureSkill = natureSkill;
+    }
+
+    public void setFishingSkill(int fishingSkill) {
+        this.fishingSkill = fishingSkill;
+    }
+
+    public int getFarmingLevel(){
+        return Math.max(0 , (farmingSkill-50)/100);
+    }
+
+    public int getMiningLevel(){
+        return Math.max(0 , (miningSkill-50)/100);
+    }
+
+    public int getNatureLevel(){
+        return Math.max(0 , (natureSkill-50)/100);
+    }
+
+    public int getFishingLevel(){
+        return Math.max(0 , (fishingSkill-50)/100);
+    }
+
+    public int getFarmingSkill() {
+        return farmingSkill;
+    }
+
+    public int getMiningSkill() {
+        return miningSkill;
+    }
+
+    public int getNatureSkill() {
+        return natureSkill;
+    }
+
+    public int getFishingSkill() {
+        return fishingSkill;
+    }
 }
