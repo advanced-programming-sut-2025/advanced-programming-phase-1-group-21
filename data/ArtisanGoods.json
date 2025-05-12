@@ -13,8 +13,8 @@
     "name": "Cheese",
     "description": "It's your basic cheese.",
     "ingredients": [
-      [{"Milk": 1}],
-      [{"Large Milk": 1}]
+      {"Milk": 1},
+      {"Large Milk": 1}
     ],
     "processing-time": 3
   },
@@ -23,8 +23,8 @@
     "name": "Goat Cheese",
     "description": "Soft cheese made from goat's milk.",
     "ingredients": [
-      [{"Goat Milk": 1}],
-      [{"Large Goat Milk": 1}]
+      {"Goat Milk": 1},
+      {"Large Goat Milk": 1}
     ],
     "processing-time": 3
   },
@@ -33,7 +33,7 @@
     "name": "Beer",
     "description": "Drink in moderation.",
     "ingredients": [
-      [{"Wheat": 1}]
+      {"Wheat": 1}
     ],
     "processing-time": 24
   },
@@ -42,7 +42,7 @@
     "name": "Vinegar",
     "description": "An aged fermented liquid used in many cooking recipes.",
     "ingredients": [
-      [{"Rice": 1}]
+      {"Rice": 1}
     ],
     "processing-time": 10
   },
@@ -51,7 +51,7 @@
     "name": "Coffee",
     "description": "It smells delicious. This is sure to give you a boost.",
     "ingredients": [
-      [{"Coffee Beans": 5}]
+      {"Coffee Beans": 5}
     ],
     "processing-time": 2
   },
@@ -60,30 +60,30 @@
     "name": "Juice",
     "description": "A sweet, nutritious beverage.",
     "ingredients": [
-      [{"Amaranth": 1}],
-      [{"Artichoke": 1}],
-      [{"Beet": 1}],
-      [{"Bok Choy": 1}],
-      [{"Broccoli": 1}],
-      [{"Carrot": 1}],
-      [{"Cauliflower": 1}],
-      [{"Corn": 1}],
-      [{"Eggplant": 1}],
-      [{"Fiddlehead Fern": 1}],
-      [{"Garlic": 1}],
-      [{"Green Bean": 1}],
-      [{"Hops": 1}],
-      [{"Kale": 1}],
-      [{"Parsnip": 1}],
-      [{"Potato": 1}],
-      [{"Pumpkin": 1}],
-      [{"Radish": 1}],
-      [{"Red Cabbage": 1}],
-      [{"Summer Squash": 1}],
-      [{"Tomato": 1}],
-      [{"Unmilled Rice": 1}],
-      [{"Wheat": 1}],
-      [{"Yam": 1}]
+      {"Amaranth": 1},
+      {"Artichoke": 1},
+      {"Beet": 1},
+      {"Bok Choy": 1},
+      {"Broccoli": 1},
+      {"Carrot": 1},
+      {"Cauliflower": 1},
+      {"Corn": 1},
+      {"Eggplant": 1},
+      {"Fiddlehead Fern": 1},
+      {"Garlic": 1},
+      {"Green Bean": 1},
+      {"Hops": 1},
+      {"Kale": 1},
+      {"Parsnip": 1},
+      {"Potato": 1},
+      {"Pumpkin": 1},
+      {"Radish": 1},
+      {"Red Cabbage": 1},
+      {"Summer Squash": 1},
+      {"Tomato": 1},
+      {"Unmilled Rice": 1},
+      {"Wheat": 1},
+      {"Yam": 1}
     ],
     "processing-time": 96
   },
@@ -92,7 +92,7 @@
     "name": "Mead",
     "description": "A fermented beverage made from honey. Drink in moderation.",
     "ingredients": [
-      [{"Honey": 1}]
+      {"Honey": 1}
     ],
     "processing-time": 10
   },
@@ -101,7 +101,7 @@
     "description": "Drink in moderation.",
     "name": "Pale Ale",
     "ingredients": [
-      [{"Hops": 1}]
+      {"Hops": 1}
     ],
     "processing-time": 72
   },
@@ -110,38 +110,37 @@
     "description": "Drink in moderation.",
     "name": "Wine",
     "ingredients": [
-      [{"Ancient Fruit": 1}],
-      [{"Apple": 1}],
-      [{"Apricot": 1}],
-      [{"Banana": 1}],
-      [{"Blackberry": 1}],
-      [{"Blueberry": 1}],
-      [{"Cherry": 1}],
-      [{"Cranberries": 1}],
-      [{"Crystal Fruit": 1}],
-      [{"Grape": 1}],
-      [{"Hot Pepper": 1}],
-      [{"Mango": 1}],
-      [{"Melon": 1}],
-      [{"Orange": 1}],
-      [{"Peach": 1}],
-      [{"Pomegranate": 1}],
-      [{"Powdermelon": 1}],
-      [{"Rhubarb": 1}],
-      [{"Salmonberry": 1}],
-      [{"Spice Berry": 1}],
-      [{"Starfruit": 1}],
-      [{"Strawberry": 1}],
-      [{"Wild Plum": 1}]
-    ],
-    "processing-time": 168
+      {"Ancient Fruit": 1},
+      {"Apple": 1},
+      {"Apricot": 1},
+      {"Banana": 1},
+      {"Blackberry": 1},
+      {"Blueberry": 1},
+      {"Cherry": 1},
+      {"Cranberries": 1},
+      {"Crystal Fruit": 1},
+      {"Grape": 1},
+      {"Hot Pepper": 1},
+      {"Mango": 1},
+      {"Melon": 1},
+      {"Orange": 1},
+      {"Peach": 1},
+      {"Pomegranate": 1},
+      {"Powdermelon": 1},
+      {"Rhubarb": 1},
+      {"Salmonberry": 1},
+      {"Spice Berry": 1},
+      {"Starfruit": 1},
+      {"Strawberry": 1},
+      {"Wild Plum": 1}
+    ],    "processing-time": 168
   },
   {
     "artisan": "Loom",
     "description": "A bolt of fine wool cloth.",
     "name": "Cloth",
     "ingredients": [
-      [{"Wool": 1}]
+      {"Wool": 1}
     ],
     "processing-time": 4
   },
@@ -150,7 +149,7 @@
     "description": "It looks spreadable.",
     "name": "Mayonnaise",
     "ingredients": [
-      [{"Egg": 1}]
+      {"Egg": 1}
     ],
     "processing-time": 3
   },
@@ -159,7 +158,7 @@
     "description": "It looks spreadable.",
     "name": "Mayonnaise",
     "ingredients": [
-      [{"Large Egg": 1}]
+      {"Large Egg": 1}
     ],
     "processing-time": 3
   },
@@ -168,7 +167,7 @@
     "description": "It's a rich, yellow mayonnaise.",
     "name": "Duck Mayonnaise",
     "ingredients": [
-      [{"Duck Egg": 1}]
+      {"Duck Egg": 1}
     ],
     "processing-time": 3
   },
@@ -177,7 +176,7 @@
     "description": "It's thick and creamy, with a vivid green hue. It smells like grass and leather.",
     "name": "Dinosaur Mayonnaise",
     "ingredients": [
-      [{"Dinosaur Egg": 1}]
+      {"Dinosaur Egg": 1}
     ],
     "processing-time": 3
   },
@@ -186,7 +185,7 @@
     "description": "A gourmet cooking ingredient.",
     "name": "Truffle Oil",
     "ingredients": [
-      [{"Truffle": 1}]
+      {"Truffle": 1}
     ],
     "processing-time": 6
   },
@@ -195,9 +194,9 @@
     "description": "All purpose cooking oil.",
     "name": "Oil",
     "ingredients": [
-      [{"Corn": 1}],
-      [{"Sunflower Seeds": 1}],
-      [{"Sunflower": 1}]
+      {"Corn": 1},
+      {"Sunflower Seeds": 1},
+      {"Sunflower": 1}
     ],
     "processing-time": 6
   },
@@ -206,61 +205,61 @@
     "name": "Pickles",
     "description": "A jar of your home-made pickles.",
     "ingredients": [
-      [{"Amaranth": 1}],
-      [{"Artichoke": 1}],
-      [{"Beet": 1}],
-      [{"Bok Choy": 1}],
-      [{"Broccoli": 1}],
-      [{"Carrot": 1}],
-      [{"Cauliflower": 1}],
-      [{"Corn": 1}],
-      [{"Eggplant": 1}],
-      [{"Fiddlehead Fern": 1}],
-      [{"Garlic": 1}],
-      [{"Green Bean": 1}],
-      [{"Hops": 1}],
-      [{"Kale": 1}],
-      [{"Parsnip": 1}],
-      [{"Potato": 1}],
-      [{"Pumpkin": 1}],
-      [{"Radish": 1}],
-      [{"Red Cabbage": 1}],
-      [{"Summer Squash": 1}],
-      [{"Tomato": 1}],
-      [{"Unmilled Rice": 1}],
-      [{"Wheat": 1}],
-      [{"Yam": 1}]
+      {"Amaranth": 1},
+      {"Artichoke": 1},
+      {"Beet": 1},
+      {"Bok Choy": 1},
+      {"Broccoli": 1},
+      {"Carrot": 1},
+      {"Cauliflower": 1},
+      {"Corn": 1},
+      {"Eggplant": 1},
+      {"Fiddlehead Fern": 1},
+      {"Garlic": 1},
+      {"Green Bean": 1},
+      {"Hops": 1},
+      {"Kale": 1},
+      {"Parsnip": 1},
+      {"Potato": 1},
+      {"Pumpkin": 1},
+      {"Radish": 1},
+      {"Red Cabbage": 1},
+      {"Summer Squash": 1},
+      {"Tomato": 1},
+      {"Unmilled Rice": 1},
+      {"Wheat": 1},
+      {"Yam": 1}
     ],
-    "processing-time": 6
+    "processing-time": 96
   },
   {
     "artisan": "Preserves Jar",
     "description": "Gooey.",
     "name": "Jelly",
     "ingredients": [
-      [{"Ancient Fruit": 1}],
-      [{"Apple": 1}],
-      [{"Apricot": 1}],
-      [{"Banana": 1}],
-      [{"Blackberry": 1}],
-      [{"Blueberry": 1}],
-      [{"Cherry": 1}],
-      [{"Cranberries": 1}],
-      [{"Crystal Fruit": 1}],
-      [{"Grape": 1}],
-      [{"Hot Pepper": 1}],
-      [{"Mango": 1}],
-      [{"Melon": 1}],
-      [{"Orange": 1}],
-      [{"Peach": 1}],
-      [{"Pomegranate": 1}],
-      [{"Powdermelon": 1}],
-      [{"Rhubarb": 1}],
-      [{"Salmonberry": 1}],
-      [{"Spice Berry": 1}],
-      [{"Starfruit": 1}],
-      [{"Strawberry": 1}],
-      [{"Wild Plum": 1}]
+      {"Ancient Fruit": 1},
+      {"Apple": 1},
+      {"Apricot": 1},
+      {"Banana": 1},
+      {"Blackberry": 1},
+      {"Blueberry": 1},
+      {"Cherry": 1},
+      {"Cranberries": 1},
+      {"Crystal Fruit": 1},
+      {"Grape": 1},
+      {"Hot Pepper": 1},
+      {"Mango": 1},
+      {"Melon": 1},
+      {"Orange": 1},
+      {"Peach": 1},
+      {"Pomegranate": 1},
+      {"Powdermelon": 1},
+      {"Rhubarb": 1},
+      {"Salmonberry": 1},
+      {"Spice Berry": 1},
+      {"Starfruit": 1},
+      {"Strawberry": 1},
+      {"Wild Plum": 1}
     ],
     "processing-time": 72
   },
@@ -269,26 +268,26 @@
     "description": "A whole fish, smoked to perfection.",
     "name": "Smoked Fish",
     "ingredients": [
-      [{"Salmon": 1}, {"Coal": 1}],
-      [{"Sardine": 1}, {"Coal": 1}],
-      [{"Shad": 1}, {"Coal": 1}],
-      [{"Blue Discus": 1}, {"Coal": 1}],
-      [{"Midnight Carp": 1}, {"Coal": 1}],
-      [{"Squid": 1}, {"Coal": 1}],
-      [{"Tuna": 1}, {"Coal": 1}],
-      [{"Perch": 1}, {"Coal": 1}],
-      [{"Flounder": 1}, {"Coal": 1}],
-      [{"Lionfish": 1}, {"Coal": 1}],
-      [{"Herring": 1}, {"Coal": 1}],
-      [{"Ghostfish": 1}, {"Coal": 1}],
-      [{"Tilapia": 1}, {"Coal": 1}],
-      [{"Dorado": 1}, {"Coal": 1}],
-      [{"Sunfish": 1}, {"Coal": 1}],
-      [{"Rainbow Trout": 1}, {"Coal": 1}],
-      [{"Legend": 1}, {"Coal": 1}],
-      [{"Glacierfish": 1}, {"Coal": 1}],
-      [{"Angler": 1}, {"Coal": 1}],
-      [{"Crimsonfish": 1}, {"Coal": 1}]
+      {"Salmon": 1, "Coal": 1},
+      {"Sardine": 1, "Coal": 1},
+      {"Shad": 1, "Coal": 1},
+      {"Blue Discus": 1, "Coal": 1},
+      {"Midnight Carp": 1, "Coal": 1},
+      {"Squid": 1, "Coal": 1},
+      {"Tuna": 1, "Coal": 1},
+      {"Perch": 1, "Coal": 1},
+      {"Flounder": 1, "Coal": 1},
+      {"Lionfish": 1, "Coal": 1},
+      {"Herring": 1, "Coal": 1},
+      {"Ghostfish": 1, "Coal": 1},
+      {"Tilapia": 1, "Coal": 1},
+      {"Dorado": 1, "Coal": 1},
+      {"Sunfish": 1, "Coal": 1},
+      {"Rainbow Trout": 1, "Coal": 1},
+      {"Legend": 1, "Coal": 1},
+      {"Glacierfish": 1, "Coal": 1},
+      {"Angler": 1, "Coal": 1},
+      {"Crimsonfish": 1, "Coal": 1}
     ],
     "processing-time": 1
   },
@@ -298,11 +297,11 @@
     "name": "Dried Mushrooms",
     "processing-time": 24,
     "ingredients": [
-      [{"Common Mushroom": 5}],
-      [{"Red Mushroom": 5}],
-      [{"Purple Mushroom": 5}],
-      [{"Morel": 5}],
-      [{"Chanterelle": 5}]
+      {"Common Mushroom": 5},
+      {"Red Mushroom": 5},
+      {"Purple Mushroom": 5},
+      {"Morel": 5},
+      {"Chanterelle": 5}
     ]
   },
   {
@@ -311,28 +310,28 @@
     "name": "Dried Fruit",
     "processing-time": 24,
     "ingredients": [
-      [{"Ancient Fruit": 1}],
-      [{"Apple": 1}],
-      [{"Apricot": 1}],
-      [{"Banana": 1}],
-      [{"Blackberry": 1}],
-      [{"Blueberry": 1}],
-      [{"Cherry": 1}],
-      [{"Cranberries": 1}],
-      [{"Crystal Fruit": 1}],
-      [{"Hot Pepper": 1}],
-      [{"Mango": 1}],
-      [{"Melon": 1}],
-      [{"Orange": 1}],
-      [{"Peach": 1}],
-      [{"Pomegranate": 1}],
-      [{"Powdermelon": 1}],
-      [{"Rhubarb": 1}],
-      [{"Salmonberry": 1}],
-      [{"Spice Berry": 1}],
-      [{"Starfruit": 1}],
-      [{"Strawberry": 1}],
-      [{"Wild Plum": 1}]
+      {"Ancient Fruit": 1},
+      {"Apple": 1},
+      {"Apricot": 1},
+      {"Banana": 1},
+      {"Blackberry": 1},
+      {"Blueberry": 1},
+      {"Cherry": 1},
+      {"Cranberries": 1},
+      {"Crystal Fruit": 1},
+      {"Hot Pepper": 1},
+      {"Mango": 1},
+      {"Melon": 1},
+      {"Orange": 1},
+      {"Peach": 1},
+      {"Pomegranate": 1},
+      {"Powdermelon": 1},
+      {"Rhubarb": 1},
+      {"Salmonberry": 1},
+      {"Spice Berry": 1},
+      {"Starfruit": 1},
+      {"Strawberry": 1},
+      {"Wild Plum": 1}
     ]
   },
   {
@@ -341,7 +340,7 @@
     "name": "Raisins",
     "processing-time": 24,
     "ingredients": [
-      [{"Grape": 5}]
+      {"Grape": 5}
     ]
   },
   {
@@ -350,7 +349,7 @@
     "name": "Coal",
     "processing-time": 1,
     "ingredients": [
-      [{"Wood": 10}]
+      {"Wood": 10}
     ]
   },
   {
@@ -359,7 +358,7 @@
     "name": "Copper Bar",
     "processing-time": 4,
     "ingredients": [
-      [{"Copper Ore": 5}, {"Coal": 1}]
+      {"Copper Ore": 5, "Coal": 1}
     ]
   },
   {
@@ -368,7 +367,7 @@
     "name": "Iron Bar",
     "processing-time": 4,
     "ingredients": [
-      [{"Iron Ore": 5}, {"Coal": 1}]
+      {"Iron Ore": 5, "Coal": 1}
     ]
   },
   {
@@ -377,7 +376,7 @@
     "name": "Gold Bar",
     "processing-time": 4,
     "ingredients": [
-      [{"Gold Ore": 5}, {"Coal": 1}]
+      {"Gold Ore": 5, "Coal": 1}
     ]
   },
   {
@@ -386,7 +385,7 @@
     "name": "Iridium Bar",
     "processing-time": 4,
     "ingredients": [
-      [{"Iridium Ore": 5}, {"Coal": 1}]
+      {"Iridium Ore": 5, "Coal": 1}
     ]
   }
 ]
