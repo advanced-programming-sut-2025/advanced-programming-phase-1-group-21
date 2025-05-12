@@ -1,31 +1,35 @@
 package models.user;
-//SHA-256
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Base64;
 
 public class Hash {
-    String hash;
+    private String hashedPassword;
+    private static final String SALT = "namak";
 
-    public static String calculateHash(String input) {
-        //TODO : implement 256SHA hash
-        return input;
+    public Hash(String hashedPassword) {
+        this.hashedPassword = hashedPassword;
     }
 
-    public Hash(String input) {
-        this.hash = calculateHash(input);
+    public boolean verify(String inputPassword) {
+        String inputHashed = hashPassword(inputPassword);
+        return this.hashedPassword.equals(inputHashed);
     }
 
-    public String getHash() {
-        return hash;
+    public String getHashedPassword() {
+        return hashedPassword;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
+    private String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update(SALT.getBytes());
+            byte[] hashedBytes = md.digest(password.getBytes());
+            return Base64.getEncoder().encodeToString(hashedBytes);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Error hashing password", e);
         }
-        if (!(obj instanceof Hash)) {
-            return false;
-        }   
-        Hash other = (Hash) obj;
-        return this.getHash().equals(other.getHash());
     }
 }

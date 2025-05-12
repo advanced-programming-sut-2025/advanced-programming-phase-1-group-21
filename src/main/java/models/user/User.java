@@ -9,7 +9,6 @@ import java.util.List;
 
 public class User {
     private String username;
-    private String password;
     private String email;
     private String nickname;
     private Gender gender;
@@ -17,8 +16,6 @@ public class User {
     private Hash hash;
     private Integer securityQuestionID;
     private String securityAnswer;
-    private Inventory myInventory;
-    private ArrayList<Recipe> myRecipes;
 
     public static final List<String> SECURITY_QUESTIONS = List.of(
             "What is your mother's maiden name?",
@@ -37,13 +34,21 @@ public class User {
 
     public User(String username, String password, String email, String nickname, Gender gender, Integer securityQuestionID, String securityAnswer , boolean isInAGame) {
         this.username = username;
-        this.password = password;
         this.email = email;
         this.nickname = nickname;
         this.gender = gender;
         this.securityQuestionID = securityQuestionID;
         this.securityAnswer = securityAnswer;
         this.isInAGame = isInAGame;
+        setPassword(password);
+    }
+
+    public void setPassword(String password) {
+        this.hash = new Hash(password);
+    }
+
+    public boolean verifyPassword(String inputPassword) {
+        return this.hash.verify(inputPassword);
     }
 
     public boolean isInAGame() {
@@ -56,10 +61,6 @@ public class User {
 
     public void setInAGame(boolean inAGame) {
         isInAGame = inAGame;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public String getEmail() {
@@ -84,10 +85,6 @@ public class User {
 
     public String getSecurityAnswer() {
         return securityAnswer;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public void setUsername(String username) {
