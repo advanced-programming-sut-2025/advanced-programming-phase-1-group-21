@@ -312,6 +312,13 @@ public class GameTerminalView {
             System.out.println(gameController.finishQuest(matcher.group("npcName") ,
                     Integer.parseInt(matcher.group("questID"))));
         }
+        else if((matcher = GameMenuCommand.GIFT_NPC.getMatcher(command)) != null) {
+            System.out.println(gameController.giftNPC(matcher.group("npcName") , matcher.group("item") ,
+                    Integer.parseInt(matcher.group("amount"))));
+        }
+        else if((matcher = GameMenuCommand.ASK_MARRIAGE.getMatcher(command)) != null) {
+            System.out.println(gameController.askMarriage(matcher.group("username")));
+        }
         else
             System.out.println("Invalid command");
 

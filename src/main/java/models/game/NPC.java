@@ -14,7 +14,6 @@ public class NPC implements Placable {
     // Characterization
     NPCHouse house;
     private ArrayList<VillagerTask> tasks;
-    private ArrayList<Dialogue> dialogues;
     private ArrayList<NPCFriendship> friendships = new ArrayList<>();
     private ArrayList<String> favorites;
     private Coord coord;
@@ -36,10 +35,6 @@ public class NPC implements Placable {
         return tasks;
     }
 
-    public ArrayList<Dialogue> getDialogues() {
-        return dialogues;
-    }
-
     public ArrayList<NPCFriendship> getFriendships() {
         return friendships;
     }
@@ -58,10 +53,6 @@ public class NPC implements Placable {
 
     public void setTasks(ArrayList<VillagerTask> tasks) {
         this.tasks = tasks;
-    }
-
-    public void setDialogues(ArrayList<Dialogue> dialogues) {
-        this.dialogues = dialogues;
     }
 
     public void setFriendships(ArrayList<NPCFriendship> friendships) {
