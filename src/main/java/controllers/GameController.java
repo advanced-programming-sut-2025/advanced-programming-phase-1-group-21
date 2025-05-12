@@ -20,6 +20,8 @@ import views.menu.GameTerminalView;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.random.RandomGenerator;
 
 public class GameController{
 
@@ -549,16 +551,29 @@ public class GameController{
         return Result.success(name + " is on tile (" + x + ", " + y + ")");
     }
 
-    public Result<Void> feedHay(String animalName){
+    public Result<Void> feedHay(String name){
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        Animal animal = App.game.getCurrentPlayer().getAnimalByName(name);
+        if (animal == null)
+            return Result.failure(GameError.ANIMAL_NOT_FOUND);
+
+        animal.setIfFeedToday(true);
+        return Result.success(null);
     }
 
-    public Result<Void> showAnimalProduces(){
+    public Result<ArrayList<String>> showAnimalProduces(){
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        //this function should show Products with their quality
-        //show which animals have unjamavari products
-        throw new UnsupportedOperationException("Not supported yet.");
+        ArrayList<String> output = new ArrayList<>();
+        for(Animal animal : App.game.getCurrentPlayer().getAnimals()){
+            output.add(animal.getName() + "products : ");
+            if(animal.getTodayProduct() != null) {
+                output.add("product name : " + animal.getTodayProduct());
+                double randomDouble = 0.5 + Math.random();
+                output.add("product quality : " + (animal.getFriendship() / 1000)*(0.5 + 0.5 * Math.random()));
+            }
+        }
+        return Result.success(output);
     }
 
     public Result<Item> collectProducts(String animalName) {
@@ -566,9 +581,17 @@ public class GameController{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<Void> sellAnimal(String animalName){
+    public Result<Void> sellAnimal(String name){
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        Animal animal = App.game.getCurrentPlayer().getAnimalByName(name);
+        if (animal == null)
+            return Result.failure(GameError.ANIMAL_NOT_FOUND);
+
+        Item price = Item.build("coin" , (int) (animal.getPrice()*((double) animal.getFriendship() /1000 + 0.3)));
+        App.game.getCurrentPlayer().getAnimals().remove(animal);
+        App.game.getCurrentPlayer().getInventory().addItem(price);
+        return Result.success(null);
     }
 
     public Result<Void> fishing(String fishingPole){
@@ -836,8 +859,8 @@ public class GameController{
         Player player = App.game.getPlayerByName(username);
         if(player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
 
-//        if(!App.game.getCurrentPlayer().weAreNextToEachOther(player))
-//            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
+        if(!App.game.getCurrentPlayer().weAreNextToEachOther(player))
+            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
 
         Relation relation = App.game.getRelationOfUs(App.game.getCurrentPlayer(), player);
         if(relation.getLevel().getLevel() < 3)
