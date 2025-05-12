@@ -41,6 +41,7 @@ public enum GameError implements Error {
     YOU_ARE_DISTANT("You should be near to do action"),
     NO_PATH("There is no path to the destination"),
     PLANT_ON_PLOWED("You can't plant unless it's plowed!"),
+    NOT_FOUND("There is no such item"),
     ;
 
 

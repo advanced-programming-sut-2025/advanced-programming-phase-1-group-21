@@ -342,9 +342,16 @@ public class GameController{
         return Result.success(null);
     }
 
-    public Result<String> showPlant(Coord cord) {
+    public Result<String> showPlant(Coord coord) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        Tile tile = App.game.getCurrentPlayer().getMap().getTile(coord);
+        if (tile == null)
+            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
+        if (tile.getTileType() != TileType.PLANTED_SEED)
+            return Result.failure(GameError.NOT_FOUND);
+        PlantedSeed plantedSeed = tile.getPlacable(PlantedSeed.class);
+        return Result.success(plantedSeed.seedData.toString());
     }
 
     public Result<Void> fertilizePlant(FertilizerType fertilizer, Coord cord) {
