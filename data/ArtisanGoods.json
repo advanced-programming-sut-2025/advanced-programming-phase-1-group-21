@@ -1,391 +1,338 @@
 [
   {
     "artisan": "Bee House",
-    "name": "Honey",
-    "description": "It's a sweet syrup produced by bees.",
-    "energy": 75,
-    "processing-time": 96,
-    "ingredients": null,
-    "price": 350
+    "recipes": [
+      {
+        "name": "Honey",
+        "description": "It's a sweet syrup produced by bees.",
+        "processing-time": 96,
+        "ingredients": null
+      }
+    ]
   },
   {
     "artisan": "Cheese Press",
-    "name": "Cheese",
-    "description": "It's your basic cheese.",
-    "ingredients": [
-      {"Milk": 1},
-      {"Large Milk": 1}
-    ],
-    "processing-time": 3
-  },
-  {
-    "artisan": "Cheese Press",
-    "name": "Goat Cheese",
-    "description": "Soft cheese made from goat's milk.",
-    "ingredients": [
-      {"Goat Milk": 1},
-      {"Large Goat Milk": 1}
-    ],
-    "processing-time": 3
-  },
-  {
-    "artisan": "Keg",
-    "name": "Beer",
-    "description": "Drink in moderation.",
-    "ingredients": [
-      {"Wheat": 1}
-    ],
-    "processing-time": 24
+    "recipes": [
+      {
+        "name": "Cheese",
+        "description": "It's your basic cheese.",
+        "processing-time": 3,
+        "ingredients": [
+          {"Milk": 1},
+          {"Large Milk": 1}
+        ]
+      },
+      {
+        "name": "Goat Cheese",
+        "description": "Soft cheese made from goat's milk.",
+        "processing-time": 3,
+        "ingredients": [
+          {"Goat Milk": 1},
+          {"Large Goat Milk": 1}
+        ]
+      }
+    ]
   },
   {
     "artisan": "Keg",
-    "name": "Vinegar",
-    "description": "An aged fermented liquid used in many cooking recipes.",
-    "ingredients": [
-      {"Rice": 1}
-    ],
-    "processing-time": 10
-  },
-  {
-    "artisan": "Keg",
-    "name": "Coffee",
-    "description": "It smells delicious. This is sure to give you a boost.",
-    "ingredients": [
-      {"Coffee Beans": 5}
-    ],
-    "processing-time": 2
-  },
-  {
-    "artisan": "Keg",
-    "name": "Juice",
-    "description": "A sweet, nutritious beverage.",
-    "ingredients": [
-      {"Amaranth": 1},
-      {"Artichoke": 1},
-      {"Beet": 1},
-      {"Bok Choy": 1},
-      {"Broccoli": 1},
-      {"Carrot": 1},
-      {"Cauliflower": 1},
-      {"Corn": 1},
-      {"Eggplant": 1},
-      {"Fiddlehead Fern": 1},
-      {"Garlic": 1},
-      {"Green Bean": 1},
-      {"Hops": 1},
-      {"Kale": 1},
-      {"Parsnip": 1},
-      {"Potato": 1},
-      {"Pumpkin": 1},
-      {"Radish": 1},
-      {"Red Cabbage": 1},
-      {"Summer Squash": 1},
-      {"Tomato": 1},
-      {"Unmilled Rice": 1},
-      {"Wheat": 1},
-      {"Yam": 1}
-    ],
-    "processing-time": 96
-  },
-  {
-    "artisan": "Keg",
-    "name": "Mead",
-    "description": "A fermented beverage made from honey. Drink in moderation.",
-    "ingredients": [
-      {"Honey": 1}
-    ],
-    "processing-time": 10
-  },
-  {
-    "artisan": "Bee House",
-    "description": "Drink in moderation.",
-    "name": "Pale Ale",
-    "ingredients": [
-      {"Hops": 1}
-    ],
-    "processing-time": 72
-  },
-  {
-    "artisan": "Bee House",
-    "description": "Drink in moderation.",
-    "name": "Wine",
-    "ingredients": [
-      {"Ancient Fruit": 1},
-      {"Apple": 1},
-      {"Apricot": 1},
-      {"Banana": 1},
-      {"Blackberry": 1},
-      {"Blueberry": 1},
-      {"Cherry": 1},
-      {"Cranberries": 1},
-      {"Crystal Fruit": 1},
-      {"Grape": 1},
-      {"Hot Pepper": 1},
-      {"Mango": 1},
-      {"Melon": 1},
-      {"Orange": 1},
-      {"Peach": 1},
-      {"Pomegranate": 1},
-      {"Powdermelon": 1},
-      {"Rhubarb": 1},
-      {"Salmonberry": 1},
-      {"Spice Berry": 1},
-      {"Starfruit": 1},
-      {"Strawberry": 1},
-      {"Wild Plum": 1}
-    ],    "processing-time": 168
+    "recipes": [
+      {
+        "name": "Beer",
+        "description": "Drink in moderation.",
+        "processing-time": 24,
+        "ingredients": [
+          {"Wheat": 1}
+        ]
+      },
+      {
+        "name": "Vinegar",
+        "description": "An aged fermented liquid used in many cooking recipes.",
+        "processing-time": 10,
+        "ingredients": [
+          {"Rice": 1}
+        ]
+      },
+      {
+        "name": "Coffee",
+        "description": "It smells delicious. This is sure to give you a boost.",
+        "processing-time": 2,
+        "ingredients": [
+          {"Coffee Beans": 5}
+        ]
+      },
+      {
+        "name": "Juice",
+        "description": "A sweet, nutritious beverage.",
+        "processing-time": 96,
+        "ingredients": [
+          {"Amaranth": 1},
+          {"Artichoke": 1},
+          {"Beet": 1},
+          {"Bok Choy": 1},
+          {"Broccoli": 1},
+          {"Carrot": 1},
+          {"Cauliflower": 1},
+          {"Corn": 1},
+          {"Eggplant": 1},
+          {"Fiddlehead Fern": 1},
+          {"Garlic": 1},
+          {"Green Bean": 1},
+          {"Hops": 1},
+          {"Kale": 1},
+          {"Parsnip": 1},
+          {"Potato": 1},
+          {"Pumpkin": 1},
+          {"Radish": 1},
+          {"Red Cabbage": 1},
+          {"Summer Squash": 1},
+          {"Tomato": 1},
+          {"Unmilled Rice": 1},
+          {"Wheat": 1},
+          {"Yam": 1}
+        ]
+      },
+      {
+        "name": "Mead",
+        "description": "A fermented beverage made from honey. Drink in moderation.",
+        "processing-time": 10,
+        "ingredients": [
+          {"Honey": 1}
+        ]
+      },
+      {
+        "name": "Pale Ale",
+        "description": "Drink in moderation.",
+        "processing-time": 72,
+        "ingredients": [
+          {"Hops": 1}
+        ]
+      },
+      {
+        "name": "Wine",
+        "description": "Drink in moderation.",
+        "processing-time": 168,
+        "ingredients": [
+          {"Ancient Fruit": 1},
+          {"Apple": 1},
+          {"Apricot": 1},
+          {"Banana": 1},
+          {"Blackberry": 1},
+          {"Blueberry": 1},
+          {"Cherry": 1},
+          {"Cranberries": 1},
+          {"Crystal Fruit": 1},
+          {"Grape": 1},
+          {"Hot Pepper": 1},
+          {"Mango": 1},
+          {"Melon": 1},
+          {"Orange": 1},
+          {"Peach": 1},
+          {"Pomegranate": 1},
+          {"Powdermelon": 1},
+          {"Rhubarb": 1},
+          {"Salmonberry": 1},
+          {"Spice Berry": 1},
+          {"Starfruit": 1},
+          {"Strawberry": 1},
+          {"Wild Plum": 1}
+        ]
+      }
+    ]
   },
   {
     "artisan": "Loom",
-    "description": "A bolt of fine wool cloth.",
-    "name": "Cloth",
-    "ingredients": [
-      {"Wool": 1}
-    ],
-    "processing-time": 4
-  },
-  {
-    "artisan": "Mayonnaise Machine",
-    "description": "It looks spreadable.",
-    "name": "Mayonnaise",
-    "ingredients": [
-      {"Egg": 1}
-    ],
-    "processing-time": 3
-  },
-  {
-    "artisan": "Mayonnaise Machine",
-    "description": "It looks spreadable.",
-    "name": "Mayonnaise",
-    "ingredients": [
-      {"Large Egg": 1}
-    ],
-    "processing-time": 3
-  },
-  {
-    "artisan": "Mayonnaise Machine",
-    "description": "It's a rich, yellow mayonnaise.",
-    "name": "Duck Mayonnaise",
-    "ingredients": [
-      {"Duck Egg": 1}
-    ],
-    "processing-time": 3
-  },
-  {
-    "artisan": "Mayonnaise Machine",
-    "description": "It's thick and creamy, with a vivid green hue. It smells like grass and leather.",
-    "name": "Dinosaur Mayonnaise",
-    "ingredients": [
-      {"Dinosaur Egg": 1}
-    ],
-    "processing-time": 3
-  },
-  {
-    "artisan": "Oil Maker",
-    "description": "A gourmet cooking ingredient.",
-    "name": "Truffle Oil",
-    "ingredients": [
-      {"Truffle": 1}
-    ],
-    "processing-time": 6
-  },
-  {
-    "artisan": "Oil Maker",
-    "description": "All purpose cooking oil.",
-    "name": "Oil",
-    "ingredients": [
-      {"Corn": 1},
-      {"Sunflower Seeds": 1},
-      {"Sunflower": 1}
-    ],
-    "processing-time": 6
-  },
-  {
-    "artisan": "Preserves Jar",
-    "name": "Pickles",
-    "description": "A jar of your home-made pickles.",
-    "ingredients": [
-      {"Amaranth": 1},
-      {"Artichoke": 1},
-      {"Beet": 1},
-      {"Bok Choy": 1},
-      {"Broccoli": 1},
-      {"Carrot": 1},
-      {"Cauliflower": 1},
-      {"Corn": 1},
-      {"Eggplant": 1},
-      {"Fiddlehead Fern": 1},
-      {"Garlic": 1},
-      {"Green Bean": 1},
-      {"Hops": 1},
-      {"Kale": 1},
-      {"Parsnip": 1},
-      {"Potato": 1},
-      {"Pumpkin": 1},
-      {"Radish": 1},
-      {"Red Cabbage": 1},
-      {"Summer Squash": 1},
-      {"Tomato": 1},
-      {"Unmilled Rice": 1},
-      {"Wheat": 1},
-      {"Yam": 1}
-    ],
-    "processing-time": 96
-  },
-  {
-    "artisan": "Preserves Jar",
-    "description": "Gooey.",
-    "name": "Jelly",
-    "ingredients": [
-      {"Ancient Fruit": 1},
-      {"Apple": 1},
-      {"Apricot": 1},
-      {"Banana": 1},
-      {"Blackberry": 1},
-      {"Blueberry": 1},
-      {"Cherry": 1},
-      {"Cranberries": 1},
-      {"Crystal Fruit": 1},
-      {"Grape": 1},
-      {"Hot Pepper": 1},
-      {"Mango": 1},
-      {"Melon": 1},
-      {"Orange": 1},
-      {"Peach": 1},
-      {"Pomegranate": 1},
-      {"Powdermelon": 1},
-      {"Rhubarb": 1},
-      {"Salmonberry": 1},
-      {"Spice Berry": 1},
-      {"Starfruit": 1},
-      {"Strawberry": 1},
-      {"Wild Plum": 1}
-    ],
-    "processing-time": 72
-  },
-  {
-    "artisan": "Bee House",
-    "description": "A whole fish, smoked to perfection.",
-    "name": "Smoked Fish",
-    "ingredients": [
-      {"Salmon": 1, "Coal": 1},
-      {"Sardine": 1, "Coal": 1},
-      {"Shad": 1, "Coal": 1},
-      {"Blue Discus": 1, "Coal": 1},
-      {"Midnight Carp": 1, "Coal": 1},
-      {"Squid": 1, "Coal": 1},
-      {"Tuna": 1, "Coal": 1},
-      {"Perch": 1, "Coal": 1},
-      {"Flounder": 1, "Coal": 1},
-      {"Lionfish": 1, "Coal": 1},
-      {"Herring": 1, "Coal": 1},
-      {"Ghostfish": 1, "Coal": 1},
-      {"Tilapia": 1, "Coal": 1},
-      {"Dorado": 1, "Coal": 1},
-      {"Sunfish": 1, "Coal": 1},
-      {"Rainbow Trout": 1, "Coal": 1},
-      {"Legend": 1, "Coal": 1},
-      {"Glacierfish": 1, "Coal": 1},
-      {"Angler": 1, "Coal": 1},
-      {"Crimsonfish": 1, "Coal": 1}
-    ],
-    "processing-time": 1
-  },
-  {
-    "artisan": "Dehydrator",
-    "description": "A package of gourmet mushrooms.",
-    "name": "Dried Mushrooms",
-    "processing-time": 24,
-    "ingredients": [
-      {"Common Mushroom": 5},
-      {"Red Mushroom": 5},
-      {"Purple Mushroom": 5},
-      {"Morel": 5},
-      {"Chanterelle": 5}
+    "recipes": [
+      {
+        "name": "Cloth",
+        "description": "A bolt of fine wool cloth.",
+        "processing-time": 4,
+        "ingredients": [
+          {"Wool": 1}
+        ]
+      }
     ]
   },
   {
-    "artisan": "Dehydrator",
-    "description": "Chewy pieces of dried fruit.",
-    "name": "Dried Fruit",
-    "processing-time": 24,
-    "ingredients": [
-      {"Ancient Fruit": 1},
-      {"Apple": 1},
-      {"Apricot": 1},
-      {"Banana": 1},
-      {"Blackberry": 1},
-      {"Blueberry": 1},
-      {"Cherry": 1},
-      {"Cranberries": 1},
-      {"Crystal Fruit": 1},
-      {"Hot Pepper": 1},
-      {"Mango": 1},
-      {"Melon": 1},
-      {"Orange": 1},
-      {"Peach": 1},
-      {"Pomegranate": 1},
-      {"Powdermelon": 1},
-      {"Rhubarb": 1},
-      {"Salmonberry": 1},
-      {"Spice Berry": 1},
-      {"Starfruit": 1},
-      {"Strawberry": 1},
-      {"Wild Plum": 1}
+    "artisan": "Mayonnaise Machine",
+    "recipes": [
+      {
+        "name": "Mayonnaise",
+        "description": "It looks spreadable.",
+        "processing-time": 3,
+        "ingredients": [
+          {"Egg": 1},
+          {"Large Egg": 1}
+        ]
+      },
+      {
+        "name": "Duck Mayonnaise",
+        "description": "It's a rich, yellow mayonnaise.",
+        "processing-time": 3,
+        "ingredients": [
+          {"Duck Egg": 1}
+        ]
+      },
+      {
+        "name": "Dinosaur Mayonnaise",
+        "description": "It's thick and creamy, with a vivid green hue. It smells like grass and leather.",
+        "processing-time": 3,
+        "ingredients": [
+          {"Dinosaur Egg": 1}
+        ]
+      }
     ]
   },
   {
-    "artisan": "Dehydrator",
-    "description": "It's said to be the Junimos' favorite food.",
-    "name": "Raisins",
-    "processing-time": 24,
-    "ingredients": [
-      {"Grape": 5}
+    "artisan": "Oil Maker",
+    "recipes": [
+      {
+        "name": "Truffle Oil",
+        "description": "A gourmet cooking ingredient.",
+        "processing-time": 6,
+        "ingredients": [
+          {"Truffle": 1}
+        ]
+      },
+      {
+        "name": "Oil",
+        "description": "All purpose cooking oil.",
+        "processing-time": 6,
+        "ingredients": [
+          {"Corn": 1}
+        ]
+      },
+      {
+        "name": "Oil",
+        "description": "All purpose cooking oil.",
+        "processing-time": 48,
+        "ingredients": [
+          {"Sunflower Seeds": 1}
+        ]
+      },
+      {
+        "name": "Oil",
+        "description": "All purpose cooking oil.",
+        "processing-time": 1,
+        "ingredients": [
+          {"Sunflower": 1}
+        ]
+      }
+    ]
+  },
+  {
+    "artisan": "Preserves Jar",
+    "recipes": [
+      {
+        "name": "Pickles",
+        "description": "A jar of your home-made pickles.",
+        "processing-time": 96,
+        "ingredients": [
+          {"Amaranth": 1},
+          {"Artichoke": 1},
+          {"Beet": 1},
+          {"Bok Choy": 1},
+          {"Broccoli": 1},
+          {"Carrot": 1},
+          {"Cauliflower": 1},
+          {"Corn": 1},
+          {"Eggplant": 1},
+          {"Fiddlehead Fern": 1},
+          {"Garlic": 1},
+          {"Green Bean": 1},
+          {"Hops": 1},
+          {"Kale": 1},
+          {"Parsnip": 1},
+          {"Potato": 1},
+          {"Pumpkin": 1},
+          {"Radish": 1},
+          {"Red Cabbage": 1},
+          {"Summer Squash": 1},
+          {"Tomato": 1},
+          {"Unmilled Rice": 1},
+          {"Wheat": 1},
+          {"Yam": 1}
+        ]
+      },
+      {
+        "name": "Jelly",
+        "description": "Gooey.",
+        "processing-time": 72,
+        "ingredients": [
+          {"Ancient Fruit": 1},
+          {"Apple": 1},
+          {"Apricot": 1},
+          {"Banana": 1},
+          {"Blackberry": 1},
+          {"Blueberry": 1},
+          {"Cherry": 1},
+          {"Cranberries": 1},
+          {"Crystal Fruit": 1},
+          {"Grape": 1},
+          {"Hot Pepper": 1},
+          {"Mango": 1},
+          {"Melon": 1},
+          {"Orange": 1},
+          {"Peach": 1},
+          {"Pomegranate": 1},
+          {"Powdermelon": 1},
+          {"Rhubarb": 1},
+          {"Salmonberry": 1},
+          {"Spice Berry": 1},
+          {"Starfruit": 1},
+          {"Strawberry": 1},
+          {"Wild Plum": 1}
+        ]
+      }
     ]
   },
   {
     "artisan": "Charcoal Kiln",
-    "description": "Turns 10 pieces of wood into one piece of coal.",
-    "name": "Coal",
-    "processing-time": 1,
-    "ingredients": [
-      {"Wood": 10}
+    "recipes": [
+      {
+        "name": "Coal",
+        "description": "Turns 10 pieces of wood into one piece of coal.",
+        "processing-time": 1,
+        "ingredients": [
+          {"Wood": 10}
+        ]
+      }
     ]
   },
   {
     "artisan": "Furnace",
-    "description": "Turns Copper ores and coal into Copper bar.",
-    "name": "Copper Bar",
-    "processing-time": 4,
-    "ingredients": [
-      {"Copper Ore": 5, "Coal": 1}
-    ]
-  },
-  {
-    "artisan": "Furnace",
-    "description": "Turns Iron ores and coal into Iron bar.",
-    "name": "Iron Bar",
-    "processing-time": 4,
-    "ingredients": [
-      {"Iron Ore": 5, "Coal": 1}
-    ]
-  },
-  {
-    "artisan": "Furnace",
-    "description": "Turns Gold ores and coal into Gold bar.",
-    "name": "Gold Bar",
-    "processing-time": 4,
-    "ingredients": [
-      {"Gold Ore": 5, "Coal": 1}
-    ]
-  },
-  {
-    "artisan": "Furnace",
-    "description": "Turns Iridium ores and coal into Iridium bar.",
-    "name": "Iridium Bar",
-    "processing-time": 4,
-    "ingredients": [
-      {"Iridium Ore": 5, "Coal": 1}
+    "recipes": [
+      {
+        "name": "Copper Bar",
+        "description": "Turns Copper ores and coal into Copper bar.",
+        "processing-time": 4,
+        "ingredients": [
+          {"Copper Ore": 5, "Coal": 1}
+        ]
+      },
+      {
+        "name": "Iron Bar",
+        "description": "Turns Iron ores and coal into Iron bar.",
+        "processing-time": 4,
+        "ingredients": [
+          {"Iron Ore": 5, "Coal": 1}
+        ]
+      },
+      {
+        "name": "Gold Bar",
+        "description": "Turns Gold ores and coal into Gold bar.",
+        "processing-time": 4,
+        "ingredients": [
+          {"Gold Ore": 5, "Coal": 1}
+        ]
+      },
+      {
+        "name": "Iridium Bar",
+        "description": "Turns Iridium ores and coal into Iridium bar.",
+        "processing-time": 4,
+        "ingredients": [
+          {"Iridium Ore": 5, "Coal": 1}
+        ]
+      }
     ]
   }
 ]
