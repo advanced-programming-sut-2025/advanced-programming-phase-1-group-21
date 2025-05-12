@@ -62,6 +62,7 @@ public enum GameMenuCommand implements Command {
 //    LOAD_GAME("load game"),
 //    EXIT_GAME("exit game"),
 //    FORCE_TERMINATE("force terminate"),ß
+    COOKING_PREPARE("\\s*cooking\\s+prepare\\s*(?<name>\\.+)\\s*"),
     PRINT_MAP("print\\s+map\\s+-l\\s+\\((?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\)\\s+-s\\s+(?<size>\\d+)"),
     ENERGY_SHOW("energy show"),
     CHEAT_ENERGY_SET("energy set -v (?<value>.*)"),

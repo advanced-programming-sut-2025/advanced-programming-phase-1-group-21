@@ -3,6 +3,7 @@ package views.menu;
 import controllers.GameController;
 import models.Item.Item;
 import models.Item.Recipe;
+import models.Item.RecipeType;
 import models.command.GameMenuCommand;
 import models.game.Game;
 import models.game.Player;
@@ -169,7 +170,10 @@ public class GameTerminalView {
             System.out.println(gameController.showCraftingRecipes());
         }
         else if ((matcher = GameMenuCommand.CRAFTING.getMatcher(command)) != null) {
-            System.out.println(gameController.craft(matcher.group("name")));
+            System.out.println(gameController.prepareRecipe(matcher.group("name"), RecipeType.CRAFTING));
+        }
+        else if ((matcher = GameMenuCommand.COOKING_PREPARE.getMatcher(command)) != null) {
+            System.out.println(gameController.prepareRecipe(matcher.group("name"), RecipeType.COOKING));
         }
         else if ((matcher = GameMenuCommand.COOKING_REFRIGERATOR.getMatcher(command)) != null) {
             System.out.println(gameController.actOnRefrigerator(matcher.group("item"), matcher.group("action")));

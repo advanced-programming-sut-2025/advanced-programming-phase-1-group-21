@@ -426,11 +426,11 @@ public class GameController{
         return Result.success(App.game.getCurrentPlayer().getRecipes(RecipeType.CRAFTING));
     }
 
-    public Result<Void> craft(String recipeName) {
+    public Result<Void> prepareRecipe(String recipeName, RecipeType recipeType) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        Recipe recipe = App.game.getCurrentPlayer().getRecipeByName(recipeName, RecipeType.CRAFTING);
+        Recipe recipe = App.game.getCurrentPlayer().getRecipeByName(recipeName, recipeType);
         if (recipe == null) {
-            return Result.failure(GameError.CRAFT_RECIPE_NOT_FOUND);
+            return Result.failure(GameError.RECIPE_NOT_FOUND);
         }
         Inventory inventory = App.game.getCurrentPlayer().getInventory();
         if (!inventory.canAdd())
