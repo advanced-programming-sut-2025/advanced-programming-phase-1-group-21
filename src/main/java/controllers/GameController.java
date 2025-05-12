@@ -66,6 +66,7 @@ public class GameController{
         }
 
         Game game = new Game(players);
+        game.addNPC();
         App.game = game;
 
         return Result.success(game , "Game created");
@@ -798,20 +799,107 @@ public class GameController{
         return Result.success(null);
     }
 
-    public Result<ArrayList<NPCFriendship>> showFriendShipNPCList(){
+    public Result<String> meetNPC(String NPCName) {
+        NPC npc = App.game.getNPCByName(NPCName);
+        if(npc == null) return Result.failure(GameError.THIS_NPC_DOES_NOT_EXIST);
+
+        NPCFriendship npcFriendship = npc.getFriendshipByPlayer(App.game.getCurrentPlayer());
+        if(!npcFriendship.isTodayMeet())
+            npcFriendship.setFriendshipXP(npcFriendship.getFriendshipXP() + 20);
+        npcFriendship.setTodayMeet(true);
+        return Result.success(npcFriendship.talk(App.game.getGameDate().getSeason() , App.game.getGameDate().getHour()));
+
+    }
+
+    public Result<Void> giftNPC(String NPCName , String item , int amount) {
+        NPC npc = App.game.getNPCByName(NPCName);
+        if(npc == null) return Result.failure(GameError.THIS_NPC_DOES_NOT_EXIST);
+
+        if(!App.game.getCurrentPlayer().getInventory().canRemoveItem(Item.build(item, amount)))
+            return Result.failure(GameError.NOT_ENOUGH_ITEMS);
+
+        if(Item.build(item , 1) instanceof Tool)
+            return Result.failure(GameError.YOU_CANT_GIFT_A_TOOL);
+
+        App.game.getCurrentPlayer().getInventory().removeItem(Item.build(item, amount));
+        NPCFriendship npcFriendship = npc.getFriendshipByPlayer(App.game.getCurrentPlayer());
+        if(npcFriendship.isTodayGift())
+            return Result.success(null);
+
+        npcFriendship.setTodayGift(true);
+        if(npc.isMyFavoriteItem(Item.build(item, amount)))
+            npcFriendship.setFriendshipXP(npcFriendship.getFriendshipXP() + 200);
+        else
+            npcFriendship.setFriendshipXP(npcFriendship.getFriendshipXP() + 50);
+        return Result.success(null);
+    }
+
+//    public Result<Void> giftNPC(String NPCName , Item gift) {
+//
+//    }
+
+    public Result<ArrayList<String>> friendShipNPCList(){
+        ArrayList<String> output = new ArrayList<>();
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        //this function should show NPC relations
-        throw new UnsupportedOperationException("Not supported yet.");
+        for(NPC npc : App.game.getNpcs()){
+            for(NPCFriendship npcFriendship : npc.getFriendships()){
+                if(npcFriendship.getPlayer().equals(App.game.getCurrentPlayer())){
+                    output.add("NPC name: " + npc.getName());
+                    output.add("Friendship XP: " + npcFriendship.getFriendshipXP());
+                    output.add("Friendship Level: " + npcFriendship.getLevel().getLevel());
+                    if(npcFriendship.isTodayMeet())
+                        output.add("last seen recently");
+                    else
+                        output.add("last seen a long time ago");
+                    if(npcFriendship.isTodayGift())
+                        output.add("last gift recently");
+                    else
+                        output.add("last gift a long time ago");
+                    output.add("-----------------");
+                }
+            }
+        }
+        return Result.success(output);
     }
 
     public Result<ArrayList<String>> showQuestList(){
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+        ArrayList<String> output = new ArrayList<>();
+        for(NPC npc : App.game.getNpcs()){
+            NPCFriendship npcFriendship = npc.getFriendshipByPlayer(App.game.getCurrentPlayer());
+            output.add("NPC name: " + npc.getName());
+            for(int i = 0 ; i < Math.min(npcFriendship.getLevel().getLevel() , 3) ; i++){
+                output.add(i + ":");
+                output.add("Request Item: " + npc.getTasks().get(i).getRequestItem());
+                output.add("Request Amount: " + npc.getTasks().get(i).getRequestAmount());
+                output.add("Reward Item: " + npc.getTasks().get(i).getRewardItem());
+                output.add("Reward Amount: " + npc.getTasks().get(i).getRewardAmount());
+            }
+        }
+        return Result.success(output);
     }
 
-    public Result<Item> finishQuest(int questID){
+    public Result<Item> finishQuest(String NPCName , int questID){
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        NPC npc = App.game.getNPCByName(NPCName);
+        if(npc == null) return Result.failure(GameError.THIS_NPC_DOES_NOT_EXIST);
+        NPCFriendship npcFriendship = npc.getFriendshipByPlayer(App.game.getCurrentPlayer());
+
+        if(questID > npcFriendship.getLevel().getLevel())
+            return Result.failure(GameError.FRIENDSHIP_LEVEL_IS_NOT_ENOUGH);
+
+        Item requiredItem = Item.build(npc.getTasks().get(questID).getRequestItem() , npc.getTasks().get(questID).getRequestAmount());
+
+        if(!App.game.getCurrentPlayer().getInventory().canRemoveItem(requiredItem))
+            return Result.failure(GameError.NOT_ENOUGH_ITEM);
+        App.game.getCurrentPlayer().getInventory().removeItem(requiredItem);
+
+        Item rewardItem = Item.build(npc.getTasks().get(questID).getRewardItem() , npc.getTasks().get(questID).getRewardAmount());
+        App.game.getCurrentPlayer().getInventory().addItem(rewardItem);
+
+        return Result.success(null);
+
     }
 
     public boolean isGameLockedDueToNight() {
