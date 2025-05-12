@@ -7,7 +7,7 @@ public enum GameError implements Error {
     CANT_STAND_ON_FORAGING("you cant walk on a foraging"),
     CANT_STAND_ON_FRIDGE("you cant walk on fridge"),
     CANT_STAND_ON_LAKE("you cant walk on a lake"),
-    CRAFT_RECIPE_NOT_FOUND("Recipe not found"),
+    CRAFT_RECIPE_NOT_FOUND("Recipse not found"),
     NOT_ENOUGH_COINS("You do not have enough coins"),
     ANIMAL_NOT_FOUND("Animal not found"),
     NOT_ENOUGH_ITEMS("Not enough items"),
@@ -36,7 +36,6 @@ public enum GameError implements Error {
     RESPONSE_IS_NOT_SUPPORTED("Response is not supported"),
     TRADE_ID_DOES_NOT_EXIST("Trade id does not exist"),
     ITEM_IS_NOT_AVAILABLE("Item is not available"),
-    YOU_ARE_DISTANT("You need to be near that to do action"),
     ;
 
 

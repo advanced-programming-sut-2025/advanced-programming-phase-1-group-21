@@ -3,6 +3,7 @@ package models.game;
 import models.App;
 import models.DailyUpdate;
 import models.Item.Item;
+import models.Item.Recipe;
 import models.animal.Animal;
 import models.map.*;
 import models.map.Coord;
@@ -47,7 +48,7 @@ public class Player implements DailyUpdate {
 
     public Recipe getRecipeByName(String name) {
         for (Recipe recipe : craftingRecipe) {
-            if (recipe.getRecipeName().equals(name)) {
+            if (recipe.getName().equals(name)) {
                 return recipe;
             }
         }
@@ -252,7 +253,7 @@ public class Player implements DailyUpdate {
             sb.append("None");
         } else {
             for (Recipe recipe : craftingRecipe) {
-                sb.append(recipe.getRecipeName()).append(" ");
+                sb.append(recipe.getName()).append(" ");
             }
         }
         sb.append("\n");

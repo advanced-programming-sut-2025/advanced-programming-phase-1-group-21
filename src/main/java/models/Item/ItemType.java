@@ -5,12 +5,9 @@ public enum ItemType {
     SAPLING,
     TOOL,
     CONSUMABLE,
-    WOOD,
     SALABLE,
-    ORE,
-    FUEL,
-    FLOWER,
-    PLACEABLE
+    PLACEABLE,
+    RECIPE
     ;
 
     public static ItemType stringToItemType(String itemType) {

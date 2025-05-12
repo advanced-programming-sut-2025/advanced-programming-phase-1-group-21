@@ -1,7 +1,7 @@
 package models.user;
 
+import models.Item.Recipe;
 import models.game.Inventory;
-import models.game.Recipe;
 import models.result.Result;
 
 import java.util.ArrayList;

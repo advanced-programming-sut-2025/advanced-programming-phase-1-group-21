@@ -1,0 +1,186 @@
+[
+  {
+    "name": "Fried Egg Recipe",
+    "description": "",
+    "result-name": "Fried Egg",
+    "ingredients": {"Egg": 1},
+    "skill-type": null,
+    "skill-level": null
+  },
+  {
+    "name": "Baked Fish Recipe",
+    "description": "",
+    "result-name": "Baked Fish",
+    "ingredients": {"Sardine": 1, "Salmon": 1, "Wheat": 1},
+    "skill-type": null,
+    "skill-level": null
+  },
+  {
+    "name": "Salad Recipe",
+    "description": "",
+    "result-name": "Salad",
+    "ingredients": {"Leek": 1, "Dandelion": 1},
+    "skill-type": null,
+    "skill-level": null
+  },
+  {
+    "name": "Omelet Recipe",
+    "description": "",
+    "result-name": "Omelet",
+    "ingredients": {"Egg": 1, "Milk": 1},
+    "skill-type": null,
+    "skill-level": null
+  },
+  {
+    "name": "Pumpkin Pie Recipe",
+    "description": "",
+    "result-name": "Pumpkin Pie",
+    "ingredients": {"Pumpkin": 1, "Wheat Flour": 1, "Milk": 1, "Sugar": 1},
+    "skill-type": null,
+    "skill-level": null
+  },
+  {
+    "name": "Spaghetti Recipe",
+    "description": "",
+    "result-name": "Spaghetti",
+    "ingredients": {"Wheat Flour": 1, "Tomato": 1},
+    "skill-type": null,
+    "skill-level": null
+  },
+  {
+    "name": "Pizza Recipe",
+    "description": "",
+    "result-name": "Pizza",
+    "ingredients": {"Wheat Flour": 1, "Tomato": 1, "Cheese": 1},
+    "skill-type": null,
+    "skill-level": null
+  },
+  {
+    "name": "Tortilla Recipe",
+    "description": "",
+    "result-name": "Tortilla",
+    "ingredients": {"Corn": 1},
+    "skill-type": null,
+    "skill-level": null
+  },
+  {
+    "name": "Maki Roll Recipe",
+    "description": "",
+    "result-name": "Maki Roll",
+    "ingredients": {"Any Fish": 1, "Rice": 1, "Fiber": 1},
+    "skill-type": null,
+    "skill-level": null
+  },
+  {
+    "name": "Triple Shot Espresso Recipe",
+    "description": "",
+    "result-name": "Triple Shot Espresso",
+    "ingredients": {"Coffee": 1},
+    "skill-type": null,
+    "skill-level": null
+  },
+  {
+    "name": "Cookie Recipe",
+    "description": "",
+    "result-name": "Cookie",
+    "ingredients": {"Wheat Flour": 1, "Sugar": 1, "Egg": 1},
+    "skill-type": null,
+    "skill-level": null
+  },
+  {
+    "name": "Hash Browns Recipe",
+    "description": "",
+    "result-name": "Hash Browns",
+    "ingredients": {"Potato": 1, "Oil": 1},
+    "skill-type": null,
+    "skill-level": null
+  },
+  {
+    "name": "Pancakes Recipe",
+    "description": "",
+    "result-name": "Pancakes",
+    "ingredients": {"Wheat Flour": 1, "Egg": 1},
+    "skill-type": null,
+    "skill-level": null
+  },
+  {
+    "name": "Fruit Salad Recipe",
+    "description": "",
+    "result-name": "Fruit Salad",
+    "ingredients": {"Blueberry": 1, "Melon": 1, "Apricot": 1},
+    "skill-type": null,
+    "skill-level": null
+  },
+  {
+    "name": "Red Plate Recipe",
+    "description": "",
+    "result-name": "Red Plate",
+    "ingredients": {"Red Cabbage": 1, "Radish": 1},
+    "skill-type": null,
+    "skill-level": null
+  },
+  {
+    "name": "Bread Recipe",
+    "description": "",
+    "result-name": "Bread",
+    "ingredients": {"Wheat Flour": 1},
+    "skill-type": null,
+    "skill-level": null
+  },
+  {
+    "name": "Salmon Dinner Recipe",
+    "description": "",
+    "result-name": "Salmon Dinner",
+    "ingredients": {"Salmon": 1, "Amaranth": 1, "Kale": 1},
+    "skill-type": null,
+    "skill-level": null
+  },
+  {
+    "name": "Vegetable Medley Recipe",
+    "description": "",
+    "result-name": "Vegetable Medley",
+    "ingredients": {"Tomato": 1, "Beet": 1},
+    "skill-type": "Foraging",
+    "skill-level": 2
+  },
+  {
+    "name": "Farmer's Lunch Recipe",
+    "description": "",
+    "result-name": "Farmer's Lunch",
+    "ingredients": {"Omelet": 1, "Parsnip": 1},
+    "skill-type": "Farming",
+    "skill-level": 1
+  },
+  {
+    "name": "Survival Burger Recipe",
+    "description": "",
+    "result-name": "Survival Burger",
+    "ingredients": {"Bread": 1, "Carrot": 1, "Eggplant": 1},
+    "skill-type": "Foraging",
+    "skill-level": 3
+  },
+  {
+    "name": "Dish O' The Sea Recipe",
+    "description": "",
+    "result-name": "Dish O' The Sea",
+    "ingredients": {"Sardines": 1, "Hash Browns": 1},
+    "skill-type": "Fishing",
+    "skill-level": 2
+  },
+  {
+    "name": "Seaform Pudding Recipe",
+    "description": "",
+    "result-name": "Seaform Pudding",
+    "ingredients": {"Flounder": 1, "Midnight Carp": 1},
+    "skill-type": "Fishing",
+    "skill-level": 3
+  },
+  {
+    "name": "Miner's Treat Recipe",
+    "description": "",
+    "result-name": "Miner's Treat",
+    "ingredients": {"Carrot": 1, "Sugar": 1},
+    "skill-type": "Mining",
+    "skill-level": 1
+  }
+]
