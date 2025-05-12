@@ -62,6 +62,7 @@ public enum GameMenuCommand implements Command {
 //    LOAD_GAME("load game"),
 //    EXIT_GAME("exit game"),
 //    FORCE_TERMINATE("force terminate"),ß
+    COOKING_PREPARE("\\s*cooking\\s+prepare\\s*(?<name>\\.+)\\s*"),
     PRINT_MAP("print\\s+map\\s+-l\\s+\\((?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\)\\s+-s\\s+(?<size>\\d+)"),
     ENERGY_SHOW("energy show"),
     CHEAT_ENERGY_SET("energy set -v (?<value>.*)"),
@@ -81,8 +82,8 @@ public enum GameMenuCommand implements Command {
     CRAFTING("\\s*crafting\\s+craft\\s+(?<name>.+)\\s*"),
 //    PLACE_ITEM("place item -n (?<item_name>.*) -d (?<direction>.*)"),
 //    CHEAT_ADD_ITEM("cheat add item -n (?<item_name>.*) -c (?<count>.*)"),
-//    COOKING_REFRIGERATOR("cooking refrigerator [put/pick] (<item>.*)"),
-//    COOKING_SHOW_RECIPES("cooking show recipes"),
+    COOKING_REFRIGERATOR("\\s*cooking\\s+refrigerator\\s+(?<action>put|pick)\\s+(?<item>\\.+)\\s*"),
+    COOKING_SHOW_RECIPES("cooking show recipes"),
 //    EAT("eat (?<food_name>.*)"),
 //    BUILD("build -a <building_name> -l <x , y>"),
 //    BUY_ANIMAL("buy animal -a <animal> -n <name>"),

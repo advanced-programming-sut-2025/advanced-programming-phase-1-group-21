@@ -9,13 +9,19 @@ import java.util.Map;
 
 public class Recipe implements Item {
     private final RecipeData data;
-    private final ItemType itemType;
+    public final RecipeType type;
+    public final ItemType itemType;
     private int amount;
 
-    public Recipe(RecipeData data, ItemType itemType, int amount) {
+    public Recipe(RecipeData data, RecipeType recipeType, int amount) {
         this.data = data;
-        this.itemType = itemType;
+        this.itemType = ItemType.RECIPE;
         this.amount = amount;
+        this.type = recipeType;
+    }
+
+    public RecipeType getType() {
+        return type;
     }
 
     @Override

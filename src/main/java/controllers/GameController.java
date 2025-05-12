@@ -226,6 +226,54 @@ public class GameController{
         return Result.success(null);
     }
 
+    public Result<Void> putItemInRefrigerator(Refrigerator refrigerator, String itemName) {
+        Inventory inv = App.game.getCurrentPlayer().getInventory();
+        Inventory refInv = refrigerator.getInventory();
+        Item item = inv.getItem(itemName);
+        if (item == null || item.getItemType() != ItemType.CONSUMABLE)
+            return Result.failure(GameError.NOT_FOUND);
+        if (!refInv.canAdd())
+            return Result.failure(GameError.MAXIMUM_SIZE_EXCEEDED);
+        inv.removeItem(item);
+        refInv.addItem(item);
+
+        return Result.success(null);
+    }
+
+    public Result<Void> pickItemRefrigerator(Refrigerator refrigerator, String itemName) {
+        Inventory inv = App.game.getCurrentPlayer().getInventory();
+        Inventory refInv = refrigerator.getInventory();
+
+        Item item = refInv.getItem(itemName);
+        if (item == null || item.getItemType() != ItemType.CONSUMABLE)
+            return Result.failure(GameError.NOT_FOUND);
+        if (!inv.canAdd())
+            return Result.failure(GameError.MAXIMUM_SIZE_EXCEEDED);
+
+        refInv.removeItem(item);
+        inv.addItem(item);
+
+        return Result.success(null);
+    }
+
+    public Result<Void> actOnRefrigerator(String itemName, String action) {
+        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+
+        Refrigerator r = null;
+        for (Tile tile: App.game.getCurrentPlayer().getNeighborTiles())
+            if (tile.getTileType() == TileType.REFRIGERATOR)
+                r = tile.getPlacable(Refrigerator.class);
+        if (r == null) return Result.failure(GameError.YOU_ARE_DISTANT);
+
+        if (action.equals("put")) {
+            return putItemInRefrigerator(r, itemName);
+        }
+        else if (action.equals("pick")) {
+            return pickItemRefrigerator(r, itemName);
+        }
+        throw new RuntimeException("This can't happen, Please recheck the REGEX");
+    }
+
     public void printMapFull() {
         GameTerminalView.printWithColor(printMap(0, 0, 50).getData());
     }
@@ -375,14 +423,14 @@ public class GameController{
 
     public Result<List<Recipe>> showCraftingRecipes() {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        return Result.success(App.game.getCurrentPlayer().getCraftingRecipe());
+        return Result.success(App.game.getCurrentPlayer().getRecipes(RecipeType.CRAFTING));
     }
 
-    public Result<Void> craft(String recipeName) {
+    public Result<Void> prepareRecipe(String recipeName, RecipeType recipeType) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        Recipe recipe = App.game.getCurrentPlayer().getRecipeByName(recipeName);
+        Recipe recipe = App.game.getCurrentPlayer().getRecipeByName(recipeName, recipeType);
         if (recipe == null) {
-            return Result.failure(GameError.CRAFT_RECIPE_NOT_FOUND);
+            return Result.failure(GameError.RECIPE_NOT_FOUND);
         }
         Inventory inventory = App.game.getCurrentPlayer().getInventory();
         if (!inventory.canAdd())
@@ -410,11 +458,9 @@ public class GameController{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<ArrayList<Recipe>> cookingShowRecipes() {
+    public Result<ArrayList<Recipe>> showCookingRecipes() {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        //this function should show list all the recipes
-        //this function should show that what recipes are available and what recipes are not
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Result.success(App.game.getCurrentPlayer().getRecipes(RecipeType.COOKING));
     }
 
     public Result<Void> eat(Consumable food){
