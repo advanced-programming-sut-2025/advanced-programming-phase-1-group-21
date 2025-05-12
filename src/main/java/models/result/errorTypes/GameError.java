@@ -40,6 +40,9 @@ public enum GameError implements Error {
     YOU_CANT_GIFT_A_TOOL("You can't gift a tool"),
     YOU_ARE_DISTANT("You should be near to do action"),
     NO_PATH("There is no path to the destination"),
+    PLANT_ON_PLOWED("You can't plant unless it's plowed!"),
+    NOT_FOUND("There is no such item"),
+    TOOL_NOT_IN_HAND("Tool is not in hand"),
     ;
 
 

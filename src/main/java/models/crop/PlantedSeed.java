@@ -12,7 +12,7 @@ public class PlantedSeed implements Placable {
 	private int day = 1;
 	private int lastHarvest = -1;
 	private int waterStage = 2;
-	SeedData seedData;
+	public final SeedData seedData;
 
 	public PlantedSeed(SeedData seedData) {
 		this.seedData = seedData;

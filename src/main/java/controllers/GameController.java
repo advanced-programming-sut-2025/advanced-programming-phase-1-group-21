@@ -324,14 +324,34 @@ public class GameController{
         return Result.success(seedData.toString());
     }
 
-    public Result<Seed> plantSeed(String seedName, Direction direction) { // After MAP
+    public Result<Void> plantSeed(String seedName, Direction direction) { // After MAP
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+        Player player = App.game.getCurrentPlayer();
+        Inventory inventory = player.getInventory();
+        Item seed = inventory.getItem(seedName);
+        if (seed == null || seed.getItemType() != ItemType.SEED)
+            return Result.failure(GameError.SEED_NOT_FOUND);
+        Coord coord = player.getCoord().addCoord(direction.getCoord());
+        Tile tile = player.getMap().getTile(coord);
+        if (tile == null)
+            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
+        if (tile.getTileType() != TileType.PLOWED)
+            return Result.failure(GameError.PLANT_ON_PLOWED);
+        inventory.removeItem(seed);
+        ((Seed) seed).plant(tile);
+        return Result.success(null);
     }
 
-    public Result<String> showPlant(Coord cord) {
+    public Result<String> showPlant(Coord coord) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        Tile tile = App.game.getCurrentPlayer().getMap().getTile(coord);
+        if (tile == null)
+            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
+        if (tile.getTileType() != TileType.PLANTED_SEED)
+            return Result.failure(GameError.NOT_FOUND);
+        PlantedSeed plantedSeed = tile.getPlacable(PlantedSeed.class);
+        return Result.success(plantedSeed.seedData.toString());
     }
 
     public Result<Void> fertilizePlant(FertilizerType fertilizer, Coord cord) {
@@ -341,8 +361,10 @@ public class GameController{
 
     public Result<Integer> howMuchWater() {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        //GET WATER_CAN FROM INVENTORY
-        throw new UnsupportedOperationException("Not supported yet.");
+        Tool tool = (Tool) App.game.getCurrentPlayer().getItemInHand();
+        if (tool == null || tool.getToolType() != ToolType.WATERING_CAN) return Result.failure(GameError.TOOL_NOT_IN_HAND);
+        WateringCan wateringCan = (WateringCan) tool;
+        return Result.success(wateringCan.getCapacity());
     }
 
     public Result<Void> water(Coord coord) {
