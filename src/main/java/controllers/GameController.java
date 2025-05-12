@@ -224,6 +224,10 @@ public class GameController{
         return Result.success(null);
     }
 
+    public void printMapFull() {
+        GameTerminalView.printWithColor(printMap(0, 0, 50).getData());
+    }
+
     public Result<ArrayList<String>> printMap(int x, int y , int size) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         return Result.success(App.game.getCurrentPlayerMap().printMap(new Coord(x , y) , size));
