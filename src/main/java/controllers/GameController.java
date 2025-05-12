@@ -226,6 +226,54 @@ public class GameController{
         return Result.success(null);
     }
 
+    public Result<Void> putItemInRefrigerator(Refrigerator refrigerator, String itemName) {
+        Inventory inv = App.game.getCurrentPlayer().getInventory();
+        Inventory refInv = refrigerator.getInventory();
+        Item item = inv.getItem(itemName);
+        if (item == null || item.getItemType() != ItemType.CONSUMABLE)
+            return Result.failure(GameError.NOT_FOUND);
+        if (!refInv.canAdd())
+            return Result.failure(GameError.MAXIMUM_SIZE_EXCEEDED);
+        inv.removeItem(item);
+        refInv.addItem(item);
+
+        return Result.success(null);
+    }
+
+    public Result<Void> pickItemRefrigerator(Refrigerator refrigerator, String itemName) {
+        Inventory inv = App.game.getCurrentPlayer().getInventory();
+        Inventory refInv = refrigerator.getInventory();
+
+        Item item = refInv.getItem(itemName);
+        if (item == null || item.getItemType() != ItemType.CONSUMABLE)
+            return Result.failure(GameError.NOT_FOUND);
+        if (!inv.canAdd())
+            return Result.failure(GameError.MAXIMUM_SIZE_EXCEEDED);
+
+        refInv.removeItem(item);
+        inv.addItem(item);
+
+        return Result.success(null);
+    }
+
+    public Result<Void> actOnRefrigerator(String itemName, String action) {
+        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+
+        Refrigerator r = null;
+        for (Tile tile: App.game.getCurrentPlayer().getNeighborTiles())
+            if (tile.getTileType() == TileType.REFRIGERATOR)
+                r = tile.getPlacable(Refrigerator.class);
+        if (r == null) return Result.failure(GameError.YOU_ARE_DISTANT);
+
+        if (action.equals("put")) {
+            return putItemInRefrigerator(r, itemName);
+        }
+        else if (action.equals("pick")) {
+            return pickItemRefrigerator(r, itemName);
+        }
+        throw new RuntimeException("This can't happen, Please recheck the REGEX");
+    }
+
     public void printMapFull() {
         GameTerminalView.printWithColor(printMap(0, 0, 50).getData());
     }

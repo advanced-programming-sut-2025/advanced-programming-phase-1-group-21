@@ -81,7 +81,7 @@ public enum GameMenuCommand implements Command {
     CRAFTING("\\s*crafting\\s+craft\\s+(?<name>.+)\\s*"),
 //    PLACE_ITEM("place item -n (?<item_name>.*) -d (?<direction>.*)"),
 //    CHEAT_ADD_ITEM("cheat add item -n (?<item_name>.*) -c (?<count>.*)"),
-//    COOKING_REFRIGERATOR("cooking refrigerator [put/pick] (<item>.*)"),
+    COOKING_REFRIGERATOR("\\s*cooking\\s+refrigerator\\s+(?<action>put|pick)\\s+(?<item>\\.+)\\s*"),
 //    COOKING_SHOW_RECIPES("cooking show recipes"),
 //    EAT("eat (?<food_name>.*)"),
 //    BUILD("build -a <building_name> -l <x , y>"),
