@@ -211,6 +211,7 @@ public class GameController{
             else return Result.failure(GameError.CANT_ENTER);
         }
         else {
+
             App.game.getCurrentPlayer().setCoord(coord);
         }
         return Result.success(null);
