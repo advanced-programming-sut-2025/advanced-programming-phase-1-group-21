@@ -18,7 +18,7 @@ public class Game implements DailyUpdate {
     private ArrayList<NPC> npcs = new ArrayList<>();
     private ArrayList<Relation> relations = new ArrayList<>();
     private Player currentPlayer;
-    private Map village = (new MapBuilder()).buildVillage();
+    public final Map village;
     private int roundCount = 0;
     private Date gameDate;
     private Weather gameWeather;
@@ -36,6 +36,9 @@ public class Game implements DailyUpdate {
                 this.relations.add(new Relation(players.get(i), players.get(j)));
             }
         }
+
+        addNPC();
+        village = (new MapBuilder()).buildVillage(npcs);
     }
 
     public Relation getRelationOfUs(Player player1 , Player player2) {

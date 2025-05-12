@@ -6,7 +6,7 @@ public class GreenHouse extends Building {
     private boolean isBuild = false;
 
     public GreenHouse() {
-
+        this.map = (new MapBuilder()).buildGreenHouse();
     }
 
     public void setBuild(boolean build) {
