@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class ArtisanGoodsData implements Data, ItemData {
-	private static final String dataURL = "data/ArtisanGoodsData.json";
+	private static final String dataURL = "data/ArtisanGoods.json";
 	private static ArrayList<ArtisanGoodsData> recipes = null;
 
 	@SerializedName("artisan")
@@ -17,7 +17,7 @@ public class ArtisanGoodsData implements Data, ItemData {
 	@SerializedName("name")
 	private String name;
 	@SerializedName("ingredients")
-	private ArrayList<ArrayList<Map<String, Integer>>> ingredients;
+	private ArrayList<Map<String, Integer>> ingredients;
 	@SerializedName("processing-time")
 	private int processingTime;
 
@@ -37,20 +37,19 @@ public class ArtisanGoodsData implements Data, ItemData {
 		System.out.println("processingTime: " + processingTime);
 		System.out.println("ingredients: ");
 		if (ingredients != null)
-			for (ArrayList<Map<String, Integer>> ingredient : ingredients)
-				for (Map<String, Integer> map : ingredient)
-					for (Map.Entry<String, Integer> entry : map.entrySet()) {
-						String key = entry.getKey();
-						int value = entry.getValue();
-						System.out.println("key: " + key + " value: " + value);
-					}
+			for (Map<String, Integer> map : ingredients)
+				for (Map.Entry<String, Integer> entry : map.entrySet()) {
+					String key = entry.getKey();
+					int value = entry.getValue();
+					System.out.println("key: " + key + " value: " + value);
+				}
 		else
 			System.out.println("ingredients is null");
 		System.out.println("----------------------------------");
 	}
 
 	public void fullConstruct() {
-
+//		printData();
 	}
 
 	@Override
@@ -62,7 +61,7 @@ public class ArtisanGoodsData implements Data, ItemData {
 		return description;
 	}
 
-	public ArrayList<ArrayList<Map<String, Integer>>> getIngredients() {
+	public ArrayList<Map<String, Integer>> getIngredients() {
 		return ingredients;
 	}
 
