@@ -36,6 +36,7 @@ public enum GameError implements Error {
     RESPONSE_IS_NOT_SUPPORTED("Response is not supported"),
     TRADE_ID_DOES_NOT_EXIST("Trade id does not exist"),
     ITEM_IS_NOT_AVAILABLE("Item is not available"),
+    YOU_ARE_DISTANT("You need to be near that to do action"),
     ;
 
 

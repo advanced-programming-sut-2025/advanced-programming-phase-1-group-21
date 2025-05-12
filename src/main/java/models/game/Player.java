@@ -118,6 +118,19 @@ public class Player implements DailyUpdate {
         return output;
     }
 
+    public ArrayList<Coord> getNeighborCoord() {
+        ArrayList<Coord> output = new ArrayList<>();
+        Coord playerCord = App.game.getCurrentPlayer().getCoord();
+        for(Direction direction : Direction.values()) {
+            Coord c = direction.getCoord().addCoord(playerCord);
+            Tile tile = App.game.getCurrentPlayerMap().getTile(c);
+            if (tile == null)
+                continue;
+            output.add(c);
+        }
+        return output;
+    }
+
     public boolean weAreNextToEachOther(Player otherPlayer) {
         if(!App.game.getCurrentPlayer().getMap().equals(otherPlayer.getMap()))
             return false;

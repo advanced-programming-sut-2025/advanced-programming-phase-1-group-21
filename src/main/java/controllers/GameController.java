@@ -179,6 +179,7 @@ public class GameController{
     public Result<Void> walk(int x , int y) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         Coord coord = new Coord(x, y);
+        boolean isNeigh = App.game.getCurrentPlayer().getCoord().isNeighbor(coord);
 
         Player player = App.game.getCurrentPlayer();
         Tile tile = player.getMap().getTile(coord);
@@ -193,6 +194,7 @@ public class GameController{
         else if(tile.getTileType() == TileType.LAKE)
             return Result.failure(GameError.CANT_STAND_ON_LAKE);
         else if(tile.getTileType() == TileType.DOOR) {
+            if (!isNeigh) return Result.failure(GameError.YOU_ARE_DISTANT);
             if (player.getMap().mapType == MapType.SHOP)
                 player.setMap(App.game.getVillage());
             else
@@ -200,7 +202,7 @@ public class GameController{
             App.game.getCurrentPlayer().setCoord(new Coord(0, 0));
         }
         else if(tile.getPlacable(Building.class) != null) {
-            System.err.println("HERE");
+            if (!isNeigh) return Result.failure(GameError.YOU_ARE_DISTANT);
             Building building = tile.getPlacable(Building.class);
             if (building.canEnter()) {
                 player.enterBuilding(building);
@@ -208,7 +210,7 @@ public class GameController{
             else return Result.failure(GameError.CANT_ENTER);
         }
         else {
-            App.game.getCurrentPlayer().setCoord(new Coord(x, y));
+            App.game.getCurrentPlayer().setCoord(coord);
         }
         return Result.success(null);
     }
