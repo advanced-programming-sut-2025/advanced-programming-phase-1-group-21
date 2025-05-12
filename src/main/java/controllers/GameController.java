@@ -18,7 +18,6 @@ import models.user.User;
 import views.menu.GameTerminalView;
 
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -374,7 +373,7 @@ public class GameController{
         return Result.success(null);
     }
 
-    public Result<List<Recipe>> craftingShowRecipes() {
+    public Result<List<Recipe>> showCraftingRecipes() {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         return Result.success(App.game.getCurrentPlayer().getCraftingRecipe());
     }
@@ -386,6 +385,8 @@ public class GameController{
             return Result.failure(GameError.CRAFT_RECIPE_NOT_FOUND);
         }
         Inventory inventory = App.game.getCurrentPlayer().getInventory();
+        if (!inventory.canAdd())
+            return Result.failure(GameError.MAXIMUM_SIZE_EXCEEDED);
         if (!inventory.canRemoveItemList(recipe.getItems()))
             return Result.failure(GameError.NOT_ENOUGH_ITEMS);
         inventory.removeItemList(recipe.getItems());

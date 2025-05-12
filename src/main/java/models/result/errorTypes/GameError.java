@@ -43,6 +43,7 @@ public enum GameError implements Error {
     PLANT_ON_PLOWED("You can't plant unless it's plowed!"),
     NOT_FOUND("There is no such item"),
     TOOL_NOT_IN_HAND("Tool is not in hand"),
+    MAXIMUM_SIZE_EXCEEDED("Maximum size exceeded"),
     ;
 
 
