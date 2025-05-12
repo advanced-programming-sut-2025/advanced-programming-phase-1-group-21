@@ -35,7 +35,9 @@ public enum TileType {
 	LEAF(1, 1, false, '*'),
 
 	NPC(1, 1, false, 'N'),
-	NPC_HOUSE(3, 3, false, 'O')
+	NPC_HOUSE(3, 3, false, 'O'),
+
+	ARTISAN(1, 1, false, '8')
 	;
 
 	private final int defaultWidth;
