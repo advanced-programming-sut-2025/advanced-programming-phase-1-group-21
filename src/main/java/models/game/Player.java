@@ -275,4 +275,8 @@ public class Player implements DailyUpdate {
     public Building getBuilding() {
         return building;
     }
+
+    public boolean isFainted() {
+        return energy.getCurrentEnergy() == 0;
+    }
 }

@@ -69,6 +69,7 @@ public class GameTerminalView {
             else
                 System.out.print(line);
         }
+        System.out.println("\n\n");
     }
 
     public static void printArrayList(ArrayList<String> output) {
@@ -105,6 +106,12 @@ public class GameTerminalView {
     public void Result(String command) throws IOException {
         if (gameController.isGameLockedDueToNight()) {
             System.out.println("You are already locked due to night, Skipping turn...");
+            gameController.nextTurn();
+            return;
+        }
+
+        if (gameController.isFainted()) {
+            System.out.println("You fainted!, skipping turn...");
             gameController.nextTurn();
             return;
         }

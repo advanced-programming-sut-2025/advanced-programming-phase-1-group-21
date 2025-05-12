@@ -218,8 +218,12 @@ public class GameController{
             if (steps == null) {
                 return Result.failure(GameError.NO_PATH);
             }
-            //TODO
-            player.setCoord(coord);
+            for (PathFinder.PathStep step : steps) {
+                player.decreaseEnergy(step.energyCost());
+                player.setCoord(step.coord());
+                printMapFull();
+                if (player.isFainted()) return Result.success(null);
+            }
         }
         return Result.success(null);
     }
@@ -978,6 +982,12 @@ public class GameController{
     }
 
     public void addDollarsCheat(int number) {
+        if (App.game == null) return;
         App.game.getCurrentPlayer().addCoins(number);
+    }
+
+    public boolean isFainted() {
+        if (App.game == null) return false;
+        return App.game.getCurrentPlayer().isFainted();
     }
 }
