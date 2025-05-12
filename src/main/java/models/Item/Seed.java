@@ -4,6 +4,7 @@ import models.crop.PlantedSeed;
 import models.data.items.ItemData;
 import models.data.items.SeedData;
 import models.map.Tile;
+import models.map.TileType;
 
 public class Seed implements Item {
 	private final SeedData data;
@@ -63,6 +64,7 @@ public class Seed implements Item {
 	public PlantedSeed plant(Tile tile) {
 		PlantedSeed plantedSeed = new PlantedSeed(data);
 		tile.setPlacable(plantedSeed);
+		tile.setTileType(TileType.PLANTED_SEED);
 		return plantedSeed;
 	}
 }

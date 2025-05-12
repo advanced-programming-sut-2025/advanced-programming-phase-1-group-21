@@ -324,9 +324,22 @@ public class GameController{
         return Result.success(seedData.toString());
     }
 
-    public Result<Seed> plantSeed(String seedName, Direction direction) { // After MAP
+    public Result<Void> plantSeed(String seedName, Direction direction) { // After MAP
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+        Player player = App.game.getCurrentPlayer();
+        Inventory inventory = player.getInventory();
+        Item seed = inventory.getItem(seedName);
+        if (seed == null || seed.getItemType() != ItemType.SEED)
+            return Result.failure(GameError.SEED_NOT_FOUND);
+        Coord coord = player.getCoord().addCoord(direction.getCoord());
+        Tile tile = player.getMap().getTile(coord);
+        if (tile == null)
+            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
+        if (tile.getTileType() != TileType.PLOWED)
+            return Result.failure(GameError.PLANT_ON_PLOWED);
+        inventory.removeItem(seed);
+        ((Seed) seed).plant(tile);
+        return Result.success(null);
     }
 
     public Result<String> showPlant(Coord cord) {
