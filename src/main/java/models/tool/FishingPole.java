@@ -44,7 +44,7 @@ public class FishingPole extends Tool {
 
 	}
 
-	public String getCheapestFish(){
+	public static String getCheapestFish(){
 		if(App.game.getSeason() == Season.SPRING)
 			return "Herring";
 		if(App.game.getSeason() == Season.SUMMER)
@@ -56,7 +56,7 @@ public class FishingPole extends Tool {
 		return null;
 	}
 
-	public String randomFish(){
+	public static String randomFish(){
 		return null;
 	}
 
