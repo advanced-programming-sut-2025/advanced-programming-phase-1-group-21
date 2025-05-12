@@ -1,12 +1,16 @@
 package models.animal;
 
 public enum AnimalTypes {
-    CHICKEN(1)
+    CHICKEN,
+    COW,
+    GOAT,
+    SHEEP,
+    RABBIT,
     ;
 
-    public int producePeriod;
-
-    AnimalTypes(int producePeriod) {
-        this.producePeriod = producePeriod;
-    }
+//    public int producePeriod;
+//
+//    AnimalTypes(int producePeriod) {
+//        this.producePeriod = producePeriod;
+//    }
 }
