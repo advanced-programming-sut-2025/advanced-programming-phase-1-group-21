@@ -361,8 +361,10 @@ public class GameController{
 
     public Result<Integer> howMuchWater() {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        //GET WATER_CAN FROM INVENTORY
-        throw new UnsupportedOperationException("Not supported yet.");
+        Tool tool = (Tool) App.game.getCurrentPlayer().getItemInHand();
+        if (tool == null || tool.getToolType() != ToolType.WATERING_CAN) return Result.failure(GameError.TOOL_NOT_IN_HAND);
+        WateringCan wateringCan = (WateringCan) tool;
+        return Result.success(wateringCan.getCapacity());
     }
 
     public Result<Void> water(Coord coord) {

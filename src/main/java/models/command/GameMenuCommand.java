@@ -96,7 +96,8 @@ public enum GameMenuCommand implements Command {
 //    ARTISAN_USE("artisan use <artisan_name> <item1_name>"),
     WATER("\\s*water\\s+-l\\s+\\((?<x>\\d+),(?<y>\\d+)\\)\\s*"),
     PLANT("^\\s*plant\\s+-s\\s+(?<seedName>.*)\\s+-d\\s+(?<direction>(N)|(E)|(S)|(W)|(NE)|(NW)|(SE)|(SW))\\s*$"),
-
+    SHOW_PLANT("\\s*show\\s+plant\\s+-l\\s+\\((?<x>\\d+),(?<y>\\d+)\\)\\s*"),
+    HOWMUCH_WATER("\\s*howmuch\\s+water\\s*"),
     //SHOP
     SHOP_SHOW_ALL_PRODUCTS("show all products"),
     SHOP_SHOW_ALL_AVAILABLE_PRODUCTS("show all available products"),

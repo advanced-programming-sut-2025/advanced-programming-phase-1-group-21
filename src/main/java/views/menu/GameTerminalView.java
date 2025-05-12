@@ -213,6 +213,12 @@ public class GameTerminalView {
         else if ((matcher = GameMenuCommand.PLANT.getMatcher(command)) != null) {
             System.out.println(gameController.plantSeed(matcher.group("seedName"), Direction.getDirection(matcher.group("direction"))));
         }
+        else if ((matcher = GameMenuCommand.SHOW_PLANT.getMatcher(command)) != null) {
+            System.out.println(gameController.showPlant(new Coord(Integer.parseInt(matcher.group("x")) , Integer.parseInt(matcher.group("y")))));
+        }
+        else if ((matcher = GameMenuCommand.HOWMUCH_WATER.getMatcher(command)) != null) {
+            System.out.println(gameController.howMuchWater());
+        }
         else if ((matcher = GameMenuCommand.WATER.getMatcher(command)) != null) {
             System.out.println(gameController.water(new Coord(Integer.parseInt(matcher.group("x")) , Integer.parseInt(matcher.group("y")))));
         }
