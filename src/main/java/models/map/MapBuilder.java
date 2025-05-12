@@ -1,6 +1,7 @@
 package models.map;
 
 import models.App;
+import models.game.NPC;
 import models.game.Refrigerator;
 import org.apache.commons.lang3.tuple.Pair;
 import java.util.ArrayList;
@@ -100,7 +101,7 @@ public class MapBuilder {
         return true;
     }
 
-    public Map buildVillage() {
+    public Map buildVillage(List<NPC> npcs) {
         while (true) {
             Map map = new Map(MapType.VILLAGE);
 
@@ -110,6 +111,10 @@ public class MapBuilder {
                 Shop shop = new Shop(type);
                 map.addShop(shop);
                 buildings.add(Pair.of(type, shop));
+            }
+
+            for (NPC npc : npcs) {
+                buildings.add(Pair.of(TileType.NPC_HOUSE, npc.getHouse()));
             }
 
             if (setBuildingsRandomly(buildings, map))
@@ -150,6 +155,14 @@ public class MapBuilder {
     public Map buildShop() {
         Map map = new Map(MapType.SHOP);
         map.tiles.get(7).get(7).setTileType(TileType.DOOR);
+        return map;
+    }
+
+    public Map buildNPCHouse(NPC npc) {
+        Map map = new Map(MapType.NPCHOUSE);
+        map.tiles.get(7).get(7).setTileType(TileType.DOOR);
+        map.tiles.get(7).get(0).setPlacable(npc);
+        map.tiles.get(7).get(0).setTileType(TileType.NPC);
         return map;
     }
 }

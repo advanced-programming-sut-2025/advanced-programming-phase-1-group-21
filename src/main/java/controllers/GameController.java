@@ -67,7 +67,6 @@ public class GameController{
         }
 
         Game game = new Game(players);
-        game.addNPC();
         App.game = game;
 
         return Result.success(game , "Game created");

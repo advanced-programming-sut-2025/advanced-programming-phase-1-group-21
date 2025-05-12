@@ -32,7 +32,11 @@ public enum TileType {
 	STEEL_ROCK(1, 1, false, 'R'),
 	GOLD_ROCK(1, 1, false, 'g'),
 	IRIDIUM_ROCK(1, 1, false, 'I'),
-	LEAF(1, 1, false, '*');
+	LEAF(1, 1, false, '*'),
+
+	NPC(1, 1, false, 'N'),
+	NPC_HOUSE(3, 3, false, 'O')
+	;
 
 	private final int defaultWidth;
 	private final int defaultHeight;

@@ -4,14 +4,16 @@ import models.Item.Item;
 import models.data.*;
 import models.map.Coord;
 import models.map.Building;
+import models.map.MapBuilder;
+import models.map.Placable;
 
 import java.util.ArrayList;
 
-public class NPC {
+public class NPC implements Placable {
     private String name;
     // Characterization
+    NPCHouse house;
     private ArrayList<VillagerTask> tasks;
-    private Building house;
     private ArrayList<Dialogue> dialogues;
     private ArrayList<NPCFriendship> friendships = new ArrayList<>();
     private ArrayList<String> favorites;
@@ -23,6 +25,7 @@ public class NPC {
         favorites = VillagerData.getData(npcName).getFavorites();
         for(Player player : players)
             friendships.add(new NPCFriendship(player , FriendshipLevel.LEVEL0 , 0));
+        house = new NPCHouse();
     }
 
     public String getName() {
@@ -31,10 +34,6 @@ public class NPC {
 
     public ArrayList<VillagerTask> getTasks() {
         return tasks;
-    }
-
-    public Building getHouse() {
-        return house;
     }
 
     public ArrayList<Dialogue> getDialogues() {
@@ -59,10 +58,6 @@ public class NPC {
 
     public void setTasks(ArrayList<VillagerTask> tasks) {
         this.tasks = tasks;
-    }
-
-    public void setHouse(Building house) {
-        this.house = house;
     }
 
     public void setDialogues(ArrayList<Dialogue> dialogues) {
@@ -97,5 +92,36 @@ public class NPC {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean isWalkable() {
+        return false;
+    }
+
+    @Override
+    public String getSprite() {
+        return "N";
+    }
+
+    public NPCHouse getHouse() {
+        return house;
+    }
+
+    public class NPCHouse extends Building implements Placable {
+
+        public NPCHouse() {
+            this.map = (new MapBuilder()).buildNPCHouse(NPC.this);
+        }
+
+        @Override
+        public boolean canEnter() {
+            return true;
+        }
+
+        @Override
+        public String getSprite() {
+            return "O";
+        }
     }
 }
