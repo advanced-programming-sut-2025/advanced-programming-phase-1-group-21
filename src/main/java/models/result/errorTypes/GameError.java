@@ -46,6 +46,7 @@ public enum GameError implements Error {
     MAXIMUM_SIZE_EXCEEDED("Maximum size exceeded"),
     ANIMAL_DOES_NOT_HAVE_PRODUCT("Animal does not have product"),
     YOU_ARE_NOT_NEAR_TO_LAKE("You are not near to lake"),
+    REQUIREMENT_NOT_SATISFIED("One or more requirements are not met.")
     ;
 
 

@@ -5,6 +5,7 @@ import models.Item.*;
 import models.Menu;
 import models.animal.AnimalTypes;
 import models.data.items.SeedData;
+import models.skill.SkillType;
 import models.tool.*;
 import models.animal.Animal;
 import models.crop.*;
@@ -657,7 +658,7 @@ public class GameController{
             return Result.failure(GameError.TOOL_NOT_FOUND);
 
 
-        double amount = Math.random() * (App.game.getCurrentPlayer().getSkill().getFishingSkill() + 2);
+        double amount = Math.random() * (App.game.getCurrentPlayer().getSkillExp(SkillType.FISHING) + 2);
         if(App.game.getWeather().equals(Weather.SUNNY))
             amount *= 1.5;
         if(App.game.getWeather().equals(Weather.RAINY))
@@ -692,29 +693,7 @@ public class GameController{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<ArrayList<Item>> showAllproducts() {
-        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public Result<ArrayList<Item>> showAvailableProducts() {
-        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public Result<Void> purchase(Item product, int count) {
-        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        // What is the Result??
-
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
     public Result<Void> addMoneyCheat(int amount) {
-        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public Result<Void> sell(Item product, int count) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -1146,7 +1125,27 @@ public class GameController{
         Building building = App.game.getCurrentPlayer().getBuilding();
         if (!(building instanceof Shop)) return Result.failure(GameError.YOU_SHOULD_BE_ON_SHOP);
         Shop shop = (Shop) building;
-        return shop.purchaseItem(name, number);
+        Inventory inventory = App.game.getCurrentPlayer().getInventory();
+        Result<Void> r = shop.prepareBuy(name, number, inventory);
+        if (r.isError()) return r;
+
+        Item resultItem = Item.build(name, number);
+        inventory.addItem(resultItem);
+        return Result.success(null);
+    }
+
+    public Result<Void> purchaseBuilding(String name, int number) {
+        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+        Building building = App.game.getCurrentPlayer().getBuilding();
+        if (!(building instanceof Shop)) return Result.failure(GameError.YOU_SHOULD_BE_ON_SHOP);
+        Shop shop = (Shop) building;
+        Inventory inventory = App.game.getCurrentPlayer().getInventory();
+        Result<Void> r = shop.prepareBuy(name, number, inventory);
+        if (r.isError()) return r;
+        Map map = App.game.getCurrentPlayer().getMap();
+        UpdatableBuilding updatableBuilding = (UpdatableBuilding) map.getBuildingBySimpleName(name.split("\\s+")[1]);
+        updatableBuilding.update(name);
+        return Result.success(null);
     }
 
     public void addDollarsCheat(int number) {

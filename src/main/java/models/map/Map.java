@@ -34,6 +34,20 @@ public class Map implements DailyUpdate {
         return buildings;
     }
 
+    public Building getBuildingByFullName(String name) {
+        for (Building building : buildings) {
+            if (building.getFullName().equalsIgnoreCase(name)) return building;
+        }
+        return null;
+    }
+
+    public Building getBuildingBySimpleName(String name) {
+        for (Building building : buildings) {
+            if (building.getSimpleName().equalsIgnoreCase(name)) return building;
+        }
+        return null;
+    }
+
     public void build(Building b) {
         buildings.add(b);
     }

@@ -10,6 +10,7 @@ import models.map.*;
 import models.map.Coord;
 import models.map.Map;
 import models.skill.Skill;
+import models.skill.SkillType;
 import models.user.User;
 
 import java.util.ArrayList;
@@ -317,7 +318,11 @@ public class Player implements DailyUpdate {
         return energy.getCurrentEnergy() == 0;
     }
 
-    public Skill getSkill() {
-        return skill;
+    public int getSkillExp(SkillType skillType) {
+        return skill.getSkillExp(skillType);
+    }
+
+    public int getSkillLevel(SkillType skillType) {
+        return skill.getSkillLevel(skillType);
     }
 }

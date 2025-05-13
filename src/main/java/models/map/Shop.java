@@ -1,12 +1,15 @@
 package models.map;
 
+import controllers.RequirementChecker;
 import models.App;
 import models.DailyUpdate;
 import models.Item.Item;
 import models.data.ShopData;
 import models.game.Inventory;
+import models.game.Player;
 import models.result.Result;
 import models.result.errorTypes.GameError;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,54 +89,56 @@ public class Shop extends Building {
 		return available;
 	}
 
-	public Result<Void> purchaseItem(String itemName, int amount) {
-		Inventory inventory = App.game.getCurrentPlayer().getInventory();
-
-		for (ShopItemInstance itemInstance : items) {
+	public ShopItemInstance getAvailableShopItemInstance(String name) {
+		for (ShopItemInstance itemInstance : getAvailableItems()) {
 			ShopData data = itemInstance.getData();
-
-			if (data.getName().equalsIgnoreCase(itemName)) {
-
-				if (!isItemAvailable(itemInstance)) return Result.failure(GameError.ITEM_IS_NOT_AVAILABLE);
-
-				int pricePerItem = data.getPrice(App.game.getSeason());
-
-				int remaining = data.getDailyLimit() - itemInstance.getSoldToday();
-				if (amount > remaining)
-					return Result.failure(GameError.ITEM_IS_NOT_AVAILABLE);
-
-				int totalPrice = pricePerItem * amount;
-				Item coin = inventory.getCoin();
-
-				if (coin == null || coin.getAmount() < totalPrice)
-					return Result.failure(GameError.NOT_ENOUGH_COINS);
-
-				java.util.Map<String, Integer> baseIngredients = data.getIngredients();
-				List<Item> requiredItems = new ArrayList<>();
-				for (java.util.Map.Entry<String, Integer> entry : baseIngredients.entrySet()) {
-					String ingredientName = entry.getKey();
-					int totalRequired = entry.getValue() * amount;
-					Item inventoryItem = inventory.getItem(ingredientName);
-
-					if (inventoryItem == null || inventoryItem.getAmount() < totalRequired) {
-						return Result.failure(GameError.NOT_ENOUGH_ITEMS);
-					}
-					Item required = Item.build(inventoryItem.getName(), totalRequired); // assuming Item has a copy constructor
-					requiredItems.add(required);
-				}
-
-				inventory.changeCoin(-totalPrice);
-				inventory.removeItemList(requiredItems);
-
-				Item resultItem = Item.build(itemName, amount); // fetch from item database
-				inventory.addItem(resultItem);
-
-				itemInstance.incrementSold(amount);
-
-				return Result.success(null);
+			if (data.getName().equalsIgnoreCase(name)) {
+				return itemInstance;
 			}
 		}
-		return Result.failure(GameError.ITEM_IS_NOT_AVAILABLE);
+		return null;
+	}
+
+	/**
+	 * this function removes ingredient from Inventory and adds the sell count
+	 * you can imagine you have the "name" after calling this function
+	 * better be a controller function but i'm goshad!
+	 * @param name
+	 * @param amount
+	 * @return Error or null
+	 */
+	public Result<Void> prepareBuy(String name, int amount, Inventory inventory) {
+		ShopItemInstance itemInstance = getAvailableShopItemInstance(name);
+		if (itemInstance == null) return Result.failure(GameError.ITEM_IS_NOT_AVAILABLE);
+		ShopData data = itemInstance.getData();
+
+		if (!(new RequirementChecker()).checkShopDate(data)) return Result.failure(GameError.REQUIREMENT_NOT_SATISFIED);
+		if (!isItemAvailable(itemInstance)) return Result.failure(GameError.ITEM_IS_NOT_AVAILABLE);
+
+		int remaining = itemInstance.getRemaining();
+		if (amount > remaining)
+			return Result.failure(GameError.ITEM_IS_NOT_AVAILABLE);
+
+		java.util.Map<String, Integer> baseIngredients = data.getIngredients();
+		List<Item> requiredItems = new ArrayList<>();
+		for (java.util.Map.Entry<String, Integer> entry : baseIngredients.entrySet()) {
+			String ingredientName = entry.getKey();
+			int totalRequired = entry.getValue() * amount;
+
+			Item required = Item.build(ingredientName, totalRequired);
+			requiredItems.add(required);
+		}
+
+		Item coins = Item.build("coin", amount * data.getPrice(App.game.getSeason()));
+		requiredItems.add(coins);
+
+		if (!inventory.canRemoveItemList(requiredItems))
+			return Result.failure(GameError.NOT_ENOUGH_ITEMS);
+
+		inventory.removeItemList(requiredItems);
+		itemInstance.incrementSold(amount);
+
+		return Result.success(null);
 	}
 
 
@@ -195,6 +200,9 @@ public class Shop extends Building {
 					" | Sold Today: " + soldToday + "/" + data.getDailyLimit();
 		}
 
+		public int getRemaining() {
+			if (data.getDailyLimit() == -1) return Integer.MAX_VALUE;
+			return data.getDailyLimit() - soldToday;
+		}
 	}
-
 }

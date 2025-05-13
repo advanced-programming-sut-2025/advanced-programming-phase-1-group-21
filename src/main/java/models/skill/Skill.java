@@ -1,56 +1,25 @@
 package models.skill;
 
+import java.util.EnumMap;
+
 public class Skill {
-    private int farmingSkill = 0;
-    private int miningSkill = 0;
-    private int natureSkill = 0;
-    private int fishingSkill = 0;
+    private final EnumMap<SkillType, Integer> expMap = new EnumMap<>(SkillType.class);
 
-    public void setFarmingSkill(int farmingSkill) {
-        this.farmingSkill = farmingSkill;
+    public Skill() {
+        for (SkillType type : SkillType.values()) {
+            expMap.put(type, 0);
+        }
     }
 
-    public void setMiningSkill(int miningSkill) {
-        this.miningSkill = miningSkill;
+    public void setSkillExp(SkillType type, int exp) {
+        expMap.put(type, exp);
     }
 
-    public void setNatureSkill(int natureSkill) {
-        this.natureSkill = natureSkill;
+    public int getSkillExp(SkillType type) {
+        return expMap.getOrDefault(type, 0);
     }
 
-    public void setFishingSkill(int fishingSkill) {
-        this.fishingSkill = fishingSkill;
-    }
-
-    public int getFarmingLevel(){
-        return Math.max(0 , (farmingSkill-50)/100);
-    }
-
-    public int getMiningLevel(){
-        return Math.max(0 , (miningSkill-50)/100);
-    }
-
-    public int getNatureLevel(){
-        return Math.max(0 , (natureSkill-50)/100);
-    }
-
-    public int getFishingLevel(){
-        return Math.max(0 , (fishingSkill-50)/100);
-    }
-
-    public int getFarmingSkill() {
-        return farmingSkill;
-    }
-
-    public int getMiningSkill() {
-        return miningSkill;
-    }
-
-    public int getNatureSkill() {
-        return natureSkill;
-    }
-
-    public int getFishingSkill() {
-        return fishingSkill;
+    public int getSkillLevel(SkillType type) {
+        return type.calcLevel(getSkillExp(type));
     }
 }
