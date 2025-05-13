@@ -87,11 +87,11 @@ public class MapBuilder {
         }
     }
 
-    private boolean isAreaAvailable(Map map, int startY, int startX, int height, int width) {
+    public boolean isAreaAvailable(Map map, int startY, int startX, int height, int width) {
         for (int y = startY - 1; y <= startY + height; y++) {
             for (int x = startX - 1; x <= startX + width; x++) {
                 Tile tile = map.getTile(new Coord(x, y));
-                if (tile != null && !tile.isEmpty()) {
+                if (tile == null || !tile.isEmpty()) {
                     return false;
                 }
             }
@@ -120,7 +120,7 @@ public class MapBuilder {
         }
     }
 
-    private void placeBuilding(Map map, Pair<TileType, Placable> pair, int startY, int startX, int height, int width) {
+    public void placeBuilding(Map map, Pair<TileType, Placable> pair, int startY, int startX, int height, int width) {
         for (int y = startY; y < startY + height; y++) {
             for (int x = startX; x < startX + width; x++) {
                 Tile tile = map.getTile(new Coord(x, y));
@@ -161,6 +161,12 @@ public class MapBuilder {
         map.tiles.get(7).get(7).setTileType(TileType.DOOR);
         map.tiles.get(7).get(0).setPlacable(npc);
         map.tiles.get(7).get(0).setTileType(TileType.NPC);
+        return map;
+    }
+
+    public Map buildAnimalHouse(MapType mapType) {
+        Map map = new Map(mapType);
+        map.tiles.get(7).get(7).setTileType(TileType.DOOR);
         return map;
     }
 }

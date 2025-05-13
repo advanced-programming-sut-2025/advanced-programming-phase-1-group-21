@@ -7,6 +7,7 @@ import models.map.Coord;
 import models.map.Tile;
 import models.result.Result;
 import models.result.errorTypes.GameError;
+import models.skill.SkillType;
 
 public class WateringCan extends Tool {
     private int currentWater;
@@ -53,7 +54,7 @@ public class WateringCan extends Tool {
             case GOLD -> player.decreaseEnergy(2);
             case IRIDIUM -> player.decreaseEnergy(1);
         }
-        if(player.getSkill().getFarmingLevel() >= 4)
+        if(player.getSkillLevel(SkillType.FARMING) >= 4)
             player.setEnergy(player.getEnergy() + 1);
         return Result.success(null);
     }

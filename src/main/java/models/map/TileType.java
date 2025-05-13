@@ -1,5 +1,7 @@
 package models.map;
 
+import org.apache.commons.lang3.StringUtils;
+
 public enum TileType {
 	// Buildings
 	HOUSE(4, 4, true, 'H'),
@@ -84,6 +86,15 @@ public enum TileType {
 			case PLOWED, UNPLOWED -> true;
 			default -> false;
 		};
+	}
+
+	public static TileType fromName(String name) {
+		for (TileType tileType : TileType.values()) {
+			if (StringUtils.containsIgnoreCase(name, tileType.name())) {
+				return tileType;
+			}
+		}
+		return null;
 	}
 
 }

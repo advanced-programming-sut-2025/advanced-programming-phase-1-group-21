@@ -6,6 +6,7 @@ import models.Item.ItemType;
 import models.map.*;
 import models.result.Result;
 import models.result.errorTypes.GameError;
+import models.skill.SkillType;
 
 public class Axe extends Tool {
 	public Axe() {
@@ -33,15 +34,15 @@ public class Axe extends Tool {
 		if(use){
 			if(this.toolMaterialType.equals(ToolMaterialType.PRIMITIVE))
 				App.game.getCurrentPlayer().decreaseEnergy(5);
-			if(this.toolMaterialType.equals(ToolMaterialType.COPPER))
+			else if(this.toolMaterialType.equals(ToolMaterialType.COPPER))
 				App.game.getCurrentPlayer().decreaseEnergy(4);
-			if(this.toolMaterialType.equals(ToolMaterialType.STEEL))
+			else if(this.toolMaterialType.equals(ToolMaterialType.STEEL))
 				App.game.getCurrentPlayer().decreaseEnergy(3);
-			if(this.toolMaterialType.equals(ToolMaterialType.GOLD))
+			else if(this.toolMaterialType.equals(ToolMaterialType.GOLD))
 				App.game.getCurrentPlayer().decreaseEnergy(2);
-			if(this.toolMaterialType.equals(ToolMaterialType.IRIDIUM))
+			else if(this.toolMaterialType.equals(ToolMaterialType.IRIDIUM))
 				App.game.getCurrentPlayer().decreaseEnergy(1);
-			if(App.game.getCurrentPlayer().getSkill().getFarmingLevel() >= 4)
+			else if(App.game.getCurrentPlayer().getSkillLevel(SkillType.FARMING) >= 4)
 				App.game.getCurrentPlayer().setEnergy(App.game.getCurrentPlayer().getEnergy() + 1);
 			return Result.success(null, "to yek derakht ro koshti");
 		}

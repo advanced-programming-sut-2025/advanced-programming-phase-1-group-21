@@ -1,5 +1,7 @@
 package models.map;
 
+import org.apache.commons.lang3.StringUtils;
+
 public enum MapType {
     HOUSE(20, 10),
     GREEN_HOUSE(20, 10),
@@ -9,8 +11,8 @@ public enum MapType {
     VILLAGE(60, 60),
     SHOP(8, 8),
     NPC_HOUSE(8, 8),
-    BARN(4, 7),
-    COOP(3, 6),
+    BARN(8, 8),
+    COOP(8, 8),
     ;
 
     public final int x;
@@ -27,5 +29,18 @@ public enum MapType {
 
     public int getHeight() {
         return y;
+    }
+
+    public static MapType getMapType(String name) {
+        for (MapType mapType : MapType.values()) {
+            if (StringUtils.containsIgnoreCase(name, mapType.name())) {
+                return mapType;
+            }
+        }
+        return null;
+    }
+
+    public boolean isAnimalHouse() {
+        return MapType.BARN == this || MapType.COOP == this;
     }
 }

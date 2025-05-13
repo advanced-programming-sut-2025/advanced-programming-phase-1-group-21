@@ -6,6 +6,7 @@ import models.game.Player;
 import models.map.*;
 import models.result.Result;
 import models.result.errorTypes.GameError;
+import models.skill.SkillType;
 
 import java.util.Map;
 import java.util.Set;
@@ -83,7 +84,7 @@ public class Pickaxe extends Tool {
         };
 		player.decreaseEnergy(use != 0 ? energyCost : 1);
 		if(use != 0) {
-			if (player.getSkill().getMiningLevel() >= 4)
+			if (player.getSkillExp(SkillType.MINING) >= 4)
 				player.setEnergy(player.getEnergy() + 1);
 		}
 

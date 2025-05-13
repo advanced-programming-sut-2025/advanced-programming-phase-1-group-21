@@ -153,7 +153,7 @@ public class ShopData implements Data {
 				", buildingRequired='" + buildingRequired + '\'' +
 				", skillTypeRequired='" + skillTypeRequired + '\'' +
 				", skillLevelRequired=" + skillLevelRequired +
-				", dailyLimit=" + dailyLimit +
+				", dailyLimit=" + (dailyLimit == -1 ? "NO LIMIT" : dailyLimit) +
 				'}';
 	}
 }

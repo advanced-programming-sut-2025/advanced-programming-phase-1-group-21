@@ -316,6 +316,9 @@ public class GameTerminalView {
         else if ((matcher = GameMenuCommand.SHOP_PURCHASE.getMatcher(command)) != null) {
             System.out.println(gameController.purchaseItem(matcher.group("name"), Integer.parseInt(matcher.group("number"))));
         }
+        else if ((matcher = GameMenuCommand.BUILD.getMatcher(command)) != null) {
+            System.out.println(gameController.purchaseBuilding(matcher.group("name"), new Coord(Integer.parseInt(matcher.group("x")), Integer.parseInt(matcher.group("y")))));
+        }
         else if ((matcher = GameMenuCommand.CHEAT_ADD_DOLLARS.getMatcher(command)) != null) {
             gameController.addDollarsCheat(Integer.parseInt(matcher.group("number")));
         }
