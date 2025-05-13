@@ -9,16 +9,34 @@ import java.util.List;
 
 public class Map implements DailyUpdate {
     public ArrayList<ArrayList<Tile>> tiles;
-    public ArrayList<Building> buildings;
+    private ArrayList<Building> buildings = new ArrayList<>();
 
-    private House house;
-    private ArrayList<Lake> lakes = new ArrayList<>();
-    private ArrayList<Shop> shops = new ArrayList<>();
-    private Mines mines;
-    private GreenHouse greenHouses;
-    private Barn barn;
-    private Coop coop;
     public final MapType mapType;
+
+    public <T extends Building> List<T> getBuildings(Class<T> type) {
+        List<T> result = new ArrayList<>();
+        for (Building b : buildings) {
+            if (type.isInstance(b)) {
+                result.add(type.cast(b));
+            }
+        }
+        return result;
+    }
+
+    public <T extends Building> T getBuilding(Class<T> type) {
+        List<T> buildings = getBuildings(type);
+        if (buildings.isEmpty()) return null;
+        if (buildings.size() > 1) throw new RuntimeException("You have multiple buildings of type " + type + " USE LIST FUNCTION");
+        return buildings.get(0);
+    }
+
+    public List<Building> getBuildings() {
+        return buildings;
+    }
+
+    public void build(Building b) {
+        buildings.add(b);
+    }
 
     private void createRectangularMap(int X, int Y) {
         tiles = new ArrayList<>();
@@ -43,30 +61,6 @@ public class Map implements DailyUpdate {
         return null;
     }
 
-    public void buildHouse(House house) {
-        this.house = house;
-    }
-
-    public void buildLakes(Lake lake) {
-        this.lakes.add(lake);
-    }
-
-    public void buildCoop(Coop coop) {
-        this.coop = coop;
-    }
-
-    public void buildShop(Shop shop) {
-        this.shops.add(shop);
-    }
-
-    public void buildMines(Mines mines) {
-        this.mines = mines;
-    }
-
-    public void buildGreenHouses(GreenHouse greenHouses) {
-        this.greenHouses = greenHouses;
-    }
-
     public Tile getTile(Coord coord) {
         return getElementOrNull(getElementOrNull(tiles, coord.getY()), coord.getX());
     }
@@ -74,10 +68,6 @@ public class Map implements DailyUpdate {
     public void setTile(Coord coord, Tile tile) {
         if (getTile(coord) == null) return;
         tiles.get(coord.getY()).set(coord.getX(), tile);
-    }
-
-    public int calculateDistance(Coord start, Coord end) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public ArrayList<String> printMap(Coord center, int radius) {
@@ -100,38 +90,6 @@ public class Map implements DailyUpdate {
 
     public ArrayList<ArrayList<Tile>> getTiles() {
         return tiles;
-    }
-
-    public House getHouse() {
-        return house;
-    }
-
-    public ArrayList<Lake> getLakes() {
-        return lakes;
-    }
-
-    public Mines getMines() {
-        return mines;
-    }
-
-    public GreenHouse getGreenHouses() {
-        return greenHouses;
-    }
-
-    public ArrayList<Shop> getShops() {
-        return shops;
-    }
-
-    public Barn getBarn() {
-        return barn;
-    }
-
-    public Coop getCoop() {
-        return coop;
-    }
-
-    public static Result<String> helpReadingMap() {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public boolean thor(Coord coord) {
@@ -171,19 +129,11 @@ public class Map implements DailyUpdate {
         builder.append("Map Summary:\n");
         builder.append("Map Type: ").append(mapType).append("\n");
 
-        builder.append("House: ").append(house == null ? "null" : house).append("\n");
-
-        builder.append("Lakes: ").append(lakes == null ? "null" : lakes.isEmpty() ? "[]" : lakes).append("\n");
-
-        builder.append("Shops: ").append(shops == null ? "null" : shops.isEmpty() ? "[]" : shops).append("\n");
-
-        builder.append("Mines: ").append(mines == null ? "null" : mines).append("\n");
-
-        builder.append("Greenhouses: ").append(greenHouses == null ? "null" : greenHouses).append("\n");
-
-        builder.append("Barn: ").append(barn == null ? "null" : barn).append("\n");
-
-        builder.append("Coop: ").append(coop == null ? "null" : coop).append("\n");
+        builder.append("Buildings: ").append(mapType).append("\n");
+        for (Building b : buildings) {
+            builder.append(b.toString()).append("\n");
+        }
+        builder.append("\n");
 
         builder.append("Tile Grid Size: ");
         if (tiles == null || tiles.isEmpty() || tiles.get(0) == null) {
@@ -196,6 +146,7 @@ public class Map implements DailyUpdate {
     }
 
     public Shop getShopByType(TileType type) {
+        List<Shop> shops = getBuildings(Shop.class);
         for (Shop shop : shops) {
             if (shop.getShopType() == type)
                 return shop;
@@ -206,6 +157,6 @@ public class Map implements DailyUpdate {
     public void addShop(Shop shop) {
         Shop oldShop = getShopByType(shop.getShopType());
         if (oldShop != null) throw new IllegalArgumentException("Shop already exists in this Map");
-        shops.add(shop);
+        build(shop);
     }
 }

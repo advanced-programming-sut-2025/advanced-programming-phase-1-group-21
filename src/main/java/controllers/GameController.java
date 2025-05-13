@@ -173,7 +173,7 @@ public class GameController{
         if (inv.canRemoveItemList(needed))
             return Result.failure(GameError.NOT_ENOUGH_ITEMS);
         inv.removeItemList(needed);
-        App.game.getCurrentPlayerMap().getGreenHouses().setBuild(true);
+        App.game.getCurrentPlayerMap().getBuilding(GreenHouse.class).setBuild(true);
         return Result.success("now you can use your greenhouse");
     }
 

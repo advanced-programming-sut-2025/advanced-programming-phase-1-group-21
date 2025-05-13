@@ -7,7 +7,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 public class MapBuilder {
     private static final int MAP_WIDTH = 30;
@@ -65,21 +64,21 @@ public class MapBuilder {
         while (true) {
             Map map = new Map(MapType.FARM);
 
-            map.buildHouse(new House());
-            map.buildGreenHouses(new GreenHouse());
-            map.buildMines(new Mines());
+            map.build(new House());
+            map.build(new GreenHouse());
+            map.build(new Mines());
 
             int lakesCount = App.random.nextInt(1,3);
             for (int i = 0; i < lakesCount; i++)
-                map.buildLakes(new Lake());
+                map.build(new Lake());
 
             List<Pair<TileType, Placable>> buildings = new ArrayList<>(Arrays.asList(
-                    Pair.of(TileType.HOUSE, map.getHouse()),
-                    Pair.of(TileType.GREEN_HOUSE, map.getGreenHouses()),
-                    Pair.of(TileType.MINES, map.getMines())
+                    Pair.of(TileType.HOUSE, map.getBuilding(House.class)),
+                    Pair.of(TileType.GREEN_HOUSE, map.getBuilding(GreenHouse.class)),
+                    Pair.of(TileType.MINES, map.getBuilding(Mines.class))
             ));
 
-            for (Lake lake: map.getLakes())
+            for (Lake lake: map.getBuildings(Lake.class))
                 buildings.add(Pair.of(TileType.LAKE, lake));
 
             if (!setBuildingsRandomly(buildings, map)) continue;
@@ -158,7 +157,7 @@ public class MapBuilder {
     }
 
     public Map buildNPCHouse(NPC npc) {
-        Map map = new Map(MapType.NPCHOUSE);
+        Map map = new Map(MapType.NPC_HOUSE);
         map.tiles.get(7).get(7).setTileType(TileType.DOOR);
         map.tiles.get(7).get(0).setPlacable(npc);
         map.tiles.get(7).get(0).setTileType(TileType.NPC);
