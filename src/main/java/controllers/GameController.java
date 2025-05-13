@@ -17,6 +17,7 @@ import models.result.errorTypes.GameError;
 import models.result.errorTypes.UserError;
 import models.user.Gender;
 import models.user.User;
+import org.apache.commons.lang3.tuple.Pair;
 import views.menu.GameTerminalView;
 
 import java.io.IOException;
@@ -1134,17 +1135,28 @@ public class GameController{
         return Result.success(null);
     }
 
-    public Result<Void> purchaseBuilding(String name, int number) {
+    public Result<Void> purchaseBuilding(String name, Coord coord) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         Building building = App.game.getCurrentPlayer().getBuilding();
         if (!(building instanceof Shop)) return Result.failure(GameError.YOU_SHOULD_BE_ON_SHOP);
         Shop shop = (Shop) building;
         Inventory inventory = App.game.getCurrentPlayer().getInventory();
-        Result<Void> r = shop.prepareBuy(name, number, inventory);
+        Result<Void> r = shop.prepareBuy(name, 1, inventory);
         if (r.isError()) return r;
-        Map map = App.game.getCurrentPlayer().getMap();
-        UpdatableBuilding updatableBuilding = (UpdatableBuilding) map.getBuildingBySimpleName(name.split("\\s+")[1]);
-        updatableBuilding.update(name);
+
+        MapType mapType = MapType.getMapType(name);
+
+        Map map = App.game.getCurrentPlayer().getDefaultMap();
+        MapBuilder mapBuilder = new MapBuilder();
+        if (!mapBuilder.isAreaAvailable(map, coord.getY(), coord.getX(), mapType.y, mapType.x))
+            return Result.failure(GameError.CANT_PLACE);
+
+        AnimalHouse animalHouse = new AnimalHouse(name);
+        map.build(animalHouse);
+
+        TileType tileType = TileType.fromName(name);
+        mapBuilder.placeBuilding(map, Pair.of(tileType, animalHouse), coord.getY(), coord.getX(), tileType.getDefaultHeight(), tileType.getDefaultWidth());
+
         return Result.success(null);
     }
 

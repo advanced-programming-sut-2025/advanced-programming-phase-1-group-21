@@ -4,8 +4,6 @@ import models.App;
 import models.data.ShopData;
 import models.game.Player;
 import models.map.Map;
-import models.map.Shop;
-import models.skill.Skill;
 import models.skill.SkillType;
 
 public class RequirementChecker {
