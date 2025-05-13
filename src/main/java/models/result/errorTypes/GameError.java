@@ -46,6 +46,12 @@ public enum GameError implements Error {
     MAXIMUM_SIZE_EXCEEDED("Maximum size exceeded"),
     ANIMAL_DOES_NOT_HAVE_PRODUCT("Animal does not have product"),
     YOU_ARE_NOT_NEAR_TO_LAKE("You are not near to lake"),
+    WRONG_ITEM_TYPES("There are no goods with these ingredients."),
+    CANT_FIND_ITEM_IN_INVENTORY("You don't have this item in your inventory"),
+    NO_FREE_ARTISAN_AROUND("There are no free artisan around you"),
+    NO_READY_ARTISAN_AROUND("There are no ready artisan around you"),
+    CANT_ADD_ITEM_TO_INVENTORY("You can't add this item to your inventory"),
+
     ;
 
 

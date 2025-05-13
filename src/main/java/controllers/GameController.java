@@ -4,6 +4,7 @@ import models.App;
 import models.Item.*;
 import models.Menu;
 import models.animal.AnimalTypes;
+import models.data.ArtisanGoodsData;
 import models.data.items.SeedData;
 import models.tool.*;
 import models.animal.Animal;
@@ -384,7 +385,7 @@ public class GameController{
             return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
         if (tile.getTileType() != TileType.PLOWED)
             return Result.failure(GameError.PLANT_ON_PLOWED);
-        inventory.removeItem(seed);//TODO : this command deletes all seeds of this type(it should delete only one of them)
+        inventory.removeItem(Item.build(seedName, 1));
         ((Seed) seed).plant(tile);
         return Result.success(null);
     }
@@ -673,18 +674,82 @@ public class GameController{
             return Result.success(null);
         }
         return Result.success(null);
-
     }
 
-    public Result<Item> artisanUse(String artisanName , String item) {
-        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Result<Void> placeArtisan(String artisanName, Direction direction) {
+        Player player = App.game.getCurrentPlayer();
+        Inventory inventory = player.getInventory();
+        Item artisan = inventory.getItem(artisanName);
+        if (artisan == null)
+            return Result.failure(GameError.CANT_FIND_ITEM_IN_INVENTORY);
+
+        Coord coord = player.getCoord().addCoord(direction.getCoord());
+
+        Tile tile = player.getMap().getTile(coord);
+        if (tile == null)
+            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
+        if (!tile.isEmpty()) {
+            return Result.failure(GameError.TILE_IS_NOT_EMPTY);
+        }
+
+        inventory.removeItem(Item.build(artisanName, 1));
+        new Artisan(ArtisanGoodsData.getRecipeData(artisanName)).onPlace(tile);
+        return Result.success(null);
     }
 
-    public Result<Item> artisanGet(String artisanName) {
+    public Result<Void> useArtisan(String artisanName , ArrayList <String> itemNames) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        //this function should get products from artisans
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        Player player = App.game.getCurrentPlayer();
+        Inventory inventory = player.getInventory();
+
+        Result <Void> result = null;
+
+        for (Direction direction: Direction.values()) {
+            Coord coord = player.getCoord().addCoord(direction.getCoord());
+
+            Tile tile = player.getMap().getTile(coord);
+            if (tile.getTileType() == TileType.ARTISAN && !tile.getPlacable(Artisan.class).isResultReady()) {
+                Artisan artisan = tile.getPlacable(Artisan.class);
+
+                result = artisan.craft(itemNames);
+                if (result.isSuccess())
+                    return result;
+            }
+        }
+
+        if (result != null)
+            return result;
+
+        return Result.failure(GameError.NO_FREE_ARTISAN_AROUND);
+    }
+
+    public Result<Item> getArtisanProduct(String artisanName) {
+        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+
+        Player player = App.game.getCurrentPlayer();
+        Inventory inventory = player.getInventory();
+
+        for (Direction direction: Direction.values()) {
+            Coord coord = player.getCoord().addCoord(direction.getCoord());
+
+            Tile tile = player.getMap().getTile(coord);
+            if (tile.getTileType() == TileType.ARTISAN && tile.getPlacable(Artisan.class).isResultReady()) {
+                Artisan artisan = tile.getPlacable(Artisan.class);
+
+
+                if (artisan.isResultReady()) {
+                    Item result = artisan.getResultWithoutReset();
+                    if (inventory.addItem(result).isSuccess()) {
+                        artisan.getResult();
+                        return Result.success(null);
+                    }
+                    return Result.failure(GameError.CANT_ADD_ITEM_TO_INVENTORY);
+                }
+            }
+        }
+
+        return Result.failure(GameError.NO_READY_ARTISAN_AROUND);
     }
 
     public Result<Void> crowAttack() {
@@ -692,7 +757,7 @@ public class GameController{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<ArrayList<Item>> showAllproducts() {
+    public Result<ArrayList<Item>> showAllProducts() {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         throw new UnsupportedOperationException("Not supported yet.");
     }

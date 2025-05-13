@@ -9,6 +9,11 @@ public class Coop extends Building{
     AnimalHouseType houseType;
 
     @Override
+    public TileType getTileType() {
+        return TileType.COOP;
+    }
+
+    @Override
     public boolean canEnter() {
         return true;
     }

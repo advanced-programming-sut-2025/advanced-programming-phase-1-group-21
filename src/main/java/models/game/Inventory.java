@@ -3,6 +3,7 @@ package models.game;
 import models.App;
 import models.Item.Item;
 import models.Item.ItemType;
+import models.result.errorTypes.GameError;
 import models.tool.*;
 import models.result.Result;
 
@@ -78,7 +79,7 @@ public class Inventory {
             }
         }
         if (!canAdd()) {
-            return Result.success("Adding " + item.getName() + " to the inventory was not completely. " + item.getAmount() + " remains.");
+            return Result.failure(GameError.CANT_ADD_ITEM_TO_INVENTORY);
         }
         items.add(item);
         return Result.success("Adding " + item.getName() + " to the inventory was successful.");

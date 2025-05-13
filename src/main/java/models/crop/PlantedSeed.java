@@ -5,6 +5,7 @@ import models.Item.Item;
 import models.Item.ItemType;
 import models.data.items.SeedData;
 import models.map.Placable;
+import models.map.TileType;
 
 public class PlantedSeed implements Placable {
 	private FertilizerType fertilizerType = null; // not implemented yet.
@@ -54,6 +55,11 @@ public class PlantedSeed implements Placable {
 
 	public boolean isOneTime() {
 		return seedData.isOneTime();
+	}
+
+	@Override
+	public TileType getTileType() {
+		return TileType.PLANTED_SEED;
 	}
 
 	@Override
