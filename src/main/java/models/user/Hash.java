@@ -10,7 +10,7 @@ public class Hash {
     private static final String SALT = "namak";
 
     public Hash(String hashedPassword) {
-        this.hashedPassword = hashedPassword;
+        this.hashedPassword = hashPassword(hashedPassword);
     }
 
     public boolean verify(String inputPassword) {
