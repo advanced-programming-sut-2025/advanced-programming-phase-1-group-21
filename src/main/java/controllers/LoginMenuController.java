@@ -27,7 +27,7 @@ public class LoginMenuController{
     public Result<User> login(String username, String password) {
         if(findUserByUsername(username) == null)
             return Result.failure(UserError.USER_NOT_FOUND);
-        if(!findUserByUsername(username).getPassword().equals(password))
+        if(!findUserByUsername(username).verifyPassword(password))
             return Result.failure(UserError.PASSWORD_DOESNT_MATCH);
 
         //TODO

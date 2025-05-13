@@ -47,7 +47,7 @@ public class ProfileMenuController{
     }
 
     public Result<Void> changePassword(String oldPassword, String newPassword) throws IOException {
-        if(!oldPassword.equals(App.logedInUser.getPassword()))
+        if(!App.logedInUser.verifyPassword(oldPassword))
             return Result.failure(AuthError.PASSWORD_CONFIRM_ERROR);
         if(checkPassword(newPassword).isError())
             return checkPassword(newPassword);

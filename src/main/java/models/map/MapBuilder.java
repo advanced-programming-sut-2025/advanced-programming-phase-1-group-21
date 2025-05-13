@@ -28,7 +28,6 @@ public class MapBuilder {
         int attempts = 0;
 
         while (placed < foragingCount && attempts < foragingCount * 10) {
-            System.out.println(attempts + " " + foragingCount);
             ++attempts;
 
             Tile tile = map.getTile(Coord.getRandomCoord(map.getMaxX(), map.getMaxY()));

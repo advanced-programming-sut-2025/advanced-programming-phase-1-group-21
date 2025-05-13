@@ -1,7 +1,7 @@
 go to login menu
 menu enter mainmenu
-login -u sobhan -p <password1>
+login -u Ali -p Alireza123!
 menu enter mainmenu
 menu enter game
-new game sobhan sobi maryam
+new game sobi sobhan maryam
 print map -l (0,0) -s 50
