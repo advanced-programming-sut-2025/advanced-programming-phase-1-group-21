@@ -87,11 +87,22 @@ public class MapBuilder {
         }
     }
 
+    private boolean checkNull(Map map, int startY, int startX, int height, int width) {
+        for (int y = startY; y < startY + height; y++) {
+            for (int x = startX; x < startX + width; x++) {
+                Tile tile = map.getTile(new Coord(x, y));
+                if (tile == null) return true;
+            }
+        }
+        return false;
+    }
+
     public boolean isAreaAvailable(Map map, int startY, int startX, int height, int width) {
+        if (checkNull(map, startY, startX, height, width)) return false;
         for (int y = startY - 1; y <= startY + height; y++) {
             for (int x = startX - 1; x <= startX + width; x++) {
                 Tile tile = map.getTile(new Coord(x, y));
-                if (tile == null || !tile.isEmpty()) {
+                if (tile != null && !tile.isEmpty()) {
                     return false;
                 }
             }

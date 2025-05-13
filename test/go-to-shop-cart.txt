@@ -8,7 +8,7 @@ go to village
 cheat add item -n Wood -c 1000
 cheat add item -n Stone -c 1000
 cheat add item -n Coin -c 10000
-walk -l (3, 1)
-walk -l (3, 2)
+walk -l (9, 13)
+walk -l (9, 14)
 show all available products
-build -a normal coop -l (50, 50)
+build -a normal coop -l (23, 10)
