@@ -4,7 +4,6 @@ import models.Item.Item;
 import models.map.Placable;
 import models.map.Tile;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Animal implements Placable {
@@ -12,7 +11,9 @@ public class Animal implements Placable {
     private AnimalTypes animalType;
     private int price;
     private int friendship;
-    private boolean ifFeedToday = false;
+    private boolean isFeedToday = false;
+    private boolean isTodayPet = false;
+    private boolean isOut = false;
     private ArrayList<String> products = new ArrayList<>();
     private String todayProduct ;
     private int produceStage;
@@ -24,6 +25,22 @@ public class Animal implements Placable {
 
     public int getPrice() {
         return price;
+    }
+
+    public boolean isTodayPet() {
+        return isTodayPet;
+    }
+
+    public boolean isOut() {
+        return isOut;
+    }
+
+    public void setOut(boolean out) {
+        isOut = out;
+    }
+
+    public void setTodayPet(boolean todayPet) {
+        isTodayPet = todayPet;
     }
 
     public ArrayList<String> getProducts() {
@@ -44,18 +61,20 @@ public class Animal implements Placable {
 
     public void pet(){
         this.friendship += 15;
+        isTodayPet = true;
     }
 
-    public boolean isIfFeedToday() {
-        return ifFeedToday;
+    public boolean isFeedToday() {
+        return isFeedToday;
     }
 
-    public void setIfFeedToday(boolean ifFeedToday) {
-        this.ifFeedToday = ifFeedToday;
+    public void setFeedToday(boolean feedToday) {
+        this.isFeedToday = feedToday;
     }
 
     public void shepherd(){
         this.friendship += 8;
+        isFeedToday = true;
     }
 
     public AnimalTypes getAnimalType() {

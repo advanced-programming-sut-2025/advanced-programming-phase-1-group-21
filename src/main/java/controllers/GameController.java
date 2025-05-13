@@ -21,8 +21,6 @@ import views.menu.GameTerminalView;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.random.RandomGenerator;
 
 public class GameController{
 
@@ -386,7 +384,7 @@ public class GameController{
             return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
         if (tile.getTileType() != TileType.PLOWED)
             return Result.failure(GameError.PLANT_ON_PLOWED);
-        inventory.removeItem(seed);
+        inventory.removeItem(seed);//TODO : this command deletes all seeds of this type(it should delete only one of them)
         ((Seed) seed).plant(tile);
         return Result.success(null);
     }
@@ -528,7 +526,10 @@ public class GameController{
         ArrayList<String> output = new ArrayList<>();
         output.add("Animals:");
         for(Animal animal : App.game.getCurrentPlayer().getAnimals()){
-            output.add(animal.getName() + " - " + animal.getFriendship());
+            output.add("animal name: " + animal.getName());
+            output.add("friendship: " + animal.getFriendship());
+            output.add("is today feed: " + animal.isFeedToday());
+            output.add("is today pet: " + animal.isTodayPet());
         }
         return Result.success(output);
     }
@@ -559,7 +560,7 @@ public class GameController{
         if (animal == null)
             return Result.failure(GameError.ANIMAL_NOT_FOUND);
 
-        animal.setIfFeedToday(true);
+        animal.setFeedToday(true);
         return Result.success(null);
     }
 
@@ -585,39 +586,43 @@ public class GameController{
             return Result.failure(GameError.ANIMAL_NOT_FOUND);
 
         if(animal.collectProduce() == null)
-            return Result.failure(GameError.ANIMAL_NOT_FOUND);
+            return Result.failure(GameError.ANIMAL_DOES_NOT_HAVE_PRODUCT);
 
         if(animal.getAnimalType().equals(AnimalTypes.COW)){
             if(App.game.getCurrentPlayer().getInventory().canRemoveItem(Item.build("milk pail" , 1))) {
-                animal.setTodayProduct(null);
                 App.game.getCurrentPlayer().getInventory().addItem(animal.collectProduce());
+                animal.setFriendship(animal.getFriendship() + 5);
+                animal.setTodayProduct(null);
             }
         }
 
         else if(animal.getAnimalType().equals(AnimalTypes.GOAT)){
             if(App.game.getCurrentPlayer().getInventory().canRemoveItem(Item.build("milk pail" , 1))) {
-                animal.setTodayProduct(null);
                 App.game.getCurrentPlayer().getInventory().addItem(animal.collectProduce());
+                animal.setFriendship(animal.getFriendship() + 5);
+                animal.setTodayProduct(null);
             }
         }
 
         else if(animal.getAnimalType().equals(AnimalTypes.SHEEP)){
             if(App.game.getCurrentPlayer().getInventory().canRemoveItem(Item.build("sheer" , 1))) {
-                animal.setTodayProduct(null);
                 App.game.getCurrentPlayer().getInventory().addItem(animal.collectProduce());
+                animal.setFriendship(animal.getFriendship() + 5);
+                animal.setTodayProduct(null);
             }
         }
 
         else if(animal.getAnimalType().equals(AnimalTypes.RABBIT)){
             if(App.game.getCurrentPlayer().getInventory().canRemoveItem(Item.build("sheer" , 1))) {
-                animal.setTodayProduct(null);
                 App.game.getCurrentPlayer().getInventory().addItem(animal.collectProduce());
+                animal.setFriendship(animal.getFriendship() + 5);
+                animal.setTodayProduct(null);
             }
         }
 
         else {
-            animal.setTodayProduct(null);
             App.game.getCurrentPlayer().getInventory().addItem(animal.collectProduce());
+            animal.setTodayProduct(null);
             return Result.success(animal.collectProduce());
         }
 
@@ -646,10 +651,10 @@ public class GameController{
                 isNearLake = true;
         }
         if(!isNearLake)
-            return Result.failure(GameError.CANT_STAND_ON_LAKE);
+            return Result.failure(GameError.YOU_ARE_NOT_NEAR_TO_LAKE);
 
         if(!App.game.getCurrentPlayer().getInventory().canRemoveItem(Item.build(fishingPole , 1)))
-            return Result.failure(GameError.CANT_STAND_ON_LAKE);
+            return Result.failure(GameError.TOOL_NOT_FOUND);
 
 
         double amount = Math.random() * (App.game.getCurrentPlayer().getSkill().getFishingSkill() + 2);
@@ -660,14 +665,14 @@ public class GameController{
         if(App.game.getWeather().equals(Weather.STORM))
             amount *= 0.5;
         if(fishingPole.equals("training")){
-            App.game.getCurrentPlayer().getInventory().addItem(Item.build(FishingPole.getCheapestFish() , (int) amount));
+            App.game.getCurrentPlayer().getInventory().addItem(Item.build(FishingPole.getCheapestFish() , Math.min(6 , (int) amount)));
             return Result.success(null);
         }
         else if(fishingPole.equals("bamboo") || fishingPole.equals("iridium") || fishingPole.equals("fiberglass")){
-            App.game.getCurrentPlayer().getInventory().addItem(Item.build(FishingPole.randomFish() , (int) amount));
+            App.game.getCurrentPlayer().getInventory().addItem(Item.build(FishingPole.randomFish() , Math.min(6 , (int) amount)));
             return Result.success(null);
         }
-        return Result.failure(GameError.CANT_STAND_ON_LAKE);
+        return Result.success(null);
 
     }
 

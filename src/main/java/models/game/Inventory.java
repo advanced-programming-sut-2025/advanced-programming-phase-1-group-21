@@ -226,7 +226,7 @@ public class Inventory {
 
     public boolean toolEquip(String toolName){
         for(Item item : items) {
-            if(item.getName().equals(toolName)) {
+            if(item.getName().equals(toolName) && (item.getItemType().equals(ItemType.TOOL))) {
                 App.game.getCurrentPlayer().setItemInHand(item);
                 return true;
             }
