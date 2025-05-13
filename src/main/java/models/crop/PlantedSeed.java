@@ -46,11 +46,11 @@ public class PlantedSeed implements Placable {
 
 		waterStage--;
 		if (waterStage < 0)
-			return false;
+			return true;
 
 		day++;
 		stage = seedData.getStage(day);
-		return true;
+		return false;
 	}
 
 	public boolean isOneTime() {
