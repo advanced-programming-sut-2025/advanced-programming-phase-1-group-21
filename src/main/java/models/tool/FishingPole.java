@@ -9,9 +9,11 @@ import models.map.Coord;
 import models.map.Lake;
 import models.map.Tile;
 import models.result.Result;
+import models.skill.SkillType;
 import models.time.Season;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class FishingPole extends Tool {
 	public FishingPole() {
@@ -66,7 +68,21 @@ public class FishingPole extends Tool {
 	}
 
 	public static String randomFish(){
-		return null;
+		ArrayList<FishData> allFishes = FishData.getFishes();
+		ArrayList<String> catchFishes  = new ArrayList<>();
+		for(FishData fishData : allFishes){
+			if(fishData.getSeason().equals(App.game.getSeason())){
+				if(App.game.getCurrentPlayer().getSkillLevel(SkillType.FISHING) >= 4){
+					catchFishes.add(fishData.getName());
+				}
+				else{
+					if(fishData.getType().equalsIgnoreCase("normal"))
+						catchFishes.add(fishData.getName());
+				}
+			}
+		}
+		Random rand = new Random();
+		return catchFishes.get(rand.nextInt(catchFishes.size()));
 	}
 
 	@Override

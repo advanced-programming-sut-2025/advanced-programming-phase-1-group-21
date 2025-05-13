@@ -25,6 +25,10 @@ public class FishData implements Data {
 		FishData.fishes = fishes;
 	}
 
+	public static ArrayList<FishData> getFishes() {
+		return fishes;
+	}
+
 	public void fullConstruct() {
 //		System.out.println(name + " " + type + " " + season + " " + price);
 	}
