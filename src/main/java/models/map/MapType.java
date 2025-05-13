@@ -8,7 +8,9 @@ public enum MapType {
     FARM(30, 50),
     VILLAGE(60, 60),
     SHOP(8, 8),
-    NPCHOUSE(8, 8),
+    NPC_HOUSE(8, 8),
+    BARN(4, 7),
+    COOP(3, 6),
     ;
 
     public final int x;
