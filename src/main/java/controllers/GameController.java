@@ -1148,13 +1148,16 @@ public class GameController{
 
         Map map = App.game.getCurrentPlayer().getDefaultMap();
         MapBuilder mapBuilder = new MapBuilder();
-        if (!mapBuilder.isAreaAvailable(map, coord.getY(), coord.getX(), mapType.y, mapType.x))
+
+        mapBuilder.buildAnimalHouse(mapType);
+        TileType tileType = TileType.fromName(name);
+
+        System.err.println("MAP: " + mapType.x + " , " + mapType.y);
+        if (!mapBuilder.isAreaAvailable(map, coord.getY(), coord.getX(), tileType.getDefaultHeight(), tileType.getDefaultWidth()))
             return Result.failure(GameError.CANT_PLACE);
 
         AnimalHouse animalHouse = new AnimalHouse(name);
         map.build(animalHouse);
-
-        TileType tileType = TileType.fromName(name);
         mapBuilder.placeBuilding(map, Pair.of(tileType, animalHouse), coord.getY(), coord.getX(), tileType.getDefaultHeight(), tileType.getDefaultWidth());
 
         return Result.success(null);

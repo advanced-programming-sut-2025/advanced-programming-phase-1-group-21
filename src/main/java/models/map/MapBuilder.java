@@ -91,7 +91,7 @@ public class MapBuilder {
         for (int y = startY - 1; y <= startY + height; y++) {
             for (int x = startX - 1; x <= startX + width; x++) {
                 Tile tile = map.getTile(new Coord(x, y));
-                if (tile != null && !tile.isEmpty()) {
+                if (tile == null || !tile.isEmpty()) {
                     return false;
                 }
             }
@@ -161,6 +161,12 @@ public class MapBuilder {
         map.tiles.get(7).get(7).setTileType(TileType.DOOR);
         map.tiles.get(7).get(0).setPlacable(npc);
         map.tiles.get(7).get(0).setTileType(TileType.NPC);
+        return map;
+    }
+
+    public Map buildAnimalHouse(MapType mapType) {
+        Map map = new Map(mapType);
+        map.tiles.get(7).get(7).setTileType(TileType.DOOR);
         return map;
     }
 }

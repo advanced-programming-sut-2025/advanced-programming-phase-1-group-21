@@ -6,10 +6,8 @@ import models.DailyUpdate;
 import models.Item.Item;
 import models.data.ShopData;
 import models.game.Inventory;
-import models.game.Player;
 import models.result.Result;
 import models.result.errorTypes.GameError;
-import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,8 +81,10 @@ public class Shop extends Building {
 
 	public List<ShopItemInstance> getAvailableItems() {
 		List<ShopItemInstance> available = new ArrayList<>();
-		for (ShopItemInstance item : available) {
-			if (isItemAvailable(item)) available.add(item);
+		for (ShopItemInstance item: items) {
+			if (isItemAvailable(item)) {
+				available.add(item);
+			}
 		}
 		return available;
 	}
@@ -186,7 +186,7 @@ public class Shop extends Building {
 		}
 
 		public boolean canSellMore() {
-			return soldToday < data.getDailyLimit();
+			return data.getDailyLimit() == -1 || soldToday < data.getDailyLimit();
 		}
 
 		@Override
@@ -197,7 +197,7 @@ public class Shop extends Building {
 		@Override
 		public String toString() {
 			return data.toString() +
-					" | Sold Today: " + soldToday + "/" + data.getDailyLimit();
+					" | Sold Today: " + soldToday;
 		}
 
 		public int getRemaining() {

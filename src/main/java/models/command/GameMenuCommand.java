@@ -9,7 +9,6 @@ public enum GameMenuCommand implements Command {
     EXIT_GAME("\\s*exit\\s+game\\s*"),
     HELP_READING_MAP("\\s*help\\s+reading\\s+map\\s*"),
     WALK("\\s*walk\\s+-l\\s+\\((?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\)\\s*"),
-    BUILD("\\s*build\\s+-a\\s+(?<buildingName>)\\s+-l\\s+\\((?<x>\\d+),(?<y>\\d+)\\)\\s*"),
     PET("\\s*pet\\s+-n\\s+(?<name>\\S+)\\s*"),
     CHEAT_ANIMAL_FRIENDSHIP("\\s*cheat\\s+set\\s+friendship\\s+-n\\s+(?<name>\\S+)\\s+-c\\s+(?<amount>\\d+)\\s*"),
     ANIMAL("show my animals"),
@@ -85,7 +84,6 @@ public enum GameMenuCommand implements Command {
     COOKING_REFRIGERATOR("\\s*cooking\\s+refrigerator\\s+(?<action>put|pick)\\s+(?<item>\\.+)\\s*"),
     COOKING_SHOW_RECIPES("cooking show recipes"),
 //    EAT("eat (?<food_name>.*)"),
-//    BUILD("build -a <building_name> -l <x , y>"),
 //    BUY_ANIMAL("buy animal -a <animal> -n <name>"),
 //    PET("pet -n <name>"),
 //    CHEAT_FRIENDSHIP("cheat set friendship -n <animal name> -c <amount>"),
@@ -100,6 +98,7 @@ public enum GameMenuCommand implements Command {
     SHOW_PLANT("\\s*show\\s+plant\\s+-l\\s+\\((?<x>\\d+),(?<y>\\d+)\\)\\s*"),
     HOWMUCH_WATER("\\s*howmuch\\s+water\\s*"),
     //SHOP
+    BUILD("\\s*build\\s+-a\\s+(?<name>[A-Za-z]+(?:\\s+[A-Za-z]+)*)\\s+-l\\s*\\(?\\s*(?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\s*\\)?\\s*"),
     SHOP_SHOW_ALL_PRODUCTS("show all products"),
     SHOP_SHOW_ALL_AVAILABLE_PRODUCTS("show all available products"),
     SHOP_PURCHASE("purchase (?<name>.+) -n (?<number>\\d+)"),

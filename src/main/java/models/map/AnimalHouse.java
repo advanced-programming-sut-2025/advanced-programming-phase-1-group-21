@@ -11,6 +11,7 @@ public class AnimalHouse extends Building implements Serializable {
     String type;
 
     public AnimalHouse(String name) {
+        map = (new MapBuilder().buildAnimalHouse(MapType.getMapType(name)));
         houseType = AnimalHouseType.getAnimalHouseType(name);
         this.type = name.split("\\s+")[1];
         if (houseType == null) throw new RuntimeException("Could not find animal type " + name);
