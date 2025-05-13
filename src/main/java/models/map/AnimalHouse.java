@@ -5,7 +5,7 @@ import models.animal.Animal;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class AnimalHouse extends Building implements Serializable {
+public class AnimalHouse extends Building {
     ArrayList<Animal> animals;
     AnimalHouseType houseType;
     String type;
@@ -20,6 +20,11 @@ public class AnimalHouse extends Building implements Serializable {
     @Override
     public boolean canEnter() {
         return true;
+    }
+
+    @Override
+    public TileType getTileType() {
+        return TileType.ANIMAL;
     }
 
     @Override
