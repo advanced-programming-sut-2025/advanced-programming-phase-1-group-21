@@ -9,6 +9,11 @@ public class Mines extends Building {
     }
 
     @Override
+    public TileType getTileType() {
+        return TileType.ARTISAN;
+    }
+
+    @Override
     public boolean canEnter() {
         return true;
     }

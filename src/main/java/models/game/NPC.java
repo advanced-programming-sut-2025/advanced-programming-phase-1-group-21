@@ -2,10 +2,7 @@ package models.game;
 
 import models.Item.Item;
 import models.data.*;
-import models.map.Coord;
-import models.map.Building;
-import models.map.MapBuilder;
-import models.map.Placable;
+import models.map.*;
 
 import java.util.ArrayList;
 
@@ -86,6 +83,11 @@ public class NPC implements Placable {
     }
 
     @Override
+    public TileType getTileType() {
+        return TileType.NPC;
+    }
+
+    @Override
     public boolean isWalkable() {
         return false;
     }
@@ -103,6 +105,11 @@ public class NPC implements Placable {
 
         public NPCHouse() {
             this.map = (new MapBuilder()).buildNPCHouse(NPC.this);
+        }
+
+        @Override
+        public TileType getTileType() {
+            return TileType.NPC;
         }
 
         @Override

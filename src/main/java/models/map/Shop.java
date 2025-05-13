@@ -151,6 +151,11 @@ public class Shop extends Building {
 	}
 
 	@Override
+	public TileType getTileType() {
+		return shopType;
+	}
+
+	@Override
 	public boolean canEnter() {
 		return true;
 	}

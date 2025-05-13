@@ -48,6 +48,12 @@ public enum GameError implements Error {
     YOU_ARE_NOT_NEAR_TO_LAKE("You are not near to lake"),
     REQUIREMENT_NOT_SATISFIED("One or more requirements are not met."),
     CANT_PLACE("can't place there!"),
+    WRONG_ITEM_TYPES("There are no goods with these ingredients."),
+    CANT_FIND_ITEM_IN_INVENTORY("You don't have this item in your inventory"),
+    NO_FREE_ARTISAN_AROUND("There are no free artisan around you"),
+    NO_READY_ARTISAN_AROUND("There are no ready artisan around you"),
+    CANT_ADD_ITEM_TO_INVENTORY("You can't add this item to your inventory"),
+
     ;
 
 

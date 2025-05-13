@@ -17,21 +17,21 @@ public class ArtisanRecipeData implements Data {
 	private int processingTime;
 
 	public void printData() {
-		System.out.println("----------------------------------");
-		System.out.println("name: " + name);
-		System.out.println("description: " + description);
-		System.out.println("processingTime: " + processingTime);
-		System.out.println("ingredients: ");
+		System.out.println("	----------------------------------");
+		System.out.println("	name: " + name);
+		System.out.println("	description: " + description);
+		System.out.println("	processingTime: " + processingTime);
+		System.out.println("	ingredients: ");
 		if (ingredients != null)
 			for (Map<String, Integer> map : ingredients)
 				for (Map.Entry<String, Integer> entry : map.entrySet()) {
 					String key = entry.getKey();
 					int value = entry.getValue();
-					System.out.println("key: " + key + " value: " + value);
+					System.out.println("	key: " + key + " value: " + value);
 				}
 		else
-			System.out.println("ingredients is null");
-		System.out.println("----------------------------------");
+			System.out.println("	ingredients is null");
+		System.out.println("	----------------------------------");
 	}
 
 	public void fullConstruct() {
