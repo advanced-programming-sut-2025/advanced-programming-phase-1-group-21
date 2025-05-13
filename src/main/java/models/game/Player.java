@@ -9,9 +9,11 @@ import models.animal.Animal;
 import models.map.*;
 import models.map.Coord;
 import models.map.Map;
+import models.skill.Skill;
 import models.user.User;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Player implements DailyUpdate {
     static final int MAX_ENERGY = 200;
@@ -21,7 +23,6 @@ public class Player implements DailyUpdate {
     private Building building;
     private Map map;
     private Map defaultMap;
-
     private Coord coord = new Coord(0 , 0);
     private int agronomicAbility = 0;
     private int miningAbility = 0;
@@ -34,6 +35,7 @@ public class Player implements DailyUpdate {
     private Item itemInHand;
     private ArrayList<NPCFriendship> npcFriendships;
     private ArrayList<Recipe> recipes = new ArrayList<>();
+    private Skill skill = new Skill();
 
     public ArrayList<Recipe> getRecipes(RecipeType type) {
         ArrayList<Recipe> recipes = new ArrayList<>();
@@ -227,7 +229,35 @@ public class Player implements DailyUpdate {
 
     @Override
     public boolean nextDay() {
-        defaultMap.nextDay(); //DON'T UPDATE ANY OTHERRRR MAPPP !!! it's done recursivly in nextDay in map class
+        defaultMap.nextDay();//DON'T UPDATE ANY OTHERRRR MAPPP !!! it's done recursivly in nextDay in map class
+
+        for(Animal animal : animals) {
+            if(!animal.isFeedToday())
+                animal.setFriendship(Math.max(animal.getFriendship() - 20 , 0));
+            if(animal.isOut())
+                animal.setFriendship(Math.max(animal.getFriendship() - 20 , 0));
+            if(!animal.isTodayPet())
+                animal.setFriendship(Math.max(0 , (animal.getFriendship()/200) - 10));
+            if(animal.isFeedToday()){
+                if(animal.getFriendship() < 100){
+                    animal.setTodayProduct(animal.getProducts().get(0));
+                }
+                else{
+                    Random rand = new Random();
+                    double randomDouble = 0.5 + Math.random();
+                    int RandomInt = (int) (animal.getFriendship() + (150 * randomDouble));
+                    int randomVariable = rand.nextInt(1500);
+                    if(randomVariable < RandomInt){
+                        animal.setTodayProduct(animal.getProducts().get(1 % animal.getProducts().size()));
+                    }
+                    else
+                        animal.setTodayProduct(animal.getProducts().get(0));
+                }
+            }
+            animal.setOut(false);
+            animal.setFeedToday(false);
+            animal.setTodayPet(false);
+        }
         return false;
     }
 
@@ -285,5 +315,9 @@ public class Player implements DailyUpdate {
 
     public boolean isFainted() {
         return energy.getCurrentEnergy() == 0;
+    }
+
+    public Skill getSkill() {
+        return skill;
     }
 }

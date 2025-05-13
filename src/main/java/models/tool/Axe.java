@@ -41,6 +41,8 @@ public class Axe extends Tool {
 				App.game.getCurrentPlayer().decreaseEnergy(2);
 			if(this.toolMaterialType.equals(ToolMaterialType.IRIDIUM))
 				App.game.getCurrentPlayer().decreaseEnergy(1);
+			if(App.game.getCurrentPlayer().getSkill().getFarmingLevel() >= 4)
+				App.game.getCurrentPlayer().setEnergy(App.game.getCurrentPlayer().getEnergy() + 1);
 			return Result.success(null, "to yek derakht ro koshti");
 		}
 

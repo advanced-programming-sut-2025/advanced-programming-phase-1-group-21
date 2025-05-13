@@ -3,6 +3,7 @@ package controllers;
 import models.App;
 import models.Item.*;
 import models.Menu;
+import models.animal.AnimalTypes;
 import models.data.items.SeedData;
 import models.tool.*;
 import models.animal.Animal;
@@ -20,8 +21,6 @@ import views.menu.GameTerminalView;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.random.RandomGenerator;
 
 public class GameController{
 
@@ -385,7 +384,7 @@ public class GameController{
             return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
         if (tile.getTileType() != TileType.PLOWED)
             return Result.failure(GameError.PLANT_ON_PLOWED);
-        inventory.removeItem(seed);
+        inventory.removeItem(seed);//TODO : this command deletes all seeds of this type(it should delete only one of them)
         ((Seed) seed).plant(tile);
         return Result.success(null);
     }
@@ -527,7 +526,10 @@ public class GameController{
         ArrayList<String> output = new ArrayList<>();
         output.add("Animals:");
         for(Animal animal : App.game.getCurrentPlayer().getAnimals()){
-            output.add(animal.getName() + " - " + animal.getFriendship());
+            output.add("animal name: " + animal.getName());
+            output.add("friendship: " + animal.getFriendship());
+            output.add("is today feed: " + animal.isFeedToday());
+            output.add("is today pet: " + animal.isTodayPet());
         }
         return Result.success(output);
     }
@@ -558,7 +560,7 @@ public class GameController{
         if (animal == null)
             return Result.failure(GameError.ANIMAL_NOT_FOUND);
 
-        animal.setIfFeedToday(true);
+        animal.setFeedToday(true);
         return Result.success(null);
     }
 
@@ -576,9 +578,55 @@ public class GameController{
         return Result.success(output);
     }
 
-    public Result<Item> collectProducts(String animalName) {
+    public Result<Item> collectProducts(String name) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        Animal animal = App.game.getCurrentPlayer().getAnimalByName(name);
+        if (animal == null)
+            return Result.failure(GameError.ANIMAL_NOT_FOUND);
+
+        if(animal.collectProduce() == null)
+            return Result.failure(GameError.ANIMAL_DOES_NOT_HAVE_PRODUCT);
+
+        if(animal.getAnimalType().equals(AnimalTypes.COW)){
+            if(App.game.getCurrentPlayer().getInventory().canRemoveItem(Item.build("milk pail" , 1))) {
+                App.game.getCurrentPlayer().getInventory().addItem(animal.collectProduce());
+                animal.setFriendship(animal.getFriendship() + 5);
+                animal.setTodayProduct(null);
+            }
+        }
+
+        else if(animal.getAnimalType().equals(AnimalTypes.GOAT)){
+            if(App.game.getCurrentPlayer().getInventory().canRemoveItem(Item.build("milk pail" , 1))) {
+                App.game.getCurrentPlayer().getInventory().addItem(animal.collectProduce());
+                animal.setFriendship(animal.getFriendship() + 5);
+                animal.setTodayProduct(null);
+            }
+        }
+
+        else if(animal.getAnimalType().equals(AnimalTypes.SHEEP)){
+            if(App.game.getCurrentPlayer().getInventory().canRemoveItem(Item.build("sheer" , 1))) {
+                App.game.getCurrentPlayer().getInventory().addItem(animal.collectProduce());
+                animal.setFriendship(animal.getFriendship() + 5);
+                animal.setTodayProduct(null);
+            }
+        }
+
+        else if(animal.getAnimalType().equals(AnimalTypes.RABBIT)){
+            if(App.game.getCurrentPlayer().getInventory().canRemoveItem(Item.build("sheer" , 1))) {
+                App.game.getCurrentPlayer().getInventory().addItem(animal.collectProduce());
+                animal.setFriendship(animal.getFriendship() + 5);
+                animal.setTodayProduct(null);
+            }
+        }
+
+        else {
+            App.game.getCurrentPlayer().getInventory().addItem(animal.collectProduce());
+            animal.setTodayProduct(null);
+            return Result.success(animal.collectProduce());
+        }
+
+        return Result.success(animal.collectProduce());
     }
 
     public Result<Void> sellAnimal(String name){
@@ -596,7 +644,36 @@ public class GameController{
 
     public Result<Void> fishing(String fishingPole){
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        boolean isNearLake = false;
+        for(Tile tile : App.game.getCurrentPlayer().getNeighborTiles()){
+            if(tile.getPlacable(Lake.class) != null)
+                isNearLake = true;
+        }
+        if(!isNearLake)
+            return Result.failure(GameError.YOU_ARE_NOT_NEAR_TO_LAKE);
+
+        if(!App.game.getCurrentPlayer().getInventory().canRemoveItem(Item.build(fishingPole , 1)))
+            return Result.failure(GameError.TOOL_NOT_FOUND);
+
+
+        double amount = Math.random() * (App.game.getCurrentPlayer().getSkill().getFishingSkill() + 2);
+        if(App.game.getWeather().equals(Weather.SUNNY))
+            amount *= 1.5;
+        if(App.game.getWeather().equals(Weather.RAINY))
+            amount *= 1.2;
+        if(App.game.getWeather().equals(Weather.STORM))
+            amount *= 0.5;
+        if(fishingPole.equals("training")){
+            App.game.getCurrentPlayer().getInventory().addItem(Item.build(FishingPole.getCheapestFish() , Math.min(6 , (int) amount)));
+            return Result.success(null);
+        }
+        else if(fishingPole.equals("bamboo") || fishingPole.equals("iridium") || fishingPole.equals("fiberglass")){
+            App.game.getCurrentPlayer().getInventory().addItem(Item.build(FishingPole.randomFish() , Math.min(6 , (int) amount)));
+            return Result.success(null);
+        }
+        return Result.success(null);
+
     }
 
     public Result<Item> artisanUse(String artisanName , String item) {
