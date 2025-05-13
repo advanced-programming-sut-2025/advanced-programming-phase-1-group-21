@@ -82,8 +82,10 @@ public class Pickaxe extends Tool {
 			default -> 0;
         };
 		player.decreaseEnergy(use != 0 ? energyCost : 1);
-		if(player.getSkill().getMiningLevel() >= 4)
-			player.setEnergy(player.getEnergy() + 1);
+		if(use != 0) {
+			if (player.getSkill().getMiningLevel() >= 4)
+				player.setEnergy(player.getEnergy() + 1);
+		}
 
 		if (use == 0)
 			return Result.success(null, "kolang hich kari nakard");

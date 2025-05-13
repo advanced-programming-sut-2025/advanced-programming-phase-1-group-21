@@ -1,13 +1,17 @@
 package models.tool;
 
 import models.App;
+import models.Item.Consumable;
 import models.Item.Item;
+import models.data.FishData;
 import models.game.Player;
 import models.map.Coord;
 import models.map.Lake;
 import models.map.Tile;
 import models.result.Result;
 import models.time.Season;
+
+import java.util.ArrayList;
 
 public class FishingPole extends Tool {
 	public FishingPole() {
@@ -24,22 +28,27 @@ public class FishingPole extends Tool {
 		Tool fishingPole = (Tool) App.game.getCurrentPlayer().getItemInHand();
 
 		//TODO : check skills
-		if(fishingPole.toolMaterialType.equals(ToolMaterialType.PRIMITIVE) ||
+		if(fishingPole.toolMaterialType.equals(ToolMaterialType.EDUCATIONAL) || fishingPole.toolMaterialType.equals(ToolMaterialType.BAMBOO) || fishingPole.toolMaterialType.equals
+				(ToolMaterialType.IRIDIUM) || fishingPole.toolMaterialType.equals(ToolMaterialType.FIBERGLASS))
+			player.setEnergy(player.getEnergy() + 1);
+
+		if(fishingPole.toolMaterialType.equals(ToolMaterialType.EDUCATIONAL) ||
 				fishingPole.toolMaterialType.equals(ToolMaterialType.BAMBOO))
 			player.decreaseEnergy(8);
 
-		if(fishingPole.toolMaterialType.equals(ToolMaterialType.FIBERGLASS))
+		else if(fishingPole.toolMaterialType.equals(ToolMaterialType.FIBERGLASS))
 			player.decreaseEnergy(6);
 
-		if(fishingPole.toolMaterialType.equals(ToolMaterialType.IRIDIUM))
+		else if(fishingPole.toolMaterialType.equals(ToolMaterialType.IRIDIUM))
 			player.decreaseEnergy(4);
 
-		if(fishingPole.toolMaterialType.equals(ToolMaterialType.PRIMITIVE))
+		if(fishingPole.toolMaterialType.equals(ToolMaterialType.EDUCATIONAL))
 			return Result.success(Item.build(getCheapestFish() , 1));
 
-		if(fishingPole.toolMaterialType.equals(ToolMaterialType.BAMBOO) || fishingPole.toolMaterialType.equals
+		else if(fishingPole.toolMaterialType.equals(ToolMaterialType.BAMBOO) || fishingPole.toolMaterialType.equals
 				(ToolMaterialType.IRIDIUM) || fishingPole.toolMaterialType.equals(ToolMaterialType.FIBERGLASS))
 			return Result.success(Item.build(randomFish() , 1));
+
 		return null;
 
 	}

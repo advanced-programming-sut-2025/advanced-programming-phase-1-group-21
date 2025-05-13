@@ -29,8 +29,10 @@ public class Shear extends Tool {
 		if(animal.getTodayProduct() == null)
 			return null;
 
-		if(animal.getAnimalType().equals(AnimalTypes.SHEEP) || (animal.getAnimalType().equals(AnimalTypes.RABBIT)))
+		if(animal.getAnimalType().equals(AnimalTypes.SHEEP) || (animal.getAnimalType().equals(AnimalTypes.RABBIT))) {
+			animal.setFriendship(animal.getFriendship() + 5);
 			return Result.success(Item.build(animal.getTodayProduct() , 1));
+		}
 
 		return null;
 	}

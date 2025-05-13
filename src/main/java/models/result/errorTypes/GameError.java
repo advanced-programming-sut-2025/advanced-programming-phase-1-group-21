@@ -44,6 +44,8 @@ public enum GameError implements Error {
     NOT_FOUND("There is no such item"),
     TOOL_NOT_IN_HAND("Tool is not in hand"),
     MAXIMUM_SIZE_EXCEEDED("Maximum size exceeded"),
+    ANIMAL_DOES_NOT_HAVE_PRODUCT("Animal does not have product"),
+    YOU_ARE_NOT_NEAR_TO_LAKE("You are not near to lake"),
     ;
 
 
