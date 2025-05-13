@@ -803,10 +803,11 @@ public class GameController{
 //        if(!App.game.getCurrentPlayer().weAreNextToEachOther(player))
 //            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
 
-        App.game.getRelationOfUs(App.game.getCurrentPlayer(), player).addTalk(App.game.getCurrentPlayer().getUser().
-                getUsername() + ": " + massage);
-        App.game.getRelationOfUs(App.game.getCurrentPlayer(), player).setFriendshipXP(App.game.getRelationOfUs(App.game
-                .getCurrentPlayer(), player).getFriendshipXP() + 20);
+        Relation relation = App.game.getRelationOfUs(App.game.getCurrentPlayer() , player);
+        relation.addTalk(App.game.getCurrentPlayer().getUser().getUsername() + ": " + massage);
+        if(!relation.isTodayTalk())
+            relation.setFriendshipXP(relation.getFriendshipXP() + 20);
+        relation.setTodayTalk(true);
         return Result.success(null);
     }
 
@@ -845,14 +846,11 @@ public class GameController{
         if(relation.getLevel().getLevel() == 0)
             return Result.failure(GameError.FRIENDSHIP_LEVEL_IS_NOT_ENOUGH);
 
-        List<Item> gift = new ArrayList<>();
-//        Item item = new Item(itemName , null , 0 , amount); Previews version
         Item item = Item.build(itemName, amount);
-        gift.add(item);
-        if(!App.game.getCurrentPlayer().getInventory().canRemoveItemList(gift))
+        if(!App.game.getCurrentPlayer().getInventory().canRemoveItem(item))
             return Result.failure(GameError.NOT_ENOUGH_ITEMS);
 
-        App.game.getCurrentPlayer().getInventory().removeItemList(gift);
+        App.game.getCurrentPlayer().getInventory().removeItem(item);
         player.getInventory().addItem(item);
         relation.addGift(new Gift(App.game.getCurrentPlayer() , player , item , relation.getGifts().size()));
         return Result.success(null);
@@ -885,11 +883,10 @@ public class GameController{
             return Result.failure(GameError.GIFT_ID_DOES_NOT_EXIST);
 
         if((rate > 5) || (rate < 1))
-            return Result.failure(GameError.RATE_MUST_BE_POSITIVE);
+            return Result.failure(GameError.RATE_MUST_BE_IN_RANGE);
 
         relation.getGifts().get(giftID).setRate(rate);
         relation.setFriendshipXP(relation.getFriendshipXP() + (int) ((rate - 3)*30 + 15));
-        relation.checkOverFlow();
         return Result.success(null);
     }
 
@@ -937,7 +934,8 @@ public class GameController{
         if(relation.getLevel().getLevel() < 2)
             return Result.failure(GameError.FRIENDSHIP_LEVEL_IS_NOT_ENOUGH);
 
-        relation.setFriendshipXP(relation.getFriendshipXP() + 60);
+        if(!relation.isTodayHug())
+            relation.setFriendshipXP(relation.getFriendshipXP() + 60);
         relation.checkOverFlow();
         return Result.success(null);
     }
@@ -958,14 +956,11 @@ public class GameController{
         if(relation.getLevel().getLevel() == 0)
             return Result.failure(GameError.FRIENDSHIP_LEVEL_IS_NOT_ENOUGH);
 
-        List<Item> gift = new ArrayList<>();
-//        Item item = new Item("Bouquet", null , 0 , 1); Previews version
         Item item = Item.build("Bouquet", 1);
-        gift.add(item);
-        if(!App.game.getCurrentPlayer().getInventory().canRemoveItemList(gift))
+        if(!App.game.getCurrentPlayer().getInventory().canRemoveItem(item))
             return Result.failure(GameError.NOT_ENOUGH_ITEMS);
 
-        App.game.getCurrentPlayer().getInventory().removeItemList(gift);
+        App.game.getCurrentPlayer().getInventory().removeItem(item);
         player.getInventory().addItem(item);
         relation.setFlower(true);
         relation.checkOverFlow();
@@ -981,8 +976,8 @@ public class GameController{
         Player player = App.game.getPlayerByName(username);
         if(player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
 
-        if(!App.game.getCurrentPlayer().weAreNextToEachOther(player))
-            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
+//        if(!App.game.getCurrentPlayer().weAreNextToEachOther(player))
+//            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
 
         Relation relation = App.game.getRelationOfUs(App.game.getCurrentPlayer(), player);
         if(relation.getLevel().getLevel() < 3)

@@ -26,7 +26,7 @@ public enum GameError implements Error {
     TILE_DOESNT_HAVE_WATER("Tile does not have water"),
     NOT_ENOUGH_ITEM("Not enough items"),
     GIFT_ID_DOES_NOT_EXIST("Gift id does not exist"),
-    RATE_MUST_BE_POSITIVE("Rate must be positive"),
+    RATE_MUST_BE_IN_RANGE("Rate must be in range"),
     YOU_ARE_GIRL("You are girl"),
     YOUR_WIFE_CAN_NOT_BE_A_BOY("Your wife can't be a boy"),
     CANT_ENTER("Cant enter"),

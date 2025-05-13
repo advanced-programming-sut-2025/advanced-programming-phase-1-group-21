@@ -218,7 +218,7 @@ public class Game implements DailyUpdate {
         nextDayWeather = calculateRandomWeather();
 
         for(Relation relation : relations) {
-            relation.setTodayCommunication(false);
+            relation.resetTodayCommunication();
         }
 
         for(NPC npc : npcs) {

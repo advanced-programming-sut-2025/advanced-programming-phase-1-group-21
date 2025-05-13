@@ -8,7 +8,10 @@ public class Relation {
     private ArrayList<String> talks = new ArrayList<>();
     private int friendshipXP = 0;
     private ArrayList<Trade> trades = new ArrayList<>();
-    private boolean todayCommunication = false;
+    private boolean todayTalk = false;
+    private boolean todayGift = false;
+    private boolean todayHug = false;
+    private boolean todayTrade = false;
     private ArrayList<Gift> gifts = new ArrayList<>();
     private boolean isFlower = false;
 
@@ -55,9 +58,6 @@ public class Relation {
         this.gifts.add(gift);
     }
 
-    public boolean isTodayCommunication() {
-        return todayCommunication;
-    }
 
     public void setPlayer1(Player player1) {
         this.player1 = player1;
@@ -84,10 +84,6 @@ public class Relation {
         trades.add(trade);
     }
 
-    public void setTodayCommunication(boolean todayCommunication) {
-        this.todayCommunication = todayCommunication;
-    }
-
     public boolean isFlower() {
         return isFlower;
     }
@@ -101,7 +97,7 @@ public class Relation {
             if(Level.equals(FriendshipLevel.LEVEL0))
                 friendshipXP = 0;
             levelDown();
-            friendshipXP = (Level.getLevel() + 1)*100 - friendshipXP;
+            friendshipXP = (Level.getLevel() + 1)*100 + friendshipXP;
         }
 
         if(Level.getLevel() == 2){
@@ -144,5 +140,44 @@ public class Relation {
             Level = FriendshipLevel.LEVEL2;
         else if(Level.equals(FriendshipLevel.LEVEL4))
             Level = FriendshipLevel.LEVEL3;
+    }
+
+    public boolean isTodayTalk() {
+        return todayTalk;
+    }
+
+    public boolean isTodayGift() {
+        return todayGift;
+    }
+
+    public boolean isTodayHug() {
+        return todayHug;
+    }
+
+    public boolean isTodayTrade() {
+        return todayTrade;
+    }
+
+    public void setTodayTalk(boolean todayTalk) {
+        this.todayTalk = todayTalk;
+    }
+
+    public void setTodayGift(boolean todayGift) {
+        this.todayGift = todayGift;
+    }
+
+    public void setTodayHug(boolean todayHug) {
+        this.todayHug = todayHug;
+    }
+
+    public void setTodayTrade(boolean todayTrade) {
+        this.todayTrade = todayTrade;
+    }
+
+    public void resetTodayCommunication(){
+        todayGift = false;
+        todayHug = false;
+        todayTrade = false;
+        todayTalk = false;
     }
 }
