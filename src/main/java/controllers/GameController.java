@@ -1162,6 +1162,7 @@ public class GameController{
 
     public String getMapStatus() {
         if (App.game == null) return "No game running";
+        printMapFull();
         return App.game.getCurrentPlayerMap().toString();
     }
 
@@ -1217,7 +1218,6 @@ public class GameController{
         mapBuilder.buildAnimalHouse(mapType);
         TileType tileType = TileType.fromName(name);
 
-        System.err.println("MAP: " + mapType.x + " , " + mapType.y);
         if (!mapBuilder.isAreaAvailable(map, coord.getY(), coord.getX(), tileType.getDefaultHeight(), tileType.getDefaultWidth()))
             return Result.failure(GameError.CANT_PLACE);
 
