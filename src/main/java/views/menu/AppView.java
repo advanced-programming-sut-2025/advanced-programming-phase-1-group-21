@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class AppView {
-    static Scanner scanner = new Scanner(System.in);
+    static Scanner scanner;
     GameTerminalView gameTerminalView = new GameTerminalView();
     LoginMenuView loginMenuView = new LoginMenuView();
     MainMenuView mainMenuView = new MainMenuView();
@@ -15,9 +15,17 @@ public class AppView {
     RegisterMenuView registerMenuView = new RegisterMenuView();
     TradeMenuView tradeMenuView = new TradeMenuView();
 
+    public void resetStatic() {
+        scanner = new Scanner(System.in);
+    }
+
     public void run() throws IOException {
         while (App.play){
             String command = scanner.nextLine().trim();
+            if (command.equals("EXIT")) {
+                scanner.close();
+                return;
+            }
             if(App.currentMenu.equals(Menu.RegisterMenu))
                 registerMenuView.Result(command);
             else if(App.currentMenu.equals(Menu.LoginMenu))
