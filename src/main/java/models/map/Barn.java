@@ -9,6 +9,11 @@ public class Barn extends Building{
     AnimalHouseType houseType;
 
     @Override
+    public TileType getTileType() {
+        return TileType.BARN;
+    }
+
+    @Override
     public boolean canEnter() {
         return true;
     }

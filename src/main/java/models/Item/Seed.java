@@ -63,8 +63,7 @@ public class Seed implements Item {
 
 	public PlantedSeed plant(Tile tile) {
 		PlantedSeed plantedSeed = new PlantedSeed(data);
-		tile.setPlacable(plantedSeed);
-		tile.setTileType(TileType.PLANTED_SEED);
+		plantedSeed.onPlace(tile);
 		return plantedSeed;
 	}
 }

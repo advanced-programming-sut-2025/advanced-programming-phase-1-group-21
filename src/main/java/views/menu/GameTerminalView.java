@@ -14,6 +14,7 @@ import models.result.Result;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 
@@ -274,36 +275,36 @@ public class GameTerminalView {
         else if ((matcher = GameMenuCommand.CHEAT_WEATHER.getMatcher(command)) != null) {
             System.out.println(gameController.setWeatherCheat(Weather.getWeather(matcher.group("type"))));
         }
-        else if((matcher = GameMenuCommand.SHOW_FRIENDSHIP.getMatcher(command)) != null) {
+        else if ((matcher = GameMenuCommand.SHOW_FRIENDSHIP.getMatcher(command)) != null) {
             printArrayList(gameController.showFriendships().getData());
         }
-        else if((matcher = GameMenuCommand.TALK.getMatcher(command)) != null) {
+        else if ((matcher = GameMenuCommand.TALK.getMatcher(command)) != null) {
             System.out.println(gameController.talk(matcher.group("username") , matcher.group("message").trim()));
         }
-        else if((matcher = GameMenuCommand.SHOW_TALK_HISTORY.getMatcher(command)) != null) {
+        else if ((matcher = GameMenuCommand.SHOW_TALK_HISTORY.getMatcher(command)) != null) {
             printArrayList(gameController.talkHistory(matcher.group("username")).getData());
         }
-        else if((matcher = GameMenuCommand.SHOW_GIFT_HISTORY.getMatcher(command)) != null) {
+        else if ((matcher = GameMenuCommand.SHOW_GIFT_HISTORY.getMatcher(command)) != null) {
             printArrayList(gameController.giftHistory(matcher.group("username")).getData());
         }
-        else if((matcher = GameMenuCommand.HUG.getMatcher(command)) != null) {
+        else if ((matcher = GameMenuCommand.HUG.getMatcher(command)) != null) {
             System.out.println(gameController.hug(matcher.group("username")));
         }
-        else if((matcher = GameMenuCommand.SEND_GIFT.getMatcher(command)) != null) {
+        else if ((matcher = GameMenuCommand.SEND_GIFT.getMatcher(command)) != null) {
             System.out.println(gameController.sendGift(matcher.group("username") , matcher.group("itemName")
                     , Integer.parseInt(matcher.group("amount"))));
         }
-        else if((matcher = GameMenuCommand.LIST_GIFTS.getMatcher(command)) != null) {
+        else if ((matcher = GameMenuCommand.LIST_GIFTS.getMatcher(command)) != null) {
             printArrayList(gameController.giftList().getData());
         }
-        else if((matcher = GameMenuCommand.GIFT_RATE.getMatcher(command)) != null) {
+        else if ((matcher = GameMenuCommand.GIFT_RATE.getMatcher(command)) != null) {
             System.out.println(gameController.giftRate(matcher.group("username") , Integer.parseInt(matcher.
                     group("giftID")) , Double.parseDouble(matcher.group("rate"))));
         }
-        else if((matcher = GameMenuCommand.SEND_FLOWER.getMatcher(command)) != null) {
+        else if ((matcher = GameMenuCommand.SEND_FLOWER.getMatcher(command)) != null) {
             System.out.println(gameController.sendFlower(matcher.group("username")));
         }
-        else if((matcher = GameMenuCommand.START_TRADE.getMatcher(command)) != null) {
+        else if ((matcher = GameMenuCommand.START_TRADE.getMatcher(command)) != null) {
             System.out.println(gameController.startTrade());
         }
         else if ((matcher = GameMenuCommand.SHOP_SHOW_ALL_PRODUCTS.getMatcher(command)) != null) {
@@ -318,25 +319,34 @@ public class GameTerminalView {
         else if ((matcher = GameMenuCommand.CHEAT_ADD_DOLLARS.getMatcher(command)) != null) {
             gameController.addDollarsCheat(Integer.parseInt(matcher.group("number")));
         }
-        else if((matcher = GameMenuCommand.MEET_NPC.getMatcher(command)) != null) {
+        else if ((matcher = GameMenuCommand.MEET_NPC.getMatcher(command)) != null) {
             System.out.println(gameController.meetNPC(matcher.group("npcName")).getMessage());
         }
-        else if((matcher = GameMenuCommand.FRIENDSHIP_NPC_LIST.getMatcher(command)) != null) {
+        else if ((matcher = GameMenuCommand.FRIENDSHIP_NPC_LIST.getMatcher(command)) != null) {
             printArrayList(gameController.friendShipNPCList().getData());
         }
-        else if((matcher = GameMenuCommand.QUESTS_LIST.getMatcher(command)) != null) {
+        else if ((matcher = GameMenuCommand.QUESTS_LIST.getMatcher(command)) != null) {
             printArrayList(gameController.showQuestList().getData());
         }
-        else if((matcher = GameMenuCommand.QUEST_FINISH.getMatcher(command)) != null) {
+        else if ((matcher = GameMenuCommand.QUEST_FINISH.getMatcher(command)) != null) {
             System.out.println(gameController.finishQuest(matcher.group("npcName") ,
                     Integer.parseInt(matcher.group("questID"))));
         }
-        else if((matcher = GameMenuCommand.GIFT_NPC.getMatcher(command)) != null) {
+        else if ((matcher = GameMenuCommand.GIFT_NPC.getMatcher(command)) != null) {
             System.out.println(gameController.giftNPC(matcher.group("npcName") , matcher.group("item") ,
                     Integer.parseInt(matcher.group("amount"))));
         }
-        else if((matcher = GameMenuCommand.ASK_MARRIAGE.getMatcher(command)) != null) {
+        else if ((matcher = GameMenuCommand.ASK_MARRIAGE.getMatcher(command)) != null) {
             System.out.println(gameController.askMarriage(matcher.group("username")));
+        }
+        else if ((matcher = GameMenuCommand.PLACE_ARTISAN.getMatcher(command)) != null) {
+            System.out.println(gameController.placeArtisan(matcher.group("name"), Direction.getDirection(matcher.group("direction"))));
+        }
+        else if ((matcher = GameMenuCommand.USE_ARTISAN.getMatcher(command)) != null) {
+            System.out.println(gameController.useArtisan(matcher.group("name"), new ArrayList<>(Arrays.asList(matcher.group("itemNames").split("\\s+")))));
+        }
+        else if ((matcher = GameMenuCommand.GET_ARTISAN_PRODUCT.getMatcher(command)) != null) {
+            System.out.println(gameController.getArtisanProduct(matcher.group("name")));
         }
         else
             System.out.println("Invalid command");

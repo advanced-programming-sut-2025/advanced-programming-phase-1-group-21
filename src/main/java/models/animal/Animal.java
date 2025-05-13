@@ -3,6 +3,7 @@ package models.animal;
 import models.Item.Item;
 import models.map.Placable;
 import models.map.Tile;
+import models.map.TileType;
 
 import java.util.ArrayList;
 
@@ -103,6 +104,10 @@ public class Animal implements Placable {
         return Item.build(todayProduct , 1);
     }
 
+    @Override
+    public TileType getTileType() {
+        return TileType.ANIMAL;
+    }
 
     @Override
     public boolean isWalkable() {

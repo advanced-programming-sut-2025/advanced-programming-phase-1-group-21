@@ -18,6 +18,11 @@ public class GreenHouse extends Building {
     }
 
     @Override
+    public TileType getTileType() {
+        return TileType.ARTISAN;
+    }
+
+    @Override
     public boolean canEnter() {
         return isBuild;
     }
