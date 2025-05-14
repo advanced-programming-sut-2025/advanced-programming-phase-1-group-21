@@ -22,14 +22,21 @@ public class RequirementChecker {
 
     private boolean checkBuilding(String name) {
         if (name == null) return true;
-        Map map = player.getMap();
+        Map map = player.getDefaultMap();
+        System.err.println("MAP: " + map);
         return map.getBuildingByFullName(name) != null;
     }
 
     public boolean checkShopDate(ShopData data) {
         if (data == null) return true;
-        if (!checkBuilding(data.getBuildingRequired())) return false;
-        if (!checkSkillLevel(data.getSkillTypeRequired(), data.getSkillLevelRequired())) return false;
+        if (!checkBuilding(data.getBuildingRequired())) {
+            System.err.println("Building required failed " + data.getBuildingRequired());
+            return false;
+        }
+        if (!checkSkillLevel(data.getSkillTypeRequired(), data.getSkillLevelRequired())) {
+            System.err.println("Required skill level required failed");
+            return false;
+        }
         //TODO others...
         return true;
     }

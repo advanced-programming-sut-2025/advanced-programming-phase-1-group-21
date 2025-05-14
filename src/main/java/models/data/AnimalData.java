@@ -1,6 +1,8 @@
 package models.data;
 
 import com.google.gson.annotations.SerializedName;
+import models.map.AnimalHouseType;
+import models.time.Season;
 
 import java.util.ArrayList;
 
@@ -45,8 +47,12 @@ public class AnimalData implements Data {
 		return house;
 	}
 
-	public ArrayList<String> getHouseType() {
-		return houseType;
+	public ArrayList<AnimalHouseType> getHouseType() {
+		ArrayList<AnimalHouseType> type = new ArrayList<>();
+		for (String house: houseType) {
+			type.add(AnimalHouseType.getAnimalHouseType(house));
+		}
+		return type;
 	}
 
 	public ArrayList<String> getProducts() {
@@ -55,6 +61,14 @@ public class AnimalData implements Data {
 
 	public int getProductTime() {
 		return productTime;
+	}
+
+	public ArrayList<Season> getSeasons() {
+		ArrayList<Season> seasons = new ArrayList<>();
+		for (String season : productSeasons) {
+			seasons.add(Season.fromName(season));
+		}
+		return seasons;
 	}
 
 	public ArrayList<String> getProductSeasons() {

@@ -4,6 +4,7 @@ import models.App;
 import models.Item.*;
 import models.Menu;
 import models.animal.AnimalTypes;
+import models.data.AnimalData;
 import models.data.ArtisanGoodsData;
 import models.data.items.SeedData;
 import models.skill.SkillType;
@@ -223,10 +224,10 @@ public class GameController{
             for (PathFinder.PathStep step : steps) {
                 player.decreaseEnergy(step.energyCost());
                 player.setCoord(step.coord());
-                printMapFull();
                 if (player.isFainted()) return Result.success(null);
             }
         }
+        printMapFull();
         return Result.success(null);
     }
 
@@ -490,10 +491,6 @@ public class GameController{
         return Result.failure(GameError.NOT_IMPLEMENTED);
     }
 
-    public Result<Animal> buyAnimal(String animal , String name){
-        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 
     public Result<Void> pet(String name){
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
@@ -1184,27 +1181,47 @@ public class GameController{
         return Result.success(shop.showAvailableItems());
     }
 
-    public Result<Void> purchaseItem(String name, int number) {
-        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        Building building = App.game.getCurrentPlayer().getBuilding();
-        if (!(building instanceof Shop)) return Result.failure(GameError.YOU_SHOULD_BE_ON_SHOP);
-        Shop shop = (Shop) building;
-        Inventory inventory = App.game.getCurrentPlayer().getInventory();
-        Result<Void> r = shop.prepareBuy(name, number, inventory);
-        if (r.isError()) return r;
-
-        Item resultItem = Item.build(name, number);
-        inventory.addItem(resultItem);
-        return Result.success(null);
-    }
-
-    public Result<Void> purchaseBuilding(String name, Coord coord) {
+    public Result<Void> purchase(String name, int number) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         Building building = App.game.getCurrentPlayer().getBuilding();
         if (!(building instanceof Shop)) return Result.failure(GameError.YOU_SHOULD_BE_ON_SHOP);
         Shop shop = (Shop) building;
         Inventory inventory = App.game.getCurrentPlayer().getInventory();
         Result<Void> r = shop.prepareBuy(name, 1, inventory);
+        if (r.isError()) return r;
+        return Result.success(null);
+    }
+
+    public Result<Void> purchaseAnimal(String animalName, String name){
+        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+        Result<Void> r = purchase(animalName, 1);
+        if (r.isError()) return r;
+        assert AnimalData.getAnimalData(animalName) != null : "Animal " + animalName + " not found";
+        Animal animal = new Animal(name, AnimalData.getAnimalData(animalName));
+        List<AnimalHouse> animalHouse = App.game.getCurrentPlayer().getDefaultMap().getBuildings(AnimalHouse.class);
+        for (AnimalHouse h : animalHouse) {
+            if (animal.canEnterHouse(h.getFullName()) && animal.canEnterHouseType(h.getHouseType()) && h.hasSpace()) {
+                h.add(animal);
+                App.game.getCurrentPlayer().addAnimal(animal);
+                return Result.success("Animal is in " + h.getFullName());
+            }
+        }
+        return Result.failure(GameError.EMPTY_HOUSE_WAS_NOT_FOUND);
+    }
+
+    public Result<Void> purchaseItem(String name, int number) {
+        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+        Result<Void> r = purchase(name, number);
+        if (r.isError()) return r;
+
+        Item resultItem = Item.build(name, number);
+        App.game.getCurrentPlayer().getInventory().addItem(resultItem);
+        return Result.success(null);
+    }
+
+    public Result<Void> purchaseBuilding(String name, Coord coord) {
+        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+        Result<Void> r = purchase(name, 1);
         if (r.isError()) return r;
 
         MapType mapType = MapType.getMapType(name);

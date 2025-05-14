@@ -103,4 +103,11 @@ public class Date {
         return String.format("Year %d, %s, Day %d, %02d:00 (%s)",
                 year, getCurrentSeason(), day, hour, getCurrentDayOfWeek());
     }
+
+    public String compactString() {
+        return String.format(
+                "%s:Day %02d @ %02d:00",
+                getCurrentSeason(), day, hour
+        );
+    }
 }

@@ -4,9 +4,10 @@ import models.animal.Animal;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AnimalHouse extends Building {
-    ArrayList<Animal> animals;
+    ArrayList<Animal> animals = new ArrayList<>();
     AnimalHouseType houseType;
     String type;
 
@@ -17,9 +18,13 @@ public class AnimalHouse extends Building {
         if (houseType == null) throw new RuntimeException("Could not find animal type " + name);
     }
 
+    public AnimalHouseType getHouseType() {
+        return houseType;
+    }
+
     @Override
     public boolean canEnter() {
-        return true;
+        return false;
     }
 
     @Override
@@ -35,5 +40,17 @@ public class AnimalHouse extends Building {
     @Override
     public String getFullName() {
         return houseType.getName() + " " + type;
+    }
+
+    public boolean hasSpace() {
+        return animals.size() < houseType.getSize();
+    }
+
+    public void add(Animal animal) {
+        animals.add(animal);
+    }
+
+    public List<Animal> getAnimals() {
+        return animals;
     }
 }

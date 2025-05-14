@@ -3,7 +3,7 @@ package controllers;
 import models.result.Result;
 
 public class ShopMenuController {
-//    public Result<Void> buyAnimal(String animal , String name){
+//    public Result<Void> purchaseAnimal(String animal , String name){
 //
 //    }
 }
