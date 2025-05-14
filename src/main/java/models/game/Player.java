@@ -67,7 +67,7 @@ public class Player implements DailyUpdate {
 
     public Player(User user) {
         this.user = user;
-        this.inventory = new Inventory();
+        this.inventory = Inventory.buildPlayerInventory();
         inventory.addItem(Game.getCoinItem(0));
         energy = new Energy();
     }
