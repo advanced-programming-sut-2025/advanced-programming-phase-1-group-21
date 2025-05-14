@@ -14,4 +14,13 @@ public enum Season {
     public String toString() {
         return this.name();
     }
+
+    public static Season fromName(String name) {
+        for (Season season : values()) {
+            if (season.name().equalsIgnoreCase(name)) {
+                return season;
+            }
+        }
+        return null;
+    }
 }

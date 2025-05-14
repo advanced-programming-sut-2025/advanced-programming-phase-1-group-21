@@ -1773,7 +1773,7 @@
     "ingredients": null,
     "backpack-required": null,
     "item-required": null,
-    "building-required": "Coop",
+    "building-required": "Normal Coop",
     "skill-type-required": null,
     "skill-level-required": null,
     "daily-limit": 2
@@ -1787,7 +1787,7 @@
     "ingredients": null,
     "backpack-required": null,
     "item-required": null,
-    "building-required": "Barn",
+    "building-required": "Normal Barn",
     "skill-type-required": null,
     "skill-level-required": null,
     "daily-limit": 2

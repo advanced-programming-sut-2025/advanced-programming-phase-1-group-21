@@ -1,11 +1,9 @@
 package views.menu;
 
 import controllers.GameController;
-import models.Item.Item;
-import models.Item.Recipe;
+import models.App;
 import models.Item.RecipeType;
 import models.command.GameMenuCommand;
-import models.game.Game;
 import models.game.Player;
 import models.map.Coord;
 import models.map.Direction;
@@ -15,7 +13,6 @@ import models.result.Result;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Matcher;
 
 public class GameTerminalView {
@@ -157,6 +154,9 @@ public class GameTerminalView {
         }
         else if ((matcher = GameMenuCommand.PET.getMatcher(command)) != null) {
             System.out.println(gameController.pet(matcher.group("name")));
+        }
+        else if ((matcher = GameMenuCommand.BUY_ANIMAL.getMatcher(command)) != null) {
+            System.out.println(gameController.purchaseAnimal(matcher.group("animalName"), matcher.group("name")));
         }
         else if ((matcher = GameMenuCommand.CHEAT_ANIMAL_FRIENDSHIP.getMatcher(command)) != null) {
             System.out.println(gameController.cheatFriendship(matcher.group("name") , Integer.parseInt(matcher.group("amount"))));

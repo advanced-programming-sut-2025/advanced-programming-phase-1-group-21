@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import models.time.Season;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -50,19 +51,6 @@ public class ShopData implements Data {
 		cseasons = new ArrayList<>();
 		for (String season : seasons)
 			cseasons.add(Season.valueOf(season.toUpperCase()));
-//		System.out.println("shop: " + shop);
-//		System.out.println("name: " + name);
-//		System.out.println("description: " + description);
-//		System.out.println("seasons: " + seasons);
-//		System.out.println("cseasons: " + cseasons);
-//		System.out.println("price: " + price);
-//		System.out.println("ingredients: " + ingredients);
-//		System.out.println("backpack-required: " + backpackRequired);
-//		System.out.println("item-required: " + itemRequired);
-//		System.out.println("building-required: " + buildingRequired);
-//		System.out.println("skill-type-required: " + skillTypeRequired);
-//		System.out.println("skill-level-required: " + skillLevelRequired);
-//		System.out.println("daily-limit: " + dailyLimit);
 	}
 
 	public String getShop() {
@@ -96,7 +84,7 @@ public class ShopData implements Data {
 	}
 
 	public Map<String, Integer> getIngredients() {
-		return ingredients;
+		return (ingredients == null ? new HashMap<String, Integer>() :  ingredients);
 	}
 
 	public String getBackpackRequired() {
@@ -144,7 +132,6 @@ public class ShopData implements Data {
 				"shop='" + shop + '\'' +
 				", name='" + name + '\'' +
 				", description='" + description + '\'' +
-				", seasons=" + seasons +
 				", cseasons=" + cseasons +
 				", prices=" + price +
 				", ingredients=" + ingredients +

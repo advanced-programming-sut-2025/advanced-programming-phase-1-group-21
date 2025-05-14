@@ -196,6 +196,10 @@ public class Player implements DailyUpdate {
         return null;
     }
 
+    public void addAnimal(Animal animal) {
+        animals.add(animal);
+    }
+
     public int getAgronomicAbility() {
         return agronomicAbility;
     }

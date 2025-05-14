@@ -13,4 +13,11 @@ public enum AnimalTypes {
 //    AnimalTypes(int producePeriod) {
 //        this.producePeriod = producePeriod;
 //    }
+
+    public static AnimalTypes fromName(String animalType) {
+        for (AnimalTypes type: AnimalTypes.values()) {
+            if (type.name().equalsIgnoreCase(animalType)) return type;
+        }
+        return null;
+    }
 }

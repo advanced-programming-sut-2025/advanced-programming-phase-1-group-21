@@ -21,6 +21,7 @@ public class AppView {
 
     public void run() throws IOException {
         while (App.play){
+            System.out.print(App.getUI() + " > ");
             String command = scanner.nextLine().trim();
             if (command.equals("EXIT")) {
                 scanner.close();

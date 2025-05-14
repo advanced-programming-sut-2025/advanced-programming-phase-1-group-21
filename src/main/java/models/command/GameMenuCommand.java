@@ -107,6 +107,8 @@ public enum GameMenuCommand implements Command {
     SHOP_PURCHASE("purchase (?<name>.+) -n (?<number>\\d+)"),
     CHEAT_ADD_DOLLARS("cheat add (?<number>\\d+) dollars"),
 
+    BUY_ANIMAL("buy\\s+animal\\s+-a\\s+(?<animalName>.+)\\s+-n\\s+(?<name>.+)\\s*"),
+
     //THESE ARE DEBUG COMMANDS
     WHERE_AM_I("whereami"),
     TILE_STATUS("\\s*tile\\s+status\\s+-l\\s+\\((?<x>\\d+),(?<y>\\d+)\\)\\s*"),

@@ -3,6 +3,7 @@ package models.game;
 import models.App;
 import models.DailyUpdate;
 import models.Item.Item;
+import models.animal.Animal;
 import models.data.DataLoader;
 import models.map.Map;
 

@@ -1,9 +1,13 @@
 package models.animal;
 
 import models.Item.Item;
+import models.data.AnimalData;
+import models.map.AnimalHouseType;
 import models.map.Placable;
 import models.map.Tile;
 import models.map.TileType;
+import models.time.Season;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 
@@ -15,10 +19,27 @@ public class Animal implements Placable {
     private boolean isFeedToday = false;
     private boolean isTodayPet = false;
     private boolean isOut = false;
-    private ArrayList<String> products = new ArrayList<>();
+    private ArrayList<String> products;
+    private ArrayList<Season> productSeasons;
     private String todayProduct ;
     private int produceStage;
-    private Tile tile;
+    private String toolName;
+    private int productTime;
+    private ArrayList<AnimalHouseType> houseTypes;
+    private String house;
+
+    public Animal(String name, AnimalData animalData) {
+        products = animalData.getProducts();
+        this.name = name;
+        price = animalData.getPrice();
+        animalType = AnimalTypes.fromName(name);
+        this.friendship = 0;
+        this.toolName = animalData.getToolName();
+        this.productTime = animalData.getProductTime();
+        this.productSeasons = animalData.getSeasons();
+        this.house = animalData.getHouse();
+        this.houseTypes = animalData.getHouseType();
+    }
 
     public String getName() {
         return name;
@@ -60,7 +81,7 @@ public class Animal implements Placable {
         this.todayProduct = todayProduct;
     }
 
-    public void pet(){
+    public void pet() {
         this.friendship += 15;
         isTodayPet = true;
     }
@@ -90,10 +111,6 @@ public class Animal implements Placable {
         return produceStage;
     }
 
-    public Tile getTile() {
-        return tile;
-    }
-
     public void setFriendship(int friendship) {
         this.friendship = friendship;
     }
@@ -117,5 +134,13 @@ public class Animal implements Placable {
     @Override
     public String getSprite() {
         return "A";
+    }
+
+    public boolean canEnterHouseType(AnimalHouseType animalHouseType) {
+        return houseTypes.contains(animalHouseType);
+    }
+
+    public boolean canEnterHouse(String name) {
+        return StringUtils.containsIgnoreCase(name, house);
     }
 }

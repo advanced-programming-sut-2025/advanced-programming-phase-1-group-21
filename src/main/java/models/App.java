@@ -3,6 +3,7 @@ package models;
 import models.data.DataLoader;
 import models.game.Game;
 import models.user.User;
+import views.menu.GameTerminalView;
 
 import java.util.Random;
 
@@ -24,5 +25,10 @@ public class App {
         play = true;
         registeredUser = null;
         logedInUser = null;
+    }
+
+    public static String getUI() {
+        if (game == null) return "";
+        return GameTerminalView.PURPLE + game.getCurrentPlayer().getUser().getUsername() + GameTerminalView.RESET + " " + GameTerminalView.GREEN + game.getGameDate().compactString() + GameTerminalView.RESET;
     }
 }
