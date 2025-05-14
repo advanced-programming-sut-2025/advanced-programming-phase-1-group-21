@@ -779,7 +779,7 @@ public class GameController{
             return Result.failure(GameError.YOU_SHOULD_BE_ON_VILLAGE);
         App.game.getCurrentPlayer().setMap(App.game.getCurrentPlayer().getDefaultMap());
         App.game.getCurrentPlayer().setCoord(new Coord(0,0));
-        return Result.success("Now you are back to home");
+        return Result.success("Now you are home");
     }
 
     public Result<ArrayList<String>> showFriendships(){

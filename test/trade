@@ -1,0 +1,20 @@
+go to login menu
+menu enter mainmenu
+login -u Ali -p Alireza123!
+menu enter mainmenu
+menu enter game
+new game sobi sobhan maryam
+cheat add item -n quartz -c 10
+start trade
+trade with money -u sobhan -t offer -i quartz -a 2 -p 300
+trade history
+back to the game
+next turn
+next turn
+cheat add item -n coin -c 800
+start trade
+trade history
+trade response -u Ali -r accept -i 0
+trade history
+back to the game
+inventory show

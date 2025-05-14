@@ -27,7 +27,9 @@ public class TradeController{
         Player player = App.game.getPlayerByName(username);
         if(player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
 
+        System.out.println("input amount : "+amount);
         Item thisItem = Item.build(item , amount);
+        assert thisItem != null;
         if(type.equals("offer") && !App.game.getCurrentPlayer().getInventory().canRemoveItem(thisItem))
             return Result.failure(GameError.NOT_ENOUGH_ITEMS);
         Relation relation = App.game.getRelationOfUs(App.game.getCurrentPlayer(), player);
@@ -97,6 +99,7 @@ public class TradeController{
         if(response.equals("reject")){
             trade.setResponse(false);
             trade.setResponsed(true);
+            relation.setFriendshipXP(relation.getFriendshipXP() - 30);
             return Result.success(null);
         }
         if(trade.getTradeType().equals(TradeType.OFFER_ITEM)){
@@ -104,6 +107,7 @@ public class TradeController{
                     .canRemoveItem(trade.getRequestItem())){
                 trade.setResponse(false);
                 trade.setResponsed(true);
+                relation.setFriendshipXP(relation.getFriendshipXP() - 30);
                 return Result.failure(GameError.NOT_ENOUGH_ITEMS);
             }
             player.getInventory().removeItem(trade.getOfferItem());
@@ -119,6 +123,7 @@ public class TradeController{
                     .canRemoveItem(trade.getOfferItem())){
                 trade.setResponse(false);
                 trade.setResponsed(true);
+                relation.setFriendshipXP(relation.getFriendshipXP() - 30);
                 return Result.failure(GameError.NOT_ENOUGH_ITEMS);
             }
             player.getInventory().removeItem(trade.getRequestItem());
@@ -177,19 +182,19 @@ public class TradeController{
                 output.add("Receiver : " + trade.getReceiver().getUser().getUsername());
                 output.add("ID : " + trade.getID());
                 if(TradeType.OFFER_ITEM.equals(trade.getTradeType())) {
-                    output.add("Offered Item : " + trade.getOfferItem().getName());
-                    output.add("Requested Item : " + trade.getRequestItem().getName());
+                    output.add("Offered Item : " + trade.getOfferItem().getName() + " " + trade.getOfferItem().getAmount());
+                    output.add("Requested Item : " + trade.getRequestItem().getName() + " " + trade.getRequestItem().getAmount());
                 }
                 if(TradeType.REQUEST_ITEM.equals(trade.getTradeType())) {
-                    output.add("Requested Item : " + trade.getRequestItem().getName());
-                    output.add("Offered Item : " + trade.getOfferItem().getName());
+                    output.add("Requested Item : " + trade.getRequestItem().getName() + " " + trade.getRequestItem().getAmount());
+                    output.add("Offered Item : " + trade.getOfferItem().getName() + " " + trade.getOfferItem().getAmount());
                 }
                 if(TradeType.OFFER_MONEY.equals(trade.getTradeType())) {
-                    output.add("Offered Item : " + trade.getOfferItem().getName());
+                    output.add("Offered Item : " + trade.getOfferItem().getName() + " " + trade.getOfferItem().getAmount());
                     output.add("Requested Price : " + trade.getRequestPrice());
                 }
                 if(TradeType.REQUEST_MONEY.equals(trade.getTradeType())) {
-                    output.add("Requested Item : " + trade.getRequestItem().getName());
+                    output.add("Requested Item : " + trade.getRequestItem().getName() + " " + trade.getRequestItem().getAmount());
                     output.add("Offered Price : " + trade.getOfferPrice());
                 }
                 output.add("----------");
