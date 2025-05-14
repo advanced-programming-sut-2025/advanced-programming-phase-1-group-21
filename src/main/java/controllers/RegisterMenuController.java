@@ -25,11 +25,8 @@ import java.util.regex.Pattern;
 import static models.user.Gender.getGenderByName;
 
 public class RegisterMenuController{
-
-
-    //TODO WTF is this (should return String)
-    public Result<Void> showCurrentMenu(){
-        return Result.success(null, "Register Menu");
+    public Result<String> showCurrentMenu(){
+        return Result.success("Register Menu");
     }
 
     public Result<Void> register(String username, String password, String passwordConfirm, String nickname , String email, String gender) throws IOException {
@@ -118,28 +115,25 @@ public class RegisterMenuController{
     }
 
     public static Result<Void> checkPassword(String password) {
-        if(password.length() < 8)
+        if (password.length() < 8)
             return Result.failure(AuthError.PASSWORD_LENGTH);
 
-        String specialCharacters = "(?!.*\\?.*)(?!.*>.*)(?!.*<.*)(?!.*,.*)(?!.*\".*)(?!.*'.*)(?!.*;.*)(?!.*:.*)(?!.*\\/.*)" +
-                "(?!.*\\|.*)(?!.*\\].*)(?!.*\\[.*)(?!.*\\}.*)(?!.*\\{.*)(?!.*\\+.*)(?!.*=.*)(?!.*\\).*)(?!.*\\(.*)(?!.*\\*.*)" +
-                "(?!.*&.*)(?!.*\\^.*)(?!.*%.*)(?!.*\\$.*)(?!.*#.*)(?!.*\\!.*)\\S+";
-
-        if(Pattern.compile(specialCharacters).matcher(password).matches())
+        String specialCharacters = ".*[?><,\"';:/|\\\\\\]\\[{}()=+*&^%$#!].*";
+        if (!Pattern.compile(specialCharacters).matcher(password).matches())
             return Result.failure(AuthError.PASSWORD_SPECIAL_CHARACTERS);
 
-        String containAlphabet = "(?!.*[a-zA-Z].*)\\S+";
-        if(Pattern.compile(containAlphabet).matcher(password).matches())
+        String containAlphabet = ".*[a-zA-Z].*";
+        if (!Pattern.compile(containAlphabet).matcher(password).matches())
             return Result.failure(AuthError.PASSWORD_ALPHABET);
 
-        String containNumber = "(?!.*[0-9].*)\\S+";
-        if(Pattern.compile(containNumber).matcher(password).matches())
+        String containNumber = ".*[0-9].*";
+        if (!Pattern.compile(containNumber).matcher(password).matches())
             return Result.failure(AuthError.PASSWORD_NUMBERS);
 
         return Result.success(null);
     }
 
-    private ArrayList<User> readAllUsers(Gson gson , String filePath){
+    private ArrayList<User> readAllUsers(Gson gson , String filePath) {
         File file = new File(filePath);
         if (!file.exists() || file.length() == 0) {
             return new ArrayList<>();
