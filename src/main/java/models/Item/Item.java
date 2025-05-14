@@ -42,4 +42,8 @@ public interface Item {
     boolean isSalable();
 
     int getPrice();
+
+    default Item copy() {
+        return Item.build(getName(), getAmount());
+    }
 }

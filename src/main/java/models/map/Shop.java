@@ -132,10 +132,10 @@ public class Shop extends Building {
 		Item coins = Item.build("coin", amount * data.getPrice(App.game.getSeason()));
 		requiredItems.add(coins);
 
-		if (!inventory.canRemoveItemList(requiredItems))
+		if (!inventory.canRemoveItems(requiredItems))
 			return Result.failure(GameError.NOT_ENOUGH_ITEMS);
 
-		inventory.removeItemList(requiredItems);
+		inventory.removeItems(requiredItems);
 		itemInstance.incrementSold(amount);
 
 		return Result.success(null);
