@@ -18,11 +18,9 @@ public abstract class Tool implements Item {
 		return toolType;
 	}
 
-	public void setToolMaterialType(ToolMaterialType toolMaterialType) {
-		this.toolMaterialType = toolMaterialType;
+	public ToolMaterialType getToolMaterialType() {
+		return toolMaterialType;
 	}
-
-	abstract public ToolMaterialType getToolMaterialType();
 
 	abstract public Result<Item> use(Coord coord);
 
@@ -52,5 +50,15 @@ public abstract class Tool implements Item {
 
 	public int getPrice() {
 		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return String.format(
+				"%s{toolType=%s, toolMaterialType=%s}",
+				getClass().getSimpleName(),
+				toolType,
+				toolMaterialType
+		);
 	}
 }

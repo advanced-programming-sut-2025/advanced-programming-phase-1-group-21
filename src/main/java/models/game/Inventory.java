@@ -12,20 +12,23 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Inventory {
-    public static final int MAXIMUM_ITEM_PER_SLOT = 999;
-    List<Item> items;
-    InventoryType inventoryType;
-    ToolMaterialType trashcanType;
+    public static final int MAXIMUM_ITEM_PER_SLOT = 9999;
+    List<Item> items = new ArrayList<>();
+    InventoryType inventoryType = InventoryType.PRIMITIVE;
+    ToolMaterialType trashcanType = ToolMaterialType.PRIMITIVE;
+
+    public static Inventory buildPlayerInventory() {
+        Inventory inventory = new Inventory();
+        inventory.addItem(new Hoe());
+        inventory.addItem(new Pickaxe());
+        inventory.addItem(new Axe());
+        inventory.addItem(new Scythe());
+        inventory.addItem(new WateringCan());
+        return inventory;
+    }
 
     public Inventory() {
-        items = new ArrayList<>();
-        items.add(new Hoe());
-        items.add(new Pickaxe());
-        items.add(new Axe());
-        items.add(new Scythe());
-        items.add(new WateringCan());
-        inventoryType = InventoryType.PRIMITIVE;
-        trashcanType = ToolMaterialType.PRIMITIVE;
+
     }
     /**
      * Copy constructor for deep-cloning inventory (for dry-run operations).
