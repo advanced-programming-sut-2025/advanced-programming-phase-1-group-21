@@ -27,6 +27,17 @@ public class Inventory {
         inventoryType = InventoryType.PRIMITIVE;
         trashcanType = ToolMaterialType.PRIMITIVE;
     }
+    /**
+     * Copy constructor for deep-cloning inventory (for dry-run operations).
+     */
+    public Inventory(Inventory other) {
+        this.inventoryType = other.inventoryType;
+        this.trashcanType   = other.trashcanType;
+        this.items          = new ArrayList<>(other.items.size());
+        for (Item i : other.items) {
+            this.items.add(i.copy());
+        }
+    }
 
     public int getSize() {
         return items.size();
@@ -85,80 +96,51 @@ public class Inventory {
         return Result.success("Adding " + item.getName() + " to the inventory was successful.");
     }
 
-    private static boolean removeItemFromList(Item itemToRemove, List<Item> items) {
-        if (itemToRemove == null || items == null) return false;
-
-        Iterator<Item> iterator = items.iterator();
-        while (iterator.hasNext() && itemToRemove.getAmount() > 0) {
-            Item existingItem = iterator.next();
-            if (existingItem.getName().equals(itemToRemove.getName())) {
-                int removeAmount = Math.min(existingItem.getAmount(), itemToRemove.getAmount());
-                existingItem.changeAmount(-removeAmount);
-                itemToRemove.changeAmount(-removeAmount);
-
-                if (existingItem.getAmount() == 0) {
-                    iterator.remove();
-                }
-            }
-        }
-        return itemToRemove.getAmount() == 0;
-    }
-
-    public boolean removeItemsByType(ItemType type, int amount) {
-        if (amount <= 0) {
-            throw new IllegalArgumentException("Amount must be positive");
-        }
-
-        int totalAvailable = getAmountByType(type);
-        if (totalAvailable < amount) {
-            return false;
-        }
-
-        Iterator<Item> iterator = items.iterator();
-        while (iterator.hasNext() && amount > 0) {
-            Item item = iterator.next();
-            if (item.getItemType() == type) {
-                int removeAmount = Math.min(item.getAmount(), amount);
-                item.changeAmount(-removeAmount);
-                amount -= removeAmount;
-
-                if (item.getAmount() == 0) {
-                    iterator.remove();
-                }
-            }
-        }
-
-        return true;
-    }
-
-    public static boolean removeItemsList(List<Item> itemsToRemove, List<Item> items) {
-        for (Item i : itemsToRemove) {
-            if (!removeItemFromList(i, items))
+    /**
+     * Remove items, mutating inventory. Returns false if any request cannot be satisfied.
+     */
+    public boolean removeItems(List<Item> toRemove) {
+        for (Item req : toRemove) {
+            int totalHave = getAmount(req.getName());
+            if (totalHave < req.getAmount()) {
                 return false;
+            }
+        }
+
+        for (Item req : toRemove) {
+            int remaining = req.getAmount();
+            Iterator<Item> itr = items.iterator();
+            while (itr.hasNext() && remaining > 0) {
+                Item slot = itr.next();
+                if (slot.getName().equals(req.getName())) {
+                    int removeAmt = Math.min(slot.getAmount(), remaining);
+                    slot.changeAmount(-removeAmt);
+                    remaining -= removeAmt;
+                    if (slot.getAmount() == 0) itr.remove();
+                }
+            }
         }
         return true;
     }
 
-    public void removeItemList(List<Item> itemsToRemove) {
-        boolean can = removeItemsList(itemsToRemove, items);
-        if (!can) System.out.println("cant");;
-    }
 
-    public String removeItem(Item item) {
+    public boolean removeItem(Item item) {
         List<Item> itemsToRemove = new ArrayList<>();
         itemsToRemove.add(item);
-        removeItemList(itemsToRemove);
-        return null;
+        return removeItems(itemsToRemove);
     }
 
-    public boolean canRemoveItemList(List<Item> itemsToRemove) {
-        return removeItemsList(itemsToRemove, new ArrayList<>(items));
+    /**
+     * Dry-run: returns true if all requested removals would succeed without mutating this.
+     */
+    public boolean canRemoveItems(List<Item> toRemove) {
+        Inventory sandbox = new Inventory(this);
+        return sandbox.removeItems(toRemove);
     }
 
     public boolean canRemoveItem(Item item) {
-        List<Item> itemsToRemove = new ArrayList<>();
-        itemsToRemove.add(item);
-        return canRemoveItemList(itemsToRemove);
+        Inventory sandbox = new Inventory(this);
+        return sandbox.removeItem(item);
     }
 
     public Item getItem(String name) {
@@ -168,26 +150,6 @@ public class Inventory {
         return null;
     }
 
-
-    // What is the purpose of these function?
-    public List<Item> getItemsByType(ItemType itemType) {
-        List<Item> itemsByType = new ArrayList<>();
-        for (Item item : items)
-            if (item.getItemType() == itemType)
-                itemsByType.add(item);
-        return itemsByType;
-    }
-
-    //can be used for getting number of coins
-    // Not anymore!! -Parsa
-    public int getAmountByType(ItemType itemType) {
-        List<Item> items = getItemsByType(itemType);
-        int amount = 0;
-        for (Item item : items) {
-            amount += item.getAmount();
-        }
-        return amount;
-    }
 
     public int getAmount(String name) {
         Item item = getItem(name);
@@ -207,23 +169,6 @@ public class Inventory {
         }
         return output;
     }
-
-//    public String removeItem(String itemName , int amount) {
-//        for(Item item : items) {
-//            if(item.getName().equals(itemName)) {
-//                if(item.getAmount() < amount)
-//                    return GameError.NOT_ENOUGH_ITEMS.getMessage();
-//                else {
-//                    item.setAmount(Math.max(item.getAmount() - amount, 0));
-//                    if(amount == 0)
-//                        items.remove(item);
-//                    return amount + " amounts of " + itemName + " removed.";
-//                }
-//            }
-//        }
-//
-//        return "There is no item with this name in the inventory.";
-//    }
 
     public boolean toolEquip(String toolName){
         for(Item item : items) {

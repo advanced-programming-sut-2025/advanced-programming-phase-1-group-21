@@ -62,7 +62,7 @@ public class Artisan implements Placable {
 					requiredItems.add(required);
 				}
 
-				inventory.removeItemList(requiredItems);
+				inventory.removeItems(requiredItems);
 
 				result = Item.build(recipe.getName(), 1);
 

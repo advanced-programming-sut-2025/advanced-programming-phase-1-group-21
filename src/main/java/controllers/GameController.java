@@ -23,6 +23,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import views.menu.GameTerminalView;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -174,9 +175,9 @@ public class GameController{
                 Item.build("wood", 500)
         );
         Inventory inv = App.game.getCurrentPlayer().getInventory();
-        if (!inv.canRemoveItemList(needed))
+        if (!inv.canRemoveItems(needed))
             return Result.failure(GameError.NOT_ENOUGH_ITEMS);
-        inv.removeItemList(needed);
+        inv.removeItems(needed);
         App.game.getCurrentPlayerMap().getBuilding(GreenHouse.class).setBuild(true);
         return Result.success("now you can use your greenhouse");
     }
@@ -318,7 +319,13 @@ public class GameController{
 
     public Result<Void> removeFromInventory(String itemName, int numberOfItems) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        return Result.success(App.game.getCurrentPlayer().getInventory().removeItem(Item.build(itemName , numberOfItems)));
+        Inventory inv = App.game.getCurrentPlayer().getInventory();
+        Item item = Item.build(itemName, numberOfItems);
+        if (inv.canRemoveItem(item)) {
+            inv.removeItem(item);
+            return Result.success(null);
+        }
+        return Result.failure(GameError.NOT_ENOUGH_ITEMS);
     }
 
     public Result<Tool> equipTool(String toolName) {
@@ -440,9 +447,9 @@ public class GameController{
         Inventory inventory = App.game.getCurrentPlayer().getInventory();
         if (!inventory.canAdd())
             return Result.failure(GameError.MAXIMUM_SIZE_EXCEEDED);
-        if (!inventory.canRemoveItemList(recipe.getItems()))
+        if (!inventory.canRemoveItems(recipe.getItems()))
             return Result.failure(GameError.NOT_ENOUGH_ITEMS);
-        inventory.removeItemList(recipe.getItems());
+        inventory.removeItems(recipe.getItems());
         inventory.addItem(recipe.getResult());
         return Result.success(null);
     }
@@ -985,7 +992,7 @@ public class GameController{
         List<Item> ring = new ArrayList<>();
         Item item = Item.build("Ring", 1);
         ring.add(item);
-        if(!App.game.getCurrentPlayer().getInventory().canRemoveItemList(ring))
+        if(!App.game.getCurrentPlayer().getInventory().canRemoveItems(ring))
             return Result.failure(GameError.NOT_ENOUGH_ITEMS);
 
         if(App.game.getCurrentPlayer().getUser().getGender().equals(Gender.FEMALE))
@@ -1002,7 +1009,7 @@ public class GameController{
         }
 
         relation.setLevel(FriendshipLevel.LEVEL4);
-        App.game.getCurrentPlayer().getInventory().removeItemList(ring);
+        App.game.getCurrentPlayer().getInventory().removeItems(ring);
         player.getInventory().addItem(item);
         Item coin = Item.build("coin" , App.game.getCurrentPlayer().getCoins() + player.getCoins());
         App.game.getCurrentPlayer().getInventory().setCoins(coin);
