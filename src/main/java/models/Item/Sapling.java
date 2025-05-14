@@ -3,7 +3,7 @@ package models.Item;
 import models.data.items.ItemData;
 import models.data.items.TreeData;
 
-public class Sapling implements Item {
+public class Sapling extends Item {
 	private final TreeData data;
 	private final ItemType itemType;
 	private int amount;
@@ -51,10 +51,5 @@ public class Sapling implements Item {
 	@Override
 	public void changeAmount(int change) {
 		amount += change;
-	}
-
-	@Override
-	public String toString() {
-		return data.getName() + " * " + amount;
 	}
 }

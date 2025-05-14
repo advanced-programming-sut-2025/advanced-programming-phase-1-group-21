@@ -2,7 +2,7 @@ package models.Item;
 
 import models.data.items.*;
 
-public class Consumable implements Item {
+public class Consumable extends Item {
     private final ConsumableData data;
     private final ItemType itemType;
     private int amount;
@@ -54,10 +54,5 @@ public class Consumable implements Item {
     @Override
     public void changeAmount(int change) {
         amount += change;
-    }
-
-    @Override
-    public String toString() {
-        return data.getName() + " * " + amount;
     }
 }

@@ -122,4 +122,17 @@ public class NPC implements Placable {
             return "O";
         }
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "NPC{name=%s, tasks=%d, friendships=%d, favorites=%s, coord=%s}",
+                name,
+                tasks != null ? tasks.size() : 0,
+                friendships != null ? friendships.size() : 0,
+                favorites,
+                coord
+        );
+    }
+
 }

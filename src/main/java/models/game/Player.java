@@ -279,6 +279,7 @@ public class Player implements DailyUpdate {
         sb.append("Foraging Ability: ").append(foragingAbility).append("\n");
         sb.append("Fishing Ability: ").append(fishingAbility).append("\n");
         sb.append("Coins: ").append(getCoins()).append("\n");
+        sb.append("Skills: ").append(skill).append("\n");
 
         sb.append("Animals Owned: ");
         if (animals.isEmpty()) {

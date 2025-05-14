@@ -210,4 +210,14 @@ public class Shop extends Building {
 			return data.getDailyLimit() - soldToday;
 		}
 	}
+
+	@Override
+	public String toString() {
+		return String.format(
+				"Shop{name='%s', type=%s, availableItems=%d}",
+				getShopName(),
+				shopType,
+				getAvailableItems().size()
+		);
+	}
 }

@@ -39,4 +39,16 @@ public class Gift {
     public void setRate(Double rate) {
         this.rate = rate;
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "Gift{id=%d, sender=%s, receiver=%s, item=%s, rate=%.2f}",
+                id,
+                Sender.getUser().getUsername(),
+                Receiver.getUser().getUsername(),
+                item.getName(),
+                rate
+        );
+    }
 }

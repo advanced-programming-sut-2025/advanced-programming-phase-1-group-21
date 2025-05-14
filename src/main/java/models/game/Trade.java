@@ -72,4 +72,21 @@ public class Trade {
 	public void setResponsed(boolean responsed) {
 		this.responsed = responsed;
 	}
+
+	@Override
+	public String toString() {
+		return String.format(
+				"Trade{id=%d, sender=%s, receiver=%s, offerPrice=%d, offerItem=%s, requestPrice=%d, requestItem=%s, tradeType=%s, response=%b, responsed=%b}",
+				ID,
+				sender.getUser().getUsername(),
+				receiver.getUser().getUsername(),
+				offerPrice,
+				offerItem.getName(),
+				requestPrice,
+				requestItem.getName(),
+				tradeType,
+				response,
+				responsed
+		);
+	}
 }

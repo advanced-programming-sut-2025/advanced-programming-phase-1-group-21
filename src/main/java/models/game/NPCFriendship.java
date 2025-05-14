@@ -195,4 +195,17 @@ public class NPCFriendship {
         else if(Level.equals(FriendshipLevel.LEVEL2))
             Level = FriendshipLevel.LEVEL3;
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "NPCFriendship{player=%s, level=%s, xp=%d, todayMeet=%b, todayGift=%b}",
+                player.getUser().getUsername(),
+                Level,
+                friendshipXP,
+                todayMeet,
+                todayGift
+        );
+    }
+
 }

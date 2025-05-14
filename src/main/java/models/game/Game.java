@@ -255,4 +255,23 @@ public class Game implements DailyUpdate {
             return 2;
         return 1;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Game{");
+        sb.append("players=[");
+        for (Player p : players) {
+            sb.append(p.getUser().getUsername()).append(",");
+        }
+        if (!players.isEmpty()) {
+            sb.setLength(sb.length() - 1);  // remove trailing comma
+        }
+        sb.append("]");
+        sb.append(", gameDate=").append(gameDate);
+        sb.append(", gameWeather=").append(gameWeather);
+        sb.append(", nextDayWeather=").append(nextDayWeather);
+        sb.append("}");
+        return sb.toString();
+    }
+
 }

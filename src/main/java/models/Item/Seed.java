@@ -6,7 +6,7 @@ import models.data.items.SeedData;
 import models.map.Tile;
 import models.map.TileType;
 
-public class Seed implements Item {
+public class Seed extends Item {
 	private final SeedData data;
 	private final ItemType itemType;
 	private int amount;
@@ -54,11 +54,6 @@ public class Seed implements Item {
 	@Override
 	public void changeAmount(int change) {
 		amount += change;
-	}
-
-	@Override
-	public String toString() {
-		return data.getName() + " * " + amount;
 	}
 
 	public PlantedSeed plant(Tile tile) {

@@ -1148,6 +1148,8 @@ public class GameController{
 
     public String whereAmI() {
         if (App.game == null) return "No game running";
+        if (App.game.getCurrentPlayer().getBuilding() != null)
+            return App.game.getCurrentPlayer().getBuilding().toString();
         return App.game.getCurrentPlayerMap().mapType.name();
     }
 

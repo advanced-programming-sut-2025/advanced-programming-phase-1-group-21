@@ -7,7 +7,7 @@ import models.data.items.SeedData;
 import models.map.Placable;
 import models.map.TileType;
 
-public class PlantedSeed implements Placable {
+public class PlantedSeed implements Placable, Harvestable {
 	private FertilizerType fertilizerType = null; // not implemented yet.
 	private int stage = 0;
 	private int day = 1;
@@ -70,5 +70,18 @@ public class PlantedSeed implements Placable {
 	@Override
 	public String getSprite() {
 		return "S";
+	}
+
+	@Override
+	public String toString() {
+		return String.format(
+				"PlantedSeed{data='%s', day=%d, stage=%d, watered=%s, lastHarvest=%s, regrowth=%s}",
+				seedData,
+				day,
+				stage,
+				waterStage > 0 ? "yes" : "no",
+				lastHarvest == -1 ? "never" : lastHarvest,
+				isOneTime() ? "no" : "yes"
+		);
 	}
 }
