@@ -16,4 +16,6 @@ public class Tree implements Harvestable {
 	public Item harvest() {
 		throw new RuntimeException();
 	}
+
+
 }

@@ -25,4 +25,14 @@ public abstract class Building implements Placable {
     public String getFullName() {
         return this.getSimpleName();
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "%s{name='%s', map=%s}",
+                getClass().getSimpleName(),
+                getFullName(),
+                map != null ? map.mapType : "null"
+        );
+    }
 }

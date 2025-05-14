@@ -97,4 +97,14 @@ public class Artisan implements Placable {
 	public String getSprite() {
 		return "8";
 	}
+
+	@Override
+	public String toString() {
+		return String.format(
+				"Artisan{name='%s', resultReady=%s, result='%s'}",
+				getName(),
+				isResultReady(),
+				result != null ? result.getName() : "none"
+		);
+	}
 }

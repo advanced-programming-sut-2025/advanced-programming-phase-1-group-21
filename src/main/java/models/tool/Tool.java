@@ -5,7 +5,7 @@ import models.Item.ItemType;
 import models.map.Coord;
 import models.result.Result;
 
-public abstract class Tool implements Item {
+public abstract class Tool extends Item {
     private final ToolType toolType;
 	public ToolMaterialType toolMaterialType = ToolMaterialType.PRIMITIVE;
 

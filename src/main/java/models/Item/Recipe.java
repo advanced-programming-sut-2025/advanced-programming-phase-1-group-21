@@ -7,7 +7,7 @@ import models.data.items.RecipeData;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class Recipe implements Item {
+public class Recipe extends Item {
     private final RecipeData data;
     public final RecipeType type;
     public final ItemType itemType;

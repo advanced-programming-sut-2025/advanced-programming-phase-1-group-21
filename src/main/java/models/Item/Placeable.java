@@ -5,7 +5,7 @@ import models.data.items.PlaceableData;
 import models.map.Placable;
 import models.map.TileType;
 
-public class Placeable implements Item {
+public class Placeable extends Item {
 	private final PlaceableData data;
 	private final ItemType itemType;
 	private int amount;
@@ -57,10 +57,5 @@ public class Placeable implements Item {
 	@Override
 	public void changeAmount(int change) {
 		amount += change;
-	}
-
-	@Override
-	public String toString() {
-		return data.getName() + " * " + amount;
 	}
 }

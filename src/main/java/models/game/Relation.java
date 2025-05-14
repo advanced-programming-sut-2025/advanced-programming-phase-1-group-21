@@ -180,4 +180,23 @@ public class Relation {
         todayTrade = false;
         todayTalk = false;
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "Relation{player1=%s, player2=%s, level=%s, xp=%d, talks=%d, trades=%d, gifts=%d, todayTalk=%b, todayGift=%b, todayHug=%b, todayTrade=%b, isFlower=%b}",
+                player1.getUser().getUsername(),
+                player2.getUser().getUsername(),
+                Level,
+                friendshipXP,
+                talks.size(),
+                trades.size(),
+                gifts.size(),
+                todayTalk,
+                todayGift,
+                todayHug,
+                todayTrade,
+                isFlower
+        );
+    }
 }

@@ -46,4 +46,15 @@ public class Energy {
     public void setEnergy(int energy) {
         currentEnergy = energy;
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "Energy{current=%d, max=%d, remainingDays=%d}",
+                currentEnergy,
+                maxEnergy,
+                remainingDays
+        );
+    }
+
 }

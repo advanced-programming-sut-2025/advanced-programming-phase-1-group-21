@@ -22,4 +22,15 @@ public class Skill {
     public int getSkillLevel(SkillType type) {
         return type.calcLevel(getSkillExp(type));
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Skills:\n");
+        for (SkillType type : SkillType.values()) {
+            int exp = getSkillExp(type);
+            int level = getSkillLevel(type);
+            sb.append(String.format("  %s - Exp: %d, Level: %d%n", type.getDisplayName(), exp, level));
+        }
+        return sb.toString();
+    }
 }

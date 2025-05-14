@@ -20,7 +20,7 @@ public class Refrigerator implements Placable {
 
     @Override
     public TileType getTileType() {
-        return TileType.ARTISAN;
+        return TileType.REFRIGERATOR;
     }
 
     @Override
@@ -32,4 +32,10 @@ public class Refrigerator implements Placable {
     public String getSprite() {
         return "R";
     }
+
+    @Override
+    public String toString() {
+        return "Refrigerator{inventory=" + inventory + '}';
+    }
+
 }

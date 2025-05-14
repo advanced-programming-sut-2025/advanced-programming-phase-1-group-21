@@ -2,8 +2,8 @@ package models.Item;
 
 import models.data.items.*;
 
-public interface Item {
-    static Item build(String name, int amount) {
+public abstract class Item {
+    public static Item build(String name, int amount) {
         AllItemsData itemData = AllItemsData.getData(name);
         if (itemData == null) {
             return null;
@@ -29,21 +29,28 @@ public interface Item {
         return null;
     }
 
-    String getName();
+    public abstract String getName();
 
-    ItemType getItemType();
+    public abstract ItemType getItemType();
 
-    int getAmount();
+    public abstract int getAmount();
 
-    void setAmount(int amount);
+    public abstract void setAmount(int amount);
 
-    void changeAmount(int change);
+    public abstract void changeAmount(int change);
 
-    boolean isSalable();
+    public abstract boolean isSalable();
 
-    int getPrice();
+    public abstract int getPrice();
 
-    default Item copy() {
+    @Override
+    public String toString() {
+        AllItemsData itemData = AllItemsData.getData(getName());
+        assert itemData != null;
+        return itemData + " * " + getAmount();
+    }
+
+    public Item copy() {
         return Item.build(getName(), getAmount());
     }
 }

@@ -3,7 +3,7 @@ package models.Item;
 import models.data.items.ItemData;
 import models.data.items.SalableData;
 
-public class Salable implements Item {
+public class Salable extends Item {
 	private final SalableData data;
 	private final ItemType itemType;
 	private int amount;
@@ -51,10 +51,5 @@ public class Salable implements Item {
 	@Override
 	public void changeAmount(int change) {
 		amount += change;
-	}
-
-	@Override
-	public String toString() {
-		return data.getName() + " * " + amount;
 	}
 }

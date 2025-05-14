@@ -143,4 +143,18 @@ public class Animal implements Placable {
     public boolean canEnterHouse(String name) {
         return StringUtils.containsIgnoreCase(name, house);
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "Animal{name='%s', type=%s, friendship=%d, fed=%s, pet=%s, outside=%s, todayProduct=%s}",
+                name,
+                animalType,
+                friendship,
+                isFeedToday ? "yes" : "no",
+                isTodayPet ? "yes" : "no",
+                isOut ? "yes" : "no",
+                todayProduct == null ? "none" : todayProduct
+        );
+    }
 }
