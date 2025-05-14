@@ -3,15 +3,17 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import views.menu.RegisterMenuView;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class Tester {
+public class menuTest {
 	private static int numberOfTestCases;
 	private static String testCaseDirectory = "src/test/resources/testcases/";
 
@@ -51,6 +53,8 @@ public class Tester {
 
 	@AfterEach
 	void tearDownAfterEach(TestInfo info) {
+
+		delete_users_json();
 		System.out.println("		------ test " + info.getDisplayName() + " is Done ------		");
 	}
 
@@ -85,42 +89,61 @@ public class Tester {
 	@Disabled
 	@ParameterizedTest
 	@ValueSource(ints = {1, 2, 3, 4})
-	@Order(1)
+	@Order(2)
 	void test0(int x) {
 		System.out.println("Test " + x);
 	}
 
-	@ParameterizedTest
-	@MethodSource("provideFileTestCases")
-	@Order(2)
-	@DisplayName("This is Second test's DisplayName")
-	void test(TestCase testcase) throws IOException {
-		InputStream baseInput = System.in;
-		PrintStream baseOutput = System.out;
+	@Test
+	@Order(1)
+	void registerTest() throws IOException {
+		String usernameWrongLenght = "register -u A -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male" + "\n" +
+				"register -u AA -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male" + "\n" +
+				"register -u AAA -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male" + "\n" +
+				"register -u AAAA -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male" + "\n" +
+				"register -u AAAAA -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male" + "\n" +
+				"register -u AAAAAA -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male" + "\n" +
+				"register -u AAAAAAA -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male" + "\n" +
+				"register -u AAAAAAAA -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male" + "\n" +
+				"register -u AAAAAAAAA -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male" + "\n" +
+				"register -u AAAAAAAAAA -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male" + "\n" +
+				"register -u AAAAAAAAAAA -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male" + "\n" +
+				"register -u AAAAAAAAAAAA -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male" + "\n";
 
-		System.out.println("input address: " + testcase.inputFilePath());
-		System.out.println("input address: " + testcase.outputFilePath());
 
-		String inputString = Files.readString(Path.of(testcase.inputFilePath()));
+//		String input = testCaseDirectory + "RegisterTestCaseInput.txt";
+//		String output = testCaseDirectory + "RegisterTestCaseOutput.txt";
+//		InputStream baseInput = System.in;
+//		PrintStream baseOutput = System.out;
+
+//		System.out.println("input address: " + testcase.inputFilePath());
+//		System.out.println("input address: " + testcase.outputFilePath());
+
+//		String inputString = Files.readString(Path.of(input));
 //		System.out.println("input: " + inputString);
 
-		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-		System.setIn(new ByteArrayInputStream(inputString.getBytes()));
-		System.setOut(new PrintStream(outputStream));
+//		System.setIn(new ByteArrayInputStream(inputString.getBytes()));
+//		System.setOut(new PrintStream(outputStream));
 
 		// Act
-		Main.main(null);
+//		Main.main(null);
+		RegisterMenuView registerMenuView = new RegisterMenuView();
+
+		Scanner scanner = new Scanner(usernameWrongLenght);
+		while (scanner.hasNextLine()) {
+			String line = scanner.nextLine().trim();
+			registerMenuView.Result(line);
+		}
 
 
-		String result = outputStream.toString();
+//		String result = outputStream.toString();
 
 		// Assert
-		System.setOut(baseOutput);
-		System.setIn(baseInput);
+//		System.setOut(baseOutput);
+//		System.setIn(baseInput);
 
-
-		delete_users_json();
 	}
 
 	private void delete_users_json() {

@@ -39,10 +39,11 @@ public class Result<T> {
     }
 
     public String getMessage() {
-        if (message != null)
-            return message;
         if (error != null)
             return error.getMessage();
+        if (message != null) {
+            return message;
+        }
         return (data != null ? data.toString() : "");
     }
 

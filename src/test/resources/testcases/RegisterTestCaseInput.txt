@@ -1,0 +1,26 @@
+register -u A -p A Alireza123! -n A -e A -g A
+pick question -q 1 -a "AAA" -c "AAA"
+register -u AA -p  Alireza123! -n Ali -e ali@gmail.com -g male
+pick question -q 1 -a "AAA" -c "AAA"
+register -u Ali -p Alireza123! Alireza123! -n Ali -e ali@gmail.com -g male
+pick question -q 1 -a "AAA" -c "AAA"
+register -u Ali -p Alireza123! Alireza123! -n Ali -e ali@gmail.com -g male
+pick question -q 1 -a "AAA" -c "AAA"
+register -u Ali -p Alireza123! Alireza123! -n Ali -e ali@gmail.com -g male
+pick question -q 1 -a "AAA" -c "AAA"
+register -u Ali -p Alireza123! Alireza123! -n Ali -e ali@gmail.com -g male
+pick question -q 1 -a "AAA" -c "AAA"
+register -u Ali -p Alireza123! Alireza123! -n Ali -e ali@gmail.com -g male
+pick question -q 1 -a "AAA" -c "AAA"
+register -u Ali -p Alireza123! Alireza123! -n Ali -e ali@gmail.com -g male
+pick question -q 1 -a "AAA" -c "AAA"
+
+
+register -u Ali -p Alireza123! Alireza123! -n Ali -e ali@gmail.com -g male
+pick question -q 1 -a "AAA" -c "AAA"
+register -u sobhan -p Sobhan123! Sobhan123! -n sobhan -e sobhan@gmail.com -g male
+pick question -q 1 -a "AAA" -c "AAA"
+register -u sobi -p Sobhan123! Sobhan123! -n sobi -e sobi@gmail.com -g male
+pick question -q 1 -a "AAA" -c "AAA"
+register -u maryam -p Maryam123! Maryam123! -n maryam -e maryam@gmail.com -g female
+pick question -q 1 -a "AAA" -c "AAA"

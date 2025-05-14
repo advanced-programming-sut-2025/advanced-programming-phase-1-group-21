@@ -27,25 +27,25 @@ public class RegisterMenuView {
 
     public void Result(String command) throws IOException {
         if((matcher = RegisterMenuCommand.REGISTER.getMatcher(command)) != null){
-            Result result = registerMenuController.register(matcher.group("username") , matcher.group("password")
+            Result <Void> result = registerMenuController.register(matcher.group("username") , matcher.group("password")
                     , matcher.group("passwordConfirm") , matcher.group("nickname") , matcher.group("email")
                     , matcher.group("gender"));
-            System.out.println(result.getMessage());
+            System.out.println(result);
             if(!result.isError())
                 printQuestions();
         }
 
         else if((matcher = RegisterMenuCommand.PICK_QUESTION.getMatcher(command)) != null){
             System.out.println(registerMenuController.pickQuestion(matcher.group("answer") ,
-                    matcher.group("answerConfirm") , matcher.group("questionNumber")).getMessage());
+                    matcher.group("answerConfirm") , matcher.group("questionNumber")));
         }
 
         else if((matcher = RegisterMenuCommand.SHOW_CURRENT_MENU.getMatcher(command)) != null){
-            System.out.println(registerMenuController.showCurrentMenu().getMessage());
+            System.out.println(registerMenuController.showCurrentMenu());
         }
 
         else if((matcher = RegisterMenuCommand.GO_TO_LOGIN.getMatcher(command)) != null){
-            System.out.println(registerMenuController.goToLogin().getMessage());;
+            System.out.println(registerMenuController.goToLogin());
         }
 
         else
