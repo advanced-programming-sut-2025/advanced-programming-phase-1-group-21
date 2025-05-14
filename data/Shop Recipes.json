@@ -1710,7 +1710,7 @@
   },
   {
     "shop": "Marnie's Ranch",
-    "name": "Shears",
+    "name": "Shear",
     "description": "Use this to collect wool from sheep",
     "seasons": ["spring", "summer", "autumn", "winter"],
     "prices": [1000, 1000, 1000, 1000],
@@ -1752,7 +1752,7 @@
   },
   {
     "shop": "Marnie's Ranch",
-    "name": "Shears",
+    "name": "Shear",
     "description": "Use this to collect wool from sheep",
     "seasons": ["spring", "summer", "autumn", "winter"],
     "prices": [1000, 1000, 1000, 1000],

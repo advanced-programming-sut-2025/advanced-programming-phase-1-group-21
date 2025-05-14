@@ -246,4 +246,12 @@ public class Game implements DailyUpdate {
         }
         return null;
     }
+
+    public double weatherCofficient(){
+        if(gameWeather.equals(Weather.RAINY) || gameWeather.equals(Weather.STORM))
+            return 1.5;
+        if(gameWeather.equals(Weather.SNOW))
+            return 2;
+        return 1;
+    }
 }

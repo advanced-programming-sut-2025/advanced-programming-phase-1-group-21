@@ -19,7 +19,7 @@ public class Shear extends Tool {
 		Player player = App.game.getCurrentPlayer();
 		Tile tile = player.getMap().getTile(coord);
 
-		player.decreaseEnergy(4);
+		player.decreaseEnergy((int)(4*App.game.weatherCofficient()));
 
 		Animal animal = tile.getPlacable(Animal.class);
 		if (animal == null) {

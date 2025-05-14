@@ -6,7 +6,7 @@ public interface Item {
     static Item build(String name, int amount) {
         AllItemsData itemData = AllItemsData.getData(name);
         if (itemData == null) {
-            throw new IllegalArgumentException("Item " + name + " does not exist");
+            return null;
         }
         switch (itemData.getType()) {
             case PLACEABLE -> {

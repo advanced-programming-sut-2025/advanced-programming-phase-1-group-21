@@ -52,6 +52,7 @@ public class Pickaxe extends Tool {
 
 		Tile tile = player.getMap().getTile(coord);
 		TileType tileType = tile.getTileType();
+		System.out.println(tile.getTileType());
 		int use = 0;
 
 		if (tileType == TileType.PLOWED) {
@@ -74,12 +75,14 @@ public class Pickaxe extends Tool {
 			}
 		}
 
+		double weatherCofficient = App.game.weatherCofficient();
+
 		int energyCost = switch (toolMaterialType) {
-			case PRIMITIVE -> 5;
-			case COPPER -> 4;
-			case STEEL -> 3;
-			case GOLD -> 2;
-			case IRIDIUM -> 1;
+			case PRIMITIVE -> (int)(5 * weatherCofficient);
+			case COPPER -> (int)(4 * weatherCofficient);
+			case STEEL -> (int)(3 * weatherCofficient);
+			case GOLD -> (int)(2 * weatherCofficient);
+			case IRIDIUM -> (int)(1 * weatherCofficient);
 			default -> 0;
         };
 		player.decreaseEnergy(use != 0 ? energyCost : 1);

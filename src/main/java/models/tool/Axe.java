@@ -31,17 +31,19 @@ public class Axe extends Tool {
 			App.game.getCurrentPlayer().getInventory().addItem(Item.build("Wood", 10));
 		}
 
+		double weatherCofficient = App.game.weatherCofficient();
+
 		if(use){
 			if(this.toolMaterialType.equals(ToolMaterialType.PRIMITIVE))
-				App.game.getCurrentPlayer().decreaseEnergy(5);
+				App.game.getCurrentPlayer().decreaseEnergy((int) (5 * weatherCofficient));
 			else if(this.toolMaterialType.equals(ToolMaterialType.COPPER))
-				App.game.getCurrentPlayer().decreaseEnergy(4);
+				App.game.getCurrentPlayer().decreaseEnergy((int) (4 * weatherCofficient));
 			else if(this.toolMaterialType.equals(ToolMaterialType.STEEL))
-				App.game.getCurrentPlayer().decreaseEnergy(3);
+				App.game.getCurrentPlayer().decreaseEnergy((int)(3 * weatherCofficient));
 			else if(this.toolMaterialType.equals(ToolMaterialType.GOLD))
-				App.game.getCurrentPlayer().decreaseEnergy(2);
+				App.game.getCurrentPlayer().decreaseEnergy((int)(2 * weatherCofficient));
 			else if(this.toolMaterialType.equals(ToolMaterialType.IRIDIUM))
-				App.game.getCurrentPlayer().decreaseEnergy(1);
+				App.game.getCurrentPlayer().decreaseEnergy((int) weatherCofficient);
 			else if(App.game.getCurrentPlayer().getSkillLevel(SkillType.FARMING) >= 4)
 				App.game.getCurrentPlayer().setEnergy(App.game.getCurrentPlayer().getEnergy() + 1);
 			return Result.success(null, "to yek derakht ro koshti");
