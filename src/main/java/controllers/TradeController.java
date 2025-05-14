@@ -27,7 +27,7 @@ public class TradeController{
         Player player = App.game.getPlayerByName(username);
         if(player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
 
-        Item thisItem = Item.build(type, amount);
+        Item thisItem = Item.build(item , amount);
         if(type.equals("offer") && !App.game.getCurrentPlayer().getInventory().canRemoveItem(thisItem))
             return Result.failure(GameError.NOT_ENOUGH_ITEMS);
         Relation relation = App.game.getRelationOfUs(App.game.getCurrentPlayer(), player);
@@ -136,7 +136,9 @@ public class TradeController{
                 trade.setResponsed(true);
                 return Result.failure(GameError.NOT_ENOUGH_ITEMS);
             }
+            System.out.println(trade.getOfferItem().getAmount());
             player.getInventory().removeItem(trade.getOfferItem());
+            System.out.println(trade.getOfferItem().getAmount());
             App.game.getCurrentPlayer().getInventory().addItem(trade.getOfferItem());
             App.game.getCurrentPlayer().getInventory().changeCoin(-trade.getRequestPrice());
             player.getInventory().changeCoin(trade.getRequestPrice());
@@ -158,7 +160,7 @@ public class TradeController{
             trade.setResponse(true);
             trade.setResponsed(true);
         }
-        relation.setFriendshipXP(relation.getFriendshipXP() + 20);
+        relation.setFriendshipXP(relation.getFriendshipXP() + 50);
         return Result.success(null);
     }
 
@@ -172,6 +174,8 @@ public class TradeController{
                 if(trade.isResponsed())
                     continue;
                 output.add("Sender : " + trade.getSender().getUser().getUsername());
+                output.add("Receiver : " + trade.getReceiver().getUser().getUsername());
+                output.add("ID : " + trade.getID());
                 if(TradeType.OFFER_ITEM.equals(trade.getTradeType())) {
                     output.add("Offered Item : " + trade.getOfferItem().getName());
                     output.add("Requested Item : " + trade.getRequestItem().getName());

@@ -47,12 +47,15 @@ public class WateringCan extends Tool {
         //calc energy TODO
         Tool waterCan = (Tool) App.game.getCurrentPlayer().getItemInHand();
         Player player = App.game.getCurrentPlayer();
+
+        double weatherCofficient = App.game.weatherCofficient();
+
         switch (waterCan.getToolMaterialType()) {
-            case PRIMITIVE -> player.decreaseEnergy(5);
-            case COPPER -> player.decreaseEnergy(4);
-            case STEEL -> player.decreaseEnergy(3);
-            case GOLD -> player.decreaseEnergy(2);
-            case IRIDIUM -> player.decreaseEnergy(1);
+            case PRIMITIVE -> player.decreaseEnergy((int)(5 * App.game.weatherCofficient()));
+            case COPPER -> player.decreaseEnergy((int)(4 * App.game.weatherCofficient()));
+            case STEEL -> player.decreaseEnergy((int)(3 * App.game.weatherCofficient()));
+            case GOLD -> player.decreaseEnergy((int)(2 * App.game.weatherCofficient()));
+            case IRIDIUM -> player.decreaseEnergy((int)(1 * App.game.weatherCofficient()));
         }
         if(player.getSkillLevel(SkillType.FARMING) >= 4)
             player.setEnergy(player.getEnergy() + 1);

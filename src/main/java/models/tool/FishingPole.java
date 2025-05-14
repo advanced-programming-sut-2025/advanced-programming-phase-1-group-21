@@ -34,15 +34,17 @@ public class FishingPole extends Tool {
 				(ToolMaterialType.IRIDIUM) || fishingPole.toolMaterialType.equals(ToolMaterialType.FIBERGLASS))
 			player.setEnergy(player.getEnergy() + 1);
 
+		double weatherCofficient = App.game.weatherCofficient();
+
 		if(fishingPole.toolMaterialType.equals(ToolMaterialType.EDUCATIONAL) ||
 				fishingPole.toolMaterialType.equals(ToolMaterialType.BAMBOO))
-			player.decreaseEnergy(8);
+			player.decreaseEnergy((int)(8* weatherCofficient));
 
 		else if(fishingPole.toolMaterialType.equals(ToolMaterialType.FIBERGLASS))
-			player.decreaseEnergy(6);
+			player.decreaseEnergy((int)(6 * weatherCofficient));
 
 		else if(fishingPole.toolMaterialType.equals(ToolMaterialType.IRIDIUM))
-			player.decreaseEnergy(4);
+			player.decreaseEnergy((int)(4 * weatherCofficient));
 
 		if(fishingPole.toolMaterialType.equals(ToolMaterialType.EDUCATIONAL))
 			return Result.success(Item.build(getCheapestFish() , 1));

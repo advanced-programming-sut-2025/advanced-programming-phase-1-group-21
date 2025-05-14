@@ -173,7 +173,7 @@ public class GameController{
                 Item.build("wood", 500)
         );
         Inventory inv = App.game.getCurrentPlayer().getInventory();
-        if (inv.canRemoveItemList(needed))
+        if (!inv.canRemoveItemList(needed))
             return Result.failure(GameError.NOT_ENOUGH_ITEMS);
         inv.removeItemList(needed);
         App.game.getCurrentPlayerMap().getBuilding(GreenHouse.class).setBuild(true);
@@ -359,7 +359,7 @@ public class GameController{
 
         Tool tool = (Tool) App.game.getCurrentPlayer().getItemInHand();
         Result<Item> item = tool.use(destinyTile);
-        if (item.isSuccess()) {
+        if (item.isSuccess() && (item.getData() != null)) {
             App.game.getCurrentPlayer().getInventory().addItem(item.getData());
         }
         return item;
@@ -1094,12 +1094,14 @@ public class GameController{
         for(NPC npc : App.game.getNpcs()){
             NPCFriendship npcFriendship = npc.getFriendshipByPlayer(App.game.getCurrentPlayer());
             output.add("NPC name: " + npc.getName());
-            for(int i = 0 ; i < Math.min(npcFriendship.getLevel().getLevel() , 3) ; i++){
+            for(int i = 0 ; i < Math.min(npcFriendship.getLevel().getLevel() + 1  , 3) ; i++){
                 output.add(i + ":");
                 output.add("Request Item: " + npc.getTasks().get(i).getRequestItem());
                 output.add("Request Amount: " + npc.getTasks().get(i).getRequestAmount());
                 output.add("Reward Item: " + npc.getTasks().get(i).getRewardItem());
                 output.add("Reward Amount: " + npc.getTasks().get(i).getRewardAmount());
+                output.add("--------------------");
+                output.add("\n");
             }
         }
         return Result.success(output);

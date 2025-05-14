@@ -30,7 +30,7 @@ public enum GameMenuCommand implements Command {
     CHEAT_WEATHER("\\s*cheat\\s+weather\\s+set\\s+(?<type>\\S+)\\s*"),
     GO_TO_VILLAGE("go to village"),
     BACK_HOME("back home"),
-    CHEAT_ADD_ITEM("cheat\\s+add\\s+item\\s+-n\\s+(?<name>\\S+)\\s+-c\\s+(?<amount>\\d+)\\s*"),
+    CHEAT_ADD_ITEM("cheat\\s+add\\s+item\\s+-n\\s+(?<name>.+)\\s+-c\\s+(?<amount>\\d+)\\s*"),
     ADD_ITEM("\\s*add\\s+item\\s+(?<name>\\S+)\\s+(?<itemType>\\S+)\\s+(?<cost>\\d+)\\s+(?<amount>\\d+)\\s*"),
     SHOW_FRIENDSHIP("\\s*show\\s+friendships\\s*"),
     TALK("\\s*talk\\s+-u\\s+(?<username>\\S+)\\s+-m\\s+(?<message>.+)\\s*"),
@@ -50,7 +50,7 @@ public enum GameMenuCommand implements Command {
     TRADE_WITH_ITEM("\\s*trade\\s+with\\s+money\\s+-u\\s+(?<username>\\S+)\\s+-t\\s+(?<type>\\S+)\\s+-i\\s+(?<ite" +
             "m1>\\S+)\\s+-a\\s+(?<amount1>\\d+)\\s+-i\\s+(?<item2>\\S+)\\s+-a\\s+(?<amount2>)\\s*"),
     TRADE_LIST("\\s*trade\\s+list\\s*"),
-    BACK_TO_THE_GAME("\\s*bach\\s+to\\s+the\\s+game\\s*"),
+    BACK_TO_THE_GAME("\\s*back\\s+to\\s+the\\s+game\\s*"),
     MEET_NPC("\\s*meet\\s+npc\\s+-n\\s+(?<npcName>\\S+)\\s*"),
     GIFT_NPC("\\s*gift\\s+npc\\s+-n\\s+(?<npcName>\\S+)\\s+-i\\s+(?<item>\\S+)\\s+-a\\s+(?<amount>\\d+)\\s*"),
     FRIENDSHIP_NPC_LIST("\\s*friendship\\s+npc\\s+list\\s*"),

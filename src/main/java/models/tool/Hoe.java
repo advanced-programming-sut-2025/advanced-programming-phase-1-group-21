@@ -18,16 +18,19 @@ public class Hoe extends Tool {
 	public Result<Item> use(Coord coord) {
 		Player player = App.game.getCurrentPlayer();
 		ToolMaterialType type = ((Tool) App.game.getCurrentPlayer().getItemInHand()).getToolMaterialType();
+
+		double weatherCofficien  = App.game.weatherCofficient();
+
 		if(type == ToolMaterialType.PRIMITIVE)
-			player.decreaseEnergy(5);
+			player.decreaseEnergy((int)(5 * weatherCofficien));
 		if(type == ToolMaterialType.COPPER)
-			player.decreaseEnergy(4);
+			player.decreaseEnergy((int)(4*weatherCofficien));
 		if (type == ToolMaterialType.STEEL)
-			player.decreaseEnergy(3);
+			player.decreaseEnergy((int)(3 * weatherCofficien));
 		if (type == ToolMaterialType.GOLD)
-			player.decreaseEnergy(2);
+			player.decreaseEnergy((int)(2 * weatherCofficien));
 		if (type == ToolMaterialType.IRIDIUM)
-			player.decreaseEnergy(1);
+			player.decreaseEnergy((int)(weatherCofficien));
 
 		if(player.getMap().mapType != MapType.FARM)
 			return Result.failure(GameError.HERE_IS_NOT_FARM);

@@ -53,14 +53,14 @@ public class Inventory {
 
     public void changeCoin(int amount){
         for (Item item : items) {
-            if (item.getName().equals("coin"))
+            if (item.getName().equalsIgnoreCase("coin"))
                 item.setAmount(item.getAmount() + amount);
         }
     }
 
     public Item getCoin() {
         for(int i = 0 ; i < items.size(); i++){
-            if(items.get(i).getName().equals("coin"))
+            if(items.get(i).getName().equalsIgnoreCase("coin"))
                 return items.get(i);
         }
         return null;
@@ -227,7 +227,7 @@ public class Inventory {
 
     public boolean toolEquip(String toolName){
         for(Item item : items) {
-            if(item.getName().equals(toolName) && (item.getItemType().equals(ItemType.TOOL))) {
+            if(item.getName().equalsIgnoreCase(toolName) && (item.getItemType().equals(ItemType.TOOL))) {
                 App.game.getCurrentPlayer().setItemInHand(item);
                 return true;
             }
