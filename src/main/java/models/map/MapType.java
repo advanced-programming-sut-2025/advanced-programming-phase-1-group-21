@@ -6,7 +6,7 @@ public enum MapType {
     HOUSE(20, 10),
     GREEN_HOUSE(20, 10),
     LAKE(10, 10),
-    MINES(25, 15),
+    MINES(50, 50),
     FARM(30, 40),
     VILLAGE(40, 40),
     SHOP(8, 8),
@@ -38,6 +38,10 @@ public enum MapType {
             }
         }
         return null;
+    }
+
+    public int getArea() {
+        return getHeight() * getWidth();
     }
 
     public boolean isAnimalHouse() {

@@ -11,17 +11,8 @@ import java.util.Random;
 
 public class MapBuilder {
 
-    public void buildRandomForaging(Map map) {
-        List<TileType> foragingTypes = Arrays.asList(
-                TileType.SIMPLE_ROCK,
-                TileType.COPPER_ROCK,
-                TileType.STEEL_ROCK,
-                TileType.GOLD_ROCK,
-                TileType.IRIDIUM_ROCK,
-                TileType.LEAF
-        );
-
-        int foragingCount = App.random.nextInt(20, 31); // 20 to 30 inclusive
+    public void buildRandomForaging(Map map, List<TileType> foragingTypes, int L, int R) {
+        int foragingCount = App.random.nextInt(L, R);
         int placed = 0;
         int attempts = 0;
 
@@ -81,7 +72,11 @@ public class MapBuilder {
                 buildings.add(Pair.of(TileType.LAKE, lake));
 
             if (!setBuildingsRandomly(random, buildings, map)) continue;
-            buildRandomForaging(map);
+            List<TileType> foragingTypes = Arrays.asList(
+                    TileType.SIMPLE_ROCK,
+                    TileType.LEAF
+            );
+            buildRandomForaging(map, foragingTypes, 20, 30);
             return map;
         }
     }
@@ -150,6 +145,13 @@ public class MapBuilder {
     public Map buildMines() {
         Map map = new Map(MapType.MINES);
         map.tiles.get(14).get(24).setTileType(TileType.DOOR);
+        List<TileType> foragingTypes = Arrays.asList(
+                TileType.COPPER_ROCK,
+                TileType.STEEL_ROCK,
+                TileType.GOLD_ROCK,
+                TileType.IRIDIUM_ROCK
+        );
+        buildRandomForaging(map, foragingTypes, map.mapType.getArea() / 10, map.mapType.getArea() / 4);
         return map;
     }
 
