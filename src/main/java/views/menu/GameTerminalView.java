@@ -336,8 +336,10 @@ public class GameTerminalView {
         else if ((matcher = GameMenuCommand.GET_ARTISAN_PRODUCT.getMatcher(command)) != null) {
             System.out.println(gameController.getArtisanProduct(matcher.group("name")));
         }
-        else
-            System.out.println("Invalid command");
+        else {
+            System.out.println("invalid command");
+            return;
+        }
 
         gameController.advance();
     }

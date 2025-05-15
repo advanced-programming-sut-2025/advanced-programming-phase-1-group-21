@@ -285,7 +285,7 @@ public class GameController{
     }
 
     public void printMapFull() {
-        GameTerminalView.printWithColor(printMap(0, 0, 50).getData());
+        GameTerminalView.printWithColor(printMap(0, 0, 300).getData());
     }
 
     public Result<ArrayList<String>> printMap(int x, int y , int size) {
