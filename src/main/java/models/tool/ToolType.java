@@ -10,7 +10,7 @@ public enum ToolType {
     SCYTHE,
     MILK_PAIL,
     SHEAR,
-    BACKPACK;
+    TRASHCAN;
 
 
 

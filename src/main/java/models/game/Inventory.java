@@ -24,6 +24,7 @@ public class Inventory {
         inventory.addItem(new Axe());
         inventory.addItem(new Scythe());
         inventory.addItem(new WateringCan());
+        inventory.addItem(new TrashCan());
         return inventory;
     }
 
@@ -137,8 +138,23 @@ public class Inventory {
      * Dry-run: returns true if all requested removals would succeed without mutating this.
      */
     public boolean canRemoveItems(List<Item> toRemove) {
-        Inventory sandbox = new Inventory(this);
-        return sandbox.removeItems(toRemove);
+        for(Item thisItem : toRemove){
+            int thisItemAmount = 0;
+            for(Item otherItem : toRemove){
+                if(thisItem.getName().equals(otherItem.getName())){
+                    thisItemAmount += otherItem.getAmount();
+                }
+            }
+            int itemInInventory = 0;
+            for(Item inventoryItem : items){
+                if(inventoryItem.getName().equals(thisItem.getName())){
+                    itemInInventory += inventoryItem.getAmount();
+                }
+            }
+            if(thisItemAmount > itemInInventory)
+                return false;
+        }
+        return true;
     }
 
     public boolean canRemoveItem(Item item) {
@@ -154,7 +170,7 @@ public class Inventory {
 
     public Item getItem(String name) {
         for (Item item : items)
-            if (item.getName().equals(name))
+            if (item.getName().equalsIgnoreCase(name))
                 return item;
         return null;
     }
