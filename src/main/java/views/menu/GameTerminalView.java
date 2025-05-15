@@ -19,60 +19,38 @@ public class GameTerminalView {
     Matcher matcher;
     GameController gameController = new GameController();
 
-    public static final String RESET = "\u001B[0m";
-    public static final String BLACK = "\u001B[30m";
-    public static final String RED = "\u001B[31m";
-    public static final String GREEN = "\u001B[32m";
-    public static final String YELLOW = "\u001B[33m";
-    public static final String BLUE = "\u001B[34m";
-    public static final String PURPLE = "\u001B[35m";
-    public static final String CYAN = "\u001B[36m";
-    public static final String WHITE = "\u001B[37m";
-    public static final String BROWN = "\u001B[38;5;94m";
-
     public static void printWithColor(ArrayList<String> output) {
-        for(String line : output) {
-            if(line.equals("#"))
-                System.out.print(WHITE + line + RESET);
-            else if(line.equals("H"))
-                System.out.print(YELLOW + line + RESET);
-            else if(line.equals("~"))
-                System.out.print(BLUE + line + RESET);
-            else if(line.equals("M"))
-                System.out.print(BLACK + line + RESET);
-            else if(line.equals("R"))
-                System.out.print(BLACK + line + RESET);
-            else if(line.equals("G"))
-                System.out.print(GREEN + line + RESET);
-            else if(line.equals("*"))
-                System.out.print(GREEN + line + RESET);
-            else if(line.equals("T"))
-                System.out.print(GREEN + line + RESET);
-            else if(line.equals("@"))
-                System.out.print(RED + line + RESET);
-            else if(line.equals("F"))
-                System.out.print(BLACK + line + RESET);
-            else if(line.equals("+"))
-                System.out.print(RED + line + RESET);
-            else if(line.equals("B"))
-                System.out.print(CYAN + line + RESET);
-            else if(line.equals("C"))
-                System.out.print(RED + line + RESET);
-            else if(line.equals("g"))
-                System.out.print(YELLOW + line + RESET);
-            else if(line.equals("I"))
-                System.out.print(BLUE + line + RESET);
-            else if(line.equals("J"))
-                System.out.print(BROWN + line + RESET);
-            else if(line.equals("P"))
-                System.out.print(GREEN + line + RESET);
-            else if(line.equals("S"))
-                System.out.print(RED + line + RESET);
-            else
-                System.out.print(line);
+        for (String line : output) {
+            Colors color;
+            switch (line) {
+                case "#": color = Colors.WHITE; break;
+                case "H": color = Colors.YELLOW; break;
+                case "~": color = Colors.BLUE; break;
+                case "M":
+                case "R":
+                case "F": color = Colors.BLACK; break;
+                case "G":
+                case "*":
+                case "T":
+                case "P": color = Colors.GREEN; break;
+                case "@":
+                case "+":
+                case "C":
+                case "S": color = Colors.RED; break;
+                case "B": color = Colors.CYAN; break;
+                case "g": color = Colors.YELLOW; break;
+                case "I": color = Colors.BLUE; break;
+                case "J": color = Colors.BROWN; break;
+                default:
+                    System.out.print(line);
+                    continue;
+            }
+
+            System.out.print(Colors.color(color, line));
         }
         System.out.println("\n\n");
     }
+
 
     public static void printArrayList(ArrayList<String> output) {
         for(String line : output) {
@@ -81,19 +59,20 @@ public class GameTerminalView {
     }
 
     public static void helpReadingMap() {
-        System.out.println(WHITE + "#" + WHITE + " :An empty tile");
-        System.out.println(YELLOW + "H" + YELLOW + WHITE + " :House" + WHITE);
-        System.out.println(GREEN + "G" + GREEN + WHITE + " :Greenhouse" + WHITE);
-        System.out.println(BLACK + "M" + BLACK + WHITE + " :Mines" + WHITE);
-        System.out.println(CYAN + "B" + CYAN + WHITE + " :Barn" + WHITE);
-        System.out.println(RED + "C" + RED + WHITE + " :Coop" + WHITE);
-        System.out.println(BLUE + "~" + BLUE + WHITE + " :Lake" + WHITE);
-        System.out.println(GREEN + "T" + GREEN + WHITE + " :Tree" + WHITE);
-        System.out.println(GREEN + "*" + GREEN + WHITE + " :Marijuana" + WHITE);
-        System.out.println(BLACK + "R" + BLACK + WHITE + " :Rock" + WHITE);
-        System.out.println(RED + "+" + RED + WHITE + " :exit way" + WHITE);
-        System.out.println(RED + "@" + RED + WHITE + " :Your avatar" + WHITE);
+        System.out.println(Colors.color(Colors.WHITE, "#") + " : An empty tile");
+        System.out.println(Colors.color(Colors.YELLOW, "H") + " : House");
+        System.out.println(Colors.color(Colors.GREEN, "G") + " : Greenhouse");
+        System.out.println(Colors.color(Colors.BLACK, "M") + " : Mines");
+        System.out.println(Colors.color(Colors.CYAN, "B") + " : Barn");
+        System.out.println(Colors.color(Colors.RED, "C") + " : Coop");
+        System.out.println(Colors.color(Colors.BLUE, "~") + " : Lake");
+        System.out.println(Colors.color(Colors.GREEN, "T") + " : Tree");
+        System.out.println(Colors.color(Colors.GREEN, "*") + " : Marijuana");
+        System.out.println(Colors.color(Colors.BLACK, "R") + " : Rock");
+        System.out.println(Colors.color(Colors.RED, "+") + " : Exit way");
+        System.out.println(Colors.color(Colors.RED, "@") + " : Your avatar");
     }
+
 
     public static int getMap(Player player){
         System.out.print(player.getUser().getUsername() + " ,Select your map ID: ");
