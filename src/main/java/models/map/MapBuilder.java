@@ -11,27 +11,18 @@ import java.util.Random;
 
 public class MapBuilder {
 
-    public void buildRandomForaging(Map map) {
-        List<TileType> foragingTypes = Arrays.asList(
-                TileType.SIMPLE_ROCK,
-                TileType.COPPER_ROCK,
-                TileType.STEEL_ROCK,
-                TileType.GOLD_ROCK,
-                TileType.IRIDIUM_ROCK,
-                TileType.LEAF
-        );
-
-        int foragingCount = App.random.nextInt(20, 31); // 20 to 30 inclusive
+    public void buildRandomTile(Map map, List<TileType> types, int L, int R) {
+        int count = App.random.nextInt(L, R);
         int placed = 0;
         int attempts = 0;
 
-        while (placed < foragingCount && attempts < foragingCount * 10) {
+        while (placed < count && attempts < count * 10) {
             ++attempts;
 
             Tile tile = map.getTile(Coord.getRandomCoord(map.getMaxX(), map.getMaxY()));
 
             if (tile != null && tile.isEmpty()) {
-                TileType randomForaging = foragingTypes.get(App.random.nextInt(foragingTypes.size()));
+                TileType randomForaging = types.get(App.random.nextInt(types.size()));
                 tile.setTileType(randomForaging);
                 placed++;
             }
@@ -81,7 +72,11 @@ public class MapBuilder {
                 buildings.add(Pair.of(TileType.LAKE, lake));
 
             if (!setBuildingsRandomly(random, buildings, map)) continue;
-            buildRandomForaging(map);
+            List<TileType> foragingTypes = Arrays.asList(
+                    TileType.SIMPLE_ROCK,
+                    TileType.LEAF
+            );
+            buildRandomTile(map, foragingTypes, 40, 70);
             return map;
         }
     }
@@ -150,6 +145,13 @@ public class MapBuilder {
     public Map buildMines() {
         Map map = new Map(MapType.MINES);
         map.tiles.get(14).get(24).setTileType(TileType.DOOR);
+        List<TileType> foragingTypes = Arrays.asList(
+                TileType.COPPER_ROCK,
+                TileType.STEEL_ROCK,
+                TileType.GOLD_ROCK,
+                TileType.IRIDIUM_ROCK
+        );
+        buildRandomTile(map, foragingTypes, map.mapType.getArea() / 10, map.mapType.getArea() / 4);
         return map;
     }
 
