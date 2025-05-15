@@ -165,6 +165,10 @@ public class Map implements DailyUpdate {
             }
         }
 
+        for (Building building : buildings) {
+            building.nextDay(g);
+        }
+
         return false;
     }
 
