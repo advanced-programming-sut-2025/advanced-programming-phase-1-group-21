@@ -39,7 +39,7 @@ public class Game {
         }
 
         addNPC();
-        village = (new MapBuilder()).buildVillage(npcs);
+        village = (new MapBuilder()).buildVillage(npcs, new Random(42));
     }
 
     /**
