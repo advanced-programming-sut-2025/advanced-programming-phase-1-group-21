@@ -500,8 +500,36 @@ public class GameController{
 
     public Result<Void> addItemCheat(String itemName, int quantity) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        App.game.getCurrentPlayer().getInventory().addItem(Item.build(itemName, quantity));
-        return Result.success(null);
+        if(itemName.equalsIgnoreCase("milkpale"))
+            App.game.getCurrentPlayer().getInventory().addItem(new MilkPail());
+        if(itemName.equalsIgnoreCase("shear"))
+            App.game.getCurrentPlayer().getInventory().addItem(new Shear());
+        if(itemName.equalsIgnoreCase("educational pole")) {
+            FishingPole fishingPole = new FishingPole();
+            fishingPole.setToolMaterialType(ToolMaterialType.EDUCATIONAL);
+            App.game.getCurrentPlayer().getInventory().addItem(fishingPole);
+        }
+        if(itemName.equalsIgnoreCase("bamboo pole")) {
+            FishingPole fishingPole = new FishingPole();
+            fishingPole.setToolMaterialType(ToolMaterialType.BAMBOO);
+            App.game.getCurrentPlayer().getInventory().addItem(fishingPole);
+        }
+        if(itemName.equalsIgnoreCase("fiberglass pole")) {
+            FishingPole fishingPole = new FishingPole();
+            fishingPole.setToolMaterialType(ToolMaterialType.FIBERGLASS);
+            App.game.getCurrentPlayer().getInventory().addItem(fishingPole);
+        }
+        if(itemName.equalsIgnoreCase("iridium pole")) {
+            FishingPole fishingPole = new FishingPole();
+            fishingPole.setToolMaterialType(ToolMaterialType.IRIDIUM);
+            App.game.getCurrentPlayer().getInventory().addItem(fishingPole);
+        }
+        if(Item.build(itemName , quantity) != null) {
+            System.out.println(itemName);
+            App.game.getCurrentPlayer().getInventory().addItem(Item.build(itemName, quantity));
+            return Result.success(null);
+        }
+        return Result.failure(GameError.ITEM_IS_NOT_AVAILABLE);
     }
 
     public Result<Void> cookingRefrigerator(Consumable consumable) {
@@ -638,44 +666,51 @@ public class GameController{
             return Result.failure(GameError.ANIMAL_DOES_NOT_HAVE_PRODUCT);
 
         if(animal.getAnimalType().equals(AnimalTypes.COW)){
-            if(App.game.getCurrentPlayer().getInventory().canRemoveItem(Item.build("milk pail" , 1))) {
+            if(App.game.getCurrentPlayer().getInventory().canRemoveItem(new MilkPail())) {
                 App.game.getCurrentPlayer().getInventory().addItem(animal.collectProduce());
                 animal.setFriendship(animal.getFriendship() + 5);
                 animal.setTodayProduct(null);
             }
+            else
+                return Result.failure(GameError.NOT_ENOUGH_ITEM);
         }
 
         else if(animal.getAnimalType().equals(AnimalTypes.GOAT)){
-            if(App.game.getCurrentPlayer().getInventory().canRemoveItem(Item.build("milk pail" , 1))) {
+            if(App.game.getCurrentPlayer().getInventory().canRemoveItem(new MilkPail())) {
                 App.game.getCurrentPlayer().getInventory().addItem(animal.collectProduce());
                 animal.setFriendship(animal.getFriendship() + 5);
                 animal.setTodayProduct(null);
             }
+            else
+                return Result.failure(GameError.NOT_ENOUGH_ITEM);
         }
 
         else if(animal.getAnimalType().equals(AnimalTypes.SHEEP)){
-            if(App.game.getCurrentPlayer().getInventory().canRemoveItem(Item.build("sheer" , 1))) {
+            if(App.game.getCurrentPlayer().getInventory().canRemoveItem(new Shear())) {
                 App.game.getCurrentPlayer().getInventory().addItem(animal.collectProduce());
                 animal.setFriendship(animal.getFriendship() + 5);
                 animal.setTodayProduct(null);
             }
+            else
+                return Result.failure(GameError.NOT_ENOUGH_ITEM);
         }
 
         else if(animal.getAnimalType().equals(AnimalTypes.RABBIT)){
-            if(App.game.getCurrentPlayer().getInventory().canRemoveItem(Item.build("sheer" , 1))) {
+            if(App.game.getCurrentPlayer().getInventory().canRemoveItem(new Shear())) {
                 App.game.getCurrentPlayer().getInventory().addItem(animal.collectProduce());
                 animal.setFriendship(animal.getFriendship() + 5);
                 animal.setTodayProduct(null);
             }
+            else
+                return Result.failure(GameError.NOT_ENOUGH_ITEM);
         }
 
         else {
             App.game.getCurrentPlayer().getInventory().addItem(animal.collectProduce());
             animal.setTodayProduct(null);
-            return Result.success(animal.collectProduce());
+            return Result.success(null);
         }
-
-        return Result.success(animal.collectProduce());
+        return Result.success(null);
     }
 
     public Result<Void> sell(String itemName, int number) {
@@ -722,7 +757,10 @@ public class GameController{
         if(!isNearLake)
             return Result.failure(GameError.YOU_ARE_NOT_NEAR_TO_LAKE);
 
-        if(!App.game.getCurrentPlayer().getInventory().canRemoveItem(Item.build(fishingPole , 1)))
+        if(Item.build(fishingPole , 1) == null)
+            return Result.failure(GameError.ITEM_IS_NOT_AVAILABLE);
+
+        if(!App.game.getCurrentPlayer().getInventory().canRemoveItem(Objects.requireNonNull(Item.build(fishingPole, 1))))
             return Result.failure(GameError.TOOL_NOT_FOUND);
 
 
@@ -1048,13 +1086,12 @@ public class GameController{
         Relation relation = App.game.getRelationOfUs(App.game.getCurrentPlayer(), player);
         if(relation.getLevel().getLevel() < 3)
             return Result.failure(GameError.FRIENDSHIP_LEVEL_IS_NOT_ENOUGH);
-        if(relation.getFriendshipXP() < 4*30 + 15)
+        if(relation.getFriendshipXP() < 300)
             return Result.failure(GameError.FRIENDSHIP_LEVEL_IS_NOT_ENOUGH);
 
-        List<Item> ring = new ArrayList<>();
-        Item item = Item.build("Ring", 1);
-        ring.add(item);
-        if(!App.game.getCurrentPlayer().getInventory().canRemoveItems(ring))
+        Item ring = Item.build("wedding ring", 1);
+        assert ring != null;
+        if(!App.game.getCurrentPlayer().getInventory().canRemoveItem(ring))
             return Result.failure(GameError.NOT_ENOUGH_ITEMS);
 
         if(App.game.getCurrentPlayer().getUser().getGender().equals(Gender.FEMALE))
@@ -1071,12 +1108,14 @@ public class GameController{
         }
 
         relation.setLevel(FriendshipLevel.LEVEL4);
-        App.game.getCurrentPlayer().getInventory().removeItems(ring);
-        player.getInventory().addItem(item);
+        App.game.getCurrentPlayer().getInventory().removeItem(ring);
+        player.getInventory().addItem(ring);
         Item coin = Item.build("coin" , App.game.getCurrentPlayer().getCoins() + player.getCoins());
-        App.game.getCurrentPlayer().getInventory().setCoins(coin);
-        player.getInventory().setCoins(coin);
-        return Result.success(null);
+        App.game.getCurrentPlayer().getInventory().removeItem(Item.build("coin" , App.game.getCurrentPlayer().getCoins()));
+        player.getInventory().removeItem(Item.build("coin" , player.getCoins()));
+        App.game.getCurrentPlayer().getInventory().addItem(coin);
+        player.getInventory().addItem(coin);
+        return Result.success("ke emshab shabe eshghe hamin emshabo darim");
     }
 
 
@@ -1313,4 +1352,13 @@ public class GameController{
         if (App.game == null) return false;
         return App.game.getCurrentPlayer().isFainted();
     }
+
+    public Result<Void> setFriendship(String username){
+        Player player = App.game.getPlayerByName(username);
+        Relation relation = App.game.getRelationOfUs(player , App.game.getCurrentPlayer());
+        relation.setFriendshipXP(400);
+        relation.setLevel(FriendshipLevel.LEVEL3);
+        return Result.success(null);
+    }
+
 }

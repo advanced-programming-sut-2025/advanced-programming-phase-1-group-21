@@ -60,10 +60,7 @@ public class Inventory {
     }
 
     public void setCoins(Item coin){
-        for(int i = 0 ; i < items.size(); i++){
-            if(items.get(i).getName().equals("coin"))
-                items.set(i, coin);
-        }
+        items.add(coin);
     }
 
     public void changeCoin(int amount){

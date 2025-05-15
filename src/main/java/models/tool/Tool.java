@@ -40,6 +40,10 @@ public abstract class Tool extends Item {
 		throw new RuntimeException("HEY. You are not supposed to call this method. Because this is a tool: " + toolType.getName() + " and you can't set new amount for it.");
 	}
 
+	public void setToolMaterialType(ToolMaterialType toolMaterialType) {
+		this.toolMaterialType = toolMaterialType;
+	}
+
 	public void changeAmount(int change) {
 		throw new RuntimeException("HEY. You are not supposed to call this method. Because this is a tool: " + toolType.getName() + " and you can't change it's amount.");
 	}
