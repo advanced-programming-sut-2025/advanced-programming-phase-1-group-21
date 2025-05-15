@@ -324,12 +324,42 @@ public class GameController{
     public Result<Void> removeFromInventory(String itemName, int numberOfItems) {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         Inventory inv = App.game.getCurrentPlayer().getInventory();
-        Item item = Item.build(itemName, numberOfItems);
-        if (inv.canRemoveItem(item)) {
-            inv.removeItem(item);
-            return Result.success(null);
+        Item itemToRemove = Item.build(itemName, numberOfItems);
+        if(itemToRemove == null)
+            return Result.failure(GameError.ITEM_IS_NOT_AVAILABLE);
+
+        if(!inv.canRemoveItem(itemToRemove))
+            return Result.failure(GameError.NOT_ENOUGH_ITEM);
+
+        TrashCan trashCan = (TrashCan) inv.getItem("trashcan");
+        if(trashCan == null)
+            return Result.failure(GameError.ITEM_IS_NOT_AVAILABLE);
+
+        int addedCoin = itemToRemove.getAmount() * itemToRemove.getPrice();
+        if(trashCan.getToolMaterialType().equals(ToolMaterialType.PRIMITIVE)){
+            inv.removeItem(itemToRemove);
         }
-        return Result.failure(GameError.NOT_ENOUGH_ITEMS);
+        else if(trashCan.getToolMaterialType().equals(ToolMaterialType.COPPER)){
+            Item coin = Item.build("coin" , addedCoin * 15 / 100);
+            inv.addItem(coin);
+            inv.removeItem(itemToRemove);
+        }
+        else if(trashCan.getToolMaterialType().equals(ToolMaterialType.STEEL)){
+            Item coin = Item.build("coin" , addedCoin * 30 / 100);
+            inv.addItem(coin);
+            inv.removeItem(itemToRemove);
+        }
+        else if(trashCan.getToolMaterialType().equals(ToolMaterialType.GOLD)){
+            Item coin = Item.build("coin" , addedCoin * 45 / 100);
+            inv.addItem(coin);
+            inv.removeItem(itemToRemove);
+        }
+        else if(trashCan.getToolMaterialType().equals(ToolMaterialType.IRIDIUM)){
+            Item coin = Item.build("coin" , addedCoin * 60 / 100);
+            inv.addItem(coin);
+            inv.removeItem(itemToRemove);
+        }
+        return Result.success(null);
     }
 
     public Result<Tool> equipTool(String toolName) {
@@ -1026,11 +1056,6 @@ public class GameController{
         return Result.success(null);
     }
 
-    //this function is useful
-//    public Result<Void> respondMarriage(Boolean respond, Player player) {
-//        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
 
     public Result<Void> startTrade() {
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
@@ -1072,10 +1097,6 @@ public class GameController{
             npcFriendship.setFriendshipXP(npcFriendship.getFriendshipXP() + 50);
         return Result.success(null);
     }
-
-//    public Result<Void> giftNPC(String NPCName , Item gift) {
-//
-//    }
 
     public Result<ArrayList<String>> friendShipNPCList(){
         ArrayList<String> output = new ArrayList<>();

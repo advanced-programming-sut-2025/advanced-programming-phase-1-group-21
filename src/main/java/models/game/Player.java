@@ -32,7 +32,6 @@ public class Player implements DailyUpdate {
     private ArrayList<Animal> animals = new ArrayList<>();
     private Energy energy;
     private Inventory inventory;
-    private TrashCanType trashCanType;
     private Item itemInHand;
     private ArrayList<NPCFriendship> npcFriendships;
     private ArrayList<Recipe> recipes = new ArrayList<>();
