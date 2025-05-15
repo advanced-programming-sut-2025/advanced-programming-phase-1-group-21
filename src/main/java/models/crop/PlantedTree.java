@@ -1,27 +1,26 @@
 package models.crop;
 
-import models.Item.Consumable;
 import models.Item.Item;
-import models.Item.ItemType;
-import models.data.items.SeedData;
+import models.data.items.TreeData;
 import models.map.Placable;
 import models.map.TileType;
 
-public class PlantedSeed implements Placable, Harvestable {
-	private FertilizerType fertilizerType = null; // not implemented yet.
+public class PlantedTree implements Placable, Harvestable {
 	private int stage = 0;
 	private int day = 1;
 	private int lastHarvest = 0;
 	private int waterStage = 2;
 	private boolean readyToHarvest = false;
-	private final SeedData seedData;
+	public final TreeData treeData;
 
-	public PlantedSeed(SeedData seedData) {
-		this.seedData = seedData;
+	public PlantedTree(TreeData treeData) {
+		this.treeData = treeData;
 	}
 
-	public void water() {
-		// This method is supposed to be called by its tile.
+	private void water() {
+		// We currently don't need this method.
+		// But I don't delete it because there is a small change that we are going to need it later.
+		// I just changed it to 'private'.
 
 		waterStage = 2;
 	}
@@ -32,27 +31,30 @@ public class PlantedSeed implements Placable, Harvestable {
 		if (readyToHarvest) {
 			readyToHarvest = false;
 			lastHarvest = day;
-			return Item.build(seedData.getResultName(), 1);
+			return Item.build(treeData.getResultName(), 1);
 		}
+
 		return null;
 	}
 
 	public boolean nextDay() {
 		// This method is supposed to be called by its tile.
 
+		/*
 		waterStage--;
 		if (waterStage < 0)
 			return true;
+		 */
 
 		day++;
-		stage = seedData.getStage(day);
+		stage = treeData.getStage(day);
 
 		if (!readyToHarvest) {
 			if (lastHarvest == 0) {
-				if (stage == seedData.getStages().size())
+				if (stage == treeData.getStages().size())
 					readyToHarvest = true;
 			}
-			else if (day - lastHarvest > seedData.getRegrowthTime()) {
+			else if (day - lastHarvest > treeData.getHarvestCycle()) {
 				readyToHarvest = true;
 			}
 		}
@@ -60,17 +62,13 @@ public class PlantedSeed implements Placable, Harvestable {
 		return false;
 	}
 
-	public SeedData getData() {
-		return seedData;
-	}
-
-	public boolean isOneTime() {
-		return seedData.isOneTime();
+	public TreeData getData() {
+		return treeData;
 	}
 
 	@Override
 	public TileType getTileType() {
-		return TileType.PLANTED_SEED;
+		return TileType.PLANTED_TREE;
 	}
 
 	@Override
@@ -80,19 +78,19 @@ public class PlantedSeed implements Placable, Harvestable {
 
 	@Override
 	public String getSprite() {
-		return "S";
+		return "T";
 	}
 
 	@Override
 	public String toString() {
 		return String.format(
-				"PlantedSeed {day=%d, stage=%d, watered=%s, lastHarvest=%s, regrowth=%s}\ndataInfo:%s",
+				"PlantedTree {day=%d, stage=%d, watered=%s, lastHarvest=%s, harvestCycle=%d}\nDataInfo:%s",
 				day,
 				stage,
 				waterStage > 0 ? "yes" : "no",
 				lastHarvest == -1 ? "never" : lastHarvest,
-				isOneTime() ? "no" : "yes",
-				seedData.toString()
+				treeData.getHarvestCycle(),
+				treeData.toString()
 		);
 	}
 }

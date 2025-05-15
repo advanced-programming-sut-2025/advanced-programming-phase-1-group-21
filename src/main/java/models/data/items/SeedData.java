@@ -3,6 +3,7 @@ package models.data.items;
 import com.google.gson.annotations.SerializedName;
 import models.Item.ItemType;
 import models.Item.Sapling;
+import models.crop.Plantable;
 import models.data.Data;
 import models.time.Season;
 
