@@ -100,6 +100,12 @@ public class GameTerminalView {
         return AppView.scanner.nextInt();
     }
 
+    public static int getSeed(Player player) {
+        System.out.println(player.getUser().getUsername() + ", Select seed ID for your map: ");
+        int seed = AppView.scanner.nextInt();
+        return seed;
+    }
+
     public static String getResponse(Player player){
         System.out.print(player.getUser().getUsername() + " ,What's your response? ");
         return AppView.scanner.nextLine();

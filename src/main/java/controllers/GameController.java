@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Objects;
 
 public class GameController{
@@ -67,7 +68,8 @@ public class GameController{
         MapBuilder mapBuilder = new MapBuilder();
 
         for(Player player : players) {
-            Map map = mapBuilder.buildFarm();
+            int seed = GameTerminalView.getSeed(player);
+            Map map = mapBuilder.buildFarm(new Random(seed));
             player.setMap(map);
             player.setDefaultMap(map);
         }

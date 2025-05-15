@@ -7,10 +7,9 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class MapBuilder {
-    private static final int MAP_WIDTH = 30;
-    private static final int MAP_HEIGHT = 50;
 
     public void buildRandomForaging(Map map) {
         List<TileType> foragingTypes = Arrays.asList(
@@ -39,7 +38,7 @@ public class MapBuilder {
         }
     }
 
-    public boolean setBuildingsRandomly(List<Pair<TileType, Placable>> buildings, Map map) {
+    public boolean setBuildingsRandomly(Random random, List<Pair<TileType, Placable>> buildings, Map map) {
         for (Pair<TileType, Placable> spec : buildings) {
             boolean placed = false;
             int attempts = 0;
@@ -48,8 +47,8 @@ public class MapBuilder {
                     return false;
                 }
                 ++attempts;
-                int startX = App.random.nextInt(MAP_WIDTH - spec.getLeft().getDefaultWidth());
-                int startY = App.random.nextInt(MAP_HEIGHT - spec.getLeft().getDefaultHeight());
+                int startX = random.nextInt(map.mapType.getWidth() - spec.getLeft().getDefaultWidth());
+                int startY = random.nextInt(map.mapType.getHeight() - spec.getLeft().getDefaultHeight());
 
                 if (isAreaAvailable(map, startY, startX, spec.getLeft().getDefaultHeight(), spec.getLeft().getDefaultWidth())) {
                     placeBuilding(map, spec, startY, startX, spec.getLeft().getDefaultHeight(), spec.getLeft().getDefaultWidth());
@@ -60,7 +59,7 @@ public class MapBuilder {
         return true;
     }
 
-    public Map buildFarm() {
+    public Map buildFarm(Random random) {
         while (true) {
             Map map = new Map(MapType.FARM);
 
@@ -68,7 +67,7 @@ public class MapBuilder {
             map.build(new GreenHouse());
             map.build(new Mines());
 
-            int lakesCount = App.random.nextInt(1,3);
+            int lakesCount = random.nextInt(1,3);
             for (int i = 0; i < lakesCount; i++)
                 map.build(new Lake());
 
@@ -81,7 +80,7 @@ public class MapBuilder {
             for (Lake lake: map.getBuildings(Lake.class))
                 buildings.add(Pair.of(TileType.LAKE, lake));
 
-            if (!setBuildingsRandomly(buildings, map)) continue;
+            if (!setBuildingsRandomly(random, buildings, map)) continue;
             buildRandomForaging(map);
             return map;
         }
@@ -110,10 +109,9 @@ public class MapBuilder {
         return true;
     }
 
-    public Map buildVillage(List<NPC> npcs) {
+    public Map buildVillage(List<NPC> npcs, Random random) {
         while (true) {
             Map map = new Map(MapType.VILLAGE);
-
 
             List<Pair<TileType, Placable>> buildings = new ArrayList<>();
             for (TileType type : TileType.values()) if (type.isShop()) {
@@ -126,7 +124,7 @@ public class MapBuilder {
                 buildings.add(Pair.of(TileType.NPC_HOUSE, npc.getHouse()));
             }
 
-            if (setBuildingsRandomly(buildings, map))
+            if (setBuildingsRandomly(random, buildings, map))
                 return map;
         }
     }
