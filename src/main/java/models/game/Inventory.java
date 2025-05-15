@@ -142,8 +142,14 @@ public class Inventory {
     }
 
     public boolean canRemoveItem(Item item) {
-        Inventory sandbox = new Inventory(this);
-        return sandbox.removeItem(item);
+        int requiredAmount = item.getAmount();
+        int totalHave = 0;
+        for(Item i : items) {
+            if(i.getName().equals(item.getName())) {
+                totalHave += i.getAmount();
+            }
+        }
+        return totalHave >= requiredAmount;
     }
 
     public Item getItem(String name) {

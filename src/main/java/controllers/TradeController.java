@@ -27,7 +27,6 @@ public class TradeController{
         Player player = App.game.getPlayerByName(username);
         if(player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
 
-        System.out.println("input amount : "+amount);
         Item thisItem = Item.build(item , amount);
         assert thisItem != null;
         if(type.equals("offer") && !App.game.getCurrentPlayer().getInventory().canRemoveItem(thisItem))
