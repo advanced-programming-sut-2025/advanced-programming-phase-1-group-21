@@ -1,12 +1,13 @@
 package models.Item;
 
+import models.crop.Plantable;
 import models.crop.PlantedSeed;
 import models.data.items.ItemData;
 import models.data.items.SeedData;
 import models.map.Tile;
 import models.map.TileType;
 
-public class Seed extends Item {
+public class Seed extends Item implements Plantable {
 	private final SeedData data;
 	private final ItemType itemType;
 	private int amount;

@@ -1,127 +1,127 @@
 [
   {
     "name": "Apricot Tree",
-    "seed-name": "Apricot Sapling",
+    "sapling-name": "Apricot Sapling",
     "stages": [7, 7, 7, 7],
     "total-harvest-time": 28,
-    "fruit": "Apricot",
+    "result": "Apricot",
     "harvest-cycle": 1,
     "seasons": ["spring"]
   },
   {
     "name": "Cherry Tree",
-    "seed-name": "Cherry Sapling",
+    "sapling-name": "Cherry Sapling",
     "stages": [7, 7, 7, 7],
     "total-harvest-time": 28,
-    "fruit": "Cherry",
+    "result": "Cherry",
     "harvest-cycle": 1,
     "seasons": ["spring"]
   },
   {
     "name": "Banana Tree",
-    "seed-name": "Banana Sapling",
+    "sapling-name": "Banana Sapling",
     "stages": [7, 7, 7, 7],
     "total-harvest-time": 28,
-    "fruit": "Banana",
+    "result": "Banana",
     "harvest-cycle": 1,
     "seasons": ["summer"]
   },
   {
     "name": "Mango Tree",
-    "seed-name": "Mango Sapling",
+    "sapling-name": "Mango Sapling",
     "stages": [7, 7, 7, 7],
     "total-harvest-time": 28,
-    "fruit": "Mango",
+    "result": "Mango",
     "harvest-cycle": 1,
     "seasons": ["summer"]
   },
   {
     "name": "Orange Tree",
-    "seed-name": "Orange Sapling",
+    "sapling-name": "Orange Sapling",
     "stages": [7, 7, 7, 7],
     "total-harvest-time": 28,
-    "fruit": "Orange",
+    "result": "Orange",
     "harvest-cycle": 1,
     "seasons": ["summer"]
   },
   {
     "name": "Peach Tree",
-    "seed-name": "Peach Sapling",
+    "sapling-name": "Peach Sapling",
     "stages": [7, 7, 7, 7],
     "total-harvest-time": 28,
-    "fruit": "Peach",
+    "result": "Peach",
     "harvest-cycle": 1,
     "seasons": ["summer"]
   },
   {
     "name": "Apple Tree",
-    "seed-name": "Apple Sapling",
+    "sapling-name": "Apple Sapling",
     "stages": [7, 7, 7, 7],
     "total-harvest-time": 28,
-    "fruit": "Apple",
+    "result": "Apple",
     "harvest-cycle": 1,
     "seasons": ["autumn"]
   },
   {
     "name": "Pomegranate Tree",
-    "seed-name": "Pomegranate Sapling",
+    "sapling-name": "Pomegranate Sapling",
     "stages": [7, 7, 7, 7],
     "total-harvest-time": 28,
-    "fruit": "Pomegranate",
+    "result": "Pomegranate",
     "harvest-cycle": 1,
     "seasons": ["autumn"]
   },
   {
     "name": "Oak Tree",
-    "seed-name": "Acorns",
+    "sapling-name": "Acorns",
     "stages": [7, 7, 7, 7],
     "total-harvest-time": 28,
-    "fruit": "Oak Resin",
+    "result": "Oak Resin",
     "harvest-cycle": 7,
     "seasons": ["spring", "summer", "autumn"]
   },
   {
     "name": "Maple Tree",
-    "seed-name": "Maple Seeds",
+    "sapling-name": "Maple Seeds",
     "stages": [7, 7, 7, 7],
     "total-harvest-time": 28,
-    "fruit": "Maple Syrup",
+    "result": "Maple Syrup",
     "harvest-cycle": 9,
     "seasons": ["spring", "summer", "autumn"]
   },
   {
     "name": "Pine Tree",
-    "seed-name": "Pine Cones",
+    "sapling-name": "Pine Cones",
     "stages": [7, 7, 7, 7],
     "total-harvest-time": 28,
-    "fruit": "Pine Tar",
+    "result": "Pine Tar",
     "harvest-cycle": 5,
     "seasons": ["spring", "summer", "autumn"]
   },
   {
     "name": "Mahogany Tree",
-    "seed-name": "Mahogany Seeds",
+    "sapling-name": "Mahogany Seeds",
     "stages": [7, 7, 7, 7],
     "total-harvest-time": "28",
-    "fruit": "Sap",
+    "result": "Sap",
     "harvest-cycle": 1,
     "seasons": ["spring", "summer", "autumn"]
   },
   {
     "name": "Mushroom Tree",
-    "seed-name": "Mushroom Tree Seeds",
+    "sapling-name": "Mushroom Tree Seeds",
     "stages": [7, 7, 7, 7],
     "total-harvest-time": 28,
-    "fruit": "Common Mushroom",
+    "result": "Common Mushroom",
     "harvest-cycle": 1,
     "seasons": ["spring", "summer", "autumn"]
   },
   {
     "name": "Mystic Tree",
-    "seed-name": "Mystic Tree Seeds",
+    "sapling-name": "Mystic Tree Seeds",
     "stages": [7, 7, 7, 7],
     "total-harvest-time": 28,
-    "fruit": "Mystic Syrup",
+    "result": "Mystic Syrup",
     "harvest-cycle": 7,
     "seasons": ["spring", "summer", "autumn"]
   }

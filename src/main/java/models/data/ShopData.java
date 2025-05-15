@@ -28,8 +28,6 @@ public class ShopData implements Data {
 
 	@SerializedName("backpack-required")
 	private String backpackRequired;
-	@SerializedName("item-required")
-	private String itemRequired;
 	@SerializedName("building-required")
 	private String buildingRequired;
 	@SerializedName("skill-type-required")
@@ -91,10 +89,6 @@ public class ShopData implements Data {
 		return backpackRequired;
 	}
 
-	public String getItemRequired() {
-		return itemRequired;
-	}
-
 	public String getBuildingRequired() {
 		return buildingRequired;
 	}
@@ -136,7 +130,6 @@ public class ShopData implements Data {
 				", prices=" + price +
 				", ingredients=" + ingredients +
 				", backpackRequired='" + backpackRequired + '\'' +
-				", itemRequired='" + itemRequired + '\'' +
 				", buildingRequired='" + buildingRequired + '\'' +
 				", skillTypeRequired='" + skillTypeRequired + '\'' +
 				", skillLevelRequired=" + skillLevelRequired +

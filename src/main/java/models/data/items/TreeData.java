@@ -1,7 +1,9 @@
 package models.data.items;
 
 import com.google.gson.annotations.SerializedName;
+import models.Item.ItemType;
 import models.data.Data;
+import models.time.Season;
 
 import java.util.ArrayList;
 
@@ -11,22 +13,23 @@ public class TreeData implements Data, ItemData {
 
 	@SerializedName("name")
 	private String name;
-	@SerializedName("seed-name")
-	private String seedName;
+	@SerializedName("sapling-name")
+	private String saplingName;
 	@SerializedName("stages")
 	private ArrayList<Integer> stages;
 
 	@SerializedName("total-harvest-time")
 	private int totalHarvestTime;
 
-	@SerializedName("fruit")
-	private String fruit;
+	@SerializedName("result")
+	private String result;
 
 	@SerializedName("harvest-cycle")
 	private int harvestCycle;
 
 	@SerializedName("seasons")
 	private ArrayList<String> seasons;
+	private ArrayList<Season> cseasons;
 
 	public static String getDataURL() {
 		return dataURL;
@@ -37,27 +40,46 @@ public class TreeData implements Data, ItemData {
 	}
 
 	public void fullConstruct() {
-//		System.out.println(name + "\n" + seedName + "\n" + stages + "\n" + totalHarvestTime + "\n" + fruit + "\n" + harvestCycle + "\n" + price + "\n" + isEdible + "\n" + energy + "\n" + health + "\n" + seasons + "\n---------");
+		cseasons = new ArrayList<>();
+		for (String season : seasons)
+			cseasons.add(Season.valueOf(season.toUpperCase()));
+//		System.out.println("name: " + name);
+//		System.out.println("sapling-name: " + saplingName);
+//		System.out.println("stages: " + stages);
+//		System.out.println("total-harvest-time: " + totalHarvestTime);
+//		System.out.println("result: " + result);
+//		System.out.println("harvest-cycle: " + harvestCycle);
+//		System.out.println("cseasons: " + cseasons);
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public String getSeedName() {
-		return seedName;
+	public String getSaplingName() {
+		return saplingName;
 	}
 
 	public ArrayList<Integer> getStages() {
 		return stages;
 	}
 
+	public int getStage(int day) {
+		int sum = 0, result = 0;
+		for (int stage: stages) {
+			sum += stage;
+			if (sum < day)
+				result++;
+		}
+		return result;
+	}
+
 	public int getTotalHarvestTime() {
 		return totalHarvestTime;
 	}
 
-	public String getFruit() {
-		return fruit;
+	public String getResultName() {
+		return result;
 	}
 
 	public int getHarvestCycle() {
@@ -70,8 +92,46 @@ public class TreeData implements Data, ItemData {
 
 	public static TreeData getData(String name) {
 		for (TreeData a : treeData)
-			if (a.getName().equalsIgnoreCase(name) || a.getSeedName().equalsIgnoreCase(name))
+			if (a.getName().equalsIgnoreCase(name) || a.getSaplingName().equalsIgnoreCase(name))
 				return a;
 		return null;
+	}
+
+	@Override
+	public String toString() {
+		String stringResult = "Crop{" +
+				"Tree Name: " + name + "\n" +
+				"Sapling Name: " + saplingName + "\n" +
+				"stages: ";
+
+		for (int i = 0; i < stages.size(); i++) {
+			stringResult += stages.get(i);
+			if (i != stages.size() - 1) stringResult += "-";
+		}
+
+		stringResult += "\nTotal Harvest Time: " + totalHarvestTime +
+				"\nHarvest Cycle: " + harvestCycle;
+		AllItemsData itemData = AllItemsData.getData(this.result);
+		if (itemData == null) {
+			throw new NullPointerException("Item " + this.result + " does not exist!");
+		}
+		ItemType itemType = itemData.getType();
+		if (itemType == ItemType.CONSUMABLE) {
+			ConsumableData consumableData = ConsumableData.getData(this.result);
+			stringResult += "\nbaseSellPrice: " + consumableData.getPrice() +
+					"\nisEdible: true" +
+					"\nenergy: " + consumableData.getEnergy();
+		}
+		else if (itemType == ItemType.SALABLE) {
+			SalableData salableData = SalableData.getData(this.result);
+			stringResult += "\nbaseSellPrice: " + salableData.getPrice() +
+					"\nisEdible: false";
+		}
+
+		stringResult += "\nseasons: ";
+		for (Season season: cseasons)
+			stringResult += season.toString().toLowerCase() + " ";
+
+		return stringResult;
 	}
 }
