@@ -9,7 +9,7 @@ public class ForagingTreeData implements Data {
 	private static ArrayList<ForagingTreeData> treeData = null;
 
 	@SerializedName("name")
-	private String name;
+	private String saplingName;
 
 	@SerializedName("seasons")
 	private ArrayList<String> seasons;
@@ -26,8 +26,8 @@ public class ForagingTreeData implements Data {
 //		System.out.println(name + "\n" + seasons + "\n----------");
 	}
 
-	public String getName() {
-		return name;
+	public String getSaplingName() {
+		return saplingName;
 	}
 
 	public ArrayList<String> getSeasons() {
@@ -36,7 +36,7 @@ public class ForagingTreeData implements Data {
 
 	public static ForagingTreeData getTreeData(String name) {
 		for (ForagingTreeData a : treeData)
-			if (a.getName().equalsIgnoreCase(name))
+			if (a.getSaplingName().equalsIgnoreCase(name))
 				return a;
 		return null;
 	}

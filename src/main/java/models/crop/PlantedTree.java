@@ -61,6 +61,12 @@ public class PlantedTree implements Placable, Harvestable {
 
 		return false;
 	}
+	public void setDay(int day) {
+		while (this.day < day)
+			nextDay();
+
+		System.out.println("this plant's day is now: " + day);
+	}
 
 	public TreeData getData() {
 		return treeData;

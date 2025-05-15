@@ -4,19 +4,19 @@
     "seasons": ["spring", "summer", "autumn", "winter"]
   },
   {
-    "name": "Maple",
+    "name": "Maple Seed",
     "seasons": ["spring", "summer", "autumn", "winter"]
   },
   {
-    "name": "Pine",
+    "name": "Pine Cone",
     "seasons": ["spring", "summer", "autumn", "winter"]
   },
   {
-    "name": "Mahogany",
+    "name": "Mahogany Seed",
     "seasons": ["spring", "summer", "autumn", "winter"]
   },
   {
-    "name": "Mushroom Tree",
+    "name": "Mushroom Tree Seed",
     "seasons": ["spring", "summer", "autumn", "winter"]
   }
 ]

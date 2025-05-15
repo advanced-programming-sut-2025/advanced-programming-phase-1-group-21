@@ -73,7 +73,7 @@
   },
   {
     "name": "Oak Tree",
-    "sapling-name": "Acorns",
+    "sapling-name": "Acorn",
     "stages": [7, 7, 7, 7],
     "total-harvest-time": 28,
     "result": "Oak Resin",
@@ -82,7 +82,7 @@
   },
   {
     "name": "Maple Tree",
-    "sapling-name": "Maple Seeds",
+    "sapling-name": "Maple Seed",
     "stages": [7, 7, 7, 7],
     "total-harvest-time": 28,
     "result": "Maple Syrup",
@@ -91,7 +91,7 @@
   },
   {
     "name": "Pine Tree",
-    "sapling-name": "Pine Cones",
+    "sapling-name": "Pine Cone",
     "stages": [7, 7, 7, 7],
     "total-harvest-time": 28,
     "result": "Pine Tar",
@@ -100,7 +100,7 @@
   },
   {
     "name": "Mahogany Tree",
-    "sapling-name": "Mahogany Seeds",
+    "sapling-name": "Mahogany Seed",
     "stages": [7, 7, 7, 7],
     "total-harvest-time": "28",
     "result": "Sap",
@@ -109,7 +109,7 @@
   },
   {
     "name": "Mushroom Tree",
-    "sapling-name": "Mushroom Tree Seeds",
+    "sapling-name": "Mushroom Tree Seed",
     "stages": [7, 7, 7, 7],
     "total-harvest-time": 28,
     "result": "Common Mushroom",
@@ -118,7 +118,7 @@
   },
   {
     "name": "Mystic Tree",
-    "sapling-name": "Mystic Tree Seeds",
+    "sapling-name": "Mystic Tree Seed",
     "stages": [7, 7, 7, 7],
     "total-harvest-time": 28,
     "result": "Mystic Syrup",

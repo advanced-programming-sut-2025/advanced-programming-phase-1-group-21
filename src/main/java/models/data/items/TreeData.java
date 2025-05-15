@@ -97,6 +97,13 @@ public class TreeData implements Data, ItemData {
 		return null;
 	}
 
+	public static TreeData getData(int id) {
+		if (id < 0 || id >= treeData.size()) {
+			return null;
+		}
+		return treeData.get(id);
+	}
+
 	@Override
 	public String toString() {
 		String stringResult = "Crop{" +
@@ -133,5 +140,9 @@ public class TreeData implements Data, ItemData {
 			stringResult += season.toString().toLowerCase() + " ";
 
 		return stringResult;
+	}
+
+	public static int getSize() {
+		return treeData.size();
 	}
 }
