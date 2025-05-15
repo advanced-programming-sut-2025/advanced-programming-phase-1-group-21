@@ -1,10 +1,12 @@
 package models.map;
 
+import models.DailyUpdate;
 import models.animal.Animal;
+import models.game.Game;
 
 import java.util.ArrayList;
 
-public abstract class Building implements Placable {
+public abstract class Building implements Placable, DailyUpdate {
     public Map map;
 
     public Map getMap() {
@@ -34,5 +36,10 @@ public abstract class Building implements Placable {
                 getFullName(),
                 map != null ? map.mapType : "null"
         );
+    }
+
+    @Override
+    public boolean nextDay(Game g) {
+        return map.nextDay(g);
     }
 }

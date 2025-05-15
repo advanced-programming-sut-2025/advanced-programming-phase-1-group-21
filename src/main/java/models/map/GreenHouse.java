@@ -1,5 +1,9 @@
 package models.map;
 
+import models.DailyUpdate;
+import models.game.Game;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class GreenHouse extends Building {
@@ -19,7 +23,7 @@ public class GreenHouse extends Building {
 
     @Override
     public TileType getTileType() {
-        return TileType.ARTISAN;
+        return TileType.GREEN_HOUSE;
     }
 
     @Override
@@ -30,5 +34,11 @@ public class GreenHouse extends Building {
     @Override
     public String getSprite() {
         return "G";
+    }
+
+    @Override
+    public boolean nextDay(Game g) {
+        g.setWeather(Weather.SUNNY); //GreenHouse Weather is always sunny
+        return super.nextDay(g);
     }
 }

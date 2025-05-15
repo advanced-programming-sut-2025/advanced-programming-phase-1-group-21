@@ -1,8 +1,10 @@
 package models.game;
 
+import models.DailyUpdate;
+
 import java.util.ArrayList;
 
-public class Relation {
+public class Relation implements DailyUpdate {
     private Player player1, player2;
     private FriendshipLevel Level = FriendshipLevel.LEVEL0;
     private ArrayList<String> talks = new ArrayList<>();
@@ -198,5 +200,11 @@ public class Relation {
                 todayTrade,
                 isFlower
         );
+    }
+
+    @Override
+    public boolean nextDay(Game game) {
+        resetTodayCommunication();
+        return true;
     }
 }

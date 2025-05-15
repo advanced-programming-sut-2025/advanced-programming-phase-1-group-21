@@ -14,7 +14,7 @@ import models.map.MapBuilder;
 import models.map.Weather;
 import models.time.*;
 
-public class Game implements DailyUpdate {
+public class Game {
     private ArrayList<Player> players;
     private ArrayList<NPC> npcs = new ArrayList<>();
     private ArrayList<Relation> relations = new ArrayList<>();
@@ -41,6 +41,22 @@ public class Game implements DailyUpdate {
         addNPC();
         village = (new MapBuilder()).buildVillage(npcs);
     }
+
+    /**
+     * copy constructor, shallow copy of all fields except weather fields are duplicated.
+     */
+    public Game(Game other) {
+        this.players = other.players;
+        this.npcs = other.npcs;
+        this.relations = other.relations;
+        this.currentPlayer = other.currentPlayer;
+        this.village = other.village;
+        this.roundCount = other.roundCount;
+        this.gameDate = other.gameDate;
+        this.gameWeather = other.gameWeather;
+        this.nextDayWeather = other.nextDayWeather;
+    }
+
 
     public Relation getRelationOfUs(Player player1 , Player player2) {
         for(Relation relation : relations) {
@@ -213,25 +229,23 @@ public class Game implements DailyUpdate {
         return npcs;
     }
 
-    @Override
     public boolean nextDay() {
         gameWeather = nextDayWeather;
         nextDayWeather = calculateRandomWeather();
 
+        Game copy = new Game(this);
+
         for(Relation relation : relations) {
-            relation.resetTodayCommunication();
+            relation.nextDay(copy);
         }
 
         for(NPC npc : npcs) {
-            for(NPCFriendship friendship : npc.getFriendships()) {
-                friendship.setTodayMeet(false);
-                friendship.setTodayGift(false);
-            }
+            npc.nextDay(copy);
         }
 
         for (Player player : players)
-            player.nextDay();
-        gameDate.goToNextDay();
+            player.nextDay(copy);
+        gameDate.nextDay(copy);
         return false;
     }
 
@@ -274,4 +288,11 @@ public class Game implements DailyUpdate {
         return sb.toString();
     }
 
+    /**
+     * changes current weather! (it's needed in the code and shouldn't be reached from user
+     * @param newWeather
+     */
+    public void setWeather(Weather newWeather) {
+        gameWeather = newWeather;
+    }
 }

@@ -1,17 +1,21 @@
 package models.animal;
 
+import models.DailyUpdate;
 import models.Item.Item;
 import models.data.AnimalData;
+import models.game.Game;
 import models.map.AnimalHouseType;
 import models.map.Placable;
 import models.map.Tile;
 import models.map.TileType;
+import models.time.Date;
 import models.time.Season;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Random;
 
-public class Animal implements Placable {
+public class Animal implements Placable, DailyUpdate {
     private String name;
     private AnimalTypes animalType;
     private int price;
@@ -156,5 +160,40 @@ public class Animal implements Placable {
                 isOut ? "yes" : "no",
                 todayProduct == null ? "none" : todayProduct
         );
+    }
+
+    private Date lastNextDayDate = null;
+
+    @Override
+    public boolean nextDay(Game g) {
+        if (lastNextDayDate != null && lastNextDayDate == g.getGameDate())
+            return false;
+        lastNextDayDate = g.getGameDate();
+        if(!isFeedToday())
+            setFriendship(Math.max(getFriendship() - 20 , 0));
+        if(isOut())
+            setFriendship(Math.max(getFriendship() - 20 , 0));
+        if(!isTodayPet())
+            setFriendship(Math.max(0 , (getFriendship()/200) - 10));
+        if(isFeedToday()){
+            if(getFriendship() < 100){
+                setTodayProduct(getProducts().get(0));
+            }
+            else{
+                Random rand = new Random();
+                double randomDouble = 0.5 + Math.random();
+                int RandomInt = (int) (getFriendship() + (150 * randomDouble));
+                int randomVariable = rand.nextInt(1500);
+                if(randomVariable < RandomInt){
+                    setTodayProduct(getProducts().get(1 % getProducts().size()));
+                }
+                else
+                    setTodayProduct(getProducts().get(0));
+            }
+        }
+        setOut(false);
+        setFeedToday(false);
+        setTodayPet(false);
+        return false;
     }
 }

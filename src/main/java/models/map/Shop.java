@@ -5,6 +5,7 @@ import models.App;
 import models.DailyUpdate;
 import models.Item.Item;
 import models.data.ShopData;
+import models.game.Game;
 import models.game.Inventory;
 import models.result.Result;
 import models.result.errorTypes.GameError;
@@ -195,9 +196,9 @@ public class Shop extends Building {
 		}
 
 		@Override
-		public boolean nextDay() {
+		public boolean nextDay(Game g) {
 			resetDailyLimit();
-			return true;
+			return false;
 		}
 		@Override
 		public String toString() {
