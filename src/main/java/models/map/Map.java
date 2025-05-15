@@ -87,8 +87,8 @@ public class Map implements DailyUpdate {
 
     public ArrayList<String> printMap(Coord center, int radius) {
         ArrayList<String> output = new ArrayList<>();
-        for(int i = center.getY() ; i < center.getY() + radius ; i++) {
-            for(int j = center.getX() ; j < center.getX() + radius; j++) {
+        for(int j = center.getX() ; j < center.getX() + radius; j++) {
+            for(int i = center.getY() ; i < center.getY() + radius ; i++) {
                 Coord coord = new Coord(i, j);
                 Tile tile = getTile(coord);
                 if (tile == null) continue;
