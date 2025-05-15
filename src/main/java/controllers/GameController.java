@@ -678,6 +678,26 @@ public class GameController{
         return Result.success(animal.collectProduce());
     }
 
+    public Result<Void> sell(String itemName, int number) {
+        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+        Item item = Item.build(itemName, number);
+        if (item == null) return Result.failure(GameError.ITEM_IS_NOT_AVAILABLE);
+        if (!item.isSalable()) return Result.failure(GameError.NOT_FOR_SALE);
+        Inventory inventory = App.game.getCurrentPlayer().getInventory();
+        if (!inventory.canRemoveItem(item)) return Result.failure(GameError.NOT_ENOUGH_ITEMS);
+
+        ShippingBin shippingBin = null;
+        for (Tile tile: App.game.getCurrentPlayer().getNeighborTiles())
+            if (tile.getPlacable(ShippingBin.class) != null)
+                shippingBin = tile.getPlacable(ShippingBin.class);
+        if (shippingBin == null)
+            return Result.failure(GameError.YOU_ARE_DISTANT);
+
+        inventory.removeItem(item);
+        shippingBin.add(item);
+        return Result.success(null);
+    }
+
     public Result<Void> sellAnimal(String name){
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
 

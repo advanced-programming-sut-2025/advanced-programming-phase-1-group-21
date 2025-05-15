@@ -142,6 +142,9 @@ public class GameTerminalView {
         else if ((matcher = GameMenuCommand.BUY_ANIMAL.getMatcher(command)) != null) {
             System.out.println(gameController.purchaseAnimal(matcher.group("animalName"), matcher.group("name")));
         }
+        else if ((matcher = GameMenuCommand.SELL.getMatcher(command)) != null) {
+            System.out.println(gameController.sell(matcher.group("item"), Integer.parseInt(matcher.group("number"))));
+        }
         else if ((matcher = GameMenuCommand.CHEAT_ANIMAL_FRIENDSHIP.getMatcher(command)) != null) {
             System.out.println(gameController.cheatFriendship(matcher.group("name") , Integer.parseInt(matcher.group("amount"))));
         }

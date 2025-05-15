@@ -139,6 +139,9 @@ public class MapBuilder {
         map.tiles.get(9).get(19).setTileType(TileType.DOOR);
         map.tiles.get(0).get(5).setTileType(TileType.REFRIGERATOR);
         map.tiles.get(0).get(5).setPlacable(refrigerator);
+
+        map.tiles.get(0).get(19).setTileType(TileType.SHIPPING_BIN);
+        map.tiles.get(0).get(19).setPlacable(new ShippingBin());
         return map;
     }
 

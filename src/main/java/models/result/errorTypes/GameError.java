@@ -54,7 +54,7 @@ public enum GameError implements Error {
     NO_FREE_ARTISAN_AROUND("There are no free artisan around you"),
     NO_READY_ARTISAN_AROUND("There are no ready artisan around you"),
     CANT_ADD_ITEM_TO_INVENTORY("You can't add this item to your inventory"),
-
+    NOT_FOR_SALE("not for sale"),
     ;
 
 

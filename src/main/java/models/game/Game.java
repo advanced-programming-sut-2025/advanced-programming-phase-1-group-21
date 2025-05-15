@@ -243,8 +243,10 @@ public class Game {
             npc.nextDay(copy);
         }
 
-        for (Player player : players)
+        for (Player player : players) {
+            copy.setCurrentPlayer(player);
             player.nextDay(copy);
+        }
         gameDate.nextDay(copy);
 
         village.nextDay(copy);

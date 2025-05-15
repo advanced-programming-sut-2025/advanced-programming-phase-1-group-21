@@ -92,6 +92,7 @@ public enum GameMenuCommand implements Command {
     SELL_ANIMAL("\\s*sell\\s+animal\\s+-n\\s+(?<name>\\S+)\\s*"),
     FISHING("\\s*fishing\\s+-p\\s+(?<fishingPole>\\S+)\\s*"),
     SHOW_ANIMAL_PRODUCE("\\s*show\\s+animal\\s+produce\\s*"),
+    SELL("\\s*sell\\s+(?<item>.+)\\s+-n\\s+(?<number>\\d+)\\s*"),
 //    ARTISAN_USE("artisan use <artisan_name> <item1_name>"),
     WATER("\\s*water\\s+-l\\s+\\((?<x>\\d+),(?<y>\\d+)\\)\\s*"),
     PLANT("^\\s*plant\\s+-s\\s+(?<seedName>.*)\\s+-d\\s+(?<direction>(N)|(E)|(S)|(W)|(NE)|(NW)|(SE)|(SW))\\s*$"),
