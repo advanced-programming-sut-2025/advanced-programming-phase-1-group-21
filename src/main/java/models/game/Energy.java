@@ -1,6 +1,8 @@
 package models.game;
 
-public class Energy {
+import models.DailyUpdate;
+
+public class Energy implements DailyUpdate {
     static final int MAX_ENERGY = 200;
 
     private int currentEnergy;
@@ -29,13 +31,15 @@ public class Energy {
         currentEnergy -= amount;
     }
 
-    public void advanceDay() {
+    @Override
+    public boolean nextDay(Game g) {
         remainingDays--;
         if (remainingDays < 0) {
             remainingDays = -1;
             maxEnergy = MAX_ENERGY;
         }
         currentEnergy = maxEnergy;
+        return false;
     }
 
     public void setMaxEnergy(int maxEnergy, int days) {

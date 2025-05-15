@@ -234,6 +234,7 @@ public class Player implements DailyUpdate {
 
     @Override
     public boolean nextDay(Game g) {
+        energy.nextDay(g);
         defaultMap.nextDay(g);//DON'T UPDATE ANY OTHERRRR MAPPP !!! it's done recursivly in nextDay in map class
 
         for(Animal animal : animals) {

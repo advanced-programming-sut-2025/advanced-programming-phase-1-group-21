@@ -40,6 +40,7 @@ public abstract class Building implements Placable, DailyUpdate {
 
     @Override
     public boolean nextDay(Game g) {
+        if (map == null) return false;
         return map.nextDay(g);
     }
 }
