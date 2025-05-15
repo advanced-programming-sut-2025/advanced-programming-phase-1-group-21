@@ -1,5 +1,6 @@
 package models.game;
 
+import models.DailyUpdate;
 import models.map.Map;
 import models.time.Date;
 import models.time.Season;
@@ -7,7 +8,7 @@ import models.time.Season;
 import java.sql.Time;
 import java.util.HashMap;
 
-public class NPCFriendship {
+public class NPCFriendship implements DailyUpdate {
     private Player player;
     private FriendshipLevel Level;
     private int friendshipXP;
@@ -208,4 +209,10 @@ public class NPCFriendship {
         );
     }
 
+    @Override
+    public boolean nextDay(Game g) {
+        this.setTodayMeet(false);
+        this.setTodayGift(false);
+        return false;
+    }
 }

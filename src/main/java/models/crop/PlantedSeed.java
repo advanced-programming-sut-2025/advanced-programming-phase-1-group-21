@@ -1,13 +1,15 @@
 package models.crop;
 
+import models.DailyUpdate;
 import models.Item.Consumable;
 import models.Item.Item;
 import models.Item.ItemType;
 import models.data.items.SeedData;
+import models.game.Game;
 import models.map.Placable;
 import models.map.TileType;
 
-public class PlantedSeed implements Placable, Harvestable {
+public class PlantedSeed implements Placable, Harvestable, DailyUpdate {
 	private FertilizerType fertilizerType = null; // not implemented yet.
 	private int stage = 0;
 	private int day = 1;
@@ -41,7 +43,8 @@ public class PlantedSeed implements Placable, Harvestable {
 		return null;
 	}
 
-	public boolean nextDay() {
+	@Override
+	public boolean nextDay(Game g) {
 		// This method is supposed to be called by its tile.
 
 		waterStage--;

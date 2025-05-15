@@ -2,6 +2,7 @@ package models.map;
 
 import models.App;
 import models.DailyUpdate;
+import models.game.Game;
 import models.result.Result;
 
 import java.util.ArrayList;
@@ -129,9 +130,16 @@ public class Map implements DailyUpdate {
     }
 
     static final int NUMBER_OF_THORS_PER_DAY = 3;
-    public boolean nextDay() {
+    @Override
+    public boolean nextDay(Game g) {
         for (int i = 0; i < NUMBER_OF_THORS_PER_DAY; i++)
             thor(getRandomCoord());
+
+        for (ArrayList<Tile> row : tiles) {
+            for (Tile tile : row) {
+                tile.nextDay(g);
+            }
+        }
 
         return false;
     }

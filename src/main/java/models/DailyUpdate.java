@@ -1,5 +1,12 @@
 package models;
 
+import models.game.Game;
+
 public interface DailyUpdate {
-    public boolean nextDay();
+    /**
+     *
+     * @param g
+     * @return if the object should be removed, returns true else false
+     */
+    public boolean nextDay(Game g);
 }

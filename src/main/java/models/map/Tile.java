@@ -4,8 +4,9 @@ import models.DailyUpdate;
 import models.crop.Harvestable;
 import models.crop.PlantedSeed;
 import models.Item.Item;
+import models.game.Game;
 
-public class Tile {
+public class Tile implements DailyUpdate {
     private TileType tileType;
     private Placable placable;
 
@@ -43,13 +44,16 @@ public class Tile {
         return null;
     }
 
-    public void nextDay() {
+    public boolean nextDay(Game g) {
+        if (g.getWeather() == Weather.RAINY)
+            water();
         if (placable instanceof DailyUpdate) {
-            boolean shouldRemove = ((DailyUpdate) placable).nextDay();
+            boolean shouldRemove = ((DailyUpdate) placable).nextDay(g);
             if (shouldRemove) {
                 placable = null;
             }
         }
+        return true;
     }
 
     public TileType getTileType() {

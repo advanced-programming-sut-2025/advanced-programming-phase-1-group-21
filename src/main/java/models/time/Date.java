@@ -1,6 +1,9 @@
 package models.time;
 
-public class Date {
+import models.DailyUpdate;
+import models.game.Game;
+
+public class Date implements DailyUpdate {
     private int hour;
     private int day;
     private int season;
@@ -109,5 +112,11 @@ public class Date {
                 "%s:Day %02d @ %02d:00",
                 getCurrentSeason(), day, hour
         );
+    }
+
+    @Override
+    public boolean nextDay(Game g) {
+        goToNextDay();
+        return false;
     }
 }

@@ -1,12 +1,13 @@
 package models.game;
 
+import models.DailyUpdate;
 import models.Item.Item;
 import models.data.*;
 import models.map.*;
 
 import java.util.ArrayList;
 
-public class NPC implements Placable {
+public class NPC implements Placable, DailyUpdate {
     private String name;
     // Characterization
     NPCHouse house;
@@ -99,6 +100,14 @@ public class NPC implements Placable {
 
     public NPCHouse getHouse() {
         return house;
+    }
+
+    @Override
+    public boolean nextDay(Game g) {
+        for(NPCFriendship friendship : this.getFriendships()) {
+            friendship.nextDay(g);
+        }
+        return false;
     }
 
     public class NPCHouse extends Building implements Placable {
