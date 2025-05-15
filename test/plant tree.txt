@@ -3,6 +3,10 @@ login -u Ali -p Alireza123!
 menu enter mainmenu
 menu enter game
 new game sobi sobhan maryam
+1
+1
+1
+1
 print map -l (0,0) -s 50
 walk -l (10,10)
 cheat add item -n Apricot Sapling -c 100

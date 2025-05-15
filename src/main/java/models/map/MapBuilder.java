@@ -1,6 +1,11 @@
 package models.map;
 
 import models.App;
+import models.Item.ItemType;
+import models.Item.Sapling;
+import models.crop.PlantedTree;
+import models.data.items.ItemData;
+import models.data.items.TreeData;
 import models.game.NPC;
 import models.game.Refrigerator;
 import org.apache.commons.lang3.tuple.Pair;
@@ -76,6 +81,18 @@ public class MapBuilder {
                     TileType.SIMPLE_ROCK,
                     TileType.LEAF
             );
+            int numberOfRemainingForagingTrees = 30;
+            final int numberOfForagingTreeTypes = TreeData.getSize();
+            while (numberOfRemainingForagingTrees > 0) {
+                Coord coord = Coord.getRandomCoord(map.getMaxX(), map.getMaxY());
+                if (map.getTile(coord).isEmpty()) {
+                    int id = random.nextInt(0, numberOfForagingTreeTypes); // What is this foraging tree's type?
+                    int day = random.nextInt(0, 60); // How old is this foraging tree?
+                    PlantedTree plantedTree = (new Sapling(TreeData.getData(id), ItemType.SAPLING, 1)).plant(map.getTile(coord));
+                    plantedTree.setDay(day);
+                    numberOfRemainingForagingTrees--;
+                }
+            }
             buildRandomTile(map, foragingTypes, 40, 70);
             return map;
         }
