@@ -1,9 +1,13 @@
 package models.Item;
 
+import models.crop.Plantable;
+import models.crop.PlantedSeed;
+import models.crop.PlantedTree;
 import models.data.items.ItemData;
 import models.data.items.TreeData;
+import models.map.Tile;
 
-public class Sapling extends Item {
+public class Sapling extends Item implements Plantable {
 	private final TreeData data;
 	private final ItemType itemType;
 	private int amount;
@@ -16,7 +20,7 @@ public class Sapling extends Item {
 
 	@Override
 	public String getName() {
-		return data.getName();
+		return data.getSaplingName();
 	}
 
 	@Override
@@ -39,6 +43,11 @@ public class Sapling extends Item {
 	}
 
 	@Override
+	public void changeAmount(int change) {
+		amount += change;
+	}
+
+	@Override
 	public boolean isSalable() {
 		return false;
 	}
@@ -48,8 +57,10 @@ public class Sapling extends Item {
 		return 0;
 	}
 
-	@Override
-	public void changeAmount(int change) {
-		amount += change;
+	public PlantedTree plant(Tile tile) {
+		PlantedTree plantedTree = new PlantedTree(data);
+		plantedTree.onPlace(tile);
+		return plantedTree;
+
 	}
 }

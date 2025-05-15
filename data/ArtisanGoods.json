@@ -6,7 +6,9 @@
         "name": "Honey",
         "description": "It's a sweet syrup produced by bees.",
         "processing-time": 96,
-        "ingredients": null
+        "ingredients": [
+
+        ]
       }
     ]
   },

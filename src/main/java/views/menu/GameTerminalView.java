@@ -237,7 +237,7 @@ public class GameTerminalView {
             System.out.println(gameController.goToVillage());
         }
         else if ((matcher = GameMenuCommand.PLANT.getMatcher(command)) != null) {
-            System.out.println(gameController.plantSeed(matcher.group("seedName"), Direction.getDirection(matcher.group("direction"))));
+            System.out.println(gameController.plant(matcher.group("seedName"), Direction.getDirection(matcher.group("direction"))));
         }
         else if ((matcher = GameMenuCommand.SHOW_PLANT.getMatcher(command)) != null) {
             System.out.println(gameController.showPlant(new Coord(Integer.parseInt(matcher.group("x")) , Integer.parseInt(matcher.group("y")))));

@@ -25,7 +25,8 @@ public enum TileType {
 	TREE(1, 1, false, 'T'),
 	ANIMAL(1, 1, false, 'A'),
 	REFRIGERATOR(1, 1, true, 'F'),
-	PLANTED_SEED(1, 1, false, '*'),
+	PLANTED_SEED(1, 1, false, 'S'),
+	PLANTED_TREE(1, 1, false, 'T'),
 	DOOR(1, 1, true, '+'),
 
 	// Foragings

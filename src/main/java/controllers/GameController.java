@@ -27,6 +27,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Objects;
 
 public class GameController{
 
@@ -385,21 +386,24 @@ public class GameController{
         return Result.success(seedData.toString());
     }
 
-    public Result<Void> plantSeed(String seedName, Direction direction) { // After MAP
+    public Result<Void> plant(String seedName, Direction direction) { // After MAP
         if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         Player player = App.game.getCurrentPlayer();
         Inventory inventory = player.getInventory();
-        Item seed = inventory.getItem(seedName);
-        if (seed == null || seed.getItemType() != ItemType.SEED)
+
+        Item plantable = inventory.getItem(seedName);
+        if (plantable == null || (plantable.getItemType() != ItemType.SEED && plantable.getItemType() != ItemType.SAPLING))
             return Result.failure(GameError.SEED_NOT_FOUND);
         Coord coord = player.getCoord().addCoord(direction.getCoord());
         Tile tile = player.getMap().getTile(coord);
         if (tile == null)
             return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
-        if (tile.getTileType() != TileType.PLOWED)
-            return Result.failure(GameError.PLANT_ON_PLOWED);
+        if (plantable.getItemType() == ItemType.SEED) {
+            if (tile.getTileType() != TileType.PLOWED)
+                return Result.failure(GameError.PLANT_ON_PLOWED);
+        }
         inventory.removeItem(Item.build(seedName, 1));
-        ((Seed) seed).plant(tile);
+        ((Plantable) plantable).plant(tile);
         return Result.success(null);
     }
 
@@ -409,10 +413,12 @@ public class GameController{
         Tile tile = App.game.getCurrentPlayer().getMap().getTile(coord);
         if (tile == null)
             return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
-        if (tile.getTileType() != TileType.PLANTED_SEED)
+        if (tile.getTileType() != TileType.PLANTED_SEED && tile.getTileType() != TileType.PLANTED_TREE)
             return Result.failure(GameError.NOT_FOUND);
-        PlantedSeed plantedSeed = tile.getPlacable(PlantedSeed.class);
-        return Result.success(plantedSeed.seedData.toString());
+
+        if (tile.getTileType() == TileType.PLANTED_SEED)
+            return Result.success(tile.getPlacable(PlantedSeed.class).toString());
+        return Result.success(tile.getPlacable(PlantedTree.class).toString());
     }
 
     public Result<Void> fertilizePlant(FertilizerType fertilizer, Coord cord) {
