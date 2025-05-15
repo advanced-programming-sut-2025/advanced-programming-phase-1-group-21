@@ -91,4 +91,5 @@ public class FishingPole extends Tool {
 	public ToolMaterialType getToolMaterialType() {
 		return toolMaterialType;
 	}
+
 }

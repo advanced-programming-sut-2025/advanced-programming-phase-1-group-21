@@ -51,6 +51,8 @@ public class Player implements DailyUpdate {
         return inventory;
     }
 
+
+
     public void addRecipes(Recipe recipe) {
         recipes.add(recipe);
     }

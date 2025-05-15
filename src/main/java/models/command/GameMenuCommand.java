@@ -90,7 +90,7 @@ public enum GameMenuCommand implements Command {
     FEED_HAY("\\s*feed\\s+hay\\s+-n\\s+(?<name>\\S+)\\s*"),
     COLLECT_PRODUCE("\\s*collect\\s+produce\\s+-n\\s+(?<name>\\S+)\\s*"),
     SELL_ANIMAL("\\s*sell\\s+animal\\s+-n\\s+(?<name>\\S+)\\s*"),
-    FISHING("\\s*fishing\\s+-p\\s+(?<fishingPole>\\S+)\\s*"),
+    FISHING("\\s*fishing\\s+-p\\s+(?<fishingPole>.+)\\s*"),
     SHOW_ANIMAL_PRODUCE("\\s*show\\s+animal\\s+produce\\s*"),
     SELL("\\s*sell\\s+(?<item>.+)\\s+-n\\s+(?<number>\\d+)\\s*"),
 //    ARTISAN_USE("artisan use <artisan_name> <item1_name>"),
@@ -113,6 +113,7 @@ public enum GameMenuCommand implements Command {
     WHO_AM_I("whoami"),
     MAP_STATUS("map status"),
     INVENTORY_STATUS("inventory status"),
+    SET_FRIENDSHIP("set friendship -u (?<username>\\S+)"),
     ;
 
     public final Pattern pattern;

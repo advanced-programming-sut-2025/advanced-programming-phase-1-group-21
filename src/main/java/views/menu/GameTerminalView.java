@@ -185,7 +185,7 @@ public class GameTerminalView {
             System.out.println(gameController.getInventoryStatus());
         }
         else if ((matcher = GameMenuCommand.CHEAT_ADD_ITEM.getMatcher(command)) != null) {
-            gameController.addItemCheat(matcher.group("name"), Integer.parseInt(matcher.group("amount")));
+            System.out.println(gameController.addItemCheat(matcher.group("name"), Integer.parseInt(matcher.group("amount"))));
         }
         else if ((matcher = GameMenuCommand.INVENTORY_SHOW.getMatcher(command)) != null) {
             printArrayList(gameController.showInventory().getData());
@@ -352,6 +352,9 @@ public class GameTerminalView {
         }
         else if((matcher = GameMenuCommand.FEED_HAY.getMatcher(command)) != null) {
             System.out.println(gameController.feedHay(matcher.group("name")));
+        }
+        else if((matcher = GameMenuCommand.SET_FRIENDSHIP.getMatcher(command)) != null) {
+            System.out.println(gameController.setFriendship(matcher.group("username")));
         }
         else {
             System.out.println("invalid command");

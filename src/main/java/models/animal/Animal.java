@@ -37,7 +37,7 @@ public class Animal implements Placable, DailyUpdate {
         products = animalData.getProducts();
         this.name = name;
         price = animalData.getPrice();
-        animalType = AnimalTypes.fromName(name);
+        animalType = AnimalTypes.fromName(animalData.getName());
         this.friendship = 0;
         this.toolName = animalData.getToolName();
         this.productTime = animalData.getProductTime();
@@ -102,6 +102,7 @@ public class Animal implements Placable, DailyUpdate {
 
     public void shepherd(){
         this.friendship += 8;
+        isOut = true;
         isFeedToday = true;
     }
 
@@ -124,6 +125,7 @@ public class Animal implements Placable, DailyUpdate {
     public Item collectProduce(){
         if(todayProduct == null)
             return null;
+
         return Item.build(todayProduct , 1);
     }
 
