@@ -13,7 +13,7 @@ import models.result.errorTypes.GameError;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Shop extends Building {
+public class Shop extends Building implements DailyUpdate{
 	private List<ShopItemInstance> items = new ArrayList<>();
 	private final TileType shopType;
 
@@ -220,5 +220,14 @@ public class Shop extends Building {
 				shopType,
 				getAvailableItems().size()
 		);
+	}
+
+	@Override
+	public boolean nextDay(Game g) {
+		super.nextDay(g);
+		for (ShopItemInstance item : items) {
+			item.nextDay(g);
+		}
+		return false;
 	}
 }

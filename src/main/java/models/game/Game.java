@@ -52,7 +52,7 @@ public class Game {
         this.currentPlayer = other.currentPlayer;
         this.village = other.village;
         this.roundCount = other.roundCount;
-        this.gameDate = other.gameDate;
+        this.gameDate = new Date(other.gameDate);
         this.gameWeather = other.gameWeather;
         this.nextDayWeather = other.nextDayWeather;
     }
@@ -246,6 +246,9 @@ public class Game {
         for (Player player : players)
             player.nextDay(copy);
         gameDate.nextDay(copy);
+
+        village.nextDay(copy);
+
         return false;
     }
 

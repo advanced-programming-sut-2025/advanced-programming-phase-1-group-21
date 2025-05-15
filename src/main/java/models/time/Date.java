@@ -22,6 +22,10 @@ public class Date implements DailyUpdate {
         normalize();
     }
 
+    public Date(Date other) {
+        this(other.hour, other.day, other.season, other.year);
+    }
+
     public static Date createBias() {
         return new Date(DEFAULT_START_HOUR, 1, 0, 1);
     }
