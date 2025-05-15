@@ -1,7 +1,6 @@
 package views.menu;
 
 import controllers.GameController;
-import models.App;
 import models.Item.RecipeType;
 import models.command.GameMenuCommand;
 import models.game.Player;
@@ -221,7 +220,7 @@ public class GameTerminalView {
         else if ((matcher = GameMenuCommand.SHOW_PLANT.getMatcher(command)) != null) {
             System.out.println(gameController.showPlant(new Coord(Integer.parseInt(matcher.group("x")) , Integer.parseInt(matcher.group("y")))));
         }
-        else if ((matcher = GameMenuCommand.HOWMUCH_WATER.getMatcher(command)) != null) {
+        else if ((matcher = GameMenuCommand.HOW_MUCH_WATER.getMatcher(command)) != null) {
             System.out.println(gameController.howMuchWater());
         }
         else if ((matcher = GameMenuCommand.WATER.getMatcher(command)) != null) {
@@ -335,6 +334,21 @@ public class GameTerminalView {
         }
         else if ((matcher = GameMenuCommand.GET_ARTISAN_PRODUCT.getMatcher(command)) != null) {
             System.out.println(gameController.getArtisanProduct(matcher.group("name")));
+        }
+        else if((matcher = GameMenuCommand.FISHING.getMatcher(command)) != null) {
+            System.out.println(gameController.fishing(matcher.group("fishingPole")));
+        }
+        else if((matcher = GameMenuCommand.SELL_ANIMAL.getMatcher(command)) != null) {
+            System.out.println(gameController.sellAnimal(matcher.group("name")));
+        }
+        else if((matcher = GameMenuCommand.COLLECT_PRODUCE.getMatcher(command)) != null){
+            System.out.println(gameController.collectProducts(matcher.group("name")));
+        }
+        else if((matcher = GameMenuCommand.SHOW_ANIMAL_PRODUCE.getMatcher(command)) != null) {
+            printArrayList(gameController.showAnimalProduces().getData());
+        }
+        else if((matcher = GameMenuCommand.FEED_HAY.getMatcher(command)) != null) {
+            System.out.println(gameController.feedHay(matcher.group("name")));
         }
         else {
             System.out.println("invalid command");

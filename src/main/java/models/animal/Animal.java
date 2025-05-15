@@ -1,5 +1,6 @@
 package models.animal;
 
+import models.App;
 import models.DailyUpdate;
 import models.Item.Item;
 import models.data.AnimalData;
@@ -43,6 +44,7 @@ public class Animal implements Placable, DailyUpdate {
         this.productSeasons = animalData.getSeasons();
         this.house = animalData.getHouse();
         this.houseTypes = animalData.getHouseType();
+        produceStage = animalData.getProductTime();
     }
 
     public String getName() {
@@ -175,7 +177,7 @@ public class Animal implements Placable, DailyUpdate {
             setFriendship(Math.max(getFriendship() - 20 , 0));
         if(!isTodayPet())
             setFriendship(Math.max(0 , (getFriendship()/200) - 10));
-        if(isFeedToday()){
+        if(isFeedToday() && (produceStage == 0) && seasonIsTrue()){
             if(getFriendship() < 100){
                 setTodayProduct(getProducts().get(0));
             }
@@ -194,6 +196,15 @@ public class Animal implements Placable, DailyUpdate {
         setOut(false);
         setFeedToday(false);
         setTodayPet(false);
+        produceStage = (produceStage + 1)%productTime;
+        return false;
+    }
+
+    public boolean seasonIsTrue(){
+        for(Season season : productSeasons){
+            if(App.game.getSeason().equals(season))
+                return true;
+        }
         return false;
     }
 }

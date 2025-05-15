@@ -576,6 +576,9 @@ public class GameController{
             output.add("friendship: " + animal.getFriendship());
             output.add("is today feed: " + animal.isFeedToday());
             output.add("is today pet: " + animal.isTodayPet());
+            if(animal.getTodayProduct() != null)
+                output.add("today product : " + animal.getTodayProduct());
+            output.add("today product : " + null);
         }
         return Result.success(output);
     }

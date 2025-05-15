@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Inventory {
-    public static final int MAXIMUM_ITEM_PER_SLOT = 9999;
+    public static final int MAXIMUM_ITEM_PER_SLOT = 100000;
     List<Item> items = new ArrayList<>();
     InventoryType inventoryType = InventoryType.PRIMITIVE;
     ToolMaterialType trashcanType = ToolMaterialType.PRIMITIVE;
