@@ -97,4 +97,18 @@ public enum TileType {
 		return null;
 	}
 
+	public boolean canThorAttack() {
+		return switch (this) {
+			case PLOWED, UNPLOWED, TREE, ANIMAL, PLANTED_SEED -> true;
+			default -> false;
+		};
+	}
+
+	public boolean canCrowAttack() {
+		return switch (this) {
+			case PLOWED, UNPLOWED, PLANTED_SEED -> true;
+			default -> false;
+		};
+	}
+
 }

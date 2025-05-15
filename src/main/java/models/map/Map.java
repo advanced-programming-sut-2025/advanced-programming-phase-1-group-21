@@ -111,10 +111,26 @@ public class Map implements DailyUpdate {
         if (mapType != MapType.FARM)
             return false;
         Tile t = getTile(coord);
-        if (t == null || t.getPlacable(Building.class) != null) return false;
-        setTile(coord, Tile.createEmpty());
-        System.err.println("Tile with coord " + coord.toString() + " is hit by thor");
-        return true;
+        if (t == null) return false;
+        if (t.getTileType().canThorAttack()) {
+            setTile(coord, Tile.createEmpty());
+            System.err.println("Tile with coord " + coord + " is hit by thor");
+            return true;
+        }
+        return false;
+    }
+
+    public boolean attackCrow(Coord coord) {
+        if (mapType != MapType.FARM)
+            return false;
+        Tile t = getTile(coord);
+        if (t == null) return false;
+        if (t.getTileType().canCrowAttack()) {
+            setTile(coord, Tile.createEmpty());
+            System.err.println("Tile with coord" + coord + " is attacked by crows!");
+            return true;
+        }
+        return false;
     }
 
     public int getMaxX() {
@@ -130,10 +146,18 @@ public class Map implements DailyUpdate {
     }
 
     static final int NUMBER_OF_THORS_PER_DAY = 3;
+    static final int NUMBER_OF_CROWS_PER_DAY = 4;
     @Override
     public boolean nextDay(Game g) {
-        for (int i = 0; i < NUMBER_OF_THORS_PER_DAY; i++)
-            thor(getRandomCoord());
+        if (g.getWeather() == Weather.STORM) {
+            for (int i = 0; i < NUMBER_OF_THORS_PER_DAY; i++)
+                thor(getRandomCoord());
+        }
+
+        //Crow attack
+        for (int i = 0; i < NUMBER_OF_CROWS_PER_DAY; i++) {
+            attackCrow(getRandomCoord());
+        }
 
         for (ArrayList<Tile> row : tiles) {
             for (Tile tile : row) {
