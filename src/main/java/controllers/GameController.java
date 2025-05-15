@@ -146,7 +146,8 @@ public class GameController{
     }
 
     public Result<Void> struckByThorCheat(Coord coord) {
-        if (App.game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+        if (App.game == null)
+            return Result.failure(GameError.NO_GAME_RUNNING);
         if (App.game.getCurrentPlayerMap().thor(coord))
             return Result.success("Thor was successful");
         return Result.failure(GameError.YOU_CANT_DO_ACTION);
