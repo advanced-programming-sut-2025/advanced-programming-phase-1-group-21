@@ -40,8 +40,8 @@ public enum TileType {
 	NPC(1, 1, false, 'N'),
 	NPC_HOUSE(3, 3, false, 'O'),
 
-	ARTISAN(1, 1, false, '8')
-	;
+	ARTISAN(1, 1, false, '8'),
+    SHIPPING_BIN(1, 1, false, 'S' ),;
 
 	private final int defaultWidth;
 	private final int defaultHeight;
