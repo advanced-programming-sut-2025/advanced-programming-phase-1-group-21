@@ -43,19 +43,5 @@ public class App implements Serializable {
                 Colors.color(Colors.YELLOW, "" + game.getCurrentPlayer().getEnergy());
     }
 
-    // Save singleton to file
-    public void saveToFile(String path) throws IOException {
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(path))) {
-            out.writeObject(this);
-        }
-    }
-
-    // Load singleton from file
-    public static void loadFromFile(String path) throws IOException, ClassNotFoundException {
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(path))) {
-            instance = (App) in.readObject();
-        }
-    }
-
     public Random getRandom() { return random; }
 }
