@@ -427,6 +427,8 @@ public class GameController {
 
         Tool tool = (Tool) game.getCurrentPlayer().getItemInHand();
         Result<Item> item = tool.use(destinyTile);
+        if (item.isError())
+            return item;
         if (item == null)
             return Result.failure(GameError.YOU_ARE_NOT_NEAR_TO_LAKE);
         if (item.isSuccess() && (item.getData() != null)) {

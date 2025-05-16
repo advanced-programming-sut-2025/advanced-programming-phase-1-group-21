@@ -93,6 +93,14 @@ public class PlantedTree implements Placable, Harvestable, Serializable, DailyUp
 		return "T";
 	}
 
+	public String getResultName() {
+		return treeData.getResultName();
+	}
+
+	public boolean isHarvestReady() {
+		return readyToHarvest;
+	}
+
 	@Override
 	public String toString() {
 		return String.format(

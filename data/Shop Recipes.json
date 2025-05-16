@@ -283,7 +283,7 @@
   {
     "shop": "Pierre's General Store",
     "name": "Basic Retaining Soil",
-    "description": "This soil will not need watering for 5 days.. Mix into tilled soil.",
+    "description": "This soil will not need watering for 5 days. Mix into tilled soil.",
     "seasons": ["spring", "summer", "autumn", "winter"],
     "prices": [100, 100, 100, 100],
     "ingredients": {},

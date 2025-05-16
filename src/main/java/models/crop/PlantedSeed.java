@@ -96,6 +96,14 @@ public class PlantedSeed implements Placable, Harvestable, DailyUpdate, Serializ
 		return "S";
 	}
 
+	public String getResultName() {
+		return seedData.getResultName();
+	}
+
+	public boolean isHarvestReady() {
+		return readyToHarvest;
+	}
+
 	@Override
 	public String toString() {
 		return String.format(

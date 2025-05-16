@@ -76,6 +76,9 @@ public class Tile implements DailyUpdate, Serializable {
 
     public void setPlacable(Placable placable) {
         this.placable = placable;
+        if (placable == null) {
+            setTileType(TileType.UNPLOWED);
+        }
     }
 
     public String getSprite() {
