@@ -1,6 +1,8 @@
 package models.map;
 
-public enum Weather {
+import java.io.Serializable;
+
+public enum Weather implements Serializable {
     SUNNY,
     RAINY,
     STORM,

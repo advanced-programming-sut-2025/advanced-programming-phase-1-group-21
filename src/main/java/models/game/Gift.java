@@ -2,7 +2,9 @@ package models.game;
 
 import models.Item.Item;
 
-public class Gift {
+import java.io.Serializable;
+
+public class Gift implements Serializable {
     private final Player Sender, Receiver;
     private double rate;
     private final Item item;

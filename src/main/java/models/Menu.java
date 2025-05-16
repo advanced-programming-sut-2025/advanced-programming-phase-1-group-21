@@ -1,6 +1,8 @@
 package models;
 
-public enum Menu {
+import java.io.Serializable;
+
+public enum Menu implements Serializable {
     Game,
     LoginMenu,
     RegisterMenu,

@@ -8,7 +8,9 @@ import models.map.Placable;
 import models.map.TileType;
 import models.skill.SkillType;
 
-public class PlantedTree implements Placable, Harvestable {
+import java.io.Serializable;
+
+public class PlantedTree implements Placable, Harvestable, Serializable {
 	private int stage = 0;
 	private int day = 1;
 	private int lastHarvest = 0;

@@ -2,9 +2,10 @@ package models.game;
 
 import models.DailyUpdate;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Relation implements DailyUpdate {
+public class Relation implements DailyUpdate, Serializable {
     private Player player1, player2;
     private FriendshipLevel Level = FriendshipLevel.LEVEL0;
     private ArrayList<String> talks = new ArrayList<>();

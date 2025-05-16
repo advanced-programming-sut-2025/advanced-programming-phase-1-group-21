@@ -4,9 +4,10 @@ import models.DailyUpdate;
 import models.animal.Animal;
 import models.game.Game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Building implements Placable, DailyUpdate {
+public abstract class Building implements Placable, DailyUpdate, Serializable {
     public Map map;
 
     public Map getMap() {

@@ -2,7 +2,9 @@ package models.game;
 
 import models.DailyUpdate;
 
-public class Energy implements DailyUpdate {
+import java.io.Serializable;
+
+public class Energy implements DailyUpdate, Serializable {
     static final int MAX_ENERGY = 200;
 
     private int currentEnergy;

@@ -2,7 +2,9 @@ package models.Item;
 
 import models.data.items.*;
 
-public abstract class Item {
+import java.io.Serializable;
+
+public abstract class Item implements Serializable {
     public static Item build(String name, int amount) {
         AllItemsData itemData = AllItemsData.getData(name);
         if (itemData == null) {

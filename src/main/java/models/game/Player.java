@@ -14,11 +14,12 @@ import models.skill.SkillType;
 import models.user.User;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 
-public class Player implements DailyUpdate {
+public class Player implements DailyUpdate, Serializable {
     static final int MAX_ENERGY = 200;
 
     private User user;

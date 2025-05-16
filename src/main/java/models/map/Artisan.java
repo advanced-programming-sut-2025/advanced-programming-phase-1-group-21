@@ -8,11 +8,12 @@ import models.game.Inventory;
 import models.result.Result;
 import models.result.errorTypes.GameError;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Artisan implements Placable {
+public class Artisan implements Placable, Serializable {
 	private final ArtisanGoodsData goodsData;
 	Item result;
 

@@ -2,11 +2,12 @@ package models.map;
 
 import models.App;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Coord {
+public class Coord implements Serializable {
     private int x;
     private int y;
 
