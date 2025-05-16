@@ -57,6 +57,10 @@ public enum GameError implements Error {
     CANT_ADD_ITEM_TO_INVENTORY("You can't add this item to your inventory"),
     NOT_FOR_SALE("not for sale"),
     THIS_GIFT_HAS_BEEN_RATED("this gift has been rated"),
+    Plant_NOT_FOUND("There is no plant"),
+    NO_FERTILIZER("There is no fertilizer with this name"),
+    NO_DIRECTION("wrong direction name"),
+    NO_TOOL_IN_HAND("You don't have any tool in your hand"),
     ;
 
 

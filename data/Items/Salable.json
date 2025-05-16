@@ -266,5 +266,17 @@
   {
     "name": "Wedding Ring",
     "price": 5000
+  },
+  {
+    "name": "Basic Retaining Soil",
+    "price": 4
+  },
+  {
+    "name": "Quality Retaining Soil",
+    "price": 5
+  },
+  {
+    "name": "Deluxe Retaining Soil",
+    "price": 30
   }
 ]
