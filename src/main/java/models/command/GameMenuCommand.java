@@ -68,7 +68,7 @@ public enum GameMenuCommand implements Command {
     EQUIP_TOOL("\\s*equip\\s+tool\\s+-t\\s+(?<toolName>.+)\\s*"),
     SHOW_CURRENT_TOOL("show current tool"),
     SHOW_AVAILABLE_TOOL("show available tools"),
-    USE_TOOL("\\s*use\\s+tool\\s+-d\\s+(?<direction>\\S+)\\s*"),
+    USE_TOOL("\\s*use\\s+tool\\s+-d\\s+(?<direction>(N)|(E)|(S)|(W)|(NE)|(NW)|(SE)|(SW))\\s*"),
     //    TOOL_SHOW_CURRENT("tool show current"),
 //    TOOLS_SHOW_AVAILABLE("tools show available"),
 //    TOOLS_UPGRADE("tools upgrade (?<toolName>.*)>"),
@@ -99,6 +99,7 @@ public enum GameMenuCommand implements Command {
     PLANT("^\\s*plant\\s+-s\\s+(?<seedName>.*)\\s+-d\\s+(?<direction>(N)|(E)|(S)|(W)|(NE)|(NW)|(SE)|(SW))\\s*$"),
     SHOW_PLANT("\\s*show\\s+plant\\s+-l\\s+\\((?<x>\\d+),(?<y>\\d+)\\)\\s*"),
     HOW_MUCH_WATER("\\s*how much\\s+water\\s*"),
+    FERTILIZE("^\\s*fertilize\\s+-f\\s+(?<fertilizer>.*)\\s+-d\\s+(?<direction>(N)|(E)|(S)|(W)|(NE)|(NW)|(SE)|(SW))\\s*$"),
     //SHOP
     BUILD("\\s*build\\s+-a\\s+(?<name>[A-Za-z]+(?:\\s+[A-Za-z]+)*)\\s+-l\\s*\\(?\\s*(?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\s*\\)?\\s*"),
     SHOP_SHOW_ALL_PRODUCTS("show all products"),

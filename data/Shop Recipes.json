@@ -157,7 +157,7 @@
   {
     "shop": "Pierre's General Store",
     "name": "Deluxe Retaining Soil",
-    "description": "This soil has a 100% chance of staying watered overnight. Mix into tilled soil.",
+    "description": "This soil will not need watering ever again. Mix into tilled soil.",
     "seasons": ["spring", "summer", "autumn", "winter"],
     "prices": [150, 150, 150, 150],
     "ingredients": {},
@@ -283,7 +283,7 @@
   {
     "shop": "Pierre's General Store",
     "name": "Basic Retaining Soil",
-    "description": "This soil has a chance of staying watered overnight. Mix into tilled soil.",
+    "description": "This soil will not need watering for 5 days.. Mix into tilled soil.",
     "seasons": ["spring", "summer", "autumn", "winter"],
     "prices": [100, 100, 100, 100],
     "ingredients": {},
@@ -297,7 +297,7 @@
   {
     "shop": "Pierre's General Store",
     "name": "Quality Retaining Soil",
-    "description": "This soil has a good chance of staying watered overnight. Mix into tilled soil.",
+    "description": "This soil will not need watering for 7 days.. Mix into tilled soil.",
     "seasons": ["spring", "summer", "autumn", "winter"],
     "prices": [150, 150, 150, 150],
     "ingredients": {},
@@ -1037,7 +1037,7 @@
   },
   {
     "shop": "Fish Shop",
-    "name": "Fish Smoker (Recipe)",
+    "name": "Fish Smoker Recipe",
     "description": "A recipe to make Fish Smoker",
     "seasons": ["spring", "summer", "autumn", "winter"],
     "prices": [10000, 10000, 10000, 10000],
@@ -1975,7 +1975,7 @@
   },
   {
     "shop": "The Stardrop Saloon",
-    "name": "Hashbrowns Recipe",
+    "name": "Hash Browns Recipe",
     "description": "A recipe to make Hashbrowns",
     "seasons": ["spring", "summer", "autumn", "winter"],
     "prices": [50, 50, 50, 50],

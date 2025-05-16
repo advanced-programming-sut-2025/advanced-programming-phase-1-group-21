@@ -408,13 +408,16 @@ public class GameController{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Result<Item> useTool(String direction) {
+    public Result<Item> useTool(Direction d) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        Direction d = Direction.getDirection(direction);
         if(d == null)
             return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
 
         Coord destinyTile = game.getCurrentPlayer().getCoord().addCoord(d.getCoord());
+
+        if (game.getCurrentPlayer().getItemInHand() == null) {
+            return Result.failure(GameError.NO_TOOL_IN_HAND);
+        }
 
         if(!game.getCurrentPlayer().getItemInHand().getItemType().equals(ItemType.TOOL))
             return Result.failure(GameError.TOOL_NOT_FOUND);
@@ -440,6 +443,8 @@ public class GameController{
 
     public Result<Void> plant(String seedName, Direction direction) { // After MAP
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+        if (direction == null)
+            return Result.failure(GameError.NO_DIRECTION);
         Player player = game.getCurrentPlayer();
         Inventory inventory = player.getInventory();
 
@@ -466,16 +471,39 @@ public class GameController{
         if (tile == null)
             return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
         if (tile.getTileType() != TileType.PLANTED_SEED && tile.getTileType() != TileType.PLANTED_TREE)
-            return Result.failure(GameError.NOT_FOUND);
+            return Result.failure(GameError.Plant_NOT_FOUND);
 
         if (tile.getTileType() == TileType.PLANTED_SEED)
             return Result.success(tile.getPlacable(PlantedSeed.class).toString());
         return Result.success(tile.getPlacable(PlantedTree.class).toString());
     }
 
-    public Result<Void> fertilizePlant(FertilizerType fertilizer, Coord cord) {
+    public Result<Void> fertilize(FertilizerType fertilizer, Direction direction) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (direction == null)
+            return Result.failure(GameError.NO_DIRECTION);
+
+        if (fertilizer == null) {
+            return Result.failure(GameError.NO_FERTILIZER);
+        }
+
+        Player player = game.getCurrentPlayer();
+        Inventory inventory = player.getInventory();
+
+        Item fertItem = inventory.getItem(fertilizer.getName());
+        if (fertItem == null)
+            return Result.failure(GameError.CANT_FIND_ITEM_IN_INVENTORY);
+        Coord coord = player.getCoord().addCoord(direction.getCoord());
+        Tile tile = player.getMap().getTile(coord);
+        if (tile == null)
+            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
+        if (tile.getTileType() != TileType.PLANTED_SEED)
+            return Result.failure(GameError.Plant_NOT_FOUND);
+
+
+        inventory.removeItem(Item.build(fertilizer.getName(), 1));
+        tile.getPlacable(PlantedSeed.class).fertilize(fertilizer);
+        return Result.success(null);
     }
 
     public Result<Integer> howMuchWater() {
@@ -547,7 +575,6 @@ public class GameController{
             game.getCurrentPlayer().getInventory().addItem(fishingPole);
         }
         if(Item.build(itemName , quantity) != null) {
-            System.out.println(itemName);
             game.getCurrentPlayer().getInventory().addItem(Item.build(itemName, quantity));
             return Result.success(null);
         }

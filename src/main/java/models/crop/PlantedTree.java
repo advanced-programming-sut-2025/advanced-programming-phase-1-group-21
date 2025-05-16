@@ -1,8 +1,10 @@
 package models.crop;
 
 import models.App;
+import models.DailyUpdate;
 import models.Item.Item;
 import models.data.items.TreeData;
+import models.game.Game;
 import models.game.Player;
 import models.map.Placable;
 import models.map.TileType;
@@ -10,7 +12,7 @@ import models.skill.SkillType;
 
 import java.io.Serializable;
 
-public class PlantedTree implements Placable, Harvestable, Serializable {
+public class PlantedTree implements Placable, Harvestable, Serializable, DailyUpdate {
 	private int stage = 0;
 	private int day = 1;
 	private int lastHarvest = 0;
@@ -43,7 +45,7 @@ public class PlantedTree implements Placable, Harvestable, Serializable {
 		return null;
 	}
 
-	public boolean nextDay() {
+	public boolean nextDay(Game g) {
 		// This method is supposed to be called by its tile.
 
 		/*
@@ -69,7 +71,7 @@ public class PlantedTree implements Placable, Harvestable, Serializable {
 	}
 	public void setDay(int day) {
 		while (this.day < day)
-			nextDay();
+			nextDay(null);
 	}
 
 	public TreeData getData() {
@@ -94,13 +96,12 @@ public class PlantedTree implements Placable, Harvestable, Serializable {
 	@Override
 	public String toString() {
 		return String.format(
-				"PlantedTree {day=%d, stage=%d, watered=%s, lastHarvest=%s, harvestCycle=%d}\nDataInfo:%s",
+				"PlantedTree:\nSapling data:\n%s\nday=%d, stage=%d, lastHarvest=%s, harvestCycle=%d",
+				treeData.toString(),
 				day,
 				stage,
-				waterStage > 0 ? "yes" : "no",
 				lastHarvest == -1 ? "never" : lastHarvest,
-				treeData.getHarvestCycle(),
-				treeData.toString()
+				treeData.getHarvestCycle()
 		);
 	}
 }

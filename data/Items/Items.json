@@ -1026,5 +1026,173 @@
   {
     "name": "Mystic Tree Seed",
     "type": "Sapling"
+  },
+  {
+    "name": "Fried Egg Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Baked Fish Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Salad Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Omelet Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Pumpkin Pie Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Spaghetti Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Pizza Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Tortilla Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Maki Roll Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Triple Shot Espresso Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Cookie Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Hash Browns Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Pancakes Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Fruit Salad Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Red Plate Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Bread Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Salmon Dinner Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Vegetable Medley Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Farmer's Lunch Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Survival Burger Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Dish O' The Sea Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Seaform Pudding Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Miner's Treat Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Charcoal Kiln Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Furnace Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Bee House Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Cheese Press Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Keg Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Loom Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Mayonnaise Machine Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Oil Maker Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Preserves Jar Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Dehydrator Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Fish Smoker Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Scarecrow Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Deluxe Scarecrow Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Sprinkler Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Quality Sprinkler Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Iridium Sprinkler Recipe",
+    "type": "Recipe"
+  },
+  {
+    "name": "Basic Retaining Soil",
+    "type": "Salable"
+  },
+  {
+    "name": "Quality Retaining Soil",
+    "type": "Salable"
+  },
+  {
+    "name": "Deluxe Retaining Soil",
+    "type": "Salable"
   }
 ]
