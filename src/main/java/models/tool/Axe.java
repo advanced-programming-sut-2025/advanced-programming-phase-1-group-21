@@ -3,6 +3,8 @@ package models.tool;
 import models.App;
 import models.Item.Item;
 import models.Item.ItemType;
+import models.Item.Sapling;
+import models.crop.PlantedTree;
 import models.map.*;
 import models.result.Result;
 import models.result.errorTypes.GameError;
@@ -20,14 +22,11 @@ public class Axe extends Tool {
 		if (tile == null) {
 			return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
 		}
-		if(!App.getInstance().game.getCurrentPlayerMap().getTile(coord).getTileType().isForaging()) {
-			App.getInstance().game.getCurrentPlayer().decreaseEnergy(1);
-			return Result.success(null, "tabaret khata raft");
-		}
-
-		if(tile.getTileType() == TileType.TREE) {
+		System.out.println(tile.getTileType());
+		if(tile.getPlacable(PlantedTree.class) != null) {
 			use = true;
 			tile.setTileType(TileType.UNPLOWED);
+			tile.setPlacable(null);
 			App.getInstance().game.getCurrentPlayer().getInventory().addItem(Item.build("Wood", 10));
 		}
 

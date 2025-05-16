@@ -543,29 +543,37 @@ public class GameController {
 
     public Result<Void> addItemCheat(String itemName, int quantity) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        if (itemName.equalsIgnoreCase("milkpale"))
+        if (itemName.equalsIgnoreCase("milkpale")) {
             game.getCurrentPlayer().getInventory().addItem(new MilkPail());
-        if (itemName.equalsIgnoreCase("shear"))
+            return Result.success(null);
+        }
+        if (itemName.equalsIgnoreCase("shear")) {
             game.getCurrentPlayer().getInventory().addItem(new Shear());
+            return Result.success(null);
+        }
         if (itemName.equalsIgnoreCase("educational pole")) {
             FishingPole fishingPole = new FishingPole();
             fishingPole.setToolMaterialType(ToolMaterialType.EDUCATIONAL);
             game.getCurrentPlayer().getInventory().addItem(fishingPole);
+            return Result.success(null);
         }
         if (itemName.equalsIgnoreCase("bamboo pole")) {
             FishingPole fishingPole = new FishingPole();
             fishingPole.setToolMaterialType(ToolMaterialType.BAMBOO);
             game.getCurrentPlayer().getInventory().addItem(fishingPole);
+            return Result.success(null);
         }
         if (itemName.equalsIgnoreCase("fiberglass pole")) {
             FishingPole fishingPole = new FishingPole();
             fishingPole.setToolMaterialType(ToolMaterialType.FIBERGLASS);
             game.getCurrentPlayer().getInventory().addItem(fishingPole);
+            return Result.success(null);
         }
         if (itemName.equalsIgnoreCase("iridium pole")) {
             FishingPole fishingPole = new FishingPole();
             fishingPole.setToolMaterialType(ToolMaterialType.IRIDIUM);
             game.getCurrentPlayer().getInventory().addItem(fishingPole);
+            return Result.success(null);
         }
         if (Item.build(itemName, quantity) != null) {
             game.getCurrentPlayer().getInventory().addItem(Item.build(itemName, quantity));
@@ -648,7 +656,8 @@ public class GameController {
             output.add("is today pet: " + animal.isTodayPet());
             if (animal.getTodayProduct() != null)
                 output.add("today product : " + animal.getTodayProduct());
-            output.add("today product : " + null);
+            else
+                output.add("today product : " + null);
         }
         return Result.success(output);
     }
@@ -690,7 +699,6 @@ public class GameController {
             output.add(animal.getName() + "products : ");
             if (animal.getTodayProduct() != null) {
                 output.add("product name : " + animal.getTodayProduct());
-                double randomDouble = 0.5 + Math.random();
                 output.add("product quality : " + (animal.getFriendship() / 1000) * (0.5 + 0.5 * Math.random()));
             }
         }

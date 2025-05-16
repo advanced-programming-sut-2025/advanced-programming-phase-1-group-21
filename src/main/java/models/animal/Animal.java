@@ -171,6 +171,7 @@ public class Animal implements Placable, DailyUpdate, Serializable {
 
     @Override
     public boolean nextDay(Game g) {
+        produceStage = (produceStage + 1)%productTime;
         if (lastNextDayDate != null && lastNextDayDate == g.getGameDate())
             return false;
         lastNextDayDate = g.getGameDate();
@@ -199,7 +200,6 @@ public class Animal implements Placable, DailyUpdate, Serializable {
         setOut(false);
         setFeedToday(false);
         setTodayPet(false);
-        produceStage = (produceStage + 1)%productTime;
         return false;
     }
 
