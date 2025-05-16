@@ -77,7 +77,6 @@ public class PathFinder {
     private List<PathStep> reconstructPath(Node endNode, int maxEnergy) {
         List<PathStep> path = new ArrayList<>();
         Node current = endNode;
-        int totalEnergy = 0;
 
         // First build path in reverse order
         List<Node> reversePath = new ArrayList<>();
@@ -90,15 +89,11 @@ public class PathFinder {
         // Convert to PathSteps with energy costs
         Direction prevDirection = null;
         for (Node node : reversePath) {
-            if (totalEnergy >= maxEnergy) break;
 
             int turnCost = prevDirection == null || prevDirection == node.direction ? 0 : 3;
             int stepCost = 1 + turnCost;
 
-            if (totalEnergy + stepCost > maxEnergy) break;
-
             path.add(new PathStep(node.coord, node.direction, stepCost));
-            totalEnergy += stepCost;
             prevDirection = node.direction;
         }
 
