@@ -21,6 +21,10 @@ public class App implements Serializable {
         DataLoader.load();
     }
 
+    public static void setInstance(App app) {
+        instance = app;
+    }
+
     public static App getInstance() {
         if (instance == null) {
             instance = new App();
@@ -37,20 +41,6 @@ public class App implements Serializable {
         return Colors.color(Colors.PURPLE, game.getCurrentPlayer().getUser().getUsername()) + " " +
                 Colors.color(Colors.GREEN, game.getGameDate().compactString()) + " " +
                 Colors.color(Colors.YELLOW, "" + game.getCurrentPlayer().getEnergy());
-    }
-
-    // Save singleton to file
-    public void saveToFile(String path) throws IOException {
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(path))) {
-            out.writeObject(this);
-        }
-    }
-
-    // Load singleton from file
-    public static void loadFromFile(String path) throws IOException, ClassNotFoundException {
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(path))) {
-            instance = (App) in.readObject();
-        }
     }
 
     public Random getRandom() { return random; }

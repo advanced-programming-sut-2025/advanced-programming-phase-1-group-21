@@ -4,9 +4,10 @@ import models.Item.Item;
 import models.map.Placable;
 import models.map.TileType;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Refrigerator implements Placable {
+public class Refrigerator implements Placable, Serializable {
     ArrayList<Item> items;
     Inventory inventory;
 

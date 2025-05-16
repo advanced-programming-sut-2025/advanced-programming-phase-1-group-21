@@ -6,7 +6,9 @@ import models.crop.PlantedSeed;
 import models.Item.Item;
 import models.game.Game;
 
-public class Tile implements DailyUpdate {
+import java.io.Serializable;
+
+public class Tile implements DailyUpdate, Serializable {
     private TileType tileType;
     private Placable placable;
 

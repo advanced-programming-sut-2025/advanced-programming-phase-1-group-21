@@ -2,7 +2,7 @@ package models.data;
 
 import com.google.gson.annotations.SerializedName;
 
-public class VillagerTask {
+public class VillagerTask implements java.io.Serializable {
     @SerializedName("request-item")
     private String requestItem;
 

@@ -5,9 +5,10 @@ import models.Item.Item;
 import models.data.*;
 import models.map.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class NPC implements Placable, DailyUpdate {
+public class NPC implements Placable, DailyUpdate, Serializable {
     private String name;
     // Characterization
     NPCHouse house;

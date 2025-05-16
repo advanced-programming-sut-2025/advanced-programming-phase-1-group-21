@@ -5,10 +5,11 @@ import models.DailyUpdate;
 import models.game.Game;
 import models.result.Result;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Map implements DailyUpdate {
+public class Map implements DailyUpdate, Serializable {
     public ArrayList<ArrayList<Tile>> tiles;
     private ArrayList<Building> buildings = new ArrayList<>();
 

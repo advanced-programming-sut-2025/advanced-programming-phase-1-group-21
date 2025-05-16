@@ -12,7 +12,9 @@ import models.map.Placable;
 import models.map.TileType;
 import models.skill.SkillType;
 
-public class PlantedSeed implements Placable, Harvestable, DailyUpdate {
+import java.io.Serializable;
+
+public class PlantedSeed implements Placable, Harvestable, DailyUpdate, Serializable {
 	private FertilizerType fertilizerType = null; // not implemented yet.
 	private int stage = 0;
 	private int day = 1;

@@ -13,10 +13,11 @@ import models.time.Date;
 import models.time.Season;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Animal implements Placable, DailyUpdate {
+public class Animal implements Placable, DailyUpdate, Serializable {
     private String name;
     private AnimalTypes animalType;
     private int price;

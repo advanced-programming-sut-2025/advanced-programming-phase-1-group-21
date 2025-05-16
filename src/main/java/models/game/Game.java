@@ -7,6 +7,7 @@ import models.animal.Animal;
 import models.data.DataLoader;
 import models.map.Map;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -14,7 +15,7 @@ import models.map.MapBuilder;
 import models.map.Weather;
 import models.time.*;
 
-public class Game {
+public class Game implements Serializable {
     private ArrayList<Player> players;
     private ArrayList<NPC> npcs = new ArrayList<>();
     private ArrayList<Relation> relations = new ArrayList<>();

@@ -3,6 +3,7 @@ package models.result.errorTypes;
 import models.result.Error;
 
 public enum GameError implements Error {
+    GAME_NOT_FOUND("Game not found"),
     EMPTY_HOUSE_WAS_NOT_FOUND("Empty house was not found"),
     COORDINATE_DOESNT_EXISTS("this coordinate does not exist in this location"),
     CANT_STAND_ON_FORAGING("you cant walk on a foraging"),

@@ -10,6 +10,7 @@ import models.game.Inventory;
 import models.result.Result;
 import models.result.errorTypes.GameError;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -166,7 +167,7 @@ public class Shop extends Building implements DailyUpdate{
 		return "" + shopType.getSymbol();
 	}
 
-	private static class ShopItemInstance implements DailyUpdate {
+	private static class ShopItemInstance implements DailyUpdate, Serializable {
 		private final ShopData data;
 		private int soldToday;
 

@@ -2,7 +2,9 @@ package models.game;
 
 import models.Item.Item;
 
-public class Trade {
+import java.io.Serializable;
+
+public class Trade implements Serializable {
 	// Be careful! All ID's have to be distinct
 	private int ID;
 	private Player sender, receiver;

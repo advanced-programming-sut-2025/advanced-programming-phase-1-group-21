@@ -5,10 +5,11 @@ import models.map.Map;
 import models.time.Date;
 import models.time.Season;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.HashMap;
 
-public class NPCFriendship implements DailyUpdate {
+public class NPCFriendship implements DailyUpdate, Serializable {
     private Player player;
     private FriendshipLevel Level;
     private int friendshipXP;

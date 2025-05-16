@@ -1,8 +1,12 @@
 package models.skill;
 
+import models.DailyUpdate;
+import models.map.Placable;
+
+import java.io.Serializable;
 import java.util.EnumMap;
 
-public class Skill {
+public class Skill implements Serializable {
     private final EnumMap<SkillType, Integer> expMap = new EnumMap<>(SkillType.class);
 
     public Skill() {

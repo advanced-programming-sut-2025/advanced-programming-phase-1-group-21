@@ -6,10 +6,11 @@ import models.Item.Placeable;
 import models.game.Game;
 import models.game.Player;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShippingBin implements Placable, DailyUpdate {
+public class ShippingBin implements Placable, DailyUpdate, Serializable {
     List<Item> toSell = new ArrayList<>();
 
     public void add(Item item) {

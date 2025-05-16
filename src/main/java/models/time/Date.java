@@ -3,7 +3,9 @@ package models.time;
 import models.DailyUpdate;
 import models.game.Game;
 
-public class Date implements DailyUpdate {
+import java.io.Serializable;
+
+public class Date implements DailyUpdate, Serializable {
     private int hour;
     private int day;
     private int season;
