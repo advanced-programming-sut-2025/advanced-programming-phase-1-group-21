@@ -233,4 +233,11 @@ public class Inventory implements Serializable {
     public boolean canAdd() {
         return getSize() < inventoryType.getMaximumSize();
     }
+    public boolean canAdd(String itemName) {
+        if (canAdd()) return true;
+        for (Item item: items)
+            if (item.getName().equals(itemName))
+                return true;
+        return false;
+    }
 }
