@@ -269,7 +269,8 @@ public class GameTerminalView {
             System.out.println(gameController.talk(matcher.group("username") , matcher.group("message").trim()));
         }
         else if ((matcher = GameMenuCommand.SHOW_TALK_HISTORY.getMatcher(command)) != null) {
-            printArrayList(gameController.talkHistory(matcher.group("username")).getData());
+            if(gameController.talkHistory(matcher.group("username")).getData() != null)
+                printArrayList(gameController.talkHistory(matcher.group("username")).getData());
         }
         else if ((matcher = GameMenuCommand.SHOW_GIFT_HISTORY.getMatcher(command)) != null) {
             printArrayList(gameController.giftHistory(matcher.group("username")).getData());
@@ -354,10 +355,13 @@ public class GameTerminalView {
             System.out.println(gameController.feedHay(matcher.group("name")));
         }
         else if((matcher = GameMenuCommand.SET_FRIENDSHIP.getMatcher(command)) != null) {
-            System.out.println(gameController.setFriendship(matcher.group("username")));
+            System.out.println(gameController.setFriendship( matcher.group("username") , Integer.parseInt(matcher.group("xp"))));
         }
         else if((matcher = GameMenuCommand.SHOW_SKILLS.getMatcher(command)) != null) {
             printArrayList(gameController.showSkills().getData());
+        }
+        else if((matcher = GameMenuCommand.SHOW_NOTIFICATIONS.getMatcher(command)) != null) {
+            printArrayList(gameController.showNotifications().getData());
         }
         else {
             System.out.println("invalid command");

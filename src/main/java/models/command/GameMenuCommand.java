@@ -113,8 +113,9 @@ public enum GameMenuCommand implements Command {
     WHO_AM_I("whoami"),
     MAP_STATUS("map status"),
     INVENTORY_STATUS("inventory status"),
-    SET_FRIENDSHIP("set friendship -u (?<username>\\S+)"),
+    SET_FRIENDSHIP("set friendship -u (?<username>\\S+) -x (?<xp>\\d+)"),
     SHOW_SKILLS("show skills"),
+    SHOW_NOTIFICATIONS("show notifications"),
     ;
 
     public final Pattern pattern;

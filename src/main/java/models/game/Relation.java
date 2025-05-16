@@ -207,4 +207,5 @@ public class Relation implements DailyUpdate {
         resetTodayCommunication();
         return true;
     }
+
 }
