@@ -7,6 +7,7 @@ import models.map.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class NPC implements Placable, DailyUpdate, Serializable {
     private String name;
@@ -115,6 +116,13 @@ public class NPC implements Placable, DailyUpdate, Serializable {
     public boolean nextDay(Game g) {
         for(NPCFriendship friendship : this.getFriendships()) {
             friendship.nextDay(g);
+            if(friendship.getLevel().equals(FriendshipLevel.LEVEL3)) {
+                Random random = new Random();
+                int randomNum = random.nextInt(3);
+                if(randomNum != 0) {
+                    friendship.getPlayer().getInventory().addItem(Item.build(tasks.get(randomNum).getRewardItem() , 1));
+                }
+            }
         }
         return false;
     }

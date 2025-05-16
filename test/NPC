@@ -29,3 +29,17 @@ quest finish -n Robin -i 1
 cheat add item -n Iron Bar -c 100
 quest finish -n Robin -i 1
 inventory show
+cheat advance date 1d
+cheat add item -n Wood -c 10
+gift npc -n Robin -i Wood -a 1
+friendship npc list
+cheat advance date 1d
+cheat add item -n Wood -c 10
+gift npc -n Robin -i Wood -a 1
+friendship npc list
+cheat advance date 1d
+inventory show
+quests list
+cheat add item -n Wood -c 1000
+quest finish -n Robin -i 2
+inventory show
