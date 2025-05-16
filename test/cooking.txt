@@ -1,0 +1,41 @@
+go to login menu
+menu enter mainmenu
+login -u Ali -p Alireza123!
+menu enter mainmenu
+menu enter game
+new game sobi sobhan maryam
+1
+1
+1
+1
+walk -l (19, 8)
+walk -l (19, 9)
+go to village
+walk -l (3, 9)
+walk -l (3, 10)
+show all products
+cheat add item -n Coin -c 90000
+purchase Cookie recipe -n 1
+walk -l (6, 7)
+walk -l (7, 7)
+back home
+walk -l (4, 0)
+walk -l (4, 1)
+cooking refrigerator put coin
+;err chon baghalesh nist
+walk -l (4, 0)
+;baghal refrigerator
+cheat add item -n Egg -c 10
+cheat add item -n Wood -c 15
+cheat add item -n Bread -c 10
+cooking refrigerator put egg
+cooking refrigerator put bread
+cheat add item -n Wheat Flour -c 10
+cheat add item -n sugar -c 10
+cooking refrigerator put Wheat Flour
+cooking refrigerator put sugar
+; fails because suger is not consumable
+cooking show recipes
+cooking prepare Cookie Recipe
+
+

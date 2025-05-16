@@ -1,6 +1,7 @@
 package models.tool;
 
 import models.App;
+import models.crop.Harvestable;
 import models.crop.PlantedSeed;
 import models.Item.Item;
 import models.crop.PlantedTree;

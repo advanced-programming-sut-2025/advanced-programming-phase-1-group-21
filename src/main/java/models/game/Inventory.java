@@ -29,6 +29,9 @@ public class Inventory implements Serializable {
         return inventory;
     }
 
+    public Inventory(List<Item> items) {
+        this.items = items;
+    }
     public Inventory() {
 
     }
@@ -239,5 +242,20 @@ public class Inventory implements Serializable {
             if (item.getName().equals(itemName))
                 return true;
         return false;
+    }
+  
+    public List<Item> getItems() {
+        return new ArrayList<>(items);
+    }
+  
+
+    public void normalize() {
+        Iterator<Item> iterator = items.iterator();
+        while (iterator.hasNext()) {
+            Item item = iterator.next();
+            if (item.getAmount() <= 0) {
+                iterator.remove();
+            }
+        }
     }
 }

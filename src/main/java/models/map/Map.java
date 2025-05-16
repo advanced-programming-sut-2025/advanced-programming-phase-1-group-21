@@ -154,7 +154,6 @@ public class Map implements DailyUpdate, Serializable {
         if (t == null) return false;
         if (t.getTileType().canCrowAttack()) {
             setTile(coord, Tile.createEmpty());
-            System.err.println("Tile with coord" + coord + " is attacked by crows!");
             return true;
         }
         return false;

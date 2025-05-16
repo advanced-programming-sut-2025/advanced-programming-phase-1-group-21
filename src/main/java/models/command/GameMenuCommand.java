@@ -3,6 +3,7 @@ package models.command;
 import java.util.regex.Pattern;
 
 public enum GameMenuCommand implements Command {
+    EAT("\\s*eat\\s+(?<name>.+)\\s*"),
     SHOW_CURRENT_MENU("\\s*show\\s+current\\s+menu\\s*"),
     NEW_GAME("\\s*new\\s+game\\s+(?<username1>\\S+)\\s+(?<username2>\\S+)\\s+(?<username3>\\S+)\\s*"),
     NEXT_TURN("\\s*next\\s+turn\\s*"),
@@ -59,7 +60,7 @@ public enum GameMenuCommand implements Command {
     QUESTS_LIST("\\s*quests\\s+list\\s*"),
     QUEST_FINISH("\\s*quest\\s+finish\\s+-n\\s+(?<npcName>\\S+)\\s+-i\\s+(?<questID>\\d+)\\s*"),
 //    FORCE_TERMINATE("force terminate"),ß
-    COOKING_PREPARE("\\s*cooking\\s+prepare\\s*(?<name>\\.+)\\s*"),
+    COOKING_PREPARE("\\s*cooking\\s+prepare\\s+(?<name>.+)\\s*"),
     PRINT_MAP("print\\s+map\\s+-l\\s+\\((?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\)\\s+-s\\s+(?<size>\\d+)"),
     ENERGY_SHOW("energy show"),
     CHEAT_ENERGY_SET("energy set -v (?<value>.*)"),
@@ -79,8 +80,8 @@ public enum GameMenuCommand implements Command {
     CRAFTING("\\s*crafting\\s+craft\\s+(?<name>.+)\\s*"),
 //    PLACE_ITEM("place item -n (?<item_name>.*) -d (?<direction>.*)"),
 //    CHEAT_ADD_ITEM("cheat add item -n (?<item_name>.*) -c (?<count>.*)"),
-    COOKING_REFRIGERATOR("\\s*cooking\\s+refrigerator\\s+(?<action>put|pick)\\s+(?<item>\\.+)\\s*"),
-    COOKING_SHOW_RECIPES("cooking show recipes"),
+    COOKING_REFRIGERATOR("\\s*cooking\\s+refrigerator\\s+(?<action>put|pick)\\s+(?<item>.+)\\s*"),
+    COOKING_SHOW_RECIPES("cooking\\s+show\\s+recipes"),
     PLACE_ARTISAN("^\\s*place\\s+artisan\\s+-n\\s+(?<name>\\S+)\\s+-d\\s+(?<direction>(N)|(E)|(S)|(W)|(NE)|(NW)|(SE)|(SW))\\s*$"),
     USE_ARTISAN("^\\s*artisan\\s+use\\s+(?<name>\\S+)\\s+(?<itemNames>.+)$"),
     GET_ARTISAN_PRODUCT("^\\s*artisan\\s+get\\s+(?<name>\\S+)$"),
@@ -94,7 +95,7 @@ public enum GameMenuCommand implements Command {
     SELL_ANIMAL("\\s*sell\\s+animal\\s+-n\\s+(?<name>\\S+)\\s*"),
     FISHING("\\s*fishing\\s+-p\\s+(?<fishingPole>.+)\\s*"),
     SHOW_ANIMAL_PRODUCE("\\s*show\\s+animal\\s+produce\\s*"),
-    SELL("\\s*sell\\s+(?<item>.+)\\s+-n\\s+(?<number>\\d+)\\s*"),
+    SELL("\\s*sell\\s+(?<item>.+?)(?:\\s+-n\\s+(?<number>\\d+))?\\s*"),
 //    ARTISAN_USE("artisan use <artisan_name> <item1_name>"),
     WATER("\\s*water\\s+-l\\s+\\((?<x>\\d+),(?<y>\\d+)\\)\\s*"),
     PLANT("^\\s*plant\\s+-s\\s+(?<seedName>.*)\\s+-d\\s+(?<direction>(N)|(E)|(S)|(W)|(NE)|(NW)|(SE)|(SW))\\s*$"),
@@ -105,7 +106,7 @@ public enum GameMenuCommand implements Command {
     BUILD("\\s*build\\s+-a\\s+(?<name>[A-Za-z]+(?:\\s+[A-Za-z]+)*)\\s+-l\\s*\\(?\\s*(?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\s*\\)?\\s*"),
     SHOP_SHOW_ALL_PRODUCTS("show all products"),
     SHOP_SHOW_ALL_AVAILABLE_PRODUCTS("show all available products"),
-    SHOP_PURCHASE("purchase (?<name>.+) -n (?<number>\\d+)"),
+    SHOP_PURCHASE("purchase\\s+(?<name>.+?)(?:\\s+-n\\s+(?<number>\\d+))?"),
     CHEAT_ADD_DOLLARS("cheat add (?<number>\\d+) dollars"),
 
     BUY_ANIMAL("buy\\s+animal\\s+-a\\s+(?<animalName>.+)\\s+-n\\s+(?<name>.+)\\s*"),

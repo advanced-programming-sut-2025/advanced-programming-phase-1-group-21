@@ -202,7 +202,7 @@ public class Game implements Serializable {
     }
 
     public static Item getCoinItem(int amount) {
-        return Item.build("Coin", 0);
+        return Item.build("Coin", amount);
     }
 
     public Map getVillage() {

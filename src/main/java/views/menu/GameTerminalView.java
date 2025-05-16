@@ -120,6 +120,9 @@ public class GameTerminalView {
         else if ((matcher = GameMenuCommand.NEW_GAME.getMatcher(command)) != null) {
             System.out.println(gameController.createGame(matcher.group("username1") , matcher.group("username2") , matcher.group("username3")));
         }
+        else if ((matcher = GameMenuCommand.EAT.getMatcher(command)) != null) {
+            System.out.println(gameController.eat(matcher.group("name")));
+        }
         else if ((matcher = GameMenuCommand.NEXT_TURN.getMatcher(command)) != null) {
             System.out.println(gameController.nextTurn());
         }
@@ -151,7 +154,14 @@ public class GameTerminalView {
             System.out.println(gameController.purchaseAnimal(matcher.group("animalName"), matcher.group("name")));
         }
         else if ((matcher = GameMenuCommand.SELL.getMatcher(command)) != null) {
-            System.out.println(gameController.sell(matcher.group("item"), Integer.parseInt(matcher.group("number"))));
+            System.out.println(
+                    gameController.sell(
+                            matcher.group("item"),
+                            matcher.group("number") == null
+                                    ? 1
+                                    : Integer.parseInt(matcher.group("number"))
+                    )
+            );
         }
         else if ((matcher = GameMenuCommand.CHEAT_ANIMAL_FRIENDSHIP.getMatcher(command)) != null) {
             System.out.println(gameController.cheatFriendship(matcher.group("name") , Integer.parseInt(matcher.group("amount"))));
@@ -316,7 +326,14 @@ public class GameTerminalView {
             System.out.println(gameController.showAvailableShopProducts().getMessage());
         }
         else if ((matcher = GameMenuCommand.SHOP_PURCHASE.getMatcher(command)) != null) {
-            System.out.println(gameController.purchaseItem(matcher.group("name"), Integer.parseInt(matcher.group("number"))));
+            System.out.println(
+                    gameController.purchaseItem(
+                            matcher.group("name"),
+                            matcher.group("number") == null
+                                    ? 1
+                                    : Integer.parseInt(matcher.group("number"))
+                    )
+            );
         }
         else if ((matcher = GameMenuCommand.BUILD.getMatcher(command)) != null) {
             System.out.println(gameController.purchaseBuilding(matcher.group("name"), new Coord(Integer.parseInt(matcher.group("x")), Integer.parseInt(matcher.group("y")))));

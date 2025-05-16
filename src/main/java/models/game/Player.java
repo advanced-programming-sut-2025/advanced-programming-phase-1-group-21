@@ -57,13 +57,13 @@ public class Player implements DailyUpdate, Serializable {
     private Stack<Pair<Map, Coord>> locStack = new Stack<>();
 
     public ArrayList<Recipe> getRecipes(RecipeType type) {
-        ArrayList<Recipe> recipes = new ArrayList<>();
+        ArrayList<Recipe> rp = new ArrayList<>();
         for (Recipe recipe : recipes) {
             if (recipe.getType() == type) {
-                recipes.add(recipe);
+                rp.add(recipe);
             }
         }
-        return recipes;
+        return rp;
     }
 
     public Inventory getInventory() {
@@ -78,7 +78,7 @@ public class Player implements DailyUpdate, Serializable {
 
     public Recipe getRecipeByName(String name, RecipeType type) {
         for (Recipe recipe : recipes) {
-            if (recipe.getName().equals(name) && recipe.getType() == type) {
+            if (recipe.getName().equalsIgnoreCase(name) && recipe.getType() == type) {
                 return recipe;
             }
         }

@@ -9,6 +9,7 @@ import models.game.Game;
 import models.game.Inventory;
 import models.result.Result;
 import models.result.errorTypes.GameError;
+import models.time.Date;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -29,6 +30,23 @@ public class Shop extends Building implements DailyUpdate{
 		for (ShopData shopData : list) {
 			items.add(new ShopItemInstance(shopData));
 		}
+	}
+
+	public int openingTime() {
+		return switch (shopType) {
+			case STARDROP_SALOON -> 12;
+			default -> 9;
+		};
+	}
+
+	public int closingTime() {
+		return switch (shopType) {
+			case MARINE_SHOP, BLACKSMITH -> 16;
+			case FISH_SHOP, PIERR_STORE -> 17;
+			case CARPENTER_SHOP -> 20;
+			case JOJAMART, STARDROP_SALOON -> 23;
+			default -> throw new IllegalStateException("Unexpected value: " + shopType);
+		};
 	}
 
 	public String getShopName() {
@@ -111,15 +129,13 @@ public class Shop extends Building implements DailyUpdate{
 	 */
 	public Result<Void> prepareBuy(String name, int amount, Inventory inventory) {
 		ShopItemInstance itemInstance = getAvailableShopItemInstance(name);
-		if (itemInstance == null) return Result.failure(GameError.ITEM_IS_NOT_AVAILABLE);
+		if (itemInstance == null) return Result.failure(GameError.NOT_FOUND);
 		ShopData data = itemInstance.getData();
-
 		if (!(new RequirementChecker()).checkShopDate(data)) return Result.failure(GameError.REQUIREMENT_NOT_SATISFIED);
-		if (!isItemAvailable(itemInstance)) return Result.failure(GameError.ITEM_IS_NOT_AVAILABLE);
-
 		int remaining = itemInstance.getRemaining();
 		if (amount > remaining)
-			return Result.failure(GameError.ITEM_IS_NOT_AVAILABLE);
+			return Result.failure(GameError.DAILY_LIMIT_EXCEED);
+		if (!isItemAvailable(itemInstance)) return Result.failure(GameError.ITEM_IS_NOT_AVAILABLE);
 
 		java.util.Map<String, Integer> baseIngredients = data.getIngredients();
 		List<Item> requiredItems = new ArrayList<>();
@@ -159,7 +175,8 @@ public class Shop extends Building implements DailyUpdate{
 
 	@Override
 	public boolean canEnter() {
-		return true;
+		Date date = App.getInstance().game.getGameDate();
+		return openingTime() <= date.getHour() && date.getHour() <= closingTime();
 	}
 
 	@Override

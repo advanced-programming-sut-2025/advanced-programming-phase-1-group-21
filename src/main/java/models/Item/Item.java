@@ -26,6 +26,9 @@ public abstract class Item implements Serializable {
             case SAPLING -> {
                 return new Sapling(TreeData.getData(name), itemData.getType(), amount);
             }
+            case RECIPE -> {
+                return new Recipe(RecipeData.getRecipeData(name).getLeft(), RecipeData.getRecipeData(name).getRight(), amount);
+            }
         }
 
         return null;
