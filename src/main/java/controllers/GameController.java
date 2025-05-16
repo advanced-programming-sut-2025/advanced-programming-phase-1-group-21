@@ -221,8 +221,10 @@ public class GameController{
             for (PathFinder.PathStep step : steps) {
                 player.decreaseEnergy(step.energyCost());
                 player.setCoord(step.coord());
-                if (player.isFainted()) return Result.success(null);
+                if (player.isFainted()) break;
             }
+            System.err.println(player.getEnergy());
+            System.err.println(steps);
         }
         printMapFull();
         return Result.success(null);

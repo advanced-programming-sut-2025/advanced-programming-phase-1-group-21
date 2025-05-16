@@ -25,10 +25,11 @@ public class Energy implements DailyUpdate {
     }
 
     public void decreaseEnergy(int amount) {
-        if (currentEnergy < amount) {
+        if (currentEnergy <= amount) {
             currentEnergy = 0;
         }
-        currentEnergy -= amount;
+        else
+            currentEnergy -= amount;
     }
 
     @Override

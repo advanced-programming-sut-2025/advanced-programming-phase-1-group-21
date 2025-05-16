@@ -8,8 +8,9 @@ new game sobi sobhan maryam
 1
 1
 1
-walk -l (50,0)
-walk -l (0,0)
-walk -l (50,0)
-walk -l (0,0)
-print map -l (0,0) -s 50
+walk -l (19, 8)
+walk -l (19, 9)
+walk -l (59, 24)
+walk -l (0, 0)
+walk -l (59, 24)
+map status
