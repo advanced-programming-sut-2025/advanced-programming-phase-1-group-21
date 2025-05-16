@@ -1,10 +1,7 @@
 package models.game;
 
 import models.App;
-import models.DailyUpdate;
 import models.Item.Item;
-import models.animal.Animal;
-import models.data.DataLoader;
 import models.map.Map;
 
 import java.io.Serializable;
@@ -264,7 +261,7 @@ public class Game implements Serializable {
         return null;
     }
 
-    public double weatherCofficient(){
+    public double weatherCoefficient(){
         if(gameWeather.equals(Weather.RAINY) || gameWeather.equals(Weather.STORM))
             return 1.5;
         if(gameWeather.equals(Weather.SNOW))

@@ -243,10 +243,11 @@ public class Inventory implements Serializable {
                 return true;
         return false;
     }
-
+  
     public List<Item> getItems() {
         return new ArrayList<>(items);
     }
+  
 
     public void normalize() {
         Iterator<Item> iterator = items.iterator();
