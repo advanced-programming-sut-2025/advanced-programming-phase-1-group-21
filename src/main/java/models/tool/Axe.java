@@ -2,6 +2,7 @@ package models.tool;
 
 import models.App;
 import models.Item.Item;
+import models.crop.PlantedTree;
 import models.map.*;
 import models.result.Result;
 import models.result.errorTypes.GameError;
