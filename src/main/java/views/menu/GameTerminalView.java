@@ -222,6 +222,9 @@ public class GameTerminalView {
         else if ((matcher = GameMenuCommand.BACK_HOME.getMatcher(command)) != null) {
             System.out.println(gameController.backToHome());
         }
+        else if ((matcher = GameMenuCommand.GO_HOME_USER.getMatcher(command)) != null) {
+            System.out.println(gameController.goToFarm(matcher.group("user")));
+        }
         else if ((matcher = GameMenuCommand.GO_TO_VILLAGE.getMatcher(command)) != null) {
             System.out.println(gameController.goToVillage());
         }

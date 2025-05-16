@@ -3,6 +3,7 @@ package models.map;
 import models.App;
 import models.DailyUpdate;
 import models.game.Game;
+import models.game.Player;
 import models.result.Result;
 
 import java.io.Serializable;
@@ -99,21 +100,33 @@ public class Map implements DailyUpdate, Serializable {
         tiles.get(coord.getY()).set(coord.getX(), tile);
     }
 
-    public ArrayList<String> printMap(Coord center, int radius) {
+    public ArrayList<String> printMap(Coord center, int radius, List<Player> players) {
         ArrayList<String> output = new ArrayList<>();
-        for(int j = center.getX() ; j < center.getX() + radius; j++) {
-            for(int i = center.getY() ; i < center.getY() + radius ; i++) {
+
+        for (int j = center.getX(); j < center.getX() + radius; j++) {
+            for (int i = center.getY(); i < center.getY() + radius; i++) {
                 Coord coord = new Coord(i, j);
                 Tile tile = getTile(coord);
                 if (tile == null) continue;
-                if (App.getInstance().game.getCurrentPlayer().getCoord().equals(coord))
-                    output.add("@");
-                else
+
+                boolean playerFound = false;
+                for (Player player : players) {
+                    if (player.getMap() == this && player.getCoord().equals(coord)) {
+                        output.add("@");
+                        playerFound = true;
+                        break;
+                    }
+                }
+
+                if (!playerFound) {
                     output.add(tile.getSprite());
+                }
             }
-            if (!output.isEmpty() && !output.getLast().equals("\n"))
+            if (!output.isEmpty() && !output.getLast().equals("\n")) {
                 output.add("\n");
+            }
         }
+
         return output;
     }
 
