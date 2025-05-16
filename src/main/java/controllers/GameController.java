@@ -934,6 +934,11 @@ public class GameController{
         relation.addTalk(game.getCurrentPlayer().getUser().getUsername() + ": " + massage);
         if(!relation.isTodayTalk())
             relation.setFriendshipXP(relation.getFriendshipXP() + 20);
+        if(relation.getLevel().getLevel() == 4){
+            player.setEnergy(player.getEnergy() + 50);
+            App.getInstance().game.getCurrentPlayer().setEnergy(App.getInstance().game.getCurrentPlayer().getEnergy() + 50);
+        }
+        player.addNotifications(App.getInstance().game.getCurrentPlayer().getUser().getUsername() + " sends you a message");
         relation.setTodayTalk(true);
         return Result.success(null);
     }
@@ -980,6 +985,11 @@ public class GameController{
         game.getCurrentPlayer().getInventory().removeItem(item);
         player.getInventory().addItem(item);
         relation.addGift(new Gift(game.getCurrentPlayer() , player , item , relation.getGifts().size()));
+        if(relation.getLevel().getLevel() == 4){
+            player.setEnergy(player.getEnergy() + 50);
+            App.getInstance().game.getCurrentPlayer().setEnergy(App.getInstance().game.getCurrentPlayer().getEnergy() + 50);
+        }
+        player.addNotifications(App.getInstance().game.getCurrentPlayer().getUser().getUsername() + " sends you a gift");
         return Result.success(null);
     }
 
@@ -988,10 +998,24 @@ public class GameController{
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
 
         ArrayList<String> output = new ArrayList<>();
-        for(Player player : game.getPlayers()){
-            if(player.equals(game.getCurrentPlayer()))
+        for(Player player : App.getInstance().game.getPlayers()){
+            if(player.equals(App.getInstance().game.getCurrentPlayer()))
                 continue;
             output.addAll(giftHistory(player.getUser().getUsername()).getData());
+            Relation relation = App.getInstance().game.getRelationOfUs(App.getInstance().game.getCurrentPlayer(), player);
+            for(Gift gift : relation.getGifts()){
+                if(gift.getReceiver().equals(App.getInstance().game.getCurrentPlayer()) && (gift.getRate() == 0)) {
+                    output.add("Gift ID : " + gift.getId());
+                    output.add("Item : " + gift.getItem().getName());
+                    output.add("Sender : " + gift.getSender().getUser().getUsername());
+                    output.add("Receiver : " + gift.getReceiver().getUser().getUsername());
+                    if (gift.getRate() == 0)
+                        output.add("Rate : not rated yet!");
+                    else
+                        output.add("Rate : " + gift.getRate());
+                    output.add("-------------------");
+                }
+            }
         }
         return Result.success(output);
     }
@@ -1005,12 +1029,16 @@ public class GameController{
         Player player = game.getPlayerByName(username);
         if(player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
 
+
         Relation relation = game.getRelationOfUs(game.getCurrentPlayer(), player);
         if((relation.getGifts().size() <= giftID) || (giftID < 0))
             return Result.failure(GameError.GIFT_ID_DOES_NOT_EXIST);
 
         if((rate > 5) || (rate < 1))
             return Result.failure(GameError.RATE_MUST_BE_IN_RANGE);
+
+        if(relation.getGifts().get(giftID).getRate() != 0)
+            return Result.failure(GameError.THIS_GIFT_HAS_BEEN_RATED);
 
         relation.getGifts().get(giftID).setRate(rate);
         relation.setFriendshipXP(relation.getFriendshipXP() + (int) ((rate - 3)*30 + 15));
@@ -1063,6 +1091,10 @@ public class GameController{
 
         if(!relation.isTodayHug())
             relation.setFriendshipXP(relation.getFriendshipXP() + 60);
+        if(relation.getLevel().getLevel() == 4){
+            player.setEnergy(player.getEnergy() + 50);
+            App.getInstance().game.getCurrentPlayer().setEnergy(App.getInstance().game.getCurrentPlayer().getEnergy() + 50);
+        }
         relation.checkOverFlow();
         return Result.success(null);
     }
@@ -1090,6 +1122,10 @@ public class GameController{
         game.getCurrentPlayer().getInventory().removeItem(item);
         player.getInventory().addItem(item);
         relation.setFlower(true);
+        if(relation.getLevel().getLevel() == 4){
+            player.setEnergy(player.getEnergy() + 50);
+            App.getInstance().game.getCurrentPlayer().setEnergy(App.getInstance().game.getCurrentPlayer().getEnergy() + 50);
+        }
         relation.checkOverFlow();
         return Result.success(null);
     }
@@ -1127,6 +1163,7 @@ public class GameController{
             relation.setFriendshipXP(0);
             relation.setLevel(FriendshipLevel.LEVEL0);
             relation.setFlower(false);
+            App.getInstance().game.getCurrentPlayer().setMaxEnergy(100 , 7);
             return Result.success("aaaajaaaab rasmieeeeeh rasme zamoooneeehhh");
         }
 
@@ -1376,11 +1413,10 @@ public class GameController{
         return game.getCurrentPlayer().isFainted();
     }
 
-    public Result<Void> setFriendship(String username){
-        Player player = game.getPlayerByName(username);
-        Relation relation = game.getRelationOfUs(player , game.getCurrentPlayer());
-        relation.setFriendshipXP(400);
-        relation.setLevel(FriendshipLevel.LEVEL3);
+    public Result<Void> setFriendship(String username , int xp){
+        Player player = App.getInstance().game.getPlayerByName(username);
+        Relation relation = App.getInstance().game.getRelationOfUs(player , App.getInstance().game.getCurrentPlayer());
+        relation.setFriendshipXP(xp);
         return Result.success(null);
     }
 
@@ -1392,6 +1428,12 @@ public class GameController{
         skills.add("FISHING : " + player.getSkillExp(SkillType.FISHING));
         skills.add("MINING : " + player.getSkillExp(SkillType.MINING));
         return Result.success(skills);
+    }
+
+    public Result<ArrayList<String>> showNotifications(){
+        ArrayList<String> output = new ArrayList<>(App.getInstance().game.getCurrentPlayer().getNotifications());
+        App.getInstance().game.getCurrentPlayer().resetNotifications();
+        return Result.success(output);
     }
 
 }
