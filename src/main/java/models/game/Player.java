@@ -246,9 +246,10 @@ public class Player implements DailyUpdate {
     @Override
     public boolean nextDay(Game g) {
         Building building = getBuilding();
-        if (building != null && building instanceof House) {
+        if (building != null && !(building instanceof House)) {
             energy.setMaxEnergy(energy.getMaxEnergy() / 2, DURATION_ENERGY);
         }
+
         energy.nextDay(g);
         defaultMap.nextDay(g);//DON'T UPDATE ANY OTHERRRR MAPPP !!! it's done recursivly in nextDay in map class
 
