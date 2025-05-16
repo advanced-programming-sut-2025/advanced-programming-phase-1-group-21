@@ -1263,6 +1263,10 @@ public class GameController {
                 output.add("Request Amount: " + npc.getTasks().get(i).getRequestAmount());
                 output.add("Reward Item: " + npc.getTasks().get(i).getRewardItem());
                 output.add("Reward Amount: " + npc.getTasks().get(i).getRewardAmount());
+                if(npc.getTasksFlag().get(i))
+                    output.add("this quest has been finished");
+                else
+                    output.add("you finish this quest");
                 output.add("--------------------");
                 output.add("\n");
             }
@@ -1279,6 +1283,8 @@ public class GameController {
 
         if (questID > npcFriendship.getLevel().getLevel())
             return Result.failure(GameError.FRIENDSHIP_LEVEL_IS_NOT_ENOUGH);
+        if(npc.getTasksFlag().get(questID))
+            return Result.failure(GameError.THIS_NPC_DOES_NOT_EXIST);
 
         Item requiredItem = Item.build(npc.getTasks().get(questID).getRequestItem(), npc.getTasks().get(questID).getRequestAmount());
 
@@ -1288,7 +1294,7 @@ public class GameController {
 
         Item rewardItem = Item.build(npc.getTasks().get(questID).getRewardItem(), npc.getTasks().get(questID).getRewardAmount());
         game.getCurrentPlayer().getInventory().addItem(rewardItem);
-
+        npc.getTasksFlag().set(questID, true);
         return Result.success(null);
 
     }
