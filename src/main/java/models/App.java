@@ -21,6 +21,10 @@ public class App implements Serializable {
         DataLoader.load();
     }
 
+    public static void setInstance(App app) {
+        instance = app;
+    }
+
     public static App getInstance() {
         if (instance == null) {
             instance = new App();

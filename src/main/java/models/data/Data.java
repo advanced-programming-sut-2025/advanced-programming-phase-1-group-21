@@ -1,6 +1,8 @@
 package models.data;
 
-public interface Data {
+import java.io.Serializable;
+
+public interface Data extends Serializable {
 
 	void fullConstruct();
 }

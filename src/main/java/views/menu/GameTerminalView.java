@@ -1,6 +1,7 @@
 package views.menu;
 
 import controllers.GameController;
+import models.App;
 import models.Item.RecipeType;
 import models.command.GameMenuCommand;
 import models.game.Player;
@@ -91,6 +92,8 @@ public class GameTerminalView {
     }
 
     public void Result(String command) throws IOException {
+        gameController.game = App.getInstance().game;
+
         if (gameController.isGameLockedDueToNight()) {
             System.out.println("You are already locked due to night, Skipping turn...");
             gameController.nextTurn();
@@ -121,6 +124,9 @@ public class GameTerminalView {
         }
         else if ((matcher = GameMenuCommand.EXIT_GAME.getMatcher(command)) != null) {
             System.out.println(gameController.exitGame());
+        }
+        else if ((matcher = GameMenuCommand.LOAD_GAME.getMatcher(command)) != null) {
+            System.out.println(gameController.loadGame());
         }
         else if ((matcher = GameMenuCommand.HELP_READING_MAP.getMatcher(command)) != null) {
             gameController.helpReadingMap();

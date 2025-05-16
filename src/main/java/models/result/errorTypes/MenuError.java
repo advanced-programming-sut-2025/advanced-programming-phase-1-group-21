@@ -4,7 +4,6 @@ import models.result.Error;
 
 public enum MenuError implements Error {
     MENU_ACCESS_DENIED("You can't access this menu");
-
     private final String message;
 
     private MenuError(String message) {

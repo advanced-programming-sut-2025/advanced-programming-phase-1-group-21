@@ -1,5 +1,7 @@
 package models.data.items;
 
-public interface ItemData {
+import java.io.Serializable;
+
+public interface ItemData extends Serializable {
 	String getName();
 }

@@ -7,6 +7,7 @@ public enum GameMenuCommand implements Command {
     NEW_GAME("\\s*new\\s+game\\s+(?<username1>\\S+)\\s+(?<username2>\\S+)\\s+(?<username3>\\S+)\\s*"),
     NEXT_TURN("\\s*next\\s+turn\\s*"),
     EXIT_GAME("\\s*exit\\s+game\\s*"),
+    LOAD_GAME("\\s*load\\s+game\\s*"),
     HELP_READING_MAP("\\s*help\\s+reading\\s+map\\s*"),
     WALK("\\s*walk\\s+-l\\s+\\((?<x>\\d+)\\s*,\\s*(?<y>\\d+)\\)\\s*"),
     PET("\\s*pet\\s+-n\\s+(?<name>.+)\\s*"),
