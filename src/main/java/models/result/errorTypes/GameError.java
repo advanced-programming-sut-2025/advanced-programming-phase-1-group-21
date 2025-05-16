@@ -58,6 +58,10 @@ public enum GameError implements Error {
     NOT_FOR_SALE("not for sale"),
     THIS_FARM_DOESNT_BELONG_TO_YOU("This farm does not belong to you"),
     THIS_GIFT_HAS_BEEN_RATED("this gift has been rated"),
+    Plant_NOT_FOUND("There is no plant"),
+    NO_FERTILIZER("There is no fertilizer with this name"),
+    NO_DIRECTION("wrong direction name"),
+    NO_TOOL_IN_HAND("You don't have any tool in your hand"),
     ;
 
 

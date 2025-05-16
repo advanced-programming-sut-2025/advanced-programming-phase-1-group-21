@@ -115,19 +115,19 @@ public class SeedData implements Data, ItemData {
 		result += "\ntotalHarvestTime: " + totalHarvestTime +
 				"\noneTime: " + oneTime +
 				"\nregrowthTime: " + regrowthTime;
-		AllItemsData itemData = AllItemsData.getData(result);
+		AllItemsData itemData = AllItemsData.getData(this.result);
 		if (itemData == null) {
 			throw new NullPointerException("Item " + result + " does not exist!");
 		}
 		ItemType itemType = itemData.getType();
 		if (itemType == ItemType.CONSUMABLE) {
-			ConsumableData consumableData = ConsumableData.getData(result);
+			ConsumableData consumableData = ConsumableData.getData(this.result);
 			result += "\nbaseSellPrice: " + consumableData.getPrice() +
 					"\nisEdible: true" +
 					"\nenergy: " + consumableData.getEnergy();
 		}
 		else if (itemType == ItemType.SALABLE) {
-			SalableData salableData = SalableData.getData(result);
+			SalableData salableData = SalableData.getData(this.result);
 			result += "\nbaseSellPrice: " + salableData.getPrice() +
 					"\nisEdible: false";
 		}

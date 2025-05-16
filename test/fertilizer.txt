@@ -1,0 +1,33 @@
+go to login menu
+menu enter mainmenu
+login -u Ali -p Alireza123!
+menu enter mainmenu
+menu enter game
+new game sobi sobhan maryam
+1
+1
+1
+1
+energy set -v 1000000
+cheat add item -n Deluxe Retaining Soil -c 12
+cheat add item -n Corn Seeds -c 10
+walk -l (19, 8)
+walk -l (19, 9)
+walk -l (20, 20)
+equip tool -t hoe
+use tool -d S
+plant -s Corn Seeds -d S
+fertilize -f Deluxe Retaining Soil -d S
+print map -l (0,0) -s 50
+show plant -l (20,21)
+energy set -v 1000000
+cheat advance date 1d
+energy set -v 1000000
+cheat advance date 10d
+energy set -v 1000000
+cheat advance date 10d
+energy set -v 1000000
+cheat advance date 10d
+next turn
+next turn
+next turn

@@ -4,6 +4,7 @@ import controllers.GameController;
 import models.App;
 import models.Item.RecipeType;
 import models.command.GameMenuCommand;
+import models.crop.FertilizerType;
 import models.game.Player;
 import models.map.Coord;
 import models.map.Direction;
@@ -216,7 +217,7 @@ public class GameTerminalView {
             printArrayList(gameController.showAvailableTools().getData());
         }
         else if ((matcher = GameMenuCommand.USE_TOOL.getMatcher(command)) != null) {
-            System.out.println(gameController.useTool(matcher.group("direction")));
+            System.out.println(gameController.useTool(Direction.getDirection(matcher.group("direction"))));
         }
         else if ((matcher = GameMenuCommand.BACK_HOME.getMatcher(command)) != null) {
             System.out.println(gameController.backToHome());
@@ -235,6 +236,9 @@ public class GameTerminalView {
         }
         else if ((matcher = GameMenuCommand.HOW_MUCH_WATER.getMatcher(command)) != null) {
             System.out.println(gameController.howMuchWater());
+        }
+        else if ((matcher = GameMenuCommand.FERTILIZE.getMatcher(command)) != null) {
+            System.out.println(gameController.fertilize(FertilizerType.getFertilizerType(matcher.group("fertilizer")), Direction.getDirection(matcher.group("direction"))));
         }
         else if ((matcher = GameMenuCommand.WATER.getMatcher(command)) != null) {
             System.out.println(gameController.water(new Coord(Integer.parseInt(matcher.group("x")) , Integer.parseInt(matcher.group("y")))));

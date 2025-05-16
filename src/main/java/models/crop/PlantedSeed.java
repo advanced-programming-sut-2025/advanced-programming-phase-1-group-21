@@ -69,6 +69,10 @@ public class PlantedSeed implements Placable, Harvestable, DailyUpdate, Serializ
 		return false;
 	}
 
+	public void fertilize(FertilizerType fertilizerType) {
+		waterStage += fertilizerType.getDays();
+	}
+
 	public SeedData getData() {
 		return seedData;
 	}
@@ -95,10 +99,10 @@ public class PlantedSeed implements Placable, Harvestable, DailyUpdate, Serializ
 	@Override
 	public String toString() {
 		return String.format(
-				"PlantedSeed {day=%d, stage=%d, watered=%s, lastHarvest=%s, regrowth=%s}\ndataInfo:%s",
+				"PlantedSeed {day=%d, stage=%d, watered=%d, lastHarvest=%s, regrowth=%s}\ndataInfo:%s",
 				day,
 				stage,
-				waterStage > 0 ? "yes" : "no",
+				waterStage,
 				lastHarvest == -1 ? "never" : lastHarvest,
 				isOneTime() ? "no" : "yes",
 				seedData.toString()
