@@ -1,0 +1,25 @@
+go to login menu
+menu enter mainmenu
+login -u Ali -p Alireza123!
+menu enter mainmenu
+menu enter game
+new game sobi sobhan maryam
+1
+1
+1
+1
+show notifications
+show friendships
+talk -u sobhan -m salam
+show talks history -u sobhan
+next turn
+next turn
+show notifications
+show notifications
+show talks history -u ali
+show talks history -u Ali
+show friendships
+
+
+\\this command will give error because we are not next to each other
+

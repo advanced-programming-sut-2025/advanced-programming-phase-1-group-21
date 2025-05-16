@@ -56,6 +56,7 @@ public enum GameError implements Error {
     NO_READY_ARTISAN_AROUND("There are no ready artisan around you"),
     CANT_ADD_ITEM_TO_INVENTORY("You can't add this item to your inventory"),
     NOT_FOR_SALE("not for sale"),
+    THIS_GIFT_HAS_BEEN_RATED("this gift has been rated"),
     ;
 
 

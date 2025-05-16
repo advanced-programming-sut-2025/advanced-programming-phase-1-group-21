@@ -39,6 +39,20 @@ public class Player implements DailyUpdate, Serializable {
     private ArrayList<NPCFriendship> npcFriendships;
     private ArrayList<Recipe> recipes = new ArrayList<>();
     private Skill skill = new Skill();
+    private ArrayList<String> notifications = new ArrayList<>();
+
+
+    public ArrayList<String> getNotifications() {
+        return notifications;
+    }
+
+    public void resetNotifications() {
+        this.notifications = new ArrayList<>();
+    }
+
+    public void addNotifications(String notification) {
+        this.notifications.add(notification);
+    }
 
     private Stack<Pair<Map, Coord>> locStack = new Stack<>();
 

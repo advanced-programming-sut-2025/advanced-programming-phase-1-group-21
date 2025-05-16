@@ -208,4 +208,5 @@ public class Relation implements DailyUpdate, Serializable {
         resetTodayCommunication();
         return true;
     }
+
 }
