@@ -751,8 +751,9 @@ public class GameController {
         for (Animal animal : game.getCurrentPlayer().getAnimals()) {
             output.add(animal.getName() + "products : ");
             if (animal.getTodayProduct() != null) {
+                output.add("name : " + animal.getName());
                 output.add("product name : " + animal.getTodayProduct());
-                output.add("product quality : " + (animal.getFriendship() / 1000) * (0.5 + 0.5 * Math.random()));
+                output.add("product quality : " + String.format("%f" , ( (double) animal.getFriendship() / 1000) * (0.5 + 0.5 * Math.random())));
             }
         }
         return Result.success(output);
