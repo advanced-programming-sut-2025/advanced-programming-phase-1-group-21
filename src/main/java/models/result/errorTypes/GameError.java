@@ -56,6 +56,7 @@ public enum GameError implements Error {
     NO_READY_ARTISAN_AROUND("There are no ready artisan around you"),
     CANT_ADD_ITEM_TO_INVENTORY("You can't add this item to your inventory"),
     NOT_FOR_SALE("not for sale"),
+    THIS_FARM_DOESNT_BELONG_TO_YOU("This farm does not belong to you"),
     ;
 
 

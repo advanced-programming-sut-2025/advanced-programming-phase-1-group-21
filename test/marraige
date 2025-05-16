@@ -12,6 +12,8 @@ go to village
 cheat add item -n Wood -c 10000
 cheat add item -n Stone -c 10000
 cheat add item -n Coin -c 90000
+walk -l (19, 8)
+walk -l (19, 9)
 walk -l (14, 19)
 walk -l (15, 19)
 build -a normal barn -l (18, 0)
