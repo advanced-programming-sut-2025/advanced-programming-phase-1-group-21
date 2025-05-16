@@ -87,12 +87,12 @@ public class GameController{
         App.setInstance(app);
 
         this.game = app.game;
-
         List<Player> players = game.getPlayers();
         int idx = -1;
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).getUser().getUsername().equals(targetName)) {
                 idx = i;
+                App.getInstance().logedInUser = players.get(i).getUser();
                 break;
             }
         }
@@ -100,6 +100,7 @@ public class GameController{
         if (idx > 0) {
             Collections.rotate(players, -idx);
         }
+        game.setCurrentPlayer(players.get(0));
         return Result.success(null);
     }
 

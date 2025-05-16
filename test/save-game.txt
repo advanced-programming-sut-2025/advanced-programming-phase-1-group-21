@@ -15,3 +15,11 @@ Fdfdsfd
 Fgfgfgfg
 
 load game
+exit game
+//barname ro beband!!
+
+go to login menu
+login -u maryam -p Maryam123!
+menu enter mainmenu
+menu enter game
+load game
