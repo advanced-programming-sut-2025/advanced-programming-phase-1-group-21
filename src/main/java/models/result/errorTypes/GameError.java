@@ -3,6 +3,7 @@ package models.result.errorTypes;
 import models.result.Error;
 
 public enum GameError implements Error {
+    DAILY_LIMIT_EXCEED("Daily limit exceeded"),
     GAME_NOT_FOUND("Game not found"),
     EMPTY_HOUSE_WAS_NOT_FOUND("Empty house was not found"),
     COORDINATE_DOESNT_EXISTS("this coordinate does not exist in this location"),
