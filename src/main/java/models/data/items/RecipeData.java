@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import models.Item.Recipe;
 import models.Item.RecipeType;
 import models.data.Data;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -92,13 +93,13 @@ public class RecipeData implements Data, ItemData {
 		return null;
 	}
 
-	public static RecipeData getRecipeData(String name) {
+	public static Pair<RecipeData, RecipeType> getRecipeData(String name) {
 		for (RecipeData a : cookingRecipes)
 			if (a.getName().equalsIgnoreCase(name))
-				return a;
+				return Pair.of(a, RecipeType.COOKING);
 		for (RecipeData a : craftingRecipes)
 			if (a.getName().equalsIgnoreCase(name))
-				return a;
+				return Pair.of(a, RecipeType.CRAFTING);
 		return null;
 	}
 

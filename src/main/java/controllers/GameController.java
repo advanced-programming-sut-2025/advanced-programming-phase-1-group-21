@@ -1383,7 +1383,10 @@ public class GameController {
         if (r.isError()) return r;
 
         Item resultItem = Item.build(name, number);
-        game.getCurrentPlayer().getInventory().addItem(resultItem);
+        if (resultItem.getItemType() == ItemType.RECIPE)
+            game.getCurrentPlayer().addRecipes((Recipe) resultItem);
+        else
+            game.getCurrentPlayer().getInventory().addItem(resultItem);
         return Result.success(null);
     }
 

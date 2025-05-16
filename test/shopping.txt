@@ -1,0 +1,83 @@
+go to login menu
+menu enter mainmenu
+login -u Ali -p Alireza123!
+menu enter mainmenu
+menu enter game
+new game sobi sobhan maryam
+1
+1
+1
+1
+walk -l (19, 8)
+walk -l (19, 9)
+go to village
+walk -l (3, 9)
+walk -l (3, 10)
+show all products
+cheat add item -n Coin -c 90000
+purchase Cookie recipe -n 2
+; choon daily limit = 2, mige unavailable
+purchase Cookie recipe -n 1
+;mikhare
+cooking show recipes
+purchase Cookie recipe -n 1
+;choon daily limit = 2, mige unavailable
+show all available products
+; nist to inam!!!
+;farda shood
+purchase Cookie recipe -n 1
+; alan kar mikone
+cooking show recipes
+walk -l (7, 6)
+walk -l (7, 7)
+walk -l (39, 15)
+walk -l (40, 15)
+walk -l (6, 7)
+walk -l (7, 7)
+walk -l (40, 15)
+;cant enter -> saat 7!
+cheat advance time 10h
+; saat 6 bazam nemishe
+cheat advance time 3h
+;alan mishe vali!
+purchase Red Cabbage Seeds -n 1
+inventory status
+; in kolan 150 ta kam mikone -> gheymat SPRING!
+cheat advance date 40d
+;Summer shod!
+purchase Red Cabbage Seeds -n 1
+inventory status
+; kolan 100 ta kam kard -> gheymat SUMMER!
+cheat add 100 dollars
+inventory status
+walk -l (6, 7)
+walk -l (7, 7)
+walk -l (47, 20)
+walk -l (48, 20)
+show all products
+show all available products
+purchase Powdermelon Seeds -n 1 
+;bara wintere alan nist!
+purchase Wheat Seeds -n 1
+; bara summere mikhare!
+purchase Wheat Seeds
+walk -l (6, 7)
+walk -l (7, 7)
+back home
+walk -l (4, 0)
+walk -l (4, 1)
+walk -l (19, 1)
+sell Wheat Seeds -n 1
+; not for sale mide!
+cheat add item -n Wool -c 1000
+inventory status
+sell wool -n 1
+ inventory status
+ ;; pool ezafe nashode!
+;; map status ta zamani ke shab beshe!
+inventory status
+; baad shab mifroshe
+ cheat advance date 1d
+ ;pool hamoone (dobar nemifroshe!)
+sell wool
+; bedoon flag
