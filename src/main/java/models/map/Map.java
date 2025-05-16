@@ -35,6 +35,19 @@ public class Map implements DailyUpdate {
         return buildings;
     }
 
+    public Coord getCoord(Placable placable) {
+        for (int i = 0; i < getMaxX(); ++i) {
+            for (int j = 0; j < getMaxY(); ++j) {
+                Coord coord = new Coord(i, j);
+                Tile tile = getTile(coord);
+                if (tile != null && tile.getPlacable(Placable.class) == placable) {
+                    return coord;
+                }
+            }
+        }
+        return null;
+    }
+
     public Building getBuildingByFullName(String name) {
         for (Building building : buildings) {
             if (building.getFullName().equalsIgnoreCase(name)) return building;

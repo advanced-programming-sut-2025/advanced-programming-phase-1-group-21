@@ -8,6 +8,7 @@ import models.map.Coord;
 import models.map.Direction;
 import models.map.Weather;
 import models.result.Result;
+import models.user.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -78,8 +79,8 @@ public class GameTerminalView {
         return AppView.scanner.nextInt();
     }
 
-    public static int getSeed(Player player) {
-        System.out.println(player.getUser().getUsername() + ", Select seed ID for your map: ");
+    public static int getSeed(User user) {
+        System.out.println(user.getUsername() + ", Select seed ID for your map: ");
         int seed = AppView.scanner.nextInt();
         return seed;
     }

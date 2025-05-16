@@ -127,33 +127,3 @@ public enum GameMenuCommand implements Command {
         return pattern;
     }
 }
-
-/*
-go to login menu
-login -u Ali -p Alireza123!
-menu enter mainmenu
-menu enter game
-new game sobi sobhan maryam
-print map -l (0,0) -s 50
-walk -l (10,10)
-cheat add item -n Loom -c 1
-inventory status
-place artisan -n Loom -d S
-inventory status
-cheat add item -n Wool -c 1
-inventory status
-artisan use Loom Wool
-inventory status
-print map -l (0,0) -s 50
-next turn
-next turn
-next turn
-next turn
-artisan get Loom
-cheat add item -n Keg -c 1
-cheat add item -n Apple -c 1
-inventory status
-place artisan -n Keg -d W
-print map -l (0,0) -s 50
-artisan use Keg Apple
- */

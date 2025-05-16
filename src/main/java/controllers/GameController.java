@@ -61,17 +61,13 @@ public class GameController{
         }
 
         ArrayList<Player> players = new ArrayList<>();
-        for(User user : users) {
-            players.add(new Player(user));
-        }
-
         MapBuilder mapBuilder = new MapBuilder();
 
-        for(Player player : players) {
-            int seed = GameTerminalView.getSeed(player);
+        for(User user : users) {
+            int seed = GameTerminalView.getSeed(user);
             Map map = mapBuilder.buildFarm(new Random(seed));
-            player.setMap(map);
-            player.setDefaultMap(map);
+            Player player = new Player(user, map);
+            players.add(player);
         }
 
         Game game = new Game(players);
@@ -205,11 +201,7 @@ public class GameController{
             return Result.failure(GameError.CANT_STAND_ON_LAKE);
         else if(tile.getTileType() == TileType.DOOR) {
             if (!isNeigh) return Result.failure(GameError.YOU_ARE_DISTANT);
-            if (player.getMap().mapType == MapType.SHOP)
-                player.setMap(App.game.getVillage());
-            else
-                player.setMap(player.getDefaultMap());
-            player.setCoord(new Coord(0, 0));
+            player.leave();
         }
         else if(tile.getPlacable(Building.class) != null) {
             if (!isNeigh) return Result.failure(GameError.YOU_ARE_DISTANT);
