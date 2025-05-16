@@ -107,9 +107,9 @@ public class SeedData implements Data, ItemData {
 				"Source: " + name + "\n" +
 				"stages: ";
 
-		for (int x: stages) {
-			result += x;
-			if (x != stages.get(stages.size() - 1)) result += '-';
+		for (int i = 0; i < stages.size(); i++) {
+			result += stages.get(i);
+			if (i != stages.size() - 1) result += "-";
 		}
 
 		result += "\ntotalHarvestTime: " + totalHarvestTime +
