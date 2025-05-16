@@ -258,11 +258,12 @@ public class Player implements DailyUpdate, Serializable {
     }
 
     static final int DURATION_ENERGY = 7;
+    static final int FAINTED_ENERGY = 100;
     @Override
     public boolean nextDay(Game g) {
         Building building = getBuilding();
         if (!(building instanceof House)) {
-            energy.setMaxEnergy(energy.getMaxEnergy() / 2, DURATION_ENERGY);
+            energy.setMaxEnergy(FAINTED_ENERGY, DURATION_ENERGY);
         }
 
         energy.nextDay(g);
