@@ -14,6 +14,11 @@ public class WateringCan extends Tool {
 
     public WateringCan() {
         super(ToolType.WATERING_CAN);
+        currentWater = getCapacity();
+    }
+
+    public int getCurrentWater() {
+        return currentWater;
     }
 
     public int getCapacity() {
@@ -27,35 +32,36 @@ public class WateringCan extends Tool {
         };
     }
 
-    static final int WATER_PER_TIME = 10;
     public void increaseWater() {
-        currentWater += WATER_PER_TIME;
-        if (currentWater >= getCapacity()) {
-            currentWater = getCapacity();
-        }
+        currentWater = getCapacity();
     }
 
     @Override
     public Result<Item> use(Coord coord) {
         Tile tile = App.getInstance().game.getCurrentPlayerMap().getTile(coord);
-        if (tile == null) {
+        if (tile == null)
             return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
+
+        if (tile.getTileType().isWater())
+            increaseWater();
+        else {
+            if (currentWater == 0) {
+                return Result.failure(GameError.WATERING_CAN_IS_EMPTY);
+            }
+            tile.water();
+            currentWater -= 1;
         }
-        if (!tile.getTileType().isWater())
-            return Result.failure(GameError.TILE_DOESNT_HAVE_WATER);
-        increaseWater();
         //calc energy TODO
-        Tool waterCan = (Tool) App.getInstance().game.getCurrentPlayer().getItemInHand();
         Player player = App.getInstance().game.getCurrentPlayer();
 
-        double weatherCofficient = App.getInstance().game.weatherCofficient();
+        double weatherCoefficient = App.getInstance().game.weatherCoefficient();
 
-        switch (waterCan.getToolMaterialType()) {
-            case PRIMITIVE -> player.decreaseEnergy((int)(5 * App.getInstance().game.weatherCofficient()));
-            case COPPER -> player.decreaseEnergy((int)(4 * App.getInstance().game.weatherCofficient()));
-            case STEEL -> player.decreaseEnergy((int)(3 * App.getInstance().game.weatherCofficient()));
-            case GOLD -> player.decreaseEnergy((int)(2 * App.getInstance().game.weatherCofficient()));
-            case IRIDIUM -> player.decreaseEnergy((int)(1 * App.getInstance().game.weatherCofficient()));
+        switch (getToolMaterialType()) {
+            case PRIMITIVE -> player.decreaseEnergy((int)(5 * weatherCoefficient));
+            case COPPER -> player.decreaseEnergy((int)(4 * weatherCoefficient));
+            case STEEL -> player.decreaseEnergy((int)(3 * weatherCoefficient));
+            case GOLD -> player.decreaseEnergy((int)(2 * weatherCoefficient));
+            case IRIDIUM -> player.decreaseEnergy((int)(1 * weatherCoefficient));
         }
         if(player.getSkillLevel(SkillType.FARMING) >= 4)
             player.setEnergy(player.getEnergy() + 1);

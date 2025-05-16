@@ -53,6 +53,7 @@ public class Tile implements DailyUpdate, Serializable {
             boolean shouldRemove = ((DailyUpdate) placable).nextDay(g);
             if (shouldRemove) {
                 placable = null;
+                tileType = TileType.UNPLOWED;
             }
         }
         return true;

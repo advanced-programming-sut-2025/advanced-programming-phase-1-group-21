@@ -2,7 +2,6 @@ package models.tool;
 
 import models.App;
 import models.Item.Item;
-import models.Item.ItemType;
 import models.map.*;
 import models.result.Result;
 import models.result.errorTypes.GameError;
@@ -31,7 +30,7 @@ public class Axe extends Tool {
 			App.getInstance().game.getCurrentPlayer().getInventory().addItem(Item.build("Wood", 10));
 		}
 
-		double weatherCofficient = App.getInstance().game.weatherCofficient();
+		double weatherCofficient = App.getInstance().game.weatherCoefficient();
 
 		if(use){
 			if(this.toolMaterialType.equals(ToolMaterialType.PRIMITIVE))

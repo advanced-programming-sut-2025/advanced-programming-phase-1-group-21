@@ -506,15 +506,16 @@ public class GameController {
         if (tool == null || tool.getToolType() != ToolType.WATERING_CAN)
             return Result.failure(GameError.TOOL_NOT_IN_HAND);
         WateringCan wateringCan = (WateringCan) tool;
-        return Result.success(wateringCan.getCapacity());
+        return Result.success(wateringCan.getCurrentWater());
     }
 
-    public Result<Void> water(Coord coord) {
+    public Result<Item> water(Coord coord) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         Map map = game.getCurrentPlayerMap();
-        Tile tile = map.getTile(coord);
-        tile.water();
-        return Result.success(null);
+        Tool tool = (Tool) game.getCurrentPlayer().getItemInHand();
+        if (tool == null || tool.getToolType() != ToolType.WATERING_CAN)
+            return Result.failure(GameError.TOOL_NOT_IN_HAND);
+        return tool.use(coord);
     }
 
     public Result<List<Recipe>> showCraftingRecipes() {

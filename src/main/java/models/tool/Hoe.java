@@ -23,7 +23,7 @@ public class Hoe extends Tool {
 			return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
 		ToolMaterialType type = ((Tool) App.getInstance().game.getCurrentPlayer().getItemInHand()).getToolMaterialType();
 
-		double weatherCofficien  = App.getInstance().game.weatherCofficient();
+		double weatherCofficien  = App.getInstance().game.weatherCoefficient();
 
 		if(type == ToolMaterialType.PRIMITIVE)
 			player.decreaseEnergy((int)(5 * weatherCofficien));

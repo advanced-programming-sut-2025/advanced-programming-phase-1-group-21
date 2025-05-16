@@ -1,7 +1,6 @@
 package models.tool;
 
 import models.App;
-import models.Item.Consumable;
 import models.Item.Item;
 import models.data.FishData;
 import models.game.Player;
@@ -35,7 +34,7 @@ public class FishingPole extends Tool {
 				(ToolMaterialType.IRIDIUM) || fishingPole.toolMaterialType.equals(ToolMaterialType.FIBERGLASS))
 			player.setEnergy(player.getEnergy() + 1);
 
-		double weatherCofficient = App.getInstance().game.weatherCofficient();
+		double weatherCofficient = App.getInstance().game.weatherCoefficient();
 
 		player.setSkillExp(SkillType.FISHING , player.getSkillExp(SkillType.FISHING) + 5);
 

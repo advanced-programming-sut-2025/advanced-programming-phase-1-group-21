@@ -1,7 +1,6 @@
 package models.tool;
 
 import models.App;
-import models.crop.Harvestable;
 import models.crop.PlantedSeed;
 import models.Item.Item;
 import models.crop.PlantedTree;
@@ -20,7 +19,7 @@ public class Scythe extends Tool {
 	@Override
 	public Result<Item> use(Coord coord) {
 		Player player = App.getInstance().game.getCurrentPlayer();
-		player.decreaseEnergy((int)(2 * App.getInstance().game.weatherCofficient()));
+		player.decreaseEnergy((int)(2 * App.getInstance().game.weatherCoefficient()));
 		Tile tile = player.getMap().getTile(coord);
 
 		if(!tile.getTileType().isForaging() && tile.getTileType() != TileType.PLANTED_SEED && tile.getTileType() != TileType.PLANTED_TREE)

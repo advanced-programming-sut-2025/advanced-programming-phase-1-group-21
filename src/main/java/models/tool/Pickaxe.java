@@ -75,7 +75,7 @@ public class Pickaxe extends Tool {
 			}
 		}
 
-		double weatherCofficient = App.getInstance().game.weatherCofficient();
+		double weatherCofficient = App.getInstance().game.weatherCoefficient();
 
 		int energyCost = switch (toolMaterialType) {
 			case PRIMITIVE -> (int)(5 * weatherCofficient);

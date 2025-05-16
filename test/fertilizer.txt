@@ -39,3 +39,26 @@ cheat advance date 1d
 next turn
 next turn
 next turn
+
+
+cheat advance date 1d
+print map -l (0,0) -s 50
+show plant -l (20,21)
+
+equip tool -t watering_can
+water -l (20,21)
+how much water
+
+water -l (20,21)
+water -l (20,21)
+water -l (20,21)
+water -l (20,21)
+water -l (20,21)
+water -l (20,21)
+water -l (20,21)
+water -l (20,21)
+water -l (20,21)
+water -l (20,21)
+water -l (20,21)
+water -l (20,21)
+water -l (20,21)
