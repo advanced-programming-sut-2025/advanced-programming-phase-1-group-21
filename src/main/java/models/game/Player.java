@@ -246,7 +246,7 @@ public class Player implements DailyUpdate {
     @Override
     public boolean nextDay(Game g) {
         Building building = getBuilding();
-        if (building != null && !(building instanceof House)) {
+        if (!(building instanceof House)) {
             energy.setMaxEnergy(energy.getMaxEnergy() / 2, DURATION_ENERGY);
         }
 
