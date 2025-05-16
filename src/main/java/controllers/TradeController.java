@@ -38,7 +38,7 @@ public class TradeController{
         }
         else{
             relation.addTrade(new Trade(relation.getTrades().size(), App.getInstance().game.getCurrentPlayer(), player, price ,
-                    null , 0 , thisItem , TradeType.REQUEST_MONEY));
+                    Item.build("coin" , price) , 0 , thisItem , TradeType.REQUEST_MONEY));
         }
 
         return Result.success(null);
@@ -73,8 +73,37 @@ public class TradeController{
     }
 
     public Result<ArrayList<String>> tradeList(){
-        if (App.getInstance().game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+        ArrayList<String> output = new ArrayList<>();
+        for(Player player : App.getInstance().game.getPlayers()){
+            if(player.equals(App.getInstance().game.getCurrentPlayer()))
+                continue;
+            Relation relation = App.getInstance().game.getRelationOfUs(App.getInstance().game.getCurrentPlayer(), player);
+            for(Trade trade : relation.getTrades()){
+                if(trade.isResponsed())
+                    continue;
+                output.add("Sender : " + trade.getSender().getUser().getUsername());
+                output.add("Receiver : " + trade.getReceiver().getUser().getUsername());
+                output.add("ID : " + trade.getID());
+                if(TradeType.OFFER_ITEM.equals(trade.getTradeType())) {
+                    output.add("Offered Item : " + trade.getOfferItem().getName() + " " + trade.getOfferItem().getAmount());
+                    output.add("Requested Item : " + trade.getRequestItem().getName() + " " + trade.getRequestItem().getAmount());
+                }
+                if(TradeType.REQUEST_ITEM.equals(trade.getTradeType())) {
+                    output.add("Requested Item : " + trade.getRequestItem().getName() + " " + trade.getRequestItem().getAmount());
+                    output.add("Offered Item : " + trade.getOfferItem().getName() + " " + trade.getOfferItem().getAmount());
+                }
+                if(TradeType.OFFER_MONEY.equals(trade.getTradeType())) {
+                    output.add("Offered Item : " + trade.getOfferItem().getName() + " " + trade.getOfferItem().getAmount());
+                    output.add("Requested Price : " + trade.getRequestPrice());
+                }
+                if(TradeType.REQUEST_MONEY.equals(trade.getTradeType())) {
+                    output.add("Requested Item : " + trade.getRequestItem().getName() + " " + trade.getRequestItem().getAmount());
+                    output.add("Offered Price : " + trade.getOfferPrice());
+                }
+                output.add("----------");
+            }
+        }
+        return Result.success(output);
     }
 
     public Result<Void> tradeResponse(String username , String response , int ID){
@@ -140,9 +169,7 @@ public class TradeController{
                 trade.setResponsed(true);
                 return Result.failure(GameError.NOT_ENOUGH_ITEMS);
             }
-            System.out.println(trade.getOfferItem().getAmount());
             player.getInventory().removeItem(trade.getOfferItem());
-            System.out.println(trade.getOfferItem().getAmount());
             App.getInstance().game.getCurrentPlayer().getInventory().addItem(trade.getOfferItem());
             App.getInstance().game.getCurrentPlayer().getInventory().changeCoin(-trade.getRequestPrice());
             player.getInventory().changeCoin(trade.getRequestPrice());
@@ -151,8 +178,8 @@ public class TradeController{
         }
 
         if(trade.getTradeType().equals(TradeType.REQUEST_MONEY)){
-            if(!App.getInstance().game.getCurrentPlayer().getInventory().canRemoveItem(trade.getOfferItem()) || (player.getInventory()
-                    .getCoin().getAmount() < trade.getRequestPrice())){
+            if(!App.getInstance().game.getCurrentPlayer().getInventory().canRemoveItem(trade.getRequestItem()) || (player.getInventory()
+                    .getCoin().getAmount() < trade.getOfferPrice())){
                 trade.setResponse(true);
                 trade.setResponsed(true);
                 return Result.failure(GameError.NOT_ENOUGH_ITEMS);
@@ -175,8 +202,6 @@ public class TradeController{
                 continue;
             Relation relation = App.getInstance().game.getRelationOfUs(App.getInstance().game.getCurrentPlayer(), player);
             for(Trade trade : relation.getTrades()){
-                if(trade.isResponsed())
-                    continue;
                 output.add("Sender : " + trade.getSender().getUser().getUsername());
                 output.add("Receiver : " + trade.getReceiver().getUser().getUsername());
                 output.add("ID : " + trade.getID());
