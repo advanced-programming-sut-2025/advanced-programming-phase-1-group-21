@@ -5,6 +5,7 @@ import models.Item.Item;
 import models.game.Player;
 import models.map.Coord;
 import models.map.MapType;
+import models.map.Tile;
 import models.map.TileType;
 import models.result.Result;
 import models.result.errorTypes.GameError;
@@ -17,6 +18,9 @@ public class Hoe extends Tool {
 	@Override
 	public Result<Item> use(Coord coord) {
 		Player player = App.game.getCurrentPlayer();
+		Tile tile = player.getMap().getTile(coord);
+		if(tile == null)
+			return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
 		ToolMaterialType type = ((Tool) App.game.getCurrentPlayer().getItemInHand()).getToolMaterialType();
 
 		double weatherCofficien  = App.game.weatherCofficient();

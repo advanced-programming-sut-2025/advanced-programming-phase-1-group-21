@@ -1,13 +1,16 @@
 package models.crop;
 
+import models.App;
 import models.DailyUpdate;
 import models.Item.Consumable;
 import models.Item.Item;
 import models.Item.ItemType;
 import models.data.items.SeedData;
 import models.game.Game;
+import models.game.Player;
 import models.map.Placable;
 import models.map.TileType;
+import models.skill.SkillType;
 
 public class PlantedSeed implements Placable, Harvestable, DailyUpdate {
 	private FertilizerType fertilizerType = null; // not implemented yet.
@@ -30,8 +33,9 @@ public class PlantedSeed implements Placable, Harvestable, DailyUpdate {
 
 	public Item harvest() {
 		// This method is supposed to be called by its tile.
-
+		Player player = App.game.getCurrentPlayer();
 		if (readyToHarvest) {
+			player.setSkillExp(SkillType.FARMING , player.getSkillExp(SkillType.FARMING) + 5);
 			readyToHarvest = false;
 			lastHarvest = day;
 			return Item.build(seedData.getResultName(), 1);

@@ -1,0 +1,76 @@
+fishing pole :
+
+go to login menu
+menu enter mainmenu
+login -u Ali -p Alireza123!
+menu enter mainmenu
+menu enter game
+new game sobi sobhan maryam
+1
+1
+1
+1
+walk -l (19,0)
+equip tool -t pickaxe
+use tool -d E
+show skills
+cheat add item -n bamboo pole -c 1
+equip tool -t fishing_pole
+walk -l (21,20)
+use tool -d E
+show skills
+inventory show
+
+hoe :
+
+go to login menu
+menu enter mainmenu
+login -u Ali -p Alireza123!
+menu enter mainmenu
+menu enter game
+new game sobi sobhan maryam
+1
+1
+1
+1
+equip tool -t hoe
+use tool -d N
+use tool -d E
+
+axe:
+
+go to login menu
+menu enter mainmenu
+login -u Ali -p Alireza123!
+menu enter mainmenu
+menu enter game
+new game sobi sobhan maryam
+1
+1
+1
+1
+equip tool -t axe
+
+pickaxe :
+
+go to login menu
+menu enter mainmenu
+login -u Ali -p Alireza123!
+menu enter mainmenu
+menu enter game
+new game sobi sobhan maryam
+1
+1
+1
+1
+walk -l (19,0)
+equip tool -t pickaxe
+use tool -d E
+walk -l (44,3)
+use tool -d S
+inventory show
+walk -l (44,9)
+walk -l (44,10)
+walk -l (1,0)
+use tool -d E
+inventory show

@@ -401,6 +401,8 @@ public class GameController{
 
         Tool tool = (Tool) App.game.getCurrentPlayer().getItemInHand();
         Result<Item> item = tool.use(destinyTile);
+        if(item == null)
+            return Result.failure(GameError.YOU_ARE_NOT_NEAR_TO_LAKE);
         if (item.isSuccess() && (item.getData() != null)) {
             App.game.getCurrentPlayer().getInventory().addItem(item.getData());
         }
@@ -763,7 +765,8 @@ public class GameController{
         if(!App.game.getCurrentPlayer().getInventory().canRemoveItem(Objects.requireNonNull(Item.build(fishingPole, 1))))
             return Result.failure(GameError.TOOL_NOT_FOUND);
 
-
+        Player player = App.game.getCurrentPlayer();
+        player.setSkillExp(SkillType.FISHING , player.getSkillExp(SkillType.FISHING) + 5);
         double amount = Math.random() * (App.game.getCurrentPlayer().getSkillExp(SkillType.FISHING) + 2);
         if(App.game.getWeather().equals(Weather.SUNNY))
             amount *= 1.5;
@@ -772,11 +775,11 @@ public class GameController{
         if(App.game.getWeather().equals(Weather.STORM))
             amount *= 0.5;
         if(fishingPole.equals("training")){
-            App.game.getCurrentPlayer().getInventory().addItem(Item.build(FishingPole.getCheapestFish() , Math.min(6 , (int) amount)));
+            player.getInventory().addItem(Item.build(FishingPole.getCheapestFish() , Math.min(6 , (int) amount)));
             return Result.success(null);
         }
         else if(fishingPole.equals("bamboo") || fishingPole.equals("iridium") || fishingPole.equals("fiberglass")){
-            App.game.getCurrentPlayer().getInventory().addItem(Item.build(FishingPole.randomFish() , Math.min(6 , (int) amount)));
+            player.getInventory().addItem(Item.build(FishingPole.randomFish() , Math.min(6 , (int) amount)));
             return Result.success(null);
         }
         return Result.success(null);
@@ -1359,6 +1362,16 @@ public class GameController{
         relation.setFriendshipXP(400);
         relation.setLevel(FriendshipLevel.LEVEL3);
         return Result.success(null);
+    }
+
+    public Result<ArrayList<String>> showSkills(){
+        Player player = App.game.getCurrentPlayer();
+        ArrayList<String> skills = new ArrayList<>();
+        skills.add("FARMING : " + player.getSkillExp(SkillType.FARMING));
+        skills.add("FORAGING : " + player.getSkillExp(SkillType.FORAGING));
+        skills.add("FISHING : " + player.getSkillExp(SkillType.FISHING));
+        skills.add("MINING : " + player.getSkillExp(SkillType.MINING));
+        return Result.success(skills);
     }
 
 }

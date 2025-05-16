@@ -8,6 +8,7 @@ import models.game.Player;
 import models.map.Coord;
 import models.map.Lake;
 import models.map.Tile;
+import models.map.Weather;
 import models.result.Result;
 import models.skill.SkillType;
 import models.time.Season;
@@ -36,6 +37,8 @@ public class FishingPole extends Tool {
 
 		double weatherCofficient = App.game.weatherCofficient();
 
+		player.setSkillExp(SkillType.FISHING , player.getSkillExp(SkillType.FISHING) + 5);
+
 		if(fishingPole.toolMaterialType.equals(ToolMaterialType.EDUCATIONAL) ||
 				fishingPole.toolMaterialType.equals(ToolMaterialType.BAMBOO))
 			player.decreaseEnergy((int)(8* weatherCofficient));
@@ -46,15 +49,24 @@ public class FishingPole extends Tool {
 		else if(fishingPole.toolMaterialType.equals(ToolMaterialType.IRIDIUM))
 			player.decreaseEnergy((int)(4 * weatherCofficient));
 
+		double amount = Math.random() * (App.game.getCurrentPlayer().getSkillLevel(SkillType.FISHING) + 2);
+		if(App.game.getWeather().equals(Weather.SUNNY))
+			amount *= 1.5;
+		if(App.game.getWeather().equals(Weather.RAINY))
+			amount *= 1.2;
+		if(App.game.getWeather().equals(Weather.STORM))
+			amount *= 0.5;
+
+		System.out.println(amount);
+
 		if(fishingPole.toolMaterialType.equals(ToolMaterialType.EDUCATIONAL))
-			return Result.success(Item.build(getCheapestFish() , 1));
+			return Result.success(Item.build(getCheapestFish() , Math.min((int) amount , 6)));
 
 		else if(fishingPole.toolMaterialType.equals(ToolMaterialType.BAMBOO) || fishingPole.toolMaterialType.equals
 				(ToolMaterialType.IRIDIUM) || fishingPole.toolMaterialType.equals(ToolMaterialType.FIBERGLASS))
-			return Result.success(Item.build(randomFish() , 1));
+			return Result.success(Item.build(randomFish() , Math.min((int) amount , 6)));
 
 		return null;
-
 	}
 
 	public static String getCheapestFish(){
@@ -73,7 +85,7 @@ public class FishingPole extends Tool {
 		ArrayList<FishData> allFishes = FishData.getFishes();
 		ArrayList<String> catchFishes  = new ArrayList<>();
 		for(FishData fishData : allFishes){
-			if(fishData.getSeason().equals(App.game.getSeason())){
+			if(fishData.getSeason().equalsIgnoreCase(App.game.getSeason().toString())){
 				if(App.game.getCurrentPlayer().getSkillLevel(SkillType.FISHING) >= 4){
 					catchFishes.add(fishData.getName());
 				}
