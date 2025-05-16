@@ -12,9 +12,11 @@ import models.map.Map;
 import models.skill.Skill;
 import models.skill.SkillType;
 import models.user.User;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Stack;
 
 public class Player implements DailyUpdate {
     static final int MAX_ENERGY = 200;
@@ -36,6 +38,8 @@ public class Player implements DailyUpdate {
     private ArrayList<NPCFriendship> npcFriendships;
     private ArrayList<Recipe> recipes = new ArrayList<>();
     private Skill skill = new Skill();
+
+    private Stack<Pair<Map, Coord>> locStack = new Stack<>();
 
     public ArrayList<Recipe> getRecipes(RecipeType type) {
         ArrayList<Recipe> recipes = new ArrayList<>();
@@ -66,19 +70,24 @@ public class Player implements DailyUpdate {
         return null;
     }
 
-    public Player(User user) {
+    public Player(User user, Map defaultMap) {
         this.user = user;
         this.inventory = Inventory.buildPlayerInventory();
         inventory.addItem(Game.getCoinItem(0));
         energy = new Energy();
+        this.defaultMap = defaultMap;
+        this.map = defaultMap;
+
+        House house = defaultMap.getBuilding(House.class);
+
+        this.coord = defaultMap.getCoord(house);
+        this.coord = coord.addCoord(new Coord(-1, 0)); //left of it!
+
+        enterBuilding(defaultMap.getBuilding(House.class));
     }
 
     public Map getDefaultMap() {
         return defaultMap;
-    }
-
-    public void setDefaultMap(Map defaultMap) {
-        this.defaultMap = defaultMap;
     }
 
     /*
@@ -233,8 +242,13 @@ public class Player implements DailyUpdate {
         this.fishingAbility += 5;
     }
 
+    static final int DURATION_ENERGY = 7;
     @Override
     public boolean nextDay(Game g) {
+        Building building = getBuilding();
+        if (building != null && building instanceof House) {
+            energy.setMaxEnergy(energy.getMaxEnergy() / 2, DURATION_ENERGY);
+        }
         energy.nextDay(g);
         defaultMap.nextDay(g);//DON'T UPDATE ANY OTHERRRR MAPPP !!! it's done recursivly in nextDay in map class
 
@@ -289,8 +303,15 @@ public class Player implements DailyUpdate {
     }
 
     public void enterBuilding(Building building) {
+        locStack.add(Pair.of(getMap(), getCoord()));
         this.building = building;
         setCoord(new Coord(0, 0));
+    }
+
+    public void leave() {
+        Pair<Map, Coord> loc = locStack.removeLast();
+        setMap(loc.getLeft());
+        setCoord(loc.getRight());
     }
 
     public Building getBuilding() {
