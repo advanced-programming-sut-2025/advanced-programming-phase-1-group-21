@@ -8,11 +8,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Refrigerator implements Placable, Serializable {
-    ArrayList<Item> items;
     Inventory inventory;
 
     public Refrigerator() {
         this.inventory = new Inventory();
+        this.inventory.inventoryType = InventoryType.BIG;
     }
 
     public Inventory getInventory() {

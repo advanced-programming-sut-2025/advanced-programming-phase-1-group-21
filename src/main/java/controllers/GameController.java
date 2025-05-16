@@ -257,12 +257,16 @@ public class GameController {
         Inventory inv = game.getCurrentPlayer().getInventory();
         Inventory refInv = refrigerator.getInventory();
         Item item = inv.getItem(itemName);
-        if (item == null || item.getItemType() != ItemType.CONSUMABLE)
+        if (item == null)
             return Result.failure(GameError.NOT_FOUND);
+        if (item.getItemType() != ItemType.CONSUMABLE)
+            return Result.failure(GameError.ITEM_DOESNT_HAVE_VALID_TYPE);
         if (!refInv.canAdd())
             return Result.failure(GameError.MAXIMUM_SIZE_EXCEEDED);
+        int amount = item.getAmount();
         inv.removeItem(item);
         refInv.addItem(item);
+        item.setAmount(amount);
 
         return Result.success(null);
     }
@@ -272,19 +276,26 @@ public class GameController {
         Inventory refInv = refrigerator.getInventory();
 
         Item item = refInv.getItem(itemName);
-        if (item == null || item.getItemType() != ItemType.CONSUMABLE)
+        if (item == null)
             return Result.failure(GameError.NOT_FOUND);
+        if (item.getItemType() != ItemType.CONSUMABLE)
+            return Result.failure(GameError.ITEM_DOESNT_HAVE_VALID_TYPE);
         if (!inv.canAdd())
             return Result.failure(GameError.MAXIMUM_SIZE_EXCEEDED);
 
+        int amount = item.getAmount();
         refInv.removeItem(item);
         inv.addItem(item);
+        item.setAmount(amount);
 
         return Result.success(null);
     }
 
     public Result<Void> actOnRefrigerator(String itemName, String action) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+
+        Item item = Item.build(itemName, 1);
+        if (item == null) return Result.failure(GameError.NOT_FOUND);
 
         Refrigerator r = null;
         for (Tile tile : game.getCurrentPlayer().getNeighborTiles())
@@ -520,19 +531,43 @@ public class GameController {
         return Result.success(game.getCurrentPlayer().getRecipes(RecipeType.CRAFTING));
     }
 
+    public Inventory getInventoryForRecipe(RecipeType recipeType) {
+        Inventory inv = game.getCurrentPlayer().getInventory();
+        if (recipeType == RecipeType.CRAFTING)
+            return inv;
+
+        Inventory refInv = ((House) game.getCurrentPlayer().getBuilding()).getRefrigerator().getInventory();
+        List<Item> items = new ArrayList<>(inv.getItems());
+        items.addAll(refInv.getItems());
+        return new Inventory(items);
+    }
+
     public Result<Void> prepareRecipe(String recipeName, RecipeType recipeType) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+        if (game.getCurrentPlayer().getMap().mapType != MapType.HOUSE)
+            return Result.failure(GameError.YOU_SHOULD_BE_ON_HOUSE);
+
         Recipe recipe = game.getCurrentPlayer().getRecipeByName(recipeName, recipeType);
         if (recipe == null) {
             return Result.failure(GameError.RECIPE_NOT_FOUND);
         }
-        Inventory inventory = game.getCurrentPlayer().getInventory();
-        if (!inventory.canAdd())
+        if (game.getCurrentPlayer().getEnergy() < recipeType.getEnergy())
+            return Result.failure(GameError.ENERGY_IS_NOT_ENOUGH);
+        Inventory all = getInventoryForRecipe(recipeType);
+        Inventory inv = game.getCurrentPlayer().getInventory();
+
+        if (!inv.canAdd())
             return Result.failure(GameError.MAXIMUM_SIZE_EXCEEDED);
-        if (!inventory.canRemoveItems(recipe.getItems()))
+        if (!all.canRemoveItems(recipe.getItems()))
             return Result.failure(GameError.NOT_ENOUGH_ITEMS);
-        inventory.removeItems(recipe.getItems());
-        inventory.addItem(recipe.getResult());
+        all.removeItems(recipe.getItems());
+        inv.addItem(recipe.getResult());
+
+        inv.normalize();
+        ((House) game.getCurrentPlayer().getBuilding()).getRefrigerator().getInventory().normalize();
+
+        game.getCurrentPlayer().decreaseEnergy(recipeType.getEnergy());
+
         return Result.success(null);
     }
 
@@ -581,13 +616,28 @@ public class GameController {
 
     public Result<ArrayList<Recipe>> showCookingRecipes() {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+        if (game.getCurrentPlayer().getMap().mapType != MapType.HOUSE)
+            return Result.failure(GameError.YOU_SHOULD_BE_ON_HOUSE);
         return Result.success(game.getCurrentPlayer().getRecipes(RecipeType.COOKING));
     }
 
-    public Result<Void> eat(Consumable food) {
+    public Result<Void> eat(String name) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        //some foods can give power to the user.
-        throw new UnsupportedOperationException("Not supported yet.");
+        Item item = game.getCurrentPlayer().getInventory().getItem(name);
+        if (item == null) return Result.failure(GameError.NOT_FOUND);
+        if (item.getItemType() != ItemType.CONSUMABLE)
+            return Result.failure(GameError.ITEM_IS_NOT_CONSUMABLE);
+        item = item.copy();
+        item.setAmount(1);
+        Consumable consumable = (Consumable) item;
+
+        Inventory inventory = game.getCurrentPlayer().getInventory();
+        if (!inventory.canRemoveItem(consumable))
+            return Result.failure(GameError.ITEM_IS_NOT_AVAILABLE);
+        inventory.removeItem(consumable);
+        System.err.println("ate " + name);
+        game.getCurrentPlayer().decreaseEnergy(-consumable.getEnergy());
+        return Result.success(null);
     }
 
     public Result<Void> buildBarnOrCoop(String buildingName, int x, int y) {

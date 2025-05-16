@@ -120,6 +120,9 @@ public class GameTerminalView {
         else if ((matcher = GameMenuCommand.NEW_GAME.getMatcher(command)) != null) {
             System.out.println(gameController.createGame(matcher.group("username1") , matcher.group("username2") , matcher.group("username3")));
         }
+        else if ((matcher = GameMenuCommand.EAT.getMatcher(command)) != null) {
+            System.out.println(gameController.eat(matcher.group("name")));
+        }
         else if ((matcher = GameMenuCommand.NEXT_TURN.getMatcher(command)) != null) {
             System.out.println(gameController.nextTurn());
         }

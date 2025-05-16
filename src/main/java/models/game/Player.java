@@ -78,7 +78,7 @@ public class Player implements DailyUpdate, Serializable {
 
     public Recipe getRecipeByName(String name, RecipeType type) {
         for (Recipe recipe : recipes) {
-            if (recipe.getName().equals(name) && recipe.getType() == type) {
+            if (recipe.getName().equalsIgnoreCase(name) && recipe.getType() == type) {
                 return recipe;
             }
         }

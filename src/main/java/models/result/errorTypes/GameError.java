@@ -1,8 +1,12 @@
 package models.result.errorTypes;
 
+import models.Item.ItemType;
 import models.result.Error;
 
 public enum GameError implements Error {
+    ITEM_IS_NOT_CONSUMABLE("Item can't be eaten"),
+    ITEM_DOESNT_HAVE_VALID_TYPE("item does not have valid type"),
+    ENERGY_IS_NOT_ENOUGH("Energy is not enough"),
     DAILY_LIMIT_EXCEED("Daily limit exceeded"),
     GAME_NOT_FOUND("Game not found"),
     EMPTY_HOUSE_WAS_NOT_FOUND("Empty house was not found"),
@@ -36,6 +40,7 @@ public enum GameError implements Error {
     YOU_SHOULD_BE_ON_FARM("You should have been on farm"),
     YOU_SHOULD_BE_ON_VILLAGE("You should have been on village"),
     YOU_SHOULD_BE_ON_SHOP("You should have been on shop"),
+    YOU_SHOULD_BE_ON_HOUSE("You should have been on house"),
     RESPONSE_IS_NOT_SUPPORTED("Response is not supported"),
     TRADE_ID_DOES_NOT_EXIST("Trade id does not exist"),
     ITEM_IS_NOT_AVAILABLE("Item is not available"),
