@@ -95,7 +95,23 @@ public class Pickaxe extends Tool {
 			return Result.success(null, "kolang hich kari nakard");
 		if (use == 1)
 			return Result.success(null, "zamin gheir shokhmi shod");
-		return Result.success(null, "the Rock removed from the ground");
+
+		player.setSkillExp(SkillType.MINING , player.getSkillExp(SkillType.MINING) + 10);
+		return Result.success(Item.build(makeOre(tileType) , 1) , "the Rock removed from the ground");
+	}
+
+	public String makeOre(TileType tileType){
+		if(tileType.equals(TileType.SIMPLE_ROCK))
+			return "stone";
+		if(tileType.equals(TileType.COPPER_ROCK))
+			return "copper ore";
+		if(tileType.equals(TileType.STEEL_ROCK))
+			return "steel ore";
+		if(tileType.equals(TileType.GOLD_ROCK))
+			return "gold ore";
+		if(tileType.equals(TileType.IRIDIUM_ROCK))
+			return "iridium ore";
+		return null;
 	}
 
 	@Override

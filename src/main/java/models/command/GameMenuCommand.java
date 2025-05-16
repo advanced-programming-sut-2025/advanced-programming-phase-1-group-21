@@ -64,7 +64,7 @@ public enum GameMenuCommand implements Command {
     CHEAT_ENERGY_UNLIMITED("energy unlimited"),
     INVENTORY_SHOW("inventory show"),
     INVENTOR_TRASH("\\s*inventory\\s+trash\\s+-i\\s+(?<name>.+)\\s+-n\\s+(?<number>\\d+)\\s*"),
-    EQUIP_TOOL("\\s*equip\\s+tool\\s+-t\\s+(?<toolName>\\S+)\\s*"),
+    EQUIP_TOOL("\\s*equip\\s+tool\\s+-t\\s+(?<toolName>.+)\\s*"),
     SHOW_CURRENT_TOOL("show current tool"),
     SHOW_AVAILABLE_TOOL("show available tools"),
     USE_TOOL("\\s*use\\s+tool\\s+-d\\s+(?<direction>\\S+)\\s*"),
@@ -114,6 +114,7 @@ public enum GameMenuCommand implements Command {
     MAP_STATUS("map status"),
     INVENTORY_STATUS("inventory status"),
     SET_FRIENDSHIP("set friendship -u (?<username>\\S+)"),
+    SHOW_SKILLS("show skills"),
     ;
 
     public final Pattern pattern;

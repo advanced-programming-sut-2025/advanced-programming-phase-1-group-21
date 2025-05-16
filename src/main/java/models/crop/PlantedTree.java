@@ -1,9 +1,12 @@
 package models.crop;
 
+import models.App;
 import models.Item.Item;
 import models.data.items.TreeData;
+import models.game.Player;
 import models.map.Placable;
 import models.map.TileType;
+import models.skill.SkillType;
 
 public class PlantedTree implements Placable, Harvestable {
 	private int stage = 0;
@@ -27,8 +30,9 @@ public class PlantedTree implements Placable, Harvestable {
 
 	public Item harvest() {
 		// This method is supposed to be called by its tile.
-
+		Player player = App.game.getCurrentPlayer();
 		if (readyToHarvest) {
+			player.setSkillExp(SkillType.FORAGING , player.getSkillExp(SkillType.FORAGING) + 5);
 			readyToHarvest = false;
 			lastHarvest = day;
 			return Item.build(treeData.getResultName(), 1);

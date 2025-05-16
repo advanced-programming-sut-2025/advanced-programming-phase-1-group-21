@@ -356,6 +356,9 @@ public class GameTerminalView {
         else if((matcher = GameMenuCommand.SET_FRIENDSHIP.getMatcher(command)) != null) {
             System.out.println(gameController.setFriendship(matcher.group("username")));
         }
+        else if((matcher = GameMenuCommand.SHOW_SKILLS.getMatcher(command)) != null) {
+            printArrayList(gameController.showSkills().getData());
+        }
         else {
             System.out.println("invalid command");
             return;

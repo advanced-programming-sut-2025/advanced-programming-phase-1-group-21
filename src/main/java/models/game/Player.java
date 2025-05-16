@@ -308,4 +308,8 @@ public class Player implements DailyUpdate {
     public int getSkillLevel(SkillType skillType) {
         return skill.getSkillLevel(skillType);
     }
+
+    public void setSkillExp(SkillType skillType, int exp) {
+        skill.setSkillExp(skillType, exp);
+    }
 }
