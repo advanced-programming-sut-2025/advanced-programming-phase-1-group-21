@@ -222,8 +222,6 @@ public class GameController{
                 player.setCoord(step.coord());
                 if (player.isFainted()) break;
             }
-            System.err.println(player.getEnergy());
-            System.err.println(steps);
         }
         printMapFull();
         return Result.success(null);
