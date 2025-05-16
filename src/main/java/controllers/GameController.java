@@ -1292,7 +1292,11 @@ public class GameController {
             return Result.failure(GameError.NOT_ENOUGH_ITEM);
         game.getCurrentPlayer().getInventory().removeItem(requiredItem);
 
-        Item rewardItem = Item.build(npc.getTasks().get(questID).getRewardItem(), npc.getTasks().get(questID).getRewardAmount());
+        int amount = 1;
+        if(npcFriendship.getLevel().getLevel() >= 2)
+            amount =2;
+        Item rewardItem = Item.build(npc.getTasks().get(questID).getRewardItem(), npc.getTasks().get(questID).getRewardAmount() * amount);
+
         game.getCurrentPlayer().getInventory().addItem(rewardItem);
         npc.getTasksFlag().set(questID, true);
         return Result.success(null);
