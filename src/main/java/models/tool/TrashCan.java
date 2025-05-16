@@ -5,7 +5,10 @@ import models.map.Coord;
 import models.result.Result;
 
 public class TrashCan extends Tool {
-    public TrashCan() {super(ToolType.TRASHCAN);}
+    public TrashCan() {
+        super(ToolType.TRASHCAN);
+        this.setToolMaterialType(ToolMaterialType.IRIDIUM);
+    }
 
     @Override
     public Result<Item> use(Coord coord) {

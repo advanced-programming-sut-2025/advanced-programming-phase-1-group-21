@@ -89,6 +89,7 @@ public class MapBuilder {
                     int id = random.nextInt(0, numberOfForagingTreeTypes); // What is this foraging tree's type?
                     int day = random.nextInt(0, 60); // How old is this foraging tree?
                     PlantedTree plantedTree = (new Sapling(TreeData.getData(id), ItemType.SAPLING, 1)).plant(map.getTile(coord));
+                    map.getTile(coord).setTileType(TileType.TREE);
                     plantedTree.setDay(day);
                     numberOfRemainingForagingTrees--;
                 }

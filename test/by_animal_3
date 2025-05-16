@@ -16,7 +16,7 @@ cheat add item -n Stone -c 10000
 cheat add item -n Coin -c 90000
 walk -l (14, 19)
 walk -l (15, 19)
-build -a normal barn -l (0, 9)
+build -a deluxe barn -l (0, 9)
 walk -l (6,7)
 walk -l (7,7)
 walk -l (55,15)
@@ -25,7 +25,7 @@ walk -l (55,15)
 .
 .
 walk -l (56,15)
-buy animal -a cow -n ali
+buy animal -a Sheep -n sobhan
 walk -l (6,7)
 walk -l (7,7)
 back home

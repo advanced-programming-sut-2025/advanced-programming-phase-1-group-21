@@ -31,6 +31,7 @@ public class MilkPail extends Tool {
 
 		if(animal.getAnimalType().equals(AnimalTypes.COW) || (animal.getAnimalType().equals(AnimalTypes.GOAT))) {
 			animal.setFriendship(animal.getFriendship() + 5);
+			animal.setTodayProduct(null);
 			return Result.success(Item.build(animal.getTodayProduct() , 1));
 		}
 
