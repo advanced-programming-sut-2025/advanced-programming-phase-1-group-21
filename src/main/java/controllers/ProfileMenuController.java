@@ -28,9 +28,9 @@ public class ProfileMenuController{
 
         ArrayList<User> users = DataBaseController.readAllUsers(gson , "Users.json");
         for(User user : users){
-            if(user.getUsername().equals(App.logedInUser.getUsername())){
+            if(user.getUsername().equals(App.getInstance().logedInUser.getUsername())){
                 user.setUsername(newUsername);
-                App.logedInUser.setUsername(newUsername);
+                App.getInstance().logedInUser.setUsername(newUsername);
 
                 try (FileWriter writer = new FileWriter("Users.json")) {
                     gson.toJson(users, writer);
@@ -47,16 +47,16 @@ public class ProfileMenuController{
     }
 
     public Result<Void> changePassword(String oldPassword, String newPassword) throws IOException {
-        if(!App.logedInUser.verifyPassword(oldPassword))
+        if(!App.getInstance().logedInUser.verifyPassword(oldPassword))
             return Result.failure(AuthError.PASSWORD_CONFIRM_ERROR);
         if(checkPassword(newPassword).isError())
             return checkPassword(newPassword);
 
         ArrayList<User> users = DataBaseController.readAllUsers(gson , "Users.json");
         for(User user : users){
-            if(user.getUsername().equals(App.logedInUser.getUsername())){
+            if(user.getUsername().equals(App.getInstance().logedInUser.getUsername())){
                 user.setPassword(newPassword);
-                App.logedInUser.setPassword(newPassword);
+                App.getInstance().logedInUser.setPassword(newPassword);
 
                 try (FileWriter writer = new FileWriter("Users.json")) {
                     gson.toJson(users, writer);
@@ -85,9 +85,9 @@ public class ProfileMenuController{
 
         ArrayList<User> users = DataBaseController.readAllUsers(gson , "Users.json");
         for(User user : users){
-            if(user.getUsername().equals(App.logedInUser.getUsername())){
+            if(user.getUsername().equals(App.getInstance().logedInUser.getUsername())){
                 user.setEmail(newEmail);
-                App.logedInUser.setEmail(newEmail);
+                App.getInstance().logedInUser.setEmail(newEmail);
 
                 try (FileWriter writer = new FileWriter("Users.json")) {
                     gson.toJson(users, writer);
@@ -114,9 +114,9 @@ public class ProfileMenuController{
     public Result<Void> changeNickname(String newNickname) throws IOException {
         ArrayList<User> users = DataBaseController.readAllUsers(gson , "Users.json");
         for(User user : users){
-            if(user.getUsername().equals(App.logedInUser.getUsername())){
+            if(user.getUsername().equals(App.getInstance().logedInUser.getUsername())){
                 user.setNickname(newNickname);
-                App.logedInUser.setNickname(newNickname);
+                App.getInstance().logedInUser.setNickname(newNickname);
 
                 try (FileWriter writer = new FileWriter("Users.json")) {
                     gson.toJson(users, writer);
@@ -142,15 +142,15 @@ public class ProfileMenuController{
     public Result<ArrayList<String>> userInfo() {
         ArrayList<String> output = new ArrayList<>();
         output.add("your info:");
-        output.add("username : " + App.logedInUser.getUsername());
-        output.add("email : " + App.logedInUser.getEmail());
-        output.add("nickname : " + App.logedInUser.getNickname());
+        output.add("username : " + App.getInstance().logedInUser.getUsername());
+        output.add("email : " + App.getInstance().logedInUser.getEmail());
+        output.add("nickname : " + App.getInstance().logedInUser.getNickname());
         return Result.success(output);
     }
 
     public Result<Void> menuEnter(String menu) {
         if(menu.equals("mainmenu")){
-            App.currentMenu = Menu.MainMenu;
+            App.getInstance().currentMenu = Menu.MainMenu;
             return Result.success(null);
         }
 

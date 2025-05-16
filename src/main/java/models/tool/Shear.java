@@ -16,10 +16,10 @@ public class Shear extends Tool {
 
 	@Override
 	public Result<Item> use(Coord coord) {
-		Player player = App.game.getCurrentPlayer();
+		Player player = App.getInstance().game.getCurrentPlayer();
 		Tile tile = player.getMap().getTile(coord);
 
-		player.decreaseEnergy((int)(4*App.game.weatherCofficient()));
+		player.decreaseEnergy((int)(4*App.getInstance().game.weatherCofficient()));
 
 		Animal animal = tile.getPlacable(Animal.class);
 		if (animal == null) {

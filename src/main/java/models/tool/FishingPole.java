@@ -23,19 +23,19 @@ public class FishingPole extends Tool {
 
 	@Override
 	public Result<Item> use(Coord coord) {
-		Player player = App.game.getCurrentPlayer();
+		Player player = App.getInstance().game.getCurrentPlayer();
 		Tile tile = player.getMap().getTile(coord);
 		if(tile.getPlacable(Lake.class) == null)
 			return null;
 
-		Tool fishingPole = (Tool) App.game.getCurrentPlayer().getItemInHand();
+		Tool fishingPole = (Tool) App.getInstance().game.getCurrentPlayer().getItemInHand();
 
 		//TODO : check skills
 		if(fishingPole.toolMaterialType.equals(ToolMaterialType.EDUCATIONAL) || fishingPole.toolMaterialType.equals(ToolMaterialType.BAMBOO) || fishingPole.toolMaterialType.equals
 				(ToolMaterialType.IRIDIUM) || fishingPole.toolMaterialType.equals(ToolMaterialType.FIBERGLASS))
 			player.setEnergy(player.getEnergy() + 1);
 
-		double weatherCofficient = App.game.weatherCofficient();
+		double weatherCofficient = App.getInstance().game.weatherCofficient();
 
 		player.setSkillExp(SkillType.FISHING , player.getSkillExp(SkillType.FISHING) + 5);
 
@@ -49,12 +49,12 @@ public class FishingPole extends Tool {
 		else if(fishingPole.toolMaterialType.equals(ToolMaterialType.IRIDIUM))
 			player.decreaseEnergy((int)(4 * weatherCofficient));
 
-		double amount = Math.random() * (App.game.getCurrentPlayer().getSkillLevel(SkillType.FISHING) + 2);
-		if(App.game.getWeather().equals(Weather.SUNNY))
+		double amount = Math.random() * (App.getInstance().game.getCurrentPlayer().getSkillLevel(SkillType.FISHING) + 2);
+		if(App.getInstance().game.getWeather().equals(Weather.SUNNY))
 			amount *= 1.5;
-		if(App.game.getWeather().equals(Weather.RAINY))
+		if(App.getInstance().game.getWeather().equals(Weather.RAINY))
 			amount *= 1.2;
-		if(App.game.getWeather().equals(Weather.STORM))
+		if(App.getInstance().game.getWeather().equals(Weather.STORM))
 			amount *= 0.5;
 
 		System.out.println(amount);
@@ -70,13 +70,13 @@ public class FishingPole extends Tool {
 	}
 
 	public static String getCheapestFish(){
-		if(App.game.getSeason() == Season.SPRING)
+		if(App.getInstance().game.getSeason() == Season.SPRING)
 			return "Herring";
-		if(App.game.getSeason() == Season.SUMMER)
+		if(App.getInstance().game.getSeason() == Season.SUMMER)
 			return "Sunfish";
-		if(App.game.getSeason() == Season.AUTUMN)
+		if(App.getInstance().game.getSeason() == Season.AUTUMN)
 			return "Sardine";
-		if(App.game.getSeason() == Season.WINTER)
+		if(App.getInstance().game.getSeason() == Season.WINTER)
 			return "Perch";
 		return null;
 	}
@@ -85,8 +85,8 @@ public class FishingPole extends Tool {
 		ArrayList<FishData> allFishes = FishData.getFishes();
 		ArrayList<String> catchFishes  = new ArrayList<>();
 		for(FishData fishData : allFishes){
-			if(fishData.getSeason().equalsIgnoreCase(App.game.getSeason().toString())){
-				if(App.game.getCurrentPlayer().getSkillLevel(SkillType.FISHING) >= 4){
+			if(fishData.getSeason().equalsIgnoreCase(App.getInstance().game.getSeason().toString())){
+				if(App.getInstance().game.getCurrentPlayer().getSkillLevel(SkillType.FISHING) >= 4){
 					catchFishes.add(fishData.getName());
 				}
 				else{

@@ -30,7 +30,7 @@ public class PlantedTree implements Placable, Harvestable {
 
 	public Item harvest() {
 		// This method is supposed to be called by its tile.
-		Player player = App.game.getCurrentPlayer();
+		Player player = App.getInstance().game.getCurrentPlayer();
 		if (readyToHarvest) {
 			player.setSkillExp(SkillType.FORAGING , player.getSkillExp(SkillType.FORAGING) + 5);
 			readyToHarvest = false;

@@ -17,13 +17,13 @@ public class Hoe extends Tool {
 
 	@Override
 	public Result<Item> use(Coord coord) {
-		Player player = App.game.getCurrentPlayer();
+		Player player = App.getInstance().game.getCurrentPlayer();
 		Tile tile = player.getMap().getTile(coord);
 		if(tile == null)
 			return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
-		ToolMaterialType type = ((Tool) App.game.getCurrentPlayer().getItemInHand()).getToolMaterialType();
+		ToolMaterialType type = ((Tool) App.getInstance().game.getCurrentPlayer().getItemInHand()).getToolMaterialType();
 
-		double weatherCofficien  = App.game.weatherCofficient();
+		double weatherCofficien  = App.getInstance().game.weatherCofficient();
 
 		if(type == ToolMaterialType.PRIMITIVE)
 			player.decreaseEnergy((int)(5 * weatherCofficien));

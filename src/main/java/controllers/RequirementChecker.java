@@ -10,7 +10,7 @@ public class RequirementChecker {
     Player player;
 
     public RequirementChecker() {
-        player = App.game.getCurrentPlayer();
+        player = App.getInstance().game.getCurrentPlayer();
     }
 
     private boolean checkSkillLevel(String typeStr, int lvl) {

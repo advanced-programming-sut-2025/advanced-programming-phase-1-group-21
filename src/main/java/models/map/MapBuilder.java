@@ -17,7 +17,7 @@ import java.util.Random;
 public class MapBuilder {
 
     public void buildRandomTile(Map map, List<TileType> types, int L, int R) {
-        int count = App.random.nextInt(L, R);
+        int count = App.getInstance().getInstance().getRandom().nextInt(L, R);
         int placed = 0;
         int attempts = 0;
 
@@ -27,7 +27,7 @@ public class MapBuilder {
             Tile tile = map.getTile(Coord.getRandomCoord(map.getMaxX(), map.getMaxY()));
 
             if (tile != null && tile.isEmpty()) {
-                TileType randomForaging = types.get(App.random.nextInt(types.size()));
+                TileType randomForaging = types.get(App.getInstance().getInstance().getRandom().nextInt(types.size()));
                 tile.setTileType(randomForaging);
                 placed++;
             }

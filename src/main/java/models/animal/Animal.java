@@ -204,7 +204,7 @@ public class Animal implements Placable, DailyUpdate {
 
     public boolean seasonIsTrue(){
         for(Season season : productSeasons){
-            if(App.game.getSeason().equals(season))
+            if(App.getInstance().game.getSeason().equals(season))
                 return true;
         }
         return false;

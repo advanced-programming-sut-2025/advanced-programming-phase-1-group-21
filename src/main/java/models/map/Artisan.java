@@ -47,7 +47,7 @@ public class Artisan implements Placable {
 				if (correct != itemNames.size())
 					continue mainLoop;
 
-				Inventory inventory = App.game.getCurrentPlayer().getInventory();
+				Inventory inventory = App.getInstance().game.getCurrentPlayer().getInventory();
 
 				List<Item> requiredItems = new ArrayList<>();
 				for (Map.Entry<String, Integer> entry : baseIngredients.entrySet()) {

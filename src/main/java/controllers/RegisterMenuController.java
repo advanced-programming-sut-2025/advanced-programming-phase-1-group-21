@@ -51,7 +51,7 @@ public class RegisterMenuController{
         }
 
         User user = new User(username , password , email , nickname , getGenderByName(gender) , null , null , false);
-        App.registeredUser = user;
+        App.getInstance().registeredUser = user;
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         ArrayList<User> users = readAllUsers(gson, "Users.json");
         users.add(user);
@@ -67,11 +67,11 @@ public class RegisterMenuController{
     public Result<Void> pickQuestion(String answer, String answerConfirm, String questionNumber) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         if(answer.equals(answerConfirm)) {
-            App.registeredUser.setSecurityQuestionID(Integer.parseInt(questionNumber));
-            App.registeredUser.setSecurityAnswer(answer);
+            App.getInstance().registeredUser.setSecurityQuestionID(Integer.parseInt(questionNumber));
+            App.getInstance().registeredUser.setSecurityAnswer(answer);
             ArrayList<User> users = readAllUsers(gson, "Users.json");
             for(User user : users){
-                if(user.getUsername().equals(App.registeredUser.getUsername())) {
+                if(user.getUsername().equals(App.getInstance().registeredUser.getUsername())) {
                     user.setSecurityAnswer(answer);
                     user.setSecurityQuestionID(Integer.parseInt(questionNumber));
                 }
@@ -150,7 +150,7 @@ public class RegisterMenuController{
     }
 
     public Result<Void> goToLogin(){
-        App.currentMenu = Menu.LoginMenu;
+        App.getInstance().currentMenu = Menu.LoginMenu;
         return Result.success(null);
     }
 
@@ -164,7 +164,7 @@ public class RegisterMenuController{
     }
 
     private String generateRandomPassword() {
-        int length = App.random.nextInt(6) + 8;
+        int length = App.getInstance().random.nextInt(6) + 8;
         String upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String lower = "abcdefghijklmnopqrstuvwxyz";
         String digits = "0123456789";
@@ -172,14 +172,14 @@ public class RegisterMenuController{
 
         List<Character> passwordChars = new ArrayList<>();
 
-        passwordChars.add(upper.charAt(App.random.nextInt(upper.length())));
-        passwordChars.add(lower.charAt(App.random.nextInt(lower.length())));
-        passwordChars.add(digits.charAt(App.random.nextInt(digits.length())));
-        passwordChars.add(specials.charAt(App.random.nextInt(specials.length())));
+        passwordChars.add(upper.charAt(App.getInstance().random.nextInt(upper.length())));
+        passwordChars.add(lower.charAt(App.getInstance().random.nextInt(lower.length())));
+        passwordChars.add(digits.charAt(App.getInstance().random.nextInt(digits.length())));
+        passwordChars.add(specials.charAt(App.getInstance().random.nextInt(specials.length())));
 
         String all = upper + lower + digits + specials;
         for (int i = 4; i < length; i++) {
-            passwordChars.add(all.charAt(App.random.nextInt(all.length())));
+            passwordChars.add(all.charAt(App.getInstance().random.nextInt(all.length())));
         }
 
         Collections.shuffle(passwordChars);

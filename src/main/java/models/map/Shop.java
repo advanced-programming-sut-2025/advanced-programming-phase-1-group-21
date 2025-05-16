@@ -76,7 +76,7 @@ public class Shop extends Building implements DailyUpdate{
 	public boolean isItemAvailable(ShopItemInstance item){
 		if (!item.canSellMore()) return false;
 		ShopData shopData = item.getData();
-		if (shopData.getPrice(App.game.getSeason()) == -1) return false;
+		if (shopData.getPrice(App.getInstance().game.getSeason()) == -1) return false;
 		return true;
 	}
 
@@ -130,7 +130,7 @@ public class Shop extends Building implements DailyUpdate{
 			requiredItems.add(required);
 		}
 
-		Item coins = Item.build("coin", amount * data.getPrice(App.game.getSeason()));
+		Item coins = Item.build("coin", amount * data.getPrice(App.getInstance().game.getSeason()));
 		requiredItems.add(coins);
 
 		if (!inventory.canRemoveItems(requiredItems))

@@ -183,7 +183,7 @@ public class Inventory {
 
     public ArrayList<String> showInventory() {
         ArrayList<String> output = new ArrayList<>();
-        output.add(App.game.getCurrentPlayer().getUser().getUsername() + "'s Inventory Items:");
+        output.add(App.getInstance().game.getCurrentPlayer().getUser().getUsername() + "'s Inventory Items:");
         for (Item item : items) {
             output.add("name :" + item.getName());
             output.add("amount :" + item.getAmount());
@@ -195,7 +195,7 @@ public class Inventory {
     public boolean toolEquip(String toolName){
         for(Item item : items) {
             if(item.getName().equalsIgnoreCase(toolName) && (item.getItemType().equals(ItemType.TOOL))) {
-                App.game.getCurrentPlayer().setItemInHand(item);
+                App.getInstance().game.getCurrentPlayer().setItemInHand(item);
                 return true;
             }
         }
@@ -205,7 +205,7 @@ public class Inventory {
 
     public ArrayList<String> showAvailableTools(){
         ArrayList<String> output = new ArrayList<>();
-        output.add(App.game.getCurrentPlayer().getUser().getUsername() + "'s Available Tools:");
+        output.add(App.getInstance().game.getCurrentPlayer().getUser().getUsername() + "'s Available Tools:");
         for(Item item : items) {
             if(item.getItemType().equals(ItemType.TOOL)){
                 output.add("name :" + item.getName());

@@ -105,7 +105,7 @@ public class Map implements DailyUpdate {
                 Coord coord = new Coord(i, j);
                 Tile tile = getTile(coord);
                 if (tile == null) continue;
-                if (App.game.getCurrentPlayer().getCoord().equals(coord))
+                if (App.getInstance().game.getCurrentPlayer().getCoord().equals(coord))
                     output.add("@");
                 else
                     output.add(tile.getSprite());

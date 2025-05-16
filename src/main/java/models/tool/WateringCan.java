@@ -37,7 +37,7 @@ public class WateringCan extends Tool {
 
     @Override
     public Result<Item> use(Coord coord) {
-        Tile tile = App.game.getCurrentPlayerMap().getTile(coord);
+        Tile tile = App.getInstance().game.getCurrentPlayerMap().getTile(coord);
         if (tile == null) {
             return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
         }
@@ -45,17 +45,17 @@ public class WateringCan extends Tool {
             return Result.failure(GameError.TILE_DOESNT_HAVE_WATER);
         increaseWater();
         //calc energy TODO
-        Tool waterCan = (Tool) App.game.getCurrentPlayer().getItemInHand();
-        Player player = App.game.getCurrentPlayer();
+        Tool waterCan = (Tool) App.getInstance().game.getCurrentPlayer().getItemInHand();
+        Player player = App.getInstance().game.getCurrentPlayer();
 
-        double weatherCofficient = App.game.weatherCofficient();
+        double weatherCofficient = App.getInstance().game.weatherCofficient();
 
         switch (waterCan.getToolMaterialType()) {
-            case PRIMITIVE -> player.decreaseEnergy((int)(5 * App.game.weatherCofficient()));
-            case COPPER -> player.decreaseEnergy((int)(4 * App.game.weatherCofficient()));
-            case STEEL -> player.decreaseEnergy((int)(3 * App.game.weatherCofficient()));
-            case GOLD -> player.decreaseEnergy((int)(2 * App.game.weatherCofficient()));
-            case IRIDIUM -> player.decreaseEnergy((int)(1 * App.game.weatherCofficient()));
+            case PRIMITIVE -> player.decreaseEnergy((int)(5 * App.getInstance().game.weatherCofficient()));
+            case COPPER -> player.decreaseEnergy((int)(4 * App.getInstance().game.weatherCofficient()));
+            case STEEL -> player.decreaseEnergy((int)(3 * App.getInstance().game.weatherCofficient()));
+            case GOLD -> player.decreaseEnergy((int)(2 * App.getInstance().game.weatherCofficient()));
+            case IRIDIUM -> player.decreaseEnergy((int)(1 * App.getInstance().game.weatherCofficient()));
         }
         if(player.getSkillLevel(SkillType.FARMING) >= 4)
             player.setEnergy(player.getEnergy() + 1);
