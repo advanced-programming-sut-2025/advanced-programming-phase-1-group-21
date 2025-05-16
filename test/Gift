@@ -1,0 +1,54 @@
+go to login menu
+menu enter mainmenu
+login -u Ali -p Alireza123!
+menu enter mainmenu
+menu enter game
+new game sobi sobhan maryam
+1
+1
+1
+1
+show notifications
+show friendships
+talk -u sobhan -m salam
+show talks history -u sobhan
+next turn
+next turn
+show notifications
+show notifications
+show talks history -u ali
+show talks history -u Ali
+show friendships
+energy show
+energy show
+energy show
+energy show
+cheat add item -n quartz -c 10
+inventory show
+send gift -u maryam -i quartz -a 2
+set friendship -u maryam -x 100
+show friendships
+show gift history -u maryam
+send gift -u maryam -i quartz -a 2
+show gift history -u maryam
+list gifts
+show friendships
+energy show
+energy show
+energy show
+energy show
+energy show
+energy show
+next turn
+next turn
+next turn
+show notifications
+list gifts
+show friendships
+show gift history -u Ali
+gift rate -u Ali -i 0 -r 4
+show gift history -u Ali
+show friendships
+gift rate -u Ali -i 0 -r 2
+list gifts
+show gift history -u Ali

@@ -54,11 +54,20 @@ next turn
 cheat add item -n coin -c 100
 inventory show
 next turn
-set friendship -u maryam
+set friendship -u maryam -x 100
 ask marriage -u maryam
 .
 .
 .
 .
+set friendship -u maryam -x 200
+set friendship -u maryam -x 300
+cheat add item -n bouquet -c 1
+send flower -u maryam
+set friendship -u maryam -x 400
+show friendships
+ask marriage -u maryam
 cheat add item -n wedding ring -c 1
 ask marriage -u maryam
+/////dasti yes    ya  no baraye energy
+inventory show
