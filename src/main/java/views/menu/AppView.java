@@ -20,24 +20,24 @@ public class AppView {
     }
 
     public void run() throws IOException {
-        while (App.play){
-            System.out.print(App.getUI() + " > ");
+        while (true){
+            System.out.print(App.getInstance().getUI() + " > ");
             String command = scanner.nextLine().trim();
             if (command.equals("EXIT")) {
                 scanner.close();
                 return;
             }
-            if(App.currentMenu.equals(Menu.RegisterMenu))
+            if(App.getInstance().currentMenu.equals(Menu.RegisterMenu))
                 registerMenuView.Result(command);
-            else if(App.currentMenu.equals(Menu.LoginMenu))
+            else if(App.getInstance().currentMenu.equals(Menu.LoginMenu))
                 loginMenuView.Result(command);
-            else if(App.currentMenu.equals(Menu.ProfileMenu))
+            else if(App.getInstance().currentMenu.equals(Menu.ProfileMenu))
                 profileMenuView.Result(command);
-            else if(App.currentMenu.equals(Menu.Game))
+            else if(App.getInstance().currentMenu.equals(Menu.Game))
                 gameTerminalView.Result(command);
-            else if(App.currentMenu.equals(Menu.MainMenu))
+            else if(App.getInstance().currentMenu.equals(Menu.MainMenu))
                 mainMenuView.Result(command);
-            else if(App.currentMenu.equals(Menu.TradeMenu))
+            else if(App.getInstance().currentMenu.equals(Menu.TradeMenu))
                 tradeMenuView.Result(command);
 
         }

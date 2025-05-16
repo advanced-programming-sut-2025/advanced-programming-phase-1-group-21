@@ -44,7 +44,7 @@ public class Pickaxe extends Tool {
 
 	@Override
 	public Result<Item> use(Coord coord) {
-		Player player = App.game.getCurrentPlayer();
+		Player player = App.getInstance().game.getCurrentPlayer();
 		MapType mapType = player.getMap().mapType;
 
 		if (mapType != MapType.FARM && mapType != MapType.MINES)
@@ -75,7 +75,7 @@ public class Pickaxe extends Tool {
 			}
 		}
 
-		double weatherCofficient = App.game.weatherCofficient();
+		double weatherCofficient = App.getInstance().game.weatherCofficient();
 
 		int energyCost = switch (toolMaterialType) {
 			case PRIMITIVE -> (int)(5 * weatherCofficient);

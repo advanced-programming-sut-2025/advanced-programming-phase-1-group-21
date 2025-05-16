@@ -16,40 +16,40 @@ public class Axe extends Tool {
 	@Override
     public Result<Item> use(Coord coord) {
 		boolean use = false;
-		Tile tile = App.game.getCurrentPlayerMap().getTile(coord);
+		Tile tile = App.getInstance().game.getCurrentPlayerMap().getTile(coord);
 		if (tile == null) {
 			return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
 		}
-		if(!App.game.getCurrentPlayerMap().getTile(coord).getTileType().isForaging()) {
-			App.game.getCurrentPlayer().decreaseEnergy(1);
+		if(!App.getInstance().game.getCurrentPlayerMap().getTile(coord).getTileType().isForaging()) {
+			App.getInstance().game.getCurrentPlayer().decreaseEnergy(1);
 			return Result.success(null, "tabaret khata raft");
 		}
 
 		if(tile.getTileType() == TileType.TREE) {
 			use = true;
 			tile.setTileType(TileType.UNPLOWED);
-			App.game.getCurrentPlayer().getInventory().addItem(Item.build("Wood", 10));
+			App.getInstance().game.getCurrentPlayer().getInventory().addItem(Item.build("Wood", 10));
 		}
 
-		double weatherCofficient = App.game.weatherCofficient();
+		double weatherCofficient = App.getInstance().game.weatherCofficient();
 
 		if(use){
 			if(this.toolMaterialType.equals(ToolMaterialType.PRIMITIVE))
-				App.game.getCurrentPlayer().decreaseEnergy((int) (5 * weatherCofficient));
+				App.getInstance().game.getCurrentPlayer().decreaseEnergy((int) (5 * weatherCofficient));
 			else if(this.toolMaterialType.equals(ToolMaterialType.COPPER))
-				App.game.getCurrentPlayer().decreaseEnergy((int) (4 * weatherCofficient));
+				App.getInstance().game.getCurrentPlayer().decreaseEnergy((int) (4 * weatherCofficient));
 			else if(this.toolMaterialType.equals(ToolMaterialType.STEEL))
-				App.game.getCurrentPlayer().decreaseEnergy((int)(3 * weatherCofficient));
+				App.getInstance().game.getCurrentPlayer().decreaseEnergy((int)(3 * weatherCofficient));
 			else if(this.toolMaterialType.equals(ToolMaterialType.GOLD))
-				App.game.getCurrentPlayer().decreaseEnergy((int)(2 * weatherCofficient));
+				App.getInstance().game.getCurrentPlayer().decreaseEnergy((int)(2 * weatherCofficient));
 			else if(this.toolMaterialType.equals(ToolMaterialType.IRIDIUM))
-				App.game.getCurrentPlayer().decreaseEnergy((int) weatherCofficient);
-			else if(App.game.getCurrentPlayer().getSkillLevel(SkillType.FARMING) >= 4)
-				App.game.getCurrentPlayer().setEnergy(App.game.getCurrentPlayer().getEnergy() + 1);
+				App.getInstance().game.getCurrentPlayer().decreaseEnergy((int) weatherCofficient);
+			else if(App.getInstance().game.getCurrentPlayer().getSkillLevel(SkillType.FARMING) >= 4)
+				App.getInstance().game.getCurrentPlayer().setEnergy(App.getInstance().game.getCurrentPlayer().getEnergy() + 1);
 			return Result.success(null, "to yek derakht ro koshti");
 		}
 
-		App.game.getCurrentPlayer().decreaseEnergy(1);
+		App.getInstance().game.getCurrentPlayer().decreaseEnergy(1);
 		return Result.success(null, "tabaret khata raft");
 	}
 

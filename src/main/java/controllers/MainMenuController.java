@@ -8,12 +8,12 @@ public class MainMenuController{
 
     public Result<Void> enterMenu(String menu) {
         if(menu.equals("game")){
-            App.currentMenu = Menu.Game;
+            App.getInstance().currentMenu = Menu.Game;
             return Result.success("Now you are in a game");
         }
 
         if(menu.equals("profile")){
-            App.currentMenu = Menu.ProfileMenu;
+            App.getInstance().currentMenu = Menu.ProfileMenu;
             return Result.success("Now you are in profile menu");
         }
         return Result.success("You are not in a game");

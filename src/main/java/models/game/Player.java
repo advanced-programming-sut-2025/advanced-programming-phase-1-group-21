@@ -129,9 +129,9 @@ public class Player implements DailyUpdate {
 
     public ArrayList<Tile> getNeighborTiles(){
         ArrayList<Tile> output = new ArrayList<>();
-        Coord playerCord = App.game.getCurrentPlayer().getCoord();
+        Coord playerCord = App.getInstance().game.getCurrentPlayer().getCoord();
         for(Direction direction : Direction.values()) {
-            Tile tile = App.game.getCurrentPlayerMap().getTile(direction.getCoord().addCoord(playerCord));
+            Tile tile = App.getInstance().game.getCurrentPlayerMap().getTile(direction.getCoord().addCoord(playerCord));
             if (tile == null)
                 continue;
             output.add(tile);
@@ -141,10 +141,10 @@ public class Player implements DailyUpdate {
 
     public ArrayList<Coord> getNeighborCoord() {
         ArrayList<Coord> output = new ArrayList<>();
-        Coord playerCord = App.game.getCurrentPlayer().getCoord();
+        Coord playerCord = App.getInstance().game.getCurrentPlayer().getCoord();
         for(Direction direction : Direction.values()) {
             Coord c = direction.getCoord().addCoord(playerCord);
-            Tile tile = App.game.getCurrentPlayerMap().getTile(c);
+            Tile tile = App.getInstance().game.getCurrentPlayerMap().getTile(c);
             if (tile == null)
                 continue;
             output.add(c);
@@ -153,10 +153,10 @@ public class Player implements DailyUpdate {
     }
 
     public boolean weAreNextToEachOther(Player otherPlayer) {
-        if(!App.game.getCurrentPlayer().getMap().equals(otherPlayer.getMap()))
+        if(!App.getInstance().game.getCurrentPlayer().getMap().equals(otherPlayer.getMap()))
             return false;
         Coord otherPlayerCord = otherPlayer.getCoord();
-        Coord myCoord = App.game.getCurrentPlayer().getCoord();
+        Coord myCoord = App.getInstance().game.getCurrentPlayer().getCoord();
 
         if((otherPlayerCord.getX() - myCoord.getX()) * (otherPlayerCord.getX() - myCoord.getX()) > 1)
             return false;
@@ -246,7 +246,7 @@ public class Player implements DailyUpdate {
     @Override
     public boolean nextDay(Game g) {
         Building building = getBuilding();
-        if (building != null && !(building instanceof House)) {
+        if (!(building instanceof House)) {
             energy.setMaxEnergy(energy.getMaxEnergy() / 2, DURATION_ENERGY);
         }
 

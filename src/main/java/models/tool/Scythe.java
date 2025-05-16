@@ -16,8 +16,8 @@ public class Scythe extends Tool {
 
 	@Override
 	public Result<Item> use(Coord coord) {
-		Player player = App.game.getCurrentPlayer();
-		player.decreaseEnergy((int)(2 * App.game.weatherCofficient()));
+		Player player = App.getInstance().game.getCurrentPlayer();
+		player.decreaseEnergy((int)(2 * App.getInstance().game.weatherCofficient()));
 		Tile tile = player.getMap().getTile(coord);
 
 		if(!tile.getTileType().isForaging() && tile.getPlacable(PlantedSeed.class) == null)

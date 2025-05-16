@@ -51,7 +51,7 @@ public class User {
         return this.hash.verify(inputPassword);
     }
 
-    public boolean isInAGame() {
+    public boolean isInAgame() {
         return isInAGame;
     }
 

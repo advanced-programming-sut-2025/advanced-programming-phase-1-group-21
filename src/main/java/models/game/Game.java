@@ -100,7 +100,7 @@ public class Game {
 
 
     private Weather calculateRandomWeather() {
-        int rnd = App.random.nextInt(100);
+        int rnd = App.getInstance().getInstance().getRandom().nextInt(100);
 
         switch (getSeason()) {
             case SPRING:
@@ -195,11 +195,7 @@ public class Game {
         currentPlayer = nextPlayer;
     }
 
-    public void endGame() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public void startGame() {
+    public void endgame() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

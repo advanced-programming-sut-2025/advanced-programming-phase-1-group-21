@@ -33,7 +33,7 @@ public class PlantedSeed implements Placable, Harvestable, DailyUpdate {
 
 	public Item harvest() {
 		// This method is supposed to be called by its tile.
-		Player player = App.game.getCurrentPlayer();
+		Player player = App.getInstance().game.getCurrentPlayer();
 		if (readyToHarvest) {
 			player.setSkillExp(SkillType.FARMING , player.getSkillExp(SkillType.FARMING) + 5);
 			readyToHarvest = false;

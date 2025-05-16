@@ -33,8 +33,8 @@ public class LoginMenuController{
         //TODO
         //Stay Logged In
 
-        App.logedInUser = findUserByUsername(username);
-        return Result.success(App.logedInUser , "User logged in successfully");
+        App.getInstance().logedInUser = findUserByUsername(username);
+        return Result.success(App.getInstance().logedInUser , "User logged in successfully");
     }
 
     public Result<Void> forgetPassword(String username) throws IOException {
@@ -70,14 +70,14 @@ public class LoginMenuController{
 
     public Result<Void> changeMenu(String menu){
         if(menu.equals(Menu.RegisterMenu.toString())){
-            App.currentMenu = Menu.RegisterMenu;
+            App.getInstance().currentMenu = Menu.RegisterMenu;
             return Result.success(null);
         }
 
         if(menu.equals("mainmenu")){
-            if(App.logedInUser == null)
+            if(App.getInstance().logedInUser == null)
                 return Result.failure(UserError.SHOULD_LOGIN_FIRST);
-            App.currentMenu = Menu.MainMenu;
+            App.getInstance().currentMenu = Menu.MainMenu;
             return Result.success(null);
         }
         else
