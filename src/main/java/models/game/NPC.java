@@ -13,6 +13,7 @@ public class NPC implements Placable, DailyUpdate, Serializable {
     // Characterization
     NPCHouse house;
     private ArrayList<VillagerTask> tasks;
+    private ArrayList<Boolean> tasksFlag = new ArrayList<>();
     private ArrayList<NPCFriendship> friendships = new ArrayList<>();
     private ArrayList<String> favorites;
     private Coord coord;
@@ -24,6 +25,13 @@ public class NPC implements Placable, DailyUpdate, Serializable {
         for(Player player : players)
             friendships.add(new NPCFriendship(player , FriendshipLevel.LEVEL0 , 0));
         house = new NPCHouse();
+        tasksFlag.add(false);
+        tasksFlag.add(false);
+        tasksFlag.add(false);
+    }
+
+    public ArrayList<Boolean> getTasksFlag() {
+        return tasksFlag;
     }
 
     public String getName() {

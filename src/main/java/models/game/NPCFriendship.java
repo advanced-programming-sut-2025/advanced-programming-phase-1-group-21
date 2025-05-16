@@ -179,6 +179,7 @@ public class NPCFriendship implements DailyUpdate, Serializable {
 
     public void setFriendshipXP(int friendshipXP) {
         this.friendshipXP = friendshipXP;
+        checkOverFlow();
 
     }
 
