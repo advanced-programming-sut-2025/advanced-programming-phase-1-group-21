@@ -70,13 +70,34 @@ public class Recipe extends Item {
     public ArrayList<Item> getItems() {
         ArrayList<Item> items = new ArrayList<>();
         Map <String, Integer> ingredients = data.getIngredients();
-        for (String itemName: ingredients.keySet())
-            items.add(Item.build(itemName, ingredients.get(itemName)));
+        for (String itemName: ingredients.keySet()) {
+            Item item = Item.build(itemName, ingredients.get(itemName));
+            if (item == null) {
+                throw new NullPointerException("Item " + itemName + " is null");
+            }
+            items.add(item);
+        }
         return items;
     }
 
     @Override
     public String toString() {
-        return data.getName() + " * " + amount;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Recipe{name='").append(data.getName()).append('\'');
+        sb.append(", type=").append(type);
+        sb.append(", amount=").append(amount);
+        sb.append(", result=").append(data.getResultName());
+        sb.append(", ingredients=[");
+
+        Map<String, Integer> ingredients = data.getIngredients();
+        boolean first = true;
+        for (Map.Entry<String, Integer> entry : ingredients.entrySet()) {
+            if (!first) sb.append(", ");
+            sb.append(entry.getKey()).append(" x").append(entry.getValue());
+            first = false;
+        }
+
+        sb.append("]}");
+        return sb.toString();
     }
 }

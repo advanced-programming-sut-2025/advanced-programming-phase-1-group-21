@@ -7,6 +7,10 @@ import java.util.ArrayList;
 public class House extends Building {
     Refrigerator refrigerator = new Refrigerator();
 
+    public Refrigerator getRefrigerator() {
+        return refrigerator;
+    }
+
     public House() {
         super();
         this.map = (new MapBuilder()).buildHouse(refrigerator);
