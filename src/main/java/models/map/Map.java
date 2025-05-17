@@ -2,13 +2,14 @@ package models.map;
 
 import models.App;
 import models.DailyUpdate;
+import models.crop.PlantedSeed;
 import models.game.Game;
 import models.game.Player;
-import models.result.Result;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Map implements DailyUpdate, Serializable {
     public ArrayList<ArrayList<Tile>> tiles;
@@ -172,7 +173,6 @@ public class Map implements DailyUpdate, Serializable {
     }
 
     static final int NUMBER_OF_THORS_PER_DAY = 3;
-    static final int NUMBER_OF_CROWS_PER_DAY = 4;
     @Override
     public boolean nextDay(Game g) {
         if (g.getWeather() == Weather.STORM) {
@@ -180,9 +180,27 @@ public class Map implements DailyUpdate, Serializable {
                 thor(getRandomCoord());
         }
 
-        //Crow attack
-        for (int i = 0; i < NUMBER_OF_CROWS_PER_DAY; i++) {
-            attackCrow(getRandomCoord());
+        List<Tile> plantedSeedTiles = new ArrayList<>();
+        for (int i = 0; i < mapType.x; i++) {
+            for (int j = 0; j < mapType.y; j++) {
+                Coord coord = new Coord(i, j);
+                Tile tile = getTile(coord);
+                if (tile != null && tile.getPlacable(PlantedSeed.class) != null) {
+                    plantedSeedTiles.add(tile);
+                }
+            }
+        }
+
+        Random rand = new Random();
+
+        if (mapType == MapType.FARM || mapType == MapType.VILLAGE) {
+            int crows = plantedSeedTiles.size() / 16;
+            for (int i = 0; i < crows; i++) if (rand.nextInt(0, 5) == 0) {
+                Tile t = plantedSeedTiles.get(rand.nextInt(plantedSeedTiles.size()));
+                System.err.println("CROW ATTACK");
+                t.setPlacable(null);
+                t.setTileType(TileType.UNPLOWED);
+            }
         }
 
         for (ArrayList<Tile> row : tiles) {

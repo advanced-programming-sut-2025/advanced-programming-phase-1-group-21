@@ -8,13 +8,15 @@ public class Energy implements DailyUpdate, Serializable {
     static final int MAX_ENERGY = 200;
 
     private int currentEnergy;
+    private int totalEnergyForRound;
     private int maxEnergy;
 
     private int remainingDays;
 
     public Energy() {
         maxEnergy = MAX_ENERGY;
-        currentEnergy = maxEnergy;
+        currentEnergy = 50;
+        totalEnergyForRound = maxEnergy;
         remainingDays = -1;
     }
 
@@ -27,11 +29,9 @@ public class Energy implements DailyUpdate, Serializable {
     }
 
     public void decreaseEnergy(int amount) {
-        if (currentEnergy <= amount) {
-            currentEnergy = 0;
-        }
-        else
-            currentEnergy -= amount;
+        amount = Math.min(amount, currentEnergy);
+        currentEnergy -= amount;
+        totalEnergyForRound -= amount;
     }
 
     @Override
@@ -41,7 +41,8 @@ public class Energy implements DailyUpdate, Serializable {
             remainingDays = -1;
             maxEnergy = MAX_ENERGY;
         }
-        currentEnergy = maxEnergy;
+        totalEnergyForRound = maxEnergy;
+        reset();
         return false;
     }
 
@@ -64,4 +65,7 @@ public class Energy implements DailyUpdate, Serializable {
         );
     }
 
+    public void reset() {
+        currentEnergy = Math.min(totalEnergyForRound, 50);
+    }
 }

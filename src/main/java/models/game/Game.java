@@ -177,6 +177,9 @@ public class Game implements Serializable {
         else {
             advance();
         }
+        for (Player player : players) {
+            player.resetEnergy();
+        }
     }
 
     public void setCurrentPlayer(Player currentPlayer) {
