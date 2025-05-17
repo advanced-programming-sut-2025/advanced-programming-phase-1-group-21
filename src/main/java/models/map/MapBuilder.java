@@ -4,6 +4,7 @@ import models.App;
 import models.Item.ItemType;
 import models.Item.Sapling;
 import models.crop.PlantedTree;
+import models.data.ForagingCropData;
 import models.data.items.ItemData;
 import models.data.items.TreeData;
 import models.game.NPC;
@@ -27,7 +28,7 @@ public class MapBuilder {
             Tile tile = map.getTile(Coord.getRandomCoord(map.getMaxX(), map.getMaxY()));
 
             if (tile != null && tile.isEmpty()) {
-                TileType randomForaging = types.get(App.getInstance().getInstance().getRandom().nextInt(types.size()));
+                TileType randomForaging = types.get(App.getInstance().getRandom().nextInt(types.size()));
                 tile.setTileType(randomForaging);
                 placed++;
             }
@@ -94,6 +95,22 @@ public class MapBuilder {
                     numberOfRemainingForagingTrees--;
                 }
             }
+
+//            int numberOfRemainingForagingCrops = 30;
+//            final int numberOfForagingCropTypes = ForagingCropData.getSize();
+//            while (numberOfRemainingForagingCrops > 0) {
+//                Coord coord = Coord.getRandomCoord(map.getMaxX(), map.getMaxY());
+//                Tile tile = map.getTile(coord);
+//                if (tile.isEmpty()) {
+//                    int id = random.nextInt(0, numberOfForagingCropTypes); // What is this foraging crop's type?
+//                    ForagingCrop foragingCrop = new ForagingCrop(ForagingCropData.getData(id));
+//
+//                    tile.setPlacable(foragingCrop);
+//                    tile.setTileType(TileType.FORAGING_CROP);
+//                    numberOfRemainingForagingCrops--;
+//                }
+//            }
+
             buildRandomTile(map, foragingTypes, 40, 70);
             return map;
         }

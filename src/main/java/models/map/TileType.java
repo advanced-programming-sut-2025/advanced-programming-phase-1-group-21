@@ -35,6 +35,7 @@ public enum TileType {
 	GOLD_ROCK(1, 1, false, 'g'),
 	IRIDIUM_ROCK(1, 1, false, 'I'),
 	LEAF(1, 1, false, '*'),
+	FORAGING_CROP(1, 1, false, 'C'),
 
 	NPC(1, 1, false, 'N'),
 	NPC_HOUSE(3, 3, false, 'O'),
