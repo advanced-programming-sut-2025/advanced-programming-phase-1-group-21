@@ -1,0 +1,14 @@
+menu enter mainmenu
+menu enter game
+new game sobi sobhan maryam
+1
+1
+1
+1
+walk -l (19, 8)
+walk -l (19, 9)
+walk -l (0, 0)
+walk -l (49, 24)
+; faint vasat rah
+energy set -v 100
+energy unlimited

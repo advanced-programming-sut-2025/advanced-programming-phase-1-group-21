@@ -1,0 +1,120 @@
+go to login menu
+menu enter mainmenu
+login -u Ali -p Alireza123!
+menu enter mainmenu
+menu enter game
+new game sobi sobhan maryam
+1
+1
+1
+1
+energy set -v 1000000
+cheat add item -n Deluxe Retaining Soil -c 30
+cheat add item -n Melon Seeds -c 30
+walk -l (19, 8)
+walk -l (19, 9)
+walk -l (20, 20)
+equip tool -t hoe
+use tool -d S
+fertilize -f Deluxe Retaining Soil -d S
+plant -s Melon Seeds -d S
+
+fertilize -f Deluxe Retaining Soil -d S
+walk -l (19, 20)
+use tool -d S
+plant -s Melon Seeds -d S
+
+fertilize -f Deluxe Retaining Soil -d S
+walk -l (18, 20)
+use tool -d S
+plant -s Melon Seeds -d S
+
+fertilize -f Deluxe Retaining Soil -d S
+walk -l (17, 20)
+use tool -d S
+plant -s Melon Seeds -d S
+
+fertilize -f Deluxe Retaining Soil -d S
+walk -l (16, 20)
+use tool -d S
+plant -s Melon Seeds -d S
+
+fertilize -f Deluxe Retaining Soil -d S
+walk -l (15, 20)
+use tool -d S
+plant -s Melon Seeds -d S
+
+fertilize -f Deluxe Retaining Soil -d S
+walk -l (14, 20)
+use tool -d S
+plant -s Melon Seeds -d S
+
+fertilize -f Deluxe Retaining Soil -d S
+walk -l (13, 20)
+use tool -d S
+plant -s Melon Seeds -d S
+
+fertilize -f Deluxe Retaining Soil -d S
+walk -l (12, 20)
+use tool -d S
+plant -s Melon Seeds -d S
+
+fertilize -f Deluxe Retaining Soil -d S
+walk -l (11, 20)
+use tool -d S
+plant -s Melon Seeds -d S
+
+fertilize -f Deluxe Retaining Soil -d S
+walk -l (10, 20)
+use tool -d S
+plant -s Melon Seeds -d S
+
+fertilize -f Deluxe Retaining Soil -d S
+walk -l (9, 20)
+use tool -d S
+plant -s Melon Seeds -d S
+
+fertilize -f Deluxe Retaining Soil -d S
+walk -l (8, 20)
+use tool -d S
+plant -s Melon Seeds -d S
+
+fertilize -f Deluxe Retaining Soil -d S
+walk -l (7, 20)
+use tool -d S
+plant -s Melon Seeds -d S
+
+fertilize -f Deluxe Retaining Soil -d S
+walk -l (6, 20)
+use tool -d S
+plant -s Melon Seeds -d S
+
+fertilize -f Deluxe Retaining Soil -d S
+walk -l (5, 20)
+use tool -d S
+plant -s Melon Seeds -d S
+
+fertilize -f Deluxe Retaining Soil -d S
+walk -l (4, 20)
+use tool -d S
+plant -s Melon Seeds -d S
+
+fertilize -f Deluxe Retaining Soil -d S
+walk -l (3, 20)
+use tool -d S
+plant -s Melon Seeds -d S
+
+fertilize -f Deluxe Retaining Soil -d S
+walk -l (2, 20)
+use tool -d S
+plant -s Melon Seeds -d S
+
+fertilize -f Deluxe Retaining Soil -d S
+walk -l (1, 20)
+use tool -d S
+plant -s Melon Seeds -d S
+
+cheat advance date 1d
+cheat advance date 10d
+cheat advance date 100d
+map status

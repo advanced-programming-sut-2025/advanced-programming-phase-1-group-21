@@ -14,7 +14,6 @@ public class PathFinder {
 
     public List<PathStep> findPathTo(Coord target) {
         Coord start = player.getCoord();
-        int maxEnergy = player.getEnergy();
 
         // Quick check: target must exist and be walkable
         Tile targetTile = map.getTile(target);
@@ -61,9 +60,6 @@ public class PathFinder {
                 // Compute turn cost (3) if changing facing after the first move
                 int turnCost = (current.direction == null || current.direction == dir) ? 0 : 3;
                 int tentativeG = current.gScore + 1 + turnCost;
-                if (tentativeG > maxEnergy) {
-                    continue;  // prune paths that exceed available energy
-                }
 
                 State nextState = new State(nextCoord, dir);
                 Node neighbor = allNodes.getOrDefault(

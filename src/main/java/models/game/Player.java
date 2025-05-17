@@ -336,7 +336,7 @@ public class Player implements DailyUpdate, Serializable {
     }
 
     public boolean isFainted() {
-        return energy.getCurrentEnergy() == 0;
+        return energy.getCurrentEnergy() <= 0;
     }
 
     public int getSkillExp(SkillType skillType) {
@@ -349,5 +349,9 @@ public class Player implements DailyUpdate, Serializable {
 
     public void setSkillExp(SkillType skillType, int exp) {
         skill.setSkillExp(skillType, exp);
+    }
+
+    public void resetEnergy() {
+        energy.reset();
     }
 }
