@@ -76,7 +76,7 @@ public enum GameMenuCommand implements Command {
 //    TOOLS_UPGRADE("tools upgrade (?<toolName>.*)>"),
 //    TOOL_USE("tool use -d (?<direction>.*)>"),
     CRAFTINFO("craftinfo -n (?<craftName>.+)"),
-    CRAFTING_SHOW_RECIPES("\\s+crafting\\s+show\\s+recipes"),
+    CRAFTING_SHOW_RECIPES("\\s*crafting\\s+show\\s+recipes\\s*"),
     CRAFTING("\\s*crafting\\s+craft\\s+(?<name>.+)\\s*"),
 //    PLACE_ITEM("place item -n (?<item_name>.*) -d (?<direction>.*)"),
 //    CHEAT_ADD_ITEM("cheat add item -n (?<item_name>.*) -c (?<count>.*)"),
