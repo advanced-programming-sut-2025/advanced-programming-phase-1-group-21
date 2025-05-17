@@ -27,21 +27,21 @@ public class LoginMenuView {
 
     public void Result(String command) throws IOException {
         if((matcher = LoginMenuCommand.FORGET_PASSWORD.getMatcher(command)) != null){
-            System.out.println(loginMenuController.forgetPassword(matcher.group("username")).getMessage());
+            System.out.println(loginMenuController.forgetPassword(matcher.group("username")));
         }
 
         else if((matcher = LoginMenuCommand.SHOW_CURRENT_MENU.getMatcher(command)) != null){
-            System.out.println(loginMenuController.showCurrentMenu().getMessage());
+            System.out.println(loginMenuController.showCurrentMenu());
         }
 
         else if((matcher = LoginMenuCommand.LOGIN.getMatcher(command)) != null){
             boolean stayLoggedIn = matcher.group("stay") != null;
             System.out.println(loginMenuController.login(matcher.group("username") ,
-                    matcher.group("password"), stayLoggedIn).getMessage());
+                    matcher.group("password"), stayLoggedIn));
         }
 
         else if((matcher = LoginMenuCommand.ENTER_MENU.getMatcher(command)) != null){
-            System.out.println(loginMenuController.changeMenu(matcher.group("menu")).getMessage());
+            System.out.println(loginMenuController.changeMenu(matcher.group("menu")));
         }
 
         else

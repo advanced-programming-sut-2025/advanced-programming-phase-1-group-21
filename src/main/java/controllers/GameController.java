@@ -776,7 +776,17 @@ public class GameController {
             if (animal.getTodayProduct() != null) {
                 output.add("name : " + animal.getName());
                 output.add("product name : " + animal.getTodayProduct());
-                output.add("product quality : " + String.format("%f" , ( (double) animal.getFriendship() / 1000) * (0.5 + 0.5 * Math.random())));
+                double quality = ( (double) animal.getFriendship() / 1000) * (0.5 + 0.5 * Math.random());
+                output.add("product quality : " + String.format("%f" , quality));
+                if(quality < 0.5)
+                    output.add("product quality : PRIMITIVE");
+                else if(quality < 0.7)
+                    output.add("product quality : SILVER");
+                else if(quality < 0.9)
+                    output.add("product quality : GOLD");
+                else
+                    output.add("product quality : IRIDIUM");
+
             }
         }
         return Result.success(output);

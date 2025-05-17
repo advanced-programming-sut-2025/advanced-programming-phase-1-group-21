@@ -1,6 +1,8 @@
 package views.menu;
 
 import controllers.MainMenuController;
+import models.App;
+import models.Menu;
 import models.command.MainMenuCommand;
 
 import java.io.IOException;
@@ -27,7 +29,7 @@ public class MainMenuView {
         }
 
         else if((matcher = MainMenuCommand.EXIT_MENU.getMatcher(command)) != null){
-            throw new UnsupportedOperationException("Not supported yet.");
+            App.getInstance().currentMenu = Menu.LoginMenu;
         }
 
         else
