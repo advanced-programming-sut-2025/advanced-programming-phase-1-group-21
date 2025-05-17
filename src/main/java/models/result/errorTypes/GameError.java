@@ -4,6 +4,7 @@ import models.Item.ItemType;
 import models.result.Error;
 
 public enum GameError implements Error {
+    INVALID_NUMBER("invalid number"),
     ITEM_IS_NOT_CONSUMABLE("Item can't be eaten"),
     ITEM_DOESNT_HAVE_VALID_TYPE("item does not have valid type"),
     ENERGY_IS_NOT_ENOUGH("Energy is not enough"),

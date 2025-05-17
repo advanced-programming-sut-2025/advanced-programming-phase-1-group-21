@@ -1,0 +1,30 @@
+go to login menu
+menu enter mainmenu
+login -u Ali -p Alireza123!
+menu enter mainmenu
+menu enter game
+new game sobi sobhan maryam
+1
+1
+1
+1
+walk -l (19, 8)
+walk -l (19, 9)
+go to village
+walk -l (75, 4)
+walk -l (75, 5)
+cheat add item -n Coin -c 100000
+purchase Fish Smoker Recipe
+crafting show recipes
+walk -l (6, 7)
+walk -l (7, 7)
+back home
+walk -l (4, 0)
+walk -l (4, 1)
+ crafting show recipes
+ cheat add item -n Wood -c 100
+ cheat add item -n Iron Bar -c 100
+ cheat add item -n Coal -c 1000
+ crafting craft Fish Smoker Recipe
+ crafting craft Fish Smoker Recipe
+ 

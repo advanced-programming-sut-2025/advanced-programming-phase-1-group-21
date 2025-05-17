@@ -531,6 +531,8 @@ public class GameController {
 
     public Result<List<Recipe>> showCraftingRecipes() {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+        if (game.getCurrentPlayer().getMap().mapType != MapType.HOUSE)
+            return Result.failure(GameError.YOU_SHOULD_BE_ON_HOUSE);
         return Result.success(game.getCurrentPlayer().getRecipes(RecipeType.CRAFTING));
     }
 
@@ -581,6 +583,7 @@ public class GameController {
 
     public Result<Void> addItemCheat(String itemName, int quantity) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+        if (quantity <= 0) return Result.failure(GameError.INVALID_NUMBER);
         if (itemName.equalsIgnoreCase("milkpale")) {
             game.getCurrentPlayer().getInventory().addItem(new MilkPail());
             return Result.success(null);
