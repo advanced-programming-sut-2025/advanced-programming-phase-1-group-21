@@ -1,5 +1,6 @@
 package models.game;
 
+import controllers.GameController;
 import models.App;
 import models.DailyUpdate;
 import models.Item.Item;
