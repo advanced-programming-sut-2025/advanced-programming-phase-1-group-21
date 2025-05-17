@@ -189,8 +189,9 @@ public class Inventory implements Serializable {
         ArrayList<String> output = new ArrayList<>();
         output.add(App.getInstance().game.getCurrentPlayer().getUser().getUsername() + "'s Inventory Items:");
         for (Item item : items) {
-            output.add("name :" + item.getName());
-            output.add("amount :" + item.getAmount());
+            output.add(item.toString());
+            output.add("name: " + item.getName());
+            output.add("amount: " + item.getAmount());
             output.add("-----------------");
         }
         return output;

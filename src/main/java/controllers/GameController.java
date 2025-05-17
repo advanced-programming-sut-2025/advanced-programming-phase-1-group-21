@@ -406,9 +406,29 @@ public class GameController {
         return Result.success(game.getCurrentPlayer().getInventory().showAvailableTools());
     }
 
-    public Result<Tool> upgradeTool(String toolName) {
+    public Result<Void> upgradeTool(String toolName) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+        Building building = game.getCurrentPlayer().getBuilding();
+        if (!(building instanceof Shop)) return Result.failure(GameError.YOU_SHOULD_BE_ON_SHOP);
+
+        Shop shop = (Shop) building;
+        if (shop.getShopType() != TileType.BLACKSMITH)
+            return Result.failure(GameError.YOU_SHOULD_BE_ON_BLACKSMITH);
+        Inventory inventory = game.getCurrentPlayer().getInventory();
+        Item item = inventory.getItem(toolName);
+        if (item == null || item.getItemType() != ItemType.TOOL)
+            return Result.failure(GameError.ITEM_IS_NOT_TOOL);
+        Tool t = (Tool) item;
+        String recipe = t.getToolMaterialType().getNextToolName();
+        if (recipe == null) return Result.failure(GameError.NOT_UPGRADABLE);
+
+        Result<Void> r = shop.prepareBuy(recipe, 1, inventory);
+        if (r.isError()) return r;
+
+        t.setToolMaterialType(t.getToolMaterialType().getNextType());
+
+        return Result.success(null);
+
     }
 
     public Result<Item> useTool(Direction d) {

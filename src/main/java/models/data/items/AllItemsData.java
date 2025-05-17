@@ -43,4 +43,9 @@ public class AllItemsData implements Data {
 				return a;
 		return null;
 	}
+
+	@Override
+	public String toString() {
+		return name + " (" + ctype + ")";
+	}
 }

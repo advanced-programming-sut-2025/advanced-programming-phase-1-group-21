@@ -73,7 +73,7 @@ public enum GameMenuCommand implements Command {
     USE_TOOL("\\s*use\\s+tool\\s+-d\\s+(?<direction>(N)|(E)|(S)|(W)|(NE)|(NW)|(SE)|(SW))\\s*"),
     //    TOOL_SHOW_CURRENT("tool show current"),
 //    TOOLS_SHOW_AVAILABLE("tools show available"),
-//    TOOLS_UPGRADE("tools upgrade (?<toolName>.*)>"),
+    TOOLS_UPGRADE("\\s*tools\\s+upgrade\\s+(?<toolName>.+)\\s*"),
 //    TOOL_USE("tool use -d (?<direction>.*)>"),
     CRAFTINFO("craftinfo -n (?<craftName>.+)"),
     CRAFTING_SHOW_RECIPES("\\s*crafting\\s+show\\s+recipes\\s*"),
