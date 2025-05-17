@@ -458,7 +458,6 @@ public class MainTester {
 		assertEquals(output, result);
 	}
 
-	@Disabled
 	@Test
 	@Order(9)
 	void profileChangeUsernameTest() throws IOException {
@@ -559,7 +558,6 @@ public class MainTester {
 		assertEquals(output, result);
 	}
 
-	@Disabled
 	@Test
 	@Order(10)
 	void profileChangeEmailTest() throws IOException {
