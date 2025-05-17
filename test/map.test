@@ -1,0 +1,13 @@
+go to login menu
+menu enter mainmenu
+login -u Ali -p Alireza123!
+menu enter mainmenu
+menu enter game
+new game sobi sobhan maryam
+3
+3
+3
+3
+walk -l (19, 8)
+walk -l (19, 9)
+map status

@@ -8,6 +8,7 @@ import models.game.Player;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -175,6 +176,17 @@ public class Map implements DailyUpdate, Serializable {
     static final int NUMBER_OF_THORS_PER_DAY = 3;
     @Override
     public boolean nextDay(Game g) {
+        if (mapType == MapType.MINES) {
+            MapBuilder mb = new MapBuilder();
+            List<TileType> foragingTypes = Arrays.asList(
+                    TileType.COPPER_ROCK,
+                    TileType.STEEL_ROCK,
+                    TileType.GOLD_ROCK,
+                    TileType.IRIDIUM_ROCK
+            );
+            mb.buildRandomTile(this, foragingTypes, 1, 3);
+        }
+
         if (g.getWeather() == Weather.STORM) {
             for (int i = 0; i < NUMBER_OF_THORS_PER_DAY; i++)
                 thor(getRandomCoord());
