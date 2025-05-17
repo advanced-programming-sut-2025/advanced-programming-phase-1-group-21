@@ -2,16 +2,15 @@ import org.junit.jupiter.api.*;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import views.menu.RegisterMenuView;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class RegisterTest {
+public class MainTester {
 	private static int numberOfTestCases;
 	private static String testCaseDirectory = "src/test/resources/testcases/";
 
@@ -87,14 +86,14 @@ public class RegisterTest {
 	@Disabled
 	@ParameterizedTest
 	@ValueSource(ints = {1, 2, 3, 4})
-	@Order(2)
+	@Order(10000)
 	void test0(int x) {
 		System.out.println("Test " + x);
 	}
 
 	@Test
 	@Order(1)
-	void invalidUsernameTest() throws IOException {
+	void registerInvalidUsernameTest() throws IOException {
 		String input =
 				"""
 						register -u A -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
@@ -127,6 +126,7 @@ public class RegisterTest {
 						register -u \\test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
 						register -u |test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
 						register -u @test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						EXIT
 						""";
 
 		String output ="""
@@ -169,7 +169,7 @@ public class RegisterTest {
 
 	@Test
 	@Order(2)
-	void invalidPasswordTest() throws IOException {
+	void registerInvalidPasswordTest() throws IOException {
 		String input =
 				"""
 						register -u ParsaTesting -p A A -n nickname -e parsa@gmail.com -g Male
@@ -187,6 +187,7 @@ public class RegisterTest {
 						register -u ParsaTesting -p Parsa### Parsa### -n nickname -e parsa@gmail.com -g Male
 						register -u ParsaTesting -p P!@@ARSA P!@@ARSA -n nickname -e parsa@gmail.com -g Male
 						register -u ParsaTesting -p PaPa^^*^ PaPa^^*^ -n nickname -e parsa@gmail.com -g Male
+						EXIT
 						""";
 
 		String output ="""
@@ -237,6 +238,7 @@ public class RegisterTest {
 						register -u ParsaTesting -p Parsa1234!@# Parsa1234!@# -n nickname -e user@domain..com -g Male
 						register -u ParsaTesting -p Parsa1234!@# Parsa1234!@# -n nickname -e user@domain.c -g Male
 						register -u ParsaTesting -p Parsa1234!@# Parsa1234!@# -n nickname -e user@.com -g Male
+						EXIT
 						""";
 
 		String output ="""
@@ -276,6 +278,7 @@ public class RegisterTest {
 						register -u ParsaTesting -p Parsa1234!@# dasd -n nickname -e parsa@gmail.com -g Male
 						register -u ParsaTesting -p Parsa1234!@# Parsa1234!@ -n nickname -e parsa@gmail.com -g Male
 						register -u ParsaTesting -p Parsa1234!@# arsa1234!@# -n nickname -e parsa@gmail.com -g Male
+						EXIT
 						""";
 
 		String output ="""
@@ -298,6 +301,7 @@ public class RegisterTest {
 						register -u ParsaTesting -p Parsa1234!@# Parsa1234!@# -n nickname -e parsa@gmail.com -g Male1
 						register -u ParsaTesting -p Parsa1234!@# Parsa1234!@# -n nickname -e parsa@gmail.com -g Mle
 						register -u ParsaTesting -p Parsa1234!@# Parsa1234!@# -n nickname -e parsa@gmail.com -g Fem
+						EXIT
 						""";
 
 		String output ="""
@@ -305,6 +309,324 @@ public class RegisterTest {
 						There is no gender with that name
 						There is no gender with that name
 						""";
+
+		String result = getOutput(input);
+
+		// Assert
+		assertEquals(output, result);
+	}
+
+	@Test
+	@Order(6)
+	void loginUsernameNotFoundTest() throws IOException {
+		String input =
+				"""
+						register -u Parsa1234 -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						pick question -q 1 -a test -c test
+						go to login menu
+						login -u Parsa12345 -p Parsa123!
+						login -u Parsa12345 -p Parsa123! -stay-logged-in
+						EXIT
+						""";
+
+		String output ="""
+				User Registered Parsa1234 Parsa123!
+				
+				Questions:
+				1. WHAT'S YOUR FAVORITE FOOD?
+				2. WHAT'S YOUR FAVORITE COLOR?
+				3. WHO'S YOUR FAVORITE SINGER?
+				4. WHO'S YOUR FAVORITE ACTOR?
+				5. WHERE'S YOUR FAVORITE CITY?
+				6. WHERE'S YOUR FAVORITE COUNTRY?
+				
+				Answer successfully set!
+				
+				User not found
+				User not found
+				""";
+
+		String result = getOutput(input);
+
+		// Assert
+		assertEquals(output, result);
+	}
+
+	@Test
+	@Order(7)
+	void loginPasswordDoesntMatchTest() throws IOException {
+		String input =
+				"""
+						register -u Parsa1234 -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						pick question -q 1 -a test -c test
+						go to login menu
+						login -u Parsa1234 -p Parsa1234!
+						EXIT
+						""";
+
+		String output ="""
+				User Registered Parsa1234 Parsa123!
+				
+				Questions:
+				1. WHAT'S YOUR FAVORITE FOOD?
+				2. WHAT'S YOUR FAVORITE COLOR?
+				3. WHO'S YOUR FAVORITE SINGER?
+				4. WHO'S YOUR FAVORITE ACTOR?
+				5. WHERE'S YOUR FAVORITE CITY?
+				6. WHERE'S YOUR FAVORITE COUNTRY?
+				
+				Answer successfully set!
+				
+				Password does not match with this username
+				""";
+
+		String result = getOutput(input);
+
+		// Assert
+		assertEquals(output, result);
+	}
+
+	@Test
+	@Order(8)
+	void profileChangePasswordTest() throws IOException {
+		String input =
+				"""
+						register -u Parsa1234 -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						pick question -q 1 -a test -c test
+						go to login menu
+						login 
+						login -u Parsa1234 -p Parsa123!
+						menu enter mainmenu
+						menu enter profile
+						change password -o dasd -n dasda
+						change password -o A -n A
+						change password -o AA -n AA
+						change password -o AAA -n AAA
+						change password -o AAAA -n AAAA
+						change password -o AAAAA -n AAAAA
+						change password -o AAAAAA -n AAAAAA
+						change password -o AAAAAAA -n AAAAAAA
+						change password -o AAAAAAAA -n AAAAAAAA
+						change password -o AAAAAAAAA -n AAAAAAAAA
+						change password -o 1234567! -n 1234567!
+						change password -o 1234@675 -n 1234@675
+						change password -o AAAAAAAAA#@%#@% -n AAAAAAAAA#@%#@%
+						change password -o Parsa### -n Parsa###
+						change password -o P!@@ARSA -n P!@@ARSA
+						change password -o PaPa^^*^ -n PaPa^^*^
+						EXIT
+						""";
+
+		String output ="""
+				User Registered Parsa1234 Parsa123!
+				
+				Questions:
+				1. WHAT'S YOUR FAVORITE FOOD?
+				2. WHAT'S YOUR FAVORITE COLOR?
+				3. WHO'S YOUR FAVORITE SINGER?
+				4. WHO'S YOUR FAVORITE ACTOR?
+				5. WHERE'S YOUR FAVORITE CITY?
+				6. WHERE'S YOUR FAVORITE COUNTRY?
+				
+				Answer successfully set!
+				
+				invalid command
+				User logged in successfully
+				
+				Now you are in profile menu
+				Password too short
+				Password too short
+				Password too short
+				Password too short
+				Password too short
+				Password too short
+				Password too short
+				Password too short
+				Password must contain special characters
+				Password must contain special characters
+				Password must contain alphabet
+				Password must contain alphabet
+				Password must contain numbers
+				Password must contain numbers
+				Password must contain numbers
+				Password must contain numbers
+				""";
+
+		String result = getOutput(input);
+
+		// Assert
+		assertEquals(output, result);
+	}
+
+	@Disabled
+	@Test
+	@Order(9)
+	void profileChangeUsernameTest() throws IOException {
+		String input =
+				"""
+						register -u Parsa1234 -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						pick question -q 1 -a test -c test
+						go to login menu
+						login 
+						login -u Parsa1234 -p Parsa123!
+						menu enter mainmenu
+						menu enter profile
+						register -u A -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u AA -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u AAAAAAAAAAAAAAAAAAAAA -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u AAAAAAAAAAAAAAAAAAAAAA -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u &test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u ^test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u %test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u $test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u +test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u )test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u (test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u *test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u #test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u (test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u *test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u #test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u (test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u *test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u #test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u _test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u +test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u =test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u /test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u [test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u ]test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u {test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u }test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u \\test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u |test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						register -u @test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						
+						change username -u dasd -n dasda
+						change password -o A -n A
+						change password -o AA -n AA
+						change password -o AAA -n AAA
+						change password -o AAAA -n AAAA
+						change password -o AAAAA -n AAAAA
+						change password -o AAAAAA -n AAAAAA
+						change password -o AAAAAAA -n AAAAAAA
+						change password -o AAAAAAAA -n AAAAAAAA
+						change password -o AAAAAAAAA -n AAAAAAAAA
+						change password -o 1234567! -n 1234567!
+						change password -o 1234@675 -n 1234@675
+						change password -o AAAAAAAAA#@%#@% -n AAAAAAAAA#@%#@%
+						change password -o Parsa### -n Parsa###
+						change password -o P!@@ARSA -n P!@@ARSA
+						change password -o PaPa^^*^ -n PaPa^^*^
+						EXIT
+						""";
+
+		String output ="""
+				User Registered Parsa1234 Parsa123!
+				
+				Questions:
+				1. WHAT'S YOUR FAVORITE FOOD?
+				2. WHAT'S YOUR FAVORITE COLOR?
+				3. WHO'S YOUR FAVORITE SINGER?
+				4. WHO'S YOUR FAVORITE ACTOR?
+				5. WHERE'S YOUR FAVORITE CITY?
+				6. WHERE'S YOUR FAVORITE COUNTRY?
+				
+				Answer successfully set!
+				
+				invalid command
+				User logged in successfully
+				
+				Now you are in profile menu
+				Password too short
+				Password too short
+				Password too short
+				Password too short
+				Password too short
+				Password too short
+				Password too short
+				Password too short
+				Password must contain special characters
+				Password must contain special characters
+				Password must contain alphabet
+				Password must contain alphabet
+				Password must contain numbers
+				Password must contain numbers
+				Password must contain numbers
+				Password must contain numbers
+				""";
+
+		String result = getOutput(input);
+
+		// Assert
+		assertEquals(output, result);
+	}
+
+	@Disabled
+	@Test
+	@Order(10)
+	void profileChangeEmailTest() throws IOException {
+		String input =
+				"""
+						register -u Parsa1234 -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						pick question -q 1 -a test -c test
+						go to login menu
+						forget password -u Parsa1234
+						test1
+						EXIT
+						""";
+
+		String output ="""
+				User Registered Parsa1234 Parsa123!
+				
+				Questions:
+				1. WHAT'S YOUR FAVORITE FOOD?
+				2. WHAT'S YOUR FAVORITE COLOR?
+				3. WHO'S YOUR FAVORITE SINGER?
+				4. WHO'S YOUR FAVORITE ACTOR?
+				5. WHERE'S YOUR FAVORITE CITY?
+				6. WHERE'S YOUR FAVORITE COUNTRY?
+				
+				Answer successfully set!
+				
+				Answer the question: Answer is incorrect
+				""";
+
+		String result = getOutput(input);
+
+		// Assert
+		assertEquals(output, result);
+	}
+
+	@Disabled
+	@Test
+	@Order(11)
+	void profileChangeNicknameTest() throws IOException {
+		String input =
+				"""
+						register -u Parsa1234 -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
+						pick question -q 1 -a test -c test
+						go to login menu
+						forget password -u Parsa1234
+						test1
+						EXIT
+						""";
+
+		String output ="""
+				User Registered Parsa1234 Parsa123!
+				
+				Questions:
+				1. WHAT'S YOUR FAVORITE FOOD?
+				2. WHAT'S YOUR FAVORITE COLOR?
+				3. WHO'S YOUR FAVORITE SINGER?
+				4. WHO'S YOUR FAVORITE ACTOR?
+				5. WHERE'S YOUR FAVORITE CITY?
+				6. WHERE'S YOUR FAVORITE COUNTRY?
+				
+				Answer successfully set!
+				
+				Answer the question: Answer is incorrect
+				""";
 
 		String result = getOutput(input);
 
@@ -326,21 +648,22 @@ public class RegisterTest {
 	}
 
 	private String getOutput(String input) throws IOException {
+		InputStream baseInput = System.in;
+		PrintStream baseOutput = System.out;;
+//		System.out.println("input: " + inputString);
+
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
+		System.setIn(new ByteArrayInputStream(input.getBytes()));
 		System.setOut(new PrintStream(outputStream));
 
 		// Act
-		RegisterMenuView registerMenuView = new RegisterMenuView();
+		Main.main(null);
 
-		Scanner scanner = new Scanner(input);
-		while (scanner.hasNextLine()) {
-			String line = scanner.nextLine().trim();
-			registerMenuView.Result(line);
-		}
+		// Assert
+		System.setOut(baseOutput);
+		System.setIn(baseInput);
 
-
-		return outputStream.toString();
-
+		return outputStream.toString().replaceAll(" > ", "");
 	}
 }
