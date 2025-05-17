@@ -220,7 +220,7 @@ public class MainTester {
 				"""
 						register -u ParsaTesting -p Parsa1234!@# Parsa1234!@# -n nickname -e parsa!@gmail.com -g Male
 						register -u ParsaTesting -p Parsa1234!@# Parsa1234!@# -n nickname -e par#sa@gmail.com -g Male
-						register -u ParsaTesting -p Pars(u_6hJi&3AYa1234!@# Parsa1234!@# -n nickname -e par@sa@gmail.com -g Male
+						register -u ParsaTesting -p Parsa1234!@# Parsa1234!@# -n nickname -e par@sa@gmail.com -g Male
 						register -u ParsaTesting -p Parsa1234!@# Parsa1234!@# -n nickname -e par+sa@gmail.com -g Male
 						register -u ParsaTesting -p Parsa1234!@# Parsa1234!@# -n nickname -e pars/a@gmail.com -g Male
 						register -u ParsaTesting -p Parsa1234!@# Parsa1234!@# -n nickname -e .parsa@gmail.com -g Male
@@ -471,53 +471,36 @@ public class MainTester {
 						login -u Parsa1234 -p Parsa123!
 						menu enter mainmenu
 						menu enter profile
-						register -u A -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u AA -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u AAAAAAAAAAAAAAAAAAAAA -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u AAAAAAAAAAAAAAAAAAAAAA -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u &test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u ^test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u %test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u $test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u +test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u )test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u (test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u *test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u #test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u (test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u *test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u #test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u (test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u *test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u #test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u _test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u +test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u =test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u /test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u [test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u ]test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u {test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u }test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u \\test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u |test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						register -u @test -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						
-						change username -u dasd -n dasda
-						change password -o A -n A
-						change password -o AA -n AA
-						change password -o AAA -n AAA
-						change password -o AAAA -n AAAA
-						change password -o AAAAA -n AAAAA
-						change password -o AAAAAA -n AAAAAA
-						change password -o AAAAAAA -n AAAAAAA
-						change password -o AAAAAAAA -n AAAAAAAA
-						change password -o AAAAAAAAA -n AAAAAAAAA
-						change password -o 1234567! -n 1234567!
-						change password -o 1234@675 -n 1234@675
-						change password -o AAAAAAAAA#@%#@% -n AAAAAAAAA#@%#@%
-						change password -o Parsa### -n Parsa###
-						change password -o P!@@ARSA -n P!@@ARSA
-						change password -o PaPa^^*^ -n PaPa^^*^
+						change username -u A
+						change username -u AA
+						change username -u AAAAAAAAAAAAAAAAAAAAA
+						change username -u AAAAAAAAAAAAAAAAAAAAAA
+						change username -u &test
+						change username -u ^test
+						change username -u %test
+						change username -u $test
+						change username -u +test
+						change username -u )test
+						change username -u (test
+						change username -u *test
+						change username -u #test
+						change username -u (test
+						change username -u *test
+						change username -u #test
+						change username -u (test
+						change username -u *test
+						change username -u #test
+						change username -u _test
+						change username -u +test
+						change username -u =test
+						change username -u /test
+						change username -u [test
+						change username -u ]test
+						change username -u {test
+						change username -u }test
+						change username -u \\test
+						change username -u |test
+						change username -u @test
 						EXIT
 						""";
 
@@ -538,22 +521,36 @@ public class MainTester {
 				User logged in successfully
 				
 				Now you are in profile menu
-				Password too short
-				Password too short
-				Password too short
-				Password too short
-				Password too short
-				Password too short
-				Password too short
-				Password too short
-				Password must contain special characters
-				Password must contain special characters
-				Password must contain alphabet
-				Password must contain alphabet
-				Password must contain numbers
-				Password must contain numbers
-				Password must contain numbers
-				Password must contain numbers
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
+				Invalid username
 				""";
 
 		String result = getOutput(input);
@@ -571,8 +568,30 @@ public class MainTester {
 						register -u Parsa1234 -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
 						pick question -q 1 -a test -c test
 						go to login menu
-						forget password -u Parsa1234
-						test1
+						login 
+						login -u Parsa1234 -p Parsa123!
+						menu enter mainmenu
+						menu enter profile
+						change email -e parsa!@gmail.com
+						change email -e par#sa@gmail.com
+						change email -e par@sa@gmail.com
+						change email -e par+sa@gmail.com
+						change email -e pars/a@gmail.com
+						change email -e .parsa@gmail.com
+						change email -e parsa.@gmail.com
+						change email -e -parsa@gmail.com
+						change email -e parsa-@gmail.com
+						change email -e _parsa@gmail.com
+						change email -e parsa_@gmail.com
+						change email -e par..sa@gmail.com
+						change email -e parsa@gmailcom
+						change email -e parsa@gmail.c
+						change email -e parsa@gmai!l.com
+						change email -e john..doe@example.com
+						change email -e user@domain
+						change email -e user@domain..com
+						change email -e user@domain.c
+						change email -e user@.com
 						EXIT
 						""";
 
@@ -589,43 +608,30 @@ public class MainTester {
 				
 				Answer successfully set!
 				
-				Answer the question: Answer is incorrect
-				""";
-
-		String result = getOutput(input);
-
-		// Assert
-		assertEquals(output, result);
-	}
-
-	@Disabled
-	@Test
-	@Order(11)
-	void profileChangeNicknameTest() throws IOException {
-		String input =
-				"""
-						register -u Parsa1234 -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
-						pick question -q 1 -a test -c test
-						go to login menu
-						forget password -u Parsa1234
-						test1
-						EXIT
-						""";
-
-		String output ="""
-				User Registered Parsa1234 Parsa123!
+				invalid command
+				User logged in successfully
 				
-				Questions:
-				1. WHAT'S YOUR FAVORITE FOOD?
-				2. WHAT'S YOUR FAVORITE COLOR?
-				3. WHO'S YOUR FAVORITE SINGER?
-				4. WHO'S YOUR FAVORITE ACTOR?
-				5. WHERE'S YOUR FAVORITE CITY?
-				6. WHERE'S YOUR FAVORITE COUNTRY?
-				
-				Answer successfully set!
-				
-				Answer the question: Answer is incorrect
+				Now you are in profile menu
+				Invalid email format
+				Invalid email format
+				Invalid email format
+				Invalid email format
+				Invalid email format
+				Invalid email format
+				Invalid email format
+				Invalid email format
+				Invalid email format
+				Invalid email format
+				Invalid email format
+				Invalid email format
+				Invalid email format
+				Invalid email format
+				Invalid email format
+				Invalid email format
+				Invalid email format
+				Invalid email format
+				Invalid email format
+				Invalid email format
 				""";
 
 		String result = getOutput(input);
