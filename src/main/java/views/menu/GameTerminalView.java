@@ -12,6 +12,7 @@ import models.map.Weather;
 import models.result.Result;
 import models.user.User;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;

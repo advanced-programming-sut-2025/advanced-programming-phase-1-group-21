@@ -14,110 +14,120 @@ public class PathFinder {
 
     public List<PathStep> findPathTo(Coord target) {
         Coord start = player.getCoord();
-        List<PathStep> path = new ArrayList<>();
+        int maxEnergy = player.getEnergy();
 
-        // Check if target is walkable
+        // Quick check: target must exist and be walkable
         Tile targetTile = map.getTile(target);
         if (targetTile == null || !targetTile.getTileType().isWalkable()) {
-            return path; // Empty path if target is not walkable
+            return Collections.emptyList();
         }
 
-        // A* algorithm implementation
-        PriorityQueue<Node> openSet = new PriorityQueue<>();
-        java.util.Map<Coord, Node> allNodes = new HashMap<>();
+        // A* state = (coord, facingDirection)
+        record State(Coord coord, Direction facing) {}
 
-        Node startNode = new Node(start, null, 0, heuristic(start, target));
+        // Priority queue ordered by fScore = gScore + heuristic
+        PriorityQueue<Node> openSet = new PriorityQueue<>();
+        java.util.Map<State, Node> allNodes = new HashMap<>();
+        Set<State> closed = new HashSet<>();
+
+        // Initialize start node (no facing yet)
+        Node startNode = new Node(start, null, null, 0, heuristic(start, target));
+        State startState = new State(start, null);
         openSet.add(startNode);
-        allNodes.put(start, startNode);
+        allNodes.put(startState, startNode);
 
         while (!openSet.isEmpty()) {
             Node current = openSet.poll();
+            State currState = new State(current.coord, current.direction);
 
-            // Check if we've reached the target
+            // Skip if we've already finalized this state
+            if (!closed.add(currState)) {
+                continue;
+            }
+
+            // Goal check
             if (current.coord.equals(target)) {
-                // Reconstruct path
-                return reconstructPath(current, player.getEnergy());
+                return reconstructPath(current);
             }
 
             // Explore neighbors
-            for (Direction direction : Direction.values()) {
-                Coord neighborCoord = current.coord.addCoord(direction.getCoord());
-                Tile neighborTile = map.getTile(neighborCoord);
-
-                // Skip if not walkable or doesn't exist
-                if (neighborTile == null || !neighborTile.getTileType().isWalkable()) {
+            for (Direction dir : Direction.values()) {
+                Coord nextCoord = current.coord.addCoord(dir.getCoord());
+                Tile nextTile = map.getTile(nextCoord);
+                if (nextTile == null || !nextTile.getTileType().isWalkable()) {
                     continue;
                 }
 
-                // Calculate tentative gScore (energy cost)
-                int turnCost = current.direction == null || current.direction == direction ? 0 : 3;
-                int tentativeGScore = current.gScore + 1 + turnCost; // 1 for move, 3 for turn
+                // Compute turn cost (3) if changing facing after the first move
+                int turnCost = (current.direction == null || current.direction == dir) ? 0 : 3;
+                int tentativeG = current.gScore + 1 + turnCost;
+                if (tentativeG > maxEnergy) {
+                    continue;  // prune paths that exceed available energy
+                }
 
-                Node neighborNode = allNodes.getOrDefault(neighborCoord,
-                        new Node(neighborCoord, null, Integer.MAX_VALUE, 0));
+                State nextState = new State(nextCoord, dir);
+                Node neighbor = allNodes.getOrDefault(
+                        nextState,
+                        new Node(nextCoord, dir, null, Integer.MAX_VALUE, 0)
+                );
 
-                if (tentativeGScore < neighborNode.gScore) {
-                    neighborNode.cameFrom = current;
-                    neighborNode.direction = direction;
-                    neighborNode.gScore = tentativeGScore;
-                    neighborNode.fScore = tentativeGScore + heuristic(neighborCoord, target);
+                if (tentativeG < neighbor.gScore) {
+                    // Better path found
+                    neighbor.gScore   = tentativeG;
+                    neighbor.fScore   = tentativeG + heuristic(nextCoord, target);
+                    neighbor.cameFrom = current;
+                    neighbor.direction = dir;
 
-                    // Remove and re-add to update position in priority queue
-                    openSet.remove(neighborNode);
-                    openSet.add(neighborNode);
-
-                    allNodes.put(neighborCoord, neighborNode);
+                    // Refresh in openSet
+                    openSet.remove(neighbor);
+                    openSet.add(neighbor);
+                    allNodes.put(nextState, neighbor);
                 }
             }
         }
 
-        return null; // No path found
+        // No path found
+        return Collections.emptyList();
     }
 
-    private List<PathStep> reconstructPath(Node endNode, int maxEnergy) {
-        List<PathStep> path = new ArrayList<>();
-        Node current = endNode;
-
-        // First build path in reverse order
-        List<Node> reversePath = new ArrayList<>();
-        while (current.cameFrom != null) {
-            reversePath.add(current);
-            current = current.cameFrom;
+    private List<PathStep> reconstructPath(Node endNode) {
+        Deque<Node> stack = new ArrayDeque<>();
+        Node curr = endNode;
+        while (curr.cameFrom != null) {
+            stack.push(curr);
+            curr = curr.cameFrom;
         }
-        Collections.reverse(reversePath);
 
-        // Convert to PathSteps with energy costs
-        Direction prevDirection = null;
-        for (Node node : reversePath) {
-
-            int turnCost = prevDirection == null || prevDirection == node.direction ? 0 : 3;
+        List<PathStep> steps = new ArrayList<>();
+        Direction prevDir = null;
+        while (!stack.isEmpty()) {
+            Node n = stack.pop();
+            int turnCost = (prevDir == null || prevDir == n.direction) ? 0 : 3;
             int stepCost = 1 + turnCost;
-
-            path.add(new PathStep(node.coord, node.direction, stepCost));
-            prevDirection = node.direction;
+            steps.add(new PathStep(n.coord, n.direction, stepCost));
+            prevDir = n.direction;
         }
-
-        return path;
+        return steps;
     }
 
     private int heuristic(Coord a, Coord b) {
-        // Manhattan distance for heuristic
+        // Manhattan distance
         return Math.abs(a.getX() - b.getX()) + Math.abs(a.getY() - b.getY());
     }
 
     private static class Node implements Comparable<Node> {
-        Coord coord;
-        Node cameFrom;
-        Direction direction;
-        int gScore; // Energy cost from start
-        int fScore; // gScore + heuristic
+        final Coord coord;
+        Direction direction;    // facing when arriving here
+        Node cameFrom;          // link to predecessor
+        int gScore;             // cost from start
+        int fScore;             // gScore + heuristic
 
-        public Node(Coord coord, Node cameFrom, int gScore, int fScore) {
+        Node(Coord coord, Direction direction, Node cameFrom, int gScore, int fScore) {
             this.coord = coord;
+            this.direction = direction;
             this.cameFrom = cameFrom;
             this.gScore = gScore;
             this.fScore = fScore;
-            this.direction = null;
         }
 
         @Override
@@ -128,22 +138,23 @@ public class PathFinder {
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Node node = (Node) o;
-            return coord.equals(node.coord);
+            if (!(o instanceof Node)) return false;
+            Node n = (Node) o;
+            return coord.equals(n.coord) &&
+                    Objects.equals(direction, n.direction);
         }
 
         @Override
         public int hashCode() {
-            return coord.hashCode();
+            return Objects.hash(coord, direction);
         }
     }
 
     public record PathStep(Coord coord, Direction direction, int energyCost) {
-
         @Override
-            public String toString() {
-                return String.format("Move %s to %s (Energy: -%d)", direction, coord, energyCost);
-            }
+        public String toString() {
+            return String.format("Move %s to %s (Energy: -%d)",
+                    direction, coord, energyCost);
         }
+    }
 }
