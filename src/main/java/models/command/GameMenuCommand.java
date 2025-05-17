@@ -82,9 +82,9 @@ public enum GameMenuCommand implements Command {
 //    CHEAT_ADD_ITEM("cheat add item -n (?<item_name>.*) -c (?<count>.*)"),
     COOKING_REFRIGERATOR("\\s*cooking\\s+refrigerator\\s+(?<action>put|pick)\\s+(?<item>.+)\\s*"),
     COOKING_SHOW_RECIPES("cooking\\s+show\\s+recipes"),
-    PLACE_ARTISAN("^\\s*place\\s+artisan\\s+-n\\s+(?<name>\\S+)\\s+-d\\s+(?<direction>(N)|(E)|(S)|(W)|(NE)|(NW)|(SE)|(SW))\\s*$"),
-    USE_ARTISAN("^\\s*artisan\\s+use\\s+(?<name>\\S+)\\s+(?<itemNames>.+)$"),
-    GET_ARTISAN_PRODUCT("^\\s*artisan\\s+get\\s+(?<name>\\S+)$"),
+    PLACE_ARTISAN("^\\s*place\\s+artisan\\s+-n\\s+(?<name>.*)\\s+-d\\s+(?<direction>(N)|(E)|(S)|(W)|(NE)|(NW)|(SE)|(SW))\\s*$"),
+    USE_ARTISAN("^\\s*artisan\\s+use\\s+(?<name>.*)\\s+-i\\s*(?<itemNames>.*)$"), // separated by , --> artisan use Keg -i Fiddlehead Fern,dasdas,dasda
+    GET_ARTISAN_PRODUCT("^\\s*artisan\\s+get\\s+(?<name>.*)$"),
 //    EAT("eat (?<food_name>.*)"),
 //    BUY_ANIMAL("buy animal -a <animal> -n <name>"),
 //    PET("pet -n <name>"),
