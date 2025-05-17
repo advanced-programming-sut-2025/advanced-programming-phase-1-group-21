@@ -30,7 +30,7 @@ public class PlantedSeed implements Placable, Harvestable, DailyUpdate, Serializ
 	public void water() {
 		// This method is supposed to be called by its tile.
 
-		waterStage = 2;
+		waterStage = Math.max(2, waterStage);
 	}
 
 	public Item harvest() {
@@ -48,6 +48,7 @@ public class PlantedSeed implements Placable, Harvestable, DailyUpdate, Serializ
 	@Override
 	public boolean nextDay(Game g) {
 		// This method is supposed to be called by its tile.
+		System.err.println("WATER: " + waterStage);
 
 		waterStage--;
 		if (waterStage < 0)

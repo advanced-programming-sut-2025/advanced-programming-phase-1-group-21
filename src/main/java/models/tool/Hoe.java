@@ -36,7 +36,7 @@ public class Hoe extends Tool {
 		if (type == ToolMaterialType.IRIDIUM)
 			player.decreaseEnergy((int)(weatherCofficien));
 
-		if(player.getMap().mapType != MapType.FARM)
+		if(player.getMap().mapType != MapType.FARM && player.getMap().mapType != MapType.GREEN_HOUSE)
 			return Result.failure(GameError.HERE_IS_NOT_FARM);
 		if(!player.getMap().getTile(coord).isEmpty())
 			return Result.failure(GameError.TILE_IS_NOT_EMPTY);

@@ -31,6 +31,7 @@ public class Tile implements DailyUpdate, Serializable {
 
     public void water() {
         if (placable instanceof PlantedSeed) {
+            System.err.println("WATERED!");
             ((PlantedSeed) placable).water();
         }
     }
@@ -47,8 +48,9 @@ public class Tile implements DailyUpdate, Serializable {
     }
 
     public boolean nextDay(Game g) {
-        if (g.getWeather() == Weather.RAINY)
+        if (g.getWeather() == Weather.RAINY) {
             water();
+        }
         if (placable instanceof DailyUpdate) {
             boolean shouldRemove = ((DailyUpdate) placable).nextDay(g);
             if (shouldRemove) {

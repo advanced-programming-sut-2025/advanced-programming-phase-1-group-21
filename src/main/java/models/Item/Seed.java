@@ -58,8 +58,10 @@ public class Seed extends Item implements Plantable {
 	}
 
 	public PlantedSeed plant(Tile tile) {
+		System.err.println("HERE");
 		PlantedSeed plantedSeed = new PlantedSeed(data);
-		plantedSeed.onPlace(tile);
+		tile.setPlacable(plantedSeed);
+		tile.setTileType(plantedSeed.getTileType());
 		return plantedSeed;
 	}
 }
