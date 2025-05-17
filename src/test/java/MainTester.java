@@ -45,14 +45,14 @@ public class MainTester {
 
 	@BeforeEach
 	void setupBeforeEach(TestInfo info) {
-		System.out.println("		------ test: " + info.getDisplayName() + " is started ------		");
+		System.out.println("		------ " + info.getDisplayName() + " is started ------		");
 	}
 
 	@AfterEach
 	void tearDownAfterEach(TestInfo info) {
 
 		delete_users_json();
-		System.out.println("		------ test " + info.getDisplayName() + " is Done ------		");
+		System.out.println("		------ " + info.getDisplayName() + " is Done ------		");
 	}
 
 	static List <TestCase> provideFileTestCases() {
@@ -643,14 +643,8 @@ public class MainTester {
 	private void delete_users_json() {
 		File file = new File("Users.json");
 
-		if (file.exists()) {
-			if (file.delete())
-				System.out.println("File deleted successfully.");
-			else
-				System.out.println("Failed to delete the file.");
-		} else {
-			System.out.println("File does not exist.");
-		}
+		if (file.exists())
+			file.delete();
 	}
 
 	private String getOutput(String input) throws IOException {
