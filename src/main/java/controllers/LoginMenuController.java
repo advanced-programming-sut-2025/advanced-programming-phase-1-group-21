@@ -24,14 +24,15 @@ public class LoginMenuController{
         return Result.success("login menu", "");
     }
 
-    public Result<User> login(String username, String password) {
+    public Result<User> login(String username, String password, boolean stayLoggedIn) throws IOException {
         if(findUserByUsername(username) == null)
             return Result.failure(UserError.USER_NOT_FOUND);
         if(!findUserByUsername(username).verifyPassword(password))
             return Result.failure(UserError.PASSWORD_DOESNT_MATCH);
 
-        //TODO
-        //Stay Logged In
+        User user = findUserByUsername(username);
+        user.setStayLoggedIn(stayLoggedIn);
+        DataBaseController.editUser(user);
 
         App.getInstance().logedInUser = findUserByUsername(username);
         return Result.success(App.getInstance().logedInUser , "User logged in successfully");

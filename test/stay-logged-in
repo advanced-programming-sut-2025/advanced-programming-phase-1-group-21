@@ -1,0 +1,7 @@
+go to login menu
+login -u Ali -p Alireza123!
+menu enter mainmenu
+user logout
+menu enter mainmenu
+login -u Ali -p Alireza123! -stay-logged-in
+; bazi ro beband

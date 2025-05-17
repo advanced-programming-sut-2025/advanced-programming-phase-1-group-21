@@ -14,6 +14,7 @@ public class User implements Serializable {
     private String nickname;
     private Gender gender;
     private boolean isInAGame;
+    private boolean stayLoggedIn;
     private Hash hash;
     private Integer securityQuestionID;
     private String securityAnswer;
@@ -114,5 +115,13 @@ public class User implements Serializable {
 
     public static String generateRandomPassword(int length) {
         return "RANDOM";
+    }
+
+    public void setStayLoggedIn(boolean stayLoggedIn) {
+        this.stayLoggedIn = stayLoggedIn;
+    }
+
+    public boolean isStayLoggedIn() {
+        return stayLoggedIn;
     }
 }
