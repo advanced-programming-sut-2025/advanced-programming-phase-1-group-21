@@ -72,7 +72,9 @@ public enum GameError implements Error {
     NO_FERTILIZER("There is no fertilizer with this name"),
     NO_DIRECTION("wrong direction name"),
     NO_TOOL_IN_HAND("You don't have any tool in your hand"),
-    WATERING_CAN_IS_EMPTY("Your watering can is empty.")
+    WATERING_CAN_IS_EMPTY("Your watering can is empty."),
+    YOU_ALREADY_BOUGHT_THIS_ITEM("You already bought this item."),
+    BUY_LARGE_FIRST("You should but \"Large Pack\" first.")
     ;
 
 

@@ -1472,8 +1472,48 @@ public class GameController {
         return Result.failure(GameError.EMPTY_HOUSE_WAS_NOT_FOUND);
     }
 
+    private Result<Void> purchasePack(String name) {
+        Building building = game.getCurrentPlayer().getBuilding();
+        if (!(building instanceof Shop)) return Result.failure(GameError.YOU_SHOULD_BE_ON_SHOP);
+
+
+        Player player = game.getCurrentPlayer();
+        Inventory inventory = player.getInventory();
+        InventoryType iType = inventory.getInventoryType();
+        Shop shop = (Shop) building;
+
+        InventoryType newIType = null;
+        if (name.equalsIgnoreCase("Large Pack")) {
+            if (iType != InventoryType.PRIMITIVE)
+                return Result.failure(GameError.YOU_ALREADY_BOUGHT_THIS_ITEM);
+            newIType = InventoryType.BIG;
+        }
+        else if (name.equalsIgnoreCase("Deluxe Pack")) {
+            if (iType == InventoryType.PRIMITIVE)
+                return Result.failure(GameError.BUY_LARGE_FIRST);
+            else if (iType == InventoryType.UNLIMITED)
+                return Result.failure(GameError.YOU_ALREADY_BOUGHT_THIS_ITEM);
+            newIType = InventoryType.UNLIMITED;
+        }
+        else {
+            return Result.failure(GameError.NOT_FOUND);
+        }
+        Result<Void> r = shop.prepareBuy(name, 1, inventory);
+        if (r.isError()) return r;
+        inventory.upgradeSize(newIType);
+
+        return Result.success(null);
+    }
+
     public Result<Void> purchaseItem(String name, int number) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+
+        if (name.contains("Pack")) {
+            Result<Void> r = purchasePack(name);
+            if (r.isError())
+                return r;
+            return Result.success(null);
+        }
         Result<Void> r = purchase(name, number);
         if (r.isError()) return r;
 
