@@ -1,0 +1,17 @@
+go to login menu
+menu enter mainmenu
+login -u Ali -p Alireza123!
+menu enter mainmenu
+menu enter game
+new game sobi sobhan maryam
+1
+1
+1
+1
+cheat Thor -l (0, 0)
+;false (in HOUSE)
+walk -l (19, 8)
+walk -l (19, 9)
+cheat Thor -l (0, 0)
+;success
+cheat Thor -l (5, 0)
