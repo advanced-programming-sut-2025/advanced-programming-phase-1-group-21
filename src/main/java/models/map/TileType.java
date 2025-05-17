@@ -3,6 +3,7 @@ package models.map;
 import org.apache.commons.lang3.StringUtils;
 
 public enum TileType {
+	PLACEABLE(1, 1, true, 'P'),
 	// Buildings
 	HOUSE(4, 4, true, 'H'),
 	GREEN_HOUSE(5, 4, true, 'G'),

@@ -182,6 +182,9 @@ public class GameTerminalView {
         else if ((matcher = GameMenuCommand.CRAFTING.getMatcher(command)) != null) {
             System.out.println(gameController.prepareRecipe(matcher.group("name"), RecipeType.CRAFTING));
         }
+        else if ((matcher = GameMenuCommand.PLACE_ITEM.getMatcher(command)) != null) {
+            System.out.println(gameController.placeItem(matcher.group("name"), Direction.getDirection(matcher.group("direction"))));
+        }
         else if ((matcher = GameMenuCommand.COOKING_PREPARE.getMatcher(command)) != null) {
             System.out.println(gameController.prepareRecipe(matcher.group("name"), RecipeType.COOKING));
         }

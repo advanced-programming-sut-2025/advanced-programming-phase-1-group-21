@@ -11,3 +11,8 @@ new game sobi sobhan maryam
 walk -l (19, 8)
 walk -l (19, 9)
 map status
+energy unlimited
+cheat add item -n Keg -c 1
+map status
+place item -n Keg -d S
+map status
