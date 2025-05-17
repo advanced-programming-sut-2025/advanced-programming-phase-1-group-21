@@ -1,0 +1,17 @@
+go to login menu
+menu enter mainmenu
+login -u Ali -p Alireza123!
+menu enter mainmenu
+menu enter game
+new game sobi sobhan maryam
+1
+1
+1
+1
+time
+date
+datetime
+day of the week
+cheat advance date 1d
+day of the week
+cheat advance date 1d

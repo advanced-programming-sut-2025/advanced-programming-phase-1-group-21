@@ -174,6 +174,9 @@ public class Game implements Serializable {
             nextDay();
             roundCount++;
         }
+        else {
+            advance();
+        }
     }
 
     public void setCurrentPlayer(Player currentPlayer) {
