@@ -1,0 +1,21 @@
+go to login menu
+menu enter mainmenu
+login -u Ali -p Alireza123!
+menu enter mainmenu
+menu enter game
+new game sobi sobhan maryam
+1
+1
+1
+1
+walk -l (19, 8)
+walk -l (19, 5)
+walk -l (18, 6)
+walk -l (19, 0)
+;; no path!
+walk -l (19,1)
+;; energy turn -> 3, energy adi -> 1
+help reading map
+print map -l (5, 5) -s 1
+print map -l (5, 5) -s 2
+print map -l (5, 10) -s 10

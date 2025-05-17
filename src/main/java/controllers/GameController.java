@@ -236,11 +236,11 @@ public class GameController {
             if (building.canEnter()) {
                 player.enterBuilding(building);
             } else return Result.failure(GameError.CANT_ENTER);
-        } else {
+        } else if (!coord.equals(game.getCurrentPlayer().getCoord())) {
             PathFinder pf = new PathFinder(player);
             List<PathFinder.PathStep> steps = pf.findPathTo(coord);
 
-            if (steps == null) {
+            if (steps == null || steps.isEmpty()) {
                 return Result.failure(GameError.NO_PATH);
             }
             for (PathFinder.PathStep step : steps) {
