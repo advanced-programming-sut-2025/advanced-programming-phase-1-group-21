@@ -3,6 +3,9 @@ package controllers;
 import models.App;
 import models.Menu;
 import models.result.Result;
+import models.user.User;
+
+import java.io.IOException;
 
 public class MainMenuController{
 
@@ -26,4 +29,12 @@ public class MainMenuController{
     }
 
 
+    public Result<Void> logout() throws IOException {
+        User user = App.getInstance().logedInUser;
+        user.setStayLoggedIn(false);
+        DataBaseController.editUser(user);
+        App.getInstance().logedInUser = null;
+        App.getInstance().currentMenu = Menu.RegisterMenu;
+        return Result.success(null);
+    }
 }

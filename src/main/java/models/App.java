@@ -1,11 +1,13 @@
 package models;
 
+import controllers.DataBaseController;
 import models.data.DataLoader;
 import models.game.Game;
 import models.user.User;
 import views.menu.Colors;
 
 import java.io.*;
+import java.util.List;
 import java.util.Random;
 
 public class App implements Serializable {
@@ -19,6 +21,20 @@ public class App implements Serializable {
 
     private App() {
         DataLoader.load();
+        User user = getStayLoggedIn();
+        if (user != null) {
+            System.err.println("we found " + user.getUsername() + " was logged in.... logging in...");
+            currentMenu = Menu.MainMenu;
+            logedInUser = user;
+        }
+    }
+
+    public User getStayLoggedIn() {
+        List<User> users = DataBaseController.readAllUsers();
+        for (User user : users) {
+            if (user.isStayLoggedIn()) return user;
+        }
+        return null;
     }
 
     public static void setInstance(App app) {

@@ -15,6 +15,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class DataBaseController {
+    public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+    public static ArrayList<User> readAllUsers() {
+        return readAllUsers(DataBaseController.gson, "Users.json");
+    }
+
     public static ArrayList<User> readAllUsers(Gson gson , String filePath){
         File file = new File(filePath);
         if (!file.exists() || file.length() == 0) {
@@ -42,8 +48,7 @@ public class DataBaseController {
 
     public static void editUser(User user) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        ArrayList<User> users = new ArrayList<>();
-        users = readAllUsers(gson , "Users.json");
+        ArrayList<User> users = readAllUsers(gson , "Users.json");
 
         for(int i = 0 ; i < users.size(); i++){
             if(users.get(i).getUsername().equals(user.getUsername())){

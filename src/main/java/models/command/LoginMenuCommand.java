@@ -6,7 +6,7 @@ public enum LoginMenuCommand implements Command {
     SHOW_CURRENT_MENU("\\s*show\\s+current\\s+menu\\s*"),
     ENTER_MENU("\\s*menu\\s+enter\\s+(?<menu>\\S+)\\s*"),
     EXIT_MENU("\\s*menu\\s+exit\\s*"),
-    LOGIN("\\s*login\\s+-u\\s+(?<username>\\S+)\\s+-p\\s+(?<password>\\S+)(\\s+-stay-logged-in)?\\s*"),
+    LOGIN("\\s*login\\s+-u\\s+(?<username>\\S+)\\s+-p\\s+(?<password>\\S+)(?:\\s+-(?<stay>stay-logged-in))?\\s*"),
     FORGET_PASSWORD("\\s*forget\\s+password\\s+-u\\s+(?<username>\\S+)\\s*"),
     ;
 
