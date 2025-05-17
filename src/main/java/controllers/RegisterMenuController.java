@@ -7,6 +7,7 @@ import models.Menu;
 import models.result.Result;
 import models.result.errorTypes.AuthError;
 import models.result.errorTypes.UserError;
+import models.user.Gender;
 import models.user.User;
 import com.google.gson.Gson;
 
@@ -48,6 +49,10 @@ public class RegisterMenuController{
 
             if (!password.equals(passwordConfirm))
                 return Result.failure(AuthError.PASSWORD_CONFIRM_ERROR);
+        }
+        Gender gender1 = getGenderByName(gender);
+        if (gender1 == null) {
+            return Result.failure(AuthError.WRONG_GENDER);
         }
 
         User user = new User(username , password , email , nickname , getGenderByName(gender) , null , null , false);
@@ -97,8 +102,8 @@ public class RegisterMenuController{
         String emailUsernameRegex = "(?!.*\\.\\..*)[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]";
         String domainRegex = "[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]\\.[a-zA-Z]{2,}";
         String invalidCharactersRegex = "(?!.*\\?.*)(?!.*>.*)(?!.*<.*)(?!.*,.*)(?!.*\".*)(?!.*'.*)(?!.*;.*)(?!.*:.*)" +
-                "(?!.*\\/.*)(?!.*\\|.*)(?!.*\\].*)(?!.*\\[.*)(?!.*\\}.*)(?!.*\\{.*)(?!.*\\+.*)(?!.*=.*)(?!.*\\).*)" +
-                "(?!.*\\(.*)(?!.*\\*.*)(?!.*&.*)(?!.*\\^.*)(?!.*%.*)(?!.*\\$.*)(?!.*#.*)(?!.*\\!.*)\\S+";
+                "(?!.*/.*)(?!.*\\|.*)(?!.*].*)(?!.*\\[.*)(?!.*}.*)(?!.*\\{.*)(?!.*\\+.*)(?!.*=.*)(?!.*\\).*)" +
+                "(?!.*\\(.*)(?!.*\\*.*)(?!.*&.*)(?!.*\\^.*)(?!.*%.*)(?!.*\\$.*)(?!.*#.*)(?!.*!.*)\\S+";
         Matcher matcher;
 
         matcher = Pattern.compile(emailGetter).matcher(email);
@@ -118,7 +123,7 @@ public class RegisterMenuController{
         if (password.length() < 8)
             return Result.failure(AuthError.PASSWORD_LENGTH);
 
-        String specialCharacters = ".*[?><,\"';:/|\\\\\\]\\[{}()=+*&^%$#!].*";
+        String specialCharacters = ".*[?><,\"';:/|\\\\\\]\\[{}()=+*&^@%$#!].*";
         if (!Pattern.compile(specialCharacters).matcher(password).matches())
             return Result.failure(AuthError.PASSWORD_SPECIAL_CHARACTERS);
 

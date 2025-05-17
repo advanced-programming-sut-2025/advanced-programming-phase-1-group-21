@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         AppView appView = new AppView();
         appView.resetStatic();
+        App.reset();
         appView.run();
     }
 

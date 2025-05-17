@@ -24,7 +24,7 @@ public class AppView {
             System.out.print(App.getInstance().getUI() + " > ");
             String command = scanner.nextLine().trim();
             if (command.equals("EXIT")) {
-                scanner.close();
+//                scanner.close();
                 return;
             }
             if(App.getInstance().currentMenu.equals(Menu.RegisterMenu))
