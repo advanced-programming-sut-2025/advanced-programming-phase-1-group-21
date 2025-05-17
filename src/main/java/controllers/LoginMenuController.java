@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 
 public class LoginMenuController{
     public Result<String> showCurrentMenu(){
-        return Result.success("login menu", "");
+        return Result.success("login menu", "login menu");
     }
 
     public Result<User> login(String username, String password, boolean stayLoggedIn) throws IOException {
@@ -70,7 +70,7 @@ public class LoginMenuController{
     }
 
     public Result<Void> changeMenu(String menu){
-        if(menu.equals(Menu.RegisterMenu.toString())){
+        if(menu.equals("register")){
             App.getInstance().currentMenu = Menu.RegisterMenu;
             return Result.success(null);
         }
