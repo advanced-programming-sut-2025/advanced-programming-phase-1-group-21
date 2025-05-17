@@ -1,0 +1,17 @@
+go to login menu
+menu enter mainmenu
+login -u Ali -p Alireza123!
+menu enter mainmenu
+menu enter game
+new game sobi sobhan maryam
+1
+1
+1
+1
+energy unlimited
+walk -l (18,9)
+walk -l (19,9)
+walk -l (40, 9)
+walk -l (40, 10)
+cheat advance date 10d
+map status
