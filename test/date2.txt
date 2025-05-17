@@ -1,0 +1,16 @@
+go to login menu
+menu enter mainmenu
+login -u Ali -p Alireza123!
+menu enter mainmenu
+menu enter game
+new game sobi sobhan maryam
+1
+1
+1
+1
+next turn
+next turn
+next turn
+next turn
+;;saat shod 10
+cheat advance time 1h

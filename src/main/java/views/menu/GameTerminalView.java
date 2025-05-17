@@ -399,7 +399,5 @@ public class GameTerminalView {
             System.out.println("invalid command");
             return;
         }
-
-        gameController.advance();
     }
 }
