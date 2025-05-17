@@ -599,9 +599,15 @@ public class GameController {
         return Result.success(null);
     }
 
-    public Result<Void> placeItem(Item item, Direction direction) {
+    public Result<Void> placeItem(String item, Direction direction) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+        Coord coord = game.getCurrentPlayer().getCoord().addCoord(direction.getCoord());
+        Map map = game.getCurrentPlayer().getMap();
+        Tile tile = map.getTile(coord);
+        if (tile == null || !tile.isEmpty()) return Result.failure(GameError.TILE_IS_NOT_EMPTY);
+        Placeable placeable = (Placeable) Item.build(item, 1);
+        placeable.onPlace(tile);
+        return Result.success(null);
     }
 
     public Result<Void> addItemCheat(String itemName, int quantity) {

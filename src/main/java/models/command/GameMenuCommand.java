@@ -78,7 +78,7 @@ public enum GameMenuCommand implements Command {
     CRAFTINFO("craftinfo -n (?<craftName>.+)"),
     CRAFTING_SHOW_RECIPES("\\s*crafting\\s+show\\s+recipes\\s*"),
     CRAFTING("\\s*crafting\\s+craft\\s+(?<name>.+)\\s*"),
-//    PLACE_ITEM("place item -n (?<item_name>.*) -d (?<direction>.*)"),
+    PLACE_ITEM("place item -n (?<name>.+) -d (?<direction>(N)|(E)|(S)|(W)|(NE)|(NW)|(SE)|(SW))"),
 //    CHEAT_ADD_ITEM("cheat add item -n (?<item_name>.*) -c (?<count>.*)"),
     COOKING_REFRIGERATOR("\\s*cooking\\s+refrigerator\\s+(?<action>put|pick)\\s+(?<item>.+)\\s*"),
     COOKING_SHOW_RECIPES("cooking\\s+show\\s+recipes"),
