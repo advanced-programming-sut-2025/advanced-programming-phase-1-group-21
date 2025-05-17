@@ -1,6 +1,7 @@
 package models.data;
 
 import com.google.gson.annotations.SerializedName;
+import models.time.Season;
 
 import java.util.ArrayList;
 
@@ -11,17 +12,9 @@ public class ForagingCropData implements Data {
 	@SerializedName("name")
 	private String name;
 
-	@SerializedName("price")
-	private int price;
-
-	@SerializedName("is-edible")
-	private boolean isEdible;
-
-	@SerializedName("energy")
-	private int energy;
-
 	@SerializedName("seasons")
 	private ArrayList<String> seasons;
+	private ArrayList<Season> cseasons;
 
 	public static String getDataURL() {
 		return dataURL;
@@ -32,6 +25,9 @@ public class ForagingCropData implements Data {
 	}
 
 	public void fullConstruct() {
+		cseasons = new ArrayList<>();
+		for (String seasonName : seasons)
+			cseasons.add(Season.valueOf(seasonName.toUpperCase()));
 //		System.out.println(name + "\n" + price + "\n" + isEdible + "\n" + energy + "\n" + seasons);
 	}
 
@@ -39,26 +35,22 @@ public class ForagingCropData implements Data {
 		return name;
 	}
 
-	public int getEnergy() {
-		return energy;
+	public ArrayList<Season> getSeasons() {
+		return cseasons;
 	}
 
-	public ArrayList<String> getSeasons() {
-		return seasons;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public boolean isEdible() {
-		return isEdible;
-	}
-
-	public static ForagingCropData getCropData(String name) {
+	public static ForagingCropData getData(String name) {
 		for (ForagingCropData a : cropData)
 			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
+	}
+
+	public static ForagingCropData getData(int id) {
+		return cropData.get(id);
+	}
+
+	public static int getSize() {
+		return cropData.size();
 	}
 }

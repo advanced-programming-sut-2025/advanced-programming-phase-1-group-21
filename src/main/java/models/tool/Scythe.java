@@ -8,6 +8,7 @@ import models.crop.PlantedTree;
 import models.game.Inventory;
 import models.game.Player;
 import models.map.Coord;
+import models.map.ForagingCrop;
 import models.map.Tile;
 import models.map.TileType;
 import models.result.Result;
@@ -23,33 +24,45 @@ public class Scythe extends Tool {
 		player.decreaseEnergy((int)(2 * App.getInstance().game.weatherCoefficient()));
 		Tile tile = player.getMap().getTile(coord);
 
-		if(!tile.getTileType().isForaging() && tile.getTileType() != TileType.PLANTED_SEED && tile.getTileType() != TileType.PLANTED_TREE)
+		if(!tile.getTileType().isForaging() && tile.getTileType() != TileType.PLANTED_SEED && tile.getTileType() != TileType.PLANTED_TREE && tile.getTileType() != TileType.FORAGING_CROP)
 			return Result.success(null, "inja ke chizi nist");
 
 		if(tile.getTileType() == TileType.LEAF){
 			tile.setTileType(TileType.UNPLOWED);
 			return Result.success(null, "the leaf removed from the ground");
 		}
-		if (tile.getTileType() == TileType.PLANTED_SEED){
-			PlantedSeed plantedSeed = tile.getPlacable(PlantedSeed.class);
-			Inventory inventory = player.getInventory();
-			if (plantedSeed.isHarvestReady()) {
-				String resultName = plantedSeed.getResultName();
-				if (inventory.canAdd(resultName)) {
-					Item result = plantedSeed.harvest();
-					if (plantedSeed.isOneTime())
-						tile.setPlacable(null);
-					return Result.success(result, "The crop has now been harvested");
+
+		Inventory inventory = player.getInventory();
+		switch(tile.getTileType()){
+			case PLANTED_SEED -> {
+				PlantedSeed plantedSeed = tile.getPlacable(PlantedSeed.class);
+				if (plantedSeed.isHarvestReady()) {
+					String resultName = plantedSeed.getResultName();
+					if (inventory.canAdd(resultName)) {
+						Item result = plantedSeed.harvest();
+						if (plantedSeed.isOneTime())
+							tile.setPlacable(null);
+						return Result.success(result, "The crop has been harvested");
+					}
 				}
 			}
-		}
-		else if (tile.getTileType() == TileType.PLANTED_TREE) {
-			PlantedTree plantedTree = tile.getPlacable(PlantedTree.class);
-			Inventory inventory = player.getInventory();
-			if (plantedTree.isHarvestReady()) {
-				String result = plantedTree.getResultName();
-				if (inventory.canAdd(result))
-					return Result.success(plantedTree.harvest(), "The crop has now been harvested");
+			case PLANTED_TREE -> {
+				PlantedTree plantedTree = tile.getPlacable(PlantedTree.class);
+				if (plantedTree.isHarvestReady()) {
+					String result = plantedTree.getResultName();
+					if (inventory.canAdd(result))
+						return Result.success(plantedTree.harvest(), "The fruit has been harvested");
+				}
+			}
+			case FORAGING_CROP -> {
+				ForagingCrop foragingCrop = tile.getPlacable(ForagingCrop.class);
+				String result = foragingCrop.getResultName();
+				if (inventory.canAdd(result)) {
+
+					Item resultItem = foragingCrop.harvest();
+					tile.setPlacable(null);
+					return Result.success(resultItem, "The foraging crop has been harvested");
+				}
 			}
 		}
 		return Result.success(null, "Failed to use scythe.");
