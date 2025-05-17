@@ -55,6 +55,10 @@ public class Inventory implements Serializable {
         this.inventoryType = inventoryType;
     }
 
+    public InventoryType getInventoryType() {
+        return inventoryType;
+    }
+
     public void upgradeTrashcan(ToolMaterialType trashcanType) {
         this.trashcanType = trashcanType;
     }
