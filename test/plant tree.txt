@@ -15,4 +15,4 @@ cheat add item -n Apricot Sapling -c 100
 inventory show
 plant -s Apricot Sapling -d S
 print map -l (0,0) -s 50
-show plant -l (9,8)
+show plant -l (8,9)
