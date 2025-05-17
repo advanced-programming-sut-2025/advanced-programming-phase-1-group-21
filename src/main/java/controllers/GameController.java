@@ -943,7 +943,7 @@ public class GameController {
             Coord coord = player.getCoord().addCoord(direction.getCoord());
 
             Tile tile = player.getMap().getTile(coord);
-            if (tile.getTileType() == TileType.ARTISAN && !tile.getPlacable(Artisan.class).isResultReady()) {
+            if (tile.getTileType() == TileType.ARTISAN && tile.getPlacable(Artisan.class).getName().equalsIgnoreCase(artisanName) && !tile.getPlacable(Artisan.class).isResultReady()) {
                 Artisan artisan = tile.getPlacable(Artisan.class);
 
                 result = artisan.craft(itemNames);

@@ -369,7 +369,7 @@ public class GameTerminalView {
             System.out.println(gameController.placeArtisan(matcher.group("name"), Direction.getDirection(matcher.group("direction"))));
         }
         else if ((matcher = GameMenuCommand.USE_ARTISAN.getMatcher(command)) != null) {
-            System.out.println(gameController.useArtisan(matcher.group("name"), new ArrayList<>(Arrays.asList(matcher.group("itemNames").split("\\s+")))));
+            System.out.println(gameController.useArtisan(matcher.group("name"), new ArrayList<>(Arrays.asList(matcher.group("itemNames").split(",")))));
         }
         else if ((matcher = GameMenuCommand.GET_ARTISAN_PRODUCT.getMatcher(command)) != null) {
             System.out.println(gameController.getArtisanProduct(matcher.group("name")));
