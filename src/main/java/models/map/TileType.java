@@ -22,7 +22,6 @@ public enum TileType {
 
 	PLOWED(1, 1, false, '#'),
 	UNPLOWED(1, 1, false, '#'),
-	TREE(1, 1, false, 'T'),
 	ANIMAL(1, 1, false, 'A'),
 	REFRIGERATOR(1, 1, true, 'F'),
 	PLANTED_SEED(1, 1, false, 'S'),
@@ -100,7 +99,7 @@ public enum TileType {
 
 	public boolean canThorAttack() {
 		return switch (this) {
-			case PLOWED, UNPLOWED, TREE, ANIMAL, PLANTED_SEED -> true;
+			case PLOWED, UNPLOWED, PLANTED_TREE, ANIMAL, PLANTED_SEED -> true;
 			default -> false;
 		};
 	}
