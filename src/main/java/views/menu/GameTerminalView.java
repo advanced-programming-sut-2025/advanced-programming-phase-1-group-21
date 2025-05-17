@@ -103,7 +103,7 @@ public class GameTerminalView {
         }
 
         if (gameController.isFainted()) {
-            System.out.println("You fainted!, skipping turn...");
+            System.out.println("Your energy is 0!, skipping turn...");
             gameController.nextTurn();
             return;
         }

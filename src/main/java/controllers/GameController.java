@@ -239,7 +239,7 @@ public class GameController {
             if (building.canEnter()) {
                 player.enterBuilding(building);
             } else return Result.failure(GameError.CANT_ENTER);
-        } else if (!coord.equals(game.getCurrentPlayer().getCoord())) {
+        } else if (!coord.equals(player.getCoord())) {
             PathFinder pf = new PathFinder(player);
             List<PathFinder.PathStep> steps = pf.findPathTo(coord);
 
