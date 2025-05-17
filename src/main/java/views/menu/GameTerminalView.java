@@ -176,6 +176,9 @@ public class GameTerminalView {
         else if ((matcher = GameMenuCommand.CRAFTING_SHOW_RECIPES.getMatcher(command)) != null) {
             System.out.println(gameController.showCraftingRecipes());
         }
+        else if ((matcher = GameMenuCommand.TOOLS_UPGRADE.getMatcher(command)) != null) {
+            System.out.println(gameController.upgradeTool(matcher.group("toolName")));
+        }
         else if ((matcher = GameMenuCommand.CRAFTING.getMatcher(command)) != null) {
             System.out.println(gameController.prepareRecipe(matcher.group("name"), RecipeType.CRAFTING));
         }

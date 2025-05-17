@@ -1,0 +1,28 @@
+go to login menu
+menu enter mainmenu
+login -u Ali -p Alireza123!
+menu enter mainmenu
+menu enter game
+new game sobi sobhan maryam
+1
+1
+1
+1
+walk -l (19, 8)
+walk -l (19, 9)
+go to village
+walk -l (58, 9)
+walk -l (58, 8)
+show all products
+tools upgrade hoe
+cheat add item -n Copper Bar -c 100
+cheat add item -n Coin -c 100000
+inventory status
+tools upgrade hoe
+inventory status
+walk -l (7,6)
+walk -l (7, 7)
+walk -l (3, 9)
+walk -l (3, 10)
+cheat advance time 3h
+tools upgrade hoe

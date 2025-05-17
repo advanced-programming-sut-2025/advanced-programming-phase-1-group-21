@@ -4,6 +4,9 @@ import models.Item.ItemType;
 import models.result.Error;
 
 public enum GameError implements Error {
+    YOU_SHOULD_BE_ON_BLACKSMITH("you are not in a blacksmith"),
+    ITEM_IS_NOT_TOOL("Item is not a tool"),
+    NOT_UPGRADABLE("Not upgradable"),
     INVALID_NUMBER("invalid number"),
     ITEM_IS_NOT_CONSUMABLE("Item can't be eaten"),
     ITEM_DOESNT_HAVE_VALID_TYPE("item does not have valid type"),
