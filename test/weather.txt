@@ -1,0 +1,20 @@
+go to login menu
+menu enter mainmenu
+login -u Ali -p Alireza123!
+menu enter mainmenu
+menu enter game
+new game sobi sobhan maryam
+1
+1
+1
+1
+weather
+cheat advance date 1d
+weather
+weather forecast
+cheat advance date 1d
+cheat advance date 100d
+;winter
+cheat advance date 1d
+weather
+weather forecast
