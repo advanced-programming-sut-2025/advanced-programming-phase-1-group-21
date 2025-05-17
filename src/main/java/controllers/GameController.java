@@ -198,6 +198,9 @@ public class GameController {
 
     public Result<Building> buildGreenHouse() {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+        if (game.getCurrentPlayer().getMap().mapType != MapType.FARM)
+            return Result.failure(GameError.YOU_SHOULD_BE_ON_FARM);
+
         List<Item> needed = List.of(
                 Item.build("coin", 1000),
                 Item.build("wood", 500)

@@ -180,21 +180,22 @@ public class Map implements DailyUpdate, Serializable {
                 thor(getRandomCoord());
         }
 
-        List<Tile> plantedSeedTiles = new ArrayList<>();
-        for (int i = 0; i < mapType.x; i++) {
-            for (int j = 0; j < mapType.y; j++) {
-                Coord coord = new Coord(i, j);
-                Tile tile = getTile(coord);
-                if (tile != null && tile.getPlacable(PlantedSeed.class) != null) {
-                    plantedSeedTiles.add(tile);
-                }
-            }
-        }
-
-        Random rand = new Random();
 
         if (mapType == MapType.FARM || mapType == MapType.VILLAGE) {
-            int crows = plantedSeedTiles.size() / 16;
+            List<Tile> plantedSeedTiles = new ArrayList<>();
+            for (int i = 0; i < mapType.x; i++) {
+                for (int j = 0; j < mapType.y; j++) {
+                    Coord coord = new Coord(i, j);
+                    Tile tile = getTile(coord);
+                    if (tile != null && tile.getPlacable(PlantedSeed.class) != null) {
+                        plantedSeedTiles.add(tile);
+                    }
+                }
+            }
+
+            Random rand = new Random();
+
+            int crows = plantedSeedTiles.size() / 10;
             for (int i = 0; i < crows; i++) if (rand.nextInt(0, 5) == 0) {
                 Tile t = plantedSeedTiles.get(rand.nextInt(plantedSeedTiles.size()));
                 System.err.println("CROW ATTACK");
@@ -203,11 +204,20 @@ public class Map implements DailyUpdate, Serializable {
             }
         }
 
-        for (ArrayList<Tile> row : tiles) {
-            for (Tile tile : row) {
+        for (int i = 0; i < mapType.x; i++) {
+            for (int j = 0; j < mapType.y; j++) {
+                Coord coord = new Coord(i, j);
+                Tile tile = getTile(coord);
                 tile.nextDay(g);
             }
         }
+
+//
+//        for (ArrayList<Tile> row : tiles) {
+//            for (Tile tile : row) {
+//                tile.nextDay(g);
+//            }
+//        }
 
         for (Building building : buildings) {
             building.nextDay(g);
