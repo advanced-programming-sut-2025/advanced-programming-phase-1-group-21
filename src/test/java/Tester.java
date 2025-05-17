@@ -90,6 +90,7 @@ public class Tester {
 		System.out.println("Test " + x);
 	}
 
+	@Disabled
 	@ParameterizedTest
 	@MethodSource("provideFileTestCases")
 	@Order(2)

@@ -13,9 +13,9 @@ public enum AuthError implements Error {
     PASSWORD_NUMBERS("Password must contain numbers"),
     PASSWORD_CONFIRM_ERROR("Password does not equal confirm password"),
     USER_ALREADY_EXISTS("User already exists"),
-    PASSWORD_TOO_WEAK("Password does not meet security requirements"),
     EMAIL_ALREADY_REGISTERED("Email is already registered"),
-    INVALID_EMAIL_FORMAT("Invalid email format");
+    INVALID_EMAIL_FORMAT("Invalid email format"),
+    WRONG_GENDER("There is no gender with that name");
 
     private final String message;
 
