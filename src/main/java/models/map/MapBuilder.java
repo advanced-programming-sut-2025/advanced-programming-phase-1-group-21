@@ -96,20 +96,20 @@ public class MapBuilder {
                 }
             }
 
-//            int numberOfRemainingForagingCrops = 30;
-//            final int numberOfForagingCropTypes = ForagingCropData.getSize();
-//            while (numberOfRemainingForagingCrops > 0) {
-//                Coord coord = Coord.getRandomCoord(map.getMaxX(), map.getMaxY());
-//                Tile tile = map.getTile(coord);
-//                if (tile.isEmpty()) {
-//                    int id = random.nextInt(0, numberOfForagingCropTypes); // What is this foraging crop's type?
-//                    ForagingCrop foragingCrop = new ForagingCrop(ForagingCropData.getData(id));
-//
-//                    tile.setPlacable(foragingCrop);
-//                    tile.setTileType(TileType.FORAGING_CROP);
-//                    numberOfRemainingForagingCrops--;
-//                }
-//            }
+            int numberOfRemainingForagingCrops = 30;
+            final int numberOfForagingCropTypes = ForagingCropData.getSize();
+            while (numberOfRemainingForagingCrops > 0) {
+                Coord coord = Coord.getRandomCoord(map.getMaxX(), map.getMaxY());
+                Tile tile = map.getTile(coord);
+                if (tile.isEmpty()) {
+                    int id = random.nextInt(0, numberOfForagingCropTypes); // What is this foraging crop's type?
+                    ForagingCrop foragingCrop = new ForagingCrop(ForagingCropData.getData(id));
+
+                    tile.setPlacable(foragingCrop);
+                    tile.setTileType(TileType.FORAGING_CROP);
+                    numberOfRemainingForagingCrops--;
+                }
+            }
 
             buildRandomTile(map, foragingTypes, 40, 70);
             return map;
