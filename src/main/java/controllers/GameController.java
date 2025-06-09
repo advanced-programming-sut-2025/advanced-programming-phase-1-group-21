@@ -972,8 +972,8 @@ public class GameController {
 
         for (Direction direction : Direction.values()) {
             Coord coord = player.getCoord().addCoord(direction.getCoord());
-
             Tile tile = player.getMap().getTile(coord);
+            if (tile == null) continue;
             if (tile.getTileType() == TileType.ARTISAN && tile.getPlacable(Artisan.class).isResultReady()) {
                 Artisan artisan = tile.getPlacable(Artisan.class);
 
