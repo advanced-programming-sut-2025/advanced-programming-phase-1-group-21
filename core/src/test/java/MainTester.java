@@ -5,6 +5,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import io.github.StardewValley.Main;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -656,7 +658,9 @@ public class MainTester {
 		System.setOut(new PrintStream(outputStream));
 
 		// Act
-		Main.main(null);
+		Main main = new Main();
+		main.create();
+//		Main.create();
 
 		// Assert
 		System.setOut(baseOutput);
