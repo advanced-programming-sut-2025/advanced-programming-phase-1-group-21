@@ -1,12 +1,25 @@
 plugins {
-	id "com.gradle.develocity" version "4.0.1"
+  // Applies the foojay-resolver plugin to allow automatic download of JDKs.
+  id("org.gradle.toolchains.foojay-resolver-convention") version "0.9.0"
+
+//  id "com.gradle.develocity" version "4.0.1"
 }
 
-develocity {
-	buildScan {
-		termsOfUseUrl = "https://gradle.com/help/legal-terms-of-use"
-		termsOfUseAgree = "yes"
-		publishing.onlyIf { !it.buildResult.failures.empty }
-	}
-}
-rootProject.name = "AP_Project"
+// These few lines doesn't work. I don't know why. so I just commented them.
+// They were supposed to give me a link to a page that shows information after each Runtime Exception.
+// but since I change the project to graphic model it doesn't work any more.
+
+//develocity {
+//  buildScan {
+//    termsOfUseUrl = "https://gradle.com/help/legal-terms-of-use"
+//    termsOfUseAgree = "yes"
+//    publishing.onlyIf { !it.buildResult.failures.empty }
+//  }
+//}
+
+// A list of which subprojects to load as part of the same larger project.
+// You can remove Strings from the list and reload the Gradle project
+// if you want to temporarily disable a subproject.
+include 'lwjgl3', 'core'
+
+rootProject.name = "Stardew Valley"

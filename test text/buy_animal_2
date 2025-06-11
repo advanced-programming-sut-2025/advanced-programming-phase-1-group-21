@@ -1,0 +1,50 @@
+go to login menu
+menu enter mainmenu
+login -u Ali -p Alireza123!
+menu enter mainmenu
+menu enter game
+new game sobi sobhan maryam
+1
+1
+1
+1
+walk -l (18,9)
+walk -l (19,9)
+go to village
+cheat add item -n Wood -c 10000
+cheat add item -n Stone -c 10000
+cheat add item -n Coin -c 90000
+walk -l (14, 19)
+walk -l (15, 19)
+build -a normal barn -l (0, 9)
+walk -l (6,7)
+walk -l (7,7)
+walk -l (55,15)
+.
+.
+.
+.
+walk -l (56,15)
+buy animal -a cow -n ali
+walk -l (6,7)
+walk -l (7,7)
+back home
+shepherd animals -n ali -l (1,1)
+show my animals
+pet -n ali
+show my animals
+energy show
+energy show
+energy show
+energy show
+energy show
+energy show
+energy show
+energy show
+show my animals
+collect produce -n ali
+show my animals
+cheat add item -n milkpale -c 1
+collect produce -n ali
+inventory show
+show my animals

@@ -1,0 +1,27 @@
+.gitkeep
+Users.json
+data/AnimalHouses.json
+data/Animals.json
+data/ArtisanGoods.json
+data/BombCraftingRecipes.json
+data/Categories/Fruits.json
+data/Categories/Mushrooms.json
+data/Categories/Vegetables.json
+data/Fishes.json
+data/ForagingCrops.json
+data/ForagingSeeds.json
+data/ForagingTrees.json
+data/Items/Consumable.json
+data/Items/CookingRecipes.json
+data/Items/CraftingRecipes.json
+data/Items/Items.json
+data/Items/Placeable.json
+data/Items/Salable.json
+data/Items/Sapling.json
+data/Items/Seed.json
+data/Minerals.json
+data/MixedSeeds.json
+data/Scarecrows.json
+data/Shop Recipes.json
+data/Sprinklers.json
+data/Villagers.json
