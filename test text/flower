@@ -1,0 +1,21 @@
+go to login menu
+menu enter mainmenu
+login -u Ali -p Alireza123!
+menu enter mainmenu
+menu enter game
+new game sobi sobhan maryam
+1
+1
+1
+1
+send flower -u sobhan
+set friendship -u sobhan -x 100
+set friendship -u sobhan -x 200
+send flower -u sobhan
+set friendship -u sobhan -x 300
+show friendships
+send flower -u sobhan
+cheat add item -n bouquet -c 1
+inventory show
+send flower -u sobhan
+show friendships
