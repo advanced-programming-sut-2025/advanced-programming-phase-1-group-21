@@ -2,20 +2,27 @@ package io.github.StardewValley.views.menu;
 
 import io.github.StardewValley.controllers.MainMenuController;
 import io.github.StardewValley.models.App;
-import io.github.StardewValley.models.Menu;
 import io.github.StardewValley.models.command.MainMenuCommand;
 
 import java.io.IOException;
 import java.util.regex.Matcher;
 
-public class MainMenuView {
-
-
+public class MainMenuView implements Menu {
     Matcher matcher;
     MainMenuController mainMenuController = new MainMenuController();
+    private static MainMenuView instance;
+
+    private MainMenuView() {
+    }
+
+    public static MainMenuView getInstance() {
+        if (instance == null)
+            instance = new MainMenuView();
+        return instance;
+    }
 
 
-    public void Result(String command) throws IOException {
+    public void Result(String command) {
         if((matcher = MainMenuCommand.LOGOUT.getMatcher(command)) != null) {
             System.out.println(mainMenuController.logout());
         }
@@ -29,7 +36,7 @@ public class MainMenuView {
         }
 
         else if((matcher = MainMenuCommand.EXIT_MENU.getMatcher(command)) != null){
-            App.getInstance().currentMenu = Menu.LoginMenu;
+            App.getInstance().currentMenu = LoginMenuView.getInstance();
         }
 
         else

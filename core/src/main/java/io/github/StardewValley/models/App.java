@@ -4,7 +4,7 @@ import io.github.StardewValley.controllers.DataBaseController;
 import io.github.StardewValley.models.data.DataLoader;
 import io.github.StardewValley.models.game.Game;
 import io.github.StardewValley.models.user.User;
-import io.github.StardewValley.views.menu.Colors;
+import io.github.StardewValley.views.menu.*;
 
 import java.io.*;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.Random;
 public class App implements Serializable {
     private static App instance;
 
-    public Menu currentMenu = Menu.RegisterMenu;
+    public Menu currentMenu = RegisterMenuView.getInstance();
     public Game game = null;
     public User registeredUser = null;
     public User logedInUser = null;
@@ -24,7 +24,7 @@ public class App implements Serializable {
         User user = getStayLoggedIn();
         if (user != null) {
             System.err.println("we found " + user.getUsername() + " was logged in.... logging in...");
-            currentMenu = Menu.MainMenu;
+            currentMenu = MainMenuView.getInstance();
             logedInUser = user;
         }
     }

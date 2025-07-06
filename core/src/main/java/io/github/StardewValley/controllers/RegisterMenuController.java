@@ -3,7 +3,8 @@ package io.github.StardewValley.controllers;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import io.github.StardewValley.models.App;
-import io.github.StardewValley.models.Menu;
+import io.github.StardewValley.views.menu.LoginMenuView;
+import io.github.StardewValley.views.menu.Menu;
 import io.github.StardewValley.models.result.Result;
 import io.github.StardewValley.models.result.errorTypes.AuthError;
 import io.github.StardewValley.models.result.errorTypes.UserError;
@@ -29,7 +30,7 @@ public class RegisterMenuController{
         return Result.success("Register Menu");
     }
 
-    public Result<Void> register(String username, String password, String passwordConfirm, String nickname , String email, String gender) throws IOException {
+    public Result<Void> register(String username, String password, String passwordConfirm, String nickname , String email, String gender) {
         if(findUserByUsername(username) != null)
             return Result.failure(AuthError.USER_ALREADY_EXISTS);
 
@@ -63,12 +64,12 @@ public class RegisterMenuController{
             gson.toJson(users, writer);
         } catch (IOException e) {
             System.err.println("error" + e.getMessage());
-            throw e;
+//            throw e;
         }
         return Result.success(null, "User Registered " + username + " " + password);
     }
 
-    public Result<Void> pickQuestion(String answer, String answerConfirm, String questionNumber) throws IOException {
+    public Result<Void> pickQuestion(String answer, String answerConfirm, String questionNumber) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         if(answer.equals(answerConfirm)) {
             App.getInstance().registeredUser.setSecurityQuestionID(Integer.parseInt(questionNumber));
@@ -84,7 +85,7 @@ public class RegisterMenuController{
                 gson.toJson(users, writer);
             } catch (IOException e) {
                 System.err.println("error" + e.getMessage());
-                throw e;
+//                throw e;
             }
             return Result.success(null, "Answer successfully set!");
         }
@@ -154,7 +155,7 @@ public class RegisterMenuController{
     }
 
     public Result<Void> goToLogin(){
-        App.getInstance().currentMenu = Menu.LoginMenu;
+        App.getInstance().currentMenu = LoginMenuView.getInstance();
         return Result.success(null);
     }
 

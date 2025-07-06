@@ -6,9 +6,19 @@ import io.github.StardewValley.models.command.LoginMenuCommand;
 import java.io.IOException;
 import java.util.regex.Matcher;
 
-public class LoginMenuView {
+public class LoginMenuView implements Menu {
     Matcher matcher;
     LoginMenuController loginMenuController = new LoginMenuController();
+    private static LoginMenuView instance;
+
+    private LoginMenuView() {
+    }
+
+    public static LoginMenuView getInstance() {
+        if (instance == null)
+            instance = new LoginMenuView();
+        return instance;
+    }
 
     public static String getAnswer(){
         System.out.print("Answer the question: ");
@@ -25,7 +35,7 @@ public class LoginMenuView {
         return AppView.scanner.nextLine();
     }
 
-    public void Result(String command) throws IOException {
+    public void Result(String command) {
         if((matcher = LoginMenuCommand.FORGET_PASSWORD.getMatcher(command)) != null){
             System.out.println(loginMenuController.forgetPassword(matcher.group("username")));
         }

@@ -17,9 +17,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 
-public class GameTerminalView {
+public class GameTerminalView implements Menu {
     Matcher matcher;
     GameController gameController = new GameController();
+    private static GameTerminalView instance;
+
+    private GameTerminalView() {
+    }
+
+    public static GameTerminalView getInstance() {
+        if (instance == null)
+            instance = new GameTerminalView();
+        return instance;
+    }
 
     public static void printWithColor(ArrayList<String> output) {
         for (String line : output) {
@@ -92,7 +102,7 @@ public class GameTerminalView {
         return AppView.scanner.nextLine();
     }
 
-    public void Result(String command) throws IOException {
+    public void Result(String command) {
         gameController.game = App.getInstance().game;
 
         if (gameController.isGameLockedDueToNight()) {

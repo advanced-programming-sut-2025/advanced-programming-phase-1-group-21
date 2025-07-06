@@ -44,7 +44,7 @@ public class DataBaseController {
         return null;
     }
 
-    public static void editUser(User user) throws IOException {
+    public static void editUser(User user) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         ArrayList<User> users = readAllUsers(gson , "Users.json");
 
@@ -58,7 +58,7 @@ public class DataBaseController {
             gson.toJson(users, writer);
         } catch (IOException e) {
             System.err.println("error" + e.getMessage());
-            throw e;
+//            throw e;
         }
     }
 

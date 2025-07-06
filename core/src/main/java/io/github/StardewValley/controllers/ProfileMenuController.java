@@ -3,7 +3,8 @@ package io.github.StardewValley.controllers;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.github.StardewValley.models.App;
-import io.github.StardewValley.models.Menu;
+import io.github.StardewValley.views.menu.MainMenuView;
+import io.github.StardewValley.views.menu.Menu;
 import io.github.StardewValley.models.result.Result;
 import io.github.StardewValley.models.result.errorTypes.AuthError;
 import io.github.StardewValley.models.result.errorTypes.MenuError;
@@ -20,7 +21,7 @@ public class ProfileMenuController{
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 
-    public Result<Void> changeUsername(String newUsername) throws IOException {
+    public Result<Void> changeUsername(String newUsername) {
         if(!usernameValidation(newUsername))
             return Result.failure(AuthError.INVALID_USERNAME);
         if(findUserByUsername(newUsername) != null)
@@ -36,7 +37,7 @@ public class ProfileMenuController{
                     gson.toJson(users, writer);
                 } catch (IOException e) {
                     System.err.println("error" + e.getMessage());
-                    throw e;
+//                    throw e;
                 }
 
                 return Result.success("Username changed successfully");
@@ -46,7 +47,7 @@ public class ProfileMenuController{
         return Result.success(null);
     }
 
-    public Result<Void> changePassword(String oldPassword, String newPassword) throws IOException {
+    public Result<Void> changePassword(String oldPassword, String newPassword) {
         if(App.getInstance().logedInUser.verifyPassword(oldPassword))
             return Result.failure(AuthError.PASSWORD_CONFIRM_ERROR);
         if(checkPassword(newPassword).isError())
@@ -62,7 +63,7 @@ public class ProfileMenuController{
                     gson.toJson(users, writer);
                 } catch (IOException e) {
                     System.err.println("error" + e.getMessage());
-                    throw e;
+//                    throw e;
                 }
 
                 return Result.success("Password changed successfully");
@@ -73,13 +74,13 @@ public class ProfileMenuController{
             gson.toJson(users, writer);
         } catch (IOException e) {
             System.err.println("error" + e.getMessage());
-            throw e;
+//            throw e;
         }
 
         return Result.success(null);
     }
 
-    public Result<Void> changeEmail(String newEmail) throws IOException {
+    public Result<Void> changeEmail(String newEmail) {
         if(!emailValidation(newEmail))
             return Result.failure(AuthError.INVALID_EMAIL_FORMAT);
 
@@ -93,7 +94,7 @@ public class ProfileMenuController{
                     gson.toJson(users, writer);
                 } catch (IOException e) {
                     System.err.println("error" + e.getMessage());
-                    throw e;
+//                    throw e;
                 }
 
                 return Result.success("Email changed successfully");
@@ -104,14 +105,14 @@ public class ProfileMenuController{
             gson.toJson(users, writer);
         } catch (IOException e) {
             System.err.println("error" + e.getMessage());
-            throw e;
+//            throw e;
         }
 
         return Result.success(null);
 
     }
 
-    public Result<Void> changeNickname(String newNickname) throws IOException {
+    public Result<Void> changeNickname(String newNickname) {
         ArrayList<User> users = DataBaseController.readAllUsers(gson , "Users.json");
         for(User user : users){
             if(user.getUsername().equals(App.getInstance().logedInUser.getUsername())){
@@ -122,7 +123,7 @@ public class ProfileMenuController{
                     gson.toJson(users, writer);
                 } catch (IOException e) {
                     System.err.println("error" + e.getMessage());
-                    throw e;
+//                    throw e;
                 }
 
                 return Result.success("Nickname changed successfully");
@@ -133,7 +134,7 @@ public class ProfileMenuController{
             gson.toJson(users, writer);
         } catch (IOException e) {
             System.err.println("error" + e.getMessage());
-            throw e;
+//            throw e;
         }
 
         return Result.success(null);
@@ -150,7 +151,7 @@ public class ProfileMenuController{
 
     public Result<Void> menuEnter(String menu) {
         if(menu.equals("mainmenu")){
-            App.getInstance().currentMenu = Menu.MainMenu;
+            App.getInstance().currentMenu = MainMenuView.getInstance();
             return Result.success(null);
         }
 
