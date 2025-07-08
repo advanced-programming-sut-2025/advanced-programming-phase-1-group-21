@@ -6,9 +6,19 @@ import io.github.StardewValley.models.command.GameMenuCommand;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 
-public class TradeMenuView {
+public class TradeMenuView implements Menu {
     Matcher matcher;
     TradeController tradeController = new TradeController();
+    private static TradeMenuView instance;
+
+    private TradeMenuView() {
+    }
+
+    public static TradeMenuView getInstance() {
+        if (instance == null)
+            instance = new TradeMenuView();
+        return instance;
+    }
 
     public static void printArrayList(ArrayList<String> output) {
         for(String line : output) {

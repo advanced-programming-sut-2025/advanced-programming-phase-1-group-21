@@ -10,7 +10,7 @@ import io.github.StardewValley.models.game.*;
 import io.github.StardewValley.models.map.*;
 import io.github.StardewValley.models.map.Map;
 import io.github.StardewValley.models.tool.*;
-import io.github.StardewValley.models.Menu;
+import io.github.StardewValley.views.menu.Menu;
 import io.github.StardewValley.models.animal.AnimalTypes;
 import io.github.StardewValley.models.data.AnimalData;
 import io.github.StardewValley.models.data.ArtisanGoodsData;
@@ -23,6 +23,7 @@ import io.github.StardewValley.models.result.errorTypes.GameError;
 import io.github.StardewValley.models.result.errorTypes.UserError;
 import io.github.StardewValley.models.user.Gender;
 import io.github.StardewValley.models.user.User;
+import io.github.StardewValley.views.menu.TradeMenuView;
 import org.apache.commons.lang3.tuple.Pair;
 import io.github.StardewValley.views.menu.GameTerminalView;
 
@@ -38,7 +39,7 @@ public class GameController {
     }
 
 
-    public Result<Game> createGame(String username1, String username2, String username3) throws IOException {
+    public Result<Game> createGame(String username1, String username2, String username3) {
         if ((DataBaseController.findUserByUsername(username1) == null) || (DataBaseController.findUserByUsername(username2)
                 == null) || (DataBaseController.findUserByUsername(username3) == null)) {
             return Result.failure(UserError.USER_NOT_FOUND);
@@ -131,7 +132,9 @@ public class GameController {
 
     public Result<Void> terminateGame() {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        throw new UnsupportedOperationException("Not supported yet.");
+//        throw new UnsupportedOperationException("Not supported yet.");
+        System.err.println("Terminating game is not supported yet");
+        return null;
     }
 
     public Result<Integer> getTime() {
@@ -1294,7 +1297,7 @@ public class GameController {
 
     public Result<Void> startTrade() {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        App.getInstance().currentMenu = Menu.TradeMenu;
+        App.getInstance().currentMenu = TradeMenuView.getInstance();
         return Result.success(null);
     }
 

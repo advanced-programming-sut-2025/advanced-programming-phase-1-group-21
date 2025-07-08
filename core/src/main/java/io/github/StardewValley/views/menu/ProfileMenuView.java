@@ -6,12 +6,22 @@ import io.github.StardewValley.models.command.ProfileMenuCommand;
 import java.io.IOException;
 import java.util.regex.Matcher;
 
-public class ProfileMenuView {
+public class ProfileMenuView implements Menu {
 
     Matcher matcher;
     ProfileMenuController profileMenuController = new ProfileMenuController();
+    private static ProfileMenuView instance;
 
-    public void Result(String command) throws IOException {
+    private ProfileMenuView() {
+    }
+
+    public static ProfileMenuView getInstance() {
+        if (instance == null)
+            instance = new ProfileMenuView();
+        return instance;
+    }
+
+    public void Result(String command) {
         if((matcher = ProfileMenuCommand.USERINFO.getMatcher(command)) != null){
             for(String string : profileMenuController.userInfo().getData())
                 System.out.println(string);

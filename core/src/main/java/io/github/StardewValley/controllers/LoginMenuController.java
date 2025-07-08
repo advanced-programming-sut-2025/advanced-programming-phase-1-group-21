@@ -2,15 +2,16 @@ package io.github.StardewValley.controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import io.github.StardewValley.models.App;
-import io.github.StardewValley.models.Menu;
+import io.github.StardewValley.views.menu.MainMenuView;
+import io.github.StardewValley.views.menu.Menu;
 import io.github.StardewValley.models.result.Result;
 import io.github.StardewValley.models.result.errorTypes.AuthError;
 import io.github.StardewValley.models.result.errorTypes.MenuError;
 import io.github.StardewValley.models.result.errorTypes.UserError;
 import io.github.StardewValley.models.user.User;
 import io.github.StardewValley.views.menu.LoginMenuView;
+import io.github.StardewValley.views.menu.RegisterMenuView;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class LoginMenuController{
         return Result.success("login menu", "login menu");
     }
 
-    public Result<User> login(String username, String password, boolean stayLoggedIn) throws IOException {
+    public Result<User> login(String username, String password, boolean stayLoggedIn) {
         if(findUserByUsername(username) == null)
             return Result.failure(UserError.USER_NOT_FOUND);
         if(!findUserByUsername(username).verifyPassword(password))
@@ -35,7 +36,7 @@ public class LoginMenuController{
         return Result.success(App.getInstance().logedInUser , "User logged in successfully");
     }
 
-    public Result<Void> forgetPassword(String username) throws IOException {
+    public Result<Void> forgetPassword(String username) {
         if(findUserByUsername(username) == null)
             return Result.failure(UserError.USER_NOT_FOUND);
         String answer = LoginMenuView.getAnswer();
@@ -60,7 +61,7 @@ public class LoginMenuController{
             gson.toJson(users, writer);
         } catch (IOException e) {
             System.err.println("error" + e.getMessage());
-            throw e;
+//            throw e;
         }
 
         return Result.success(null, "Password changed successfully");
@@ -68,14 +69,14 @@ public class LoginMenuController{
 
     public Result<Void> changeMenu(String menu){
         if(menu.equals("register")){
-            App.getInstance().currentMenu = Menu.RegisterMenu;
+            App.getInstance().currentMenu = RegisterMenuView.getInstance();
             return Result.success(null);
         }
 
         if(menu.equals("mainmenu")){
             if(App.getInstance().logedInUser == null)
                 return Result.failure(UserError.SHOULD_LOGIN_FIRST);
-            App.getInstance().currentMenu = Menu.MainMenu;
+            App.getInstance().currentMenu = MainMenuView.getInstance();
             return Result.success(null);
         }
         else

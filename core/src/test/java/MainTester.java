@@ -5,8 +5,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import io.github.StardewValley.Main;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -333,7 +331,7 @@ public class MainTester {
 
 		String output ="""
 				User Registered Parsa1234 Parsa123!
-				
+
 				Questions:
 				1. WHAT'S YOUR FAVORITE FOOD?
 				2. WHAT'S YOUR FAVORITE COLOR?
@@ -341,9 +339,9 @@ public class MainTester {
 				4. WHO'S YOUR FAVORITE ACTOR?
 				5. WHERE'S YOUR FAVORITE CITY?
 				6. WHERE'S YOUR FAVORITE COUNTRY?
-				
+
 				Answer successfully set!
-				
+
 				User not found
 				User not found
 				""";
@@ -368,7 +366,7 @@ public class MainTester {
 
 		String output ="""
 				User Registered Parsa1234 Parsa123!
-				
+
 				Questions:
 				1. WHAT'S YOUR FAVORITE FOOD?
 				2. WHAT'S YOUR FAVORITE COLOR?
@@ -376,9 +374,9 @@ public class MainTester {
 				4. WHO'S YOUR FAVORITE ACTOR?
 				5. WHERE'S YOUR FAVORITE CITY?
 				6. WHERE'S YOUR FAVORITE COUNTRY?
-				
+
 				Answer successfully set!
-				
+
 				Password does not match with this username
 				""";
 
@@ -396,7 +394,7 @@ public class MainTester {
 						register -u Parsa1234 -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
 						pick question -q 1 -a test -c test
 						go to login menu
-						login 
+						login
 						login -u Parsa1234 -p Parsa123!
 						menu enter mainmenu
 						menu enter profile
@@ -421,7 +419,7 @@ public class MainTester {
 
 		String output ="""
 				User Registered Parsa1234 Parsa123!
-				
+
 				Questions:
 				1. WHAT'S YOUR FAVORITE FOOD?
 				2. WHAT'S YOUR FAVORITE COLOR?
@@ -429,12 +427,12 @@ public class MainTester {
 				4. WHO'S YOUR FAVORITE ACTOR?
 				5. WHERE'S YOUR FAVORITE CITY?
 				6. WHERE'S YOUR FAVORITE COUNTRY?
-				
+
 				Answer successfully set!
-				
+
 				invalid command
 				User logged in successfully
-				
+
 				Now you are in profile menu
 				Password too short
 				Password too short
@@ -468,7 +466,7 @@ public class MainTester {
 						register -u Parsa1234 -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
 						pick question -q 1 -a test -c test
 						go to login menu
-						login 
+						login
 						login -u Parsa1234 -p Parsa123!
 						menu enter mainmenu
 						menu enter profile
@@ -507,7 +505,7 @@ public class MainTester {
 
 		String output ="""
 				User Registered Parsa1234 Parsa123!
-				
+
 				Questions:
 				1. WHAT'S YOUR FAVORITE FOOD?
 				2. WHAT'S YOUR FAVORITE COLOR?
@@ -515,12 +513,12 @@ public class MainTester {
 				4. WHO'S YOUR FAVORITE ACTOR?
 				5. WHERE'S YOUR FAVORITE CITY?
 				6. WHERE'S YOUR FAVORITE COUNTRY?
-				
+
 				Answer successfully set!
-				
+
 				invalid command
 				User logged in successfully
-				
+
 				Now you are in profile menu
 				Invalid username
 				Invalid username
@@ -568,7 +566,7 @@ public class MainTester {
 						register -u Parsa1234 -p Parsa123! Parsa123! -n nickname -e parsa@gmail.com -g Male
 						pick question -q 1 -a test -c test
 						go to login menu
-						login 
+						login
 						login -u Parsa1234 -p Parsa123!
 						menu enter mainmenu
 						menu enter profile
@@ -597,7 +595,7 @@ public class MainTester {
 
 		String output ="""
 				User Registered Parsa1234 Parsa123!
-				
+
 				Questions:
 				1. WHAT'S YOUR FAVORITE FOOD?
 				2. WHAT'S YOUR FAVORITE COLOR?
@@ -605,12 +603,12 @@ public class MainTester {
 				4. WHO'S YOUR FAVORITE ACTOR?
 				5. WHERE'S YOUR FAVORITE CITY?
 				6. WHERE'S YOUR FAVORITE COUNTRY?
-				
+
 				Answer successfully set!
-				
+
 				invalid command
 				User logged in successfully
-				
+
 				Now you are in profile menu
 				Invalid email format
 				Invalid email format
@@ -658,9 +656,7 @@ public class MainTester {
 		System.setOut(new PrintStream(outputStream));
 
 		// Act
-		Main main = new Main();
-		main.create();
-//		Main.create();
+//		Main.main(null);
 
 		// Assert
 		System.setOut(baseOutput);

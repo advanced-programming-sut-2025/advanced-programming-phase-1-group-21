@@ -2,7 +2,8 @@ package io.github.StardewValley.controllers;
 
 import io.github.StardewValley.models.App;
 import io.github.StardewValley.models.Item.Item;
-import io.github.StardewValley.models.Menu;
+import io.github.StardewValley.views.menu.GameTerminalView;
+import io.github.StardewValley.views.menu.Menu;
 import io.github.StardewValley.models.game.Player;
 import io.github.StardewValley.models.game.Relation;
 import io.github.StardewValley.models.game.Trade;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 public class TradeController{
 
     public Result<Void> backToGame() {
-        App.getInstance().currentMenu = Menu.Game;
+        App.getInstance().currentMenu = GameTerminalView.getInstance();
         return Result.success(null);
     }
 

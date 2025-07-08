@@ -8,10 +8,20 @@ import io.github.StardewValley.models.result.Result;
 import java.io.IOException;
 import java.util.regex.Matcher;
 
-public class RegisterMenuView {
+public class RegisterMenuView implements Menu {
     Matcher matcher;
     RegisterMenuController registerMenuController = new RegisterMenuController();
     GameController gameController = new GameController();
+    private static RegisterMenuView instance;
+
+    private RegisterMenuView() {
+    }
+
+    public static RegisterMenuView getInstance() {
+        if (instance == null)
+            instance = new RegisterMenuView();
+        return instance;
+    }
 
     public void printQuestions(){
         System.out.println();
@@ -25,7 +35,7 @@ public class RegisterMenuView {
         System.out.println();
     }
 
-    public void Result(String command) throws IOException {
+    public void Result(String command) {
         if((matcher = RegisterMenuCommand.REGISTER.getMatcher(command)) != null){
             Result <Void> result = registerMenuController.register(matcher.group("username") , matcher.group("password")
                     , matcher.group("passwordConfirm") , matcher.group("nickname") , matcher.group("email")

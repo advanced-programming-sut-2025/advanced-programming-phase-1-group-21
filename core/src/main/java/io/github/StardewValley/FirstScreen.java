@@ -3,13 +3,16 @@ package io.github.StardewValley;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.VisTable;
+import io.github.StardewValley.models.App;
+import io.github.StardewValley.views.menu.AppView;
 
 /** First screen of the application. Displayed after the application is created. */
 public class FirstScreen implements Screen {
@@ -40,11 +43,20 @@ public class FirstScreen implements Screen {
         table.row();
         table.add(button).pad(10);
 
-        button.addListener(e -> {
-            if (button.isPressed()) {
-                System.out.println("Game started!");
+        button.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("start");
+                AppView appView = new AppView();
+                appView.resetStatic();
+                App.reset();
+                try {
+                    appView.run();
+                }
+                catch (Exception e) {
+
+                }
             }
-            return false;
         });
 
 //        VisUI.load();

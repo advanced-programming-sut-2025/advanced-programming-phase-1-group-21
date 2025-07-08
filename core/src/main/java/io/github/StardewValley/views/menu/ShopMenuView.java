@@ -1,8 +1,18 @@
 package io.github.StardewValley.views.menu;
 
-public class ShopMenuView {
+public class ShopMenuView implements Menu {
+    private static ShopMenuView instance;
 
-    public void Result(String command){
+    private ShopMenuView() {
+    }
+
+    public static ShopMenuView getInstance() {
+        if (instance == null)
+            instance = new ShopMenuView();
+        return instance;
+    }
+
+    public void Result(String command) {
 
     }
 }
