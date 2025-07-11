@@ -323,7 +323,7 @@ public class Player implements DailyUpdate, Serializable {
     }
 
     public void leave() {
-        Pair<Map, Coord> loc = locStack.removeLast();
+        Pair<Map, Coord> loc = locStack.remove(locStack.size() - 1);
         setMap(loc.getLeft());
         setCoord(loc.getRight());
     }
