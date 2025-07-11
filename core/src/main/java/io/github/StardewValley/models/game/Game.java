@@ -26,7 +26,7 @@ public class Game implements Serializable {
 
     public Game(ArrayList<Player> players) {
         this.players = players;
-        this.currentPlayer = players.getFirst();
+        this.currentPlayer = players.get(0);
         this.gameDate = Date.createBias();
         this.gameWeather = Weather.SUNNY;
         this.nextDayWeather = calculateRandomWeather();

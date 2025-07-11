@@ -123,7 +123,7 @@ public class Map implements DailyUpdate, Serializable {
                     output.add(tile.getSprite());
                 }
             }
-            if (!output.isEmpty() && !output.getLast().equals("\n")) {
+            if (!output.isEmpty() && !output.get(output.size() - 1).equals("\n")) {
                 output.add("\n");
             }
         }

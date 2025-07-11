@@ -2361,7 +2361,6 @@ Textures/Villagers/Sebastian.png
 Textures/Weapon/Bomb.png
 Textures/Weapon/Cherry_Bomb.png
 Textures/Weapon/Mega_Bomb.png
-Users.json
 data/AnimalHouses.json
 data/Animals.json
 data/ArtisanGoods.json
