@@ -1,4 +1,4 @@
-package io.github.StardewValley.views.menu;
+package io.github.StardewValley.views.menu.CLI;
 
 import io.github.StardewValley.controllers.GameController;
 import io.github.StardewValley.models.App;
@@ -12,7 +12,6 @@ import io.github.StardewValley.models.map.Weather;
 import io.github.StardewValley.models.result.Result;
 import io.github.StardewValley.models.user.User;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Matcher;

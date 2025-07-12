@@ -3,8 +3,7 @@ package io.github.StardewValley.controllers;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import io.github.StardewValley.models.App;
-import io.github.StardewValley.views.menu.LoginMenuView;
-import io.github.StardewValley.views.menu.Menu;
+import io.github.StardewValley.views.menu.CLI.LoginMenuView;
 import io.github.StardewValley.models.result.Result;
 import io.github.StardewValley.models.result.errorTypes.AuthError;
 import io.github.StardewValley.models.result.errorTypes.UserError;
@@ -30,7 +29,7 @@ public class RegisterMenuController{
         return Result.success("Register Menu");
     }
 
-    public Result<Void> register(String username, String password, String passwordConfirm, String nickname , String email, String gender) {
+    public Result<Void> register(String username, String password, String passwordConfirm, String nickname , String email, Gender gender) {
         if(findUserByUsername(username) != null)
             return Result.failure(AuthError.USER_ALREADY_EXISTS);
 
@@ -50,12 +49,8 @@ public class RegisterMenuController{
             if (!password.equals(passwordConfirm))
                 return Result.failure(AuthError.PASSWORD_CONFIRM_ERROR);
         }
-        Gender gender1 = getGenderByName(gender);
-        if (gender1 == null) {
-            return Result.failure(AuthError.WRONG_GENDER);
-        }
 
-        User user = new User(username , password , email , nickname , getGenderByName(gender) , null , null , false);
+        User user = new User(username , password , email , nickname , gender , null , null , false);
         App.getInstance().registeredUser = user;
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         ArrayList<User> users = readAllUsers(gson, "Users.json");

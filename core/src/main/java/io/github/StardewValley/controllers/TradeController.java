@@ -2,8 +2,7 @@ package io.github.StardewValley.controllers;
 
 import io.github.StardewValley.models.App;
 import io.github.StardewValley.models.Item.Item;
-import io.github.StardewValley.views.menu.GameTerminalView;
-import io.github.StardewValley.views.menu.Menu;
+import io.github.StardewValley.views.menu.CLI.GameTerminalView;
 import io.github.StardewValley.models.game.Player;
 import io.github.StardewValley.models.game.Relation;
 import io.github.StardewValley.models.game.Trade;

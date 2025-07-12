@@ -3,27 +3,40 @@ package io.github.StardewValley;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
+import io.github.StardewValley.models.asset.Assets;
+import io.github.StardewValley.views.menu.GUI.RegisterScreen;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Main extends Game {
     private final LinkedList <Stage> layers = new LinkedList<>();
 
+
+    private static Main main;
+
+    public Main() {
+        super();
+        main = this;
+    }
+
+    public static Main getInstance() {
+        return main;
+    }
+
     @Override
     public void create() {
-        setScreen(new FirstScreen());
-//        try {
-//            AppView appView = new AppView();
-//            appView.resetStatic();
-//            App.reset();
-//            appView.run();
-//        }
-//        catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        Assets.load();
+        Assets.finishLoading();
+        setScreen(new RegisterScreen());
     }
 
     public void addStage(Stage stage) {
@@ -58,6 +71,7 @@ public class Main extends Game {
 
     @Override
     public void setScreen (Screen screen) {
+        System.err.println("Switching to " + screen.getClass().getSimpleName());
         if (this.screen != null)
             this.screen.dispose();
 
@@ -68,3 +82,4 @@ public class Main extends Game {
         }
     }
 }
+

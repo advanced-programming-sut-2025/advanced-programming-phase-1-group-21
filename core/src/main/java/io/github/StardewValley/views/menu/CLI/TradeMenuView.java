@@ -1,4 +1,4 @@
-package io.github.StardewValley.views.menu;
+package io.github.StardewValley.views.menu.CLI;
 
 import io.github.StardewValley.controllers.TradeController;
 import io.github.StardewValley.models.command.GameMenuCommand;

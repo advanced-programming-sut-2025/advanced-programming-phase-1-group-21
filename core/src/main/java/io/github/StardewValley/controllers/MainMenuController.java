@@ -1,14 +1,11 @@
 package io.github.StardewValley.controllers;
 
 import io.github.StardewValley.models.App;
-import io.github.StardewValley.views.menu.GameTerminalView;
-import io.github.StardewValley.views.menu.Menu;
+import io.github.StardewValley.views.menu.CLI.GameTerminalView;
 import io.github.StardewValley.models.result.Result;
 import io.github.StardewValley.models.user.User;
-import io.github.StardewValley.views.menu.ProfileMenuView;
-import io.github.StardewValley.views.menu.RegisterMenuView;
-
-import java.io.IOException;
+import io.github.StardewValley.views.menu.CLI.ProfileMenuView;
+import io.github.StardewValley.views.menu.CLI.RegisterMenuView;
 
 public class MainMenuController{
 

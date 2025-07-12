@@ -1,17 +1,16 @@
-package io.github.StardewValley.views.menu;
+package io.github.StardewValley.views.menu.CLI;
 
 import io.github.StardewValley.controllers.GameController;
 import io.github.StardewValley.controllers.RegisterMenuController;
 import io.github.StardewValley.models.command.RegisterMenuCommand;
 import io.github.StardewValley.models.result.Result;
+import io.github.StardewValley.models.user.Gender;
 
-import java.io.IOException;
 import java.util.regex.Matcher;
 
 public class RegisterMenuView implements Menu {
     Matcher matcher;
     RegisterMenuController registerMenuController = new RegisterMenuController();
-    GameController gameController = new GameController();
     private static RegisterMenuView instance;
 
     private RegisterMenuView() {
@@ -39,7 +38,7 @@ public class RegisterMenuView implements Menu {
         if((matcher = RegisterMenuCommand.REGISTER.getMatcher(command)) != null){
             Result <Void> result = registerMenuController.register(matcher.group("username") , matcher.group("password")
                     , matcher.group("passwordConfirm") , matcher.group("nickname") , matcher.group("email")
-                    , matcher.group("gender"));
+                    , Gender.getGenderByName(matcher.group("gender")));
             System.out.println(result);
             if(!result.isError())
                 printQuestions();

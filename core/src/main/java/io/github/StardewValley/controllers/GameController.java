@@ -10,7 +10,6 @@ import io.github.StardewValley.models.game.*;
 import io.github.StardewValley.models.map.*;
 import io.github.StardewValley.models.map.Map;
 import io.github.StardewValley.models.tool.*;
-import io.github.StardewValley.views.menu.Menu;
 import io.github.StardewValley.models.animal.AnimalTypes;
 import io.github.StardewValley.models.data.AnimalData;
 import io.github.StardewValley.models.data.ArtisanGoodsData;
@@ -23,11 +22,10 @@ import io.github.StardewValley.models.result.errorTypes.GameError;
 import io.github.StardewValley.models.result.errorTypes.UserError;
 import io.github.StardewValley.models.user.Gender;
 import io.github.StardewValley.models.user.User;
-import io.github.StardewValley.views.menu.TradeMenuView;
+import io.github.StardewValley.views.menu.CLI.TradeMenuView;
 import org.apache.commons.lang3.tuple.Pair;
-import io.github.StardewValley.views.menu.GameTerminalView;
+import io.github.StardewValley.views.menu.CLI.GameTerminalView;
 
-import java.io.IOException;
 import java.util.*;
 
 public class GameController {
