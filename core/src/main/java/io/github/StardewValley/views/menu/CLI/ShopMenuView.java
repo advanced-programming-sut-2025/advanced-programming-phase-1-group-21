@@ -1,4 +1,4 @@
-package io.github.StardewValley.views.menu;
+package io.github.StardewValley.views.menu.CLI;
 
 public class ShopMenuView implements Menu {
     private static ShopMenuView instance;

@@ -1,9 +1,8 @@
-package io.github.StardewValley.views.menu;
+package io.github.StardewValley.views.menu.CLI;
 
 import io.github.StardewValley.controllers.ProfileMenuController;
 import io.github.StardewValley.models.command.ProfileMenuCommand;
 
-import java.io.IOException;
 import java.util.regex.Matcher;
 
 public class ProfileMenuView implements Menu {

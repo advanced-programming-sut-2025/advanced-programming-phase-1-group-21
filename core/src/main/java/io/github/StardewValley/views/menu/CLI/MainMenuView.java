@@ -1,10 +1,9 @@
-package io.github.StardewValley.views.menu;
+package io.github.StardewValley.views.menu.CLI;
 
 import io.github.StardewValley.controllers.MainMenuController;
 import io.github.StardewValley.models.App;
 import io.github.StardewValley.models.command.MainMenuCommand;
 
-import java.io.IOException;
 import java.util.regex.Matcher;
 
 public class MainMenuView implements Menu {

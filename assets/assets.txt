@@ -2386,3 +2386,10 @@ data/Scarecrows.json
 data/Shop Recipes.json
 data/Sprinklers.json
 data/Villagers.json
+menu.png
+skin/default.fnt
+skin/font-small.fnt
+skin/uiskin.atlas
+skin/uiskin.json
+skin/uiskin.png
+sound-effects/click.wav

@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.VisTable;
 import io.github.StardewValley.models.App;
-import io.github.StardewValley.views.menu.AppView;
+import io.github.StardewValley.views.menu.CLI.AppView;
 
 /** First screen of the application. Displayed after the application is created. */
 public class FirstScreen implements Screen {
@@ -25,7 +25,7 @@ public class FirstScreen implements Screen {
     public void show() {
         // Initialize the VisUI skin
 //        VisUI.load();
-        VisUI.load(VisUI.SkinScale.X2);
+        //VisUI.load(VisUI.SkinScale.X2);
 
 
         stage = new Stage(new ScreenViewport());

@@ -1,10 +1,15 @@
 package io.github.StardewValley.models;
 
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.utils.Array;
 import io.github.StardewValley.controllers.DataBaseController;
 import io.github.StardewValley.models.data.DataLoader;
 import io.github.StardewValley.models.game.Game;
 import io.github.StardewValley.models.user.User;
-import io.github.StardewValley.views.menu.*;
+import io.github.StardewValley.views.menu.CLI.Colors;
+import io.github.StardewValley.views.menu.CLI.MainMenuView;
+import io.github.StardewValley.views.menu.CLI.Menu;
+import io.github.StardewValley.views.menu.CLI.RegisterMenuView;
 
 import java.io.*;
 import java.util.List;
@@ -14,6 +19,7 @@ public class App implements Serializable {
     private static App instance;
 
     public Menu currentMenu = RegisterMenuView.getInstance();
+    public Screen currentScreen = null;
     public Game game = null;
     public User registeredUser = null;
     public User logedInUser = null;
@@ -60,4 +66,15 @@ public class App implements Serializable {
     }
 
     public Random getRandom() { return random; }
+
+    public Array<String> getSecurityQuestions() {
+        return new Array<>(new String[] {
+                "1. WHAT'S YOUR FAVORITE FOOD?",
+                "2. WHAT'S YOUR FAVORITE COLOR?",
+                "3. WHO'S YOUR FAVORITE SINGER?",
+                "4. WHO'S YOUR FAVORITE ACTOR?",
+                "5. WHERE'S YOUR FAVORITE CITY?",
+                "6. WHERE'S YOUR FAVORITE COUNTRY?"
+        });
+    }
 }
