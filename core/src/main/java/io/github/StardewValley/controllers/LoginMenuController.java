@@ -35,6 +35,38 @@ public class LoginMenuController{
         return Result.success(App.getInstance().logedInUser , "User logged in successfully");
     }
 
+    public String getQuestion(String username) {
+        return findUserByUsername(username).getSecurityAnswer();
+    }
+
+    public Result<Void> forgetPass(String username, String answer, String password, String passwordConfirm) {
+        if(findUserByUsername(username) == null)
+            return Result.failure(UserError.USER_NOT_FOUND);
+        if(!answer.equals(getQuestion(username)))
+            return Result.failure(UserError.INCORRECT_ANSWER);
+        if(checkPassword(password).isError())
+            return checkPassword(password);
+
+        if(!password.equals(passwordConfirm))
+            return Result.failure(AuthError.PASSWORD_CONFIRM_ERROR);
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        ArrayList<User> users = readAllUsers(gson , "Users.json");
+        for(User user : users){
+            if(user.getUsername().equals(username))
+                user.setPassword(password);
+        }
+
+        try (FileWriter writer = new FileWriter("Users.json")) {
+            gson.toJson(users, writer);
+        } catch (IOException e) {
+            System.err.println("error" + e.getMessage());
+//            throw e;
+        }
+
+        return Result.success(null, "Password changed successfully");
+    }
+
     public Result<Void> forgetPassword(String username) {
         if(findUserByUsername(username) == null)
             return Result.failure(UserError.USER_NOT_FOUND);
