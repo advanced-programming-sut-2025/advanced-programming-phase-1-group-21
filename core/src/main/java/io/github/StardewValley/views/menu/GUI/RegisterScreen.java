@@ -116,6 +116,7 @@ public class RegisterScreen implements Screen {
                 return false;
             }
         });
+        UIUtil.goToConsole(multiplexer);
 
         multiplexer.addProcessor(stage);
         Gdx.input.setInputProcessor(multiplexer);

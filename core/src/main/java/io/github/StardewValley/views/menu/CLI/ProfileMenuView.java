@@ -50,4 +50,33 @@ public class ProfileMenuView implements Menu {
         else
             System.out.println("Invalid command");
     }
+
+    public String ResultText(String command) {
+        if((matcher = ProfileMenuCommand.USERINFO.getMatcher(command)) != null){
+            for(String string : profileMenuController.userInfo().getData())
+                return string.toString();
+        }
+
+        else if((matcher = ProfileMenuCommand.CHANGE_USERNAME.getMatcher(command)) != null){
+            return profileMenuController.changeUsername(matcher.group("newUsername")).toString();
+        }
+
+        else if((matcher = ProfileMenuCommand.CHANGE_PASSWORD.getMatcher(command)) != null){
+            System.out.println(profileMenuController.changePassword(matcher.group("oldPassword"),
+                    matcher.group("newPassword")));
+        }
+
+        else if((matcher = ProfileMenuCommand.CHANGE_EMAIL.getMatcher(command)) != null){
+            return profileMenuController.changeEmail(matcher.group("newEmail")).toString();
+        }
+
+        else if((matcher = ProfileMenuCommand.CHANGE_NICKNAME.getMatcher(command)) != null){
+            return profileMenuController.changeNickname(matcher.group("newNickname")).toString();
+        }
+
+        else if((matcher = ProfileMenuCommand.ENTER_MENU.getMatcher(command)) != null){
+            return profileMenuController.menuEnter(matcher.group("menu")).toString();
+        }
+            return "Invalid command".toString();
+    }
 }

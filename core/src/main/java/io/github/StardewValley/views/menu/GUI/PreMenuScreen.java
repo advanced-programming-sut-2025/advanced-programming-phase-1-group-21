@@ -63,6 +63,11 @@ public class PreMenuScreen implements Screen {
         // Add buttons to layout
         table.add(loginButton).width(200).height(50).pad(10).row();
         table.add(registerButton).width(200).height(50).pad(10).row();
+
+        InputMultiplexer multiplexer = new InputMultiplexer();
+        UIUtil.goToConsole(multiplexer);
+        multiplexer.addProcessor(stage);
+        Gdx.input.setInputProcessor(multiplexer);
     }
 
     @Override

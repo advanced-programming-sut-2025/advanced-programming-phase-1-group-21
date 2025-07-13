@@ -56,4 +56,32 @@ public class TradeMenuView implements Menu {
         }
 
     }
+
+    public String ResultText(String command){
+        if((matcher = GameMenuCommand.TRADE_WITH_MONEY.getMatcher(command)) != null) {
+            System.out.println(tradeController.tradeWithMoney(matcher.group("username") , matcher.group("type")
+                    , matcher.group("item") , Integer.parseInt(matcher.group("amount")) , Integer.parseInt
+                            (matcher.group("price"))));
+        }
+
+        else if((matcher = GameMenuCommand.TRADE_WITH_ITEM.getMatcher(command)) != null) {
+            System.out.println(tradeController.tradeWithItem(matcher.group("username") , matcher.group("type")
+                    , matcher.group("item1") , Integer.parseInt(matcher.group("amount1")) ,
+                    matcher.group("item2") , Integer.parseInt(matcher.group("amount2"))));
+        }
+
+        else if((matcher = GameMenuCommand.TRADE_RESPONSE.getMatcher(command)) != null) {
+            return tradeController.tradeResponse(matcher.group("username") , matcher.group("response") , Integer.parseInt(matcher.group("ID"))).toString();
+        }
+
+        else if((matcher = GameMenuCommand.TRADE_HISTORY.getMatcher(command)) != null) {
+            printArrayList(tradeController.tradeHistory().getData());
+        }
+
+        else if((matcher = GameMenuCommand.BACK_TO_THE_GAME.getMatcher(command)) != null) {
+            return tradeController.backToGame().toString();
+        }
+            return "Invalid command".toString();
+
+    }
 }

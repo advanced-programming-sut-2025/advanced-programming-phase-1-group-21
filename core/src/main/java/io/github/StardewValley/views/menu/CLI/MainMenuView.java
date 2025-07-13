@@ -42,4 +42,23 @@ public class MainMenuView implements Menu {
             System.out.println("invalid command");
     }
 
+    public String ResultText(String command) {
+        if((matcher = MainMenuCommand.LOGOUT.getMatcher(command)) != null) {
+            return mainMenuController.logout().toString();
+        }
+
+        else if((matcher = MainMenuCommand.SHOW_CURRENT_MENU.getMatcher(command)) != null){
+            return mainMenuController.showCurrentMenu().toString();
+        }
+
+        else if((matcher = MainMenuCommand.ENTER_MENU.getMatcher(command)) != null){
+            return mainMenuController.enterMenu(matcher.group("menu").trim()).toString();
+        }
+
+        else if((matcher = MainMenuCommand.EXIT_MENU.getMatcher(command)) != null){
+            App.getInstance().currentMenu = LoginMenuView.getInstance();
+        }
+            return "invalid command".toString();
+    }
+
 }

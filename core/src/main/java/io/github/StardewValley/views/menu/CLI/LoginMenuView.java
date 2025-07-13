@@ -57,4 +57,26 @@ public class LoginMenuView implements Menu {
             System.out.println("invalid command");
     }
 
+    public String ResultText(String command) {
+        if((matcher = LoginMenuCommand.FORGET_PASSWORD.getMatcher(command)) != null){
+            return loginMenuController.forgetPassword(matcher.group("username")).toString();
+        }
+
+        else if((matcher = LoginMenuCommand.SHOW_CURRENT_MENU.getMatcher(command)) != null){
+            return loginMenuController.showCurrentMenu().toString();
+        }
+
+        else if((matcher = LoginMenuCommand.LOGIN.getMatcher(command)) != null){
+            boolean stayLoggedIn = matcher.group("stay") != null;
+            System.out.println(loginMenuController.login(matcher.group("username") ,
+                    matcher.group("password"), stayLoggedIn));
+        }
+
+        else if((matcher = LoginMenuCommand.ENTER_MENU.getMatcher(command)) != null){
+            return loginMenuController.changeMenu(matcher.group("menu")).toString();
+        }
+
+            return "invalid command";
+    }
+
 }
