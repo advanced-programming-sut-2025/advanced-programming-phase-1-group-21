@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import io.github.StardewValley.models.asset.Assets;
+import io.github.StardewValley.views.menu.GUI.PreMenuScreen;
 import io.github.StardewValley.views.menu.GUI.RegisterScreen;
 
 import java.io.FileInputStream;
@@ -36,7 +37,7 @@ public class Main extends Game {
     public void create() {
         Assets.load();
         Assets.finishLoading();
-        setScreen(new RegisterScreen());
+        setScreen(new PreMenuScreen());
     }
 
     public void addStage(Stage stage) {

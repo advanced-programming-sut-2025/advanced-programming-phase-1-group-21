@@ -11,30 +11,25 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import io.github.StardewValley.Main;
-import io.github.StardewValley.controllers.RegisterMenuController;
-import io.github.StardewValley.models.App;
+import io.github.StardewValley.controllers.LoginMenuController;
 import io.github.StardewValley.models.asset.Assets;
 import io.github.StardewValley.models.result.Result;
-import io.github.StardewValley.models.user.Gender;
+import io.github.StardewValley.models.user.User;
 
-public class RegisterScreen implements Screen {
+public class LoginScreen implements Screen {
+
     private final Main game;
-    private final RegisterMenuController controller;
+    private final LoginMenuController controller;
     private Stage stage;
-    private TextField usernameField;
-    private TextField nicknameField;
 
+    private TextField usernameField;
     private TextField passwordField;
-    private TextField emailField;
-    private TextField repeatPasswordField;
-    private SelectBox<String> securityQuestionBox;
-    private SelectBox<Gender> genderBox;
-    private TextField securityAnswerField;
+    private CheckBox stayLoggedInBox;
     private Label messageLabel;
 
-    public RegisterScreen() {
+    public LoginScreen() {
         this.game = Main.getInstance();
-        this.controller = new RegisterMenuController();
+        this.controller = new LoginMenuController();
         createUI();
     }
 
@@ -42,67 +37,50 @@ public class RegisterScreen implements Screen {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
+        Skin skin = Assets.getSkin();
         Texture backgroundTexture = Assets.getMenuBackground();
+
         Image backgroundImage = new Image(new TextureRegionDrawable(new TextureRegion(backgroundTexture)));
         backgroundImage.setFillParent(true);
         stage.addActor(backgroundImage);
 
-        Skin skin = Assets.getSkin();
-
-        Table table = new Table();
+        Table table = new Table(skin);
         table.setFillParent(true);
         table.center();
         stage.addActor(table);
 
         usernameField = new TextField("", skin);
-        table.add(new Label("username", skin)).right().pad(10);
+        table.add(new Label("Username", skin)).right().pad(10);
         table.add(usernameField).width(200).row();
-
-        nicknameField = new TextField("", skin);
-        table.add(new Label("nickname", skin)).right().pad(10);
-        table.add(nicknameField).width(200).row();
-
-        emailField = new TextField("", skin);
-        table.add(new Label("email", skin)).right().pad(10);
-        table.add(emailField).width(200).row();
 
         passwordField = new TextField("", skin);
         passwordField.setPasswordMode(true);
         passwordField.setPasswordCharacter('*');
-        table.add(new Label("password", skin)).right().pad(10);
+        table.add(new Label("Password", skin)).right().pad(10);
         table.add(passwordField).width(200).row();
 
-        repeatPasswordField = new TextField("", skin);
-        repeatPasswordField.setPasswordMode(true);
-        repeatPasswordField.setPasswordCharacter('*');
-        table.add(new Label("repeat password", skin)).right().pad(10);
-        table.add(repeatPasswordField).width(200).row();
-
-        genderBox = new SelectBox<>(skin);
-        genderBox.setItems(Gender.values());
-        table.add(new Label("gender", skin)).right().pad(10);
-        table.add(genderBox).width(200).row();
-
-        securityQuestionBox = new SelectBox<>(skin);
-        securityQuestionBox.setItems(App.getInstance().getSecurityQuestions().toArray());
-        table.add(new Label("security question", skin)).right().pad(10);
-        table.add(securityQuestionBox).width(200).row();
-
-        securityAnswerField = new TextField("", skin);
-        table.add(new Label("security answer", skin)).right().pad(10);
-        table.add(securityAnswerField).width(200).row();
+        stayLoggedInBox = new CheckBox("Stay Logged In", skin);
+        table.add(stayLoggedInBox).colspan(2).left().pad(10).row();
 
         messageLabel = new Label("", skin);
         table.add(messageLabel).colspan(2).center().padTop(10).row();
 
-        TextButton registerButton = new TextButton("register", skin);
-        registerButton.addListener(new ClickListener() {
+        TextButton loginButton = new TextButton("Login", skin);
+        TextButton forgetButton = new TextButton("Forgot Password", skin);
+
+        loginButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                handleRegistration();
+                handleLogin();
             }
         });
-        table.add(registerButton).colspan(2).center().padTop(20).row();
+
+        forgetButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new ForgetPasswordScreen());
+            }
+        });
 
         InputMultiplexer multiplexer = new InputMultiplexer();
 
@@ -119,29 +97,28 @@ public class RegisterScreen implements Screen {
 
         multiplexer.addProcessor(stage);
         Gdx.input.setInputProcessor(multiplexer);
+
+        Table buttonTable = new Table();
+        buttonTable.add(loginButton).padRight(20);
+        buttonTable.add(forgetButton);
+
+        table.add(buttonTable).colspan(2).center().padTop(20).row();
     }
 
-    private void handleRegistration() {
+    private void handleLogin() {
         String username = usernameField.getText();
         String password = passwordField.getText();
-        String repeatPassword = repeatPasswordField.getText();
-        String securityQuestion = securityQuestionBox.getSelected();
-        String securityAnswer = securityAnswerField.getText();
-        String nickname = nicknameField.getText();
-        Gender gender = genderBox.getSelected();
-        String email = emailField.getText();
+        boolean stayLoggedIn = stayLoggedInBox.isChecked();
 
-        Result<Void> result = controller.register(username, password, repeatPassword, nickname, email, gender);
-
+        Result<User> result = controller.login(username, password, stayLoggedIn);
         if (result.isSuccess()) {
-            showMessage("success", Color.GREEN);
-            //game.setScreen(new LoginScreen());
+            // game.setScreen(new MainMenuScreen());
         } else {
             showMessage(result.getMessage(), Color.RED);
         }
     }
 
-    public void showMessage(String msg, Color color) {
+    private void showMessage(String msg, Color color) {
         messageLabel.setText(msg);
         messageLabel.setColor(color);
     }
