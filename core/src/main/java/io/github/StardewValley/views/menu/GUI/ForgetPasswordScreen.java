@@ -112,6 +112,8 @@ public class ForgetPasswordScreen implements Screen {
 
         multiplexer.addProcessor(stage);
         Gdx.input.setInputProcessor(multiplexer);
+
+        UIUtil.goToConsole(multiplexer);
     }
 
     private void fetchSecurityQuestion() {

@@ -103,6 +103,7 @@ public class LoginScreen implements Screen {
         buttonTable.add(forgetButton);
 
         table.add(buttonTable).colspan(2).center().padTop(20).row();
+        UIUtil.goToConsole(multiplexer);
     }
 
     private void handleLogin() {

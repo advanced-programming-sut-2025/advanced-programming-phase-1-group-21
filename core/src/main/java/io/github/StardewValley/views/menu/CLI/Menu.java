@@ -10,4 +10,6 @@ public interface Menu extends Serializable {
 //    TradeMenu,
 //    ProfileMenu;
     void Result(String command);
+
+    String ResultText(String command);
 }

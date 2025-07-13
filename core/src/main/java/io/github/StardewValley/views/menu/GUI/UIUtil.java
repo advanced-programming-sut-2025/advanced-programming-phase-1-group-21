@@ -5,8 +5,10 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import io.github.StardewValley.Main;
 import io.github.StardewValley.models.asset.Assets;
 import io.github.StardewValley.models.asset.GameSound;
+import io.github.StardewValley.views.console.ConsoleScreen;
 
 import javax.swing.*;
 import java.io.File;
@@ -17,6 +19,19 @@ public class UIUtil {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 GameSound.CLICK.play(Assets.getVolume());
+            }
+        });
+    }
+
+    public static void goToConsole(InputMultiplexer multiplexer) {
+        multiplexer.addProcessor(new InputAdapter() {
+            @Override
+            public boolean keyDown(int keycode) {
+                if (keycode == Input.Keys.T) {
+                    Main.getInstance().setScreen(new ConsoleScreen());
+                    return true;
+                }
+                return false;
             }
         });
     }

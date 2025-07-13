@@ -61,4 +61,31 @@ public class RegisterMenuView implements Menu {
             System.out.println("invalid command");
 
     }
+
+    public String ResultText(String command) {
+        if((matcher = RegisterMenuCommand.REGISTER.getMatcher(command)) != null){
+            Result <Void> result = registerMenuController.register(matcher.group("username") , matcher.group("password")
+                    , matcher.group("passwordConfirm") , matcher.group("nickname") , matcher.group("email")
+                    , Gender.getGenderByName(matcher.group("gender")));
+            if (!result.isError())
+                printQuestions();
+            else
+                return result.toString();
+        }
+
+        else if((matcher = RegisterMenuCommand.PICK_QUESTION.getMatcher(command)) != null){
+            System.out.println(registerMenuController.pickQuestion(matcher.group("answer") ,
+                    matcher.group("answerConfirm") , matcher.group("questionNumber")));
+        }
+
+        else if((matcher = RegisterMenuCommand.SHOW_CURRENT_MENU.getMatcher(command)) != null){
+            return registerMenuController.showCurrentMenu().toString();
+        }
+
+        else if((matcher = RegisterMenuCommand.GO_TO_LOGIN.getMatcher(command)) != null){
+            return registerMenuController.goToLogin().toString();
+        }
+            return "invalid command".toString();
+
+    }
 }
