@@ -2,12 +2,12 @@ package io.github.StardewValley.controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import io.github.StardewValley.models.App;
+import io.github.StardewValley.App;
 import io.github.StardewValley.views.menu.CLI.MainMenuView;
-import io.github.StardewValley.models.result.Result;
-import io.github.StardewValley.models.result.errorTypes.AuthError;
-import io.github.StardewValley.models.result.errorTypes.MenuError;
-import io.github.StardewValley.models.user.User;
+import models.result.Result;
+import models.result.errorTypes.AuthError;
+import models.result.errorTypes.MenuError;
+import models.user.User;
 
 import java.io.FileWriter;
 import java.io.IOException;

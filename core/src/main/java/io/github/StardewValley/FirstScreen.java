@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.VisTable;
-import io.github.StardewValley.models.App;
 import io.github.StardewValley.views.menu.CLI.AppView;
 
 /** First screen of the application. Displayed after the application is created. */

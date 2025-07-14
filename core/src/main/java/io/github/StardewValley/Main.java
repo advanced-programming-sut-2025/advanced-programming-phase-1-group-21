@@ -1,22 +1,14 @@
 package io.github.StardewValley;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
-import io.github.StardewValley.models.asset.Assets;
+import io.github.StardewValley.asset.Assets;
 import io.github.StardewValley.views.menu.GUI.PreMenuScreen;
-import io.github.StardewValley.views.menu.GUI.RegisterScreen;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.LinkedList;
-import java.util.List;
 
 public class Main extends Game {
     private final LinkedList <Stage> layers = new LinkedList<>();

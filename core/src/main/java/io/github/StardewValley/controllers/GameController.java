@@ -1,28 +1,29 @@
 package io.github.StardewValley.controllers;
 
-import io.github.StardewValley.models.App;
-import io.github.StardewValley.models.Item.*;
-import io.github.StardewValley.models.crop.FertilizerType;
-import io.github.StardewValley.models.crop.Plantable;
-import io.github.StardewValley.models.crop.PlantedSeed;
-import io.github.StardewValley.models.crop.PlantedTree;
-import io.github.StardewValley.models.game.*;
-import io.github.StardewValley.models.map.*;
-import io.github.StardewValley.models.map.Map;
-import io.github.StardewValley.models.tool.*;
-import io.github.StardewValley.models.animal.AnimalTypes;
-import io.github.StardewValley.models.data.AnimalData;
-import io.github.StardewValley.models.data.ArtisanGoodsData;
-import io.github.StardewValley.models.data.items.SeedData;
-import io.github.StardewValley.models.skill.SkillType;
-import io.github.StardewValley.models.animal.Animal;
-import io.github.StardewValley.models.result.Result;
-import io.github.StardewValley.models.result.errorTypes.AuthError;
-import io.github.StardewValley.models.result.errorTypes.GameError;
-import io.github.StardewValley.models.result.errorTypes.UserError;
-import io.github.StardewValley.models.user.Gender;
-import io.github.StardewValley.models.user.User;
+import io.github.StardewValley.App;
+
+import data.AnimalData;
+import data.ArtisanGoodsData;
+import data.items.SeedData;
 import io.github.StardewValley.views.menu.CLI.TradeMenuView;
+import models.Item.*;
+import models.animal.Animal;
+import models.animal.AnimalTypes;
+import models.crop.FertilizerType;
+import models.crop.Plantable;
+import models.crop.PlantedSeed;
+import models.crop.PlantedTree;
+import models.game.*;
+import models.map.*;
+import models.map.Map;
+import models.result.Result;
+import models.result.errorTypes.AuthError;
+import models.result.errorTypes.GameError;
+import models.result.errorTypes.UserError;
+import models.skill.SkillType;
+import models.tool.*;
+import models.user.Gender;
+import models.user.User;
 import org.apache.commons.lang3.tuple.Pair;
 import io.github.StardewValley.views.menu.CLI.GameTerminalView;
 
@@ -239,7 +240,7 @@ public class GameController {
         } else if (tile.getPlacable(Building.class) != null) {
             if (!isNeigh) return Result.failure(GameError.YOU_ARE_DISTANT);
             Building building = tile.getPlacable(Building.class);
-            if (building.canEnter()) {
+            if (building.canEnter(game.getGameDate())) {
                 player.enterBuilding(building);
             } else return Result.failure(GameError.CANT_ENTER);
         } else if (!coord.equals(player.getCoord())) {
@@ -304,7 +305,7 @@ public class GameController {
         if (item == null) return Result.failure(GameError.NOT_FOUND);
 
         Refrigerator r = null;
-        for (Tile tile : game.getCurrentPlayer().getNeighborTiles())
+        for (Tile tile : game.getCurrentPlayer().getNeighborTiles(game))
             if (tile.getTileType() == TileType.REFRIGERATOR)
                 r = tile.getPlacable(Refrigerator.class);
         if (r == null) return Result.failure(GameError.YOU_ARE_DISTANT);
@@ -393,7 +394,7 @@ public class GameController {
 
     public Result<Tool> equipTool(String toolName) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        if (game.getCurrentPlayer().getInventory().toolEquip(toolName)) {
+        if (game.getCurrentPlayer().getInventory().toolEquip(game.getCurrentPlayer(), toolName)) {
             return Result.success("Now " + toolName + " is in your hands");
         }
 
@@ -409,7 +410,7 @@ public class GameController {
 
     public Result<ArrayList<String>> showAvailableTools() {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        return Result.success(game.getCurrentPlayer().getInventory().showAvailableTools());
+        return Result.success(game.getCurrentPlayer().getInventory().showAvailableTools(game.getCurrentPlayer()));
     }
 
     public Result<Void> upgradeTool(String toolName) {
@@ -428,7 +429,7 @@ public class GameController {
         String recipe = t.getToolMaterialType().getNextToolName();
         if (recipe == null) return Result.failure(GameError.NOT_UPGRADABLE);
 
-        Result<Void> r = shop.prepareBuy(recipe, 1, inventory);
+        Result<Void> r = shop.prepareBuy(recipe, 1, inventory, game);
         if (r.isError()) return r;
 
         t.setToolMaterialType(t.getToolMaterialType().getNextType());
@@ -452,7 +453,7 @@ public class GameController {
             return Result.failure(GameError.TOOL_NOT_FOUND);
 
         Tool tool = (Tool) game.getCurrentPlayer().getItemInHand();
-        Result<Item> item = tool.use(destinyTile);
+        Result<Item> item = tool.use(destinyTile, game);
         if (item.isError())
             return item;
         if (item == null)
@@ -552,7 +553,7 @@ public class GameController {
         Tool tool = (Tool) game.getCurrentPlayer().getItemInHand();
         if (tool == null || tool.getToolType() != ToolType.WATERING_CAN)
             return Result.failure(GameError.TOOL_NOT_IN_HAND);
-        return tool.use(coord);
+        return tool.use(coord, game);
     }
 
     public Result<List<Recipe>> showCraftingRecipes() {
@@ -606,7 +607,7 @@ public class GameController {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         Coord coord = game.getCurrentPlayer().getCoord().addCoord(direction.getCoord());
         Map map = game.getCurrentPlayer().getMap();
-        Tile tile = map.getTile(coord);
+        Tile tile = ((models.map.Map) map).getTile(coord);
         if (tile == null || !tile.isEmpty()) return Result.failure(GameError.TILE_IS_NOT_EMPTY);
         Placeable placeable = (Placeable) Item.build(item, 1);
         placeable.onPlace(tile);
@@ -706,7 +707,7 @@ public class GameController {
 
     public Result<Void> pet(String name) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        List<Tile> neigh = game.getCurrentPlayer().getNeighborTiles();
+        List<Tile> neigh = game.getCurrentPlayer().getNeighborTiles(game);
 
         for (Tile tile : neigh) {
             Animal animal = tile.getPlacable(Animal.class);
@@ -859,7 +860,7 @@ public class GameController {
         if (!inventory.canRemoveItem(item)) return Result.failure(GameError.NOT_ENOUGH_ITEMS);
 
         ShippingBin shippingBin = null;
-        for (Tile tile : game.getCurrentPlayer().getNeighborTiles())
+        for (Tile tile : game.getCurrentPlayer().getNeighborTiles(game))
             if (tile.getPlacable(ShippingBin.class) != null)
                 shippingBin = tile.getPlacable(ShippingBin.class);
         if (shippingBin == null)
@@ -887,7 +888,7 @@ public class GameController {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
 
         boolean isNearLake = false;
-        for (Tile tile : game.getCurrentPlayer().getNeighborTiles()) {
+        for (Tile tile : game.getCurrentPlayer().getNeighborTiles(game)) {
             if (tile.getPlacable(Lake.class) != null)
                 isNearLake = true;
         }
@@ -910,10 +911,10 @@ public class GameController {
         if (game.getWeather().equals(Weather.STORM))
             amount *= 0.5;
         if (fishingPole.equals("training")) {
-            player.getInventory().addItem(Item.build(FishingPole.getCheapestFish(), Math.min(6, (int) amount)));
+            player.getInventory().addItem(Item.build(FishingPole.getCheapestFish(game), Math.min(6, (int) amount)));
             return Result.success(null);
         } else if (fishingPole.equals("bamboo") || fishingPole.equals("iridium") || fishingPole.equals("fiberglass")) {
-            player.getInventory().addItem(Item.build(FishingPole.randomFish(), Math.min(6, (int) amount)));
+            player.getInventory().addItem(Item.build(FishingPole.randomFish(game), Math.min(6, (int) amount)));
             return Result.success(null);
         }
         return Result.success(null);
@@ -936,7 +937,7 @@ public class GameController {
         }
 
         inventory.removeItem(Item.build(artisanName, 1));
-        new Artisan(ArtisanGoodsData.getRecipeData(artisanName)).onPlace(tile);
+        new Artisan(ArtisanGoodsData.getRecipeData(artisanName), game.getCurrentPlayer().getInventory()).onPlace(tile);
         return Result.success(null);
     }
 
@@ -955,7 +956,7 @@ public class GameController {
             if (tile.getTileType() == TileType.ARTISAN && tile.getPlacable(Artisan.class).getName().equalsIgnoreCase(artisanName) && !tile.getPlacable(Artisan.class).isResultReady()) {
                 Artisan artisan = tile.getPlacable(Artisan.class);
 
-                result = artisan.craft(itemNames);
+                result = artisan.craft(itemNames, game.getCurrentPlayer().getInventory());
                 if (result.isSuccess())
                     return result;
             }
@@ -984,7 +985,7 @@ public class GameController {
                 if (artisan.isResultReady()) {
                     Item result = artisan.getResultWithoutReset();
                     if (inventory.addItem(result).isSuccess()) {
-                        artisan.getResult();
+                        artisan.getResult(game.getCurrentPlayer().getInventory());
                         return Result.success(null);
                     }
                     return Result.failure(GameError.CANT_ADD_ITEM_TO_INVENTORY);
@@ -1463,7 +1464,7 @@ public class GameController {
         Building building = game.getCurrentPlayer().getBuilding();
         if (!(building instanceof Shop)) return Result.failure(GameError.YOU_SHOULD_BE_ON_SHOP);
         Shop shop = (Shop) building;
-        return Result.success(shop.showAvailableItems());
+        return Result.success(shop.showAvailableItems(game));
     }
 
     public Result<Void> purchase(String name, int number) {
@@ -1472,7 +1473,7 @@ public class GameController {
         if (!(building instanceof Shop)) return Result.failure(GameError.YOU_SHOULD_BE_ON_SHOP);
         Shop shop = (Shop) building;
         Inventory inventory = game.getCurrentPlayer().getInventory();
-        Result<Void> r = shop.prepareBuy(name, number, inventory);
+        Result<Void> r = shop.prepareBuy(name, number, inventory, game);
         if (r.isError()) return r;
         return Result.success(null);
     }
@@ -1520,7 +1521,7 @@ public class GameController {
         else {
             return Result.failure(GameError.NOT_FOUND);
         }
-        Result<Void> r = shop.prepareBuy(name, 1, inventory);
+        Result<Void> r = shop.prepareBuy(name, 1, inventory, game);
         if (r.isError()) return r;
         inventory.upgradeSize(newIType);
 

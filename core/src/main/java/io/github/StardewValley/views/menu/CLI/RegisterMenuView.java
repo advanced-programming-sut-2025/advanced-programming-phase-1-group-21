@@ -1,10 +1,9 @@
 package io.github.StardewValley.views.menu.CLI;
 
-import io.github.StardewValley.controllers.GameController;
 import io.github.StardewValley.controllers.RegisterMenuController;
-import io.github.StardewValley.models.command.RegisterMenuCommand;
-import io.github.StardewValley.models.result.Result;
-import io.github.StardewValley.models.user.Gender;
+import models.command.RegisterMenuCommand;
+import models.result.Result;
+import models.user.Gender;
 
 import java.util.regex.Matcher;
 
@@ -36,7 +35,7 @@ public class RegisterMenuView implements Menu {
 
     public void Result(String command) {
         if((matcher = RegisterMenuCommand.REGISTER.getMatcher(command)) != null){
-            Result <Void> result = registerMenuController.register(matcher.group("username") , matcher.group("password")
+            Result<Void> result = registerMenuController.register(matcher.group("username") , matcher.group("password")
                     , matcher.group("passwordConfirm") , matcher.group("nickname") , matcher.group("email")
                     , Gender.getGenderByName(matcher.group("gender")));
             System.out.println(result);

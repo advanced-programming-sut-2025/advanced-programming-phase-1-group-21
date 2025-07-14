@@ -3,9 +3,9 @@ package io.github.StardewValley.controllers;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import io.github.StardewValley.models.Item.Item;
-import io.github.StardewValley.models.time.Season;
-import io.github.StardewValley.models.user.User;
+import models.Item.Item;
+import models.time.Season;
+import models.user.User;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -35,7 +35,7 @@ public class DataBaseController {
         }
     }
 
-    public static User findUserByUsername(String username) {
+    public static models.user.User findUserByUsername(String username) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         ArrayList<User> users = readAllUsers(gson , "Users.json");
         for(User user : users)

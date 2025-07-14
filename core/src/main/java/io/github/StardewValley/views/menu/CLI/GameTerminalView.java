@@ -1,16 +1,16 @@
 package io.github.StardewValley.views.menu.CLI;
 
 import io.github.StardewValley.controllers.GameController;
-import io.github.StardewValley.models.App;
-import io.github.StardewValley.models.Item.RecipeType;
-import io.github.StardewValley.models.command.GameMenuCommand;
-import io.github.StardewValley.models.crop.FertilizerType;
-import io.github.StardewValley.models.game.Player;
-import io.github.StardewValley.models.map.Coord;
-import io.github.StardewValley.models.map.Direction;
-import io.github.StardewValley.models.map.Weather;
-import io.github.StardewValley.models.result.Result;
-import io.github.StardewValley.models.user.User;
+import io.github.StardewValley.App;
+import models.Item.RecipeType;
+import models.command.GameMenuCommand;
+import models.crop.FertilizerType;
+import models.game.Player;
+import models.map.Coord;
+import models.map.Direction;
+import models.map.Weather;
+import models.result.Result;
+import models.user.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;

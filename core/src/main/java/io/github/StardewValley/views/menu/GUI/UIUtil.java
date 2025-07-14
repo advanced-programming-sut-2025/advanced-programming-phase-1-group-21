@@ -6,8 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import io.github.StardewValley.Main;
-import io.github.StardewValley.models.asset.Assets;
-import io.github.StardewValley.models.asset.GameSound;
+import io.github.StardewValley.asset.Assets;
+import io.github.StardewValley.asset.GameSound;
 import io.github.StardewValley.views.console.ConsoleScreen;
 
 import javax.swing.*;

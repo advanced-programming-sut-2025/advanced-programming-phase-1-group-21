@@ -1,7 +1,6 @@
 package io.github.StardewValley.views.menu.CLI;
 
-import io.github.StardewValley.models.App;
-import io.github.StardewValley.models.result.Result;
+import io.github.StardewValley.App;
 
 import java.io.IOException;
 import java.util.Scanner;
