@@ -14,8 +14,8 @@ import io.github.StardewValley.Main;
 import io.github.StardewValley.controllers.RegisterMenuController;
 import io.github.StardewValley.App;
 import io.github.StardewValley.asset.Assets;
-import io.github.StardewValley.models.result.Result;
-import io.github.StardewValley.models.user.Gender;
+import models.result.Result;
+import models.user.Gender;
 
 public class RegisterScreen implements Screen {
     private final Main game;

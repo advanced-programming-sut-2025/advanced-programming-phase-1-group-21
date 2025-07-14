@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import io.github.StardewValley.Main;
 import io.github.StardewValley.controllers.LoginMenuController;
 import io.github.StardewValley.asset.Assets;
-import io.github.StardewValley.models.result.Result;
+import models.result.Result;
 
 public class ForgetPasswordScreen implements Screen {
 

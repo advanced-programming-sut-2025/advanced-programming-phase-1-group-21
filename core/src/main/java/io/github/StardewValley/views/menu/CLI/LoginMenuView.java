@@ -1,7 +1,7 @@
 package io.github.StardewValley.views.menu.CLI;
 
 import io.github.StardewValley.controllers.LoginMenuController;
-import io.github.StardewValley.models.command.LoginMenuCommand;
+import models.command.LoginMenuCommand;
 
 import java.util.regex.Matcher;
 

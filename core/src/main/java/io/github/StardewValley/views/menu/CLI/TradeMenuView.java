@@ -1,7 +1,7 @@
 package io.github.StardewValley.views.menu.CLI;
 
 import io.github.StardewValley.controllers.TradeController;
-import io.github.StardewValley.models.command.GameMenuCommand;
+import models.command.GameMenuCommand;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;

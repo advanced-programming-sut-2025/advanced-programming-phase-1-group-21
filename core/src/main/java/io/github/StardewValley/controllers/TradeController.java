@@ -1,14 +1,14 @@
 package io.github.StardewValley.controllers;
 
 import io.github.StardewValley.App;
-import io.github.StardewValley.models.Item.Item;
 import io.github.StardewValley.views.menu.CLI.GameTerminalView;
-import io.github.StardewValley.models.game.Player;
-import io.github.StardewValley.models.game.Relation;
-import io.github.StardewValley.models.game.Trade;
-import io.github.StardewValley.models.game.TradeType;
-import io.github.StardewValley.models.result.Result;
-import io.github.StardewValley.models.result.errorTypes.GameError;
+import models.Item.Item;
+import models.game.Player;
+import models.game.Relation;
+import models.game.Trade;
+import models.game.TradeType;
+import models.result.Result;
+import models.result.errorTypes.GameError;
 
 import java.util.ArrayList;
 

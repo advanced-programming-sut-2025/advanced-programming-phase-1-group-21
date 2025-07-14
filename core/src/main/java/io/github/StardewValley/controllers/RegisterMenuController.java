@@ -4,12 +4,12 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import io.github.StardewValley.App;
 import io.github.StardewValley.views.menu.CLI.LoginMenuView;
-import io.github.StardewValley.models.result.Result;
-import io.github.StardewValley.models.result.errorTypes.AuthError;
-import io.github.StardewValley.models.result.errorTypes.UserError;
-import io.github.StardewValley.models.user.Gender;
-import io.github.StardewValley.models.user.User;
 import com.google.gson.Gson;
+import models.result.Result;
+import models.result.errorTypes.AuthError;
+import models.result.errorTypes.UserError;
+import models.user.Gender;
+import models.user.User;
 
 import java.io.File;
 import java.io.FileReader;

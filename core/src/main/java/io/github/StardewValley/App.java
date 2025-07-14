@@ -3,13 +3,13 @@ package io.github.StardewValley;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.Array;
 import io.github.StardewValley.controllers.DataBaseController;
-import io.github.StardewValley.data.DataLoader;
-import io.github.StardewValley.models.game.Game;
-import io.github.StardewValley.models.user.User;
+import data.DataLoader;
 import io.github.StardewValley.views.menu.CLI.Colors;
 import io.github.StardewValley.views.menu.CLI.MainMenuView;
 import io.github.StardewValley.views.menu.CLI.Menu;
 import io.github.StardewValley.views.menu.CLI.RegisterMenuView;
+import models.game.Game;
+import models.user.User;
 
 import java.io.*;
 import java.util.List;
