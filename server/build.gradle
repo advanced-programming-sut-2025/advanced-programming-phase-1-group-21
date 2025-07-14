@@ -1,0 +1,17 @@
+plugins {
+    id 'application'
+}
+
+dependencies {
+    implementation project(':shared')
+    implementation 'com.esotericsoftware:kryonet:2.22.0-RC1'
+}
+
+application {
+    mainClass = 'Main'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
