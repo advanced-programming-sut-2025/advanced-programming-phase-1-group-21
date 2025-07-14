@@ -1,4 +1,4 @@
-package io.github.StardewValley.models.data.items;
+package io.github.StardewValley.data.items;
 
 import java.io.Serializable;
 

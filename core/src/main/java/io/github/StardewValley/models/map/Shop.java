@@ -1,10 +1,10 @@
 package io.github.StardewValley.models.map;
 
 import io.github.StardewValley.controllers.RequirementChecker;
-import io.github.StardewValley.models.App;
+import io.github.StardewValley.App;
 import io.github.StardewValley.models.DailyUpdate;
 import io.github.StardewValley.models.Item.Item;
-import io.github.StardewValley.models.data.ShopData;
+import io.github.StardewValley.data.ShopData;
 import io.github.StardewValley.models.game.Game;
 import io.github.StardewValley.models.game.Inventory;
 import io.github.StardewValley.models.result.Result;

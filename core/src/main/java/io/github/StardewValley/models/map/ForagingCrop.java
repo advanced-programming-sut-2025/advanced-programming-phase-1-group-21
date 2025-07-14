@@ -2,7 +2,7 @@ package io.github.StardewValley.models.map;
 
 import io.github.StardewValley.models.Item.Item;
 import io.github.StardewValley.models.crop.Harvestable;
-import io.github.StardewValley.models.data.ForagingCropData;
+import io.github.StardewValley.data.ForagingCropData;
 
 import java.io.Serializable;
 

@@ -2,8 +2,8 @@ package io.github.StardewValley.models.Item;
 
 import io.github.StardewValley.models.crop.Plantable;
 import io.github.StardewValley.models.crop.PlantedTree;
-import io.github.StardewValley.models.data.items.ItemData;
-import io.github.StardewValley.models.data.items.TreeData;
+import io.github.StardewValley.data.items.ItemData;
+import io.github.StardewValley.data.items.TreeData;
 import io.github.StardewValley.models.map.Tile;
 
 public class Sapling extends Item implements Plantable {

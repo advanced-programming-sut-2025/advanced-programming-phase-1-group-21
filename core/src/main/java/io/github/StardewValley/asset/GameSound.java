@@ -1,4 +1,4 @@
-package io.github.StardewValley.models.asset;
+package io.github.StardewValley.asset;
 
 import com.badlogic.gdx.audio.Sound;
 

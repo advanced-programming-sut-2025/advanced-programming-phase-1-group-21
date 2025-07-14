@@ -1,6 +1,6 @@
 package io.github.StardewValley.controllers;
 
-import io.github.StardewValley.models.App;
+import io.github.StardewValley.App;
 import io.github.StardewValley.views.menu.CLI.GameTerminalView;
 import io.github.StardewValley.models.result.Result;
 import io.github.StardewValley.models.user.User;

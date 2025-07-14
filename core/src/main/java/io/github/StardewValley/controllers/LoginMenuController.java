@@ -2,7 +2,7 @@ package io.github.StardewValley.controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import io.github.StardewValley.models.App;
+import io.github.StardewValley.App;
 import io.github.StardewValley.views.menu.CLI.MainMenuView;
 import io.github.StardewValley.models.result.Result;
 import io.github.StardewValley.models.result.errorTypes.AuthError;

@@ -1,7 +1,7 @@
-package io.github.StardewValley.models.data;
+package io.github.StardewValley.data;
 
 import com.google.gson.annotations.SerializedName;
-import io.github.StardewValley.models.data.items.ItemData;
+import io.github.StardewValley.data.items.ItemData;
 
 import java.util.ArrayList;
 

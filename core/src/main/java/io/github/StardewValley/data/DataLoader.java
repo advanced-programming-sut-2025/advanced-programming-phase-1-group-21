@@ -1,12 +1,11 @@
-package io.github.StardewValley.models.data;
+package io.github.StardewValley.data;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import io.github.StardewValley.models.data.items.*;
+import io.github.StardewValley.data.items.*;
 
-import java.io.FileReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;

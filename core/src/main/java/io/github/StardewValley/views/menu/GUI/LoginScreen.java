@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import io.github.StardewValley.Main;
 import io.github.StardewValley.controllers.LoginMenuController;
-import io.github.StardewValley.models.asset.Assets;
+import io.github.StardewValley.asset.Assets;
 import io.github.StardewValley.models.result.Result;
 import io.github.StardewValley.models.user.User;
 

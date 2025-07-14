@@ -2,7 +2,7 @@ package io.github.StardewValley.controllers;
 
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import io.github.StardewValley.models.App;
+import io.github.StardewValley.App;
 import io.github.StardewValley.views.menu.CLI.LoginMenuView;
 import io.github.StardewValley.models.result.Result;
 import io.github.StardewValley.models.result.errorTypes.AuthError;
@@ -21,8 +21,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static io.github.StardewValley.models.user.Gender.getGenderByName;
 
 public class RegisterMenuController{
     public Result<String> showCurrentMenu(){

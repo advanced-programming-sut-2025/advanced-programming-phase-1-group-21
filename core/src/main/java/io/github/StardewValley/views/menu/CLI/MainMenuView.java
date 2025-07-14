@@ -1,7 +1,7 @@
 package io.github.StardewValley.views.menu.CLI;
 
 import io.github.StardewValley.controllers.MainMenuController;
-import io.github.StardewValley.models.App;
+import io.github.StardewValley.App;
 import io.github.StardewValley.models.command.MainMenuCommand;
 
 import java.util.regex.Matcher;

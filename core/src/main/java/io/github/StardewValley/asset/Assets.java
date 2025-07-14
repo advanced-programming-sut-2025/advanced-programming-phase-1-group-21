@@ -1,15 +1,10 @@
-package io.github.StardewValley.models.asset;
+package io.github.StardewValley.asset;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.kotcrab.vis.ui.VisUI;
-
-import java.util.*;
 
 public class Assets {
     private static final AssetManager manager = new AssetManager();

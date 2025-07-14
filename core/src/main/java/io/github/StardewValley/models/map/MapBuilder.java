@@ -1,11 +1,11 @@
 package io.github.StardewValley.models.map;
 
-import io.github.StardewValley.models.App;
+import io.github.StardewValley.App;
 import io.github.StardewValley.models.Item.ItemType;
 import io.github.StardewValley.models.Item.Sapling;
 import io.github.StardewValley.models.crop.PlantedTree;
-import io.github.StardewValley.models.data.ForagingCropData;
-import io.github.StardewValley.models.data.items.TreeData;
+import io.github.StardewValley.data.ForagingCropData;
+import io.github.StardewValley.data.items.TreeData;
 import io.github.StardewValley.models.game.NPC;
 import io.github.StardewValley.models.game.Refrigerator;
 import org.apache.commons.lang3.tuple.Pair;

@@ -1,9 +1,9 @@
 package io.github.StardewValley.models.map;
 
-import io.github.StardewValley.models.App;
+import io.github.StardewValley.App;
 import io.github.StardewValley.models.Item.Item;
-import io.github.StardewValley.models.data.ArtisanGoodsData;
-import io.github.StardewValley.models.data.ArtisanRecipeData;
+import io.github.StardewValley.data.ArtisanGoodsData;
+import io.github.StardewValley.data.ArtisanRecipeData;
 import io.github.StardewValley.models.game.Inventory;
 import io.github.StardewValley.models.result.Result;
 import io.github.StardewValley.models.result.errorTypes.GameError;

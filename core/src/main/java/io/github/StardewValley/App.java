@@ -1,9 +1,9 @@
-package io.github.StardewValley.models;
+package io.github.StardewValley;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.Array;
 import io.github.StardewValley.controllers.DataBaseController;
-import io.github.StardewValley.models.data.DataLoader;
+import io.github.StardewValley.data.DataLoader;
 import io.github.StardewValley.models.game.Game;
 import io.github.StardewValley.models.user.User;
 import io.github.StardewValley.views.menu.CLI.Colors;

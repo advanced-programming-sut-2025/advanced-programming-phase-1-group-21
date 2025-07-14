@@ -2,8 +2,8 @@ package io.github.StardewValley.models.Item;
 
 import io.github.StardewValley.models.crop.Plantable;
 import io.github.StardewValley.models.crop.PlantedSeed;
-import io.github.StardewValley.models.data.items.ItemData;
-import io.github.StardewValley.models.data.items.SeedData;
+import io.github.StardewValley.data.items.ItemData;
+import io.github.StardewValley.data.items.SeedData;
 import io.github.StardewValley.models.map.Tile;
 
 public class Seed extends Item implements Plantable {

@@ -1,6 +1,6 @@
 package io.github.StardewValley.controllers;
 
-import io.github.StardewValley.models.App;
+import io.github.StardewValley.App;
 import io.github.StardewValley.models.Item.*;
 import io.github.StardewValley.models.crop.FertilizerType;
 import io.github.StardewValley.models.crop.Plantable;
@@ -11,9 +11,9 @@ import io.github.StardewValley.models.map.*;
 import io.github.StardewValley.models.map.Map;
 import io.github.StardewValley.models.tool.*;
 import io.github.StardewValley.models.animal.AnimalTypes;
-import io.github.StardewValley.models.data.AnimalData;
-import io.github.StardewValley.models.data.ArtisanGoodsData;
-import io.github.StardewValley.models.data.items.SeedData;
+import io.github.StardewValley.data.AnimalData;
+import io.github.StardewValley.data.ArtisanGoodsData;
+import io.github.StardewValley.data.items.SeedData;
 import io.github.StardewValley.models.skill.SkillType;
 import io.github.StardewValley.models.animal.Animal;
 import io.github.StardewValley.models.result.Result;

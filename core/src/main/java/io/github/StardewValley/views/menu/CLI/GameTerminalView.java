@@ -1,7 +1,7 @@
 package io.github.StardewValley.views.menu.CLI;
 
 import io.github.StardewValley.controllers.GameController;
-import io.github.StardewValley.models.App;
+import io.github.StardewValley.App;
 import io.github.StardewValley.models.Item.RecipeType;
 import io.github.StardewValley.models.command.GameMenuCommand;
 import io.github.StardewValley.models.crop.FertilizerType;

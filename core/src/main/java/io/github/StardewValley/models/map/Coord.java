@@ -1,6 +1,6 @@
 package io.github.StardewValley.models.map;
 
-import io.github.StardewValley.models.App;
+import io.github.StardewValley.App;
 
 import java.io.Serializable;
 

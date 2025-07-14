@@ -1,6 +1,6 @@
 package io.github.StardewValley.models.tool;
 
-import io.github.StardewValley.models.App;
+import io.github.StardewValley.App;
 import io.github.StardewValley.models.Item.Item;
 import io.github.StardewValley.models.animal.Animal;
 import io.github.StardewValley.models.animal.AnimalTypes;

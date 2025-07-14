@@ -1,7 +1,7 @@
 package io.github.StardewValley.controllers;
 
-import io.github.StardewValley.models.App;
-import io.github.StardewValley.models.data.ShopData;
+import io.github.StardewValley.App;
+import io.github.StardewValley.data.ShopData;
 import io.github.StardewValley.models.game.Player;
 import io.github.StardewValley.models.map.Map;
 import io.github.StardewValley.models.skill.SkillType;

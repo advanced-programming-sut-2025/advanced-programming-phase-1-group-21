@@ -1,7 +1,7 @@
 package io.github.StardewValley.models.Item;
 
-import io.github.StardewValley.models.data.items.ItemData;
-import io.github.StardewValley.models.data.items.PlaceableData;
+import io.github.StardewValley.data.items.ItemData;
+import io.github.StardewValley.data.items.PlaceableData;
 import io.github.StardewValley.models.map.Placable;
 import io.github.StardewValley.models.map.TileType;
 

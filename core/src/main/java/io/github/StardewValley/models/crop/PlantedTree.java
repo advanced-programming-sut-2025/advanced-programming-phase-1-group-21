@@ -1,9 +1,9 @@
 package io.github.StardewValley.models.crop;
 
-import io.github.StardewValley.models.App;
+import io.github.StardewValley.App;
 import io.github.StardewValley.models.DailyUpdate;
 import io.github.StardewValley.models.Item.Item;
-import io.github.StardewValley.models.data.items.TreeData;
+import io.github.StardewValley.data.items.TreeData;
 import io.github.StardewValley.models.game.Game;
 import io.github.StardewValley.models.game.Player;
 import io.github.StardewValley.models.map.Placable;

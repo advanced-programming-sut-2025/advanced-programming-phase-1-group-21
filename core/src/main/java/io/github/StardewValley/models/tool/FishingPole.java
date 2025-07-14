@@ -1,8 +1,8 @@
 package io.github.StardewValley.models.tool;
 
-import io.github.StardewValley.models.App;
+import io.github.StardewValley.App;
 import io.github.StardewValley.models.Item.Item;
-import io.github.StardewValley.models.data.FishData;
+import io.github.StardewValley.data.FishData;
 import io.github.StardewValley.models.game.Player;
 import io.github.StardewValley.models.map.Coord;
 import io.github.StardewValley.models.map.Lake;

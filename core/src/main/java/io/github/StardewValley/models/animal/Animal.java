@@ -1,9 +1,9 @@
 package io.github.StardewValley.models.animal;
 
-import io.github.StardewValley.models.App;
+import io.github.StardewValley.App;
 import io.github.StardewValley.models.DailyUpdate;
 import io.github.StardewValley.models.Item.Item;
-import io.github.StardewValley.models.data.AnimalData;
+import io.github.StardewValley.data.AnimalData;
 import io.github.StardewValley.models.game.Game;
 import io.github.StardewValley.models.map.AnimalHouseType;
 import io.github.StardewValley.models.map.Placable;

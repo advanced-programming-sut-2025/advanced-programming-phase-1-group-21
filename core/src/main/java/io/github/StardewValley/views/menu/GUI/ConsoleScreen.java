@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import io.github.StardewValley.Main;
-import io.github.StardewValley.models.asset.Assets;
+import io.github.StardewValley.asset.Assets;
 import io.github.StardewValley.views.menu.CLI.AppView;
 import io.github.StardewValley.views.menu.GUI.PreMenuScreen;
 

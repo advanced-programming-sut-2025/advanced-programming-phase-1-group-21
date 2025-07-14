@@ -2,8 +2,8 @@ package io.github.StardewValley.models.game;
 
 import io.github.StardewValley.models.DailyUpdate;
 import io.github.StardewValley.models.Item.Item;
-import io.github.StardewValley.models.data.VillagerData;
-import io.github.StardewValley.models.data.VillagerTask;
+import io.github.StardewValley.data.VillagerData;
+import io.github.StardewValley.data.VillagerTask;
 import io.github.StardewValley.models.map.*;
 
 import java.io.Serializable;

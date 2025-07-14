@@ -1,7 +1,7 @@
 package io.github.StardewValley.models.Item;
 
-import io.github.StardewValley.models.data.items.ConsumableData;
-import io.github.StardewValley.models.data.items.ItemData;
+import io.github.StardewValley.data.items.ConsumableData;
+import io.github.StardewValley.data.items.ItemData;
 
 public class Consumable extends Item {
     private final ConsumableData data;

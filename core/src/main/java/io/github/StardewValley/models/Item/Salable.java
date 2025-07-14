@@ -1,7 +1,7 @@
 package io.github.StardewValley.models.Item;
 
-import io.github.StardewValley.models.data.items.ItemData;
-import io.github.StardewValley.models.data.items.SalableData;
+import io.github.StardewValley.data.items.ItemData;
+import io.github.StardewValley.data.items.SalableData;
 
 public class Salable extends Item {
 	private final SalableData data;

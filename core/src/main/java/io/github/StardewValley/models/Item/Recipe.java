@@ -1,7 +1,7 @@
 package io.github.StardewValley.models.Item;
 
-import io.github.StardewValley.models.data.items.ItemData;
-import io.github.StardewValley.models.data.items.RecipeData;
+import io.github.StardewValley.data.items.ItemData;
+import io.github.StardewValley.data.items.RecipeData;
 
 import java.util.ArrayList;
 import java.util.Map;
