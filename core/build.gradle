@@ -24,6 +24,8 @@ dependencies {
   implementation 'com.google.code.gson:gson:2.10.1'
   testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
   implementation project(":shared")
+  implementation 'com.esotericsoftware:kryonet:2.22.0-RC1'
+
 
   if(enableGraalNative == 'true') {
     implementation "io.github.berstanio:gdx-svmhelper-annotations:$graalHelperVersion"

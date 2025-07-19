@@ -6,8 +6,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import io.github.StardewValley.asset.Assets;
+import io.github.StardewValley.network.NetworkUtil;
 import io.github.StardewValley.views.menu.GUI.PreMenuScreen;
 
+import java.io.IOException;
 import java.util.LinkedList;
 
 public class Main extends Game {
@@ -30,6 +32,12 @@ public class Main extends Game {
         Assets.load();
         Assets.finishLoading();
         setScreen(new PreMenuScreen());
+
+        try {
+            NetworkUtil.init();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void addStage(Stage stage) {
