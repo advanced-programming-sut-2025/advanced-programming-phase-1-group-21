@@ -113,7 +113,7 @@ public class LoginScreen implements Screen {
 
         Result<User> result = controller.login(username, password, stayLoggedIn);
         if (result.isSuccess()) {
-            // game.setScreen(new MainMenuScreen());
+             game.setScreen(new MainMenuScreen());
         } else {
             showMessage(result.getMessage(), Color.RED);
         }

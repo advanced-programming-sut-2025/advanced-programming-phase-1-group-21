@@ -136,7 +136,7 @@ public class RegisterScreen implements Screen {
 
         if (result.isSuccess()) {
             showMessage("success", Color.GREEN);
-            //game.setScreen(new LoginScreen());
+            game.setScreen(new LoginScreen());
         } else {
             showMessage(result.getMessage(), Color.RED);
         }
