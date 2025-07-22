@@ -5,6 +5,7 @@ plugins {
 dependencies {
     implementation project(':shared')
     implementation 'com.esotericsoftware:kryonet:2.22.0-RC1'
+    implementation 'com.google.code.gson:gson:2.10.1'
 }
 
 application {

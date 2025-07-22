@@ -21,7 +21,11 @@ public class App implements Serializable {
     public Menu currentMenu = RegisterMenuView.getInstance();
     public Screen currentScreen = null;
     public Game game = null;
-    public User registeredUser = null;
+
+    //IT WILL BE NO LONGER NEEDED (NETWORK WILL HANDLE IT)!!!!
+    //server should already know which user is registered
+    //public User registeredUser = null;
+
     public User logedInUser = null;
     public final Random random = new Random(1);
 
@@ -36,10 +40,13 @@ public class App implements Serializable {
     }
 
     public User getStayLoggedIn() {
+        //TODO :)))
+        /*
         List<User> users = DataBaseController.readAllUsers();
         for (User user : users) {
             if (user.isStayLoggedIn()) return user;
         }
+         */
         return null;
     }
 

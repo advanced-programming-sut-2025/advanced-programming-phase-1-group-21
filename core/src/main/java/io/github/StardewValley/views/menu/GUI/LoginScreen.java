@@ -111,7 +111,7 @@ public class LoginScreen implements Screen {
         String password = passwordField.getText();
         boolean stayLoggedIn = stayLoggedInBox.isChecked();
 
-        Result<User> result = controller.login(username, password, stayLoggedIn);
+        Result<Void> result = controller.login(username, password, stayLoggedIn);
         if (result.isSuccess()) {
              game.setScreen(new MainMenuScreen());
         } else {
