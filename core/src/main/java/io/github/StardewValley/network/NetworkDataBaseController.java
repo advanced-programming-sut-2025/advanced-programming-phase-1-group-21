@@ -38,5 +38,6 @@ public class NetworkDataBaseController {
     }
 
     public static Result<Void> login(String username, String password, boolean stayLoggedIn) {
+
     }
 }

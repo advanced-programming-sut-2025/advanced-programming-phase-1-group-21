@@ -2,6 +2,7 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
+import controller.MessageHandler;
 import packets.Message;
 import packets.MessageType;
 
@@ -22,6 +23,15 @@ public class Main {
             public void connected(Connection c) {
                 System.out.println("[SERVER] Client connected: " + c.getRemoteAddressTCP().getAddress().getHostAddress());
                 c.sendTCP(new Message(MessageType.PING));
+            }
+
+            public void received(Connection connection, Object o) {
+                if (o instanceof Message) {
+                    MessageHandler.handle(connection, (Message) o);
+                }
+                else {
+                    throw new RuntimeException("[ERROR] GOT: " + o.getClass().getName() + " Instead of Message!");
+                }
             }
         });
 

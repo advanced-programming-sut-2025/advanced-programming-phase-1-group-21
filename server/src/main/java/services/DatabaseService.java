@@ -1,9 +1,8 @@
-package controller;
+package services;
 
 import models.user.User;
 
-public class DataBaseController {
-
+public class DatabaseService {
 
     public static User findUserByUsername(String username) {
         throw new UnsupportedOperationException("Not supported yet.");
