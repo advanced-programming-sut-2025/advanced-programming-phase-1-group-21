@@ -18,6 +18,10 @@ public class NetworkUtil {
 
     private static final ConcurrentHashMap<String, BlockingQueue<Message>> responseMap = new ConcurrentHashMap<>();
 
+    public static Client getClient() {
+        return client;
+    }
+
     public static void init() throws IOException {
         client = new Client();
         Kryo kryo = client.getKryo();
@@ -53,7 +57,7 @@ public class NetworkUtil {
         }
     }
 
-    public static Message sendMessageAndWaitForResponse(Connection connection, Message message) {
+    public static Message sendMessageAndWaitForResponse(Message message) {
         String requestId = UUID.randomUUID().toString();
         message.requestId = requestId;
 

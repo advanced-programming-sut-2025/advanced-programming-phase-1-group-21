@@ -36,7 +36,8 @@ public class Main extends Game {
         try {
             NetworkUtil.init();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.err.println("Error initializing network");
+            //throw new RuntimeException(e);
         }
     }
 
