@@ -7,5 +7,6 @@ public enum MessageType {
     MESSAGE,
     GAME_REQUEST, //Client request a Game
     ON_GAME_ACTION, //Client performs X and wants to sync with server
-
+    REQUEST_LOBBIES,
+    REQUEST_LOBBY_USERS,
 }

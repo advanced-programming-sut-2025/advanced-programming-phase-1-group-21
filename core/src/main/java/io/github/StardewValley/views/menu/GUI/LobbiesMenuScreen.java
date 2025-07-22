@@ -1,5 +1,7 @@
 package io.github.StardewValley.views.menu.GUI;
 
+import java.util.List;
+
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -17,6 +19,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import io.github.StardewValley.Main;
 import io.github.StardewValley.asset.Assets;
+import io.github.StardewValley.network.NetworkLobbyController;
 import models.Lobby;
 import models.user.User;
 
@@ -27,8 +30,8 @@ public class LobbiesMenuScreen implements Screen {
     private final Main game;
     private Stage stage;
     private Table selectedRow = null;
-    ArrayList <Lobby> lobbies = new ArrayList <>();
-    ArrayList <User> users = new ArrayList <>();
+    List <Lobby> lobbies = new ArrayList <>();
+    List <User> users = new ArrayList <>();
     Skin skin;
 
     public LobbiesMenuScreen() {
@@ -203,42 +206,12 @@ public class LobbiesMenuScreen implements Screen {
         Gdx.input.setInputProcessor(multiplexer);
     }
 
-    private ArrayList <Lobby> getLobbies() { // Ali
-        /*
-        ArrayList <Lobby> result = new ArrayList <>();
-        User u1 = new User(null, "1234", null, "Parsa", null, null, null, false);
-        User u2 = new User(null, "1234", null, "Parsa2", null, null, null, false);
-        User u3 = new User(null, "1234", null, "Parsa3", null, null, null, false);
-        User u4 = new User(null, "1234", null, "Parsa4", null, null, null, false);
-        Lobby l1 = new Lobby("lobby 1", 5125632, null, false, false);
-        l1.addUser(u1);
-        l1.addUser(u2);
-        l1.addUser(u3);
-        l1.addUser(u4);
-        Lobby l2 = new Lobby("lobby 2", 1895819, "pass", true, false);
-        l2.addUser(u1);
-        Lobby l3 = new Lobby("lobby 3", 7848952, null, false, false);
-        l3.addUser(u4);
-        Lobby l4 = new Lobby("lobby 4", 9125283, null, false, true);
-        l4.addUser(u3);
-        Lobby l5 = new Lobby("lobby 5", 7621053, "1234", true, false);
-        l5.addUser(u2);
-        result.add(l1);
-        result.add(l2);
-        result.add(l3);
-        result.add(l4);
-        result.add(l5);
-        return result;
-        */
-        return null;
+    private List <Lobby> getLobbies() {
+        return NetworkLobbyController.requestLobbies();
     }
 
-    private ArrayList <User> getUsers() { // Ali
-        ArrayList <User> result = new ArrayList <>();
-        for (int i = 0; i < 20; i++) {
-            result.add(new User(null, "1234", null, "player " + i, null, null, null, false));
-        }
-        return result;
+    private List <User> getUsers() {
+        return NetworkLobbyController.getUsers();
     }
 
 
