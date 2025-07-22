@@ -5,10 +5,12 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
@@ -25,6 +27,9 @@ public class LobbiesMenuScreen implements Screen {
     private final Main game;
     private Stage stage;
     private Table selectedRow = null;
+    ArrayList <Lobby> lobbies = new ArrayList <>();
+    ArrayList <User> users = new ArrayList <>();
+    Skin skin;
 
     public LobbiesMenuScreen() {
         this.game = Main.getInstance();
@@ -37,7 +42,7 @@ public class LobbiesMenuScreen implements Screen {
         int sw = Gdx.graphics.getWidth();
         int sh = Gdx.graphics.getHeight();
 
-        Skin skin = Assets.getSkin();
+        skin = Assets.getSkin();
         Texture backgroundTexture = Assets.getMenuBackground();
 
         Image backgroundImage = new Image(new TextureRegionDrawable(new TextureRegion(backgroundTexture)));
@@ -56,7 +61,7 @@ public class LobbiesMenuScreen implements Screen {
 
         selectedRow = null;
 
-        ArrayList <Lobby> lobbies = getLobbies();
+        lobbies = getLobbies();
         for (Lobby l: lobbies) {
             if (l.isInvisible())
                 continue;
@@ -90,7 +95,14 @@ public class LobbiesMenuScreen implements Screen {
                     selectedRow = row;
 
                     if (getTapCount() == 2) {
-                        System.out.println("Double-clicked on: " + nameLabel.getText());
+                        Lobby l = getLobbyByName(nameLabel.getText().replace("Name: ", "").toString());
+                        if (l.isPrivate()) {
+                            getPasswordDialog(l);
+                            // ...
+                        }
+                        else {
+                            joinTheLobby(l);
+                        }
                     }
                 }
             });
@@ -110,7 +122,7 @@ public class LobbiesMenuScreen implements Screen {
         onlinePlayersTable.pad(10);
         onlinePlayersTable.defaults().pad(5);
 
-        ArrayList <User> users = getUsers();
+        users = getUsers();
         for (User user: users) {
             Label nameLabel = new Label(user.getNickname(), skin);
             onlinePlayersTable.add(nameLabel).expandX().fillX().row();
@@ -131,16 +143,32 @@ public class LobbiesMenuScreen implements Screen {
             }
         });
 
+        createLobbyButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                createLobbyDialog();
+            }
+        });
+
+        refreshButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                refreshWindow();
+            }
+        });
+
+        joinByIDButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                joinByIDDialog();
+            }
+        });
+
         Table mainTable = new Table();
-//        mainTable.setFillParent(true);
-//        mainTable.center();
         mainTable.add(lobbiesTitle).padLeft(50).align(Align.left);
         mainTable.add(onlinePlayersTitle).row();
-
         mainTable.add(lobbyScrollPane).padTop(sh / 40).padRight(sw / 20).width((int) (sw * (2. / 3 - 1. / 20))).height(sh * 3 / 5);
-        mainTable.add(onlineScrollPane).padTop(sh / 40).width(sw / 4).height(sh * 3 / 5);
-
-        mainTable.row();
+        mainTable.add(onlineScrollPane).padTop(sh / 40).width(sw / 4).height(sh * 3 / 5).row();
 
         mainTable.setPosition(sw / 2, sh * 5 / 8);
         int backW = sw / 15, refreshW = sw / 10, createW = sw / 8, joinW = sw / 8, d = sw / 7, base = sw / 15;
@@ -177,7 +205,7 @@ public class LobbiesMenuScreen implements Screen {
         Gdx.input.setInputProcessor(multiplexer);
     }
 
-    private ArrayList <Lobby> getLobbies() {
+    private ArrayList <Lobby> getLobbies() { // Ali
         ArrayList <Lobby> result = new ArrayList <>();
         User u1 = new User(null, "1234", null, "Parsa", null, null, null, false);
         User u2 = new User(null, "1234", null, "Parsa2", null, null, null, false);
@@ -204,12 +232,221 @@ public class LobbiesMenuScreen implements Screen {
         return result;
     }
 
-    private ArrayList <User> getUsers() {
+    private ArrayList <User> getUsers() { // Ali
         ArrayList <User> result = new ArrayList <>();
         for (int i = 0; i < 20; i++) {
             result.add(new User(null, "1234", null, "player " + i, null, null, null, false));
         }
         return result;
+    }
+
+
+    private void refreshWindow() {
+        lobbies = getLobbies();
+        users = getUsers();
+    }
+
+    private Lobby getLobbyByName(String name) {
+        for (Lobby l: lobbies)
+            if (l.checkName(name))
+                return l;
+        return null;
+    }
+
+    private Lobby getLobbyByID(int id) {
+        for (Lobby l: lobbies)
+            if (l.checkID(id))
+                return l;
+        return null;
+    }
+
+    private void getPasswordDialog(Lobby lobby) {
+        Dialog dialog = new Dialog("Enter Password", skin) {
+            @Override
+            protected void result(Object object) {
+                if (object.equals(true)) {
+                    TextField tf = findActor("passwordInput");
+                    String password = tf.getText();
+                    joinTheLobby(lobby, password);
+                }
+            }
+        };
+
+        TextField passwordField = new TextField("", skin);
+        passwordField.setMessageText("Password");
+        passwordField.setName("passwordInput");
+
+        dialog.getContentTable().pad(10);
+
+
+        dialog.getContentTable().add(passwordField).width(200).padBottom(10).row();
+
+        dialog.button("OK", true);
+        dialog.button("Cancel", false);
+        dialog.setModal(true);
+        dialog.setMovable(true);
+        dialog.setResizable(false);
+        dialog.show(stage);
+    }
+
+    private void createLobbyDialog() {
+        Dialog dialog = new Dialog("Create Lobby", skin) {
+            @Override
+            protected void result(Object object) {
+                if (object.equals(true)) {
+                    String name = ((TextField) findActor("nameField")).getText();
+                    String password = ((TextField) findActor("passwordField")).getText();
+                    boolean isPrivate = ((CheckBox) findActor("isPrivateBox")).isChecked();
+                    boolean isInvisible = ((CheckBox) findActor("isInvisibleBox")).isChecked();
+
+                    if (!isPrivate) {
+                        password = null;
+                    }
+                    createLobby(name, password, isPrivate, isInvisible);
+                }
+            }
+        };
+
+        // Name input
+        Label nameLabel = new Label("Name:", skin);
+        TextField nameField = new TextField("", skin);
+        nameField.setMessageText("Name");
+        nameField.setName("nameField");
+
+        // Password input
+        Label passwordLabel = new Label("Password:", skin);
+        TextField passwordField = new TextField("", skin);
+        passwordField.setMessageText("Password");
+        passwordField.setName("passwordField");
+        passwordField.setDisabled(true);
+
+        // Private Checkbox
+        CheckBox isPrivate = new CheckBox("Private", skin);
+        isPrivate.setName("isPrivateBox");
+        isPrivate.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                passwordField.setDisabled(!isPrivate.isChecked());
+                if (!isPrivate.isChecked()) {
+                    passwordField.setMessageText("Password");
+                }
+            }
+        });
+
+        // Invisible Checkbox
+        CheckBox isInvisible = new CheckBox("Invisible", skin);
+        isInvisible.setName("isInvisibleBox");
+
+        // Layout
+        Table content = dialog.getContentTable();
+        content.pad(20);
+        content.defaults().pad(10);
+
+        content.add(nameLabel).left();
+        content.add(nameField).width(200).row();
+
+        content.add(isPrivate).colspan(2).left().row();
+
+        content.add(passwordLabel).left();
+        content.add(passwordField).width(200).row();
+
+        content.add(isInvisible).colspan(2).left().row();
+
+
+        // Buttons
+        dialog.button("OK", true);
+        dialog.button("Cancel", false);
+        dialog.setModal(true);
+        dialog.setMovable(true);
+        dialog.setResizable(false);
+        dialog.show(stage);
+    }
+
+    // joinByIDDialog
+    private void joinByIDDialog() {
+        Dialog dialog = new Dialog("Enter Lobby's ID", skin) {
+            @Override
+            protected void result(Object object) {
+                if (object.equals(true)) {
+                    TextField tf = findActor("IDInput");
+                    String ID = tf.getText();
+                    int intID = 0;
+                    try {
+                        intID = Integer.parseInt(ID);
+                    }
+                    catch (NumberFormatException e) {
+                        lobbyNotFoundDialog();
+                        return;
+                    }
+
+                    Lobby lobby = getLobbyByID(intID);
+                    if (lobby == null) {
+                        lobbyNotFoundDialog();
+                        return;
+                    }
+                    else if (lobby.isPrivate()) {
+                        getPasswordDialog(lobby);
+                    }
+                    else {
+                        joinTheLobby(lobby);
+                    }
+                }
+            }
+        };
+
+        TextField passwordField = new TextField("", skin);
+        passwordField.setMessageText("ID");
+        passwordField.setName("IDInput");
+
+        dialog.getContentTable().pad(10);
+
+        dialog.getContentTable().add(passwordField).width(200).padBottom(10).row();
+
+        dialog.button("OK", true);
+        dialog.button("Cancel", false);
+        dialog.setModal(true);
+        dialog.setMovable(true);
+        dialog.setResizable(false);
+        dialog.show(stage);
+    }
+
+    private void lobbyNotFoundDialog() {
+        Dialog dialog = new Dialog("Lobby not found", skin);
+        dialog.text("You typed a wrong ID because there is no lobby with that ID.");
+
+        dialog.button("OK");
+        dialog.setModal(true);
+        dialog.setMovable(true);
+        dialog.setResizable(false);
+        dialog.show(stage);
+    }
+
+    private void joinTheLobby(Lobby lobby, String password) { // Ali
+        if (!lobby.isPrivate())
+            System.out.println("This lobby didn't have password");
+
+        System.out.println("Trying to join the lobby. lobby name: " + lobby.getName() + ", lobby password: " + lobby.getPassword() + ", entered password: " + password);
+    }
+
+    private void joinTheLobby(Lobby lobby) { // Ali
+        if (lobby.isPrivate()) {
+            System.out.println("You can't join a private lobby without passowrd");
+        }
+        System.out.println("Trying to join the lobby. name: " + lobby.getName());
+    }
+
+    private void createLobby(String name, String password, boolean isPrivate, boolean isInvisible) { // Ali
+        System.out.println("Name: " + name);
+        System.out.println("Password: " + password);
+        System.out.println("Private: " + isPrivate);
+        System.out.println("Invisible: " + isInvisible);
+
+
+        /*
+        If creating was successful, you should give the user the ID of the lobby. (With a Dialog)
+        And if creating was not successful, you should tell the user why. (With a Dialog)
+        I can handle it if you finish the network part
+         */
     }
 
     @Override
