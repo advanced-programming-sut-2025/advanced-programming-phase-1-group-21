@@ -44,6 +44,14 @@ public class Lobby {
 		return users;
 	}
 
+	public boolean checkName(String name) {
+		return name.equals(this.name);
+	}
+
+	public boolean checkID(int ID) {
+		return ID == this.ID;
+	}
+
 	public void addUser(User user) {
 		users.add(user);
 	}
