@@ -6,8 +6,10 @@ import packets.Message;
 import packets.MessageType;
 
 import java.io.IOException;
+import java.util.Random;
 
 public class Main {
+    public static Random rand = new Random();
     public static void main(String[] args) throws IOException {
         Server server = new Server();
 

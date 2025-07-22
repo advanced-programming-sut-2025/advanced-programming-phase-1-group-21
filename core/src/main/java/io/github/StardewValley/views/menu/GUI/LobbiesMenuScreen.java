@@ -63,8 +63,6 @@ public class LobbiesMenuScreen implements Screen {
 
         lobbies = getLobbies();
         for (Lobby l: lobbies) {
-            if (l.isInvisible())
-                continue;
             Label nameLabel = new Label("Name: " + l.getName(), skin);
             Label idLabel = new Label("ID: " + l.getID(), skin);
 
@@ -206,6 +204,7 @@ public class LobbiesMenuScreen implements Screen {
     }
 
     private ArrayList <Lobby> getLobbies() { // Ali
+        /*
         ArrayList <Lobby> result = new ArrayList <>();
         User u1 = new User(null, "1234", null, "Parsa", null, null, null, false);
         User u2 = new User(null, "1234", null, "Parsa2", null, null, null, false);
@@ -230,6 +229,8 @@ public class LobbiesMenuScreen implements Screen {
         result.add(l4);
         result.add(l5);
         return result;
+        */
+        return null;
     }
 
     private ArrayList <User> getUsers() { // Ali
