@@ -2361,6 +2361,14 @@ Textures/Villagers/Sebastian.png
 Textures/Weapon/Bomb.png
 Textures/Weapon/Cherry_Bomb.png
 Textures/Weapon/Mega_Bomb.png
+Textures/map/FallBasicTile.png
+Textures/map/Outdoors Fall.png
+Textures/map/Outdoors Spring.png
+Textures/map/Outdoors Summer.png
+Textures/map/Outdoors Winter.png
+Textures/map/SpringBasicTile.png
+Textures/map/SummerBasicTile.png
+Textures/map/WinterBasicTile.png
 data/AnimalHouses.json
 data/Animals.json
 data/ArtisanGoods.json

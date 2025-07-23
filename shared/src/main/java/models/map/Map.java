@@ -75,6 +75,8 @@ public class Map implements DailyUpdate, Serializable {
             ArrayList<Tile> row = new ArrayList<>();
             for (int x = 0; x < X; ++x) {
                 row.add(Tile.createEmpty());
+                row.get(row.size() - 1).spriteGetter().setX(100 + x*25);
+                row.get(row.size() - 1).spriteGetter().setY(100 + y*25);
             }
             tiles.add(row);
         }
