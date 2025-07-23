@@ -48,4 +48,12 @@ public class Coord implements Serializable {
         int dy = Math.abs(this.y - other.y);
         return (dx + dy) == 1;
     }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
 }

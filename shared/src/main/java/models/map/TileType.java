@@ -5,8 +5,8 @@ import org.apache.commons.lang3.StringUtils;
 public enum TileType {
 	PLACEABLE(1, 1, true, 'P'),
 	// Buildings
-	HOUSE(4, 4, true, 'H'),
-	GREEN_HOUSE(5, 4, true, 'G'),
+	HOUSE(8, 8, true, 'H'),
+	GREEN_HOUSE(10, 7, true, 'G'),
 	MINES(6, 6, true, 'M'),
 	LAKE(5, 4, false, '~'),
 	COOP(3, 4, true, 'C'),

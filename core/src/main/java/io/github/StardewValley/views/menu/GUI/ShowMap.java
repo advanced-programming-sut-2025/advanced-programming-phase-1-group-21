@@ -3,13 +3,13 @@ package io.github.StardewValley.views.menu.GUI;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import io.github.StardewValley.App;
 import io.github.StardewValley.Main;
-import models.map.Coord;
-import models.map.Map;
-import models.map.Tile;
+import models.map.*;
 
 public class ShowMap {
     public static void show(Main game){
         showTiles(game);
+        showHouse(game);
+        showPlayer(game);
     }
 
     public static void showTiles(Main game){
@@ -25,6 +25,14 @@ public class ShowMap {
     }
 
     public static void showPlayer(Main game){
-        
+        App.getInstance().game.getCurrentPlayer().getSprite().draw(game.getBatch());
+    }
+
+    public static void showHouse(Main game){//TODO: this function should be changed to showBuilding
+        Map map = App.getInstance().game.getCurrentPlayerMap();
+        for(Building building : map.getBuildings()){
+            if(building.sprite != null)
+                building.sprite.draw(game.getBatch());
+        }
     }
 }

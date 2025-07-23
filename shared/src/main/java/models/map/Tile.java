@@ -21,6 +21,7 @@ public class Tile implements DailyUpdate, Serializable {
     private Tile(TileType tileType, Placable placable) {
         this.tileType = tileType;
         this.placable = placable;
+        sprite.setSize(30 , 30);
     }
 
     public Texture getTexture() {
@@ -28,7 +29,6 @@ public class Tile implements DailyUpdate, Serializable {
     }
 
     public Sprite spriteGetter(){
-        sprite.setSize(25 , 25);
         return sprite;
     }
 

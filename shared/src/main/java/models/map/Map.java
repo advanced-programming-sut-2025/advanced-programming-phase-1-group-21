@@ -75,8 +75,8 @@ public class Map implements DailyUpdate, Serializable {
             ArrayList<Tile> row = new ArrayList<>();
             for (int x = 0; x < X; ++x) {
                 row.add(Tile.createEmpty());
-                row.get(row.size() - 1).spriteGetter().setX(x*25 + mapType.getDistanceX());
-                row.get(row.size() - 1).spriteGetter().setY((Y - 1 - y)*25 + mapType.getDistanceY());
+                row.get(row.size() - 1).spriteGetter().setX(x*30 + mapType.getDistanceX());
+                row.get(row.size() - 1).spriteGetter().setY((Y - 1 - y)*30 + mapType.getDistanceY());
             }
             tiles.add(row);
         }
@@ -279,5 +279,15 @@ public class Map implements DailyUpdate, Serializable {
         Shop oldShop = getShopByType(shop.getShopType());
         if (oldShop != null) throw new IllegalArgumentException("Shop already exists in this Map");
         build(shop);
+    }
+
+    public Tile getCornerOfBuilding(TileType building){
+        for(int i = 0 ; i < getMaxX() ; i++){
+            for(int j = getMaxY() - 1 ; j >= 0 ; j--){
+                if(getTile(i , j).getTileType().equals(building))
+                    return getTile(i , j);
+            }
+        }
+        return null;
     }
 }

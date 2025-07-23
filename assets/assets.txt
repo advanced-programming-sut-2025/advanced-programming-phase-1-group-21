@@ -74,6 +74,12 @@ Textures/Bait/Challenge_Bait.png
 Textures/Bait/Deluxe_Bait.png
 Textures/Bait/Magic_Bait.png
 Textures/Bait/Wild_Bait.png
+Textures/Buildings/DestroyedGreenHouse.png
+Textures/Buildings/Farm Buildings.png
+Textures/Buildings/HouseLevel1png.png
+Textures/Buildings/HouseLevel2.png
+Textures/Buildings/HouseLevel3.png
+Textures/Buildings/NormalGreenHouse.png
 Textures/Chest/Chest.png
 Textures/Clock/Clock.png
 Textures/Clock/ClockWithJournal.png

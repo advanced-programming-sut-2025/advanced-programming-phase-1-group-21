@@ -3,11 +3,11 @@ package models.map;
 import org.apache.commons.lang3.StringUtils;
 
 public enum MapType {
-    HOUSE(20, 10 , 100 , 100),
+    HOUSE(20, 10 , 660, 377),
     GREEN_HOUSE(20, 10 , 0 , 0),
     LAKE(10, 10 , 0 , 0),
     MINES(50, 30 , 0 , 0),
-    FARM(60, 25 , 0 , 0),
+    FARM(64, 34 , 0 , 25),
     VILLAGE(80, 30 , 0 , 0),
     SHOP(8, 8 , 0 , 0),
     NPC_HOUSE(8, 8 , 0 , 0),
