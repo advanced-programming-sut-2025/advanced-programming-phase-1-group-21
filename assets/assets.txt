@@ -1921,6 +1921,8 @@ Textures/Node/Omni_Geode_Node.png
 Textures/Node/Radioactive_Node.png
 Textures/Node/Ruby_Node.png
 Textures/Node/Topaz_Node.png
+Textures/Players/Farmer Base.png
+Textures/Players/FarmerFront1.png
 Textures/Recipe/Algae_Soup.png
 Textures/Recipe/AncientSeedsRecipe.png
 Textures/Recipe/Artichoke_Dip.png

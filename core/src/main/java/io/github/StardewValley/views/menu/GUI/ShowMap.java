@@ -18,15 +18,13 @@ public class ShowMap {
         float mapY = map.getMaxY();
         for(int i = 0 ; i < mapY ; i++){
             for(int j = 0 ; j < mapX ; j++){
-                Tile tile = map.getTile(new Coord(j , i));
+                Tile tile = map.getTile(j , (int)mapY - i -1);
                 tile.spriteGetter().draw(game.getBatch());
-                BitmapFont font = new BitmapFont();
-                font.draw(game.getBatch() , tile.getSprite() , tile.spriteGetter().getX() , tile.spriteGetter().getY());
             }
         }
     }
 
-    public static void showPlayer(){
-
+    public static void showPlayer(Main game){
+        
     }
 }

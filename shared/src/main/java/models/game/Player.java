@@ -1,5 +1,7 @@
 package models.game;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import models.DailyUpdate;
 import models.Item.Item;
 import models.Item.Recipe;
@@ -11,6 +13,7 @@ import models.skill.SkillType;
 import models.user.User;
 import org.apache.commons.lang3.tuple.Pair;
 
+import javax.swing.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Stack;
@@ -37,6 +40,13 @@ public class Player implements DailyUpdate, Serializable {
     private Skill skill = new Skill();
     private ArrayList<String> notifications = new ArrayList<>();
 
+
+    private transient Texture texture = new Texture("assets/Textures/Players/FarmerFront1.png");
+    private transient Sprite sprite = new Sprite(texture);
+
+    public Sprite getSprite() {
+        return sprite;
+    }
 
     public ArrayList<String> getNotifications() {
         return notifications;
@@ -95,6 +105,8 @@ public class Player implements DailyUpdate, Serializable {
         this.coord = coord.addCoord(new Coord(-1, 0)); //left of it!
 
         enterBuilding(defaultMap.getBuilding(House.class));
+        sprite.setX(coord.getX() + map.mapType.getDistanceX());
+        sprite.setY(coord.getY() + map.mapType.getDistanceY());
     }
 
     public Map getDefaultMap() {

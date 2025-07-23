@@ -57,7 +57,6 @@ public class MapBuilder {
     public Map buildFarm(Random random) {
         while (true) {
             Map map = new Map(MapType.FARM);
-
             map.build(new House());
             map.build(new GreenHouse());
             map.build(new Mines(random));
