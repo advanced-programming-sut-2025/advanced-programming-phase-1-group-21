@@ -34,9 +34,9 @@ public class GameScreen implements Screen , InputProcessor {
         ArrayList<Player> players = new ArrayList<>();
         players.add(new Player(App.getInstance().logedInUser, map));
         App.getInstance().game = new Game(players);
-
         this.game = Main.getInstance();
         this.controller = new GameController();
+        controller.game = App.getInstance().game;
         createUI();
     }
 

@@ -2,6 +2,7 @@ package io.github.StardewValley.controllers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import io.github.StardewValley.App;
 
 import data.AnimalData;
@@ -41,6 +42,14 @@ public class GameController {
     public void buttonController(Main thisGame){
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
             thisGame.setScreen(new MainMenuScreen());
+        if(Gdx.input.isKeyPressed(Input.Keys.UP))
+            walk(Direction.NORTH);
+        if(Gdx.input.isKeyPressed(Input.Keys.DOWN))
+            walk(Direction.SOUTH);
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT))
+            walk(Direction.EAST);
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT))
+            walk(Direction.WEST);
     }
 
     public Result<String> showCurrentMenu() {
@@ -227,47 +236,81 @@ public class GameController {
         return Result.success("now you can use your greenhouse");
     }
 
-    public Result<Void> walk(int x, int y) {
-        if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        Coord coord = new Coord(x, y);
-        boolean isNeigh = game.getCurrentPlayer().getCoord().isNeighbor(coord);
+    public void walk(Direction direction) {
+//        if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+//        Coord coord = new Coord(x, y);
+//        boolean isNeigh = game.getCurrentPlayer().getCoord().isNeighbor(coord);
+//
+//        Player player = game.getCurrentPlayer();
+//        Tile tile = player.getMap().getTile(coord);
+//
+//        if (tile == null)
+//            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
+//
+//        if (tile.getTileType().isForaging())
+//            return Result.failure(GameError.CANT_STAND_ON_FORAGING);
+//        else if (tile.getTileType() == TileType.REFRIGERATOR)
+//            return Result.failure(GameError.CANT_STAND_ON_FRIDGE);
+//        else if (tile.getTileType() == TileType.LAKE)
+//            return Result.failure(GameError.CANT_STAND_ON_LAKE);
+//        else if (tile.getTileType() == TileType.DOOR) {
+//            if (!isNeigh) return Result.failure(GameError.YOU_ARE_DISTANT);
+//            player.leave();
+//        } else if (tile.getPlacable(Building.class) != null) {
+//            if (!isNeigh) return Result.failure(GameError.YOU_ARE_DISTANT);
+//            Building building = tile.getPlacable(Building.class);
+//            if (building.canEnter(game.getGameDate())) {
+//                player.enterBuilding(building);
+//            } else return Result.failure(GameError.CANT_ENTER);
+//        } else if (!coord.equals(player.getCoord())) {
+//            PathFinder pf = new PathFinder(player);
+//            List<PathFinder.PathStep> steps = pf.findPathTo(coord);
+//
+//            if (steps == null || steps.isEmpty()) {
+//                return Result.failure(GameError.NO_PATH);
+//            }
+//            for (PathFinder.PathStep step : steps) {
+//                player.decreaseEnergy(step.energyCost());
+//                player.setCoord(step.coord());
+//                if (player.isFainted()) break;
+//            }
+//        }
+//        printMapFull();
+//        return Result.success(null);
+        Player player = App.getInstance().game.getCurrentPlayer();
+        Map map = player.getMap();
+        Sprite sprite = player.getSprite();
+        float speed = player.getSpeed();
 
-        Player player = game.getCurrentPlayer();
-        Tile tile = player.getMap().getTile(coord);
+        if((speed*direction.getDx() + sprite.getX()) > (map.getMaxX()*30 + map.mapType.distanceX - 26))
+            return;
+        if((speed*direction.getDy() + sprite.getY()) > (map.getMaxY()*30 + map.mapType.distanceY - 26))
+            return;
+        if((speed*direction.getDx() + sprite.getX()) < map.mapType.distanceX)
+            return;
+        if((speed*direction.getDy() + sprite.getY()) < map.mapType.distanceY)
+            return;
 
-        if (tile == null)
-            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
 
-        if (tile.getTileType().isForaging())
-            return Result.failure(GameError.CANT_STAND_ON_FORAGING);
+        Tile tile = map.getTile((int) (sprite.getX() + speed*direction.getDx() - map.mapType.distanceX)/30 ,
+                map.getMaxY() - 1 - (int) (sprite.getY() + speed*direction.getDy() - map.mapType.distanceY)/30);
+        if(tile.getTileType().isForaging())
+            return;
         else if (tile.getTileType() == TileType.REFRIGERATOR)
-            return Result.failure(GameError.CANT_STAND_ON_FRIDGE);
+            return;
         else if (tile.getTileType() == TileType.LAKE)
-            return Result.failure(GameError.CANT_STAND_ON_LAKE);
+            return;
         else if (tile.getTileType() == TileType.DOOR) {
-            if (!isNeigh) return Result.failure(GameError.YOU_ARE_DISTANT);
             player.leave();
         } else if (tile.getPlacable(Building.class) != null) {
-            if (!isNeigh) return Result.failure(GameError.YOU_ARE_DISTANT);
-            Building building = tile.getPlacable(Building.class);
-            if (building.canEnter(game.getGameDate())) {
-                player.enterBuilding(building);
-            } else return Result.failure(GameError.CANT_ENTER);
-        } else if (!coord.equals(player.getCoord())) {
-            PathFinder pf = new PathFinder(player);
-            List<PathFinder.PathStep> steps = pf.findPathTo(coord);
-
-            if (steps == null || steps.isEmpty()) {
-                return Result.failure(GameError.NO_PATH);
-            }
-            for (PathFinder.PathStep step : steps) {
-                player.decreaseEnergy(step.energyCost());
-                player.setCoord(step.coord());
-                if (player.isFainted()) break;
-            }
+            return;
         }
-        printMapFull();
-        return Result.success(null);
+
+        sprite.setX(speed*direction.getDx() + sprite.getX());
+        sprite.setY(speed*direction.getDy() + sprite.getY());
+        player.getCoord().setX((int) (sprite.getX() - map.mapType.distanceX)/30);
+        player.getCoord().setY(map.getMaxY() - 1 - (int) (sprite.getY() - map.mapType.distanceY)/30);
+
     }
 
     public Result<Void> putItemInRefrigerator(Refrigerator refrigerator, String itemName) {

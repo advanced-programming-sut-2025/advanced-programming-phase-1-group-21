@@ -2,6 +2,8 @@ package models.game;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Rectangle;
 import models.DailyUpdate;
 import models.Item.Item;
 import models.Item.Recipe;
@@ -39,6 +41,7 @@ public class Player implements DailyUpdate, Serializable {
     private ArrayList<Recipe> recipes = new ArrayList<>();
     private Skill skill = new Skill();
     private ArrayList<String> notifications = new ArrayList<>();
+    private float speed = (float) 4;
 
 
     private transient Texture texture = new Texture("assets/Textures/Players/FarmerFront1.png");
@@ -105,8 +108,9 @@ public class Player implements DailyUpdate, Serializable {
         this.coord = coord.addCoord(new Coord(-1, 0)); //left of it!
 
         enterBuilding(defaultMap.getBuilding(House.class));
-        sprite.setX(coord.getX() + map.mapType.getDistanceX());
-        sprite.setY(coord.getY() + map.mapType.getDistanceY());
+        sprite.setX(getMap().mapType.getDistanceX());
+        sprite.setY(getMap().mapType.getDistanceY() + (getMap().getMaxY() - 1)*30);
+        sprite.setSize(30 , 78);
     }
 
     public Map getDefaultMap() {
@@ -361,5 +365,9 @@ public class Player implements DailyUpdate, Serializable {
 
     public void resetEnergy() {
         energy.reset();
+    }
+
+    public float getSpeed() {
+        return speed;
     }
 }

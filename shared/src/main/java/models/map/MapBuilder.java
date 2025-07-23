@@ -57,8 +57,10 @@ public class MapBuilder {
     public Map buildFarm(Random random) {
         while (true) {
             Map map = new Map(MapType.FARM);
-            map.build(new House());
-            map.build(new GreenHouse());
+            House house = new House();
+            map.build(house);
+            GreenHouse greenHouse = new GreenHouse();
+            map.build(greenHouse);
             map.build(new Mines(random));
 
             int lakesCount = random.nextInt(1,3);
@@ -109,6 +111,12 @@ public class MapBuilder {
             }
 
             buildRandomTile(map, foragingTypes, 40, 70, random);
+
+            house.sprite.setX(map.getCornerOfBuilding(TileType.HOUSE).spriteGetter().getX());
+            house.sprite.setY(map.getCornerOfBuilding(TileType.HOUSE).spriteGetter().getY());
+
+            greenHouse.sprite.setX(map.getCornerOfBuilding(TileType.GREEN_HOUSE).spriteGetter().getX());
+            greenHouse.sprite.setY(map.getCornerOfBuilding(TileType.GREEN_HOUSE).spriteGetter().getY());
             return map;
         }
     }
