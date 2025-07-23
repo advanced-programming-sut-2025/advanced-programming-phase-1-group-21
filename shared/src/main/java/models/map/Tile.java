@@ -1,21 +1,35 @@
 package models.map;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import models.DailyUpdate;
 import models.crop.Harvestable;
 import models.crop.PlantedSeed;
 import models.Item.Item;
 import models.game.Game;
 import models.game.Player;
+import org.w3c.dom.Text;
 
 import java.io.Serializable;
 
 public class Tile implements DailyUpdate, Serializable {
     private TileType tileType;
     private Placable placable;
+    transient private Texture texture = new Texture("assets/Textures/map/SpringBasicTile.png");
+    transient private Sprite sprite = new Sprite(texture);
 
     private Tile(TileType tileType, Placable placable) {
         this.tileType = tileType;
         this.placable = placable;
+    }
+
+    public Texture getTexture() {
+        return texture;
+    }
+
+    public Sprite spriteGetter(){
+        sprite.setSize(25 , 25);
+        return sprite;
     }
 
     public static Tile createEmpty() {

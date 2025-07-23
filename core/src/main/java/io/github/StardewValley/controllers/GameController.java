@@ -1,11 +1,15 @@
 package io.github.StardewValley.controllers;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import io.github.StardewValley.App;
 
 import data.AnimalData;
 import data.ArtisanGoodsData;
 import data.items.SeedData;
+import io.github.StardewValley.Main;
 import io.github.StardewValley.views.menu.CLI.TradeMenuView;
+import io.github.StardewValley.views.menu.GUI.MainMenuScreen;
 import models.Item.*;
 import models.animal.Animal;
 import models.animal.AnimalTypes;
@@ -27,11 +31,17 @@ import models.user.User;
 import org.apache.commons.lang3.tuple.Pair;
 import io.github.StardewValley.views.menu.CLI.GameTerminalView;
 
+import java.security.Key;
 import java.util.*;
 
 public class GameController {
 
     public Game game = null;
+
+    public void buttonController(Main thisGame){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
+            thisGame.setScreen(new MainMenuScreen());
+    }
 
     public Result<String> showCurrentMenu() {
         return Result.success("game", "");
