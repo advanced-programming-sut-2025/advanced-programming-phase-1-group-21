@@ -5,6 +5,7 @@ import com.esotericsoftware.kryonet.Server;
 import controller.MessageHandler;
 import packets.Message;
 import packets.MessageType;
+import session.SessionManager;
 
 import java.io.IOException;
 import java.util.Random;
@@ -23,6 +24,7 @@ public class Main {
             public void connected(Connection c) {
                 System.out.println("[SERVER] Client connected: " + c.getRemoteAddressTCP().getAddress().getHostAddress());
                 c.sendTCP(new Message(MessageType.PING));
+                SessionManager.add(c);
             }
 
             public void received(Connection connection, Object o) {

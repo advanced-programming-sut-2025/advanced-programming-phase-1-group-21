@@ -20,7 +20,7 @@ public class Message {
     }
 
     public String getMethodName() {
-        return type.serviceName + "." + methodName;
+        return methodName;
     }
 
     public boolean isMethodRequest() {
