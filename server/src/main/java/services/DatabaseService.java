@@ -28,12 +28,13 @@ public class DatabaseService {
     /**
      * @param password raw password
      */
-    public Result<User> login(String username, String password, boolean stayLoggedIn) {
+    public Result<Void> login(String username, String password, boolean stayLoggedIn) {
         Result<User> re = SQLHandler.login(username, password);
         if (re.isSuccess()) {
             SessionManager.add(connection, re.getData());
+            return Result.success(null);
         }
-        return re;
+        return Result.failure(re.getError());
     }
 
     public Result<String> getSecurityQuestion(String username) {
