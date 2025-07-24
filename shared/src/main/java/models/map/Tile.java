@@ -24,6 +24,23 @@ public class Tile implements DailyUpdate, Serializable {
         sprite.setSize(30 , 30);
     }
 
+    public void setTexture(MapType mapType) {
+        float x = sprite.getX();
+        float y = sprite.getY();
+        if(mapType.equals(MapType.HOUSE)) {
+            texture = new Texture("assets/Textures/Flooring/HouseFloor.png");
+            sprite = new Sprite(texture);
+        }
+        else{
+            texture = new Texture("assets/Textures/map/SpringBasicTile.png");
+            sprite = new Sprite(texture);
+        }
+
+        sprite.setSize(30 , 30);
+        sprite.setX(x);
+        sprite.setY(y);
+    }
+
     public Texture getTexture() {
         return texture;
     }

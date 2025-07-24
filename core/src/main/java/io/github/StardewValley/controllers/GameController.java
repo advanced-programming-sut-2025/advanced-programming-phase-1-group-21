@@ -3,6 +3,8 @@ package io.github.StardewValley.controllers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Rectangle;
 import io.github.StardewValley.App;
 
 import data.AnimalData;
@@ -50,6 +52,27 @@ public class GameController {
             walk(Direction.EAST);
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT))
             walk(Direction.WEST);
+    }
+
+    public void clickController(int x , int y){
+        Player player = game.getCurrentPlayer();
+        Map map = player.getMap();
+        Tile tile = map.getTile((x - map.mapType.distanceX)/30 , (y - map.mapType.distanceY)/30);
+        if(tile == null)
+            return;
+        tile.spriteGetter().setSize(15 , 15);
+        if(tile.getPlacable(Building.class) != null){
+            Building building = tile.getPlacable(Building.class);
+            if(checkCollision(building.sprite , player.getSprite()) && building.canEnter(game.getGameDate())){
+                player.enterBuilding(building);
+            }
+        }
+    }
+
+    public boolean checkCollision(Sprite target, Sprite player) {
+        Rectangle targetRect = target.getBoundingRectangle();
+        Rectangle playerRect = player.getBoundingRectangle();
+        return Intersector.overlaps(targetRect, playerRect);
     }
 
     public Result<String> showCurrentMenu() {
@@ -302,7 +325,11 @@ public class GameController {
             return;
         else if (tile.getTileType() == TileType.DOOR) {
             player.leave();
-        } else if (tile.getPlacable(Building.class) != null) {
+        }
+        else if(tile.getTileType() == TileType.BRIDGE && map.mapType == MapType.FARM){
+            goToVillage();
+        }
+        else if (tile.getPlacable(Building.class) != null) {
             return;
         }
 
@@ -1060,11 +1087,11 @@ public class GameController {
     }
 
     public Result<Void> goToVillage() {
-        if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        if (game.getCurrentPlayerMap().mapType != MapType.FARM)
-            return Result.failure(GameError.YOU_SHOULD_BE_ON_FARM);
-        game.getCurrentPlayer().setMap(game.getVillage());
-        game.getCurrentPlayer().setCoord(new Coord(0, 0));
+        Player player = game.getCurrentPlayer();
+        player.setMap(game.getVillage());
+        player.setCoord(new Coord(0, 0));
+        player.getSprite().setX(player.getMap().mapType.getDistanceX());
+        player.getSprite().setY(player.getMap().mapType.getDistanceY() + (player.getMap().getMaxY() - 1)*30);
         return Result.success("Now you are in village");
     }
 

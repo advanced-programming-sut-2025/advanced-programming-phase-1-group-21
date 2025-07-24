@@ -13,7 +13,7 @@ public class ShowMap {
     }
 
     public static void showTiles(Main game){
-        Map map = App.getInstance().game.getCurrentPlayerMap();
+        Map map = App.getInstance().game.getCurrentPlayer().getMap();
         float mapX = map.getMaxX();
         float mapY = map.getMaxY();
         for(int i = 0 ; i < mapY ; i++){

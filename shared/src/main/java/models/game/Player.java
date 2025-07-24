@@ -335,12 +335,30 @@ public class Player implements DailyUpdate, Serializable {
         locStack.add(Pair.of(getMap(), getCoord()));
         this.building = building;
         setCoord(new Coord(0, 0));
+        sprite.setX(getMap().mapType.getDistanceX());
+        sprite.setY(getMap().mapType.getDistanceY() + (getMap().getMaxY() - 1)*30);
     }
 
     public void leave() {
         Pair<Map, Coord> loc = locStack.remove(locStack.size() - 1);
+        resetPosition(getMap() , loc);
         setMap(loc.getLeft());
-        setCoord(loc.getRight());
+    }
+
+    public void resetPosition(Map map , Pair<Map , Coord> loc){
+        Tile tile = null;
+        if(map.mapType == MapType.HOUSE)
+            tile = loc.getLeft().getCornerOfBuilding(TileType.HOUSE);
+        else if(map.mapType == MapType.GREEN_HOUSE)
+            tile = loc.getLeft().getCornerOfBuilding(TileType.GREEN_HOUSE);
+        if(tile == null)
+            return;
+
+        sprite.setX(tile.spriteGetter().getX());
+        sprite.setY(tile.spriteGetter().getY());
+
+        coord.setX((int) (sprite.getX() - map.mapType.distanceX)/30);
+        coord.setY(map.getMaxY() - 1 - (int) (sprite.getY() - map.mapType.distanceY)/30);
     }
 
     public Building getBuilding() {
