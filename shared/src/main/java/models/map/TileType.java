@@ -28,6 +28,7 @@ public enum TileType {
 	PLANTED_SEED(1, 1, false, 'S'),
 	PLANTED_TREE(1, 1, false, 'T'),
 	DOOR(1, 1, true, '+'),
+	BRIDGE(1 , 1 , true , '+'),
 
 	// Foragings
 	SIMPLE_ROCK(1, 1, false, 'R'),

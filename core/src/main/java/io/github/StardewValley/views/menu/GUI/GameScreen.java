@@ -107,7 +107,8 @@ public class GameScreen implements Screen , InputProcessor {
     }
 
     @Override
-    public boolean touchDown(int i, int i1, int i2, int i3) {
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        controller.clickController(screenX, screenY);
         return false;
     }
 

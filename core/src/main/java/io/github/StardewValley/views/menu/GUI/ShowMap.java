@@ -13,13 +13,14 @@ public class ShowMap {
     }
 
     public static void showTiles(Main game){
-        Map map = App.getInstance().game.getCurrentPlayerMap();
+        Map map = App.getInstance().game.getCurrentPlayer().getMap();
         float mapX = map.getMaxX();
         float mapY = map.getMaxY();
         for(int i = 0 ; i < mapY ; i++){
             for(int j = 0 ; j < mapX ; j++){
                 Tile tile = map.getTile(j , (int)mapY - i -1);
-                tile.spriteGetter().draw(game.getBatch());
+                if(tile.getPlacable(Building.class) == null)
+                    tile.spriteGetter().draw(game.getBatch());
             }
         }
     }
