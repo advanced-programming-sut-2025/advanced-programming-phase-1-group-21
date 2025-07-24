@@ -290,4 +290,12 @@ public class Map implements DailyUpdate, Serializable {
         }
         return null;
     }
+
+    public void setTextures(){
+        for(int i = 0 ; i < tiles.size() ; i++){
+            for(int j = 0 ; j < tiles.get(0).size() ; j++) {
+                tiles.get(i).get(j).setTexture(mapType);
+            }
+        }
+    }
 }

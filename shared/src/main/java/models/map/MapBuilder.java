@@ -110,6 +110,8 @@ public class MapBuilder {
                 }
             }
 
+            map.getTile(map.getMaxX() -1 , map.getMaxY() - 1).setTileType(TileType.BRIDGE);
+
             buildRandomTile(map, foragingTypes, 40, 70, random);
 
             house.sprite.setX(map.getCornerOfBuilding(TileType.HOUSE).spriteGetter().getX());
@@ -117,6 +119,7 @@ public class MapBuilder {
 
             greenHouse.sprite.setX(map.getCornerOfBuilding(TileType.GREEN_HOUSE).spriteGetter().getX());
             greenHouse.sprite.setY(map.getCornerOfBuilding(TileType.GREEN_HOUSE).spriteGetter().getY());
+            map.setTextures();
             return map;
         }
     }
@@ -159,8 +162,10 @@ public class MapBuilder {
                 buildings.add(Pair.of(TileType.NPC_HOUSE, npc.getHouse()));
             }
 
-            if (setBuildingsRandomly(random, buildings, map))
+            if (setBuildingsRandomly(random, buildings, map)) {
+                map.setTextures();
                 return map;
+            }
         }
     }
 
@@ -182,6 +187,7 @@ public class MapBuilder {
 
         map.tiles.get(0).get(19).setTileType(TileType.SHIPPING_BIN);
         map.tiles.get(0).get(19).setPlacable(new ShippingBin());
+        map.setTextures();
         return map;
     }
 
@@ -195,18 +201,21 @@ public class MapBuilder {
                 TileType.IRIDIUM_ROCK
         );
         buildRandomTile(map, foragingTypes, map.mapType.getArea() / 10, map.mapType.getArea() / 4, random);
+        map.setTextures();
         return map;
     }
 
     public Map buildGreenHouse() {
         Map map = new Map(MapType.GREEN_HOUSE);
         map.tiles.get(9).get(19).setTileType(TileType.DOOR);
+        map.setTextures();
         return map;
     }
 
     public Map buildShop() {
         Map map = new Map(MapType.SHOP);
         map.tiles.get(7).get(7).setTileType(TileType.DOOR);
+        map.setTextures();
         return map;
     }
 
@@ -215,12 +224,14 @@ public class MapBuilder {
         map.tiles.get(7).get(7).setTileType(TileType.DOOR);
         map.tiles.get(7).get(0).setPlacable(npc);
         map.tiles.get(7).get(0).setTileType(TileType.NPC);
+        map.setTextures();
         return map;
     }
 
     public Map buildAnimalHouse(MapType mapType) {
         Map map = new Map(mapType);
         map.tiles.get(7).get(7).setTileType(TileType.DOOR);
+        map.setTextures();
         return map;
     }
 }

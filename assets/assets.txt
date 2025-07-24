@@ -1555,6 +1555,7 @@ Textures/Fishing_Pole/Bamboo_Pole.png
 Textures/Fishing_Pole/Fiberglass_Rod.png
 Textures/Fishing_Pole/Iridium_Rod.png
 Textures/Fishing_Pole/Training_Rod.png
+Textures/Flooring/Flooring.png
 Textures/Flooring/Flooring_01.png
 Textures/Flooring/Flooring_02.png
 Textures/Flooring/Flooring_03.png
@@ -1652,6 +1653,8 @@ Textures/Flooring/Flooring_94.png
 Textures/Flooring/Flooring_95.png
 Textures/Flooring/Flooring_96.png
 Textures/Flooring/Flooring_97.png
+Textures/Flooring/HouseFloor.png
+Textures/Flooring/Walls & Floors.png
 Textures/Foraging/Autumn%27s_Bounty.png
 Textures/Foraging/Basic_Fertilizer.png
 Textures/Foraging/Blackberry.png

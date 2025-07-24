@@ -8,7 +8,7 @@ public enum MapType {
     LAKE(10, 10 , 0 , 0),
     MINES(50, 30 , 0 , 0),
     FARM(64, 34 , 0 , 25),
-    VILLAGE(80, 30 , 0 , 0),
+    VILLAGE(64, 34 , 0 , 25),
     SHOP(8, 8 , 0 , 0),
     NPC_HOUSE(8, 8 , 0 , 0),
     BARN(8, 8 , 0 , 0),
