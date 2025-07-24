@@ -2,7 +2,6 @@ package io.github.StardewValley;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.Array;
-import io.github.StardewValley.controllers.DataBaseController;
 import data.DataLoader;
 import io.github.StardewValley.views.menu.CLI.Colors;
 import io.github.StardewValley.views.menu.CLI.MainMenuView;

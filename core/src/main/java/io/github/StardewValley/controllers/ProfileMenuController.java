@@ -14,7 +14,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static io.github.StardewValley.controllers.DataBaseController.findUserByUsername;
 import static io.github.StardewValley.controllers.RegisterMenuController.*;
 
 public class ProfileMenuController{

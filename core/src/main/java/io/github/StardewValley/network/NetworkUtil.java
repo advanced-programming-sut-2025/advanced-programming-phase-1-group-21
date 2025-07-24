@@ -6,6 +6,7 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import packets.Message;
 import packets.MessageType;
+import packets.NetworkRegister;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -26,9 +27,9 @@ public class NetworkUtil {
 
     public static void init() throws IOException {
         client = new Client();
-        Kryo kryo = client.getKryo();
-        kryo.register(MessageType.class);
-        kryo.register(Message.class);
+
+        NetworkRegister.register(client.getKryo());
+
 
         client.addListener(new Listener() {
             public void received(Connection connection, Object o) {

@@ -31,3 +31,6 @@ dependencies {
     implementation "io.github.berstanio:gdx-svmhelper-annotations:$graalHelperVersion"
   }
 }
+tasks.withType(JavaCompile) {
+  options.compilerArgs += "-parameters"
+}

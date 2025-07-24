@@ -49,7 +49,7 @@ public class SQLHandler {
         }
     }
 
-    public static Result<Void> createUser(String username, String password, String email, String nickname, Gender gender, Integer questionID, String answer) {
+    public static Result<Void> createUser(String username, String password, String email, String nickname, String gender, Integer questionID, String answer) {
         if (doesUserExist(username)) {
             return Result.failure(AuthError.USER_ALREADY_EXISTS);
         }
@@ -58,7 +58,7 @@ public class SQLHandler {
             stmt.setString(1, username);
             stmt.setString(2, email);
             stmt.setString(3, nickname);
-            stmt.setString(4, gender.name());
+            stmt.setString(4, gender);
             stmt.setString(5, password);
             stmt.setObject(6, questionID);
             stmt.setString(7, answer);

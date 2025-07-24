@@ -14,11 +14,12 @@ import java.util.Map;
 
 public class MessageHandler {
 
+
+    private static Map<MessageType, ServiceRouter> serviceMap = new HashMap<>();
+
     static {
         registerAll();
     }
-
-    private static Map<MessageType, ServiceRouter> serviceMap = new HashMap<>();
 
     private static void registerAll() {
         serviceMap.put(MessageType.DATABASE_SERVICE, new DatabaseServiceRouter());
@@ -27,8 +28,19 @@ public class MessageHandler {
 
     public static void handle(Connection connection, Message msg) {
         if (msg.isMethodRequest()) {
+            printMethodMessage(msg);
             handleMethod(connection, msg);
         }
+    }
+
+    private static void printMethodMessage(Message msg) {
+        System.out.println("[RECIEVED] " + msg.type + " " + msg.methodName);
+        Map<String, Object> map = (Map) msg.data;
+        System.out.println("DATA : {");
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + " : " + entry.getValue());
+        }
+        System.out.println("}");
     }
 
     private static void handleMethod(Connection connection, Message msg) {

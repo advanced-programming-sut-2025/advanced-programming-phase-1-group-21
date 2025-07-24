@@ -5,6 +5,7 @@ import com.esotericsoftware.kryonet.Server;
 import controller.MessageHandler;
 import packets.Message;
 import packets.MessageType;
+import packets.NetworkRegister;
 import session.SessionManager;
 
 import java.io.IOException;
@@ -17,8 +18,8 @@ public class Main {
 
 
         Kryo kryo = server.getKryo();
-        kryo.register(MessageType.class);
-        kryo.register(Message.class);
+        NetworkRegister.register(kryo);
+
 
         server.addListener(new Listener() {
             public void connected(Connection c) {
@@ -30,9 +31,6 @@ public class Main {
             public void received(Connection connection, Object o) {
                 if (o instanceof Message) {
                     MessageHandler.handle(connection, (Message) o);
-                }
-                else {
-                    throw new RuntimeException("[ERROR] GOT: " + o.getClass().getName() + " Instead of Message!");
                 }
             }
         });
