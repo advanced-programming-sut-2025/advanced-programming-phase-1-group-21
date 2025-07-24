@@ -5,119 +5,148 @@
   },
   {
     "name": "Duck Feather",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Animal_product/Duck_Feather.png"
   },
   {
     "name": "Wool",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Animal_product/Wool.png"
   },
   {
     "name": "Rabbit's foot",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Animal_product/Rabbits_Foot.png"
   },
   {
     "name": "Dinosaur Egg",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Animal_product/Dinosaur_Egg.png"
   },
   {
     "name": "Egg",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Animal_product/Egg.png"
   },
   {
-    "name": "Big Egg",
-    "type": "Consumable"
+    "name": "Large Egg",
+    "type": "Consumable",
+    "texture-address": "Textures/Animal_product/Large_Egg.png"
   },
   {
     "name": "Duck Egg",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Animal_product/Duck_Egg.png"
   },
   {
     "name": "Milk",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Animal_product/Milk.png"
   },
   {
     "name": "Large Milk",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Animal_product/Large_Milk.png"
   },
   {
     "name": "Goat Milk",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Animal_product/Goat_Milk.png"
   },
   {
     "name": "Large Goat Milk",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Animal_product/Large_Goat_Milk.png"
   },
   {
     "name": "Truffle",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Animal_product/Truffle.png"
   },
   {
     "name": "Honey",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Artisan_good/Honey.png"
   },
   {
     "name": "Cheese",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Artisan_good/Cheese.png"
   },
   {
     "name": "Goat Cheese",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Artisan_good/Goat_Cheese.png"
   },
   {
     "name": "Beer",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Artisan_good/Beer.png"
   },
   {
     "name": "Vinegar",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Ingredient/Vinegar.png"
   },
   {
     "name": "Coffee",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Artisan_good/Coffee.png"
   },
   {
     "name": "Juice",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Artisan_good/Juice.png"
   },
   {
     "name": "Mead",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Artisan_good/Mead.png"
   },
   {
     "name": "Pale Ale",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Artisan_good/Pale_Ale.png"
   },
   {
     "name": "Wine",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Artisan_good/Wine.png"
   },
   {
     "name": "Mayonnaise",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Artisan_good/Mayonnaise.png"
   },
   {
     "name": "Duck Mayonnaise",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Artisan_good/Duck_Mayonnaise.png"
   },
   {
     "name": "Dinosaur Mayonnaise",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Artisan_good/Dinosaur_Mayonnaise.png"
   },
   {
     "name": "Truffle Oil",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Artisan_good/Truffle_Oil.png"
   },
   {
     "name": "Oil",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Ingredient/Oil.png"
   },
   {
     "name": "Pickle",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Artisan_good/Pickles.png"
   },
   {
     "name": "Jelly",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Artisan_good/Jelly.png"
   },
   {
     "name": "Smoked Fish",
@@ -125,1074 +154,1342 @@
   },
   {
     "name": "Dried Mushrooms",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Artisan_good/Dried_Mushrooms.png"
   },
   {
     "name": "Dried Fruit",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Artisan_good/Dried_Fruit.png"
   },
   {
     "name": "Raisins",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Artisan_good/Raisins.png"
   },
   {
     "name": "Copper Ore",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Resource/Copper_Ore.png"
   },
   {
     "name": "Iron Ore",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Resource/Iron_Ore.png"
   },
   {
     "name": "Gold Ore",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Resource/Gold_Ore.png"
   },
   {
     "name": "Iridium Ore",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Resource/Iridium_Ore.png"
   },
   {
     "name": "Coal",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Resource/Coal.png"
   },
   {
     "name": "Copper Bar",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Resource/Copper_Bar.png"
   },
   {
     "name": "Iron Bar",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Resource/Iron_Bar.png"
   },
   {
     "name": "Gold Bar",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Resource/Gold_Bar.png"
   },
   {
     "name": "Iridium Bar",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Resource/Iridium_Bar.png"
   },
   {
     "name": "Cloth",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Artisan_good/Cloth.png"
   },
   {
     "name": "Cherry Bomb",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Craftable_item/Cherry_Bomb.png"
   },
   {
     "name": "Bomb",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Craftable_item/Bomb.png"
   },
   {
     "name": "Mega Bomb",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Craftable_item/Mega_Bomb.png"
   },
   {
     "name": "Fried Egg",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Recipe/Fried_Egg.png"
   },
   {
     "name": "Baked Fish",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Recipe/Baked_Fish.png"
   },
   {
     "name": "Salad",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Recipe/Salad.png"
   },
   {
     "name": "Omelet",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Recipe/Omelet.png"
   },
   {
     "name": "Pumpkin Pie",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Recipe/Pumpkin_Pie.png"
   },
   {
     "name": "Spaghetti",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Recipe/Spaghetti.png"
   },
   {
     "name": "Pizza",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Recipe/Pizza.png"
   },
   {
     "name": "Tortilla",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Recipe/Tortilla.png"
   },
   {
     "name": "Maki Roll",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Recipe/Maki_Roll.png"
   },
   {
     "name": "Triple Shot Espresso",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Recipe/Triple_Shot_Espresso.png"
   },
   {
     "name": "Cookie",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Recipe/Cookie.png"
   },
   {
     "name": "Hash Browns",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Recipe/Hashbrowns.png"
   },
   {
     "name": "Pancakes",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Recipe/Pancakes.png"
   },
   {
     "name": "Fruit Salad",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Recipe/Fruit_Salad.png"
   },
   {
     "name": "Red Plate",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Recipe/Red_Plate.png"
   },
   {
     "name": "Bread",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Recipe/Bread.png"
   },
   {
     "name": "Salmon Dinner",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Recipe/Salmon_Dinner.png"
   },
   {
     "name": "Vegetable Medley",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Recipe/Vegetable_Medley.png"
   },
   {
-    "name": "Farmer'S Lunch",
-    "type": "Consumable"
+    "name": "Farmer's Lunch",
+    "type": "Consumable",
+    "texture-address": "Textures/Recipe/Farmers_Lunch.png"
   },
   {
     "name": "Survival Burger",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Recipe/Survival_Burger.png"
   },
   {
     "name": "Dish O' The Sea",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Recipe/Dish O The Sea.png"
   },
   {
     "name": "Seafoam Pudding",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Recipe/Seafoam Pudding.png"
   },
   {
-    "name": "Miner'S Treat",
-    "type": "Consumable"
+    "name": "Miner's Treat",
+    "type": "Consumable",
+    "texture-address": "Textures/Recipe/Miners Treat.png"
   },
   {
     "name": "Blue Jazz",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Blue_Jazz.png"
   },
   {
     "name": "Carrot",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Carrot.png"
   },
   {
     "name": "Cauliflower",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Cauliflower.png"
   },
   {
     "name": "Garlic",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Garlic.png"
   },
   {
     "name": "Green Bean",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Green_Bean.png"
   },
   {
     "name": "Kale",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Kale.png"
   },
   {
     "name": "Parsnip",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Parsnip.png"
   },
   {
     "name": "Potato",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Potato.png"
   },
   {
     "name": "Strawberry",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Strawberry.png"
   },
   {
     "name": "Tulip",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Tulip.png"
   },
   {
     "name": "Unmilled Rice",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Unmilled_Rice.png"
   },
   {
     "name": "Rice",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Ingredient/Rice.png"
   },
   {
     "name": "Blueberry",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Blueberry.png"
   },
   {
     "name": "Corn",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Corn.png"
   },
   {
     "name": "Hops",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Hops.png"
   },
   {
     "name": "Hot Pepper",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Hot_Pepper.png"
   },
   {
     "name": "Melon",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Melon.png"
   },
   {
     "name": "Poppy",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Poppy.png"
   },
   {
     "name": "Radish",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Radish.png"
   },
   {
     "name": "Red Cabbage",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Red_Cabbage.png"
   },
   {
     "name": "Starfruit",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Starfruit.png"
   },
   {
     "name": "Summer Spangle",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Summer_Spangle.png"
   },
   {
     "name": "Summer Squash",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Summer_Squash.png"
   },
   {
     "name": "Sunflower",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Sunflower.png"
   },
   {
     "name": "Tomato",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Tomato.png"
   },
   {
     "name": "Amaranth",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Amaranth.png"
   },
   {
     "name": "Artichoke",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Artichoke.png"
   },
   {
     "name": "Beet",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Beet.png"
   },
   {
     "name": "Bok Choy",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Bok_Choy.png"
   },
   {
     "name": "Broccoli",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Broccoli.png"
   },
   {
     "name": "Cranberries",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Cranberries.png"
   },
   {
     "name": "Eggplant",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Eggplant.png"
   },
   {
     "name": "Fairy Rose",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Fairy_Rose.png"
   },
   {
     "name": "Grape",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Grape.png"
   },
   {
     "name": "Yam",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Yam.png"
   },
   {
     "name": "Powdermelon",
-    "type": "Consumable"
-  },
-  {
-    "name": "Coffee Beans",
-    "type": "Salable"
+    "type": "Consumable",
+    "texture-address": "Textures/Crops/Powdermelon.png"
   },
   {
     "name": "Rhubarb",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Crops/Grape.png"
   },
   {
     "name": "Wheat",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Crops/Wheat.png"
   },
   {
     "name": "Pumpkin",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Crops/Wheat.png"
   },
   {
     "name": "Sweet Gem Berry",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Crops/Sweet_Gem_Berry.png"
   },
   {
     "name": "Ancient Fruit",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Crops/Ancient_Fruit.png"
+  },
+  {
+    "name": "Coffee Bean",
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Coffee_Bean.png"
   },
   {
     "name": "Jazz Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Jazz_Seeds.png"
   },
   {
     "name": "Carrot Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Carrot_Seeds.png"
   },
   {
     "name": "Cauliflower Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Cauliflower_Seeds.png"
   },
   {
     "name": "Garlic Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Garlic_Seeds.png"
   },
   {
     "name": "Bean Starter",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Bean_Starter.png"
   },
   {
     "name": "Kale Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Kale_Seeds.png"
   },
   {
     "name": "Parsnip Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Parsnip_Seeds.png"
   },
   {
     "name": "Potato Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Potato_Seeds.png"
   },
   {
     "name": "Rhubarb Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Rhubarb_Seeds.png"
   },
   {
     "name": "Strawberry Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Strawberry_Seeds.png"
   },
   {
     "name": "Tulip Bulb",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Tulip_Bulb.png"
   },
   {
     "name": "Rice Shoot",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Rice_Shoot.png"
   },
   {
     "name": "Blueberry Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Blueberry_Seeds.png"
   },
   {
     "name": "Corn Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Corn_Seeds.png"
   },
   {
     "name": "Hops Starter",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Hops_Starter.png"
   },
   {
     "name": "Pepper Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Pepper_Seeds.png"
   },
   {
     "name": "Melon Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Melon_Seeds.png"
   },
   {
     "name": "Poppy Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Poppy_Seeds.png"
   },
   {
     "name": "Radish Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Radish_Seeds.png"
   },
   {
     "name": "Red Cabbage Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Red_Cabbage_Seeds.png"
   },
   {
     "name": "Starfruit Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Starfruit_Seeds.png"
   },
   {
     "name": "Spangle Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Spangle_Seeds.png"
   },
   {
-    "name": "summer Squash Seeds",
-    "type": "Seed"
+    "name": "Summer Squash Seeds",
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Summer_Squash_Seeds.png"
   },
   {
     "name": "Sunflower Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Sunflower_Seeds.png"
   },
   {
     "name": "Tomato Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Tomato_Seeds.png"
   },
   {
     "name": "Wheat Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Wheat_Seeds.png"
   },
   {
     "name": "Amaranth Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Amaranth_Seeds.png"
   },
   {
     "name": "Artichoke Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Artichoke_Seeds.png"
   },
   {
     "name": "Beet Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Beet_Seeds.png"
   },
   {
     "name": "Bok Choy Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Bok_Choy_Seeds.png"
   },
   {
     "name": "Broccoli Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Broccoli_Seeds.png"
   },
   {
     "name": "Cranberry Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Cranberry_Seeds.png"
   },
   {
     "name": "Eggplant Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Eggplant_Seeds.png"
   },
   {
     "name": "Fairy Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Fairy_Seeds.png"
   },
   {
     "name": "Grape Starter",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Grape_Starter.png"
   },
   {
     "name": "Pumpkin Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Pumpkin_Seeds.png"
   },
   {
     "name": "Yam Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Yam_Seeds.png"
   },
   {
     "name": "Rare Seed",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Rare_Seed.png"
   },
   {
     "name": "Powdermelon Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Powdermelon_Seeds.png"
   },
   {
     "name": "Ancient Seeds",
-    "type": "Seed"
+    "type": "Seed",
+    "texture-address": "Textures/Crops/Ancient_Seeds.png"
   },
   {
     "name": "Common Mushroom",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Foraging/Common_Mushroom.png"
   },
   {
     "name": "Daffodil",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Foraging/Daffodil.png"
   },
   {
     "name": "Dandelion",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Foraging/Dandelion.png"
   },
   {
     "name": "Leek",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Foraging/Leek.png"
   },
   {
     "name": "Morel",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Foraging/Morel.png"
   },
   {
     "name": "Salmonberry",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Foraging/Salmonberry.png"
   },
   {
     "name": "Onion",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Foraging/Spring_Onion.png"
   },
   {
     "name": "Wild Horseradish",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Foraging/Wild_Horseradish.png"
   },
   {
     "name": "Fiddlehead Fern",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Foraging/Fiddlehead_Fern.png"
   },
   {
     "name": "Red Mushroom",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Foraging/Red_Mushroom.png"
   },
   {
     "name": "Spice Berry",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Foraging/Spice_Berry.png"
   },
   {
     "name": "Sweet Pea",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Foraging/Sweet_Pea.png"
   },
   {
     "name": "Blackberry",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Foraging/Blackberry.png"
   },
   {
     "name": "Chanterelle",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Foraging/Chanterelle.png"
   },
   {
     "name": "Hazelnut",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Foraging/Hazelnut.png"
   },
   {
     "name": "Purple Mushroom",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Foraging/Purple_Mushroom.png"
   },
   {
     "name": "Wild Plum",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Foraging/Wild_Plum.png"
   },
   {
     "name": "Crocus",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Foraging/Crocus.png"
   },
   {
     "name": "Crystal Fruit",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Foraging/Crystal_Fruit.png"
   },
   {
     "name": "Holly",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Foraging/Holly.png"
   },
   {
     "name": "Snow Yam",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Foraging/Snow_Yam.png"
   },
   {
     "name": "Winter Root",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Foraging/Winter_Root.png"
   },
   {
     "name": "Bee House",
-    "type": "Placeable"
+    "type": "Placeable",
+    "texture-address": "Textures/Craftable_item/Bee_House.png"
   },
   {
     "name": "Cheese Press",
-    "type": "Placeable"
+    "type": "Placeable",
+    "texture-address": "Textures/Craftable_item/Cheese_Press.png"
   },
   {
     "name": "Keg",
-    "type": "Placeable"
+    "type": "Placeable",
+    "texture-address": "Textures/Craftable_item/Keg.png"
   },
   {
     "name": "Loom",
-    "type": "Placeable"
+    "type": "Placeable",
+    "texture-address": "Textures/Craftable_item/Loom.png"
   },
   {
     "name": "Mayonnaise Machine",
-    "type": "Placeable"
+    "type": "Placeable",
+    "texture-address": "Textures/Craftable_item/Mayonnaise_Machine.png"
   },
   {
     "name": "Oil Maker",
-    "type": "Placeable"
+    "type": "Placeable",
+    "texture-address": "Textures/Craftable_item/Oil_Maker.png"
   },
   {
     "name": "Preserves Jar",
-    "type": "Placeable"
+    "type": "Placeable",
+    "texture-address": "Textures/Craftable_item/Preserves_Jar.png"
   },
   {
     "name": "Fish Smoker",
-    "type": "Placeable"
+    "type": "Placeable",
+    "texture-address": "Textures/Craftable_item/Fish Smoker.png"
   },
   {
     "name": "Dehydrator",
-    "type": "Placeable"
+    "type": "Placeable",
+    "texture-address": "Textures/Craftable_item/Dehydrator.png"
   },
   {
     "name": "Charcoal Kiln",
-    "type": "Placeable"
+    "type": "Placeable",
+    "texture-address": "Textures/Craftable_item/Charcoal_Kiln.png"
   },
   {
     "name": "Furnace",
-    "type": "Placeable"
+    "type": "Placeable",
+    "texture-address": "Textures/Craftable_item/Furnace.png"
   },
   {
     "name": "Scarecrow",
-    "type": "Placeable"
+    "type": "Placeable",
+    "texture-address": "Textures/Craftable_item/Scarecrow.png"
   },
   {
     "name": "Deluxe Scarecrow",
-    "type": "Placeable"
+    "type": "Placeable",
+    "texture-address": "Textures/Craftable_item/Deluxe_Scarecrow.png"
   },
   {
     "name": "Sprinkler",
-    "type": "Placeable"
+    "type": "Placeable",
+    "texture-address": "Textures/Craftable_item/Sprinkler.png"
   },
   {
     "name": "Quality Sprinkler",
-    "type": "Placeable"
+    "type": "Placeable",
+    "texture-address": "Textures/Craftable_item/Quality_Sprinkler.png"
   },
   {
     "name": "Iridium Sprinkler",
-    "type": "Placeable"
+    "type": "Placeable",
+    "texture-address": "Textures/Craftable_item/Iridium_Sprinkler.png"
   },
   {
     "name": "Sugar",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Ingredient/Sugar.png"
   },
   {
     "name": "Joja Cola",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Artisan_good/Joja_Cola.png"
   },
   {
     "name": "Hay",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Artisan_good/Hay.png"
   },
   {
     "name": "Apricot",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Trees/Apricot.png"
   },
   {
     "name": "Cherry",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Trees/Cherry.png"
   },
   {
     "name": "Banana",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Trees/Banana.png"
   },
   {
     "name": "Mango",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Trees/Mango.png"
   },
   {
     "name": "Orange",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Trees/Orange.png"
   },
   {
     "name": "Peach",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Trees/Peach.png"
   },
   {
     "name": "Apple",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Trees/Apple.png"
   },
   {
     "name": "Pomegranate",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Trees/Pomegranate.png"
   },
   {
     "name": "Oak Resin",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Artisan_good/Oak_Resin.png"
   },
   {
     "name": "Maple Syrup",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Artisan_good/Maple_Syrup.png"
   },
   {
     "name": "Pine Tar",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Artisan_good/Pine_Tar.png"
   },
   {
     "name": "Sap",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Trees/Sap.png"
   },
   {
     "name": "Mystic Syrup",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Artisan_good/Mystic_Syrup.png"
   },
   {
     "name": "Salmon",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Fish/Salmon.png"
   },
   {
     "name": "Sardine",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Fish/Sardine.png"
   },
   {
     "name": "Shad",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Fish/Shad.png"
   },
   {
     "name": "Blue Discus",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Fish/Blue_Discus.png"
   },
   {
     "name": "Midnight Carp",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Fish/Midnight_Carp.png"
   },
   {
     "name": "Squid",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Fish/Squid.png"
   },
   {
     "name": "Tuna",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Fish/Tuna.png"
   },
   {
     "name": "Perch",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Fish/Salmon.png"
   },
   {
     "name": "Flounder",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Fish/Flounder.png"
   },
   {
     "name": "Lionfish",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Fish/Lionfish.png"
   },
   {
     "name": "Herring",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Fish/Herring.png"
   },
   {
     "name": "Ghostfish",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Fish/Ghostfish.png"
   },
   {
     "name": "Tilapia",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Fish/Lionfish.png"
   },
   {
     "name": "Dorado",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Fish/Dorado.png"
   },
   {
     "name": "Sunfish",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Fish/Lionfish.png"
   },
   {
     "name": "Rainbow Trout",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Fish/Rainbow_Trout.png"
   },
   {
     "name": "Legend",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Fish/Legend.png"
   },
   {
     "name": "Glacierfish",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Fish/Glacierfish.png"
   },
   {
     "name": "Angler",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Fish/Angler.png"
   },
   {
     "name": "Crimsonfish",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Fish/Crimsonfish.png"
   },
   {
     "name": "Quartz",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Mineral/Quartz.png"
   },
   {
     "name": "Earth Crystal",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Mineral/Earth_Crystal.png"
   },
   {
     "name": "Frozen Tear",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Mineral/Frozen_Tear.png"
   },
   {
     "name": "Fire Quartz",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Mineral/Fire_Quartz.png"
   },
   {
     "name": "Emerald",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Gem/Emerald.png"
   },
   {
     "name": "Aquamarine",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Gem/Aquamarine.png"
   },
   {
     "name": "Ruby",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Gem/Ruby.png"
   },
   {
     "name": "Amethyst",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Gem/Amethyst.png"
   },
   {
     "name": "Topaz",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Gem/Topaz.png"
   },
   {
     "name": "Jade",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Gem/Jade.png"
   },
   {
     "name": "Diamond",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Gem/Diamond.png"
   },
   {
     "name": "Prismatic Shard",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Gem/Prismatic_Shard.png"
   },
   {
     "name": "Wood",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Resource/Wood.png"
   },
   {
     "name": "Stone",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Resource/Stone.png"
   },
   {
     "name": "Bouquet",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Special_item/Bouquet.png"
   },
   {
     "name": "Wedding Ring",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Craftable_item/Wedding_Ring.png"
   },
   {
     "name": "Wheat Flour",
-    "type": "Consumable"
+    "type": "Consumable",
+    "texture-address": "Textures/Ingredient/Wheat_Flour.png"
   },
   {
     "name": "Apricot Sapling",
-    "type": "Sapling"
+    "type": "Sapling",
+    "texture-address": "Textures/Trees/Sapling/Apricot_Sapling.png"
   },
   {
     "name": "Cherry Sapling",
-    "type": "Sapling"
+    "type": "Sapling",
+    "texture-address": "Textures/Trees/Sapling/Cherry_Sapling.png"
   },
   {
     "name": "Banana Sapling",
-    "type": "Sapling"
+    "type": "Sapling",
+    "texture-address": "Textures/Trees/Sapling/Banana_Sapling.png"
   },
   {
     "name": "Mango Sapling",
-    "type": "Sapling"
+    "type": "Sapling",
+    "texture-address": "Textures/Trees/Sapling/Mango_Sapling.png"
   },
   {
     "name": "Orange Sapling",
-    "type": "Sapling"
+    "type": "Sapling",
+    "texture-address": "Textures/Trees/Sapling/Orange_Sapling.png"
   },
   {
     "name": "Peach Sapling",
-    "type": "Sapling"
+    "type": "Sapling",
+    "texture-address": "Textures/Trees/Sapling/Peach_Sapling.png"
   },
   {
     "name": "Apple Sapling",
-    "type": "Sapling"
+    "type": "Sapling",
+    "texture-address": "Textures/Trees/Sapling/Apple_Sapling.png"
   },
   {
     "name": "Pomegranate Sapling",
-    "type": "Sapling"
+    "type": "Sapling",
+    "texture-address": "Textures/Trees/Sapling/Pomegranate_Sapling.png"
   },
   {
     "name": "Acorn",
-    "type": "Sapling"
+    "type": "Sapling",
+    "texture-address": "Textures/Trees/Acorn.png"
   },
   {
     "name": "Maple Seed",
-    "type": "Sapling"
+    "type": "Sapling",
+    "texture-address": "Textures/Trees/Maple_Seed.png"
   },
   {
     "name": "Pine Cone",
-    "type": "Sapling"
+    "type": "Sapling",
+    "texture-address": "Textures/Trees/Pine_Cone.png"
   },
   {
     "name": "Mahogany Seed",
-    "type": "Sapling"
+    "type": "Sapling",
+    "texture-address": "Textures/Trees/Mahogany_Seed.png"
   },
   {
     "name": "Mushroom Tree Seed",
-    "type": "Sapling"
+    "type": "Sapling",
+    "texture-address": "Textures/Trees/Mushroom_Tree_Seed.png"
   },
   {
     "name": "Mystic Tree Seed",
-    "type": "Sapling"
+    "type": "Sapling",
+    "texture-address": "Textures/Trees/Mystic_Tree_Seed.png"
   },
   {
     "name": "Fried Egg Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Baked Fish Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Salad Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Omelet Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Pumpkin Pie Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Spaghetti Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Pizza Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Tortilla Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Maki Roll Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Triple Shot Espresso Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Cookie Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Hash Browns Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Pancakes Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Fruit Salad Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Red Plate Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Bread Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Salmon Dinner Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Vegetable Medley Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Farmer's Lunch Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Survival Burger Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Dish O' The Sea Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Seaform Pudding Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Miner's Treat Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Charcoal Kiln Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Furnace Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Bee House Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Cheese Press Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Keg Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Loom Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Mayonnaise Machine Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Oil Maker Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Preserves Jar Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Dehydrator Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Fish Smoker Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Scarecrow Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Deluxe Scarecrow Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Sprinkler Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Quality Sprinkler Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Iridium Sprinkler Recipe",
-    "type": "Recipe"
+    "type": "Recipe",
+    "texture-address": null
   },
   {
     "name": "Basic Retaining Soil",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Fertilizer/Basic_Retaining_Soil.png"
   },
   {
     "name": "Quality Retaining Soil",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Fertilizer/Quality_Retaining_Soil.png"
   },
   {
     "name": "Deluxe Retaining Soil",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": "Textures/Fertilizer/Deluxe_Retaining_Soil.png"
   }
 ]

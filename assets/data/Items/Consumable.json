@@ -5,7 +5,7 @@
     "energy": 25
   },
   {
-    "name": "Big Egg",
+    "name": "Large Egg",
     "price": 95,
     "energy": 38
   },
@@ -565,7 +565,7 @@
     "energy": 165
   },
   {
-    "name": "Farmer'S Lunch",
+      "name": "Farmer's Lunch",
     "price": 150,
     "energy": 200
   },
@@ -585,7 +585,7 @@
     "energy": 175
   },
   {
-    "name": "Miner'S Treat",
+    "name": "Miner's Treat",
     "price": 200,
     "energy": 125
   },

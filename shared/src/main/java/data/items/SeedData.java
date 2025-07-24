@@ -34,6 +34,15 @@ public class SeedData implements Data, ItemData {
 	@SerializedName("can-become-giant")
 	private boolean canBecomeGiant;
 
+	@SerializedName("stage-textures")
+	private ArrayList<String> stageTextures;
+
+	@SerializedName("harvest-texture")
+	private String harvestTexture;
+
+	@SerializedName("regrowth-texture")
+	private String regrowthTexture;
+
 	public static String getDataURL() {
 		return dataURL;
 	}
@@ -89,6 +98,22 @@ public class SeedData implements Data, ItemData {
 
 	public boolean canBecomeGiant() {
 		return canBecomeGiant;
+	}
+
+	public ArrayList<String> getStageTextures() {
+		return stageTextures;
+	}
+
+	public String getStageTexture(int stage) {
+		return stageTextures.get(stage);
+	}
+
+	public String getHarvestTexture() {
+		return harvestTexture;
+	}
+
+	public String getRegrowthTexture() {
+		return regrowthTexture;
 	}
 
 	public static SeedData getData(String name) {

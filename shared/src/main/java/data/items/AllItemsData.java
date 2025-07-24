@@ -15,6 +15,8 @@ public class AllItemsData implements Data {
 	@SerializedName("type")
 	private String type;
 	private ItemType ctype;
+	@SerializedName("texture-address")
+	private String textureAddress;
 
 	public static String getDataURL() {
 		return dataURL;
@@ -35,6 +37,10 @@ public class AllItemsData implements Data {
 
 	public ItemType getType() {
 		return ctype;
+	}
+
+	public String getTextureAddress() {
+		return textureAddress;
 	}
 
 	public static AllItemsData getData(String name) {

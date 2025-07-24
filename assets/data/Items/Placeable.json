@@ -1,66 +1,114 @@
 [
   {
     "name": "Bee House",
-    "location": "Farm"
+    "location": "Farm",
+    "empty-texture": "Textures/Craftable_item/Bee_House.png",
+    "processing-texture": "Textures/Craftable_item/Bee_House.png",
+    "done-texture": "Textures/Craftable_item/Bee_House_Full.png"
   },
   {
     "name": "Cheese Press",
-    "location": "House"
+    "location": "House",
+    "empty-texture": "Textures/Craftable_item/Cheese_Press.png",
+    "processing-texture": "Textures/Craftable_item/Cheese_Press.png",
+    "done-texture": "Textures/Craftable_item/Cheese_Press.png"
   },
   {
     "name": "Keg",
-    "location": "House"
+    "location": "House",
+    "empty-texture": "Textures/Craftable_item/Keg.png",
+    "processing-texture": "Textures/Craftable_item/Keg.png",
+    "done-texture": "Textures/Craftable_item/Keg.png"
   },
   {
     "name": "Loom",
-    "location": "House"
+    "location": "House",
+    "empty-texture": "Textures/Craftable_item/Loom.png",
+    "processing-texture": "Textures/Craftable_item/Loom.png",
+    "done-texture": "Textures/Craftable_item/Loom_Done.png"
   },
   {
-    "name": "Mayonnaise Machine",
-    "location": "House"
+      "name": "Mayonnaise Machine",
+    "location": "House",
+    "empty-texture": "Textures/Craftable_item/Mayonnaise_Machine.png",
+    "processing-texture": "Textures/Craftable_item/Mayonnaise_Machine.png",
+    "done-texture": "Textures/Craftable_item/Mayonnaise_Machine.png"
   },
   {
     "name": "Oil Maker",
-    "location": "House"
+    "location": "House",
+    "empty-texture": "Textures/Craftable_item/Oil_Maker.png",
+    "processing-texture": "Textures/Craftable_item/Oil_Maker.png",
+    "done-texture": "Textures/Craftable_item/Oil_Maker.png"
   },
   {
     "name": "Preserves Jar",
-    "location": "House"
+    "location": "House",
+    "empty-texture": "Textures/Craftable_item/Preserves_Jar.png",
+    "processing-texture": "Textures/Craftable_item/Preserves_Jar.png",
+    "done-texture": "Textures/Craftable_item/Preserves_Jar.png"
   },
   {
     "name": "Fish Smoker",
-    "location": "House"
+    "location": "House",
+    "empty-texture": "Textures/Craftable_item/Fish_Smoker.png",
+    "processing-texture": "Textures/Craftable_item/Fish_Smoker_On.png",
+    "done-texture": "Textures/Craftable_item/Fish_Smoker.png"
   },
   {
     "name": "Dehydrator",
-    "location": "House"
+    "location": "House",
+    "empty-texture": "Textures/Craftable_item/Dehydrator.png",
+    "processing-texture": "Textures/Craftable_item/Dehydrator.png",
+    "done-texture": "Textures/Craftable_item/Dehydrator.png"
   },
   {
     "name": "Charcoal Kiln",
-    "location": "House"
+    "location": "House",
+    "empty-texture": "Textures/Craftable_item/Charcoal_Kiln_Off.png",
+    "processing-texture": "Textures/Craftable_item/Charcoal_Kiln.png",
+    "done-texture": "Textures/Craftable_item/Charcoal_Kiln.png"
   },
   {
     "name": "Furnace",
-    "location": "House"
+    "location": "House",
+    "empty-texture": "Textures/Craftable_item/Furnace.png",
+    "processing-texture": "Textures/Craftable_item/Furnace_On.png",
+    "done-texture": "Textures/Craftable_item/Furnace.png"
   },
   {
     "name": "Scarecrow",
-    "location": "Farm"
+    "location": "Farm",
+    "empty-texture": "Textures/Craftable_item/Scarecrow.png",
+    "processing-texture": "Textures/Craftable_item/Scarecrow.png",
+    "done-texture": "Textures/Craftable_item/Scarecrow.png"
   },
   {
     "name": "Deluxe Scarecrow",
-    "location": "Farm"
+    "location": "Farm",
+    "empty-texture": "Textures/Craftable_item/Deluxe_Scarecrow.png",
+    "processing-texture": "Textures/Craftable_item/Deluxe_Scarecrow.png",
+    "done-texture": "Textures/Craftable_item/Deluxe_Scarecrow.png"
   },
   {
     "name": "Sprinkler",
-    "location": "Farm"
+    "location": "Farm",
+    "empty-texture": "Textures/Craftable_item/Sprinkler.png",
+    "processing-texture": "Textures/Craftable_item/Sprinkler.png",
+    "done-texture": "Textures/Craftable_item/Sprinkler.png"
   },
   {
     "name": "Quality Sprinkler",
-    "location": "Farm"
+    "location": "Farm",
+    "empty-texture": "Textures/Craftable_item/Quality_Sprinkler.png",
+    "processing-texture": "Textures/Craftable_item/Quality_Sprinkler.png",
+    "done-texture": "Textures/Craftable_item/Quality_Sprinkler.png"
   },
   {
     "name": "Iridium Sprinkler",
-    "location": "Farm"
+    "location": "Farm",
+    "empty-texture": "Textures/Craftable_item/Iridium_Sprinkler.png",
+    "processing-texture": "Textures/Craftable_item/Iridium_Sprinkler.png",
+    "done-texture": "Textures/Craftable_item/Iridium_Sprinkler.png"
   }
 ]
