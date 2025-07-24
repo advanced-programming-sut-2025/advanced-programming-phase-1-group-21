@@ -7,7 +7,15 @@
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["spring"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Blue_Jazz_Stage_1.png",
+      "Textures/Crops/Blue_Jazz_Stage_2.png",
+      "Textures/Crops/Blue_Jazz_Stage_3.png",
+      "Textures/Crops/Blue_Jazz_Stage_4.png"
+    ],
+    "harvest-texture": "Textures/Crops/Blue_Jazz_Stage_5.png",
+    "regrowth-texture": null
   },
   {
     "name": "Carrot Seeds",
@@ -17,7 +25,14 @@
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["spring"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Carrot_Stage_1.png",
+      "Textures/Crops/Carrot_Stage_2.png",
+      "Textures/Crops/Carrot_Stage_3.png"
+    ],
+    "harvest-texture": "Textures/Crops/Carrot_Stage_4.png",
+    "regrowth-texture": null
   },
   {
     "name": "Cauliflower Seeds",
@@ -27,17 +42,35 @@
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["spring"],
-    "can-become-giant": true
+    "can-become-giant": true,
+    "stage-textures": [
+      "Textures/Crops/Cauliflower_Stage_1.png",
+      "Textures/Crops/Cauliflower_Stage_2.png",
+      "Textures/Crops/Cauliflower_Stage_3.png",
+      "Textures/Crops/Cauliflower_Stage_4.png",
+      "Textures/Crops/Cauliflower_Stage_5.png"
+    ],
+    "harvest-texture": "Textures/Crops/Cauliflower_Stage_6.png",
+    "regrowth-texture": null
   },
   {
-    "name": "Coffee Beans",
-    "result": "Coffee Beans",
+    "name": "Coffee Bean",
+    "result": "Coffee Bean",
     "stages": [1, 2, 2, 3, 2],
     "total-harvest-time": 10,
     "one-time": false,
     "regrowth-time": 2,
     "seasons": ["spring", "summer"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Coffee_Stage_1.png",
+      "Textures/Crops/Coffee_Stage_2.png",
+      "Textures/Crops/Coffee_Stage_3.png",
+      "Textures/Crops/Coffee_Stage_4.png",
+      "Textures/Crops/Coffee_Stage_5.png"
+    ],
+    "harvest-texture": "Textures/Crops/Coffee_Stage_6.png",
+    "regrowth-texture": "Textures/Crops/Coffee_Stage_7.png"
   },
   {
     "name": "Garlic Seeds",
@@ -47,7 +80,15 @@
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["spring"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Garlic_Stage_1.png",
+      "Textures/Crops/Garlic_Stage_2.png",
+      "Textures/Crops/Garlic_Stage_3.png",
+      "Textures/Crops/Garlic_Stage_4.png"
+    ],
+    "harvest-texture": "Textures/Crops/Garlic_Stage_5.png",
+    "regrowth-texture": null
   },
   {
     "name": "Bean Starter",
@@ -57,7 +98,16 @@
     "one-time": false,
     "regrowth-time": 3,
     "seasons": ["spring"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Green_Bean_Stage_2.png",
+      "Textures/Crops/Green_Bean_Stage_3.png",
+      "Textures/Crops/Green_Bean_Stage_4.png",
+      "Textures/Crops/Green_Bean_Stage_5.png",
+      "Textures/Crops/Green_Bean_Stage_6.png"
+    ],
+    "harvest-texture": "Textures/Crops/Green_Bean_Stage_7.png",
+    "regrowth-texture": "Textures/Crops/Green_Bean_Stage_8.png"
   },
   {
     "name": "Kale Seeds",
@@ -67,7 +117,15 @@
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["spring"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Kale_Stage_1.png",
+      "Textures/Crops/Kale_Stage_2.png",
+      "Textures/Crops/Kale_Stage_3.png",
+      "Textures/Crops/Kale_Stage_4.png"
+    ],
+    "harvest-texture": "Textures/Crops/Kale_Stage_5.png",
+    "regrowth-texture": null
   },
   {
     "name": "Parsnip Seeds",
@@ -77,7 +135,15 @@
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["spring"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Parsnip_Stage_1.png",
+      "Textures/Crops/Parsnip_Stage_2.png",
+      "Textures/Crops/Parsnip_Stage_3.png",
+      "Textures/Crops/Parsnip_Stage_4.png"
+    ],
+    "harvest-texture": "Textures/Crops/Parsnip_Stage_5.png",
+    "regrowth-texture": null
   },
   {
     "name": "Potato Seeds",
@@ -87,7 +153,16 @@
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["spring"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Potato_Stage_1.png",
+      "Textures/Crops/Potato_Stage_2.png",
+      "Textures/Crops/Potato_Stage_3.png",
+      "Textures/Crops/Potato_Stage_4.png",
+      "Textures/Crops/Potato_Stage_5.png"
+    ],
+    "harvest-texture": "Textures/Crops/Potato_Stage_6.png",
+    "regrowth-texture": null
   },
   {
     "name": "Rhubarb Seeds",
@@ -97,7 +172,16 @@
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["spring"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Rhubarb_Stage_1.png",
+      "Textures/Crops/Rhubarb_Stage_2.png",
+      "Textures/Crops/Rhubarb_Stage_3.png",
+      "Textures/Crops/Rhubarb_Stage_4.png",
+      "Textures/Crops/Rhubarb_Stage_5.png"
+    ],
+    "harvest-texture": "Textures/Crops/Rhubarb_Stage_6.png",
+    "regrowth-texture": null
   },
   {
     "name": "Strawberry Seeds",
@@ -107,7 +191,16 @@
     "one-time": false,
     "regrowth-time": 4,
     "seasons": ["spring"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Strawberry_Stage_1.png",
+      "Textures/Crops/Strawberry_Stage_2.png",
+      "Textures/Crops/Strawberry_Stage_3.png",
+      "Textures/Crops/Strawberry_Stage_4.png",
+      "Textures/Crops/Strawberry_Stage_5.png"
+    ],
+    "harvest-texture": "Textures/Crops/Strawberry_Stage_6.png",
+    "regrowth-texture": "Textures/Crops/Strawberry_Stage_7.png"
   },
   {
     "name": "Tulip Bulb",
@@ -117,7 +210,15 @@
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["spring"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Tulip_Stage_1.png",
+      "Textures/Crops/Tulip_Stage_2.png",
+      "Textures/Crops/Tulip_Stage_3.png",
+      "Textures/Crops/Tulip_Stage_4.png"
+    ],
+    "harvest-texture": "Textures/Crops/Tulip_Stage_6.png",
+    "regrowth-texture": null
   },
   {
     "name": "Rice Shoot",
@@ -127,7 +228,15 @@
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["spring"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Unmilled_Rice_Stage_1.png",
+      "Textures/Crops/Unmilled_Rice_Stage_2.png",
+      "Textures/Crops/Unmilled_Rice_Stage_3.png",
+      "Textures/Crops/Unmilled_Rice_Stage_4.png"
+    ],
+    "harvest-texture": "Textures/Crops/Unmilled_Rice_Stage_5.png",
+    "regrowth-texture": null
   },
   {
     "name": "Blueberry Seeds",
@@ -137,7 +246,16 @@
     "one-time": false,
     "regrowth-time": 4,
     "seasons": ["summer"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Blueberry_Stage_1.png",
+      "Textures/Crops/Blueberry_Stage_2.png",
+      "Textures/Crops/Blueberry_Stage_3.png",
+      "Textures/Crops/Blueberry_Stage_4.png",
+      "Textures/Crops/Blueberry_Stage_5.png"
+    ],
+    "harvest-texture": "Textures/Crops/Blueberry_Stage_6.png",
+    "regrowth-texture": "Textures/Crops/Blueberry_Stage_7.png"
   },
   {
     "name": "Corn Seeds",
@@ -147,7 +265,16 @@
     "one-time": false,
     "regrowth-time": 4,
     "seasons": ["summer", "autumn"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Corn_Stage_1.png",
+      "Textures/Crops/Corn_Stage_2.png",
+      "Textures/Crops/Corn_Stage_3.png",
+      "Textures/Crops/Corn_Stage_4.png",
+      "Textures/Crops/Corn_Stage_5.png"
+    ],
+    "harvest-texture": "Textures/Crops/Corn_Stage_6.png",
+    "regrowth-texture": "Textures/Crops/Corn_Stage_7.png"
   },
   {
     "name": "Hops Starter",
@@ -157,7 +284,16 @@
     "one-time": false,
     "regrowth-time": 1,
     "seasons": ["summer"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Hops_Stage_1.png",
+      "Textures/Crops/Hops_Stage_3.png",
+      "Textures/Crops/Hops_Stage_4.png",
+      "Textures/Crops/Hops_Stage_5.png",
+      "Textures/Crops/Hops_Stage_6.png"
+    ],
+    "harvest-texture": "Textures/Crops/Hops_Stage_7.png",
+    "regrowth-texture": "Textures/Crops/Hops_Stage_8.png"
   },
   {
     "name": "Pepper Seeds",
@@ -167,7 +303,16 @@
     "one-time": false,
     "regrowth-time": 3,
     "seasons": ["summer"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Hot_Pepper_Stage_1.png",
+      "Textures/Crops/Hot_Pepper_Stage_2.png",
+      "Textures/Crops/Hot_Pepper_Stage_3.png",
+      "Textures/Crops/Hot_Pepper_Stage_4.png",
+      "Textures/Crops/Hot_Pepper_Stage_4b.png"
+    ],
+    "harvest-texture": "Textures/Crops/Hot_Pepper_Stage_5.png",
+    "regrowth-texture": "Textures/Crops/Hot_Pepper_Stage_6.png"
   },
   {
     "name": "Melon Seeds",
@@ -177,7 +322,16 @@
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["summer"],
-    "can-become-giant": true
+    "can-become-giant": true,
+    "stage-textures": [
+      "Textures/Crops/Melon_Stage_1.png",
+      "Textures/Crops/Melon_Stage_2.png",
+      "Textures/Crops/Melon_Stage_3.png",
+      "Textures/Crops/Melon_Stage_4.png",
+      "Textures/Crops/Melon_Stage_5.png"
+    ],
+    "harvest-texture": "Textures/Crops/Melon_Stage_6.png",
+    "regrowth-texture": null
   },
   {
     "name": "Poppy Seeds",
@@ -187,7 +341,15 @@
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["summer"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Poppy_Stage_1.png",
+      "Textures/Crops/Poppy_Stage_2.png",
+      "Textures/Crops/Poppy_Stage_3.png",
+      "Textures/Crops/Poppy_Stage_4.png"
+    ],
+    "harvest-texture": "Textures/Crops/Poppy_Stage_6.png",
+    "regrowth-texture": null
   },
   {
     "name": "Radish Seeds",
@@ -197,7 +359,15 @@
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["summer"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Radish_Stage_1.png",
+      "Textures/Crops/Radish_Stage_2.png",
+      "Textures/Crops/Radish_Stage_3.png",
+      "Textures/Crops/Radish_Stage_4.png"
+    ],
+    "harvest-texture": "Textures/Crops/Radish_Stage_5.png",
+    "regrowth-texture": null
   },
   {
     "name": "Red Cabbage Seeds",
@@ -207,7 +377,16 @@
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["summer"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Red_Cabbage_Stage_1.png",
+      "Textures/Crops/Red_Cabbage_Stage_2.png",
+      "Textures/Crops/Red_Cabbage_Stage_3.png",
+      "Textures/Crops/Red_Cabbage_Stage_4.png",
+      "Textures/Crops/Red_Cabbage_Stage_5.png"
+    ],
+    "harvest-texture": "Textures/Crops/Red_Cabbage_Stage_6.png",
+    "regrowth-texture": null
   },
   {
     "name": "Starfruit Seeds",
@@ -217,27 +396,53 @@
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["summer"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Starfruit_Stage_1.png",
+      "Textures/Crops/Starfruit_Stage_2.png",
+      "Textures/Crops/Starfruit_Stage_3.png",
+      "Textures/Crops/Starfruit_Stage_4.png",
+      "Textures/Crops/Starfruit_Stage_5.png"
+    ],
+    "harvest-texture": "Textures/Crops/Starfruit_Stage_6.png",
+    "regrowth-texture": null
   },
   {
     "name": "Spangle Seeds",
-    "result": "summer Spangle",
+    "result": "Summer Spangle",
     "stages": [1, 2, 3, 1],
     "total-harvest-time": 8,
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["summer"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Summer_Spangle_Stage_1.png",
+      "Textures/Crops/Summer_Spangle_Stage_2.png",
+      "Textures/Crops/Summer_Spangle_Stage_3.png",
+      "Textures/Crops/Summer_Spangle_Stage_4.png"
+    ],
+    "harvest-texture": "Textures/Crops/Summer_Spangle_Stage_5.png",
+    "regrowth-texture": null
   },
   {
-    "name": "summer Squash Seeds",
-    "result": "summer Squash",
+    "name": "Summer Squash Seeds",
+    "result": "Summer Squash",
     "stages": [1, 1, 1, 2, 1],
     "total-harvest-time": 6,
     "one-time": false,
     "regrowth-time": 3,
     "seasons": ["summer"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Summer_Squash_Stage_1.png",
+      "Textures/Crops/Summer_Squash_Stage_2.png",
+      "Textures/Crops/Summer_Squash_Stage_3.png",
+      "Textures/Crops/Summer_Squash_Stage_4.png",
+      "Textures/Crops/Summer_Squash_Stage_5.png"
+    ],
+    "harvest-texture": "Textures/Crops/Summer_Squash_Stage_6.png",
+    "regrowth-texture": "Textures/Crops/Summer_Squash_Stage_7.png"
   },
   {
     "name": "Sunflower Seeds",
@@ -247,7 +452,15 @@
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["summer", "autumn"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Sunflower_Stage_1.png",
+      "Textures/Crops/Sunflower_Stage_2.png",
+      "Textures/Crops/Sunflower_Stage_3.png",
+      "Textures/Crops/Sunflower_Stage_4.png"
+    ],
+    "harvest-texture": "Textures/Crops/Sunflower_Stage_5.png",
+    "regrowth-texture": null
   },
   {
     "name": "Tomato Seeds",
@@ -257,7 +470,16 @@
     "one-time": false,
     "regrowth-time": 4,
     "seasons": ["summer"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Tomato_Stage_1.png",
+      "Textures/Crops/Tomato_Stage_2.png",
+      "Textures/Crops/Tomato_Stage_3.png",
+      "Textures/Crops/Tomato_Stage_4.png",
+      "Textures/Crops/Tomato_Stage_5.png"
+    ],
+    "harvest-texture": "Textures/Crops/Tomato_Stage_6.png",
+    "regrowth-texture": "Textures/Crops/Tomato_Stage_7.png"
   },
   {
     "name": "Wheat Seeds",
@@ -267,7 +489,15 @@
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["summer", "autumn"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Wheat_Stage_1.png",
+      "Textures/Crops/Wheat_Stage_2.png",
+      "Textures/Crops/Wheat_Stage_3.png",
+      "Textures/Crops/Wheat_Stage_4.png"
+    ],
+    "harvest-texture": "Textures/Crops/Wheat_Stage_5.png",
+    "regrowth-texture": null
   },
   {
     "name": "Amaranth Seeds",
@@ -277,7 +507,15 @@
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["autumn"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Amaranth_Stage_1.png",
+      "Textures/Crops/Amaranth_Stage_2.png",
+      "Textures/Crops/Amaranth_Stage_3.png",
+      "Textures/Crops/Amaranth_Stage_4.png"
+    ],
+    "harvest-texture": "Textures/Crops/Amaranth_Stage_5.png",
+    "regrowth-texture": null
   },
   {
     "name": "Artichoke Seeds",
@@ -287,7 +525,16 @@
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["autumn"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Artichoke_Stage_1.png",
+      "Textures/Crops/Artichoke_Stage_2.png",
+      "Textures/Crops/Artichoke_Stage_3.png",
+      "Textures/Crops/Artichoke_Stage_4.png",
+      "Textures/Crops/Artichoke_Stage_5.png"
+    ],
+    "harvest-texture": "Textures/Crops/Artichoke_Stage_6.png",
+    "regrowth-texture": null
   },
   {
     "name": "Beet Seeds",
@@ -297,7 +544,15 @@
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["autumn"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Beet_Stage_1.png",
+      "Textures/Crops/Beet_Stage_2.png",
+      "Textures/Crops/Beet_Stage_3.png",
+      "Textures/Crops/Beet_Stage_4.png"
+    ],
+    "harvest-texture": "Textures/Crops/Beet_Stage_5.png",
+    "regrowth-texture": null
   },
   {
     "name": "Bok Choy Seeds",
@@ -307,7 +562,15 @@
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["autumn"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Bok_Choy_Stage_1.png",
+      "Textures/Crops/Bok_Choy_Stage_2.png",
+      "Textures/Crops/Bok_Choy_Stage_3.png",
+      "Textures/Crops/Bok_Choy_Stage_4.png"
+    ],
+    "harvest-texture": "Textures/Crops/Bok_Choy_Stage_5.png",
+    "regrowth-texture": null
   },
   {
     "name": "Broccoli Seeds",
@@ -317,7 +580,15 @@
     "one-time": false,
     "regrowth-time": 4,
     "seasons": ["autumn"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Broccoli_Stage_1.png",
+      "Textures/Crops/Broccoli_Stage_2.png",
+      "Textures/Crops/Broccoli_Stage_3.png",
+      "Textures/Crops/Broccoli_Stage_4.png"
+    ],
+    "harvest-texture": "Textures/Crops/Broccoli_Stage_5.png",
+    "regrowth-texture": "Textures/Crops/Broccoli_Stage_4.png"
   },
   {
     "name": "Cranberry Seeds",
@@ -327,17 +598,35 @@
     "one-time": false,
     "regrowth-time": 5,
     "seasons": ["autumn"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Cranberry_Stage_1.png",
+      "Textures/Crops/Cranberry_Stage_2.png",
+      "Textures/Crops/Cranberry_Stage_3.png",
+      "Textures/Crops/Cranberry_Stage_4.png",
+      "Textures/Crops/Cranberry_Stage_5.png"
+    ],
+    "harvest-texture": "Textures/Crops/Cranberry_Stage_6.png",
+    "regrowth-texture": "Textures/Crops/Cranberry_Stage_7.png"
   },
   {
     "name": "Eggplant Seeds",
     "result": "Eggplant",
-    "stages": [1, 1, 1, 1],
+    "stages": [1, 1, 1, 1, 1],
     "total-harvest-time": 5,
     "one-time": false,
     "regrowth-time": 5,
     "seasons": ["autumn"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Eggplant_Stage_1.png",
+      "Textures/Crops/Eggplant_Stage_2.png",
+      "Textures/Crops/Eggplant_Stage_3.png",
+      "Textures/Crops/Eggplant_Stage_4.png",
+      "Textures/Crops/Eggplant_Stage_5.png"
+    ],
+    "harvest-texture": "Textures/Crops/Eggplant_Stage_6.png",
+    "regrowth-texture": "Textures/Crops/Eggplant_Stage_7.png"
   },
   {
     "name": "Fairy Seeds",
@@ -347,7 +636,15 @@
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["autumn"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Fairy_Rose_Stage_1.png",
+      "Textures/Crops/Fairy_Rose_Stage_2.png",
+      "Textures/Crops/Fairy_Rose_Stage_3.png",
+      "Textures/Crops/Fairy_Rose_Stage_4.png"
+    ],
+    "harvest-texture": "Textures/Crops/Fairy_Rose_Stage_5.png",
+    "regrowth-texture": null
   },
   {
     "name": "Grape Starter",
@@ -357,7 +654,16 @@
     "one-time": false,
     "regrowth-time": 3,
     "seasons": ["autumn"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Grape_Stage_1.png",
+      "Textures/Crops/Grape_Stage_2.png",
+      "Textures/Crops/Grape_Stage_3.png",
+      "Textures/Crops/Grape_Stage_4.png",
+      "Textures/Crops/Grape_Stage_5.png"
+    ],
+    "harvest-texture": "Textures/Crops/Grape_Stage_6.png",
+    "regrowth-texture": "Textures/Crops/Grape_Stage_7.png"
   },
   {
     "name": "Pumpkin Seeds",
@@ -367,7 +673,16 @@
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["autumn"],
-    "can-become-giant": true
+    "can-become-giant": true,
+    "stage-textures": [
+      "Textures/Crops/Pumpkin_Stage_1.png",
+      "Textures/Crops/Pumpkin_Stage_2.png",
+      "Textures/Crops/Pumpkin_Stage_3.png",
+      "Textures/Crops/Pumpkin_Stage_4.png",
+      "Textures/Crops/Pumpkin_Stage_5.png"
+    ],
+    "harvest-texture": "Textures/Crops/Pumpkin_Stage_6.png",
+    "regrowth-texture": null
   },
   {
     "name": "Yam Seeds",
@@ -377,7 +692,15 @@
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["autumn"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Yam_Stage_1.png",
+      "Textures/Crops/Yam_Stage_2.png",
+      "Textures/Crops/Yam_Stage_3.png",
+      "Textures/Crops/Yam_Stage_4.png"
+    ],
+    "harvest-texture": "Textures/Crops/Yam_Stage_5.png",
+    "regrowth-texture": null
   },
   {
     "name": "Rare Seed",
@@ -387,7 +710,16 @@
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["autumn"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Sweet_Gem_Berry_Stage_1.png",
+      "Textures/Crops/Sweet_Gem_Berry_Stage_2.png",
+      "Textures/Crops/Sweet_Gem_Berry_Stage_3.png",
+      "Textures/Crops/Sweet_Gem_Berry_Stage_4.png",
+      "Textures/Crops/Sweet_Gem_Berry_Stage_5.png"
+    ],
+    "harvest-texture": "Textures/Crops/Sweet_Gem_Berry_Stage_6.png",
+    "regrowth-texture": null
   },
   {
     "name": "Powdermelon Seeds",
@@ -397,7 +729,16 @@
     "one-time": true,
     "regrowth-time": null,
     "seasons": ["winter"],
-    "can-become-giant": true
+    "can-become-giant": true,
+    "stage-textures": [
+      "Textures/Crops/Powdermelon_Stage_1.png",
+      "Textures/Crops/Powdermelon_Stage_2.png",
+      "Textures/Crops/Powdermelon_Stage_3.png",
+      "Textures/Crops/Powdermelon_Stage_4.png",
+      "Textures/Crops/Powdermelon_Stage_5.png"
+    ],
+    "harvest-texture": "Textures/Crops/Powdermelon_Stage_6.png",
+    "regrowth-texture": null
   },
   {
     "name": "Ancient Seeds",
@@ -407,6 +748,15 @@
     "one-time": false,
     "regrowth-time": 7,
     "seasons": ["spring", "summer", "autumn"],
-    "can-become-giant": false
+    "can-become-giant": false,
+    "stage-textures": [
+      "Textures/Crops/Ancient_Fruit_Stage_1.png",
+      "Textures/Crops/Ancient_Fruit_Stage_2.png",
+      "Textures/Crops/Ancient_Fruit_Stage_3.png",
+      "Textures/Crops/Ancient_Fruit_Stage_4.png",
+      "Textures/Crops/Ancient_Fruit_Stage_5.png"
+    ],
+    "harvest-texture": "Textures/Crops/Ancient_Fruit_Stage_6.png",
+    "regrowth-texture": "Textures/Crops/Ancient_Fruit_Stage_7.png"
   }
 ]
