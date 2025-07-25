@@ -7,19 +7,19 @@ public enum TileType {
 	// Buildings
 	HOUSE(8, 8, true, 'H'),
 	GREEN_HOUSE(10, 7, true, 'G'),
-	MINES(6, 6, true, 'M'),
-	LAKE(5, 4, false, '~'),
+	MINES(5, 5, true, 'M'),
+	LAKE(4, 5, false, '~'),
 	COOP(3, 4, true, 'C'),
 	BARN(4, 4, true, 'B'),
 
 	// Shops
-	BLACKSMITH(6, 10, true, 'B'),
-	JOJAMART(6, 10, true, 'J'),
-	PIERR_STORE(6, 10, true, 'P'),
-	CARPENTER_SHOP(6, 10, true, 'C'),
-	FISH_SHOP(6, 10, true, 'F'),
-	MARINE_SHOP(6, 10, true, 'M'),
-	STARDROP_SALOON(6, 10, true, 'S'),
+	BLACKSMITH(6, 9, true, 'B'),
+	JOJAMART(8, 10, true, 'J'),
+	PIERR_STORE(7, 7, true, 'P'),
+	CARPENTER_SHOP(6, 7, true, 'C'),
+	FISH_SHOP(7, 7, true, 'F'),
+	MARINE_SHOP(5, 9, true, 'M'),
+	STARDROP_SALOON(9, 8, true, 'S'),
 
 	PLOWED(1, 1, false, '#'),
 	UNPLOWED(1, 1, false, '#'),
@@ -40,7 +40,7 @@ public enum TileType {
 	FORAGING_CROP(1, 1, false, 'C'),
 
 	NPC(1, 1, false, 'N'),
-	NPC_HOUSE(3, 3, false, 'O'),
+	NPC_HOUSE(4, 4, false, 'O'),
 
 	ARTISAN(1, 1, false, '8'),
     SHIPPING_BIN(1, 1, false, 'S' ),;

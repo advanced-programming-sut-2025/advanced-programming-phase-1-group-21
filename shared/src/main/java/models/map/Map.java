@@ -281,10 +281,10 @@ public class Map implements DailyUpdate, Serializable {
         build(shop);
     }
 
-    public Tile getCornerOfBuilding(TileType building){
+    public Tile getCornerOfBuilding(Building building){
         for(int i = 0 ; i < getMaxX() ; i++){
             for(int j = getMaxY() - 1 ; j >= 0 ; j--){
-                if(getTile(i , j).getTileType().equals(building))
+                if(getTile(i , j).getPlacable(Building.class) == building)
                     return getTile(i , j);
             }
         }

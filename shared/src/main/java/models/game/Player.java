@@ -346,11 +346,7 @@ public class Player implements DailyUpdate, Serializable {
     }
 
     public void resetPosition(Map map , Pair<Map , Coord> loc){
-        Tile tile = null;
-        if(map.mapType == MapType.HOUSE)
-            tile = loc.getLeft().getCornerOfBuilding(TileType.HOUSE);
-        else if(map.mapType == MapType.GREEN_HOUSE)
-            tile = loc.getLeft().getCornerOfBuilding(TileType.GREEN_HOUSE);
+        Tile tile = loc.getLeft().getCornerOfBuilding(building);
         if(tile == null)
             return;
 

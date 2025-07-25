@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 public abstract class Building implements Placable, DailyUpdate, Serializable {
     public Map map;
-    transient Texture texture;
+    public transient Texture texture;
     transient public Sprite sprite;
 
     public Map getMap() {
