@@ -29,7 +29,7 @@ public class ShowMap {
     }
 
     public static void showHouse(Main game){//TODO: this function should be changed to showBuilding
-        Map map = App.getInstance().game.getCurrentPlayerMap();
+        Map map = App.getInstance().game.getCurrentPlayer().getMap();
         for(Building building : map.getBuildings()){
             if(building.sprite != null)
                 building.sprite.draw(game.getBatch());

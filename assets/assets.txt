@@ -27,7 +27,7 @@ Textures/Animal_product/Milk.png
 Textures/Animal_product/Milk_ES.png
 Textures/Animal_product/Milk_FR.png
 Textures/Animal_product/Milk_TR.png
-Textures/Animal_product/Rabbit%27s_Foot.png
+Textures/Animal_product/Rabbits_Foot.png
 Textures/Animal_product/Truffle.png
 Textures/Animal_product/Wool.png
 Textures/Animals/ButterflyAnimated.gif
@@ -55,8 +55,10 @@ Textures/Artisan_good/Dried_Fruit.png
 Textures/Artisan_good/Dried_Mushrooms.png
 Textures/Artisan_good/Duck_Mayonnaise.png
 Textures/Artisan_good/Goat_Cheese.png
+Textures/Artisan_good/Hay.png
 Textures/Artisan_good/Honey.png
 Textures/Artisan_good/Jelly.png
+Textures/Artisan_good/Joja_Cola.png
 Textures/Artisan_good/Juice.png
 Textures/Artisan_good/Maple_Syrup.png
 Textures/Artisan_good/Mayonnaise.png
@@ -74,12 +76,26 @@ Textures/Bait/Challenge_Bait.png
 Textures/Bait/Deluxe_Bait.png
 Textures/Bait/Magic_Bait.png
 Textures/Bait/Wild_Bait.png
+Textures/Buildings/AbigailHouse.png
+Textures/Buildings/Blacksmith.png
+Textures/Buildings/Carpenter's_Shop.png
 Textures/Buildings/DestroyedGreenHouse.png
 Textures/Buildings/Farm Buildings.png
+Textures/Buildings/Fish_Shop.png
+Textures/Buildings/HarveyHouse.png
 Textures/Buildings/HouseLevel1png.png
 Textures/Buildings/HouseLevel2.png
 Textures/Buildings/HouseLevel3.png
+Textures/Buildings/Jojamart.png
+Textures/Buildings/LeahHouse.png
 Textures/Buildings/NormalGreenHouse.png
+Textures/Buildings/Pierres_shop.png
+Textures/Buildings/RobinHouse.png
+Textures/Buildings/SebastianHouse.png
+Textures/Buildings/lake.png
+Textures/Buildings/marine_shop.png
+Textures/Buildings/mines.png
+Textures/Buildings/stardrop_saloon.png
 Textures/Chest/Chest.png
 Textures/Clock/Clock.png
 Textures/Clock/ClockWithJournal.png
@@ -765,17 +781,10 @@ Textures/Crafting/Thorns_Ring.png
 Textures/Crafting/Torch.png
 Textures/Crafting/Trap_Bobber.png
 Textures/Crafting/Treasure_Hunter.png
-Textures/Crafting/Treasure_Totem.png
 Textures/Crafting/Tree_Fertilizer.png
 Textures/Crafting/Truffle_Oil.png
 Textures/Crafting/Tub_o%27_Flowers.png
 Textures/Crafting/Tulip_Bulb.png
-Textures/Crafting/Void_Essence.png
-Textures/Crafting/Warp_Totem_Beach.png
-Textures/Crafting/Warp_Totem_Desert.png
-Textures/Crafting/Warp_Totem_Farm.png
-Textures/Crafting/Warp_Totem_Island.png
-Textures/Crafting/Warp_Totem_Mountains.png
 Textures/Crafting/Warrior_Ring.png
 Textures/Crafting/Weathered_Floor.png
 Textures/Crafting/Wedding_Ring.png
@@ -859,12 +868,6 @@ Textures/Crops/Broccoli_Stage_3.png
 Textures/Crops/Broccoli_Stage_4.png
 Textures/Crops/Broccoli_Stage_5.png
 Textures/Crops/Bruschetta.png
-Textures/Crops/Bundle_Green.png
-Textures/Crops/Bundle_Orange.png
-Textures/Crops/Bundle_Purple.png
-Textures/Crops/Bundle_Red.png
-Textures/Crops/Bundle_Teal.png
-Textures/Crops/Bundle_Yellow.png
 Textures/Crops/Cactus_Fruit.png
 Textures/Crops/Cactus_Seeds.png
 Textures/Crops/Cactus_Stage_1.png
@@ -1954,10 +1957,10 @@ Textures/Recipe/Crab_Cakes.png
 Textures/Recipe/Cranberry_Candy.png
 Textures/Recipe/Cranberry_Sauce.png
 Textures/Recipe/Crispy_Bass.png
-Textures/Recipe/Dish_O%27_The_Sea.png
+Textures/Recipe/Dish_O_The_Sea.png
 Textures/Recipe/Eggplant_Parmesan.png
 Textures/Recipe/Escargot.png
-Textures/Recipe/Farmer%27s_Lunch.png
+Textures/Recipe/Farmers_Lunch.png
 Textures/Recipe/Fiddlehead_Risotto.png
 Textures/Recipe/Fish_Stew.png
 Textures/Recipe/Fish_Taco.png
@@ -1975,7 +1978,7 @@ Textures/Recipe/Lucky_Lunch.png
 Textures/Recipe/Maki_Roll.png
 Textures/Recipe/Mango_Sticky_Rice.png
 Textures/Recipe/Maple_Bar.png
-Textures/Recipe/Miner%27s_Treat.png
+Textures/Recipe/Miners_Treat.png
 Textures/Recipe/Moss_Soup.png
 Textures/Recipe/Omelet.png
 Textures/Recipe/Pale_Broth.png
@@ -2369,9 +2372,6 @@ Textures/Villagers/Harvey.png
 Textures/Villagers/Leah.png
 Textures/Villagers/Robin.png
 Textures/Villagers/Sebastian.png
-Textures/Weapon/Bomb.png
-Textures/Weapon/Cherry_Bomb.png
-Textures/Weapon/Mega_Bomb.png
 Textures/map/FallBasicTile.png
 Textures/map/Outdoors Fall.png
 Textures/map/Outdoors Spring.png
