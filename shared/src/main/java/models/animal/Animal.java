@@ -1,5 +1,6 @@
 package models.animal;
 
+import com.badlogic.gdx.graphics.Texture;
 import data.AnimalData;
 import models.DailyUpdate;
 import models.Item.Item;
@@ -143,6 +144,11 @@ public class Animal implements Placable, DailyUpdate, Serializable {
         return "A";
     }
 
+    @Override
+    public Texture getTexture() {
+        return null;
+    }
+
     public boolean canEnterHouseType(AnimalHouseType animalHouseType) {
         return houseTypes.contains(animalHouseType);
     }
@@ -208,4 +214,6 @@ public class Animal implements Placable, DailyUpdate, Serializable {
         }
         return false;
     }
+
+
 }

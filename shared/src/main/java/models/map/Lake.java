@@ -32,4 +32,9 @@ public class Lake extends Building {
     public String getSprite() {
         return "~";
     }
+
+    @Override
+    public Texture getTexture() {
+        return null;
+    }
 }

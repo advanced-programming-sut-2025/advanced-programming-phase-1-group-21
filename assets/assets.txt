@@ -2018,6 +2018,7 @@ Textures/Recipe/Triple_Shot_Espresso.png
 Textures/Recipe/Tropical_Curry.png
 Textures/Recipe/Trout_Soup.png
 Textures/Recipe/Vegetable_Medley.png
+Textures/Refrigerator/Fridge.png
 Textures/Refrigerator/refrigerator.jpg
 Textures/Resource/Coal.png
 Textures/Resource/Copper_Bar.png

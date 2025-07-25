@@ -1,5 +1,6 @@
 package models.map;
 
+import com.badlogic.gdx.graphics.Texture;
 import models.DailyUpdate;
 import models.Item.Item;
 import models.game.Game;
@@ -40,5 +41,10 @@ public class ShippingBin implements Placable, DailyUpdate, Serializable {
     @Override
     public String getSprite() {
         return "S";
+    }
+
+    @Override
+    public Texture getTexture() {
+        return null;
     }
 }

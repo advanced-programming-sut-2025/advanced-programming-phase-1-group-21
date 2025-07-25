@@ -40,4 +40,9 @@ public class House extends Building {
     public String getSprite() {
         return "H";
     }
+
+    @Override
+    public Texture getTexture() {
+        return null;
+    }
 }

@@ -218,14 +218,14 @@ public class MapBuilder {
 
     public Map buildShop() {
         Map map = new Map(MapType.SHOP);
-        map.tiles.get(7).get(7).setTileType(TileType.DOOR);
+        map.tiles.get(19).get(19).setTileType(TileType.DOOR);
         map.setTextures();
         return map;
     }
 
     public Map buildNPCHouse(NPC npc) {
         Map map = new Map(MapType.NPC_HOUSE);
-        map.tiles.get(7).get(7).setTileType(TileType.DOOR);
+        map.tiles.get(9).get(9).setTileType(TileType.DOOR);
         map.tiles.get(7).get(0).setPlacable(npc);
         map.tiles.get(7).get(0).setTileType(TileType.NPC);
         map.setTextures();

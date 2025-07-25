@@ -1,5 +1,6 @@
 package models.Item;
 
+import com.badlogic.gdx.graphics.Texture;
 import data.items.ItemData;
 import data.items.PlaceableData;
 import models.map.Placable;
@@ -72,5 +73,10 @@ public class Placeable extends Item implements Placable {
 	@Override
 	public String getSprite() {
 		return "P";
+	}
+
+	@Override
+	public Texture getTexture() {
+		return null;
 	}
 }

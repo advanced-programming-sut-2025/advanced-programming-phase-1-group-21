@@ -1,5 +1,6 @@
 package models.crop;
 
+import com.badlogic.gdx.graphics.Texture;
 import data.items.SeedData;
 import models.DailyUpdate;
 import models.Item.Item;
@@ -91,6 +92,11 @@ public class PlantedSeed implements Placable, Harvestable, DailyUpdate, Serializ
 	@Override
 	public String getSprite() {
 		return "S";
+	}
+
+	@Override
+	public Texture getTexture() {
+		return null;
 	}
 
 	public String getResultName() {

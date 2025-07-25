@@ -1,5 +1,6 @@
 package models.map;
 
+import com.badlogic.gdx.graphics.Texture;
 import data.ArtisanGoodsData;
 import data.ArtisanRecipeData;
 import models.Item.Item;
@@ -94,6 +95,11 @@ public class Artisan implements Placable, Serializable {
 	@Override
 	public String getSprite() {
 		return "8";
+	}
+
+	@Override
+	public Texture getTexture() {
+		return null;
 	}
 
 	@Override
