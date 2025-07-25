@@ -60,7 +60,6 @@ public class GameController {
         Tile tile = map.getTile((x - map.mapType.distanceX)/30 , (y - map.mapType.distanceY)/30);
         if(tile == null)
             return;
-        tile.spriteGetter().setSize(15 , 15);
         if(tile.getPlacable(Building.class) != null){
             Building building = tile.getPlacable(Building.class);
             if(checkCollision(building.sprite , player.getSprite()) && building.canEnter(game.getGameDate())){

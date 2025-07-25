@@ -74,12 +74,26 @@ Textures/Bait/Challenge_Bait.png
 Textures/Bait/Deluxe_Bait.png
 Textures/Bait/Magic_Bait.png
 Textures/Bait/Wild_Bait.png
+Textures/Buildings/AbigailHouse.png
+Textures/Buildings/Blacksmith.png
+Textures/Buildings/Carpenter's_Shop.png
 Textures/Buildings/DestroyedGreenHouse.png
 Textures/Buildings/Farm Buildings.png
+Textures/Buildings/Fish_Shop.png
+Textures/Buildings/HarveyHouse.png
 Textures/Buildings/HouseLevel1png.png
 Textures/Buildings/HouseLevel2.png
 Textures/Buildings/HouseLevel3.png
+Textures/Buildings/Jojamart.png
+Textures/Buildings/LeahHouse.png
 Textures/Buildings/NormalGreenHouse.png
+Textures/Buildings/Pierres_shop.png
+Textures/Buildings/RobinHouse.png
+Textures/Buildings/SebastianHouse.png
+Textures/Buildings/lake.png
+Textures/Buildings/marine_shop.png
+Textures/Buildings/mines.png
+Textures/Buildings/stardrop_saloon.png
 Textures/Chest/Chest.png
 Textures/Clock/Clock.png
 Textures/Clock/ClockWithJournal.png

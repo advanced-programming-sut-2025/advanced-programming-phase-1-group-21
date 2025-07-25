@@ -64,8 +64,10 @@ public class MapBuilder {
             map.build(new Mines(random));
 
             int lakesCount = random.nextInt(1,3);
-            for (int i = 0; i < lakesCount; i++)
-                map.build(new Lake());
+            for (int i = 0; i < lakesCount; i++) {
+                Lake lake = new Lake();
+                map.build(lake);
+            }
 
             List<Pair<TileType, Placable>> buildings = new ArrayList<>(Arrays.asList(
                     Pair.of(TileType.HOUSE, map.getBuilding(House.class)),
@@ -112,13 +114,6 @@ public class MapBuilder {
 
             buildRandomTile(map, foragingTypes, 40, 70, random);
             map.getTile(map.getMaxX() -1 , map.getMaxY() - 1).setTileType(TileType.BRIDGE);
-
-            house.sprite.setX(map.getCornerOfBuilding(TileType.HOUSE).spriteGetter().getX());
-            house.sprite.setY(map.getCornerOfBuilding(TileType.HOUSE).spriteGetter().getY());
-
-            greenHouse.sprite.setX(map.getCornerOfBuilding(TileType.GREEN_HOUSE).spriteGetter().getX());
-            greenHouse.sprite.setY(map.getCornerOfBuilding(TileType.GREEN_HOUSE).spriteGetter().getY());
-
             map.setTextures();
             return map;
         }
@@ -160,6 +155,7 @@ public class MapBuilder {
 
             for (NPC npc : npcs) {
                 buildings.add(Pair.of(TileType.NPC_HOUSE, npc.getHouse()));
+                map.build(npc.getHouse());
             }
 
             if (setBuildingsRandomly(random, buildings, map)) {
@@ -175,6 +171,13 @@ public class MapBuilder {
                 Tile tile = map.getTile(new Coord(x, y));
                 tile.setTileType(pair.getLeft());
                 tile.setPlacable(pair.getRight());
+            }
+        }
+        Tile tile = map.getTile(startX , startY + height -1);
+        if(pair.getRight() instanceof Building building){
+            if (building.sprite != null) {
+                building.sprite.setX(tile.spriteGetter().getX());
+                building.sprite.setY(tile.spriteGetter().getY());
             }
         }
     }
@@ -193,7 +196,7 @@ public class MapBuilder {
 
     public Map buildMines(Random random) {
         Map map = new Map(MapType.MINES);
-        map.tiles.get(14).get(24).setTileType(TileType.DOOR);
+        map.tiles.get(29).get(49).setTileType(TileType.DOOR);
         List<TileType> foragingTypes = Arrays.asList(
                 TileType.COPPER_ROCK,
                 TileType.STEEL_ROCK,

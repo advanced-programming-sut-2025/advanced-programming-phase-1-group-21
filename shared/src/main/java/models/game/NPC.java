@@ -1,5 +1,7 @@
 package models.game;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import data.VillagerData;
 import data.VillagerTask;
 import models.DailyUpdate;
@@ -13,7 +15,6 @@ import java.util.Random;
 
 public class NPC implements Placable, DailyUpdate, Serializable {
     private String name;
-    // Characterization
     NPCHouse house;
     private ArrayList<VillagerTask> tasks;
     private ArrayList<Boolean> tasksFlag = new ArrayList<>();
@@ -133,6 +134,9 @@ public class NPC implements Placable, DailyUpdate, Serializable {
 
         public NPCHouse() {
             this.map = (new MapBuilder()).buildNPCHouse(NPC.this);
+            texture = new Texture("assets/Textures/Buildings/" + name + "House.png");
+            sprite = new Sprite(texture);
+            sprite.setSize(5 * 30 , 5 * 30);
         }
 
         @Override
