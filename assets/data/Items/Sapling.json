@@ -229,12 +229,12 @@
     "harvest-cycle": 7,
     "seasons": ["spring", "summer", "autumn"],
     "stage-textures": [
-      "Textures/Trees/Mystic_Stage_1.png",
-      "Textures/Trees/Mystic_Stage_2.png",
-      "Textures/Trees/Mystic_Stage_3.png",
-      "Textures/Trees/Mystic_Stage_4.png"
+      "Textures/Trees/Mystic_Tree_Stage_1.png",
+      "Textures/Trees/Mystic_Tree_Stage_2.png",
+      "Textures/Trees/Mystic_Tree_Stage_3.png",
+      "Textures/Trees/Mystic_Tree_Stage_4.png"
     ],
     "harvest-texture": null,
-    "season-texture": "Textures/Trees/Mystic_Stage_5.png"
+    "season-texture": "Textures/Trees/Mystic_Tree_Stage_5.png"
   }
 ]

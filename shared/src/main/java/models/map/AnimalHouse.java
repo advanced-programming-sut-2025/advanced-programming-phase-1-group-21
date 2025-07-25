@@ -1,5 +1,6 @@
 package models.map;
 
+import com.badlogic.gdx.graphics.Texture;
 import models.animal.Animal;
 import models.time.Date;
 
@@ -35,6 +36,11 @@ public class AnimalHouse extends Building {
     @Override
     public String getSprite() {
         return ("" + type.charAt(0)).toUpperCase();
+    }
+
+    @Override
+    public Texture getTexture() {
+        return null;
     }
 
     @Override

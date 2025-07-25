@@ -1,5 +1,8 @@
 package models.map;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+
 import java.io.Serializable;
 
 public interface Placable extends Serializable {
@@ -10,4 +13,5 @@ public interface Placable extends Serializable {
     TileType getTileType();
     boolean isWalkable();
     String getSprite();
+    Texture getTexture();
 }

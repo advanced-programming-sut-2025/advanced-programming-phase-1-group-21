@@ -15,30 +15,41 @@ import java.io.Serializable;
 public class Tile implements DailyUpdate, Serializable {
     private TileType tileType;
     private Placable placable;
-    transient private Texture texture = new Texture("assets/Textures/map/SpringBasicTile.png");
+    transient private Texture texture = new Texture("assets/Textures/map/SpringBasicTile.png");;
     transient private Sprite sprite = new Sprite(texture);
+    transient private Texture onTileTexture;
+    transient private Sprite onTileSprite;
 
     private Tile(TileType tileType, Placable placable) {
         this.tileType = tileType;
         this.placable = placable;
-        sprite.setSize(30 , 30);
     }
 
     public void setTexture(MapType mapType) {
         float x = sprite.getX();
         float y = sprite.getY();
-        if(mapType.equals(MapType.HOUSE)) {
+        if(mapType.equals(MapType.HOUSE))
             texture = new Texture("assets/Textures/Flooring/HouseFloor.png");
-            sprite = new Sprite(texture);
-        }
-        else{
+        else if(getPlacable(Building.class) != null)
             texture = new Texture("assets/Textures/map/SpringBasicTile.png");
-            sprite = new Sprite(texture);
-        }
+        else if(isEmpty())
+            texture = new Texture("assets/Textures/map/SpringBasicTile.png");
 
-        sprite.setSize(30 , 30);
+        if(tileType.getTextureAddress() != null)
+            onTileTexture = new Texture(tileType.getTextureAddress());
+        else if(placable!= null && placable.getTexture() != null)
+            onTileTexture = placable.getTexture();
+
+        sprite = new Sprite(texture);
+        sprite.setSize(30 , (float) (30 * texture.getHeight()) / texture.getWidth());
         sprite.setX(x);
         sprite.setY(y);
+
+        if(onTileTexture != null) {
+            onTileSprite = new Sprite(onTileTexture);
+            onTileSprite.setX(x);
+            onTileSprite.setY(y);
+        }
     }
 
     public Texture getTexture() {
@@ -47,6 +58,10 @@ public class Tile implements DailyUpdate, Serializable {
 
     public Sprite spriteGetter(){
         return sprite;
+    }
+
+    public Sprite getOnTileSprite() {
+        return onTileSprite;
     }
 
     public static Tile createEmpty() {

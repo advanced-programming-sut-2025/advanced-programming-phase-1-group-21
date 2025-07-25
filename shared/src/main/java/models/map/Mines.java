@@ -29,4 +29,9 @@ public class Mines extends Building {
     public String getSprite() {
         return "M";
     }
+
+    @Override
+    public Texture getTexture() {
+        return null;
+    }
 }

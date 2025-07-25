@@ -211,6 +211,11 @@ public class Shop extends Building implements DailyUpdate{
 		return "" + shopType.getSymbol();
 	}
 
+	@Override
+	public Texture getTexture() {
+		return null;
+	}
+
 	private static class ShopItemInstance implements DailyUpdate, Serializable {
 		private final ShopData data;
 		private int soldToday;

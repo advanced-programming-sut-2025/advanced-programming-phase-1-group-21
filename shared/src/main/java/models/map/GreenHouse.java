@@ -12,7 +12,6 @@ public class GreenHouse extends Building {
         this.map = (new MapBuilder()).buildGreenHouse();
         texture = new Texture("assets/Textures/Buildings/DestroyedGreenHouse.png");
         sprite = new Sprite(texture);
-        sprite.setSize(7 , 10);
         sprite.setSize(210 , 300);
     }
 
@@ -37,6 +36,11 @@ public class GreenHouse extends Building {
     @Override
     public String getSprite() {
         return "G";
+    }
+
+    @Override
+    public Texture getTexture() {
+        return null;
     }
 
     @Override
