@@ -1,5 +1,7 @@
 package models.game;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import data.VillagerData;
 import data.VillagerTask;
 import models.DailyUpdate;
@@ -110,6 +112,11 @@ public class NPC implements Placable, DailyUpdate, Serializable {
         return "N";
     }
 
+    @Override
+    public Texture getTexture() {
+        return null;
+    }
+
     public NPCHouse getHouse() {
         return house;
     }
@@ -133,6 +140,9 @@ public class NPC implements Placable, DailyUpdate, Serializable {
 
         public NPCHouse() {
             this.map = (new MapBuilder()).buildNPCHouse(NPC.this);
+            texture = new Texture("assets/Textures/Buildings/" + name + "House.png");
+            sprite = new Sprite(texture);
+            sprite.setSize(5 * 30 , 5 * 30);
         }
 
         @Override
@@ -148,6 +158,11 @@ public class NPC implements Placable, DailyUpdate, Serializable {
         @Override
         public String getSprite() {
             return "O";
+        }
+
+        @Override
+        public Texture getTexture() {
+            return null;
         }
     }
 

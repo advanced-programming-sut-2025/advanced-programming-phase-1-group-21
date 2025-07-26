@@ -1,5 +1,9 @@
 package models.game;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Rectangle;
 import models.DailyUpdate;
 import models.Item.Item;
 import models.Item.Recipe;
@@ -11,6 +15,7 @@ import models.skill.SkillType;
 import models.user.User;
 import org.apache.commons.lang3.tuple.Pair;
 
+import javax.swing.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Stack;
@@ -36,7 +41,15 @@ public class Player implements DailyUpdate, Serializable {
     private ArrayList<Recipe> recipes = new ArrayList<>();
     private Skill skill = new Skill();
     private ArrayList<String> notifications = new ArrayList<>();
+    private float speed = (float) 4;
 
+
+    private transient Texture texture = new Texture("assets/Textures/Players/FarmerFront1.png");
+    private transient Sprite sprite = new Sprite(texture);
+
+    public Sprite getSprite() {
+        return sprite;
+    }
 
     public ArrayList<String> getNotifications() {
         return notifications;
@@ -95,6 +108,9 @@ public class Player implements DailyUpdate, Serializable {
         this.coord = coord.addCoord(new Coord(-1, 0)); //left of it!
 
         enterBuilding(defaultMap.getBuilding(House.class));
+        sprite.setX(getMap().mapType.getDistanceX());
+        sprite.setY(getMap().mapType.getDistanceY() + (getMap().getMaxY() - 1)*30);
+        sprite.setSize(30 , 78);
     }
 
     public Map getDefaultMap() {
@@ -319,12 +335,26 @@ public class Player implements DailyUpdate, Serializable {
         locStack.add(Pair.of(getMap(), getCoord()));
         this.building = building;
         setCoord(new Coord(0, 0));
+        sprite.setX(getMap().mapType.getDistanceX());
+        sprite.setY(getMap().mapType.getDistanceY() + (getMap().getMaxY() - 1)*30);
     }
 
     public void leave() {
         Pair<Map, Coord> loc = locStack.remove(locStack.size() - 1);
+        resetPosition(getMap() , loc);
         setMap(loc.getLeft());
-        setCoord(loc.getRight());
+    }
+
+    public void resetPosition(Map map , Pair<Map , Coord> loc){
+        Tile tile = loc.getLeft().getCornerOfBuilding(building);
+        if(tile == null)
+            return;
+
+        sprite.setX(tile.spriteGetter().getX());
+        sprite.setY(tile.spriteGetter().getY());
+
+        coord.setX((int) (sprite.getX() - map.mapType.distanceX)/30);
+        coord.setY(map.getMaxY() - 1 - (int) (sprite.getY() - map.mapType.distanceY)/30);
     }
 
     public Building getBuilding() {
@@ -349,5 +379,9 @@ public class Player implements DailyUpdate, Serializable {
 
     public void resetEnergy() {
         energy.reset();
+    }
+
+    public float getSpeed() {
+        return speed;
     }
 }

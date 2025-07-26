@@ -13,6 +13,12 @@ public class PlaceableData implements Data, ItemData {
 	private String name;
 	@SerializedName("location")
 	private String location;
+	@SerializedName("empty-texture")
+	private String emptyTexture;
+	@SerializedName("processing-texture")
+	private String processingTexture;
+	@SerializedName("done-texture")
+	private String doneTexture;
 
 	public static String getDataURL() {
 		return dataURL;
@@ -32,6 +38,18 @@ public class PlaceableData implements Data, ItemData {
 
 	public String getLocation() {
 		return location;
+	}
+
+	public String getEmptyTexture() {
+		return emptyTexture;
+	}
+
+	public String getProcessingTexture() {
+		return processingTexture;
+	}
+
+	public String getDoneTexture() {
+		return doneTexture;
 	}
 
 	public static PlaceableData getData(String name) {

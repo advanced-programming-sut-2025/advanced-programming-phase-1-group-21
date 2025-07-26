@@ -3,57 +3,60 @@ package models.map;
 import org.apache.commons.lang3.StringUtils;
 
 public enum TileType {
-	PLACEABLE(1, 1, true, 'P'),
+	PLACEABLE(1, 1, true, 'P' , null),
 	// Buildings
-	HOUSE(4, 4, true, 'H'),
-	GREEN_HOUSE(5, 4, true, 'G'),
-	MINES(6, 6, true, 'M'),
-	LAKE(5, 4, false, '~'),
-	COOP(3, 4, true, 'C'),
-	BARN(4, 4, true, 'B'),
+	HOUSE(8, 8, true, 'H' , null),
+	GREEN_HOUSE(10, 7, true, 'G' , null),
+	MINES(5, 5, true, 'M' , null),
+	LAKE(4, 5, false, '~' , null),
+	COOP(3, 4, true, 'C' , null),
+	BARN(4, 4, true, 'B' , null),
 
 	// Shops
-	BLACKSMITH(6, 10, true, 'B'),
-	JOJAMART(6, 10, true, 'J'),
-	PIERR_STORE(6, 10, true, 'P'),
-	CARPENTER_SHOP(6, 10, true, 'C'),
-	FISH_SHOP(6, 10, true, 'F'),
-	MARINE_SHOP(6, 10, true, 'M'),
-	STARDROP_SALOON(6, 10, true, 'S'),
+	BLACKSMITH(6, 9, true, 'B' , null),
+	JOJAMART(8, 10, true, 'J' , null),
+	PIERR_STORE(7, 7, true, 'P' , null),
+	CARPENTER_SHOP(6, 7, true, 'C' ,null),
+	FISH_SHOP(7, 7, true, 'F' , null),
+	MARINE_SHOP(5, 9, true, 'M' , null),
+	STARDROP_SALOON(9, 8, true, 'S' , null),
 
-	PLOWED(1, 1, false, '#'),
-	UNPLOWED(1, 1, false, '#'),
-	ANIMAL(1, 1, false, 'A'),
-	REFRIGERATOR(1, 1, true, 'F'),
-	PLANTED_SEED(1, 1, false, 'S'),
-	PLANTED_TREE(1, 1, false, 'T'),
-	DOOR(1, 1, true, '+'),
+	PLOWED(1, 1, false, '#' , null),
+	UNPLOWED(1, 1, false, '#' , null),
+	ANIMAL(1, 1, false, 'A' ,null),
+	REFRIGERATOR(1, 1, true, 'F' , null),
+	PLANTED_SEED(1, 1, false, 'S' , null),
+	PLANTED_TREE(1, 1, false, 'T' , null),
+	DOOR(1, 1, true, '+' , null),
+	BRIDGE(1 , 1 , true , '+' , null),
 
 	// Foragings
-	SIMPLE_ROCK(1, 1, false, 'R'),
-	COPPER_ROCK(1, 1, false, 'R'),
-	STEEL_ROCK(1, 1, false, 'R'),
-	GOLD_ROCK(1, 1, false, 'g'),
-	IRIDIUM_ROCK(1, 1, false, 'I'),
-	LEAF(1, 1, false, '*'),
-	FORAGING_CROP(1, 1, false, 'C'),
+	SIMPLE_ROCK(1, 1, false, 'R' , "Textures/Resource/Stone.png"),
+	COPPER_ROCK(1, 1, false, 'R' , "Textures/Resource/Copper_Ore.png"),
+	STEEL_ROCK(1, 1, false, 'R' , "Textures/Resource/Iron_Ore.png"),
+	GOLD_ROCK(1, 1, false, 'g' , "Textures/Resource/Gold_Ore.png"),
+	IRIDIUM_ROCK(1, 1, false, 'I' , "Textures/Resource/Iridium_Ore.png"),
+	LEAF(1, 1, false, '*' , null),
+	FORAGING_CROP(1, 1, false, 'C' , null),
 
-	NPC(1, 1, false, 'N'),
-	NPC_HOUSE(3, 3, false, 'O'),
+	NPC(1, 1, false, 'N' , null),
+	NPC_HOUSE(4, 4, false, 'O'  , null),
 
-	ARTISAN(1, 1, false, '8'),
-    SHIPPING_BIN(1, 1, false, 'S' ),;
+	ARTISAN(1, 1, false, '8' , null),
+    SHIPPING_BIN(1, 1, false, 'S', null),;
 
 	private final int defaultWidth;
 	private final int defaultHeight;
 	private final boolean isStructure;
 	private final char symbol;
+	private final String textureAddress;
 
-	TileType(int defaultHeight, int defaultWidth, boolean isStructure, char symbol) {
+	TileType(int defaultHeight, int defaultWidth, boolean isStructure, char symbol , String textureAddress) {
 		this.defaultWidth = defaultWidth;
 		this.defaultHeight = defaultHeight;
 		this.isStructure = isStructure;
 		this.symbol = symbol;
+		this.textureAddress = textureAddress;
 	}
 
 	// Getters
@@ -61,6 +64,10 @@ public enum TileType {
 	public int getDefaultHeight() { return defaultHeight; }
 	public boolean isStructure() { return isStructure; }
 	public char getSymbol() { return symbol; }
+
+	public String getTextureAddress() {
+		return textureAddress;
+	}
 
 	public boolean isForaging() {
 		return switch (this) {

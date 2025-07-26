@@ -1,5 +1,7 @@
 package models.map;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import models.game.Game;
 import models.time.Date;
 
@@ -8,6 +10,9 @@ public class GreenHouse extends Building {
 
     public GreenHouse() {
         this.map = (new MapBuilder()).buildGreenHouse();
+        texture = new Texture("assets/Textures/Buildings/DestroyedGreenHouse.png");
+        sprite = new Sprite(texture);
+        sprite.setSize(210 , 300);
     }
 
     public void setBuild(boolean build) {
@@ -31,6 +36,11 @@ public class GreenHouse extends Building {
     @Override
     public String getSprite() {
         return "G";
+    }
+
+    @Override
+    public Texture getTexture() {
+        return null;
     }
 
     @Override

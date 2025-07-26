@@ -31,6 +31,15 @@ public class TreeData implements Data, ItemData {
 	private ArrayList<String> seasons;
 	private ArrayList<Season> cseasons;
 
+	@SerializedName("stage-textures")
+	private ArrayList<String> stageTextures;
+
+	@SerializedName("harvest-texture")
+	private String harvestTexture;
+
+	@SerializedName("season-texture")
+	private String seasonTexture;
+
 	public static String getDataURL() {
 		return dataURL;
 	}
@@ -88,6 +97,22 @@ public class TreeData implements Data, ItemData {
 
 	public ArrayList<String> getSeasons() {
 		return seasons;
+	}
+
+	public ArrayList<String> getStageTextures() {
+		return stageTextures;
+	}
+
+	public String getStageTexture(int stage) {
+		return stageTextures.get(stage);
+	}
+
+	public String getHarvestTexture() {
+		return harvestTexture;
+	}
+
+	public String getSeasonTexture() {
+		return seasonTexture;
 	}
 
 	public static TreeData getData(String name) {

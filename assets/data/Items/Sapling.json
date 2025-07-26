@@ -6,7 +6,15 @@
     "total-harvest-time": 28,
     "result": "Apricot",
     "harvest-cycle": 1,
-    "seasons": ["spring"]
+    "seasons": ["spring"],
+    "stage-textures": [
+      "Textures/Trees/Apricot_Stage_1.png",
+      "Textures/Trees/Apricot_Stage_2.png",
+      "Textures/Trees/Apricot_Stage_3.png",
+      "Textures/Trees/Apricot_Stage_4.png"
+    ],
+    "harvest-texture": "Textures/Trees/Apricot_Stage_5_Fruit.png",
+    "season-texture": "Textures/Trees/Apricot_Stage_5.png"
   },
   {
     "name": "Cherry Tree",
@@ -15,7 +23,15 @@
     "total-harvest-time": 28,
     "result": "Cherry",
     "harvest-cycle": 1,
-    "seasons": ["spring"]
+    "seasons": ["spring"],
+    "stage-textures": [
+      "Textures/Trees/Cherry_Stage_1.png",
+      "Textures/Trees/Cherry_Stage_2.png",
+      "Textures/Trees/Cherry_Stage_3.png",
+      "Textures/Trees/Cherry_Stage_4.png"
+    ],
+    "harvest-texture": "Textures/Trees/Cherry_Stage_5_Fruit.png",
+    "season-texture": "Textures/Trees/Cherry_Stage_5.png"
   },
   {
     "name": "Banana Tree",
@@ -24,7 +40,15 @@
     "total-harvest-time": 28,
     "result": "Banana",
     "harvest-cycle": 1,
-    "seasons": ["summer"]
+    "seasons": ["summer"],
+    "stage-textures": [
+      "Textures/Trees/Banana_Stage_1.png",
+      "Textures/Trees/Banana_Stage_2.png",
+      "Textures/Trees/Banana_Stage_3.png",
+      "Textures/Trees/Banana_Stage_4.png"
+    ],
+    "harvest-texture": "Textures/Trees/Banana_Stage_5_Fruit.png",
+    "season-texture": "Textures/Trees/Banana_Stage_5.png"
   },
   {
     "name": "Mango Tree",
@@ -33,7 +57,15 @@
     "total-harvest-time": 28,
     "result": "Mango",
     "harvest-cycle": 1,
-    "seasons": ["summer"]
+    "seasons": ["summer"],
+    "stage-textures": [
+      "Textures/Trees/Mango_Stage_1.png",
+      "Textures/Trees/Mango_Stage_2.png",
+      "Textures/Trees/Mango_Stage_3.png",
+      "Textures/Trees/Mango_Stage_4.png"
+    ],
+    "harvest-texture": "Textures/Trees/Mango_Stage_5_Fruit.png",
+    "season-texture": "Textures/Trees/Mango_Stage_5.png"
   },
   {
     "name": "Orange Tree",
@@ -42,7 +74,15 @@
     "total-harvest-time": 28,
     "result": "Orange",
     "harvest-cycle": 1,
-    "seasons": ["summer"]
+    "seasons": ["summer"],
+    "stage-textures": [
+      "Textures/Trees/Orange_Stage_1.png",
+      "Textures/Trees/Orange_Stage_2.png",
+      "Textures/Trees/Orange_Stage_3.png",
+      "Textures/Trees/Orange_Stage_4.png"
+    ],
+    "harvest-texture": "Textures/Trees/Orange_Stage_5_Fruit.png",
+    "season-texture": "Textures/Trees/Orange_Stage_5.png"
   },
   {
     "name": "Peach Tree",
@@ -51,7 +91,15 @@
     "total-harvest-time": 28,
     "result": "Peach",
     "harvest-cycle": 1,
-    "seasons": ["summer"]
+    "seasons": ["summer"],
+    "stage-textures": [
+      "Textures/Trees/Peach_Stage_1.png",
+      "Textures/Trees/Peach_Stage_2.png",
+      "Textures/Trees/Peach_Stage_3.png",
+      "Textures/Trees/Peach_Stage_4.png"
+    ],
+    "harvest-texture": "Textures/Trees/Peach_Stage_5_Fruit.png",
+    "season-texture": "Textures/Trees/Peach_Stage_5.png"
   },
   {
     "name": "Apple Tree",
@@ -60,7 +108,15 @@
     "total-harvest-time": 28,
     "result": "Apple",
     "harvest-cycle": 1,
-    "seasons": ["autumn"]
+    "seasons": ["autumn"],
+    "stage-textures": [
+      "Textures/Trees/Apple_Stage_1.png",
+      "Textures/Trees/Apple_Stage_2.png",
+      "Textures/Trees/Apple_Stage_3.png",
+      "Textures/Trees/Apple_Stage_4.png"
+    ],
+    "harvest-texture": "Textures/Trees/Apple_Stage_5_Fruit.png",
+    "season-texture": "Textures/Trees/Apple_Stage_5.png"
   },
   {
     "name": "Pomegranate Tree",
@@ -69,7 +125,15 @@
     "total-harvest-time": 28,
     "result": "Pomegranate",
     "harvest-cycle": 1,
-    "seasons": ["autumn"]
+    "seasons": ["autumn"],
+    "stage-textures": [
+      "Textures/Trees/Pomegranate_Stage_1.png",
+      "Textures/Trees/Pomegranate_Stage_2.png",
+      "Textures/Trees/Pomegranate_Stage_3.png",
+      "Textures/Trees/Pomegranate_Stage_4.png"
+    ],
+    "harvest-texture": "Textures/Trees/Pomegranate_Stage_5_Fruit.png",
+    "season-texture": "Textures/Trees/Pomegranate_Stage_5.png"
   },
   {
     "name": "Oak Tree",
@@ -78,7 +142,15 @@
     "total-harvest-time": 28,
     "result": "Oak Resin",
     "harvest-cycle": 7,
-    "seasons": ["spring", "summer", "autumn"]
+    "seasons": ["spring", "summer", "autumn"],
+    "stage-textures": [
+      "Textures/Trees/Oak_Stage_1.png",
+      "Textures/Trees/Oak_Stage_2.png",
+      "Textures/Trees/Oak_Stage_3.png",
+      "Textures/Trees/Oak_Stage_4.png"
+    ],
+    "harvest-texture": null,
+    "season-texture": "Textures/Trees/Oak_Stage_5.png"
   },
   {
     "name": "Maple Tree",
@@ -87,7 +159,15 @@
     "total-harvest-time": 28,
     "result": "Maple Syrup",
     "harvest-cycle": 9,
-    "seasons": ["spring", "summer", "autumn"]
+    "seasons": ["spring", "summer", "autumn"],
+    "stage-textures": [
+      "Textures/Trees/Maple_Stage_1.png",
+      "Textures/Trees/Maple_Stage_2.png",
+      "Textures/Trees/Maple_Stage_3.png",
+      "Textures/Trees/Maple_Stage_4.png"
+    ],
+    "harvest-texture": null,
+    "season-texture": "Textures/Trees/Maple_Stage_5.png"
   },
   {
     "name": "Pine Tree",
@@ -96,7 +176,15 @@
     "total-harvest-time": 28,
     "result": "Pine Tar",
     "harvest-cycle": 5,
-    "seasons": ["spring", "summer", "autumn"]
+    "seasons": ["spring", "summer", "autumn"],
+    "stage-textures": [
+      "Textures/Trees/Pine_Stage_1.png",
+      "Textures/Trees/Pine_Stage_2.png",
+      "Textures/Trees/Pine_Stage_3.png",
+      "Textures/Trees/Pine_Stage_4.png"
+    ],
+    "harvest-texture": null,
+    "season-texture": "Textures/Trees/Pine_Stage_5.png"
   },
   {
     "name": "Mahogany Tree",
@@ -105,7 +193,15 @@
     "total-harvest-time": "28",
     "result": "Sap",
     "harvest-cycle": 1,
-    "seasons": ["spring", "summer", "autumn"]
+    "seasons": ["spring", "summer", "autumn"],
+    "stage-textures": [
+      "Textures/Trees/Mahogany_Stage_1.png",
+      "Textures/Trees/Mahogany_Stage_2.png",
+      "Textures/Trees/Mahogany_Stage_3.png",
+      "Textures/Trees/Mahogany_Stage_4.png"
+    ],
+    "harvest-texture": null,
+    "season-texture": "Textures/Trees/Mahogany_Stage_5.png"
   },
   {
     "name": "Mushroom Tree",
@@ -114,7 +210,15 @@
     "total-harvest-time": 28,
     "result": "Common Mushroom",
     "harvest-cycle": 1,
-    "seasons": ["spring", "summer", "autumn"]
+    "seasons": ["spring", "summer", "autumn"],
+    "stage-textures": [
+      "Textures/Trees/Mushroom_Stage_1.png",
+      "Textures/Trees/Mushroom_Stage_2.png",
+      "Textures/Trees/Mushroom_Stage_3.png",
+      "Textures/Trees/Mushroom_Stage_4.png"
+    ],
+    "harvest-texture": null,
+    "season-texture": "Textures/Trees/Mushroom_Stage_5.png"
   },
   {
     "name": "Mystic Tree",
@@ -123,6 +227,14 @@
     "total-harvest-time": 28,
     "result": "Mystic Syrup",
     "harvest-cycle": 7,
-    "seasons": ["spring", "summer", "autumn"]
+    "seasons": ["spring", "summer", "autumn"],
+    "stage-textures": [
+      "Textures/Trees/Mystic_Tree_Stage_1.png",
+      "Textures/Trees/Mystic_Tree_Stage_2.png",
+      "Textures/Trees/Mystic_Tree_Stage_3.png",
+      "Textures/Trees/Mystic_Tree_Stage_4.png"
+    ],
+    "harvest-texture": null,
+    "season-texture": "Textures/Trees/Mystic_Tree_Stage_5.png"
   }
 ]

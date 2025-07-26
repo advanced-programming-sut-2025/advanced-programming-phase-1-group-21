@@ -1,21 +1,67 @@
 package models.map;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import models.DailyUpdate;
 import models.crop.Harvestable;
 import models.crop.PlantedSeed;
 import models.Item.Item;
 import models.game.Game;
 import models.game.Player;
+import org.w3c.dom.Text;
 
 import java.io.Serializable;
 
 public class Tile implements DailyUpdate, Serializable {
     private TileType tileType;
     private Placable placable;
+    transient private Texture texture = new Texture("assets/Textures/map/SpringBasicTile.png");;
+    transient private Sprite sprite = new Sprite(texture);
+    transient private Texture onTileTexture;
+    transient private Sprite onTileSprite;
 
     private Tile(TileType tileType, Placable placable) {
         this.tileType = tileType;
         this.placable = placable;
+    }
+
+    public void setTexture(MapType mapType) {
+        float x = sprite.getX();
+        float y = sprite.getY();
+        if(mapType.equals(MapType.HOUSE))
+            texture = new Texture("assets/Textures/Flooring/HouseFloor.png");
+        else if(getPlacable(Building.class) != null)
+            texture = new Texture("assets/Textures/map/SpringBasicTile.png");
+        else if(isEmpty())
+            texture = new Texture("assets/Textures/map/SpringBasicTile.png");
+
+        if(tileType.getTextureAddress() != null)
+            onTileTexture = new Texture(tileType.getTextureAddress());
+        else if(placable!= null && placable.getTexture() != null)
+            onTileTexture = placable.getTexture();
+
+        sprite = new Sprite(texture);
+        sprite.setSize(30 , (float) (30 * texture.getHeight()) / texture.getWidth());
+        sprite.setX(x);
+        sprite.setY(y);
+
+        if(onTileTexture != null) {
+            onTileSprite = new Sprite(onTileTexture);
+            onTileSprite.setX(x);
+            onTileSprite.setY(y);
+        }
+    }
+
+    public Texture getTexture() {
+        return texture;
+    }
+
+    public Sprite spriteGetter(){
+        return sprite;
+    }
+
+    public Sprite getOnTileSprite() {
+        return onTileSprite;
     }
 
     public static Tile createEmpty() {

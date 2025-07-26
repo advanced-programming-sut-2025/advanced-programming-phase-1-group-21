@@ -57,9 +57,10 @@ public class MapBuilder {
     public Map buildFarm(Random random) {
         while (true) {
             Map map = new Map(MapType.FARM);
-
-            map.build(new House());
-            map.build(new GreenHouse());
+            House house = new House();
+            map.build(house);
+            GreenHouse greenHouse = new GreenHouse();
+            map.build(greenHouse);
             map.build(new Mines(random));
 
             int lakesCount = random.nextInt(1,3);
@@ -109,7 +110,11 @@ public class MapBuilder {
                 }
             }
 
+            map.getTile(map.getMaxX() -1 , map.getMaxY() - 1).setTileType(TileType.BRIDGE);
+
             buildRandomTile(map, foragingTypes, 40, 70, random);
+
+            map.setTextures();
             return map;
         }
     }
@@ -150,10 +155,13 @@ public class MapBuilder {
 
             for (NPC npc : npcs) {
                 buildings.add(Pair.of(TileType.NPC_HOUSE, npc.getHouse()));
+                map.build(npc.getHouse());
             }
 
-            if (setBuildingsRandomly(random, buildings, map))
+            if (setBuildingsRandomly(random, buildings, map)) {
+                map.setTextures();
                 return map;
+            }
         }
     }
 
@@ -163,6 +171,14 @@ public class MapBuilder {
                 Tile tile = map.getTile(new Coord(x, y));
                 tile.setTileType(pair.getLeft());
                 tile.setPlacable(pair.getRight());
+            }
+        }
+
+        Tile tile = map.getTile(startX , startY + height -1);
+        if(pair.getRight() instanceof Building building){
+            if (building.sprite != null) {
+                building.sprite.setX(tile.spriteGetter().getX());
+                building.sprite.setY(tile.spriteGetter().getY());
             }
         }
     }
@@ -175,12 +191,13 @@ public class MapBuilder {
 
         map.tiles.get(0).get(19).setTileType(TileType.SHIPPING_BIN);
         map.tiles.get(0).get(19).setPlacable(new ShippingBin());
+        map.setTextures();
         return map;
     }
 
     public Map buildMines(Random random) {
         Map map = new Map(MapType.MINES);
-        map.tiles.get(14).get(24).setTileType(TileType.DOOR);
+        map.tiles.get(29).get(49).setTileType(TileType.DOOR);
         List<TileType> foragingTypes = Arrays.asList(
                 TileType.COPPER_ROCK,
                 TileType.STEEL_ROCK,
@@ -188,32 +205,37 @@ public class MapBuilder {
                 TileType.IRIDIUM_ROCK
         );
         buildRandomTile(map, foragingTypes, map.mapType.getArea() / 10, map.mapType.getArea() / 4, random);
+        map.setTextures();
         return map;
     }
 
     public Map buildGreenHouse() {
         Map map = new Map(MapType.GREEN_HOUSE);
         map.tiles.get(9).get(19).setTileType(TileType.DOOR);
+        map.setTextures();
         return map;
     }
 
     public Map buildShop() {
         Map map = new Map(MapType.SHOP);
-        map.tiles.get(7).get(7).setTileType(TileType.DOOR);
+        map.tiles.get(19).get(19).setTileType(TileType.DOOR);
+        map.setTextures();
         return map;
     }
 
     public Map buildNPCHouse(NPC npc) {
         Map map = new Map(MapType.NPC_HOUSE);
-        map.tiles.get(7).get(7).setTileType(TileType.DOOR);
+        map.tiles.get(9).get(9).setTileType(TileType.DOOR);
         map.tiles.get(7).get(0).setPlacable(npc);
         map.tiles.get(7).get(0).setTileType(TileType.NPC);
+        map.setTextures();
         return map;
     }
 
     public Map buildAnimalHouse(MapType mapType) {
         Map map = new Map(mapType);
         map.tiles.get(7).get(7).setTileType(TileType.DOOR);
+        map.setTextures();
         return map;
     }
 }

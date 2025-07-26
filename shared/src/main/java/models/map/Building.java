@@ -1,5 +1,7 @@
 package models.map;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import models.DailyUpdate;
 import models.game.Game;
 import models.time.Date;
@@ -8,6 +10,8 @@ import java.io.Serializable;
 
 public abstract class Building implements Placable, DailyUpdate, Serializable {
     public Map map;
+    public transient Texture texture;
+    transient public Sprite sprite;
 
     public Map getMap() {
         return map;

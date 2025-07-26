@@ -75,6 +75,8 @@ public class Map implements DailyUpdate, Serializable {
             ArrayList<Tile> row = new ArrayList<>();
             for (int x = 0; x < X; ++x) {
                 row.add(Tile.createEmpty());
+                row.get(row.size() - 1).spriteGetter().setX(x*30 + mapType.getDistanceX());
+                row.get(row.size() - 1).spriteGetter().setY((Y - 1 - y)*30 + mapType.getDistanceY());
             }
             tiles.add(row);
         }
@@ -94,6 +96,10 @@ public class Map implements DailyUpdate, Serializable {
 
     public Tile getTile(Coord coord) {
         return getElementOrNull(getElementOrNull(tiles, coord.getY()), coord.getX());
+    }
+
+    public Tile getTile(int x , int y){
+        return getElementOrNull(getElementOrNull(tiles, y), x);
     }
 
     public void setTile(Coord coord, Tile tile) {
@@ -273,5 +279,23 @@ public class Map implements DailyUpdate, Serializable {
         Shop oldShop = getShopByType(shop.getShopType());
         if (oldShop != null) throw new IllegalArgumentException("Shop already exists in this Map");
         build(shop);
+    }
+
+    public Tile getCornerOfBuilding(Building building){
+        for(int i = 0 ; i < getMaxX() ; i++){
+            for(int j = getMaxY() - 1 ; j >= 0 ; j--){
+                if(getTile(i , j).getPlacable(Building.class) == building)
+                    return getTile(i , j);
+            }
+        }
+        return null;
+    }
+
+    public void setTextures(){
+        for(int i = 0 ; i < tiles.size() ; i++){
+            for(int j = 0 ; j < tiles.get(0).size() ; j++) {
+                tiles.get(i).get(j).setTexture(mapType);
+            }
+        }
     }
 }

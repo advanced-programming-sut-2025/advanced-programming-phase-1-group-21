@@ -7,7 +7,13 @@
     "product-time": 1,
     "product-seasons": ["spring", "summer", "autumn", "winter"],
     "tool": null,
-    "price": 800
+    "price": 800,
+    "textures": [
+      "Textures/Animals/Chicken/White_Chicken.png",
+      "Textures/Animals/Chicken/Golden_Chicken.png",
+      "Textures/Animals/Chicken/Brown_Chicken.png",
+      "Textures/Animals/Chicken/Blue_Chicken.png"
+    ]
   },
   {
     "name": "Duck",
@@ -17,7 +23,10 @@
     "product-time": 2,
     "product-seasons": ["spring", "summer", "autumn", "winter"],
     "tool": null,
-    "price": 1200
+    "price": 1200,
+    "textures": [
+      "Textures/Animals/Duck/Duck.png"
+    ]
   },
   {
     "name": "Rabbit",
@@ -27,7 +36,10 @@
     "product-time": 4,
     "product-seasons": ["spring", "summer", "autumn", "winter"],
     "tool": null,
-    "price": 8000
+    "price": 8000,
+    "textures": [
+      "Textures/Animals/Rabbit/Rabbit.png"
+    ]
   },
   {
     "name": "Dinosaur",
@@ -37,7 +49,10 @@
     "product-time": 7,
     "product-seasons": ["spring", "summer", "autumn", "winter"],
     "tool": null,
-    "price": 14000
+    "price": 14000,
+    "textures": [
+      "Textures/Animals/Dinosaur/Dinosaur.png"
+    ]
   },
   {
     "name": "Cow",
@@ -47,7 +62,11 @@
     "product-time": 1,
     "product-seasons": ["spring", "summer", "autumn", "winter"],
     "tool": "MilkPail",
-    "price": 1500
+    "price": 1500,
+    "textures": [
+      "Textures/Animals/Cow/White_Cow.png",
+      "Textures/Animals/Cow/Brown_Cow.png"
+    ]
   },
   {
     "name": "Goat",
@@ -57,7 +76,10 @@
     "product-time": 2,
     "product-seasons": ["spring", "summer", "autumn", "winter"],
     "tool": "MilkPail",
-    "price": 4000
+    "price": 4000,
+    "textures": [
+      "Textures/Animals/Goat/Goat.png"
+    ]
   },
   {
     "name": "Sheep",
@@ -67,7 +89,10 @@
     "product-time": 3,
     "product-seasons": ["spring", "summer", "autumn", "winter"],
     "tool": "Shear",
-    "price": 8000
+    "price": 8000,
+    "textures": [
+      "Textures/Animals/Sheep/Sheep.png"
+    ]
   },
   {
     "name": "Pig",
@@ -77,6 +102,9 @@
     "product-time": 1,
     "product-seasons": ["spring", "summer", "autumn"],
     "tool": null,
-    "price": 16000
+    "price": 16000,
+    "textures": [
+      "Textures/Animals/Pig/Pig.png"
+    ]
   }
 ]

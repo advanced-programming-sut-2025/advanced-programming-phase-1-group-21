@@ -1,5 +1,7 @@
 package models.map;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import controllers.RequirementChecker;
 import data.ShopData;
 import models.DailyUpdate;
@@ -25,10 +27,37 @@ public class Shop extends Building implements DailyUpdate{
 		this.shopType = shopType;
 		this.map = (new MapBuilder()).buildShop();
 
+		setTexture();
+		sprite = new Sprite(texture);
+		sprite.setSize(shopType.getDefaultWidth()*30 , shopType.getDefaultHeight()*30);
+
 		List<ShopData> list = ShopData.getRecipeByShop(getShopName());
 		for (ShopData shopData : list) {
 			items.add(new ShopItemInstance(shopData));
 		}
+	}
+
+	private void setTexture(){
+		if(shopType.equals(TileType.STARDROP_SALOON))
+			texture = new Texture("assets/Textures/Buildings/stardrop_saloon.png");
+
+		if(shopType.equals(TileType.BLACKSMITH))
+			texture = new Texture("assets/Textures/Buildings/Blacksmith.png");
+
+		if(shopType.equals(TileType.CARPENTER_SHOP))
+			texture = new Texture("assets/Textures/Buildings/Carpenter's_Shop.png");
+
+		if(shopType.equals(TileType.FISH_SHOP))
+			texture = new Texture("assets/Textures/Buildings/Fish_Shop.png");
+
+		if(shopType.equals(TileType.JOJAMART))
+			texture = new Texture("assets/Textures/Buildings/Jojamart.png");
+
+		if(shopType.equals(TileType.MARINE_SHOP))
+			texture = new Texture("assets/Textures/Buildings/marine_shop.png");
+
+		if(shopType.equals(TileType.PIERR_STORE))
+			texture = new Texture("assets/Textures/Buildings/Pierres_shop.png");
 	}
 
 	public int openingTime() {
@@ -180,6 +209,11 @@ public class Shop extends Building implements DailyUpdate{
 	@Override
 	public String getSprite() {
 		return "" + shopType.getSymbol();
+	}
+
+	@Override
+	public Texture getTexture() {
+		return null;
 	}
 
 	private static class ShopItemInstance implements DailyUpdate, Serializable {

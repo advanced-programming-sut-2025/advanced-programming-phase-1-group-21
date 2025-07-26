@@ -3,6 +3,7 @@ package io.github.StardewValley;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import io.github.StardewValley.asset.Assets;
@@ -14,6 +15,7 @@ import java.util.LinkedList;
 
 public class Main extends Game {
     private final LinkedList <Stage> layers = new LinkedList<>();
+    private SpriteBatch batch;
 
 
     private static Main main;
@@ -23,12 +25,17 @@ public class Main extends Game {
         main = this;
     }
 
+    public SpriteBatch getBatch() {
+        return batch;
+    }
+
     public static Main getInstance() {
         return main;
     }
 
     @Override
     public void create() {
+        batch = new SpriteBatch();
         Assets.load();
         Assets.finishLoading();
         setScreen(new PreMenuScreen());

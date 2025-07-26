@@ -1,5 +1,6 @@
 package models.game;
 
+import com.badlogic.gdx.graphics.Texture;
 import models.map.Placable;
 import models.map.TileType;
 
@@ -30,6 +31,11 @@ public class Refrigerator implements Placable, Serializable {
     @Override
     public String getSprite() {
         return "R";
+    }
+
+    @Override
+    public Texture getTexture() {
+        return new Texture("assets/Textures/Refrigerator/Fridge.png");
     }
 
     @Override
