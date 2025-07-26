@@ -59,7 +59,7 @@ public class SQLHandler {
             stmt.setString(2, email);
             stmt.setString(3, nickname);
             stmt.setString(4, gender);
-            stmt.setString(5, password);
+            stmt.setString(5, Hash.hashPassword(password));
             stmt.setObject(6, questionID);
             stmt.setString(7, answer);
             stmt.setString(8, null); // token
