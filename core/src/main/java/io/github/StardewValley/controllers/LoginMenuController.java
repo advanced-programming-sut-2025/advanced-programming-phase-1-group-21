@@ -19,7 +19,12 @@ public class LoginMenuController{
     public Result<Void> login(String username, String password, boolean stayLoggedIn) {
         if (!NetworkDataBaseController.doesUserExists(username))
             return Result.failure(UserError.USER_NOT_FOUND);
-        return NetworkDataBaseController.login(username, password, stayLoggedIn);
+        Result<User> result = NetworkDataBaseController.login(username, password, stayLoggedIn);
+        if (result.isSuccess()) {
+            App.getInstance().logedInUser = result.getData();
+            return Result.success(null);
+        }
+        return Result.failure(result.getError());
     }
 
     public Result<String> getQuestion(String username) {

@@ -207,7 +207,7 @@ public class LobbiesMenuScreen implements Screen {
     }
 
     private List <Lobby> getLobbies() {
-        return NetworkLobbyController.requestLobbies();
+        return NetworkLobbyController.getAllLobbies();
     }
 
     private List <User> getUsers() {

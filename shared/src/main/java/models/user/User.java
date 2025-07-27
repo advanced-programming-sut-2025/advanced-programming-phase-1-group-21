@@ -29,6 +29,14 @@ public class User implements Serializable {
         this.securityAnswer = securityAnswer;
     }
 
+
+    /**
+     * for kryo only!
+     */
+    public User() {
+
+    }
+
     public User(String username, String password, String email, String nickname, Gender gender, Integer securityQuestionID, String securityAnswer , boolean isInAGame) {
         this.username = username;
         this.email = email;
@@ -37,7 +45,8 @@ public class User implements Serializable {
         this.securityQuestionID = securityQuestionID;
         this.securityAnswer = securityAnswer;
         this.isInAGame = isInAGame;
-        setPassword(password);
+        if (password != null)
+            setPassword(password);
     }
 
     public void setPassword(String password) {
@@ -106,5 +115,9 @@ public class User implements Serializable {
 
     public boolean isStayLoggedIn() {
         return stayLoggedIn;
+    }
+
+    public User copy() {
+        return new User(username, null, email, nickname, gender, securityQuestionID, securityAnswer, isInAGame);
     }
 }

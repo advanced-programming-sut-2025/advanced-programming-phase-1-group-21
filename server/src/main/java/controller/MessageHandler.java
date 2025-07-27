@@ -4,8 +4,10 @@ import com.esotericsoftware.kryonet.Connection;
 import packets.Message;
 import packets.MessageType;
 import router.DatabaseServiceRouter;
+import router.LobbyServiceRouter;
 import router.ServiceRouter;
 import services.DatabaseService;
+import services.LobbyService;
 import util.*;
 
 import java.lang.reflect.Method;
@@ -23,6 +25,7 @@ public class MessageHandler {
 
     private static void registerAll() {
         serviceMap.put(MessageType.DATABASE_SERVICE, new DatabaseServiceRouter());
+        serviceMap.put(MessageType.LOBBY_SERVICE, new LobbyServiceRouter());
     }
 
 

@@ -85,7 +85,7 @@ public class NetworkDataBaseController {
         return (Result<Void>) response.data;
     }
 
-    public static Result<Void> login(String username, String password, boolean stayLoggedIn) {
+    public static Result<User> login(String username, String password, boolean stayLoggedIn) {
         Message msg = new Message(MessageType.DATABASE_SERVICE);
         msg.methodName = "login";
         msg.data = NetworkUtil.mapArgs(
@@ -94,6 +94,6 @@ public class NetworkDataBaseController {
                 "stayLoggedIn", stayLoggedIn
         );
         Message response = NetworkUtil.sendMessageAndWaitForResponse(msg);
-        return (Result<Void>) response.data;
+        return (Result<User>) response.data;
     }
 }

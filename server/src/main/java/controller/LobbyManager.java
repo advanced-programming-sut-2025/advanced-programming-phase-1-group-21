@@ -19,11 +19,11 @@ public class LobbyManager {
 
     ArrayList<Lobby> lobbies = new ArrayList<>();
 
-    void addLobby(Lobby lobby) {
+    public void addLobby(Lobby lobby) {
         lobbies.add(lobby);
     }
 
-    void removeLobby(Lobby lobby) {
+    public void removeLobby(Lobby lobby) {
         lobbies.remove(lobby);
     }
 

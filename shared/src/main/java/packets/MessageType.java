@@ -13,6 +13,7 @@ public enum MessageType {
     REQUEST_LOBBIES,
     REQUEST_LOBBY_USERS,
     DATABASE_SERVICE("DatabaseService"),
+    LOBBY_SERVICE("LobbyService"),
     RESPONSE;
 
 
