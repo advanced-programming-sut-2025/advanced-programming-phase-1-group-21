@@ -1,17 +1,17 @@
-package controller;
+package io.github.StardewValley.network;
 
-import com.esotericsoftware.kryonet.Connection;
 import Network.Message;
 import Network.MessageType;
-import router.DatabaseServiceRouter;
-import router.LobbyServiceRouter;
 import Network.ServiceRouter;
+import com.esotericsoftware.kryonet.Connection;
+import io.github.StardewValley.network.routing.MessageRouter;
 import util.NetworkUtil;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class MessageHandler {
+
     private static Map<MessageType, ServiceRouter> serviceMap = new HashMap<>();
 
     static {
@@ -19,8 +19,7 @@ public class MessageHandler {
     }
 
     private static void registerAll() {
-        serviceMap.put(MessageType.DATABASE_SERVICE, new DatabaseServiceRouter());
-        serviceMap.put(MessageType.LOBBY_SERVICE, new LobbyServiceRouter());
+        serviceMap.put(MessageType.CLIENT_SERVICE, new MessageRouter());
     }
 
 
@@ -29,9 +28,6 @@ public class MessageHandler {
             System.out.println("[RECEIVED] ");
             NetworkUtil.printMethodMessage(msg);
             handleMethod(connection, msg);
-        }
-        else {
-            System.out.println("[RECEIVED] " + msg + ", But we don't know what to do with this");
         }
     }
 

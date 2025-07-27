@@ -1,15 +1,16 @@
 package router;
 
 import com.esotericsoftware.kryonet.Connection;
+import Network.ServiceRouter;
 import services.LobbyService;
 import session.SessionManager;
-import util.ServerUtil;
+import util.NetworkUtil;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LobbyServiceRouter implements ServiceRouter{
+public class LobbyServiceRouter implements ServiceRouter {
     private static final Map<String, Method> methods = new HashMap<>();
 
     static {
@@ -24,7 +25,7 @@ public class LobbyServiceRouter implements ServiceRouter{
         if (method == null) {
             throw new RuntimeException("[DISPATCH ERROR] Method not found: " + methodName);
         }
-        Object[] parsedArgs = ServerUtil.mapToArgs(method, args);
+        Object[] parsedArgs = NetworkUtil.mapToArgs(method, args);
         return method.invoke(SessionManager.getLobbyService(conn), parsedArgs);
     }
 }

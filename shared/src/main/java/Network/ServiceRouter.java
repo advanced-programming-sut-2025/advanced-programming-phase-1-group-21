@@ -1,9 +1,7 @@
-package router;
+package Network;
 
 import com.esotericsoftware.kryonet.Connection;
-import packets.Message;
-import packets.MessageType;
-import util.ServerUtil;
+import util.NetworkUtil;
 
 import java.util.Map;
 
@@ -18,7 +16,7 @@ public interface ServiceRouter {
             Message response = new Message(MessageType.RESPONSE, result);
             response.requestId = msg.requestId;
             System.out.println("[SENDING] ");
-            ServerUtil.printMethodMessage(response);
+            NetworkUtil.printMethodMessage(response);
             conn.sendTCP(response);
         }
         catch (Exception e) {

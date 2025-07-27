@@ -1,12 +1,12 @@
 package io.github.StardewValley.network;
 
-import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
-import packets.Message;
-import packets.MessageType;
-import packets.NetworkRegister;
+import Network.Message;
+import Network.MessageType;
+import Network.NetworkRegister;
+import io.github.StardewValley.network.routing.MessageRouter;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.*;
 
-public class NetworkUtil {
+public class ClientNetwork {
 
     private static final int TIMEOUT = 1000;
     private static Client client;
@@ -54,11 +54,7 @@ public class NetworkUtil {
             responseMap.get(message.requestId).offer(message);
             return;
         }
-
-        MessageType type = message.type;
-        if (type == MessageType.PING) {
-            System.out.println("[CLIENT] Server has pinged us!");
-        }
+        MessageHandler.handle(connection, message);
     }
 
     public static Message sendMessageAndWaitForResponse(Message message) {
@@ -83,18 +79,6 @@ public class NetworkUtil {
 
     public static void sendMessage(Message message) {
         client.sendTCP(message);
-    }
-
-    public static Map<String, Object> mapArgs(Object... keyValuePairs) {
-        if (keyValuePairs.length % 2 != 0) {
-            throw new IllegalArgumentException("You must provide pairs of key and value");
-        }
-
-        Map<String, Object> map = new HashMap<>();
-        for (int i = 0; i < keyValuePairs.length; i += 2) {
-            map.put((String) keyValuePairs[i], keyValuePairs[i + 1]);
-        }
-        return map;
     }
 
 }

@@ -7,7 +7,7 @@ import models.result.Result;
 import models.result.errorTypes.ServerError;
 import models.user.User;
 import session.SessionManager;
-import util.ServerUtil;
+import util.NetworkUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ public class LobbyService {
 
 
     public Result<Void> createLobby(String name, String password, boolean isPrivate, boolean isInvisible) {
-        lobby = new Lobby(name, password, !isInvisible, isPrivate, ServerUtil.random);
+        lobby = new Lobby(name, password, !isInvisible, isPrivate, NetworkUtil.random);
         LobbyManager.get().addLobby(lobby);
         lobby.setAdmin(user);
         lobby.addUser(user);

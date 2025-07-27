@@ -3,19 +3,18 @@ package io.github.StardewValley.network;
 import com.esotericsoftware.kryonet.Client;
 import models.Lobby;
 import models.result.Result;
-import models.result.errorTypes.ServerError;
 import models.user.User;
-import packets.Message;
-import packets.MessageType;
+import Network.Message;
+import Network.MessageType;
+import util.NetworkUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class NetworkLobbyController {
     private static final Client client;
 
     static {
-        client = NetworkUtil.getClient();
+        client = ClientNetwork.getClient();
         if (client == null) {
             throw new RuntimeException("[ERROR] Client is null!");
         }
@@ -34,7 +33,7 @@ public class NetworkLobbyController {
         Message msg = new Message(MessageType.LOBBY_SERVICE);
         msg.methodName = "getAllLobbies";
         msg.data = NetworkUtil.mapArgs();
-        Message response = NetworkUtil.sendMessageAndWaitForResponse(msg);
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
         List<Lobby> result = (List<Lobby>) response.data;
         return result;
     }
@@ -44,7 +43,7 @@ public class NetworkLobbyController {
         Message msg = new Message(MessageType.LOBBY_SERVICE);
         msg.methodName = "createLobby";
         msg.data = NetworkUtil.mapArgs("name", name, "password", password, "isPrivate", isPrivate, "isInvisible", isInvisible);
-        Message response = NetworkUtil.sendMessageAndWaitForResponse(msg);
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
         Result<Void> result = (Result<Void>) response.data;
         return result;
     }
@@ -53,7 +52,7 @@ public class NetworkLobbyController {
         Message msg = new Message(MessageType.LOBBY_SERVICE);
         msg.methodName = "getLobby";
         msg.data = NetworkUtil.mapArgs();
-        Message response = NetworkUtil.sendMessageAndWaitForResponse(msg);
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
         Result<Lobby> result = (Result<Lobby>) response.data;
         return result;
     }
@@ -62,7 +61,7 @@ public class NetworkLobbyController {
         Message msg = new Message(MessageType.LOBBY_SERVICE);
         msg.methodName = "removeFromLobby";
         msg.data = NetworkUtil.mapArgs("username", username);
-        Message response = NetworkUtil.sendMessageAndWaitForResponse(msg);
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
         Result<Void> result = (Result<Void>) response.data;
         return result;
     }
@@ -71,7 +70,7 @@ public class NetworkLobbyController {
         Message msg = new Message(MessageType.LOBBY_SERVICE);
         msg.methodName = "joinLobby";
         msg.data = NetworkUtil.mapArgs("id", id, "password", password);
-        Message response = NetworkUtil.sendMessageAndWaitForResponse(msg);
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
         Result<Void> result = (Result<Void>) response.data;
         return result;
     }
@@ -80,7 +79,7 @@ public class NetworkLobbyController {
         Message msg = new Message(MessageType.LOBBY_SERVICE);
         msg.methodName = "leaveLobby";
         msg.data = NetworkUtil.mapArgs();
-        Message response = NetworkUtil.sendMessageAndWaitForResponse(msg);
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
         Result<Void> result = (Result<Void>) response.data;
         return result;
     }
@@ -89,7 +88,7 @@ public class NetworkLobbyController {
         Message msg = new Message(MessageType.LOBBY_SERVICE);
         msg.methodName = "getOnlineUsers";
         msg.data = NetworkUtil.mapArgs();
-        Message response = NetworkUtil.sendMessageAndWaitForResponse(msg);
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
         List<User> result = (List<User>) response.data;
         return result;
     }

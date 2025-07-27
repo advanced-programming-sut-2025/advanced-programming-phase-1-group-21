@@ -3,10 +3,11 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import controller.MessageHandler;
-import packets.Message;
-import packets.MessageType;
-import packets.NetworkRegister;
+import Network.Message;
+import Network.MessageType;
+import Network.NetworkRegister;
 import session.SessionManager;
+import util.ServerUtil;
 
 import java.io.IOException;
 import java.util.Random;
@@ -24,7 +25,7 @@ public class Main {
         server.addListener(new Listener() {
             public void connected(Connection c) {
                 System.out.println("[SERVER] Client connected: " + c.getRemoteAddressTCP().getAddress().getHostAddress());
-                c.sendTCP(new Message(MessageType.PING));
+                c.sendTCP(ServerUtil.createPingMessage());
                 SessionManager.add(c);
             }
 
@@ -37,6 +38,5 @@ public class Main {
 
         server.start();
         server.bind(54555, 54777);
-
     }
 }
