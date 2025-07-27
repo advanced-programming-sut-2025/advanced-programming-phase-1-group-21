@@ -1,6 +1,7 @@
 package io.github.StardewValley.views.menu.GUI;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -28,6 +29,8 @@ public class GameScreen implements Screen , InputProcessor {
     private final Main game;
     private final GameController controller;
     private Stage stage;
+    private InventoryTab inventoryTab;
+    private boolean isInventoryShown = false;
 
     public GameScreen() {
         Map map = new MapBuilder().buildFarm(new Random(1));
@@ -40,7 +43,7 @@ public class GameScreen implements Screen , InputProcessor {
         createUI();
     }
 
-    private void createUI(){
+    private void createUI() {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(this);
 
@@ -51,6 +54,7 @@ public class GameScreen implements Screen , InputProcessor {
         float tileX = stage.getWidth()/ mapX;
 
         Skin skin = Assets.getSkin();
+        inventoryTab = new InventoryTab(this, stage, skin);
     }
 
     @Override
@@ -64,6 +68,9 @@ public class GameScreen implements Screen , InputProcessor {
         controller.buttonController(game);
         ShowMap.show(game);
         game.getBatch().end();
+        if (isInventoryShown) {
+            stage.draw();
+        }
     }
 
     @Override
@@ -88,11 +95,20 @@ public class GameScreen implements Screen , InputProcessor {
 
     @Override
     public void dispose() {
-
+        stage.dispose();
+        if (inventoryTab != null) {
+            inventoryTab.dispose();
+        }
     }
 
     @Override
     public boolean keyDown(int i) {
+        if (i == Input.Keys.I && !isInventoryShown) {
+
+            isInventoryShown = true;
+            Gdx.input.setInputProcessor(stage);
+            inventoryTab.show();
+        }
         return false;
     }
 
@@ -135,5 +151,10 @@ public class GameScreen implements Screen , InputProcessor {
     @Override
     public boolean scrolled(float v, float v1) {
         return false;
+    }
+
+    public void onInventoryClosed() {
+        isInventoryShown = false;
+        Gdx.input.setInputProcessor(this);
     }
 }
