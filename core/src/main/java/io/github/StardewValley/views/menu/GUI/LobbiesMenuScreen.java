@@ -30,6 +30,7 @@ public class LobbiesMenuScreen implements Screen {
     private final Main game;
     private Stage stage;
     private Table selectedRow = null;
+    private Table onlinePlayersTable, lobbyTable;
     List <Lobby> lobbies = new ArrayList <>();
     List <User> users = new ArrayList <>();
     Skin skin;
@@ -57,7 +58,7 @@ public class LobbiesMenuScreen implements Screen {
         Label onlinePlayersTitle = new Label("Online Players", skin);
         onlinePlayersTitle.setFontScale(1.5f);
 
-        Table lobbyTable = new Table();
+        lobbyTable = new Table();
         lobbyTable.top();
         lobbyTable.pad(10);
         lobbyTable.defaults().pad(5);
@@ -65,69 +66,19 @@ public class LobbiesMenuScreen implements Screen {
         selectedRow = null;
 
         lobbies = getLobbies();
-        for (Lobby l: lobbies) {
-            Label nameLabel = new Label("Name: " + l.getName(), skin);
-            Label idLabel = new Label("ID: " + l.getID(), skin);
-
-            String membersString = "";
-            for (User user: l.getUsers())
-                membersString += user.getNickname() + ", ";
-            membersString = membersString.substring(0, membersString.length() - 2);
-            Label members = new Label("Members: " + membersString, skin);
-
-
-            Table row = new Table();
-            row.left();
-            row.setTouchable(Touchable.enabled);
-            row.add(nameLabel).padRight(20);
-            row.add(idLabel);
-            row.pad(5).row();
-            row.add(members).expandX().fillX();
-
-            row.setBackground(skin.newDrawable("white", Color.CLEAR));
-
-            row.addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    if (selectedRow != null)
-                        selectedRow.setBackground(skin.newDrawable("white", Color.CLEAR));
-
-                    row.setBackground(skin.newDrawable("white", new Color(Color.LIGHT_GRAY.r, Color.LIGHT_GRAY.g, Color.LIGHT_GRAY.b, 0.4f)));
-                    selectedRow = row;
-
-                    if (getTapCount() == 2) {
-                        Lobby l = getLobbyByName(nameLabel.getText().replace("Name: ", "").toString());
-                        if (l.isPrivate()) {
-                            getPasswordDialog(l);
-                            // ...
-                        }
-                        else {
-                            joinTheLobby(l);
-                        }
-                    }
-                }
-            });
-
-            lobbyTable.add(row).expandX().fillX().row();
-
-            // Optional: separator
-            Image separator = new Image(skin.newDrawable("white", Color.DARK_GRAY));
-            lobbyTable.add(separator).height(1).expandX().fillX().padTop(5).padBottom(5).row();
-        }
+        fillLobbyTable();
 
         ScrollPane lobbyScrollPane = new ScrollPane(lobbyTable, skin);
         lobbyScrollPane.setFadeScrollBars(false);
 
-        Table onlinePlayersTable = new Table();
+        onlinePlayersTable = new Table();
         onlinePlayersTable.top();
         onlinePlayersTable.pad(10);
         onlinePlayersTable.defaults().pad(5);
 
         users = getUsers();
-        for (User user: users) {
-            Label nameLabel = new Label(user.getNickname(), skin);
-            onlinePlayersTable.add(nameLabel).expandX().fillX().row();
-        }
+        fillOnlinePlayerTable();
+
 
         ScrollPane onlineScrollPane = new ScrollPane(onlinePlayersTable, skin);
         onlineScrollPane.setFadeScrollBars(false);
@@ -206,18 +157,82 @@ public class LobbiesMenuScreen implements Screen {
         Gdx.input.setInputProcessor(multiplexer);
     }
 
+    private void fillOnlinePlayerTable() {
+        onlinePlayersTable.clear();
+        for (User user: users) {
+            Label nameLabel = new Label(user.getNickname(), skin);
+            onlinePlayersTable.add(nameLabel).expandX().fillX().row();
+        }
+    }
+
+    private void fillLobbyTable() {
+        lobbyTable.clear();
+        for (Lobby l: lobbies) {
+            Label nameLabel = new Label("Name: " + l.getName(), skin);
+            Label idLabel = new Label("ID: " + l.getID(), skin);
+
+            StringBuilder membersString = new StringBuilder();
+            for (User user: l.getUsers())
+                membersString.append(user.getNickname()).append(", ");
+            membersString.setLength(membersString.length() - 2);
+            Label members = new Label("Members: " + membersString, skin);
+
+
+            Table row = new Table();
+            row.left();
+            row.setTouchable(Touchable.enabled);
+            row.add(nameLabel).padRight(20);
+            row.add(idLabel);
+            row.pad(5).row();
+            row.add(members).expandX().fillX();
+
+            row.setBackground(skin.newDrawable("white", Color.CLEAR));
+
+            row.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    if (selectedRow != null)
+                        selectedRow.setBackground(skin.newDrawable("white", Color.CLEAR));
+
+                    row.setBackground(skin.newDrawable("white", new Color(Color.LIGHT_GRAY.r, Color.LIGHT_GRAY.g, Color.LIGHT_GRAY.b, 0.4f)));
+                    selectedRow = row;
+
+                    if (getTapCount() == 2) {
+                        Lobby l = getLobbyByName(nameLabel.getText().replace("Name: ", "").toString());
+                        if (l.isPrivate()) {
+                            getPasswordDialog(l);
+                            // ...
+                        }
+                        else {
+                            joinTheLobby(l);
+                        }
+                    }
+                }
+            });
+
+            lobbyTable.add(row).expandX().fillX().row();
+
+            // Optional: separator
+            Image separator = new Image(skin.newDrawable("white", Color.DARK_GRAY));
+            lobbyTable.add(separator).height(1).expandX().fillX().padTop(5).padBottom(5).row();
+        }
+    }
+
     private List <Lobby> getLobbies() {
         return NetworkLobbyController.getAllLobbies();
     }
 
     private List <User> getUsers() {
-        return NetworkLobbyController.getUsers();
+        return NetworkLobbyController.getOnlineUsers();
     }
 
 
     private void refreshWindow() {
         lobbies = getLobbies();
         users = getUsers();
+
+        fillOnlinePlayerTable();
+        fillLobbyTable();
     }
 
     private Lobby getLobbyByName(String name) {
@@ -400,6 +415,8 @@ public class LobbiesMenuScreen implements Screen {
             System.out.println("This lobby didn't have password");
 
         System.out.println("Trying to join the lobby. lobby name: " + lobby.getName() + ", lobby password: " + lobby.getPassword() + ", entered password: " + password);
+
+        NetworkLobbyController.joinLobby(lobby.getID(), password);
     }
 
     private void joinTheLobby(Lobby lobby) { // Ali
@@ -407,14 +424,11 @@ public class LobbiesMenuScreen implements Screen {
             System.out.println("You can't join a private lobby without passowrd");
         }
         System.out.println("Trying to join the lobby. name: " + lobby.getName());
+        NetworkLobbyController.joinLobby(lobby.getID(), null);
     }
 
     private void createLobby(String name, String password, boolean isPrivate, boolean isInvisible) { // Ali
-        System.out.println("Name: " + name);
-        System.out.println("Password: " + password);
-        System.out.println("Private: " + isPrivate);
-        System.out.println("Invisible: " + isInvisible);
-
+        NetworkLobbyController.createLobby(name, password, isPrivate, isInvisible);
 
         /*
         If creating was successful, you should give the user the ID of the lobby. (With a Dialog)

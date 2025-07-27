@@ -21,7 +21,7 @@ public class NetworkLobbyController {
         }
     }
 
-    public static List<User> getUsers() {
+    public static List<User> getUsersOfLobby() {
         Result<Lobby> lobbyResult = getLobby();
         if (lobbyResult.isSuccess()) {
             return lobbyResult.getData().getUsers();
@@ -43,7 +43,7 @@ public class NetworkLobbyController {
     public static Result<Void> createLobby(String name, String password, boolean isPrivate, boolean isInvisible) {
         Message msg = new Message(MessageType.LOBBY_SERVICE);
         msg.methodName = "createLobby";
-        msg.data = NetworkUtil.mapArgs("name", name, "password", password, "private", isPrivate, "invisible", isInvisible);
+        msg.data = NetworkUtil.mapArgs("name", name, "password", password, "isPrivate", isPrivate, "isInvisible", isInvisible);
         Message response = NetworkUtil.sendMessageAndWaitForResponse(msg);
         Result<Void> result = (Result<Void>) response.data;
         return result;
@@ -67,10 +67,10 @@ public class NetworkLobbyController {
         return result;
     }
 
-    public static Result<Void> joinLobby(int id) {
+    public static Result<Void> joinLobby(int id, String password) {
         Message msg = new Message(MessageType.LOBBY_SERVICE);
         msg.methodName = "joinLobby";
-        msg.data = NetworkUtil.mapArgs("id", id);
+        msg.data = NetworkUtil.mapArgs("id", id, "password", password);
         Message response = NetworkUtil.sendMessageAndWaitForResponse(msg);
         Result<Void> result = (Result<Void>) response.data;
         return result;
@@ -78,10 +78,19 @@ public class NetworkLobbyController {
 
     public static Result<Void> leaveLobby() {
         Message msg = new Message(MessageType.LOBBY_SERVICE);
-        msg.methodName = "joinLobby";
+        msg.methodName = "leaveLobby";
         msg.data = NetworkUtil.mapArgs();
         Message response = NetworkUtil.sendMessageAndWaitForResponse(msg);
         Result<Void> result = (Result<Void>) response.data;
+        return result;
+    }
+
+    public static List<User> getOnlineUsers() {
+        Message msg = new Message(MessageType.LOBBY_SERVICE);
+        msg.methodName = "getOnlineUsers";
+        msg.data = NetworkUtil.mapArgs();
+        Message response = NetworkUtil.sendMessageAndWaitForResponse(msg);
+        List<User> result = (List<User>) response.data;
         return result;
     }
 }

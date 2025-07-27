@@ -14,7 +14,7 @@ public class Lobby {
 	private boolean isVisible;
 	private ArrayList<User> users = new ArrayList<>();
 	private User admin;
-	private Random rand;
+	private transient Random rand;
 
 	//private Lobby
 	public Lobby(String name, String password, boolean isVisible, boolean isPrivate, Random rand) {
@@ -109,5 +109,10 @@ public class Lobby {
 
 	public User getAdmin() {
 		return admin;
+	}
+
+	@Override
+	public String toString() {
+		return "{lobby=" + name + ", ID=" + ID + ", password=" + password + ", isPrivate=" + isPrivate + ", isVisible=" + isVisible + ", users=" + users + "}";
 	}
 }

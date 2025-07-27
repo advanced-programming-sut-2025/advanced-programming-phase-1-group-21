@@ -120,4 +120,9 @@ public class User implements Serializable {
     public User copy() {
         return new User(username, null, email, nickname, gender, securityQuestionID, securityAnswer, isInAGame);
     }
+
+    @Override
+    public String toString() {
+        return "{username=" + username + ", nickname=" + nickname + "}";
+    }
 }

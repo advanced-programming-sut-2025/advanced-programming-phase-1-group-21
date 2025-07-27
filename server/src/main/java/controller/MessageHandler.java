@@ -31,19 +31,10 @@ public class MessageHandler {
 
     public static void handle(Connection connection, Message msg) {
         if (msg.isMethodRequest()) {
-            printMethodMessage(msg);
+            System.out.println("[RECEIVED] ");
+            ServerUtil.printMethodMessage(msg);
             handleMethod(connection, msg);
         }
-    }
-
-    private static void printMethodMessage(Message msg) {
-        System.out.println("[RECIEVED] " + msg.type + " " + msg.methodName);
-        Map<String, Object> map = (Map) msg.data;
-        System.out.println("DATA : {");
-        for (Map.Entry<String, Object> entry : map.entrySet()) {
-            System.out.println(entry.getKey() + " : " + entry.getValue());
-        }
-        System.out.println("}");
     }
 
     private static void handleMethod(Connection connection, Message msg) {

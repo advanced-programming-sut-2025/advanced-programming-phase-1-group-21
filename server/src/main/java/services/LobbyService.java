@@ -33,6 +33,7 @@ public class LobbyService {
         lobby = new Lobby(name, password, !isInvisible, isPrivate, ServerUtil.random);
         LobbyManager.get().addLobby(lobby);
         lobby.setAdmin(user);
+        lobby.addUser(user);
         return Result.success(null);
     }
 
@@ -54,11 +55,13 @@ public class LobbyService {
         return Result.success(null);
     }
 
-    public Result<Void> joinLobby(int id) {
+    public Result<Void> joinLobby(int id, String password) {
         lobby = LobbyManager.get().getLobbyByID(id);
         if (lobby == null) {
             return Result.failure(ServerError.NO_LOBBY);
         }
+        if (lobby.getPassword() != null && !lobby.getPassword().equals(password))
+            return Result.failure(ServerError.INSUFFICENT_PERMISSION);
         lobby.addUser(user);
         return Result.success(null);
     }
@@ -68,6 +71,10 @@ public class LobbyService {
         if (lobby.isEmpty())
             LobbyManager.get().removeLobby(lobby);
         return Result.success(null);
+    }
+
+    public List<User> getOnlineUsers() {
+        return SessionManager.getOnlineUsers();
     }
 
 }

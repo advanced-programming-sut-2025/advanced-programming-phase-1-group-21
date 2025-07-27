@@ -26,4 +26,9 @@ public class Message {
     public boolean isMethodRequest() {
         return type.isMethod;
     }
+
+    @Override
+    public String toString() {
+        return "Message [type=" + type + ", requestId=" + requestId + ", data=" + data + "]";
+    }
 }

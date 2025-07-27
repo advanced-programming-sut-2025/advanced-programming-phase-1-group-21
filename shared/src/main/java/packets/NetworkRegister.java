@@ -1,6 +1,7 @@
 package packets;
 
 import com.esotericsoftware.kryo.Kryo;
+import models.Lobby;
 import models.result.Error;
 import models.result.Result;
 import models.result.errorTypes.*;
@@ -40,5 +41,7 @@ public class NetworkRegister {
         kryo.register(String.class);
         kryo.register(Void.class);
         kryo.register(Result.class);
+
+        kryo.register(Lobby.class);
     }
 }

@@ -1,6 +1,7 @@
 package util;
 
 import models.result.Error;
+import packets.Message;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
@@ -19,4 +20,9 @@ public class ServerUtil {
         return out;
     }
 
+    public static void printMethodMessage(Message msg) {
+        System.out.println(msg.type + " " + msg.methodName);
+        System.out.println("DATA:  ");
+        System.out.println(msg.data);
+    }
 }

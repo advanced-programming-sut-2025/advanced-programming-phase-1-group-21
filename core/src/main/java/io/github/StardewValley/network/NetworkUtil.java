@@ -49,6 +49,7 @@ public class NetworkUtil {
 
     public static void handleMessage(Connection connection, Message message) {
         //THIS block is for handling Sync Message
+        System.out.println("[RECEIVED] " + message);
         if (message.requestId != null && responseMap.containsKey(message.requestId)) {
             responseMap.get(message.requestId).offer(message);
             return;

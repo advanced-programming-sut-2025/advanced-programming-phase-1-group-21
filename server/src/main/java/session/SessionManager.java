@@ -6,6 +6,8 @@ import models.user.User;
 import services.DatabaseService;
 import services.LobbyService;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -15,22 +17,25 @@ public class SessionManager {
     private static final Map<String, Connection> userConnectionMap = new ConcurrentHashMap<>();
     private static final Map<Connection, DatabaseService> databaseServiceMap = new ConcurrentHashMap<>();
     private static final Map<Connection, LobbyService> lobbyServiceMap = new ConcurrentHashMap<>();
+    private static final List<User> listUsers = new ArrayList<>();
 
 
     public static void add(Connection connection) {
         databaseServiceMap.put(connection, new DatabaseService(connection));
-        lobbyServiceMap.put(connection, new LobbyService(connection));
     }
 
     public static void add(Connection conn, User user) {
         connectionUserMap.put(conn, user);
         userConnectionMap.put(user.getUsername(), conn);
+        lobbyServiceMap.put(conn, new LobbyService(conn));
+        listUsers.add(user);
     }
 
     public static void remove(Connection conn) {
         User user = connectionUserMap.remove(conn);
         userConnectionMap.remove(user.getUsername());
         databaseServiceMap.remove(conn);
+        listUsers.remove(user);
     }
 
     public static User getUser(Connection conn) {
@@ -54,5 +59,9 @@ public class SessionManager {
 
     public static LobbyService getLobbyService(Connection conn) {
         return lobbyServiceMap.get(conn);
+    }
+
+    public static List<User> getOnlineUsers() {
+        return new ArrayList<>(listUsers);
     }
 }

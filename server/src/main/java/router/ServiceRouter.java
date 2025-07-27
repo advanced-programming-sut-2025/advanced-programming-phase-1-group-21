@@ -3,6 +3,7 @@ package router;
 import com.esotericsoftware.kryonet.Connection;
 import packets.Message;
 import packets.MessageType;
+import util.ServerUtil;
 
 import java.util.Map;
 
@@ -16,6 +17,8 @@ public interface ServiceRouter {
             Object result = dispatch(conn, msg.getMethodName(), (Map<String, Object>) msg.data);
             Message response = new Message(MessageType.RESPONSE, result);
             response.requestId = msg.requestId;
+            System.out.println("[SENDING] ");
+            ServerUtil.printMethodMessage(response);
             conn.sendTCP(response);
         }
         catch (Exception e) {
