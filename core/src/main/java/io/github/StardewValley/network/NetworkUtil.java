@@ -6,8 +6,11 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import packets.Message;
 import packets.MessageType;
+import packets.NetworkRegister;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.*;
 
@@ -24,9 +27,9 @@ public class NetworkUtil {
 
     public static void init() throws IOException {
         client = new Client();
-        Kryo kryo = client.getKryo();
-        kryo.register(MessageType.class);
-        kryo.register(Message.class);
+
+        NetworkRegister.register(client.getKryo());
+
 
         client.addListener(new Listener() {
             public void received(Connection connection, Object o) {
@@ -46,6 +49,7 @@ public class NetworkUtil {
 
     public static void handleMessage(Connection connection, Message message) {
         //THIS block is for handling Sync Message
+        System.out.println("[RECEIVED] " + message);
         if (message.requestId != null && responseMap.containsKey(message.requestId)) {
             responseMap.get(message.requestId).offer(message);
             return;
@@ -80,4 +84,17 @@ public class NetworkUtil {
     public static void sendMessage(Message message) {
         client.sendTCP(message);
     }
+
+    public static Map<String, Object> mapArgs(Object... keyValuePairs) {
+        if (keyValuePairs.length % 2 != 0) {
+            throw new IllegalArgumentException("You must provide pairs of key and value");
+        }
+
+        Map<String, Object> map = new HashMap<>();
+        for (int i = 0; i < keyValuePairs.length; i += 2) {
+            map.put((String) keyValuePairs[i], keyValuePairs[i + 1]);
+        }
+        return map;
+    }
+
 }

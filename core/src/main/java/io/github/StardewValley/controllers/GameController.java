@@ -10,6 +10,7 @@ import io.github.StardewValley.App;
 import data.AnimalData;
 import data.ArtisanGoodsData;
 import data.items.SeedData;
+import io.github.StardewValley.network.NetworkDataBaseController;
 import io.github.StardewValley.Main;
 import io.github.StardewValley.views.menu.CLI.TradeMenuView;
 import io.github.StardewValley.views.menu.GUI.MainMenuScreen;
@@ -79,24 +80,24 @@ public class GameController {
     }
 
 
+    //TODO
     public Result<Game> createGame(String username1, String username2, String username3) {
-        if ((DataBaseController.findUserByUsername(username1) == null) || (DataBaseController.findUserByUsername(username2)
-                == null) || (DataBaseController.findUserByUsername(username3) == null)) {
+        if ((!NetworkDataBaseController.doesUserExists(username1)) || (!NetworkDataBaseController.doesUserExists(username2)) || (!NetworkDataBaseController.doesUserExists(username3))) {
             return Result.failure(UserError.USER_NOT_FOUND);
         }
 
+        /*
         ArrayList<User> users = new ArrayList<>();
         users.add(App.getInstance().logedInUser);
         users.add(DataBaseController.findUserByUsername(username1));
         users.add(DataBaseController.findUserByUsername(username2));
         users.add(DataBaseController.findUserByUsername(username3));
 
-        /* TODO (DEBUG PURPOSE)
         for(User user : users) {
             if(user.isInAgame)
                 return Result.failure(AuthError.IN_GAME_USER);
         }
-         */
+
 
         for (User user : users) {
             user.setInAGame(true);
@@ -116,6 +117,7 @@ public class GameController {
         Game game = new Game(players);
         this.game = game;
         App.getInstance().game = game;
+        */
 
         return Result.success(game, "Game created");
     }

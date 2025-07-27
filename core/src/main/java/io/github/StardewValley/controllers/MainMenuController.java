@@ -29,10 +29,11 @@ public class MainMenuController{
     }
 
 
+    //TODO
     public Result<Void> logout() {
         User user = App.getInstance().logedInUser;
         user.setStayLoggedIn(false);
-        DataBaseController.editUser(user);
+        //.editUser(user);
         App.getInstance().logedInUser = null;
         App.getInstance().currentMenu = RegisterMenuView.getInstance();
         return Result.success(null);

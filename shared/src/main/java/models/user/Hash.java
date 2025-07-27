@@ -23,7 +23,7 @@ public class Hash implements Serializable {
         return hashedPassword;
     }
 
-    private String hashPassword(String password) {
+    public static String hashPassword(String password) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             md.update(SALT.getBytes());

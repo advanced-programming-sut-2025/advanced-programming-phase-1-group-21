@@ -10,7 +10,7 @@ public class User implements Serializable {
     private Gender gender;
     private boolean isInAGame;
     private boolean stayLoggedIn;
-    private Hash hash;
+    private String hash;
     private Integer securityQuestionID;
     private String securityAnswer;
 
@@ -29,6 +29,14 @@ public class User implements Serializable {
         this.securityAnswer = securityAnswer;
     }
 
+
+    /**
+     * for kryo only!
+     */
+    public User() {
+
+    }
+
     public User(String username, String password, String email, String nickname, Gender gender, Integer securityQuestionID, String securityAnswer , boolean isInAGame) {
         this.username = username;
         this.email = email;
@@ -37,15 +45,16 @@ public class User implements Serializable {
         this.securityQuestionID = securityQuestionID;
         this.securityAnswer = securityAnswer;
         this.isInAGame = isInAGame;
-        setPassword(password);
+        if (password != null)
+            setPassword(password);
     }
 
     public void setPassword(String password) {
-        this.hash = new Hash(password);
+        this.hash = Hash.hashPassword(password);
     }
 
     public boolean verifyPassword(String inputPassword) {
-        return this.hash.verify(inputPassword);
+        return this.hash.equals(Hash.hashPassword(inputPassword));
     }
 
     public boolean isInAgame() {
@@ -72,10 +81,6 @@ public class User implements Serializable {
         return nickname;
     }
 
-    public Hash getHash() {
-        return hash;
-    }
-
     public Integer getSecurityQuestionID() {
         return securityQuestionID;
     }
@@ -100,16 +105,8 @@ public class User implements Serializable {
         this.gender = gender;
     }
 
-    public void setHash(Hash hash) {
-        this.hash = hash;
-    }
-
     public boolean validateSecurityAnswer(String answer) {
         return this.securityAnswer.equalsIgnoreCase(answer);
-    }
-
-    public static String generateRandomPassword(int length) {
-        return "RANDOM";
     }
 
     public void setStayLoggedIn(boolean stayLoggedIn) {
@@ -118,5 +115,14 @@ public class User implements Serializable {
 
     public boolean isStayLoggedIn() {
         return stayLoggedIn;
+    }
+
+    public User copy() {
+        return new User(username, null, email, nickname, gender, securityQuestionID, securityAnswer, isInAGame);
+    }
+
+    @Override
+    public String toString() {
+        return "{username=" + username + ", nickname=" + nickname + "}";
     }
 }
