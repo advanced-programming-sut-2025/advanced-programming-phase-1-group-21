@@ -7,7 +7,7 @@ import models.time.Date;
 public class Lake extends Building {
 
     public Lake() {
-        texture = new Texture("assets/Textures/Buildings/lake.png");
+        texture = new Texture("Textures/Buildings/lake.png");
         sprite = new Sprite(texture);
         sprite.setSize(150 , 120);
     }

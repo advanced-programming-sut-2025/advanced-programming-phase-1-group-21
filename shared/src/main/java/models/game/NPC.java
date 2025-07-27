@@ -140,7 +140,7 @@ public class NPC implements Placable, DailyUpdate, Serializable {
 
         public NPCHouse() {
             this.map = (new MapBuilder()).buildNPCHouse(NPC.this);
-            texture = new Texture("assets/Textures/Buildings/" + name + "House.png");
+            texture = new Texture("Textures/Buildings/" + name + "House.png");
             sprite = new Sprite(texture);
             sprite.setSize(5 * 30 , 5 * 30);
         }

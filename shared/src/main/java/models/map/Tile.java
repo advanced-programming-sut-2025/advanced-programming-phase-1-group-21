@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class Tile implements DailyUpdate, Serializable {
     private TileType tileType;
     private Placable placable;
-    transient private Texture texture = new Texture("assets/Textures/map/SpringBasicTile.png");;
+    transient private Texture texture = new Texture("Textures/map/SpringBasicTile.png");;
     transient private Sprite sprite = new Sprite(texture);
     transient private Texture onTileTexture;
     transient private Sprite onTileSprite;
@@ -29,11 +29,11 @@ public class Tile implements DailyUpdate, Serializable {
         float x = sprite.getX();
         float y = sprite.getY();
         if(mapType.equals(MapType.HOUSE))
-            texture = new Texture("assets/Textures/Flooring/HouseFloor.png");
+            texture = new Texture("Textures/Flooring/HouseFloor.png");
         else if(getPlacable(Building.class) != null)
-            texture = new Texture("assets/Textures/map/SpringBasicTile.png");
+            texture = new Texture("Textures/map/SpringBasicTile.png");
         else if(isEmpty())
-            texture = new Texture("assets/Textures/map/SpringBasicTile.png");
+            texture = new Texture("Textures/map/SpringBasicTile.png");
 
         if(tileType.getTextureAddress() != null)
             onTileTexture = new Texture(tileType.getTextureAddress());

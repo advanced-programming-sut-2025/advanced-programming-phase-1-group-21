@@ -35,7 +35,7 @@ public class Refrigerator implements Placable, Serializable {
 
     @Override
     public Texture getTexture() {
-        return new Texture("assets/Textures/Refrigerator/Fridge.png");
+        return new Texture("Textures/Refrigerator/Fridge.png");
     }
 
     @Override
