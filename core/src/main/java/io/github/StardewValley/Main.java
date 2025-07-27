@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import io.github.StardewValley.asset.Assets;
-import io.github.StardewValley.network.NetworkUtil;
+import io.github.StardewValley.network.ClientNetwork;
 import io.github.StardewValley.views.menu.GUI.PreMenuScreen;
 
 import java.io.IOException;
@@ -41,7 +41,7 @@ public class Main extends Game {
         setScreen(new PreMenuScreen());
 
         try {
-            NetworkUtil.init();
+            ClientNetwork.init();
         } catch (IOException e) {
             System.err.println("Error initializing network");
             //throw new RuntimeException(e);

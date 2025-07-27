@@ -3,8 +3,9 @@ package io.github.StardewValley.network;
 import models.result.Result;
 import models.user.Gender;
 import models.user.User;
-import packets.Message;
-import packets.MessageType;
+import Network.Message;
+import Network.MessageType;
+import util.NetworkUtil;
 
 public class NetworkDataBaseController {
 
@@ -12,7 +13,7 @@ public class NetworkDataBaseController {
         Message msg = new Message(MessageType.DATABASE_SERVICE);
         msg.methodName = "doesUserExists";
         msg.data = NetworkUtil.mapArgs("username", username);
-        Message response = NetworkUtil.sendMessageAndWaitForResponse(msg);
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
         Boolean result = (Boolean) response.data;
         return result;
     }
@@ -27,7 +28,7 @@ public class NetworkDataBaseController {
                 "nickname", nickname,
                 "gender", gender.name()
         );
-        Result r = (Result) NetworkUtil.sendMessageAndWaitForResponse(msg).data;
+        Result r = (Result) ClientNetwork.sendMessageAndWaitForResponse(msg).data;
         System.out.println(r.getMessage());
     }
 
@@ -35,7 +36,7 @@ public class NetworkDataBaseController {
         Message msg = new Message(MessageType.DATABASE_SERVICE);
         msg.methodName = "getSecurityQuestion";
         msg.data = NetworkUtil.mapArgs("username", username);
-        Message response = NetworkUtil.sendMessageAndWaitForResponse(msg);
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
         return (Result<String>) response.data;
     }
 
@@ -43,21 +44,21 @@ public class NetworkDataBaseController {
         Message msg = new Message(MessageType.DATABASE_SERVICE);
         msg.methodName = "setSecurityQuestionID";
         msg.data = NetworkUtil.mapArgs("questionID", i);
-        NetworkUtil.sendMessageAndWaitForResponse(msg);
+        ClientNetwork.sendMessageAndWaitForResponse(msg);
     }
 
     public static void setSecurityAnswer(String answer) {
         Message msg = new Message(MessageType.DATABASE_SERVICE);
         msg.methodName = "setSecurityAnswer";
         msg.data = NetworkUtil.mapArgs("answer", answer);
-        NetworkUtil.sendMessageAndWaitForResponse(msg);
+        ClientNetwork.sendMessageAndWaitForResponse(msg);
     }
 
     public static Result<Void> setEmail(String newEmail) {
         Message msg = new Message(MessageType.DATABASE_SERVICE);
         msg.methodName = "setEmail";
         msg.data = NetworkUtil.mapArgs("newEmail", newEmail);
-        Message response = NetworkUtil.sendMessageAndWaitForResponse(msg);
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
         return (Result<Void>) response.data;
     }
 
@@ -65,7 +66,7 @@ public class NetworkDataBaseController {
         Message msg = new Message(MessageType.DATABASE_SERVICE);
         msg.methodName = "setPassword";
         msg.data = NetworkUtil.mapArgs("oldPassword", oldPassword, "newPassword", newPassword);
-        Message response = NetworkUtil.sendMessageAndWaitForResponse(msg);
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
         return (Result<Void>) response.data;
     }
 
@@ -73,7 +74,7 @@ public class NetworkDataBaseController {
         Message msg = new Message(MessageType.DATABASE_SERVICE);
         msg.methodName = "setNickname";
         msg.data = NetworkUtil.mapArgs("newNickname", newNickname);
-        Message response = NetworkUtil.sendMessageAndWaitForResponse(msg);
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
         return (Result<Void>) response.data;
     }
 
@@ -81,7 +82,7 @@ public class NetworkDataBaseController {
         Message msg = new Message(MessageType.DATABASE_SERVICE);
         msg.methodName = "setUsername";
         msg.data = NetworkUtil.mapArgs("newUsername", newUsername);
-        Message response = NetworkUtil.sendMessageAndWaitForResponse(msg);
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
         return (Result<Void>) response.data;
     }
 
@@ -93,7 +94,7 @@ public class NetworkDataBaseController {
                 "password", password,
                 "stayLoggedIn", stayLoggedIn
         );
-        Message response = NetworkUtil.sendMessageAndWaitForResponse(msg);
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
         return (Result<User>) response.data;
     }
 }

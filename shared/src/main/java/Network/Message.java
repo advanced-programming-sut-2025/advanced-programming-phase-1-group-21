@@ -1,4 +1,4 @@
-package packets;
+package Network;
 
 public class Message {
 

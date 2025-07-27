@@ -1,4 +1,4 @@
-package packets;
+package Network;
 
 import com.esotericsoftware.kryo.Kryo;
 import models.Lobby;
@@ -11,7 +11,6 @@ import models.user.User;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
