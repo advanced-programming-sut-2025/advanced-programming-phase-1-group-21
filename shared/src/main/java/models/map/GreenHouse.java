@@ -10,7 +10,7 @@ public class GreenHouse extends Building {
 
     public GreenHouse() {
         this.map = (new MapBuilder()).buildGreenHouse();
-        texture = new Texture("assets/Textures/Buildings/DestroyedGreenHouse.png");
+        texture = new Texture("Textures/Buildings/DestroyedGreenHouse.png");
         sprite = new Sprite(texture);
         sprite.setSize(210 , 300);
     }

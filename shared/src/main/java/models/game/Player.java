@@ -44,7 +44,7 @@ public class Player implements DailyUpdate, Serializable {
     private float speed = (float) 4;
 
 
-    private transient Texture texture = new Texture("assets/Textures/Players/FarmerFront1.png");
+    private transient Texture texture = new Texture("Textures/Players/FarmerFront1.png");
     private transient Sprite sprite = new Sprite(texture);
 
     public Sprite getSprite() {

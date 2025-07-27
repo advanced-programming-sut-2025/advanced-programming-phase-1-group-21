@@ -15,7 +15,7 @@ public class House extends Building {
     public House() {
         super();
         this.map = (new MapBuilder()).buildHouse(refrigerator);
-        texture = new Texture("assets/Textures/Buildings/HouseLevel1png.png");
+        texture = new Texture("Textures/Buildings/HouseLevel1png.png");
         sprite = new Sprite(texture);
         sprite.setSize(30*8 , 30*8);
     }
