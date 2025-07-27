@@ -2381,6 +2381,7 @@ Textures/map/Outdoors Winter.png
 Textures/map/SpringBasicTile.png
 Textures/map/SummerBasicTile.png
 Textures/map/WinterBasicTile.png
+Users.json
 data/AnimalHouses.json
 data/Animals.json
 data/ArtisanGoods.json
