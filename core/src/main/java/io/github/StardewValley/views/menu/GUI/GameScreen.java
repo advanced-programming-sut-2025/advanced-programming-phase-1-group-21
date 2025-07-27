@@ -54,7 +54,7 @@ public class GameScreen implements Screen , InputProcessor {
         float tileX = stage.getWidth()/ mapX;
 
         Skin skin = Assets.getSkin();
-        inventoryTab = new InventoryTab(this, stage, skin);
+        inventoryTab = new InventoryTab(this, skin);
     }
 
     @Override
@@ -69,7 +69,8 @@ public class GameScreen implements Screen , InputProcessor {
         ShowMap.show(game);
         game.getBatch().end();
         if (isInventoryShown) {
-            stage.draw();
+            inventoryTab.draw();
+//            stage.draw();
         }
     }
 
@@ -106,7 +107,7 @@ public class GameScreen implements Screen , InputProcessor {
         if (i == Input.Keys.I && !isInventoryShown) {
 
             isInventoryShown = true;
-            Gdx.input.setInputProcessor(stage);
+//            Gdx.input.setInputProcessor(stage);
             inventoryTab.show();
         }
         return false;
