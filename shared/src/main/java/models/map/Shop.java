@@ -39,25 +39,25 @@ public class Shop extends Building implements DailyUpdate{
 
 	private void setTexture(){
 		if(shopType.equals(TileType.STARDROP_SALOON))
-			texture = new Texture("assets/Textures/Buildings/stardrop_saloon.png");
+			texture = new Texture("Textures/Buildings/stardrop_saloon.png");
 
 		if(shopType.equals(TileType.BLACKSMITH))
-			texture = new Texture("assets/Textures/Buildings/Blacksmith.png");
+			texture = new Texture("Textures/Buildings/Blacksmith.png");
 
 		if(shopType.equals(TileType.CARPENTER_SHOP))
-			texture = new Texture("assets/Textures/Buildings/Carpenter's_Shop.png");
+			texture = new Texture("Textures/Buildings/Carpenter's_Shop.png");
 
 		if(shopType.equals(TileType.FISH_SHOP))
-			texture = new Texture("assets/Textures/Buildings/Fish_Shop.png");
+			texture = new Texture("Textures/Buildings/Fish_Shop.png");
 
 		if(shopType.equals(TileType.JOJAMART))
-			texture = new Texture("assets/Textures/Buildings/Jojamart.png");
+			texture = new Texture("Textures/Buildings/Jojamart.png");
 
 		if(shopType.equals(TileType.MARINE_SHOP))
-			texture = new Texture("assets/Textures/Buildings/marine_shop.png");
+			texture = new Texture("Textures/Buildings/marine_shop.png");
 
 		if(shopType.equals(TileType.PIERR_STORE))
-			texture = new Texture("assets/Textures/Buildings/Pierres_shop.png");
+			texture = new Texture("Textures/Buildings/Pierres_shop.png");
 	}
 
 	public int openingTime() {

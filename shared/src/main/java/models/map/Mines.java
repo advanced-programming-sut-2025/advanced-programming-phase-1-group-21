@@ -10,7 +10,7 @@ public class Mines extends Building {
 
     public Mines(Random rand) {
         map = (new MapBuilder()).buildMines(rand);
-        texture = new Texture("assets/Textures/Buildings/mines.png");
+        texture = new Texture("Textures/Buildings/mines.png");
         sprite = new Sprite(texture);
         sprite.setSize(30*5 , 30*5);
     }
