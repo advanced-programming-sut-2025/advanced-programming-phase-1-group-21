@@ -1,6 +1,7 @@
 package controller;
 
-import models.Lobby;
+import models.network.Lobby;
+import models.user.User;
 
 import java.util.ArrayList;
 
@@ -19,11 +20,11 @@ public class LobbyManager {
 
     ArrayList<Lobby> lobbies = new ArrayList<>();
 
-    void addLobby(Lobby lobby) {
+    public void addLobby(Lobby lobby) {
         lobbies.add(lobby);
     }
 
-    void removeLobby(Lobby lobby) {
+    public void removeLobby(Lobby lobby) {
         lobbies.remove(lobby);
     }
 
@@ -50,6 +51,17 @@ public class LobbyManager {
         for (Lobby lobby : lobbies) {
             if (lobby.getID() == id) {
                 return lobby;
+            }
+        }
+        return null;
+    }
+
+    public Lobby getLobbyByUsername(String username) {
+        for (Lobby lobby : lobbies) {
+            for (User user : lobby.getUsers()) {
+                if (user.getUsername().equals(username)) {
+                    return lobby;
+                }
             }
         }
         return null;

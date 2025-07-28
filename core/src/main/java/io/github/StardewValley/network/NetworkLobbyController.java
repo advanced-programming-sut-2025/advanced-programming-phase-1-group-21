@@ -1,10 +1,12 @@
 package io.github.StardewValley.network;
 
 import com.esotericsoftware.kryonet.Client;
-import models.Lobby;
+import models.network.Lobby;
+import models.result.Result;
 import models.user.User;
-import packets.Message;
-import packets.MessageType;
+import Network.Message;
+import Network.MessageType;
+import util.NetworkUtil;
 
 import java.util.List;
 
@@ -12,33 +14,82 @@ public class NetworkLobbyController {
     private static final Client client;
 
     static {
-        client = NetworkUtil.getClient();
+        client = ClientNetwork.getClient();
         if (client == null) {
             throw new RuntimeException("[ERROR] Client is null!");
         }
     }
 
-    public static List<Lobby> requestLobbies() {
-        Message response = NetworkUtil.sendMessageAndWaitForResponse(new Message(MessageType.REQUEST_LOBBIES));
-        try {
-            List<Lobby> lobbyList = (List<Lobby>) response.data;
-            return lobbyList;
+    public static List<User> getUsersOfLobby() {
+        Result<Lobby> lobbyResult = getLobby();
+        if (lobbyResult.isSuccess()) {
+            return lobbyResult.getData().getUsers();
         }
-        catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("[ERROR] Failed to get lobbies!");
-        }
+        return null;
     }
 
-    public static List<User> getUsers() {
-        Message response = NetworkUtil.sendMessageAndWaitForResponse(new Message(MessageType.REQUEST_LOBBY_USERS));
-        try {
-            List<User> lobbyList = (List<User>) response.data;
-            return lobbyList;
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("[ERROR] Failed to get lobby users!");
-        }
+
+    public static List<Lobby> getAllLobbies() {
+        Message msg = new Message(MessageType.LOBBY_SERVICE);
+        msg.methodName = "getAllLobbies";
+        msg.data = NetworkUtil.mapArgs();
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
+        List<Lobby> result = (List<Lobby>) response.data;
+        return result;
+    }
+
+
+    public static Result<Void> createLobby(String name, String password, boolean isPrivate, boolean isInvisible) {
+        Message msg = new Message(MessageType.LOBBY_SERVICE);
+        msg.methodName = "createLobby";
+        msg.data = NetworkUtil.mapArgs("name", name, "password", password, "isPrivate", isPrivate, "isInvisible", isInvisible);
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
+        Result<Void> result = (Result<Void>) response.data;
+        return result;
+    }
+
+    public static Result<Lobby> getLobby() {
+        Message msg = new Message(MessageType.LOBBY_SERVICE);
+        msg.methodName = "getLobby";
+        msg.data = NetworkUtil.mapArgs();
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
+        Result<Lobby> result = (Result<Lobby>) response.data;
+        return result;
+    }
+
+    public static Result<Void> removeFromLobby(String username) {
+        Message msg = new Message(MessageType.LOBBY_SERVICE);
+        msg.methodName = "removeFromLobby";
+        msg.data = NetworkUtil.mapArgs("username", username);
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
+        Result<Void> result = (Result<Void>) response.data;
+        return result;
+    }
+
+    public static Result<Void> joinLobby(int id, String password) {
+        Message msg = new Message(MessageType.LOBBY_SERVICE);
+        msg.methodName = "joinLobby";
+        msg.data = NetworkUtil.mapArgs("id", id, "password", password);
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
+        Result<Void> result = (Result<Void>) response.data;
+        return result;
+    }
+
+    public static Result<Void> leaveLobby() {
+        Message msg = new Message(MessageType.LOBBY_SERVICE);
+        msg.methodName = "leaveLobby";
+        msg.data = NetworkUtil.mapArgs();
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
+        Result<Void> result = (Result<Void>) response.data;
+        return result;
+    }
+
+    public static List<User> getOnlineUsers() {
+        Message msg = new Message(MessageType.LOBBY_SERVICE);
+        msg.methodName = "getOnlineUsers";
+        msg.data = NetworkUtil.mapArgs();
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
+        List<User> result = (List<User>) response.data;
+        return result;
     }
 }

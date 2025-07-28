@@ -2,8 +2,12 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
-import packets.Message;
-import packets.MessageType;
+import controller.MessageHandler;
+import Network.Message;
+import Network.MessageType;
+import Network.NetworkRegister;
+import session.SessionManager;
+import util.ServerUtil;
 
 import java.io.IOException;
 import java.util.Random;
@@ -15,18 +19,24 @@ public class Main {
 
 
         Kryo kryo = server.getKryo();
-        kryo.register(MessageType.class);
-        kryo.register(Message.class);
+        NetworkRegister.register(kryo);
+
 
         server.addListener(new Listener() {
             public void connected(Connection c) {
                 System.out.println("[SERVER] Client connected: " + c.getRemoteAddressTCP().getAddress().getHostAddress());
-                c.sendTCP(new Message(MessageType.PING));
+                c.sendTCP(ServerUtil.createPingMessage());
+                SessionManager.add(c);
+            }
+
+            public void received(Connection connection, Object o) {
+                if (o instanceof Message) {
+                    MessageHandler.handle(connection, (Message) o);
+                }
             }
         });
 
         server.start();
         server.bind(54555, 54777);
-
     }
 }

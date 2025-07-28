@@ -1,9 +1,16 @@
 package models.result;
 
 public class Result<T> {
-    private final T data;
-    private final Error error;
-    private final String message;
+    private T data;
+    private Error error;
+    private String message;
+
+    /**
+     * THIS IS FOR KRYO-NET, don't USE IT
+     */
+    public Result() {
+
+    }
 
     private Result(T data, Error error, String message) {
         this.data = data;

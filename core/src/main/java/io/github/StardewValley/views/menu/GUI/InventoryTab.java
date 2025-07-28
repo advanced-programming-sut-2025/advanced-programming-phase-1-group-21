@@ -386,7 +386,6 @@ class InventoryTab {
 		setButtonBar();
 	}
 
-
 	private String capitilize(Tool tool) {
 		String type = tool.getToolMaterialType().toString();
 		String name = tool.getToolType().toString();

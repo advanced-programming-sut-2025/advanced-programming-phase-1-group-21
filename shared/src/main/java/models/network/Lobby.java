@@ -1,10 +1,9 @@
-package models;
+package models.network;
 
 import models.user.User;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.UUID;
 
 public class Lobby {
 	private String name;
@@ -13,29 +12,30 @@ public class Lobby {
 	private boolean isPrivate;
 	private boolean isVisible;
 	private ArrayList<User> users = new ArrayList<>();
+	private User admin;
+	private transient Random rand;
 
 	//private Lobby
-	public Lobby(String name, String password, boolean isVisible, Random rand) {
-		isPrivate = true;
+	public Lobby(String name, String password, boolean isVisible, boolean isPrivate, Random rand) {
+		this.isPrivate = isPrivate;
 		this.isVisible = isVisible;
 		this.name = name;
 		this.password = password;
 		this.ID = createID(rand);
+		this.rand = rand;
 	}
 
-	//public lobby
-	public Lobby(String name, boolean isVisible, Random rand) {
-		isPrivate = false;
-		this.isVisible = isVisible;
-		this.name = name;
-		this.password = null;
-		this.ID = createID(rand);
-	}
+	//Kryo-Net
+	public Lobby() {
 
-	public Lobby(String name, String password, boolean isVisible) {}
+	}
 
 	public static int createID(Random rand) {
 		return rand.nextInt();
+	}
+
+	public void setAdmin(User admin) {
+		this.admin = admin;
 	}
 
 	public String getName() {
@@ -78,14 +78,25 @@ public class Lobby {
 		users.add(user);
 	}
 
-	public void removeUser(User user) {
-		users.remove(user);
+	public void setRandomAdmin() {
+		if (users.isEmpty()) {
+			return;
+		}
+		int idx = rand.nextInt(users.size());
+		admin = users.get(idx);
 	}
 
-	public String getUserByUsername(String username) {
+	public void removeUser(User user) {
+		users.remove(user);
+		if (user.equals(admin)) {
+			setRandomAdmin();
+		}
+	}
+
+	public User getUserByUsername(String username) {
 		for (User user : users) {
 			if (user.getUsername().equals(username)) {
-				return user.getUsername();
+				return user;
 			}
 		}
 		return null;
@@ -93,5 +104,14 @@ public class Lobby {
 
 	public boolean isEmpty() {
 		return users.isEmpty();
+	}
+
+	public User getAdmin() {
+		return admin;
+	}
+
+	@Override
+	public String toString() {
+		return "{lobby=" + name + ", ID=" + ID + ", password=" + password + ", isPrivate=" + isPrivate + ", isVisible=" + isVisible + ", users=" + users + "}";
 	}
 }
