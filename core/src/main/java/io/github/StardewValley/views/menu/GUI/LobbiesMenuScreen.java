@@ -410,31 +410,28 @@ public class LobbiesMenuScreen implements Screen {
         dialog.show(stage);
     }
 
-    private void joinTheLobby(Lobby lobby, String password) { // Ali
+    private void joinTheLobby(Lobby lobby, String password) {
         if (!lobby.isPrivate())
             System.out.println("This lobby didn't have password");
 
         System.out.println("Trying to join the lobby. lobby name: " + lobby.getName() + ", lobby password: " + lobby.getPassword() + ", entered password: " + password);
 
         NetworkLobbyController.joinLobby(lobby.getID(), password);
+        game.setScreen(new LobbyScreen(NetworkLobbyController.getLobby().getData()));
     }
 
-    private void joinTheLobby(Lobby lobby) { // Ali
+    private void joinTheLobby(Lobby lobby) {
         if (lobby.isPrivate()) {
             System.out.println("You can't join a private lobby without passowrd");
         }
         System.out.println("Trying to join the lobby. name: " + lobby.getName());
         NetworkLobbyController.joinLobby(lobby.getID(), null);
+        game.setScreen(new LobbyScreen(NetworkLobbyController.getLobby().getData()));
     }
 
-    private void createLobby(String name, String password, boolean isPrivate, boolean isInvisible) { // Ali
+    private void createLobby(String name, String password, boolean isPrivate, boolean isInvisible) {
         NetworkLobbyController.createLobby(name, password, isPrivate, isInvisible);
-
-        /*
-        If creating was successful, you should give the user the ID of the lobby. (With a Dialog)
-        And if creating was not successful, you should tell the user why. (With a Dialog)
-        I can handle it if you finish the network part
-         */
+        game.setScreen(new LobbyScreen(NetworkLobbyController.getLobby().getData()));
     }
 
     @Override

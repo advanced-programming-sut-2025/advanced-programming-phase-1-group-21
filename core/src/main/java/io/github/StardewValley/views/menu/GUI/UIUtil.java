@@ -27,7 +27,7 @@ public class UIUtil {
         multiplexer.addProcessor(new InputAdapter() {
             @Override
             public boolean keyDown(int keycode) {
-                if (keycode == Input.Keys.T) {
+                if (keycode == Input.Keys.F1) {
                     Main.getInstance().setScreen(new ConsoleScreen());
                     return true;
                 }
