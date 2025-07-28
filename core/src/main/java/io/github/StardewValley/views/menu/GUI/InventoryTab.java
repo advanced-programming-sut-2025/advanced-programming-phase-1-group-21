@@ -4,10 +4,14 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -18,8 +22,10 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import data.items.AllItemsData;
 import io.github.StardewValley.App;
 import models.Item.Item;
+import models.Item.ItemType;
 import models.game.Player;
 import models.skill.SkillType;
+import models.tool.Tool;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +43,7 @@ class InventoryTab {
 
 
 	private ScrollPane inventoryScrollPane;
+	BitmapFont numberFont;
 
 	private int dialogWidth, dialogHeight;
 	private Texture sampleTexture;
@@ -55,6 +62,7 @@ class InventoryTab {
 		Player player = App.getInstance().game.getCurrentPlayer();
 		stage = new Stage(new ScreenViewport());
 		setEmpty();
+		setNumberFont();
 
 		sampleTexture = new Texture(AllItemsData.getData("Wool").getTextureAddress());
 
@@ -90,16 +98,22 @@ class InventoryTab {
 				Image cell;
 				int id = row * 12 + col;
 				if (id < items.size()) {
-					AllItemsData data = AllItemsData.getData(items.get(id).getName());
+					Item item = items.get(id);
+					AllItemsData data = AllItemsData.getData(item.getName());
 					if (data != null) {
 						String address = data.getTextureAddress();
 						if (address != null)
 							cell = new Image(new TextureRegionDrawable(new TextureRegion(new Texture(address))));
-						else
+						else {
 							cell = new Image(new TextureRegionDrawable(new TextureRegion(sampleTexture)));
+						}
 					}
 					else {
-						cell = new Image(new TextureRegionDrawable(new TextureRegion(sampleTexture)));
+						if (item.getItemType() == ItemType.TOOL) {
+							cell = new Image(new TextureRegionDrawable(new TextureRegion(new Texture("Textures/Tools/" + capitilize(((Tool) item)) + ".png"))));
+						}
+						else
+							cell = new Image(new TextureRegionDrawable(new TextureRegion(sampleTexture)));
 					}
 				}
 				else {
@@ -240,7 +254,6 @@ class InventoryTab {
 	}
 
 	public void show() {
-//		tableDialog.show(stage);
 		Gdx.input.setInputProcessor(stage);
 	}
 
@@ -275,6 +288,20 @@ class InventoryTab {
 		pixmap.setColor(1, 0, 0, 1);
 		pixmap.fillRectangle(0, 0, size, size);
 		redSquare = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
+	}
+
+	private void setNumberFont() {
+		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Fonts/font.otf"));
+		FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+
+		parameter.size = 24;
+		parameter.color = Color.WHITE;
+		parameter.borderWidth = 2;
+		parameter.borderColor = Color.BLACK;
+		parameter.borderStraight = true;
+
+		numberFont = generator.generateFont(parameter);
+		generator.dispose();
 	}
 
 	private void setDarkBackground() {
@@ -357,5 +384,12 @@ class InventoryTab {
 //		tableDialog.getContentTable().clear();
 		stage.clear();
 		setButtonBar();
+	}
+
+
+	private String capitilize(Tool tool) {
+		String type = tool.getToolMaterialType().toString();
+		String name = tool.getToolType().toString();
+		return type.substring(0, 1).toUpperCase() + type.substring(1).toLowerCase() + "_" + name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
 	}
 }
