@@ -1,10 +1,9 @@
-package models;
+package models.network;
 
 import models.user.User;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.UUID;
 
 public class Lobby {
 	private String name;
