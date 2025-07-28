@@ -8,11 +8,17 @@ import models.result.Result;
 
 public abstract class Tool extends Item {
     private final ToolType toolType;
-	public ToolMaterialType toolMaterialType = ToolMaterialType.PRIMITIVE;
+	public ToolMaterialType toolMaterialType;
 
 
 	public Tool(ToolType toolType) {
 		this.toolType = toolType;
+		if (toolType == ToolType.SCYTHE) {
+			toolMaterialType = ToolMaterialType.STEEL;
+		}
+		else {
+			toolMaterialType = ToolMaterialType.PRIMITIVE;
+		}
 	}
 
 	public ToolType getToolType() {

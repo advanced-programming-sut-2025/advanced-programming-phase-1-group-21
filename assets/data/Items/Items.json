@@ -1,7 +1,8 @@
 [
   {
     "name": "Coin",
-    "type": "Salable"
+    "type": "Salable",
+    "texture-address": null
   },
   {
     "name": "Duck Feather",
