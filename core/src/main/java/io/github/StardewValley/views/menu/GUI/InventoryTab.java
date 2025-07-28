@@ -1,9 +1,6 @@
 package io.github.StardewValley.views.menu.GUI;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -12,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -24,6 +22,7 @@ import io.github.StardewValley.App;
 import models.Item.Item;
 import models.Item.ItemType;
 import models.game.Player;
+import models.network.Lobby;
 import models.skill.SkillType;
 import models.tool.Tool;
 
@@ -39,16 +38,22 @@ class InventoryTab {
 	private TextureRegionDrawable emptyDrawable, whiteSquare, redSquare;
 	private TextButton exitButton, inventoryButton, socialButton, mapButton, settingButton, skillButton, missionButton;
 	private Label farmingSkillLabel, miningSkillLabel, foragingSkillLabel, fishingSkillLabel;
-	private ArrayList<Image> farmingLevels, miningLevels, foragingLevels, fishingLevels;
+	private final ArrayList<Image> farmingLevels, miningLevels, foragingLevels, fishingLevels;
+	private final ArrayList<ArrayList<Item>> itemMatrix = new ArrayList<>();
+	private Item goldItem;
+	private Label goldLabel;
+	private Image itemInHandImage;
+
+	private Container<Image> selectedItem;
 
 
-	private ScrollPane inventoryScrollPane;
+	private Table scrollTable;
 	BitmapFont numberFont;
 
-	private int dialogWidth, dialogHeight;
 	private Texture sampleTexture;
 
 	public InventoryTab(GameScreen gameScreen, Skin skin) {
+		stage = new Stage(new ScreenViewport());
 		this.gameScreen = gameScreen;
 		this.skin = skin;
 		farmingLevels = new ArrayList<>();
@@ -59,85 +64,122 @@ class InventoryTab {
 	}
 
 	void createUI() {
+		stage.clear();
 		Player player = App.getInstance().game.getCurrentPlayer();
-		stage = new Stage(new ScreenViewport());
 		setEmpty();
 		setNumberFont();
+		stage.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				System.out.println("Stage click: " + x + ", " + y);
+			}
+		});
 
 		sampleTexture = new Texture(AllItemsData.getData("Wool").getTextureAddress());
 
-		// Create Dialog
-		dialogWidth = Gdx.graphics.getWidth() / 2;
-		dialogHeight = Gdx.graphics.getHeight() / 2;
-//		tableDialog = new Dialog("", skin) {
-//			@Override
-//			protected void result(Object object) {
-//				gameScreen.onInventoryClosed();
-//			}
-//		};
-//		tableDialog.setSize(dialogWidth, dialogHeight);
-//		tableDialog.setPosition(
-//				(Gdx.graphics.getWidth() - dialogWidth) / 2,
-//				(Gdx.graphics.getHeight() - dialogHeight) / 2
-//		);
-//		tableDialog.setModal(true);
-//		tableDialog.setMovable(false);
-
-//		tableDialog.button("exit");
-		// ایجاد جدول برای اسکرول
-		Table scrollTable = new Table();
-
-		scrollTable.top();
+		scrollTable = new Table();
 		scrollTable.defaults().width(64).height(64).pad(2);
 
-		List<Item> items = player.getInventory().getItems();
-		int rows = items.size() / 12;
 
-		for (int row = 0; row < 70; row++) {
+		List<Item> items = player.getInventory().getItems();
+		int rowIndex = 0, colIndex = 0, number = 0;
+		for (Item item: items) {
+			if (item.getName().equalsIgnoreCase("coin")) {
+				goldItem = item;
+				continue;
+			}
+			if (colIndex == 0)
+				itemMatrix.add(new ArrayList<>());
+
+			itemMatrix.get(rowIndex).add(item);
+			colIndex++;
+
+			if (colIndex == 12) {
+				rowIndex++;
+				colIndex = 0;
+			}
+			number++;
+		}
+
+		if (goldItem != null)
+			goldLabel = new Label(goldItem.getAmount() + "g", skin);
+		else
+			goldLabel = new Label("Gold Item not found!", skin);
+		goldLabel.setPosition(610, 500);
+
+		setItemInHand();
+
+		for (int row = 0; row < 3; row++) {
 			for (int col = 0; col < 12; col++) {
+				Container<Image> container = new Container<>();
+				container.setSize(64, 64);
 				Image cell;
-				int id = row * 12 + col;
-				if (id < items.size()) {
-					Item item = items.get(id);
+				if (row * 12 + col < number) {
+					Item item = itemMatrix.get(row).get(col);
 					AllItemsData data = AllItemsData.getData(item.getName());
 					if (data != null) {
 						String address = data.getTextureAddress();
-						if (address != null)
+						if (address != null) {
 							cell = new Image(new TextureRegionDrawable(new TextureRegion(new Texture(address))));
+							cell.setUserObject(item);
+						}
 						else {
-							cell = new Image(new TextureRegionDrawable(new TextureRegion(sampleTexture)));
+							System.err.println("There is no texture for this item!! item name: " + item.getName() + ", row: " + row + ", col: " + col);
+							cell = new Image(emptyDrawable);
+							cell.setUserObject(item);
 						}
 					}
 					else {
 						if (item.getItemType() == ItemType.TOOL) {
-							cell = new Image(new TextureRegionDrawable(new TextureRegion(new Texture("Textures/Tools/" + capitilize(((Tool) item)) + ".png"))));
+							cell = new Image(new TextureRegionDrawable(new TextureRegion(new Texture(getItemTexture(item)))));
+							cell.setUserObject(item);
 						}
-						else
-							cell = new Image(new TextureRegionDrawable(new TextureRegion(sampleTexture)));
+						else {
+							cell = new Image(emptyDrawable);
+							cell.setUserObject(null);
+						}
 					}
 				}
 				else {
 					cell = new Image(emptyDrawable);
+					cell.setUserObject(null);
 				}
-				scrollTable.add(cell);
+				container.setActor(cell);
+				container.addListener(new ClickListener() {
+					@Override
+					public void clicked(InputEvent event, float x, float y) {
+						System.out.println("You clicked on a container");
+						if (selectedItem != null)
+							selectedItem.setBackground(skin.newDrawable("white", Color.CLEAR));
+
+						container.setBackground(skin.newDrawable("white", new Color(Color.LIGHT_GRAY.r, Color.LIGHT_GRAY.g, Color.LIGHT_GRAY.b, 0.4f)));
+						selectedItem = container;
+
+						if (getTapCount() == 2) {
+							Object o = container.getActor().getUserObject();
+							if (o instanceof Item) {
+								player.setItemInHand((Item) o);
+								setItemInHand();
+								System.out.println("changing ItemInHand");
+							}
+							else {
+								System.err.println("There is no Item in here???");
+							}
+						}
+					}
+				});
+
+				scrollTable.add(container);
 			}
 			scrollTable.row();
 		}
+		scrollTable.setSize(850, 200);
+		scrollTable.setPosition(610, 575);
 
-		inventoryScrollPane = new ScrollPane(scrollTable, skin);
-		inventoryScrollPane.setScrollingDisabled(true, false);
-		inventoryScrollPane.setFlickScroll(true);
-		inventoryScrollPane.setSmoothScrolling(true);
-		inventoryScrollPane.setForceScroll(false, false);
-		inventoryScrollPane.setOverscroll(false, false);
-		inventoryScrollPane.setFadeScrollBars(false);
-		inventoryScrollPane.setSize(850, 200);
-		inventoryScrollPane.setPosition(610, 575);
-		inventoryScrollPane.addListener(new InputListener() {
+		scrollTable.addListener(new ClickListener() {
 			@Override
-			public boolean scrolled(InputEvent event, float x, float y, float amountX, float amountY) {
-				System.out.println("Scroll detected: " + amountY);
-				return super.scrolled(event, x, y, amountX, amountY);
+			public void clicked(InputEvent event, float x, float y) {
+				System.out.println("you clicked on the scroll table");
 			}
 		});
 
@@ -145,7 +187,6 @@ class InventoryTab {
 		exitButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-//				tableDialog.cancel();
 				gameScreen.onInventoryClosed();
 			}
 		});
@@ -247,13 +288,11 @@ class InventoryTab {
 			fishingLevels.add(im);
 		}
 
-
-		// aaaa1111@
-
-		setInventoryTab();
+		System.out.println("scrollTable bounds: x=" + scrollTable.getX() + ", y=" + scrollTable.getY() + ", w=" + scrollTable.getWidth() + ", h=" + scrollTable.getHeight());
 	}
 
 	public void show() {
+		setInventoryTab();
 		Gdx.input.setInputProcessor(stage);
 	}
 
@@ -261,6 +300,7 @@ class InventoryTab {
 		if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
 			System.out.println("Left mouse button clicked!, coor: " + Gdx.input.getX() + " " + Gdx.input.getY());
 		}
+		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
 	}
 
@@ -291,7 +331,7 @@ class InventoryTab {
 	}
 
 	private void setNumberFont() {
-		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Fonts/font.otf"));
+		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Fonts/Blomberg-8MKKZ.otf"));
 		FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
 		parameter.size = 24;
@@ -314,6 +354,11 @@ class InventoryTab {
 		stage.addActor(new Image(bgTexture));
 	}
 
+	private void setStage() {
+		stage.clear();
+		createUI();
+	}
+
 	private void setButtonBar() {
 		setDarkBackground();
 		Table buttonTable = new Table();
@@ -331,15 +376,15 @@ class InventoryTab {
 	}
 
 	private void setInventoryTab() {
-		stage.clear();
-
+		setStage();
 		setButtonBar();
-		stage.addActor(inventoryScrollPane);
-		stage.setScrollFocus(inventoryScrollPane);
+		stage.addActor(goldLabel);
+		stage.addActor(itemInHandImage);
+		stage.addActor(scrollTable);
 	}
 
 	private void setSkillTab() {
-		stage.clear();
+		setStage();
 		setButtonBar();
 
 		stage.addActor(farmingSkillLabel);
@@ -360,29 +405,40 @@ class InventoryTab {
 		}
 	}
 
+	private void setItemInHand() {
+		String itemInHandTextureAddress = getItemTexture(App.getInstance().game.getCurrentPlayer().getItemInHand());
+		if (itemInHandImage != null) {
+			itemInHandImage.remove();
+		}
+		if (itemInHandTextureAddress == null) {
+			itemInHandImage = new Image(emptyDrawable);
+		}
+		else {
+			itemInHandImage = new Image(new TextureRegionDrawable(new TextureRegion(new Texture(itemInHandTextureAddress))));
+		}
+		itemInHandImage.setPosition(1350, 480);
+		stage.addActor(itemInHandImage);
+	}
+
 
 	private void setMapTab() {
-//		tableDialog.getContentTable().clear();
-		stage.clear();
+		setStage();
 		setButtonBar();
 	}
 
 	private void setSocialTab() {
-//		tableDialog.getContentTable().clear();
-		stage.clear();
+		setStage();
 		setButtonBar();
 
 	}
 
 	private void setMissionTab() {
-//		tableDialog.getContentTable().clear();
-		stage.clear();
+		setStage();
 		setButtonBar();
 	}
 
 	private void setSettingTab() {
-//		tableDialog.getContentTable().clear();
-		stage.clear();
+		setStage();
 		setButtonBar();
 	}
 
@@ -390,5 +446,20 @@ class InventoryTab {
 		String type = tool.getToolMaterialType().toString();
 		String name = tool.getToolType().toString();
 		return type.substring(0, 1).toUpperCase() + type.substring(1).toLowerCase() + "_" + name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
+	}
+
+	private String getItemTexture(Item item) {
+		if (item == null)
+			return null;
+		if (item.getName().equalsIgnoreCase("coin"))
+			return null;
+		if (item.getItemType() == ItemType.TOOL) {
+			return "Textures/Tools/" + capitilize(((Tool) item)) + ".png";
+		}
+		AllItemsData data = AllItemsData.getData(item.getName());
+		if (data == null) {
+			return null;
+		}
+		return data.getTextureAddress();
 	}
 }
