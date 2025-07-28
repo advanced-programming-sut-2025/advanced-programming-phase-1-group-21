@@ -1,4 +1,5 @@
 .gitkeep
+Fonts/Blomberg-8MKKZ.otf
 Textures/Animal_product/Brown_Egg.png
 Textures/Animal_product/Dinosaur_Egg.png
 Textures/Animal_product/Duck_Egg.png
@@ -2382,6 +2383,7 @@ Textures/map/Outdoors Winter.png
 Textures/map/SpringBasicTile.png
 Textures/map/SummerBasicTile.png
 Textures/map/WinterBasicTile.png
+Users.json
 data/AnimalHouses.json
 data/Animals.json
 data/ArtisanGoods.json
