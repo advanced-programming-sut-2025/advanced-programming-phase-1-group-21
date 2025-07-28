@@ -7,6 +7,7 @@ public enum MessageType {
     CLIENT_SERVICE("Service"),
     DATABASE_SERVICE("DatabaseService"),
     LOBBY_SERVICE("LobbyService"),
+    CHAT_SERVICE("ChatService"),
     RESPONSE;
 
 

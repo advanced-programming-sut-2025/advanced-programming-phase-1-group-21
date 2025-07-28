@@ -1,7 +1,7 @@
 package io.github.StardewValley.network;
 
 import com.esotericsoftware.kryonet.Client;
-import models.Lobby;
+import models.network.Lobby;
 import models.result.Result;
 import models.user.User;
 import Network.Message;

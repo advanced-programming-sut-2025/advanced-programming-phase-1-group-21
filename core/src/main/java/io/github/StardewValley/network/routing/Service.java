@@ -1,5 +1,7 @@
 package io.github.StardewValley.network.routing;
 
+import models.network.Chat;
+
 /**
  * All functions should be static
  * Because MessageRouter Assumes so
@@ -23,5 +25,9 @@ public class Service {
      */
     public static void ping() {
         System.out.println("Hey we have been PONGED!");
+    }
+
+    public static void handleChat(Chat chat) {
+
     }
 }

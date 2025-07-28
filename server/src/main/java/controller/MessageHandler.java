@@ -1,8 +1,11 @@
 package controller;
 
+import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import Network.Message;
 import Network.MessageType;
+import models.network.Chat;
+import router.ChatServiceRouter;
 import router.DatabaseServiceRouter;
 import router.LobbyServiceRouter;
 import Network.ServiceRouter;
@@ -21,6 +24,7 @@ public class MessageHandler {
     private static void registerAll() {
         serviceMap.put(MessageType.DATABASE_SERVICE, new DatabaseServiceRouter());
         serviceMap.put(MessageType.LOBBY_SERVICE, new LobbyServiceRouter());
+        serviceMap.put(MessageType.CLIENT_SERVICE, new ChatServiceRouter());
     }
 
 

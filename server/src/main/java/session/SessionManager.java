@@ -1,8 +1,8 @@
 package session;
 
 import com.esotericsoftware.kryonet.Connection;
-import models.Lobby;
 import models.user.User;
+import services.ChatService;
 import services.DatabaseService;
 import services.LobbyService;
 
@@ -17,6 +17,7 @@ public class SessionManager {
     private static final Map<String, Connection> userConnectionMap = new ConcurrentHashMap<>();
     private static final Map<Connection, DatabaseService> databaseServiceMap = new ConcurrentHashMap<>();
     private static final Map<Connection, LobbyService> lobbyServiceMap = new ConcurrentHashMap<>();
+    private static final Map<Connection, ChatService> chatServiceMap = new ConcurrentHashMap<>();
     private static final List<User> listUsers = new ArrayList<>();
 
 
@@ -28,6 +29,7 @@ public class SessionManager {
         connectionUserMap.put(conn, user);
         userConnectionMap.put(user.getUsername(), conn);
         lobbyServiceMap.put(conn, new LobbyService(conn));
+        chatServiceMap.put(conn, new ChatService(conn));
         listUsers.add(user);
     }
 
@@ -36,6 +38,12 @@ public class SessionManager {
         userConnectionMap.remove(user.getUsername());
         databaseServiceMap.remove(conn);
         listUsers.remove(user);
+    }
+
+    public static User getUser(String username) {
+        Connection conn = userConnectionMap.get(username);
+        if (conn == null) return null;
+        return connectionUserMap.get(conn);
     }
 
     public static User getUser(Connection conn) {
@@ -63,5 +71,9 @@ public class SessionManager {
 
     public static List<User> getOnlineUsers() {
         return new ArrayList<>(listUsers);
+    }
+
+    public static ChatService getChatService(Connection conn) {
+        return chatServiceMap.get(conn);
     }
 }

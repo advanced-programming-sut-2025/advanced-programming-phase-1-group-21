@@ -2,7 +2,7 @@ package services;
 
 import com.esotericsoftware.kryonet.Connection;
 import controller.LobbyManager;
-import models.Lobby;
+import models.network.Lobby;
 import models.result.Result;
 import models.result.errorTypes.ServerError;
 import models.user.User;

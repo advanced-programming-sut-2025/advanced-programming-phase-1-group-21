@@ -20,7 +20,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import io.github.StardewValley.Main;
 import io.github.StardewValley.asset.Assets;
 import io.github.StardewValley.network.NetworkLobbyController;
-import models.Lobby;
+import models.network.Lobby;
 import models.user.User;
 
 import java.util.ArrayList;
