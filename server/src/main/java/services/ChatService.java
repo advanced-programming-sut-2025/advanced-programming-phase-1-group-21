@@ -40,6 +40,7 @@ public class ChatService {
             msg.data = NetworkUtil.mapArgs("chat", chat);
             conn.sendTCP(msg);
         }
+        return Result.success(null);
     }
 
     //this shouldn't be called from CLIENT
