@@ -70,7 +70,6 @@ public class GameScreen implements Screen , InputProcessor {
         game.getBatch().end();
         if (isInventoryShown) {
             inventoryTab.draw();
-//            stage.draw();
         }
     }
 
@@ -105,9 +104,7 @@ public class GameScreen implements Screen , InputProcessor {
     @Override
     public boolean keyDown(int i) {
         if (i == Input.Keys.I && !isInventoryShown) {
-
             isInventoryShown = true;
-//            Gdx.input.setInputProcessor(stage);
             inventoryTab.show();
         }
         return false;
