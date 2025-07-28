@@ -21,6 +21,8 @@ import data.items.AllItemsData;
 import io.github.StardewValley.App;
 import models.Item.Item;
 import models.Item.ItemType;
+import models.game.Inventory;
+import models.game.InventoryType;
 import models.game.Player;
 import models.network.Lobby;
 import models.skill.SkillType;
@@ -48,6 +50,7 @@ class InventoryTab {
 
 
 	private Table scrollTable;
+	private ScrollPane inventoryScrollPane;
 	BitmapFont numberFont;
 
 	private Texture sampleTexture;
@@ -68,12 +71,6 @@ class InventoryTab {
 		Player player = App.getInstance().game.getCurrentPlayer();
 		setEmpty();
 		setNumberFont();
-		stage.addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				System.out.println("Stage click: " + x + ", " + y);
-			}
-		});
 
 		sampleTexture = new Texture(AllItemsData.getData("Wool").getTextureAddress());
 
@@ -81,7 +78,8 @@ class InventoryTab {
 		scrollTable.defaults().width(64).height(64).pad(2);
 
 
-		List<Item> items = player.getInventory().getItems();
+		Inventory inv = player.getInventory();
+		List<Item> items = inv.getItems();
 		int rowIndex = 0, colIndex = 0, number = 0;
 		for (Item item: items) {
 			if (item.getName().equalsIgnoreCase("coin")) {
@@ -107,9 +105,11 @@ class InventoryTab {
 			goldLabel = new Label("Gold Item not found!", skin);
 		goldLabel.setPosition(610, 500);
 
-		setItemInHand();
+		int rowNumber = inv.getMaximumSize() / 12;
+		if (inv.getInventoryType() == InventoryType.UNLIMITED)
+			rowNumber = Integer.max(3, (items.size() + 11) / 12);
 
-		for (int row = 0; row < 3; row++) {
+		for (int row = 0; row < rowNumber; row++) {
 			for (int col = 0; col < 12; col++) {
 				Container<Image> container = new Container<>();
 				container.setSize(64, 64);
@@ -148,7 +148,6 @@ class InventoryTab {
 				container.addListener(new ClickListener() {
 					@Override
 					public void clicked(InputEvent event, float x, float y) {
-						System.out.println("You clicked on a container");
 						if (selectedItem != null)
 							selectedItem.setBackground(skin.newDrawable("white", Color.CLEAR));
 
@@ -160,10 +159,6 @@ class InventoryTab {
 							if (o instanceof Item) {
 								player.setItemInHand((Item) o);
 								setItemInHand();
-								System.out.println("changing ItemInHand");
-							}
-							else {
-								System.err.println("There is no Item in here???");
 							}
 						}
 					}
@@ -173,15 +168,12 @@ class InventoryTab {
 			}
 			scrollTable.row();
 		}
-		scrollTable.setSize(850, 200);
-		scrollTable.setPosition(610, 575);
 
-		scrollTable.addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				System.out.println("you clicked on the scroll table");
-			}
-		});
+		inventoryScrollPane = new ScrollPane(scrollTable, skin);
+		inventoryScrollPane.setScrollingDisabled(true, false);
+		inventoryScrollPane.setFadeScrollBars(false);
+		inventoryScrollPane.setSize(850, 200);
+		inventoryScrollPane.setPosition(610, 575);
 
 		exitButton = new TextButton("X", skin);
 		exitButton.addListener(new ClickListener() {
@@ -287,8 +279,6 @@ class InventoryTab {
 			im.setPosition(750 + i * 60, 400);
 			fishingLevels.add(im);
 		}
-
-		System.out.println("scrollTable bounds: x=" + scrollTable.getX() + ", y=" + scrollTable.getY() + ", w=" + scrollTable.getWidth() + ", h=" + scrollTable.getHeight());
 	}
 
 	public void show() {
@@ -298,7 +288,7 @@ class InventoryTab {
 
 	public void draw() {
 		if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
-			System.out.println("Left mouse button clicked!, coor: " + Gdx.input.getX() + " " + Gdx.input.getY());
+//			System.out.println("Left mouse button clicked!, coor: " + Gdx.input.getX() + " " + Gdx.input.getY());
 		}
 		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
@@ -379,8 +369,9 @@ class InventoryTab {
 		setStage();
 		setButtonBar();
 		stage.addActor(goldLabel);
-		stage.addActor(itemInHandImage);
-		stage.addActor(scrollTable);
+		setItemInHand();
+//		stage.addActor(scrollTable);
+		stage.addActor(inventoryScrollPane);
 	}
 
 	private void setSkillTab() {
