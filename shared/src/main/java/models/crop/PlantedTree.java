@@ -111,6 +111,11 @@ public class PlantedTree implements Placable, Harvestable, Serializable, DailyUp
 		return null;
 	}
 
+	@Override
+	public Sprite spriteGetter() {
+		return null;
+	}
+
 	public String getResultName() {
 		return treeData.getResultName();
 	}

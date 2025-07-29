@@ -37,4 +37,9 @@ public class Lake extends Building {
     public Texture getTexture() {
         return null;
     }
+
+    @Override
+    public Sprite spriteGetter() {
+        return null;
+    }
 }

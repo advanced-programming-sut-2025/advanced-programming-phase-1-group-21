@@ -1,6 +1,7 @@
 package models.map;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import models.animal.Animal;
 import models.time.Date;
 
@@ -40,6 +41,11 @@ public class AnimalHouse extends Building {
 
     @Override
     public Texture getTexture() {
+        return null;
+    }
+
+    @Override
+    public Sprite spriteGetter() {
         return null;
     }
 

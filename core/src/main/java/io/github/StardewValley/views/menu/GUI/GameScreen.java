@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -20,6 +21,7 @@ import models.map.Coord;
 import models.map.Map;
 import models.map.MapBuilder;
 import models.map.Tile;
+import models.tool.Tool;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -31,6 +33,11 @@ public class GameScreen implements Screen , InputProcessor {
     private Stage stage;
     private InventoryTab inventoryTab;
     private boolean isInventoryShown = false;
+    private float x = 0;
+    private float y = 0;
+    private BitmapFont font = new BitmapFont();
+    private BitmapFont messagePrinter = new BitmapFont();
+    private String message;
 
     public GameScreen() {
         Map map = new MapBuilder().buildFarm(new Random(1));
@@ -67,6 +74,8 @@ public class GameScreen implements Screen , InputProcessor {
         game.getBatch().begin();
         controller.buttonController(game);
         ShowMap.show(game);
+        messagePrinter.setColor(Color.RED);
+        messagePrinter.draw(game.getBatch(), message , 100 , 100);
         game.getBatch().end();
         if (isInventoryShown) {
             inventoryTab.draw();
@@ -122,7 +131,7 @@ public class GameScreen implements Screen , InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        controller.clickController(screenX, screenY);
+        message = controller.clickController(screenX, screenY);
         return false;
     }
 
@@ -142,7 +151,13 @@ public class GameScreen implements Screen , InputProcessor {
     }
 
     @Override
-    public boolean mouseMoved(int i, int i1) {
+    public boolean mouseMoved(int screenX, int screenY) {
+        if(App.getInstance().game.getCurrentPlayer().getItemInHand() instanceof Tool){
+            Tool tool = (Tool) App.getInstance().game.getCurrentPlayer().getItemInHand();
+            tool.handleRotation(screenX , Gdx.graphics.getHeight() - screenY);
+        }
+        x = screenX;
+        y = screenY;
         return false;
     }
 

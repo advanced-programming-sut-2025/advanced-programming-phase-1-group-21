@@ -44,6 +44,11 @@ public class GreenHouse extends Building {
     }
 
     @Override
+    public Sprite spriteGetter() {
+        return null;
+    }
+
+    @Override
     public boolean nextDay(Game g) {
         g.setWeather(Weather.SUNNY); //GreenHouse Weather is always sunny
         return super.nextDay(g);

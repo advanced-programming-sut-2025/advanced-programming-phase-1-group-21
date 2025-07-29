@@ -1,6 +1,7 @@
 package models.animal;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import data.AnimalData;
 import models.DailyUpdate;
 import models.Item.Item;
@@ -146,6 +147,11 @@ public class Animal implements Placable, DailyUpdate, Serializable {
 
     @Override
     public Texture getTexture() {
+        return null;
+    }
+
+    @Override
+    public Sprite spriteGetter() {
         return null;
     }
 

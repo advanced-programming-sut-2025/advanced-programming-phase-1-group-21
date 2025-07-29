@@ -55,18 +55,29 @@ public class GameController {
             walk(Direction.WEST);
     }
 
-    public void clickController(int x , int y){
+    public String clickController(int x , int y){
         Player player = game.getCurrentPlayer();
         Map map = player.getMap();
         Tile tile = map.getTile((x - map.mapType.distanceX)/30 , (y - map.mapType.distanceY)/30);
         if(tile == null)
-            return;
+            return "invalid tile";
         if(tile.getPlacable(Building.class) != null){
             Building building = tile.getPlacable(Building.class);
             if(checkCollision(building.sprite , player.getSprite()) && building.canEnter(game.getGameDate())){
                 player.enterBuilding(building);
             }
         }
+        if((player.getCoord().getX() - (x - map.mapType.distanceX)/30) > 1)
+            return "tile is not neighbor";
+        if((player.getCoord().getX() - (x - map.mapType.distanceX)/30) < -1)
+            return "tile is not neighbor";
+        if((player.getCoord().getY() - (y - map.mapType.distanceY)/30) > 1)
+            return "tile is not neighbor";
+        if((player.getCoord().getY() - (y - map.mapType.distanceY)/30) < -1)
+            return "tile is not neighbor";
+
+        return null;
+
     }
 
     public boolean checkCollision(Sprite target, Sprite player) {
