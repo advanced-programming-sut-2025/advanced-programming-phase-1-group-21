@@ -14,4 +14,5 @@ public interface Placable extends Serializable {
     boolean isWalkable();
     String getSprite();
     Texture getTexture();
+    Sprite spriteGetter();
 }

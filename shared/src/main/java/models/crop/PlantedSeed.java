@@ -1,6 +1,7 @@
 package models.crop;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import data.items.SeedData;
 import models.DailyUpdate;
 import models.Item.Item;
@@ -96,6 +97,11 @@ public class PlantedSeed implements Placable, Harvestable, DailyUpdate, Serializ
 
 	@Override
 	public Texture getTexture() {
+		return null;
+	}
+
+	@Override
+	public Sprite spriteGetter() {
 		return null;
 	}
 

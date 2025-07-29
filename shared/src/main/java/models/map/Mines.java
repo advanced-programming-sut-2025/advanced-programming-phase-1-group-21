@@ -34,4 +34,9 @@ public class Mines extends Building {
     public Texture getTexture() {
         return null;
     }
+
+    @Override
+    public Sprite spriteGetter() {
+        return null;
+    }
 }

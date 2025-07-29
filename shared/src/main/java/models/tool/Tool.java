@@ -1,14 +1,26 @@
 package models.tool;
 
+import Asset.SharedAssetManager;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.MathUtils;
 import models.Item.Item;
 import models.Item.ItemType;
 import models.game.Game;
 import models.map.Coord;
 import models.result.Result;
+import org.w3c.dom.Text;
+
 
 public abstract class Tool extends Item {
     private final ToolType toolType;
 	public ToolMaterialType toolMaterialType;
+	private Texture texture;
+	private Sprite sprite;
+	public float spriteX;
+	public float spriteY;
+
+
 
 
 	public Tool(ToolType toolType) {
@@ -19,10 +31,32 @@ public abstract class Tool extends Item {
 		else {
 			toolMaterialType = ToolMaterialType.PRIMITIVE;
 		}
+		loadTexture();
+	}
+
+	public Sprite getSprite() {
+		return sprite;
 	}
 
 	public ToolType getToolType() {
 		return toolType;
+	}
+
+	public void loadTexture(){
+		String type = this.getToolMaterialType().toString();
+		String name = this.getToolType().toString();
+		String result = type.substring(0, 1).toUpperCase() + type.substring(1).toLowerCase() + "_" + name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
+		texture = SharedAssetManager.getToolTexture(result);
+		if(sprite == null)
+			sprite = new Sprite(texture);
+		sprite.setTexture(texture);
+		sprite.setX(spriteX);
+		sprite.setY(spriteY);
+	}
+
+	public void handleRotation(int x , int y){
+		float angle = (float) Math.atan2(y - spriteY, x - spriteX);
+		sprite.setRotation((float) (3.14 + angle * MathUtils.radiansToDegrees));
 	}
 
 	public ToolMaterialType getToolMaterialType() {

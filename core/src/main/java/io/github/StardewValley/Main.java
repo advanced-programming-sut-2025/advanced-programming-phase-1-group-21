@@ -1,5 +1,6 @@
 package io.github.StardewValley;
 
+import Asset.SharedAssetManager;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -37,7 +38,9 @@ public class Main extends Game {
     public void create() {
         batch = new SpriteBatch();
         Assets.load();
+        SharedAssetManager.load();
         Assets.finishLoading();
+        SharedAssetManager.finishLoading();
         setScreen(new PreMenuScreen());
 
         try {
