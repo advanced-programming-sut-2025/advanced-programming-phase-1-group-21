@@ -1,12 +1,14 @@
 package util;
 
 import Network.Message;
+import com.esotericsoftware.kryonet.Connection;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.CompletableFuture;
 
 public class NetworkUtil {
     public static Random random = new Random();
@@ -35,5 +37,11 @@ public class NetworkUtil {
             map.put((String) keyValuePairs[i], keyValuePairs[i + 1]);
         }
         return map;
+    }
+
+    public static void sendMessage(Message msg, Connection c) {
+        CompletableFuture.runAsync(() -> {
+            c.sendTCP(msg);
+        });
     }
 }

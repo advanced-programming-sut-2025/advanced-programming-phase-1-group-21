@@ -2,47 +2,39 @@ package models.network;
 
 import models.user.User;
 
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 public class Lobby {
 	private String name;
-	private int ID;
+	private String ID;
 	private String password;
 	private boolean isPrivate;
 	private boolean isVisible;
-	private ArrayList<User> users = new ArrayList<>();
-	private User admin;
-	private transient Random rand;
+	private ArrayList<LobbyUser> users = new ArrayList<>();
 
 	//private Lobby
-	public Lobby(String name, String password, boolean isVisible, boolean isPrivate, Random rand) {
+	public Lobby(String name, String password, boolean isVisible, boolean isPrivate) {
 		this.isPrivate = isPrivate;
 		this.isVisible = isVisible;
 		this.name = name;
 		this.password = password;
-		this.ID = createID(rand);
-		this.rand = rand;
-	}
+		this.ID = Long.toString(Long.parseLong(UUID.randomUUID().toString().replace("-", "").substring(0, 8), 16), 36).toUpperCase();	}
 
 	//Kryo-Net
 	public Lobby() {
 
 	}
 
-	public static int createID(Random rand) {
-		return rand.nextInt();
-	}
-
-	public void setAdmin(User admin) {
-		this.admin = admin;
+	public LobbyUser getAdmin() {
+		if (!users.isEmpty()) return users.get(0);
+		return null;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public int getID() {
+	public String getID() {
 		return ID;
 	}
 
@@ -62,7 +54,7 @@ public class Lobby {
 		return isVisible;
 	}
 
-	public ArrayList<User> getUsers() {
+	public ArrayList<LobbyUser> getUsers() {
 		return users;
 	}
 
@@ -70,32 +62,25 @@ public class Lobby {
 		return name.equals(this.name);
 	}
 
-	public boolean checkID(int ID) {
-		return ID == this.ID;
+	public boolean checkID(String ID) {
+		return ID.equals(this.ID);
 	}
 
-	public void addUser(User user) {
+	public void addUser(LobbyUser user) {
 		users.add(user);
 	}
 
-	public void setRandomAdmin() {
-		if (users.isEmpty()) {
-			return;
-		}
-		int idx = rand.nextInt(users.size());
-		admin = users.get(idx);
+	public void addUser(User user) {
+		users.add(new LobbyUser(user));
 	}
 
-	public void removeUser(User user) {
+	public void removeUser(LobbyUser user) {
 		users.remove(user);
-		if (user.equals(admin)) {
-			setRandomAdmin();
-		}
 	}
 
-	public User getUserByUsername(String username) {
-		for (User user : users) {
-			if (user.getUsername().equals(username)) {
+	public LobbyUser getUserByUsername(String username) {
+		for (LobbyUser user : users) {
+			if (user.user.getUsername().equals(username)) {
 				return user;
 			}
 		}
@@ -106,12 +91,24 @@ public class Lobby {
 		return users.isEmpty();
 	}
 
-	public User getAdmin() {
-		return admin;
-	}
-
 	@Override
 	public String toString() {
 		return "{lobby=" + name + ", ID=" + ID + ", password=" + password + ", isPrivate=" + isPrivate + ", isVisible=" + isVisible + ", users=" + users + "}";
+	}
+
+	public void setMapID(String username, int mapID) {
+		for (LobbyUser user : users) {
+			if (user.user.getUsername().equals(username)) {
+				user.mapID = mapID;
+			}
+		}
+	}
+
+	public void toggleReady(String username) {
+		for (LobbyUser user : users) {
+			if (user.user.getUsername().equals(username)) {
+				user.isReady = !user.isReady;
+			}
+		}
 	}
 }

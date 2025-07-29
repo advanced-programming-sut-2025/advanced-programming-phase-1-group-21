@@ -17,7 +17,7 @@ public interface ServiceRouter {
             response.requestId = msg.requestId;
             System.out.print("[SENDING] ");
             NetworkUtil.printMethodMessage(response);
-            conn.sendTCP(response);
+            NetworkUtil.sendMessage(response, conn);
         }
         catch (Exception e) {
             e.printStackTrace();

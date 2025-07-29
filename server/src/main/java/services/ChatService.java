@@ -6,11 +6,14 @@ import com.esotericsoftware.kryonet.Connection;
 import controller.LobbyManager;
 import models.network.Chat;
 import models.network.ChatType;
+import models.network.Lobby;
+import models.network.LobbyUser;
 import models.result.Result;
 import models.result.errorTypes.UserError;
 import models.user.User;
 import session.SessionManager;
 import util.NetworkUtil;
+import util.ServerUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +41,7 @@ public class ChatService {
             Message msg = new Message(MessageType.CLIENT_SERVICE);
             msg.methodName = "handleChat";
             msg.data = NetworkUtil.mapArgs("chat", chat);
-            conn.sendTCP(msg);
+            NetworkUtil.sendMessage(msg, conn);
         }
         return Result.success(null);
     }
@@ -51,10 +54,10 @@ public class ChatService {
     }
 
     private List<Connection> handleLobbyMessage(Chat chat) {
-        List<User> users = LobbyManager.get().getLobbyByUsername(chat.getSender()).getUsers();
+        List<LobbyUser> users = LobbyManager.get().getLobbyByUsername(chat.getSender()).getUsers();
         List<Connection> connections = new ArrayList<>();
-        for (User user : users) {
-            Connection conn = SessionManager.getConnection(user.getUsername());
+        for (LobbyUser user : users) {
+            Connection conn = SessionManager.getConnection(user.user.getUsername());
             connections.add(conn);
         }
         return connections;

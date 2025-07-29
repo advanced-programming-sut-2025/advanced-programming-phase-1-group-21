@@ -1,6 +1,7 @@
 package io.github.StardewValley.views.menu.GUI;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -16,13 +17,21 @@ import io.github.StardewValley.asset.Assets;
 import io.github.StardewValley.network.NetworkLobbyController;
 import io.github.StardewValley.network.Refreshable;
 import models.network.Lobby;
+import models.network.LobbyUser;
 import models.user.User;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class LobbyScreen implements Screen, Refreshable {
     private final Main game;
     private Stage stage;
     private Lobby lobby;
-    private Label playersLabel;
+    private Table playersTable;
+    private Set<String> readyPlayers = new HashSet<>();
+    private TextField mapNumberField;
+    private TextButton readyButton;
+
     Skin skin;
 
     public LobbyScreen(Lobby lobby) {
@@ -46,41 +55,42 @@ public class LobbyScreen implements Screen, Refreshable {
 
         Label lobbyTitle = new Label("Lobby", skin);
         lobbyTitle.setFontScale(1.5f);
-        lobbyTitle.setPosition(sw / 2 - 50, sh * 15 / 16);
+        lobbyTitle.setPosition(sw / 2f - 50, sh * 15 / 16f);
 
         Label nameLabel = new Label("Name: " + lobby.getName(), skin);
         nameLabel.setFontScale(1.5f);
-        nameLabel.setPosition(sw / 16, sh * 13 / 16);
+        nameLabel.setPosition(sw / 16f, sh * 13 / 16f);
 
-        Label passwordLabel = new Label("Password: ", skin);
-        if (lobby.getPassword() != null)
-            passwordLabel.setText("Password: " + lobby.getPassword());
-        else
-            passwordLabel.setText("Password: None");
+        Label passwordLabel = new Label(lobby.getPassword() != null ?
+                "Password: " + lobby.getPassword() : "Password: None", skin);
         passwordLabel.setFontScale(1.5f);
-        passwordLabel.setPosition(sw * 8 / 16, sh * 13 / 16);
-
-
-        playersLabel = new Label("Players: " + getPlayersName(), skin);
-        playersLabel.setFontScale(1.5f);
-        playersLabel.setPosition(sw / 16, sh * 11 / 16);
-
+        passwordLabel.setPosition(sw * 8 / 16f, sh * 13 / 16f);
 
         Label idLabel = new Label("ID: " + lobby.getID(), skin);
         idLabel.setFontScale(1.5f);
-        idLabel.setPosition(sw / 16, sh * 9 / 16);
+        idLabel.setPosition(sw / 16f, sh * 11 / 16f);
 
-        TextButton backButton = new TextButton("Back", skin);
-        TextButton leaveButton = new TextButton("Leave Lobby", skin);
-        TextButton startButton = new TextButton("Start Game", skin);
-        TextButton deleteButton = new TextButton("Delete Lobby", skin);
+        // MAP Number Input
+        Label mapLabel = new Label("MAP:", skin);
+        mapLabel.setFontScale(1.5f);
+        mapLabel.setPosition(sw / 16f, sh * 10 / 16f - 40);
 
-        backButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                backToLobbies();
-            }
-        });
+        mapNumberField = new TextField("1", skin); // Default value 1
+        mapNumberField.setMessageText("Enter your map seed");
+        mapNumberField.setSize(sw / 8f, sh / 20f);
+        mapNumberField.setPosition(sw / 16f + 120, sh * 10 / 16f - 40);
+
+        stage.addActor(mapLabel);
+        stage.addActor(mapNumberField);
+
+        // Players Table
+        playersTable = new Table();
+        playersTable.setPosition(sw / 16f, sh * 9 / 16f);
+        playersTable.top().left();
+        updatePlayersTable(); // initialize with player list
+
+        TextButton leaveButton = new TextButton("Leave", skin);
+        readyButton = new TextButton("Ready", skin);
 
         leaveButton.addListener(new ClickListener() {
             @Override
@@ -89,46 +99,30 @@ public class LobbyScreen implements Screen, Refreshable {
             }
         });
 
-        startButton.addListener(new ClickListener() {
+        readyButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                startGame();
+                toggleReady();
             }
         });
 
-        deleteButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                deleteLobby();
-            }
-        });
 
         int backW = sw / 15, refreshW = sw / 10, createW = sw / 8, joinW = sw / 8, d = sw / 7, base = sw / 15;
-        backButton.setPosition(base, sh / 8);
-        backButton.setSize(sw / 15, sh / 15);
         leaveButton.setPosition(base + backW + d, sh / 8);
         leaveButton.setSize(sw / 10, sh / 15);
-        startButton.setPosition(base + backW + refreshW + 2 * d, sh / 8);
-        startButton.setSize(sw / 8, sh / 15);
-        deleteButton.setPosition(base + backW + refreshW + createW + 3 * d, sh / 8);
-        deleteButton.setSize(sw / 8, sh / 15);
+        readyButton.setPosition(base + backW + refreshW + 2 * d, sh / 8);
+        readyButton.setSize(sw / 8, sh / 15);
 
 
         stage.addActor(lobbyTitle);
         stage.addActor(nameLabel);
         stage.addActor(passwordLabel);
-        stage.addActor(playersLabel);
+        stage.addActor(playersTable);
         stage.addActor(idLabel);
-        stage.addActor(backButton);
         stage.addActor(leaveButton);
-        if (lobby.getUsers().get(0).getUsername().equalsIgnoreCase(App.getInstance().logedInUser.getUsername())) {
-            // Admin
-            stage.addActor(startButton);
-            stage.addActor(deleteButton);
-        }
+        stage.addActor(readyButton);
 
-
-
+        // ESC handling
         InputMultiplexer multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(new InputAdapter() {
             @Override
@@ -145,17 +139,40 @@ public class LobbyScreen implements Screen, Refreshable {
         Gdx.input.setInputProcessor(multiplexer);
     }
 
-    private String getPlayersName() {
-        StringBuilder playersString = new StringBuilder();
-        for (User user: lobby.getUsers())
-            playersString.append(user.getNickname()).append(", ");
-        playersString.setLength(playersString.length() - 2);
-        return playersString.toString();
+    private void updatePlayersTable() {
+        playersTable.clear();
+        for (LobbyUser lobbyUser : lobby.getUsers()) {
+            User user = lobbyUser.user;
+            String displayName = user.getUsername();
+            if (isAdmin(user)) {
+                displayName += " (SAR JOOKHE)";
+            }
+
+            Label playerLabel = new Label(displayName, skin);
+
+            if (lobbyUser.isReady) {
+                playerLabel.setColor(Color.GREEN);
+            } else {
+                playerLabel.setColor(Color.RED);
+            }
+
+            playersTable.add(playerLabel).left().pad(5);
+            playersTable.row();
+        }
+    }
+
+    private boolean isAdmin(User user) {
+        return lobby.getAdmin().equals(user);
+    }
+
+    private void toggleReady() {
+        NetworkLobbyController.toggleReady();
     }
 
     public void refresh() {
         lobby = NetworkLobbyController.getLobby().getData();
-        playersLabel.setText(getPlayersName());
+        updatePlayersTable();
+        readyButton.setText(lobby.getUserByUsername(App.getInstance().logedInUser.getUsername()).isReady ? "Unready" : "Ready");
     }
 
     private void leaveLobby() {
@@ -164,47 +181,37 @@ public class LobbyScreen implements Screen, Refreshable {
     }
 
     private void startGame() {
-
-    }
-
-    private void deleteLobby() {
-        for (User user: NetworkLobbyController.getUsersOfLobby()) {
-            NetworkLobbyController.removeFromLobby(user.getUsername());
-        }
-        backToLobbies();
+        // Logic to start game
     }
 
     private void backToLobbies() {
         game.setScreen(new LobbiesMenuScreen());
     }
 
-
-    @Override
-    public void show() {}
-
-    @Override
-    public void render(float delta) {
+    @Override public void show() {}
+    @Override public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(delta);
         stage.draw();
     }
-
-    @Override
-    public void resize(int width, int height) {
+    @Override public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
     }
-
-    @Override
-    public void pause() {}
-
-    @Override
-    public void resume() {}
-
-    @Override
-    public void hide() {}
-
-    @Override
-    public void dispose() {
+    @Override public void pause() {}
+    @Override public void resume() {}
+    @Override public void hide() {}
+    @Override public void dispose() {
         stage.dispose();
+    }
+
+    public void sendMap() {
+        String mapInput = mapNumberField.getText().trim();
+        int mapNumber;
+        try {
+            mapNumber = Integer.parseInt(mapInput);
+        } catch (NumberFormatException e) {
+            mapNumber = 1;
+        }
+        NetworkLobbyController.sendMap(mapNumber);
     }
 }
