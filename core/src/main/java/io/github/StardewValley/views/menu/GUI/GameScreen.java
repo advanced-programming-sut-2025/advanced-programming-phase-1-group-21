@@ -40,7 +40,7 @@ public class GameScreen implements Screen , InputProcessor {
         Map map = new MapBuilder().buildFarm(new Random(1));
         ArrayList<Player> players = new ArrayList<>();
         players.add(new Player(App.getInstance().logedInUser, map));
-        App.getInstance().game = new Game(players);
+        App.getInstance().game = new Game(players, players.get(0));
         this.game = Main.getInstance();
         this.controller = new GameController();
         controller.game = App.getInstance().game;

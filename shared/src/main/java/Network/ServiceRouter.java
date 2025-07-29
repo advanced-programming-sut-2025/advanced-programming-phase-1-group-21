@@ -6,13 +6,15 @@ import util.NetworkUtil;
 import java.util.Map;
 
 public interface ServiceRouter {
-    Object dispatch(Connection conn, String methodName, Map<String, Object> args) throws Exception;
+    Object dispatch(Connection conn, Message msg) throws Exception;
 
-    default void route(Connection conn, Message msg){
-        if (!(msg.data instanceof Map))
-            throw new RuntimeException("[ERROR] DATA is not a map");
+    default void route(Connection conn, Message msg) {
         try {
-            Object result = dispatch(conn, msg.getMethodName(), (Map<String, Object>) msg.data);
+            Object result = dispatch(conn, msg);
+            /*if (result == null) {
+                NetworkUtil.sendMessage(null, conn);
+                return;
+            }*/
             Message response = new Message(MessageType.RESPONSE, result);
             response.requestId = msg.requestId;
             System.out.print("[SENDING] ");

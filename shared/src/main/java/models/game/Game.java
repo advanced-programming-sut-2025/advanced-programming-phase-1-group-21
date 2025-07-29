@@ -24,9 +24,9 @@ public class Game implements Serializable {
     private Weather nextDayWeather;
     public final Random rand = new Random();
 
-    public Game(ArrayList<Player> players) {
+    public Game(ArrayList<Player> players, Player currentPlayer) {
         this.players = players;
-        this.currentPlayer = players.get(0);
+        this.currentPlayer = currentPlayer;
         this.gameDate = Date.createBias();
         this.gameWeather = Weather.SUNNY;
         this.nextDayWeather = calculateRandomWeather();

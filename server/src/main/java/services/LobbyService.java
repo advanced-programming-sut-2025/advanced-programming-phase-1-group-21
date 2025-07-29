@@ -1,5 +1,7 @@
 package services;
 
+import Network.Message;
+import Network.MessageType;
 import com.esotericsoftware.kryonet.Connection;
 import controller.LobbyManager;
 import models.network.Lobby;
@@ -13,6 +15,7 @@ import util.ServerUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class LobbyService {
 
@@ -87,13 +90,17 @@ public class LobbyService {
         return SessionManager.getOnlineUsers();
     }
 
-    public void makeRefresh() {
-        for (LobbyUser user: lobby.getUsers()) {
-            Connection c = SessionManager.getConnection(user.user.getUsername());
+    public void sendAllLobby(Message message) {
+        List<Connection> connections = SessionManager.getConnectionsByLobby(lobby);
+        for (Connection c : connections) {
             if (c != null) {
-                NetworkUtil.sendMessage(ServerUtil.createRefreshMessage(), c);
+                NetworkUtil.sendMessage(message, c);
             }
         }
+    }
+
+    public void makeRefresh() {
+        sendAllLobby(ServerUtil.createRefreshMessage());
     }
 
     public void setMapID(int mapID) {
@@ -104,5 +111,25 @@ public class LobbyService {
     public void toggleReady() {
         lobby.toggleReady(user.getUsername());
         makeRefresh();
+
+        CompletableFuture.runAsync(this::checkReadyLobby);
+    }
+
+    private void checkReadyLobby() {
+        for (LobbyUser user: lobby.getUsers()) {
+            if (!user.isReady)
+                return;
+        }
+        sendAllLobby(new Message(MessageType.CLIENT_SERVICE, "sendMapID"));
+        try {
+            Thread.sleep(ServerUtil.AVOID_RACE);
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //All are READY
+        SessionManager.addGame(lobby);
+        sendAllLobby(ServerUtil.createGameStart());
     }
 }
