@@ -11,7 +11,7 @@ import models.network.Chat;
 
 /**
  * All functions should be static
- * Because MessageRouter Assumes so
+ * Because ClientServiceRouter Assumes so
  * we send respond but server actually ignores respond (for now)
  *
  *
@@ -25,7 +25,7 @@ import models.network.Chat;
  *     2. So When Game is ready, server actually runs "public static void gameStart()" here, and
  *     you should do what ever you need to do on client (call functions from gameStart()..., Init the Game View, ...)
  */
-public class Service {
+public class ClientService {
 
     /**
      * This is actually for testing
@@ -45,10 +45,14 @@ public class Service {
         }
     }
 
-    public static void sendMap() {
+    public static void sendMapID() {
         Screen screen = Main.getInstance().getScreen();
         if (screen instanceof LobbyScreen) {
             ((LobbyScreen) screen).sendMap();
         }
+    }
+
+    public static void startGame() {
+        System.out.println("HERE");
     }
 }

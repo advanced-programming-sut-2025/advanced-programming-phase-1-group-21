@@ -1,5 +1,6 @@
 package router;
 
+import Network.Message;
 import com.esotericsoftware.kryonet.Connection;
 import Network.ServiceRouter;
 import services.DatabaseService;
@@ -21,7 +22,9 @@ public class DatabaseServiceRouter implements ServiceRouter {
     }
 
     @Override
-    public Object dispatch(Connection conn, String methodName, Map<String, Object> args) throws Exception {
+    public Object dispatch(Connection conn, Message msg) throws Exception {
+        String methodName = msg.getMethodName();
+        Map<String, Object> args = (Map<String, Object>) msg.data;
         Method method = methods.get(methodName);
         if (method == null) {
             throw new RuntimeException("[DISPATCH ERROR] Method not found: " + methodName);

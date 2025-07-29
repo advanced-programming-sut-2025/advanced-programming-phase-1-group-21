@@ -4,15 +4,11 @@ import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import Network.Message;
-import Network.MessageType;
 import Network.NetworkRegister;
-import io.github.StardewValley.network.routing.MessageRouter;
 import io.github.StardewValley.views.menu.GUI.UIUtil;
 import models.result.errorTypes.ServerError;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.*;
 
@@ -78,7 +74,8 @@ public class ClientNetwork {
         try {
             Message response = queue.poll(TIMEOUT, TimeUnit.MILLISECONDS);
             if (response == null) {
-                throw new RuntimeException("Server did not respond within " + TIMEOUT + "ms");
+
+                throw new RuntimeException("Server did not respond within " + TIMEOUT + "ms for message: " + message);
             }
             responseMap.remove(requestId);
             return response;

@@ -97,7 +97,7 @@ public class NetworkLobbyController {
     public static void sendMap(int mapNumber) {
         Message msg = new Message(MessageType.LOBBY_SERVICE);
         msg.methodName = "setMapID";
-        msg.data = NetworkUtil.mapArgs();
+        msg.data = NetworkUtil.mapArgs("mapID", mapNumber);
         Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
     }
 

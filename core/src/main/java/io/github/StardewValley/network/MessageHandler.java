@@ -4,7 +4,7 @@ import Network.Message;
 import Network.MessageType;
 import Network.ServiceRouter;
 import com.esotericsoftware.kryonet.Connection;
-import io.github.StardewValley.network.routing.MessageRouter;
+import io.github.StardewValley.network.routing.ClientServiceRouter;
 import util.NetworkUtil;
 
 import java.util.HashMap;
@@ -19,7 +19,7 @@ public class MessageHandler {
     }
 
     private static void registerAll() {
-        serviceMap.put(MessageType.CLIENT_SERVICE, new MessageRouter());
+        serviceMap.put(MessageType.CLIENT_SERVICE, new ClientServiceRouter());
     }
 
 
@@ -32,6 +32,10 @@ public class MessageHandler {
     }
 
     private static void handleMethod(Connection connection, Message msg) {
+        if (msg.type == MessageType.GAME_SERVICE) {
+
+        }
+
         ServiceRouter serviceRouter = serviceMap.get(msg.type);
         if (serviceRouter == null)
             throw new RuntimeException("Service router not found");
