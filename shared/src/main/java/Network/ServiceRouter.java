@@ -15,7 +15,7 @@ public interface ServiceRouter {
             Object result = dispatch(conn, msg.getMethodName(), (Map<String, Object>) msg.data);
             Message response = new Message(MessageType.RESPONSE, result);
             response.requestId = msg.requestId;
-            System.out.println("[SENDING] ");
+            System.out.print("[SENDING] ");
             NetworkUtil.printMethodMessage(response);
             conn.sendTCP(response);
         }

@@ -1,5 +1,9 @@
 package io.github.StardewValley.network.routing;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
+import io.github.StardewValley.Main;
+import io.github.StardewValley.network.Refreshable;
 import models.network.Chat;
 
 /**
@@ -29,5 +33,12 @@ public class Service {
 
     public static void handleChat(Chat chat) {
 
+    }
+
+    public static void refresh() {
+        Screen screen = Main.getInstance().getScreen();
+        if (screen instanceof Refreshable) {
+            ((Refreshable) screen).refresh();
+        }
     }
 }

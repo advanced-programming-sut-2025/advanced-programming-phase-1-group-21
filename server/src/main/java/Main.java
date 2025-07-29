@@ -34,6 +34,11 @@ public class Main {
                     MessageHandler.handle(connection, (Message) o);
                 }
             }
+
+            public void disconnected(Connection connection) {
+                System.out.println("[SERVER] Client disconnected");
+                SessionManager.disconnected(connection);
+            }
         });
 
         server.start();

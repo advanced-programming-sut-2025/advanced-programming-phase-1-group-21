@@ -14,13 +14,15 @@ import io.github.StardewValley.App;
 import io.github.StardewValley.Main;
 import io.github.StardewValley.asset.Assets;
 import io.github.StardewValley.network.NetworkLobbyController;
+import io.github.StardewValley.network.Refreshable;
 import models.network.Lobby;
 import models.user.User;
 
-public class LobbyScreen implements Screen {
+public class LobbyScreen implements Screen, Refreshable {
     private final Main game;
     private Stage stage;
     private Lobby lobby;
+    private Label playersLabel;
     Skin skin;
 
     public LobbyScreen(Lobby lobby) {
@@ -58,11 +60,8 @@ public class LobbyScreen implements Screen {
         passwordLabel.setFontScale(1.5f);
         passwordLabel.setPosition(sw * 8 / 16, sh * 13 / 16);
 
-        StringBuilder playersString = new StringBuilder();
-        for (User user: lobby.getUsers())
-            playersString.append(user.getNickname()).append(", ");
-        playersString.setLength(playersString.length() - 2);
-        Label playersLabel = new Label("Players: " + playersString, skin);
+
+        playersLabel = new Label("Players: " + getPlayersName(), skin);
         playersLabel.setFontScale(1.5f);
         playersLabel.setPosition(sw / 16, sh * 11 / 16);
 
@@ -146,6 +145,19 @@ public class LobbyScreen implements Screen {
         Gdx.input.setInputProcessor(multiplexer);
     }
 
+    private String getPlayersName() {
+        StringBuilder playersString = new StringBuilder();
+        for (User user: lobby.getUsers())
+            playersString.append(user.getNickname()).append(", ");
+        playersString.setLength(playersString.length() - 2);
+        return playersString.toString();
+    }
+
+    public void refresh() {
+        lobby = NetworkLobbyController.getLobby().getData();
+        playersLabel.setText(getPlayersName());
+    }
+
     private void leaveLobby() {
         NetworkLobbyController.leaveLobby();
         backToLobbies();
@@ -164,10 +176,6 @@ public class LobbyScreen implements Screen {
 
     private void backToLobbies() {
         game.setScreen(new LobbiesMenuScreen());
-    }
-
-    private void refresh() {
-        lobby = NetworkLobbyController.getLobby().getData();
     }
 
 

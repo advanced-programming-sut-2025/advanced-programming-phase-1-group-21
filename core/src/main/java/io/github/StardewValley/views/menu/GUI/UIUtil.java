@@ -9,6 +9,7 @@ import io.github.StardewValley.Main;
 import io.github.StardewValley.asset.Assets;
 import io.github.StardewValley.asset.GameSound;
 import io.github.StardewValley.views.console.ConsoleScreen;
+import models.result.Error;
 
 import javax.swing.*;
 import java.io.File;
@@ -53,6 +54,18 @@ public class UIUtil {
         multiplexer.addProcessor(stage);
 
         Gdx.input.setInputProcessor(multiplexer);
+    }
+
+    public static void showErrorScreen(Error error) {
+        Main.getInstance().setScreen(new ErrorScreen(error));
+    }
+
+    public static void showErrorScreen(String error) {
+        Main.getInstance().setScreen(new ErrorScreen(error));
+    }
+
+    public static void showErrorScreen() {
+        Main.getInstance().setScreen(new ErrorScreen("Something went wrong"));
     }
 
     public static class FilePicker {

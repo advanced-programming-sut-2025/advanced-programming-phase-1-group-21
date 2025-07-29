@@ -21,9 +21,7 @@ public class NetworkUtil {
     }
 
     public static void printMethodMessage(Message msg) {
-        System.out.println(msg.type + " " + msg.methodName);
-        System.out.println("DATA:  ");
-        System.out.println(msg.data);
+        System.out.println(msg.type + " " + msg.methodName + " DATA{" + msg.data + "}");
     }
 
 

@@ -7,6 +7,8 @@ import Network.Message;
 import Network.MessageType;
 import Network.NetworkRegister;
 import io.github.StardewValley.network.routing.MessageRouter;
+import io.github.StardewValley.views.menu.GUI.UIUtil;
+import models.result.errorTypes.ServerError;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -16,7 +18,7 @@ import java.util.concurrent.*;
 
 public class ClientNetwork {
 
-    private static final int TIMEOUT = 1000;
+    private static final int TIMEOUT = 5000;
     private static Client client;
 
     private static final ConcurrentHashMap<String, BlockingQueue<Message>> responseMap = new ConcurrentHashMap<>();
@@ -45,6 +47,9 @@ public class ClientNetwork {
             Message message = (Message) o;
             handleMessage(connection, message);
         }
+        else {
+            System.out.println("[RECEIVED] " + o.toString() + " -> " + o.getClass().getSimpleName());
+        }
     }
 
     public static void handleMessage(Connection connection, Message message) {
@@ -54,20 +59,27 @@ public class ClientNetwork {
             responseMap.get(message.requestId).offer(message);
             return;
         }
-        MessageHandler.handle(connection, message);
+        CompletableFuture.runAsync(() -> {
+            MessageHandler.handle(connection, message);
+        });
     }
 
     public static Message sendMessageAndWaitForResponse(Message message) {
+        System.out.println("[Send And Wait For Response] " + message);
         String requestId = UUID.randomUUID().toString();
         message.requestId = requestId;
 
         BlockingQueue<Message> queue = new ArrayBlockingQueue<>(1);
         responseMap.put(requestId, queue);
 
+
         sendMessage(message);
 
         try {
             Message response = queue.poll(TIMEOUT, TimeUnit.MILLISECONDS);
+            if (response == null) {
+                throw new RuntimeException("Server did not respond within " + TIMEOUT + "ms");
+            }
             responseMap.remove(requestId);
             return response;
         }
@@ -78,7 +90,12 @@ public class ClientNetwork {
     }
 
     public static void sendMessage(Message message) {
-        client.sendTCP(message);
+        if (client != null && client.isConnected()) {
+            client.sendTCP(message);
+        } else {
+            UIUtil.showErrorScreen(ServerError.NO_SERVER_IS_RUNNING);
+            throw new RuntimeException("[ERROR] Cannot send message. Client is not connected to the server.");
+        }
     }
 
 }

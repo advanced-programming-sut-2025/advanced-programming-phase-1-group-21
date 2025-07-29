@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import io.github.StardewValley.Main;
 import io.github.StardewValley.asset.Assets;
+import io.github.StardewValley.controllers.LoginMenuController;
 
 public class MainMenuScreen implements Screen {
 
@@ -81,6 +82,7 @@ public class MainMenuScreen implements Screen {
             @Override
             public boolean keyDown(int keycode) {
                 if (keycode == Input.Keys.ESCAPE) {
+                    LoginMenuController.logout();
                     game.setScreen(new PreMenuScreen());
                     return true;
                 }
