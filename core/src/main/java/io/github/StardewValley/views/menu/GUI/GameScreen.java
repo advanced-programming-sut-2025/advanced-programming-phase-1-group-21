@@ -33,9 +33,6 @@ public class GameScreen implements Screen , InputProcessor {
     private Stage stage;
     private InventoryTab inventoryTab;
     private boolean isInventoryShown = false;
-    private float x = 0;
-    private float y = 0;
-    private BitmapFont font = new BitmapFont();
     private BitmapFont messagePrinter = new BitmapFont();
     private String message;
 
@@ -73,9 +70,10 @@ public class GameScreen implements Screen , InputProcessor {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.getBatch().begin();
         controller.buttonController(game);
-        ShowMap.show(game);
+        ShowMap.show(game , delta);
         messagePrinter.setColor(Color.RED);
-        messagePrinter.draw(game.getBatch(), message , 100 , 100);
+        if(message != null)
+            messagePrinter.draw(game.getBatch(), message , 100 , 100);
         game.getBatch().end();
         if (isInventoryShown) {
             inventoryTab.draw();
@@ -156,8 +154,6 @@ public class GameScreen implements Screen , InputProcessor {
             Tool tool = (Tool) App.getInstance().game.getCurrentPlayer().getItemInHand();
             tool.handleRotation(screenX , Gdx.graphics.getHeight() - screenY);
         }
-        x = screenX;
-        y = screenY;
         return false;
     }
 

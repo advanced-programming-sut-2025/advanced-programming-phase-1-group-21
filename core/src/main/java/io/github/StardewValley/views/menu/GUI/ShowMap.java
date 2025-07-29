@@ -9,12 +9,12 @@ import models.map.*;
 import models.tool.Tool;
 
 public class ShowMap {
-    public static void show(Main game){
+    public static void show(Main game , float delta){
         showTiles(game);
         showHouse(game);
         onTilesShow(game);
         showPlayer(game);
-        showTool(game);
+        showTool(game , delta);
     }
 
     public static void showTiles(Main game){
@@ -58,7 +58,7 @@ public class ShowMap {
         }
     }
 
-    public static void showTool(Main game){
+    public static void showTool(Main game , float delta){
         Player player = App.getInstance().game.getCurrentPlayer();
         if(player.getItemInHand() instanceof Tool){
             Tool tool = (Tool) player.getItemInHand();
@@ -66,6 +66,8 @@ public class ShowMap {
             tool.spriteY = player.getSprite().getY();
             tool.loadTexture();
             tool.getSprite().draw(game.getBatch());
+            if(tool.getAnimationTime() > 0)
+                tool.animation(delta);
         }
     }
 }

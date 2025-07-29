@@ -53,6 +53,17 @@ public class GameController {
             walk(Direction.EAST);
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT))
             walk(Direction.WEST);
+
+        if(Gdx.input.isKeyPressed(Input.Keys.W))
+            useTool(Direction.SOUTH);
+        if(Gdx.input.isKeyPressed(Input.Keys.S))
+            useTool(Direction.NORTH);
+        if(Gdx.input.isKeyPressed(Input.Keys.D))
+            useTool(Direction.EAST);
+        if(Gdx.input.isKeyPressed(Input.Keys.A))
+            useTool(Direction.WEST);
+
+
     }
 
     public String clickController(int x , int y){
@@ -553,6 +564,8 @@ public class GameController {
         if (item.isSuccess() && (item.getData() != null)) {
             game.getCurrentPlayer().getInventory().addItem(item.getData());
         }
+        ((Tool) game.getCurrentPlayer().getItemInHand()).setAnimationTime((float) 0.5);
+        ((Tool) game.getCurrentPlayer().getItemInHand()).setAnimationDirection(d.getDx());
         return item;
     }
 
