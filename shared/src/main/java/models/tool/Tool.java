@@ -8,6 +8,7 @@ import models.Item.Item;
 import models.Item.ItemType;
 import models.game.Game;
 import models.map.Coord;
+import models.map.Direction;
 import models.result.Result;
 import org.w3c.dom.Text;
 
@@ -19,6 +20,8 @@ public abstract class Tool extends Item {
 	private Sprite sprite;
 	public float spriteX;
 	public float spriteY;
+	public float animationTime;
+	public int animationDirection;
 
 
 
@@ -32,6 +35,25 @@ public abstract class Tool extends Item {
 			toolMaterialType = ToolMaterialType.PRIMITIVE;
 		}
 		loadTexture();
+	}
+
+	public void animation(float delta){
+		animationTime += delta;
+		sprite.rotate((float) (3.14 + animationTime * animationDirection * MathUtils.radiansToDegrees));
+		if(animationTime > 1)
+			animationTime = 0;
+	}
+
+	public float getAnimationTime() {
+		return animationTime;
+	}
+
+	public void setAnimationTime(float animationTime) {
+		this.animationTime = animationTime;
+	}
+
+	public void setAnimationDirection(int animationDirection) {
+		this.animationDirection = animationDirection;
 	}
 
 	public Sprite getSprite() {
