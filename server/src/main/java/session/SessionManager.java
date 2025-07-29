@@ -33,11 +33,15 @@ public class SessionManager {
         listUsers.add(user);
     }
 
-    public static void remove(Connection conn) {
+    public static void logout(Connection conn) {
         User user = connectionUserMap.remove(conn);
         userConnectionMap.remove(user.getUsername());
-        databaseServiceMap.remove(conn);
         listUsers.remove(user);
+
+        LobbyService lobbyService = lobbyServiceMap.remove(conn);
+        lobbyService.leaveLobby();
+
+        chatServiceMap.remove(conn);
     }
 
     public static User getUser(String username) {
@@ -75,5 +79,10 @@ public class SessionManager {
 
     public static ChatService getChatService(Connection conn) {
         return chatServiceMap.get(conn);
+    }
+
+    public static void disconnected(Connection connection) {
+        logout(connection);
+        databaseServiceMap.remove(connection);
     }
 }

@@ -1,5 +1,6 @@
 package services;
 
+import Network.Message;
 import com.esotericsoftware.kryonet.Connection;
 import controller.LobbyManager;
 import models.network.Lobby;
@@ -8,6 +9,7 @@ import models.result.errorTypes.ServerError;
 import models.user.User;
 import session.SessionManager;
 import util.NetworkUtil;
+import util.ServerUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +47,9 @@ public class LobbyService {
     }
 
     public Result<Void> removeFromLobby(String username) {
+        if (lobby == null) {
+            return Result.failure(ServerError.NO_LOBBY);
+        }
         if (!lobby.getAdmin().equals(user))
             return Result.failure(ServerError.INSUFFICENT_PERMISSION);
         User userToRemove = lobby.getUserByUsername(username);
@@ -52,6 +57,7 @@ public class LobbyService {
             throw new RuntimeException("[REMOVING FROM LOBBY] User not found");
         }
         lobby.removeUser(userToRemove);
+        makeRefresh();
         return Result.success(null);
     }
 
@@ -63,13 +69,18 @@ public class LobbyService {
         if (lobby.getPassword() != null && !lobby.getPassword().equals(password))
             return Result.failure(ServerError.INSUFFICENT_PERMISSION);
         lobby.addUser(user);
+        makeRefresh();
         return Result.success(null);
     }
 
     public Result<Void> leaveLobby() {
+        if (lobby == null) {
+            return Result.failure(ServerError.NO_LOBBY);
+        }
         lobby.removeUser(user);
         if (lobby.isEmpty())
             LobbyManager.get().removeLobby(lobby);
+        makeRefresh();
         return Result.success(null);
     }
 
@@ -77,4 +88,12 @@ public class LobbyService {
         return SessionManager.getOnlineUsers();
     }
 
+    public void makeRefresh() {
+        for (User user: lobby.getUsers()) {
+            Connection c = SessionManager.getConnection(user.getUsername());
+            if (c != null) {
+                c.sendTCP(ServerUtil.createRefreshMessage());
+            }
+        }
+    }
 }

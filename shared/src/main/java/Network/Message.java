@@ -29,6 +29,6 @@ public class Message {
 
     @Override
     public String toString() {
-        return "Message [type=" + type + ", requestId=" + requestId + ", data=" + data + "]";
+        return "Message [type=" + type + ", method=" + methodName + ", requestId=" + requestId + ", data=" + data + "]";
     }
 }

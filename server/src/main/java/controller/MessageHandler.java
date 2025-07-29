@@ -30,7 +30,7 @@ public class MessageHandler {
 
     public static void handle(Connection connection, Message msg) {
         if (msg.isMethodRequest()) {
-            System.out.println("[RECEIVED] ");
+            System.out.print("[RECEIVED] ");
             NetworkUtil.printMethodMessage(msg);
             handleMethod(connection, msg);
         }

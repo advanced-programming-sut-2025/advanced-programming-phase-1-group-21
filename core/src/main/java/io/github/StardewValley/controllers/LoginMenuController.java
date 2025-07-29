@@ -110,4 +110,12 @@ public class LoginMenuController{
         return RegisterMenuController.checkPassword(password);
     }
 
+    public static Result<Void> logout() {
+        if (App.getInstance().logedInUser == null) {
+            System.out.println("[WARN] You are not logged in!");
+            return Result.failure(UserError.USER_NOT_FOUND);
+        }
+        NetworkDataBaseController.logout();
+        return Result.success(null);
+    }
 }

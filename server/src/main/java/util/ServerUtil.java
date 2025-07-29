@@ -11,4 +11,11 @@ public class ServerUtil {
         msg.data = NetworkUtil.mapArgs();
         return msg;
     }
+
+    public static Message createRefreshMessage() {
+        Message msg = new Message(MessageType.CLIENT_SERVICE);
+        msg.methodName = "refresh";
+        msg.data = NetworkUtil.mapArgs();
+        return msg;
+    }
 }

@@ -21,6 +21,7 @@ import io.github.StardewValley.Main;
 import io.github.StardewValley.asset.Assets;
 import io.github.StardewValley.network.NetworkLobbyController;
 import models.network.Lobby;
+import models.result.Result;
 import models.user.User;
 
 import java.util.ArrayList;
@@ -411,22 +412,27 @@ public class LobbiesMenuScreen implements Screen {
     }
 
     private void joinTheLobby(Lobby lobby, String password) {
-        if (!lobby.isPrivate())
+        if (!lobby.isPrivate()) {
             System.out.println("This lobby didn't have password");
+            return;
+        }
 
         System.out.println("Trying to join the lobby. lobby name: " + lobby.getName() + ", lobby password: " + lobby.getPassword() + ", entered password: " + password);
 
-        NetworkLobbyController.joinLobby(lobby.getID(), password);
-        game.setScreen(new LobbyScreen(NetworkLobbyController.getLobby().getData()));
+        Result r = NetworkLobbyController.joinLobby(lobby.getID(), password);
+        if (r.isSuccess())
+            game.setScreen(new LobbyScreen(NetworkLobbyController.getLobby().getData()));
     }
 
     private void joinTheLobby(Lobby lobby) {
         if (lobby.isPrivate()) {
             System.out.println("You can't join a private lobby without passowrd");
+            return;
         }
         System.out.println("Trying to join the lobby. name: " + lobby.getName());
-        NetworkLobbyController.joinLobby(lobby.getID(), null);
-        game.setScreen(new LobbyScreen(NetworkLobbyController.getLobby().getData()));
+        Result r = NetworkLobbyController.joinLobby(lobby.getID(), null);
+        if (r.isSuccess())
+            game.setScreen(new LobbyScreen(NetworkLobbyController.getLobby().getData()));
     }
 
     private void createLobby(String name, String password, boolean isPrivate, boolean isInvisible) {

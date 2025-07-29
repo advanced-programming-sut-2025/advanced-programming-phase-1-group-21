@@ -38,6 +38,10 @@ public class DatabaseService {
         return Result.failure(re.getError());
     }
 
+    public void logout() {
+        SessionManager.logout(connection);
+    }
+
     public Result<String> getSecurityQuestion(String username) {
         return SQLHandler.getSecurityQuestion(username);
     }

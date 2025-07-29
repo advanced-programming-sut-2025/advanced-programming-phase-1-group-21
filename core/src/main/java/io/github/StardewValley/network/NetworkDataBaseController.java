@@ -97,4 +97,11 @@ public class NetworkDataBaseController {
         Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
         return (Result<User>) response.data;
     }
+
+    public static void logout() {
+        Message msg = new Message(MessageType.DATABASE_SERVICE);
+        msg.methodName = "logout";
+        msg.data = NetworkUtil.mapArgs();
+        ClientNetwork.sendMessageAndWaitForResponse(msg);
+    }
 }
