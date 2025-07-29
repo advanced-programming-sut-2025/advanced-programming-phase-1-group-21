@@ -21,6 +21,7 @@ import io.github.StardewValley.Main;
 import io.github.StardewValley.asset.Assets;
 import io.github.StardewValley.network.NetworkLobbyController;
 import models.network.Lobby;
+import models.network.LobbyUser;
 import models.result.Result;
 import models.user.User;
 
@@ -173,8 +174,8 @@ public class LobbiesMenuScreen implements Screen {
             Label idLabel = new Label("ID: " + l.getID(), skin);
 
             StringBuilder membersString = new StringBuilder();
-            for (User user: l.getUsers())
-                membersString.append(user.getNickname()).append(", ");
+            for (LobbyUser user: l.getUsers())
+                membersString.append(user.user.getNickname()).append(", ");
             membersString.setLength(membersString.length() - 2);
             Label members = new Label("Members: " + membersString, skin);
 
@@ -243,7 +244,7 @@ public class LobbiesMenuScreen implements Screen {
         return null;
     }
 
-    private Lobby getLobbyByID(int id) {
+    private Lobby getLobbyByID(String id) {
         for (Lobby l: lobbies)
             if (l.checkID(id))
                 return l;
@@ -359,17 +360,8 @@ public class LobbiesMenuScreen implements Screen {
             protected void result(Object object) {
                 if (object.equals(true)) {
                     TextField tf = findActor("IDInput");
-                    String ID = tf.getText();
-                    int intID = 0;
-                    try {
-                        intID = Integer.parseInt(ID);
-                    }
-                    catch (NumberFormatException e) {
-                        lobbyNotFoundDialog();
-                        return;
-                    }
 
-                    Lobby lobby = getLobbyByID(intID);
+                    Lobby lobby = getLobbyByID(tf.getText());
                     if (lobby == null) {
                         lobbyNotFoundDialog();
                         return;

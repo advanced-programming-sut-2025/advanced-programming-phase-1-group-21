@@ -1,6 +1,7 @@
 package controller;
 
 import models.network.Lobby;
+import models.network.LobbyUser;
 import models.user.User;
 
 import java.util.ArrayList;
@@ -47,9 +48,9 @@ public class LobbyManager {
         return null;
     }
 
-    public Lobby getLobbyByID(int id) {
+    public Lobby getLobbyByID(String id) {
         for (Lobby lobby : lobbies) {
-            if (lobby.getID() == id) {
+            if (lobby.getID().equals(id)) {
                 return lobby;
             }
         }
@@ -58,8 +59,8 @@ public class LobbyManager {
 
     public Lobby getLobbyByUsername(String username) {
         for (Lobby lobby : lobbies) {
-            for (User user : lobby.getUsers()) {
-                if (user.getUsername().equals(username)) {
+            for (LobbyUser user : lobby.getUsers()) {
+                if (user.user.getUsername().equals(username)) {
                     return lobby;
                 }
             }

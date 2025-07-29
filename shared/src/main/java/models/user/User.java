@@ -1,5 +1,8 @@
 package models.user;
 
+import models.network.Lobby;
+import models.network.LobbyUser;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -123,13 +126,16 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "{username=" + username + ", nickname=" + nickname + "}";
+        return username;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null) return false;
+        if (o.getClass() == LobbyUser.class) return equals(((LobbyUser) o).user);
+        if (getClass() != o.getClass()) return false;
+
         User user = (User) o;
         return username.equals(user.username);
     }

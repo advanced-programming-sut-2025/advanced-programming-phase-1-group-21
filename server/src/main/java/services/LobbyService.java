@@ -1,9 +1,9 @@
 package services;
 
-import Network.Message;
 import com.esotericsoftware.kryonet.Connection;
 import controller.LobbyManager;
 import models.network.Lobby;
+import models.network.LobbyUser;
 import models.result.Result;
 import models.result.errorTypes.ServerError;
 import models.user.User;
@@ -32,9 +32,8 @@ public class LobbyService {
 
 
     public Result<Void> createLobby(String name, String password, boolean isPrivate, boolean isInvisible) {
-        lobby = new Lobby(name, password, !isInvisible, isPrivate, NetworkUtil.random);
+        lobby = new Lobby(name, password, !isInvisible, isPrivate);
         LobbyManager.get().addLobby(lobby);
-        lobby.setAdmin(user);
         lobby.addUser(user);
         return Result.success(null);
     }
@@ -52,7 +51,7 @@ public class LobbyService {
         }
         if (!lobby.getAdmin().equals(user))
             return Result.failure(ServerError.INSUFFICENT_PERMISSION);
-        User userToRemove = lobby.getUserByUsername(username);
+        LobbyUser userToRemove = lobby.getUserByUsername(username);
         if (userToRemove == null) {
             throw new RuntimeException("[REMOVING FROM LOBBY] User not found");
         }
@@ -61,7 +60,7 @@ public class LobbyService {
         return Result.success(null);
     }
 
-    public Result<Void> joinLobby(int id, String password) {
+    public Result<Void> joinLobby(String id, String password) {
         lobby = LobbyManager.get().getLobbyByID(id);
         if (lobby == null) {
             return Result.failure(ServerError.NO_LOBBY);
@@ -77,7 +76,7 @@ public class LobbyService {
         if (lobby == null) {
             return Result.failure(ServerError.NO_LOBBY);
         }
-        lobby.removeUser(user);
+        lobby.removeUser(lobby.getUserByUsername(user.getUsername()));
         if (lobby.isEmpty())
             LobbyManager.get().removeLobby(lobby);
         makeRefresh();
@@ -89,11 +88,21 @@ public class LobbyService {
     }
 
     public void makeRefresh() {
-        for (User user: lobby.getUsers()) {
-            Connection c = SessionManager.getConnection(user.getUsername());
+        for (LobbyUser user: lobby.getUsers()) {
+            Connection c = SessionManager.getConnection(user.user.getUsername());
             if (c != null) {
-                c.sendTCP(ServerUtil.createRefreshMessage());
+                NetworkUtil.sendMessage(ServerUtil.createRefreshMessage(), c);
             }
         }
+    }
+
+    public void setMapID(int mapID) {
+        lobby.setMapID(user.getUsername(), mapID);
+        makeRefresh();
+    }
+
+    public void toggleReady() {
+        lobby.toggleReady(user.getUsername());
+        makeRefresh();
     }
 }

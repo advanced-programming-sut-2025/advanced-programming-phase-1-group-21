@@ -2,6 +2,7 @@ package io.github.StardewValley.network;
 
 import com.esotericsoftware.kryonet.Client;
 import models.network.Lobby;
+import models.network.LobbyUser;
 import models.result.Result;
 import models.user.User;
 import Network.Message;
@@ -20,7 +21,7 @@ public class NetworkLobbyController {
         }
     }
 
-    public static List<User> getUsersOfLobby() {
+    public static List<LobbyUser> getUsersOfLobby() {
         Result<Lobby> lobbyResult = getLobby();
         if (lobbyResult.isSuccess()) {
             return lobbyResult.getData().getUsers();
@@ -66,7 +67,7 @@ public class NetworkLobbyController {
         return result;
     }
 
-    public static Result<Void> joinLobby(int id, String password) {
+    public static Result<Void> joinLobby(String id, String password) {
         Message msg = new Message(MessageType.LOBBY_SERVICE);
         msg.methodName = "joinLobby";
         msg.data = NetworkUtil.mapArgs("id", id, "password", password);
@@ -91,5 +92,19 @@ public class NetworkLobbyController {
         Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
         List<User> result = (List<User>) response.data;
         return result;
+    }
+
+    public static void sendMap(int mapNumber) {
+        Message msg = new Message(MessageType.LOBBY_SERVICE);
+        msg.methodName = "setMapID";
+        msg.data = NetworkUtil.mapArgs();
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
+    }
+
+    public static void toggleReady() {
+        Message msg = new Message(MessageType.LOBBY_SERVICE);
+        msg.methodName = "toggleReady";
+        msg.data = NetworkUtil.mapArgs();
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
     }
 }

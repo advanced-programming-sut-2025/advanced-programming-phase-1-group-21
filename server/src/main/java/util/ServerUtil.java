@@ -2,6 +2,10 @@ package util;
 
 import Network.Message;
 import Network.MessageType;
+import com.esotericsoftware.kryonet.Connection;
+
+import java.util.concurrent.CompletableFuture;
+
 
 public class ServerUtil {
 

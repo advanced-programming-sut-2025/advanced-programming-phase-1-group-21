@@ -22,6 +22,7 @@ public class LoginMenuController{
         Result<User> result = NetworkDataBaseController.login(username, password, stayLoggedIn);
         if (result.isSuccess()) {
             App.getInstance().logedInUser = result.getData();
+            System.out.println("Logged in as " + App.getInstance().logedInUser.getUsername());
             return Result.success(null);
         }
         return Result.failure(result.getError());

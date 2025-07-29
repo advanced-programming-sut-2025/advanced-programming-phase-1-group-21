@@ -11,6 +11,7 @@ import util.ServerUtil;
 
 import java.io.IOException;
 import java.util.Random;
+import java.util.concurrent.CompletableFuture;
 
 public class Main {
     public static Random rand = new Random();
@@ -31,7 +32,9 @@ public class Main {
 
             public void received(Connection connection, Object o) {
                 if (o instanceof Message) {
-                    MessageHandler.handle(connection, (Message) o);
+                    CompletableFuture.runAsync(() -> {
+                        MessageHandler.handle(connection, (Message) o);
+                    });
                 }
             }
 
