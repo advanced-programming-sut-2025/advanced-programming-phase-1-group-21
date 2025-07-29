@@ -4,7 +4,9 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextTooltip;
 import com.kotcrab.vis.ui.VisUI;
+import org.w3c.dom.Text;
 
 public class Assets {
     private static final AssetManager manager = new AssetManager();
@@ -21,6 +23,14 @@ public class Assets {
             manager.load(gameSound.getPath(), Sound.class);
 
         manager.load("menu.png", Texture.class);
+        manager.load("Textures/Tools/Primitive_Axe.png" , Texture.class);
+        manager.load("Textures/Tools/Primitive_Hoe.png" , Texture.class);
+        manager.load("Textures/Tools/Primitive_Milk_pail.png" , Texture.class);
+        manager.load("Textures/Tools/Primitive_Pickaxe.png" , Texture.class);
+        manager.load("Textures/Tools/Primitive_Shears.png" , Texture.class);
+        manager.load("Textures/Tools/Primitive_Trashcan.png" , Texture.class);
+        manager.load("Textures/Tools/Primitive_Watering_can.png" , Texture.class);
+        manager.load("Textures/Tools/Steel_Scythe.png" , Texture.class);
     }
 
     public static void finishLoading() {
@@ -31,6 +41,10 @@ public class Assets {
         for (GameSound gameSound: GameSound.values()) {
             gameSound.setSound(manager.get(gameSound.getPath(), Sound.class));
         }
+    }
+
+    public static Texture getToolTexture(String name){
+        return manager.get("Textures/Tools/" + name + ".png");
     }
 
     public static Texture getBackground() {

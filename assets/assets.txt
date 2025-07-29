@@ -2182,7 +2182,7 @@ Textures/Tools/Iridium_Trashcan.png
 Textures/Tools/Iridium_Watering_can.png
 Textures/Tools/Primitive_Axe.png
 Textures/Tools/Primitive_Hoe.png
-Textures/Tools/Primitive_Milk_Pail.png
+Textures/Tools/Primitive_Milk_pail.png
 Textures/Tools/Primitive_Pickaxe.png
 Textures/Tools/Primitive_Shears.png
 Textures/Tools/Primitive_Trashcan.png

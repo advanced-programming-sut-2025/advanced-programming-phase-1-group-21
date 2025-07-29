@@ -1,6 +1,7 @@
 package models.Item;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import data.items.ItemData;
 import data.items.PlaceableData;
 import models.map.Placable;
@@ -77,6 +78,11 @@ public class Placeable extends Item implements Placable {
 
 	@Override
 	public Texture getTexture() {
+		return null;
+	}
+
+	@Override
+	public Sprite spriteGetter() {
 		return null;
 	}
 }

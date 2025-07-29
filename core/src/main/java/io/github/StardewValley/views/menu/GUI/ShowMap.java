@@ -3,8 +3,10 @@ package io.github.StardewValley.views.menu.GUI;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import io.github.StardewValley.App;
 import io.github.StardewValley.Main;
+import models.game.Player;
 import models.game.Refrigerator;
 import models.map.*;
+import models.tool.Tool;
 
 public class ShowMap {
     public static void show(Main game){
@@ -12,6 +14,7 @@ public class ShowMap {
         showHouse(game);
         onTilesShow(game);
         showPlayer(game);
+        showTool(game);
     }
 
     public static void showTiles(Main game){
@@ -52,6 +55,17 @@ public class ShowMap {
         for(Building building : map.getBuildings()){
             if(building.sprite != null)
                 building.sprite.draw(game.getBatch());
+        }
+    }
+
+    public static void showTool(Main game){
+        Player player = App.getInstance().game.getCurrentPlayer();
+        if(player.getItemInHand() instanceof Tool){
+            Tool tool = (Tool) player.getItemInHand();
+            tool.spriteX = player.getSprite().getX();
+            tool.spriteY = player.getSprite().getY();
+            tool.loadTexture();
+            tool.getSprite().draw(game.getBatch());
         }
     }
 }

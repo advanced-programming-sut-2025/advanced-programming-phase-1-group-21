@@ -1,6 +1,7 @@
 package models.map;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import data.ForagingCropData;
 import models.Item.Item;
 import models.crop.Harvestable;
@@ -42,6 +43,11 @@ public class ForagingCrop implements Placable, Harvestable, Serializable {
 
 	@Override
 	public Texture getTexture() {
+		return null;
+	}
+
+	@Override
+	public Sprite spriteGetter() {
 		return null;
 	}
 

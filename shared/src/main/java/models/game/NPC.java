@@ -117,6 +117,11 @@ public class NPC implements Placable, DailyUpdate, Serializable {
         return null;
     }
 
+    @Override
+    public Sprite spriteGetter() {
+        return null;
+    }
+
     public NPCHouse getHouse() {
         return house;
     }
@@ -162,6 +167,11 @@ public class NPC implements Placable, DailyUpdate, Serializable {
 
         @Override
         public Texture getTexture() {
+            return null;
+        }
+
+        @Override
+        public Sprite spriteGetter() {
             return null;
         }
     }
