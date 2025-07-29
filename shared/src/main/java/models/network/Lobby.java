@@ -18,8 +18,7 @@ public class Lobby {
 		this.isVisible = isVisible;
 		this.name = name;
 		this.password = password;
-		this.ID = UUID.randomUUID().toString().replace("-", "").substring(0, 5);
-	}
+		this.ID = Long.toString(Long.parseLong(UUID.randomUUID().toString().replace("-", "").substring(0, 8), 16), 36).toUpperCase();	}
 
 	//Kryo-Net
 	public Lobby() {
@@ -27,7 +26,7 @@ public class Lobby {
 	}
 
 	public LobbyUser getAdmin() {
-		if (users.size() > 0) return users.get(0);
+		if (!users.isEmpty()) return users.get(0);
 		return null;
 	}
 

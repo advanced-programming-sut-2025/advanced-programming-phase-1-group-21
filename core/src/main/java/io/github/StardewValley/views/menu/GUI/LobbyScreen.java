@@ -89,30 +89,13 @@ public class LobbyScreen implements Screen, Refreshable {
         playersTable.top().left();
         updatePlayersTable(); // initialize with player list
 
-        TextButton backButton = new TextButton("Back", skin);
         TextButton leaveButton = new TextButton("Leave", skin);
-        TextButton startButton = new TextButton("Start", skin);
         readyButton = new TextButton("Ready", skin);
-
-        // Buttons
-        backButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                backToLobbies();
-            }
-        });
 
         leaveButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 leaveLobby();
-            }
-        });
-
-        startButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                startGame();
             }
         });
 
@@ -123,21 +106,12 @@ public class LobbyScreen implements Screen, Refreshable {
             }
         });
 
-        int backW = sw / 15, refreshW = sw / 10, createW = sw / 8, d = sw / 7, base = sw / 15;
-        backButton.setBounds(base, sh / 8f, sw / 15f, sh / 15f);
-        leaveButton.setBounds(base + backW + d, sh / 8f, sw / 10f, sh / 15f);
-        readyButton.setBounds(base + backW + refreshW + 2 * d, sh / 8f, sw / 8f, sh / 15f);
 
-        float btnY = sh / 10f;
-        float btnHeight = sh / 15f;
-        float btnWidth = sw / 10f;
-
-        backButton.setBounds(sw / 20f, btnY, btnWidth, btnHeight);
-        leaveButton.setBounds(sw / 20f + btnWidth + 20, btnY, btnWidth, btnHeight);
-
-        readyButton.setBounds(sw / 2f - (sw / 8f) / 2f, btnY, sw / 8f, btnHeight);
-
-        startButton.setBounds(sw - btnWidth - sw / 20f, btnY, btnWidth, btnHeight);
+        int backW = sw / 15, refreshW = sw / 10, createW = sw / 8, joinW = sw / 8, d = sw / 7, base = sw / 15;
+        leaveButton.setPosition(base + backW + d, sh / 8);
+        leaveButton.setSize(sw / 10, sh / 15);
+        readyButton.setPosition(base + backW + refreshW + 2 * d, sh / 8);
+        readyButton.setSize(sw / 8, sh / 15);
 
 
         stage.addActor(lobbyTitle);
@@ -145,12 +119,8 @@ public class LobbyScreen implements Screen, Refreshable {
         stage.addActor(passwordLabel);
         stage.addActor(playersTable);
         stage.addActor(idLabel);
-        stage.addActor(backButton);
         stage.addActor(leaveButton);
         stage.addActor(readyButton);
-
-        // Only admin sees Start button
-        if (isAdmin(App.getInstance().logedInUser)) stage.addActor(startButton);
 
         // ESC handling
         InputMultiplexer multiplexer = new InputMultiplexer();
