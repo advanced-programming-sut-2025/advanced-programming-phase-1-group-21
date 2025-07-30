@@ -167,8 +167,11 @@ class InventoryTab {
 							Object o = container.getActor().getUserObject();
 							if (o instanceof Item) {
 								player.setItemInHand((Item) o);
-								setItemInHand();
 							}
+							else {
+								player.setItemInHand(null);
+							}
+							setItemInHand();
 						}
 					}
 				});
@@ -406,15 +409,15 @@ class InventoryTab {
 	}
 
 	private void setItemInHand() {
-		String itemInHandTextureAddress = getItemTexture(App.getInstance().game.getCurrentPlayer().getItemInHand());
 		if (itemInHandImage != null) {
 			itemInHandImage.remove();
 		}
-		if (itemInHandTextureAddress == null) {
+		Item item = App.getInstance().game.getCurrentPlayer().getItemInHand();
+		if (item == null || getItemTexture(item) == null) {
 			itemInHandImage = new Image(emptyDrawable);
 		}
 		else {
-			itemInHandImage = new Image(new TextureRegionDrawable(new TextureRegion(new Texture(itemInHandTextureAddress))));
+			itemInHandImage = new Image(new TextureRegionDrawable(new TextureRegion(new Texture(getItemTexture(item)))));
 		}
 		itemInHandImage.setPosition(1350, 480);
 		stage.addActor(itemInHandImage);

@@ -90,6 +90,21 @@ public class GameController {
                 placeArtisan(player.getItemInHand(), tile);
             }
         }
+        if (tile.getTileType() == TileType.ARTISAN && tile.getPlacable(Artisan.class).isEmpty() && player.getItemInHand() != null) {
+            tile.getPlacable(Artisan.class).findRecipeAndCraft(player.getItemInHand().getName(), player.getInventory());
+        }
+
+        if (tile.getTileType() == TileType.ARTISAN) {
+            Artisan artisan = tile.getPlacable(Artisan.class);
+            System.out.println("result: " + artisan.isResultReady() + ", empty: " + artisan.isEmpty());
+            Inventory inventory = player.getInventory();
+            if (artisan.isResultReady() && inventory.canAdd(artisan.getResultWithoutReset().getName())) {
+                Item result = artisan.getResultWithoutReset();
+                if (inventory.addItem(result).isSuccess()) {
+                    artisan.getResult(inventory);
+                }
+            }
+        }
 
         return null;
 
@@ -1067,7 +1082,6 @@ public class GameController {
         return Result.success(null);
     }
 
-
     public Result<Void> useArtisan(String artisanName, ArrayList<String> itemNames) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
 
@@ -1105,7 +1119,7 @@ public class GameController {
             Coord coord = player.getCoord().addCoord(direction.getCoord());
             Tile tile = player.getMap().getTile(coord);
             if (tile == null) continue;
-            if (tile.getTileType() == TileType.ARTISAN && tile.getPlacable(Artisan.class).isResultReady()) {
+            if (tile.getTileType() == TileType.ARTISAN && tile.getPlacable(Artisan.class).isResultReady() && tile.getPlacable(Artisan.class).getName().equalsIgnoreCase(artisanName)) {
                 Artisan artisan = tile.getPlacable(Artisan.class);
 
 

@@ -35,6 +35,34 @@ public class Artisan implements Placable, Serializable {
 		return goodsData.getName();
 	}
 
+	public Result<Void> findRecipeAndCraft(String mainIngredient, Inventory inventory) {
+		int numberOfRecipe = 0;
+		for (ArtisanRecipeData recipe : goodsData.getRecipes())
+			for (Map <String, Integer> baseIngredients: recipe.getIngredients())
+				for (Map.Entry<String, Integer> entry : baseIngredients.entrySet())
+					if (mainIngredient.equalsIgnoreCase(entry.getKey()))
+						numberOfRecipe++;
+		if (numberOfRecipe != 1)
+			return Result.success(null);
+
+		Map <String, Integer> ingredients = null;
+		mainLoop:
+		for (ArtisanRecipeData recipe : goodsData.getRecipes())
+			for (Map <String, Integer> baseIngredients: recipe.getIngredients())
+				for (Map.Entry<String, Integer> entry : baseIngredients.entrySet())
+					if (mainIngredient.equalsIgnoreCase(entry.getKey())) {
+						ingredients = baseIngredients;
+						break mainLoop;
+					}
+		if (ingredients == null)
+			return Result.success(null);
+		ArrayList <String> itemNames = new ArrayList<>();
+		for (Map.Entry<String, Integer> entry : ingredients.entrySet()) {
+			itemNames.add(entry.getKey());
+		}
+		return craft(itemNames, inventory);
+	}
+
 	public Result<Void> craft(ArrayList <String> itemNames, Inventory inventory) {
 		for (ArtisanRecipeData recipe : goodsData.getRecipes()) {
 			mainLoop:
@@ -47,7 +75,7 @@ public class Artisan implements Placable, Serializable {
 						continue mainLoop;
 				}
 				if (correct != itemNames.size())
-					continue mainLoop;
+					continue;
 
 				List<Item> requiredItems = new ArrayList<>();
 				for (Map.Entry<String, Integer> entry : baseIngredients.entrySet()) {
@@ -80,6 +108,10 @@ public class Artisan implements Placable, Serializable {
 		return false;
 	}
 
+	public boolean isEmpty() {
+		return !isProcessing() && result == null;
+	}
+  
 	public Item getResult(Inventory inventory) {
 		Item r = result;
 		result = null;
