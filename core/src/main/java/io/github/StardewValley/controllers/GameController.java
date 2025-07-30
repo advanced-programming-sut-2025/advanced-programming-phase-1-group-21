@@ -1,5 +1,10 @@
 package io.github.StardewValley.controllers;
 
+/**
+ * Each operation here is forward through NETWORK
+ * SO please keep that IN MIND
+ */
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -24,6 +29,7 @@ import models.crop.PlantedTree;
 import models.game.*;
 import models.map.*;
 import models.map.Map;
+import models.network.Lobby;
 import models.result.Result;
 import models.result.errorTypes.AuthError;
 import models.result.errorTypes.GameError;
@@ -40,130 +46,20 @@ import java.util.*;
 
 public class GameController {
 
-    public Game game = null;
+    private final Game game;
+    private final Player player;
 
-    public void buttonController(Main thisGame){
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
-            thisGame.setScreen(new MainMenuScreen());
-        if(Gdx.input.isKeyPressed(Input.Keys.W))
-            walk(Direction.NORTH);
-        if(Gdx.input.isKeyPressed(Input.Keys.S))
-            walk(Direction.SOUTH);
-        if(Gdx.input.isKeyPressed(Input.Keys.D))
-            walk(Direction.EAST);
-        if(Gdx.input.isKeyPressed(Input.Keys.A))
-            walk(Direction.WEST);
-
-        if(Gdx.input.isKeyPressed(Input.Keys.UP))
-            useTool(Direction.SOUTH);
-        if(Gdx.input.isKeyPressed(Input.Keys.DOWN))
-            useTool(Direction.NORTH);
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT))
-            useTool(Direction.EAST);
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT))
-            useTool(Direction.WEST);
-    }
-
-    public String clickController(int x , int y){
-        Player player = game.getCurrentPlayer();
-        Map map = player.getMap();
-        Tile tile = map.getTile((x - map.mapType.distanceX)/30 , (y - map.mapType.distanceY)/30);
-        if(tile == null)
-            return "invalid tile";
-        if(tile.getPlacable(Building.class) != null){
-            Building building = tile.getPlacable(Building.class);
-            if(checkCollision(building.sprite , player.getSprite()) && building.canEnter(game.getGameDate())){
-                player.enterBuilding(building);
-            }
-        }
-        if((player.getCoord().getX() - (x - map.mapType.distanceX)/30) > 1)
-            return "tile is not neighbor";
-        if((player.getCoord().getX() - (x - map.mapType.distanceX)/30) < -1)
-            return "tile is not neighbor";
-        if((player.getCoord().getY() - (y - map.mapType.distanceY)/30) > 1)
-            return "tile is not neighbor";
-        if((player.getCoord().getY() - (y - map.mapType.distanceY)/30) < -1)
-            return "tile is not neighbor";
-
-        if (tile.getTileType() == TileType.PLOWED || tile.getTileType() == TileType.UNPLOWED){
-            if (player.getItemInHand().getItemType() == ItemType.PLACEABLE) {
-                placeArtisan(player.getItemInHand(), tile);
-            }
-        }
-        if (tile.getTileType() == TileType.ARTISAN && tile.getPlacable(Artisan.class).isEmpty() && player.getItemInHand() != null) {
-            tile.getPlacable(Artisan.class).findRecipeAndCraft(player.getItemInHand().getName(), player.getInventory());
-        }
-
-        if (tile.getTileType() == TileType.ARTISAN) {
-            Artisan artisan = tile.getPlacable(Artisan.class);
-            System.out.println("result: " + artisan.isResultReady() + ", empty: " + artisan.isEmpty());
-            Inventory inventory = player.getInventory();
-            if (artisan.isResultReady() && inventory.canAdd(artisan.getResultWithoutReset().getName())) {
-                Item result = artisan.getResultWithoutReset();
-                if (inventory.addItem(result).isSuccess()) {
-                    artisan.getResult(inventory);
-                }
-            }
-        }
-
-        return null;
-
-    }
-
-    public boolean checkCollision(Sprite target, Sprite player) {
-        Rectangle targetRect = target.getBoundingRectangle();
-        Rectangle playerRect = player.getBoundingRectangle();
-        return Intersector.overlaps(targetRect, playerRect);
+    public GameController(Game game, Player player) {
+        this.game = game;
+        this.player = player;
     }
 
     public Result<String> showCurrentMenu() {
         return Result.success("game", "");
     }
 
-
-    //TODO
-    public Result<Game> createGame(String username1, String username2, String username3) {
-        if ((!NetworkDataBaseController.doesUserExists(username1)) || (!NetworkDataBaseController.doesUserExists(username2)) || (!NetworkDataBaseController.doesUserExists(username3))) {
-            return Result.failure(UserError.USER_NOT_FOUND);
-        }
-
-        /*
-        ArrayList<User> users = new ArrayList<>();
-        users.add(App.getInstance().logedInUser);
-        users.add(DataBaseController.findUserByUsername(username1));
-        users.add(DataBaseController.findUserByUsername(username2));
-        users.add(DataBaseController.findUserByUsername(username3));
-
-        for(User user : users) {
-            if(user.isInAgame)
-                return Result.failure(AuthError.IN_GAME_USER);
-        }
-
-
-        for (User user : users) {
-            user.setInAGame(true);
-            DataBaseController.editUser(user);
-        }
-
-        ArrayList<Player> players = new ArrayList<>();
-        MapBuilder mapBuilder = new MapBuilder();
-
-        for (User user : users) {
-            int seed = GameTerminalView.getSeed(user);
-            Map map = mapBuilder.buildFarm(new Random(seed));
-            Player player = new Player(user, map);
-            players.add(player);
-        }
-
-        Game game = new Game(players);
-        this.game = game;
-        App.getInstance().game = game;
-        */
-
-        return Result.success(game, "Game created");
-    }
-
     public Result<Void> loadGame() {
+        /*
         User user = App.getInstance().logedInUser;
         String targetName = user.getUsername();
 
@@ -188,6 +84,9 @@ public class GameController {
         }
         game.setCurrentPlayer(players.get(0));
         return Result.success(null);
+
+         */
+        return null;
     }
 
     public void saveGame() {
@@ -196,21 +95,28 @@ public class GameController {
     }
 
     public Result<Void> exitGame() {
+        /*
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         saveGame();
         game = null;
         App.getInstance().game = null;
         return Result.success("Exit Game ...");
+
+         */
+        return null;
     }
 
     public Result<Void> nextTurn() {
+        /*
         if (game == null)
             return Result.failure(AuthError.GAME_NOT_CREATED);
 
         game.nextTurn();
 
-        return Result.success("Now its " + game.getCurrentPlayer().getUser().getUsername() + "'s turn");
+        return Result.success("Now its " + player.getUser().getUsername() + "'s turn");
 
+         */
+        return null;
     }
 
     public Result<Void> terminateGame() {
@@ -263,7 +169,7 @@ public class GameController {
     public Result<Void> struckByThorCheat(Coord coord) {
         if (game == null)
             return Result.failure(GameError.NO_GAME_RUNNING);
-        if (game.getCurrentPlayerMap().thor(coord))
+        if (player.getMap().thor(coord))
             return Result.success("Thor was successful");
         return Result.failure(GameError.YOU_CANT_DO_ACTION);
     }
@@ -286,27 +192,26 @@ public class GameController {
 
     public Result<Building> buildGreenHouse() {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        if (game.getCurrentPlayer().getMap().mapType != MapType.FARM)
+        if (player.getMap().mapType != MapType.FARM)
             return Result.failure(GameError.YOU_SHOULD_BE_ON_FARM);
 
         List<Item> needed = List.of(
                 Item.build("coin", 1000),
                 Item.build("wood", 500)
         );
-        Inventory inv = game.getCurrentPlayer().getInventory();
+        Inventory inv = player.getInventory();
         if (!inv.canRemoveItems(needed))
             return Result.failure(GameError.NOT_ENOUGH_ITEMS);
         inv.removeItems(needed);
-        game.getCurrentPlayerMap().getBuilding(GreenHouse.class).setBuild(true);
+        player.getMap().getBuilding(GreenHouse.class).setBuild(true);
         return Result.success("now you can use your greenhouse");
     }
 
     public void walk(Direction direction) {
 //        if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
 //        Coord coord = new Coord(x, y);
-//        boolean isNeigh = game.getCurrentPlayer().getCoord().isNeighbor(coord);
+//        boolean isNeigh = player.getCoord().isNeighbor(coord);
 //
-//        Player player = game.getCurrentPlayer();
 //        Tile tile = player.getMap().getTile(coord);
 //
 //        if (tile == null)
@@ -342,7 +247,6 @@ public class GameController {
 //        }
 //        printMapFull();
 //        return Result.success(null);
-        Player player = App.getInstance().game.getCurrentPlayer();
         Map map = player.getMap();
         Sprite sprite = player.getSprite();
         float speed = player.getSpeed();
@@ -383,7 +287,7 @@ public class GameController {
     }
 
     public Result<Void> putItemInRefrigerator(Refrigerator refrigerator, String itemName) {
-        Inventory inv = game.getCurrentPlayer().getInventory();
+        Inventory inv = player.getInventory();
         Inventory refInv = refrigerator.getInventory();
         Item item = inv.getItem(itemName);
         if (item == null)
@@ -401,7 +305,7 @@ public class GameController {
     }
 
     public Result<Void> pickItemRefrigerator(Refrigerator refrigerator, String itemName) {
-        Inventory inv = game.getCurrentPlayer().getInventory();
+        Inventory inv = player.getInventory();
         Inventory refInv = refrigerator.getInventory();
 
         Item item = refInv.getItem(itemName);
@@ -427,7 +331,7 @@ public class GameController {
         if (item == null) return Result.failure(GameError.NOT_FOUND);
 
         Refrigerator r = null;
-        for (Tile tile : game.getCurrentPlayer().getNeighborTiles(game))
+        for (Tile tile : player.getNeighborTiles(game))
             if (tile.getTileType() == TileType.REFRIGERATOR)
                 r = tile.getPlacable(Refrigerator.class);
         if (r == null) return Result.failure(GameError.YOU_ARE_DISTANT);
@@ -446,12 +350,12 @@ public class GameController {
 
     public Result<ArrayList<String>> printMap(int x, int y, int size) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        return Result.success(game.getCurrentPlayerMap().printMap(new Coord(x, y), size, game.getPlayers()));
+        return Result.success(player.getMap().printMap(new Coord(x, y), size, game.getPlayers()));
     }
 
     public int showEnergy() {
         if (game == null) return -1;
-        return game.getCurrentPlayer().getEnergy();
+        return player.getEnergy();
     }
 
     public Result<Void> helpReadingMap() {
@@ -462,24 +366,24 @@ public class GameController {
 
     public Result<Void> setEnergyCheat(int energyValue) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        game.getCurrentPlayer().setEnergy(energyValue);
+        player.setEnergy(energyValue);
         return Result.success(null);
     }
 
     public Result<Energy> setEnergyUnlimited() {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        game.getCurrentPlayer().setEnergy(Integer.MAX_VALUE);
+        player.setEnergy(Integer.MAX_VALUE);
         return Result.success(null);
     }
 
     public Result<ArrayList<String>> showInventory() {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        return Result.success(game.getCurrentPlayer().getInventory().showInventory());
+        return Result.success(player.getInventory().showInventory());
     }
 
     public Result<Void> removeFromInventory(String itemName, int numberOfItems) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        Inventory inv = game.getCurrentPlayer().getInventory();
+        Inventory inv = player.getInventory();
         Item itemToRemove = Item.build(itemName, numberOfItems);
         if (itemToRemove == null)
             return Result.failure(GameError.ITEM_IS_NOT_AVAILABLE);
@@ -516,7 +420,7 @@ public class GameController {
 
     public Result<Tool> equipTool(String toolName) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        if (game.getCurrentPlayer().getInventory().toolEquip(game.getCurrentPlayer(), toolName)) {
+        if (player.getInventory().toolEquip(player, toolName)) {
             return Result.success("Now " + toolName + " is in your hands");
         }
 
@@ -525,25 +429,25 @@ public class GameController {
 
     public Result<String> showCurrentTool() {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        if (game.getCurrentPlayer().getItemInHand() == null)
+        if (player.getItemInHand() == null)
             return Result.success("nothing is in your hands");
-        return Result.success(game.getCurrentPlayer().getItemInHand().getName());
+        return Result.success(player.getItemInHand().getName());
     }
 
     public Result<ArrayList<String>> showAvailableTools() {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        return Result.success(game.getCurrentPlayer().getInventory().showAvailableTools(game.getCurrentPlayer()));
+        return Result.success(player.getInventory().showAvailableTools(player));
     }
 
     public Result<Void> upgradeTool(String toolName) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        Building building = game.getCurrentPlayer().getBuilding();
+        Building building = player.getBuilding();
         if (!(building instanceof Shop)) return Result.failure(GameError.YOU_SHOULD_BE_ON_SHOP);
 
         Shop shop = (Shop) building;
         if (shop.getShopType() != TileType.BLACKSMITH)
             return Result.failure(GameError.YOU_SHOULD_BE_ON_BLACKSMITH);
-        Inventory inventory = game.getCurrentPlayer().getInventory();
+        Inventory inventory = player.getInventory();
         Item item = inventory.getItem(toolName);
         if (item == null || item.getItemType() != ItemType.TOOL)
             return Result.failure(GameError.ITEM_IS_NOT_TOOL);
@@ -565,26 +469,26 @@ public class GameController {
         if (d == null)
             return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
 
-        Coord destinyTile = game.getCurrentPlayer().getCoord().addCoord(d.getCoord());
+        Coord destinyTile = player.getCoord().addCoord(d.getCoord());
 
-        if (game.getCurrentPlayer().getItemInHand() == null) {
+        if (player.getItemInHand() == null) {
             return Result.failure(GameError.NO_TOOL_IN_HAND);
         }
 
-        if (!game.getCurrentPlayer().getItemInHand().getItemType().equals(ItemType.TOOL))
+        if (!player.getItemInHand().getItemType().equals(ItemType.TOOL))
             return Result.failure(GameError.TOOL_NOT_FOUND);
 
-        Tool tool = (Tool) game.getCurrentPlayer().getItemInHand();
+        Tool tool = (Tool) player.getItemInHand();
         Result<Item> item = tool.use(destinyTile, game);
         if (item.isError())
             return item;
         if (item == null)
             return Result.failure(GameError.YOU_ARE_NOT_NEAR_TO_LAKE);
         if (item.isSuccess() && (item.getData() != null)) {
-            game.getCurrentPlayer().getInventory().addItem(item.getData());
+            player.getInventory().addItem(item.getData());
         }
-        ((Tool) game.getCurrentPlayer().getItemInHand()).setAnimationTime((float) 0.5);
-        ((Tool) game.getCurrentPlayer().getItemInHand()).setAnimationDirection(d.getDx());
+        ((Tool) player.getItemInHand()).setAnimationTime((float) 0.5);
+        ((Tool) player.getItemInHand()).setAnimationDirection(d.getDx());
         return item;
     }
 
@@ -601,7 +505,6 @@ public class GameController {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         if (direction == null)
             return Result.failure(GameError.NO_DIRECTION);
-        Player player = game.getCurrentPlayer();
         Inventory inventory = player.getInventory();
 
         Item plantable = inventory.getItem(seedName);
@@ -623,7 +526,7 @@ public class GameController {
     public Result<String> showPlant(Coord coord) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
 
-        Tile tile = game.getCurrentPlayer().getMap().getTile(coord);
+        Tile tile = player.getMap().getTile(coord);
         if (tile == null)
             return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
         if (tile.getTileType() != TileType.PLANTED_SEED && tile.getTileType() != TileType.PLANTED_TREE)
@@ -643,7 +546,6 @@ public class GameController {
             return Result.failure(GameError.NO_FERTILIZER);
         }
 
-        Player player = game.getCurrentPlayer();
         Inventory inventory = player.getInventory();
 
         Item fertItem = inventory.getItem(fertilizer.getName());
@@ -664,7 +566,7 @@ public class GameController {
 
     public Result<Integer> howMuchWater() {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        Tool tool = (Tool) game.getCurrentPlayer().getItemInHand();
+        Tool tool = (Tool) player.getItemInHand();
         if (tool == null || tool.getToolType() != ToolType.WATERING_CAN)
             return Result.failure(GameError.TOOL_NOT_IN_HAND);
         WateringCan wateringCan = (WateringCan) tool;
@@ -673,8 +575,8 @@ public class GameController {
 
     public Result<Item> water(Coord coord) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        Map map = game.getCurrentPlayerMap();
-        Tool tool = (Tool) game.getCurrentPlayer().getItemInHand();
+        Map map = player.getMap();
+        Tool tool = (Tool) player.getItemInHand();
         if (tool == null || tool.getToolType() != ToolType.WATERING_CAN)
             return Result.failure(GameError.TOOL_NOT_IN_HAND);
         return tool.use(coord, game);
@@ -682,17 +584,17 @@ public class GameController {
 
     public Result<List<Recipe>> showCraftingRecipes() {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        if (game.getCurrentPlayer().getMap().mapType != MapType.HOUSE)
+        if (player.getMap().mapType != MapType.HOUSE)
             return Result.failure(GameError.YOU_SHOULD_BE_ON_HOUSE);
-        return Result.success(game.getCurrentPlayer().getRecipes(RecipeType.CRAFTING));
+        return Result.success(player.getRecipes(RecipeType.CRAFTING));
     }
 
     public Inventory getInventoryForRecipe(RecipeType recipeType) {
-        Inventory inv = game.getCurrentPlayer().getInventory();
+        Inventory inv = player.getInventory();
         if (recipeType == RecipeType.CRAFTING)
             return inv;
 
-        Inventory refInv = ((House) game.getCurrentPlayer().getBuilding()).getRefrigerator().getInventory();
+        Inventory refInv = ((House) player.getBuilding()).getRefrigerator().getInventory();
         List<Item> items = new ArrayList<>(inv.getItems());
         items.addAll(refInv.getItems());
         return new Inventory(items);
@@ -700,17 +602,17 @@ public class GameController {
 
     public Result<Void> prepareRecipe(String recipeName, RecipeType recipeType) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        if (game.getCurrentPlayer().getMap().mapType != MapType.HOUSE)
+        if (player.getMap().mapType != MapType.HOUSE)
             return Result.failure(GameError.YOU_SHOULD_BE_ON_HOUSE);
 
-        Recipe recipe = game.getCurrentPlayer().getRecipeByName(recipeName, recipeType);
+        Recipe recipe = player.getRecipeByName(recipeName, recipeType);
         if (recipe == null) {
             return Result.failure(GameError.RECIPE_NOT_FOUND);
         }
-        if (game.getCurrentPlayer().getEnergy() < recipeType.getEnergy())
+        if (player.getEnergy() < recipeType.getEnergy())
             return Result.failure(GameError.ENERGY_IS_NOT_ENOUGH);
         Inventory all = getInventoryForRecipe(recipeType);
-        Inventory inv = game.getCurrentPlayer().getInventory();
+        Inventory inv = player.getInventory();
 
         if (!inv.canAdd())
             return Result.failure(GameError.MAXIMUM_SIZE_EXCEEDED);
@@ -720,17 +622,17 @@ public class GameController {
         inv.addItem(recipe.getResult());
 
         inv.normalize();
-        ((House) game.getCurrentPlayer().getBuilding()).getRefrigerator().getInventory().normalize();
+        ((House) player.getBuilding()).getRefrigerator().getInventory().normalize();
 
-        game.getCurrentPlayer().decreaseEnergy(recipeType.getEnergy());
+        player.decreaseEnergy(recipeType.getEnergy());
 
         return Result.success(null);
     }
 
     public Result<Void> placeItem(String item, Direction direction) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        Coord coord = game.getCurrentPlayer().getCoord().addCoord(direction.getCoord());
-        Map map = game.getCurrentPlayer().getMap();
+        Coord coord = player.getCoord().addCoord(direction.getCoord());
+        Map map = player.getMap();
         Tile tile = ((models.map.Map) map).getTile(coord);
         if (tile == null || !tile.isEmpty()) return Result.failure(GameError.TILE_IS_NOT_EMPTY);
         Placeable placeable = (Placeable) Item.build(item, 1);
@@ -742,39 +644,39 @@ public class GameController {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         if (quantity <= 0) return Result.failure(GameError.INVALID_NUMBER);
         if (itemName.equalsIgnoreCase("milkpale")) {
-            game.getCurrentPlayer().getInventory().addItem(new MilkPail());
+            player.getInventory().addItem(new MilkPail());
             return Result.success(null);
         }
         if (itemName.equalsIgnoreCase("shear")) {
-            game.getCurrentPlayer().getInventory().addItem(new Shear());
+            player.getInventory().addItem(new Shear());
             return Result.success(null);
         }
         if (itemName.equalsIgnoreCase("educational pole")) {
             FishingPole fishingPole = new FishingPole();
             fishingPole.setToolMaterialType(ToolMaterialType.EDUCATIONAL);
-            game.getCurrentPlayer().getInventory().addItem(fishingPole);
+            player.getInventory().addItem(fishingPole);
             return Result.success(null);
         }
         if (itemName.equalsIgnoreCase("bamboo pole")) {
             FishingPole fishingPole = new FishingPole();
             fishingPole.setToolMaterialType(ToolMaterialType.BAMBOO);
-            game.getCurrentPlayer().getInventory().addItem(fishingPole);
+            player.getInventory().addItem(fishingPole);
             return Result.success(null);
         }
         if (itemName.equalsIgnoreCase("fiberglass pole")) {
             FishingPole fishingPole = new FishingPole();
             fishingPole.setToolMaterialType(ToolMaterialType.FIBERGLASS);
-            game.getCurrentPlayer().getInventory().addItem(fishingPole);
+            player.getInventory().addItem(fishingPole);
             return Result.success(null);
         }
         if (itemName.equalsIgnoreCase("iridium pole")) {
             FishingPole fishingPole = new FishingPole();
             fishingPole.setToolMaterialType(ToolMaterialType.IRIDIUM);
-            game.getCurrentPlayer().getInventory().addItem(fishingPole);
+            player.getInventory().addItem(fishingPole);
             return Result.success(null);
         }
         if (Item.build(itemName, quantity) != null) {
-            game.getCurrentPlayer().getInventory().addItem(Item.build(itemName, quantity));
+            player.getInventory().addItem(Item.build(itemName, quantity));
             return Result.success(null);
         }
         return Result.failure(GameError.ITEM_IS_NOT_AVAILABLE);
@@ -787,14 +689,14 @@ public class GameController {
 
     public Result<ArrayList<Recipe>> showCookingRecipes() {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        if (game.getCurrentPlayer().getMap().mapType != MapType.HOUSE)
+        if (player.getMap().mapType != MapType.HOUSE)
             return Result.failure(GameError.YOU_SHOULD_BE_ON_HOUSE);
-        return Result.success(game.getCurrentPlayer().getRecipes(RecipeType.COOKING));
+        return Result.success(player.getRecipes(RecipeType.COOKING));
     }
 
     public Result<Void> eat(String name) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        Item item = game.getCurrentPlayer().getInventory().getItem(name);
+        Item item = player.getInventory().getItem(name);
         if (item == null) return Result.failure(GameError.NOT_FOUND);
         if (item.getItemType() != ItemType.CONSUMABLE)
             return Result.failure(GameError.ITEM_IS_NOT_CONSUMABLE);
@@ -802,12 +704,12 @@ public class GameController {
         item.setAmount(1);
         Consumable consumable = (Consumable) item;
 
-        Inventory inventory = game.getCurrentPlayer().getInventory();
+        Inventory inventory = player.getInventory();
         if (!inventory.canRemoveItem(consumable))
             return Result.failure(GameError.ITEM_IS_NOT_AVAILABLE);
         inventory.removeItem(consumable);
         System.err.println("ate " + name);
-        game.getCurrentPlayer().decreaseEnergy(-consumable.getEnergy());
+        player.decreaseEnergy(-consumable.getEnergy());
         return Result.success(null);
     }
 
@@ -817,12 +719,12 @@ public class GameController {
             return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
         for (int i = y; i < y + 5; i++) {
             for (int j = x; j < x + 5; j++) {
-                if (!game.getCurrentPlayerMap().getTile(new Coord(i, j)).isEmpty())
+                if (!player.getMap().getTile(new Coord(i, j)).isEmpty())
                     return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
             }
         }
 
-        if (game.getCurrentPlayer().getInventory().getAmount("name") < 1000)
+        if (player.getInventory().getAmount("name") < 1000)
             return Result.failure(GameError.NOT_ENOUGH_COINS);
         //TODO
         return Result.failure(GameError.NOT_IMPLEMENTED);
@@ -831,7 +733,7 @@ public class GameController {
 
     public Result<Void> pet(String name) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        List<Tile> neigh = game.getCurrentPlayer().getNeighborTiles(game);
+        List<Tile> neigh = player.getNeighborTiles(game);
 
         for (Tile tile : neigh) {
             Animal animal = tile.getPlacable(Animal.class);
@@ -848,7 +750,7 @@ public class GameController {
 
     public Result<Void> cheatFriendship(String name, int amount) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        for (Animal animal : game.getCurrentPlayer().getAnimals()) {
+        for (Animal animal : player.getAnimals()) {
             if (animal.getName().equals(name)) {
                 animal.setFriendship(amount);
                 return Result.success("Now your friendship with " + name + " is " + animal.getFriendship());
@@ -862,7 +764,7 @@ public class GameController {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         ArrayList<String> output = new ArrayList<>();
         output.add("Animals:");
-        for (Animal animal : game.getCurrentPlayer().getAnimals()) {
+        for (Animal animal : player.getAnimals()) {
             output.add("animal name: " + animal.getName());
             output.add("friendship: " + animal.getFriendship());
             output.add("is today feed: " + animal.isFeedToday());
@@ -877,19 +779,19 @@ public class GameController {
 
     public Result<Void> shepherdAnimals(String name, int x, int y) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        Tile tile = game.getCurrentPlayerMap().getTile(new Coord(x, y));
+        Tile tile = player.getMap().getTile(new Coord(x, y));
         if (tile == null)
             return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
         if (!tile.isEmpty())
             return Result.failure(GameError.TILE_IS_NOT_EMPTY);
 
-        Animal animal = game.getCurrentPlayer().getAnimalByName(name);
+        Animal animal = player.getAnimalByName(name);
         if (animal == null)
             return Result.failure(GameError.ANIMAL_NOT_FOUND);
 
 
         animal.shepherd(); //TODO
-        game.getCurrentPlayerMap().getTile(new Coord(x, y)).setPlacable(animal);
+        player.getMap().getTile(new Coord(x, y)).setPlacable(animal);
 
         return Result.success(name + " is on tile (" + x + ", " + y + ")");
     }
@@ -897,7 +799,7 @@ public class GameController {
     public Result<Void> feedHay(String name) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
 
-        Animal animal = game.getCurrentPlayer().getAnimalByName(name);
+        Animal animal = player.getAnimalByName(name);
         if (animal == null)
             return Result.failure(GameError.ANIMAL_NOT_FOUND);
 
@@ -908,7 +810,7 @@ public class GameController {
     public Result<ArrayList<String>> showAnimalProduces() {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         ArrayList<String> output = new ArrayList<>();
-        for (Animal animal : game.getCurrentPlayer().getAnimals()) {
+        for (Animal animal : player.getAnimals()) {
             output.add(animal.getName() + "products : ");
             if (animal.getTodayProduct() != null) {
                 output.add("name : " + animal.getName());
@@ -932,7 +834,7 @@ public class GameController {
     public Result<Item> collectProducts(String name) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
 
-        Animal animal = game.getCurrentPlayer().getAnimalByName(name);
+        Animal animal = player.getAnimalByName(name);
         if (animal == null)
             return Result.failure(GameError.ANIMAL_NOT_FOUND);
 
@@ -940,35 +842,35 @@ public class GameController {
             return Result.failure(GameError.ANIMAL_DOES_NOT_HAVE_PRODUCT);
 
         if (animal.getAnimalType().equals(AnimalTypes.COW)) {
-            if (game.getCurrentPlayer().getInventory().canRemoveItem(new MilkPail())) {
-                game.getCurrentPlayer().getInventory().addItem(animal.collectProduce());
+            if (player.getInventory().canRemoveItem(new MilkPail())) {
+                player.getInventory().addItem(animal.collectProduce());
                 animal.setFriendship(animal.getFriendship() + 5);
                 animal.setTodayProduct(null);
             } else
                 return Result.failure(GameError.NOT_ENOUGH_ITEM);
         } else if (animal.getAnimalType().equals(AnimalTypes.GOAT)) {
-            if (game.getCurrentPlayer().getInventory().canRemoveItem(new MilkPail())) {
-                game.getCurrentPlayer().getInventory().addItem(animal.collectProduce());
+            if (player.getInventory().canRemoveItem(new MilkPail())) {
+                player.getInventory().addItem(animal.collectProduce());
                 animal.setFriendship(animal.getFriendship() + 5);
                 animal.setTodayProduct(null);
             } else
                 return Result.failure(GameError.NOT_ENOUGH_ITEM);
         } else if (animal.getAnimalType().equals(AnimalTypes.SHEEP)) {
-            if (game.getCurrentPlayer().getInventory().canRemoveItem(new Shear())) {
-                game.getCurrentPlayer().getInventory().addItem(animal.collectProduce());
+            if (player.getInventory().canRemoveItem(new Shear())) {
+                player.getInventory().addItem(animal.collectProduce());
                 animal.setFriendship(animal.getFriendship() + 5);
                 animal.setTodayProduct(null);
             } else
                 return Result.failure(GameError.NOT_ENOUGH_ITEM);
         } else if (animal.getAnimalType().equals(AnimalTypes.RABBIT)) {
-            if (game.getCurrentPlayer().getInventory().canRemoveItem(new Shear())) {
-                game.getCurrentPlayer().getInventory().addItem(animal.collectProduce());
+            if (player.getInventory().canRemoveItem(new Shear())) {
+                player.getInventory().addItem(animal.collectProduce());
                 animal.setFriendship(animal.getFriendship() + 5);
                 animal.setTodayProduct(null);
             } else
                 return Result.failure(GameError.NOT_ENOUGH_ITEM);
         } else {
-            game.getCurrentPlayer().getInventory().addItem(animal.collectProduce());
+            player.getInventory().addItem(animal.collectProduce());
             animal.setTodayProduct(null);
             return Result.success(null);
         }
@@ -980,11 +882,11 @@ public class GameController {
         Item item = Item.build(itemName, number);
         if (item == null) return Result.failure(GameError.ITEM_IS_NOT_AVAILABLE);
         if (!item.isSalable()) return Result.failure(GameError.NOT_FOR_SALE);
-        Inventory inventory = game.getCurrentPlayer().getInventory();
+        Inventory inventory = player.getInventory();
         if (!inventory.canRemoveItem(item)) return Result.failure(GameError.NOT_ENOUGH_ITEMS);
 
         ShippingBin shippingBin = null;
-        for (Tile tile : game.getCurrentPlayer().getNeighborTiles(game))
+        for (Tile tile : player.getNeighborTiles(game))
             if (tile.getPlacable(ShippingBin.class) != null)
                 shippingBin = tile.getPlacable(ShippingBin.class);
         if (shippingBin == null)
@@ -998,13 +900,13 @@ public class GameController {
     public Result<Void> sellAnimal(String name) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
 
-        Animal animal = game.getCurrentPlayer().getAnimalByName(name);
+        Animal animal = player.getAnimalByName(name);
         if (animal == null)
             return Result.failure(GameError.ANIMAL_NOT_FOUND);
 
         Item price = Item.build("coin", (int) (animal.getPrice() * ((double) animal.getFriendship() / 1000 + 0.3)));
-        game.getCurrentPlayer().getAnimals().remove(animal);
-        game.getCurrentPlayer().getInventory().addItem(price);
+        player.getAnimals().remove(animal);
+        player.getInventory().addItem(price);
         return Result.success(null);
     }
 
@@ -1012,7 +914,7 @@ public class GameController {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
 
         boolean isNearLake = false;
-        for (Tile tile : game.getCurrentPlayer().getNeighborTiles(game)) {
+        for (Tile tile : player.getNeighborTiles(game)) {
             if (tile.getPlacable(Lake.class) != null)
                 isNearLake = true;
         }
@@ -1022,12 +924,11 @@ public class GameController {
         if (Item.build(fishingPole, 1) == null)
             return Result.failure(GameError.ITEM_IS_NOT_AVAILABLE);
 
-        if (!game.getCurrentPlayer().getInventory().canRemoveItem(Objects.requireNonNull(Item.build(fishingPole, 1))))
+        if (!player.getInventory().canRemoveItem(Objects.requireNonNull(Item.build(fishingPole, 1))))
             return Result.failure(GameError.TOOL_NOT_FOUND);
 
-        Player player = game.getCurrentPlayer();
         player.setSkillExp(SkillType.FISHING, player.getSkillExp(SkillType.FISHING) + 5);
-        double amount = Math.random() * (game.getCurrentPlayer().getSkillExp(SkillType.FISHING) + 2);
+        double amount = Math.random() * (player.getSkillExp(SkillType.FISHING) + 2);
         if (game.getWeather().equals(Weather.SUNNY))
             amount *= 1.5;
         if (game.getWeather().equals(Weather.RAINY))
@@ -1045,7 +946,6 @@ public class GameController {
     }
 
     public Result<Void> placeArtisan(String artisanName, Direction direction) {
-        Player player = game.getCurrentPlayer();
         Inventory inventory = player.getInventory();
         Item artisan = inventory.getItem(artisanName);
         if (artisan == null)
@@ -1061,12 +961,11 @@ public class GameController {
         }
 
         inventory.removeItem(Item.build(artisanName, 1));
-        new Artisan(ArtisanGoodsData.getRecipeData(artisanName), game.getCurrentPlayer().getInventory()).onPlace(tile);
+        new Artisan(ArtisanGoodsData.getRecipeData(artisanName), player.getInventory()).onPlace(tile);
         return Result.success(null);
     }
 
     public Result<Void> placeArtisan(Item artisan, Tile tile) {
-        Player player = game.getCurrentPlayer();
         Inventory inventory = player.getInventory();
         if (artisan == null)
             return Result.failure(GameError.CANT_FIND_ITEM_IN_INVENTORY);
@@ -1078,14 +977,13 @@ public class GameController {
         }
 
         inventory.removeItem(Item.build(artisan.getName(), 1));
-        new Artisan(ArtisanGoodsData.getRecipeData(artisan.getName()), game.getCurrentPlayer().getInventory()).onPlace(tile);
+        new Artisan(ArtisanGoodsData.getRecipeData(artisan.getName()), player.getInventory()).onPlace(tile);
         return Result.success(null);
     }
 
     public Result<Void> useArtisan(String artisanName, ArrayList<String> itemNames) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
 
-        Player player = game.getCurrentPlayer();
         Inventory inventory = player.getInventory();
 
         Result<Void> result = null;
@@ -1097,7 +995,7 @@ public class GameController {
             if (tile.getTileType() == TileType.ARTISAN && tile.getPlacable(Artisan.class).getName().equalsIgnoreCase(artisanName) && !tile.getPlacable(Artisan.class).isResultReady()) {
                 Artisan artisan = tile.getPlacable(Artisan.class);
 
-                result = artisan.craft(itemNames, game.getCurrentPlayer().getInventory());
+                result = artisan.craft(itemNames, player.getInventory());
                 if (result.isSuccess())
                     return result;
             }
@@ -1112,7 +1010,6 @@ public class GameController {
     public Result<Item> getArtisanProduct(String artisanName) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
 
-        Player player = game.getCurrentPlayer();
         Inventory inventory = player.getInventory();
 
         for (Direction direction : Direction.values()) {
@@ -1126,7 +1023,7 @@ public class GameController {
                 if (artisan.isResultReady()) {
                     Item result = artisan.getResultWithoutReset();
                     if (inventory.addItem(result).isSuccess()) {
-                        artisan.getResult(game.getCurrentPlayer().getInventory());
+                        artisan.getResult(player.getInventory());
                         return Result.success(null);
                     }
                     return Result.failure(GameError.CANT_ADD_ITEM_TO_INVENTORY);
@@ -1148,7 +1045,6 @@ public class GameController {
     }
 
     public Result<Void> goToVillage() {
-        Player player = game.getCurrentPlayer();
         player.setMap(game.getVillage());
         player.setCoord(new Coord(0, 0));
         player.getSprite().setX(player.getMap().mapType.getDistanceX());
@@ -1158,43 +1054,43 @@ public class GameController {
 
     public Result<Void> backToHome() {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        if (game.getCurrentPlayerMap().mapType != MapType.VILLAGE)
+        if (player.getMap().mapType != MapType.VILLAGE)
             return Result.failure(GameError.YOU_SHOULD_BE_ON_VILLAGE);
-        game.getCurrentPlayer().setMap(game.getCurrentPlayer().getDefaultMap());
-        game.getCurrentPlayer().setCoord(new Coord(0, 0));
+        player.setMap(player.getDefaultMap());
+        player.setCoord(new Coord(0, 0));
         return Result.success("Now you are home");
     }
 
     public Result<ArrayList<String>> showFriendships() {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         ArrayList<String> output = new ArrayList<>();
-        output.add(game.getCurrentPlayer().getUser().getUsername() + "'s friendships :");
-        for (Relation relation : game.getMyRelations(game.getCurrentPlayer()))
-            output.add(relation.printRelation(game.getCurrentPlayer()));
+        output.add(player.getUser().getUsername() + "'s friendships :");
+        for (Relation relation : game.getMyRelations(player))
+            output.add(relation.printRelation(player));
         return Result.success(output);
     }
 
     public Result<Void> talk(String username, String massage) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
 
-        if (game.getCurrentPlayer().getUser().getUsername().equals(username))
+        if (player.getUser().getUsername().equals(username))
             return Result.failure(GameError.NO_PLAYER_FOUND);
 
         Player player = game.getPlayerByName(username);
         if (player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
 
-//        if(!game.getCurrentPlayer().weAreNextToEachOther(player))
+//        if(!player.weAreNextToEachOther(player))
 //            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
 
-        Relation relation = game.getRelationOfUs(game.getCurrentPlayer(), player);
-        relation.addTalk(game.getCurrentPlayer().getUser().getUsername() + ": " + massage);
+        Relation relation = game.getRelationOfUs(player, player);
+        relation.addTalk(player.getUser().getUsername() + ": " + massage);
         if (!relation.isTodayTalk())
             relation.setFriendshipXP(relation.getFriendshipXP() + 20);
         if(relation.getLevel().getLevel() == 4){
             player.setEnergy(player.getEnergy() + 50);
-            App.getInstance().game.getCurrentPlayer().setEnergy(App.getInstance().game.getCurrentPlayer().getEnergy() + 50);
+            player.setEnergy(player.getEnergy() + 50);
         }
-        player.addNotifications(App.getInstance().game.getCurrentPlayer().getUser().getUsername() + " sends you a message");
+        player.addNotifications(player.getUser().getUsername() + " sends you a message");
         relation.setTodayTalk(true);
         return Result.success(null);
     }
@@ -1204,13 +1100,13 @@ public class GameController {
 
         ArrayList<String> output = new ArrayList<>();
 
-        if (game.getCurrentPlayer().getUser().getUsername().equals(username))
+        if (player.getUser().getUsername().equals(username))
             return Result.failure(GameError.NO_PLAYER_FOUND);
 
         Player player = game.getPlayerByName(username);
         if (player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
 
-        Relation relation = game.getRelationOfUs(game.getCurrentPlayer(), player);
+        Relation relation = game.getRelationOfUs(player, player);
         output.add("your chats with " + username + " :");
         output.addAll(relation.getTalks());
 
@@ -1221,31 +1117,31 @@ public class GameController {
     public Result<Void> sendGift(String username, String itemName, int amount) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
 
-        if (game.getCurrentPlayer().getUser().getUsername().equals(username))
+        if (player.getUser().getUsername().equals(username))
             return Result.failure(GameError.NO_PLAYER_FOUND);
 
         Player player = game.getPlayerByName(username);
         if (player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
 
-//        if(!game.getCurrentPlayer().weAreNextToEachOther(player))
+//        if(!player.weAreNextToEachOther(player))
 //            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
 
-        Relation relation = game.getRelationOfUs(game.getCurrentPlayer(), player);
+        Relation relation = game.getRelationOfUs(player, player);
         if (relation.getLevel().getLevel() == 0)
             return Result.failure(GameError.FRIENDSHIP_LEVEL_IS_NOT_ENOUGH);
 
         Item item = Item.build(itemName, amount);
-        if (!game.getCurrentPlayer().getInventory().canRemoveItem(item))
+        if (!player.getInventory().canRemoveItem(item))
             return Result.failure(GameError.NOT_ENOUGH_ITEMS);
 
-        game.getCurrentPlayer().getInventory().removeItem(item);
+        player.getInventory().removeItem(item);
         player.getInventory().addItem(item);
-        relation.addGift(new Gift(game.getCurrentPlayer() , player , item , relation.getGifts().size()));
+        relation.addGift(new Gift(player , player , item , relation.getGifts().size()));
         if(relation.getLevel().getLevel() == 4){
             player.setEnergy(player.getEnergy() + 50);
-            App.getInstance().game.getCurrentPlayer().setEnergy(App.getInstance().game.getCurrentPlayer().getEnergy() + 50);
+            player.setEnergy(player.getEnergy() + 50);
         }
-        player.addNotifications(App.getInstance().game.getCurrentPlayer().getUser().getUsername() + " sends you a gift");
+        player.addNotifications(player.getUser().getUsername() + " sends you a gift");
         return Result.success(null);
     }
 
@@ -1255,12 +1151,12 @@ public class GameController {
 
         ArrayList<String> output = new ArrayList<>();
         for(Player player : App.getInstance().game.getPlayers()){
-            if(player.equals(App.getInstance().game.getCurrentPlayer()))
+            if(player.equals(player))
                 continue;
             output.addAll(giftHistory(player.getUser().getUsername()).getData());
-            Relation relation = App.getInstance().game.getRelationOfUs(App.getInstance().game.getCurrentPlayer(), player);
+            Relation relation = App.getInstance().game.getRelationOfUs(player, player);
             for(Gift gift : relation.getGifts()){
-                if(gift.getReceiver().equals(App.getInstance().game.getCurrentPlayer()) && (gift.getRate() == 0)) {
+                if(gift.getReceiver().equals(player) && (gift.getRate() == 0)) {
                     output.add("Gift ID : " + gift.getId());
                     output.add("Item : " + gift.getItem().getName());
                     output.add("Sender : " + gift.getSender().getUser().getUsername());
@@ -1279,14 +1175,14 @@ public class GameController {
     public Result<Void> giftRate(String username, int giftID, double rate) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
 
-        if (game.getCurrentPlayer().getUser().getUsername().equals(username))
+        if (player.getUser().getUsername().equals(username))
             return Result.failure(GameError.NO_PLAYER_FOUND);
 
         Player player = game.getPlayerByName(username);
         if (player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
 
 
-        Relation relation = game.getRelationOfUs(game.getCurrentPlayer(), player);
+        Relation relation = game.getRelationOfUs(player, player);
         if ((relation.getGifts().size() <= giftID) || (giftID < 0))
             return Result.failure(GameError.GIFT_ID_DOES_NOT_EXIST);
 
@@ -1306,13 +1202,13 @@ public class GameController {
 
         ArrayList<String> output = new ArrayList<>();
 
-        if (game.getCurrentPlayer().getUser().getUsername().equals(username))
+        if (player.getUser().getUsername().equals(username))
             return Result.failure(GameError.NO_PLAYER_FOUND);
 
         Player player = game.getPlayerByName(username);
         if (player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
 
-        Relation relation = game.getRelationOfUs(game.getCurrentPlayer(), player);
+        Relation relation = game.getRelationOfUs(player, player);
         output.add("your gift history with " + username + " :");
         for (Gift gift : relation.getGifts()) {
             output.add("Gift ID : " + gift.getId());
@@ -1331,16 +1227,16 @@ public class GameController {
     public Result<Void> hug(String username) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
 
-        if (game.getCurrentPlayer().getUser().getUsername().equals(username))
+        if (player.getUser().getUsername().equals(username))
             return Result.failure(GameError.NO_PLAYER_FOUND);
 
         Player player = game.getPlayerByName(username);
         if (player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
 
-//        if(!game.getCurrentPlayer().weAreNextToEachOther(player))
+//        if(!player.weAreNextToEachOther(player))
 //            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
 
-        Relation relation = game.getRelationOfUs(game.getCurrentPlayer(), player);
+        Relation relation = game.getRelationOfUs(player, player);
 
         if (relation.getLevel().getLevel() < 2)
             return Result.failure(GameError.FRIENDSHIP_LEVEL_IS_NOT_ENOUGH);
@@ -1349,7 +1245,7 @@ public class GameController {
             relation.setFriendshipXP(relation.getFriendshipXP() + 60);
         if(relation.getLevel().getLevel() == 4){
             player.setEnergy(player.getEnergy() + 50);
-            App.getInstance().game.getCurrentPlayer().setEnergy(App.getInstance().game.getCurrentPlayer().getEnergy() + 50);
+            player.setEnergy(player.getEnergy() + 50);
         }
         relation.checkOverFlow();
         return Result.success(null);
@@ -1358,29 +1254,29 @@ public class GameController {
     public Result<Void> sendFlower(String username) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
 
-        if (game.getCurrentPlayer().getUser().getUsername().equals(username))
+        if (player.getUser().getUsername().equals(username))
             return Result.failure(GameError.NO_PLAYER_FOUND);
 
         Player player = game.getPlayerByName(username);
         if (player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
 
-//        if(!game.getCurrentPlayer().weAreNextToEachOther(player))
+//        if(!player.weAreNextToEachOther(player))
 //            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
 
-        Relation relation = game.getRelationOfUs(game.getCurrentPlayer(), player);
+        Relation relation = game.getRelationOfUs(player, player);
         if (relation.getLevel().getLevel() == 0)
             return Result.failure(GameError.FRIENDSHIP_LEVEL_IS_NOT_ENOUGH);
 
         Item item = Item.build("Bouquet", 1);
-        if (!game.getCurrentPlayer().getInventory().canRemoveItem(item))
+        if (!player.getInventory().canRemoveItem(item))
             return Result.failure(GameError.NOT_ENOUGH_ITEMS);
 
-        game.getCurrentPlayer().getInventory().removeItem(item);
+        player.getInventory().removeItem(item);
         player.getInventory().addItem(item);
         relation.setFlower(true);
         if(relation.getLevel().getLevel() == 4){
             player.setEnergy(player.getEnergy() + 50);
-            App.getInstance().game.getCurrentPlayer().setEnergy(App.getInstance().game.getCurrentPlayer().getEnergy() + 50);
+            player.setEnergy(player.getEnergy() + 50);
         }
         relation.checkOverFlow();
         return Result.success(null);
@@ -1389,16 +1285,16 @@ public class GameController {
     public Result<Void> askMarriage(String username) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
 
-        if (game.getCurrentPlayer().getUser().getUsername().equals(username))
+        if (player.getUser().getUsername().equals(username))
             return Result.failure(GameError.NO_PLAYER_FOUND);
 
         Player player = game.getPlayerByName(username);
         if (player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
 
-//        if(!game.getCurrentPlayer().weAreNextToEachOther(player))
+//        if(!player.weAreNextToEachOther(player))
 //            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
 
-        Relation relation = game.getRelationOfUs(game.getCurrentPlayer(), player);
+        Relation relation = game.getRelationOfUs(player, player);
         if (relation.getLevel().getLevel() < 3)
             return Result.failure(GameError.FRIENDSHIP_LEVEL_IS_NOT_ENOUGH);
         if (relation.getFriendshipXP() < 300)
@@ -1406,10 +1302,10 @@ public class GameController {
 
         Item ring = Item.build("wedding ring", 1);
         assert ring != null;
-        if (!game.getCurrentPlayer().getInventory().canRemoveItem(ring))
+        if (!player.getInventory().canRemoveItem(ring))
             return Result.failure(GameError.NOT_ENOUGH_ITEMS);
 
-        if (game.getCurrentPlayer().getUser().getGender().equals(Gender.FEMALE))
+        if (player.getUser().getGender().equals(Gender.FEMALE))
             return Result.failure(GameError.YOU_ARE_GIRL);
         if (player.getUser().getGender().equals(Gender.MALE))
             return Result.failure(GameError.YOUR_WIFE_CAN_NOT_BE_A_BOY);
@@ -1419,17 +1315,17 @@ public class GameController {
             relation.setFriendshipXP(0);
             relation.setLevel(FriendshipLevel.LEVEL0);
             relation.setFlower(false);
-            App.getInstance().game.getCurrentPlayer().setMaxEnergy(100 , 7);
+            player.setMaxEnergy(100 , 7);
             return Result.success("aaaajaaaab rasmieeeeeh rasme zamoooneeehhh");
         }
 
         relation.setLevel(FriendshipLevel.LEVEL4);
-        game.getCurrentPlayer().getInventory().removeItem(ring);
+        player.getInventory().removeItem(ring);
         player.getInventory().addItem(ring);
-        Item coin = Item.build("coin", game.getCurrentPlayer().getCoins() + player.getCoins());
-        game.getCurrentPlayer().getInventory().removeItem(Item.build("coin", game.getCurrentPlayer().getCoins()));
+        Item coin = Item.build("coin", player.getCoins() + player.getCoins());
         player.getInventory().removeItem(Item.build("coin", player.getCoins()));
-        game.getCurrentPlayer().getInventory().addItem(coin);
+        player.getInventory().removeItem(Item.build("coin", player.getCoins()));
+        player.getInventory().addItem(coin);
         player.getInventory().addItem(coin);
         return Result.success("ke emshab shabe eshghe hamin emshabo darim");
     }
@@ -1445,7 +1341,7 @@ public class GameController {
         NPC npc = game.getNPCByName(NPCName);
         if (npc == null) return Result.failure(GameError.THIS_NPC_DOES_NOT_EXIST);
 
-        NPCFriendship npcFriendship = npc.getFriendshipByPlayer(game.getCurrentPlayer());
+        NPCFriendship npcFriendship = npc.getFriendshipByPlayer(player);
         if (!npcFriendship.isTodayMeet())
             npcFriendship.setFriendshipXP(npcFriendship.getFriendshipXP() + 20);
         npcFriendship.setTodayMeet(true);
@@ -1457,14 +1353,14 @@ public class GameController {
         NPC npc = game.getNPCByName(NPCName);
         if (npc == null) return Result.failure(GameError.THIS_NPC_DOES_NOT_EXIST);
 
-        if (!game.getCurrentPlayer().getInventory().canRemoveItem(Item.build(item, amount)))
+        if (!player.getInventory().canRemoveItem(Item.build(item, amount)))
             return Result.failure(GameError.NOT_ENOUGH_ITEMS);
 
         if (Item.build(item, 1) instanceof Tool)
             return Result.failure(GameError.YOU_CANT_GIFT_A_TOOL);
 
-        game.getCurrentPlayer().getInventory().removeItem(Item.build(item, amount));
-        NPCFriendship npcFriendship = npc.getFriendshipByPlayer(game.getCurrentPlayer());
+        player.getInventory().removeItem(Item.build(item, amount));
+        NPCFriendship npcFriendship = npc.getFriendshipByPlayer(player);
         if (npcFriendship.isTodayGift())
             return Result.success(null);
 
@@ -1481,7 +1377,7 @@ public class GameController {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         for (NPC npc : game.getNpcs()) {
             for (NPCFriendship npcFriendship : npc.getFriendships()) {
-                if (npcFriendship.getPlayer().equals(game.getCurrentPlayer())) {
+                if (npcFriendship.getPlayer().equals(player)) {
                     output.add("NPC name: " + npc.getName());
                     output.add("Friendship XP: " + npcFriendship.getFriendshipXP());
                     output.add("Friendship Level: " + npcFriendship.getLevel().getLevel());
@@ -1504,7 +1400,7 @@ public class GameController {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         ArrayList<String> output = new ArrayList<>();
         for (NPC npc : game.getNpcs()) {
-            NPCFriendship npcFriendship = npc.getFriendshipByPlayer(game.getCurrentPlayer());
+            NPCFriendship npcFriendship = npc.getFriendshipByPlayer(player);
             output.add("NPC name: " + npc.getName());
             for (int i = 0; i < Math.min(npcFriendship.getLevel().getLevel() + 1, 3); i++) {
                 output.add(i + ":");
@@ -1528,7 +1424,7 @@ public class GameController {
 
         NPC npc = game.getNPCByName(NPCName);
         if (npc == null) return Result.failure(GameError.THIS_NPC_DOES_NOT_EXIST);
-        NPCFriendship npcFriendship = npc.getFriendshipByPlayer(game.getCurrentPlayer());
+        NPCFriendship npcFriendship = npc.getFriendshipByPlayer(player);
 
         if (questID > npcFriendship.getLevel().getLevel())
             return Result.failure(GameError.FRIENDSHIP_LEVEL_IS_NOT_ENOUGH);
@@ -1537,16 +1433,16 @@ public class GameController {
 
         Item requiredItem = Item.build(npc.getTasks().get(questID).getRequestItem(), npc.getTasks().get(questID).getRequestAmount());
 
-        if (!game.getCurrentPlayer().getInventory().canRemoveItem(requiredItem))
+        if (!player.getInventory().canRemoveItem(requiredItem))
             return Result.failure(GameError.NOT_ENOUGH_ITEM);
-        game.getCurrentPlayer().getInventory().removeItem(requiredItem);
+        player.getInventory().removeItem(requiredItem);
 
         int amount = 1;
         if(npcFriendship.getLevel().getLevel() >= 2)
             amount =2;
         Item rewardItem = Item.build(npc.getTasks().get(questID).getRewardItem(), npc.getTasks().get(questID).getRewardAmount() * amount);
 
-        game.getCurrentPlayer().getInventory().addItem(rewardItem);
+        player.getInventory().addItem(rewardItem);
         npc.getTasksFlag().set(questID, true);
         return Result.success(null);
 
@@ -1566,35 +1462,35 @@ public class GameController {
 
     public String whereAmI() {
         if (game == null) return "No game running";
-        if (game.getCurrentPlayer().getBuilding() != null)
-            return game.getCurrentPlayer().getBuilding().toString();
-        return game.getCurrentPlayerMap().mapType.name();
+        if (player.getBuilding() != null)
+            return player.getBuilding().toString();
+        return player.getMap().mapType.name();
     }
 
     public String whoAmI() {
         if (game == null) return "No game running";
-        return game.getCurrentPlayer().toString();
+        return player.toString();
     }
 
     public String getTileStatus(Coord coord) {
         if (game == null) return "No game running";
-        return game.getCurrentPlayerMap().getTile(coord).toString();
+        return player.getMap().getTile(coord).toString();
     }
 
     public String getMapStatus() {
         if (game == null) return "No game running";
         printMapFull();
-        return game.getCurrentPlayerMap().toString();
+        return player.getMap().toString();
     }
 
     public String getInventoryStatus() {
         if (game == null) return "No game running";
-        return game.getCurrentPlayer().getInventory().toString();
+        return player.getInventory().toString();
     }
 
     public Result<String> showAllShopProducts() {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        Building building = App.getInstance().game.getCurrentPlayer().getBuilding();
+        Building building = player.getBuilding();
         if (!(building instanceof Shop)) return Result.failure(GameError.YOU_SHOULD_BE_ON_SHOP);
         Shop shop = (Shop) building;
         return Result.success(shop.showProducts());
@@ -1602,7 +1498,7 @@ public class GameController {
 
     public Result<String> showAvailableShopProducts() {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        Building building = game.getCurrentPlayer().getBuilding();
+        Building building = player.getBuilding();
         if (!(building instanceof Shop)) return Result.failure(GameError.YOU_SHOULD_BE_ON_SHOP);
         Shop shop = (Shop) building;
         return Result.success(shop.showAvailableItems(game));
@@ -1610,10 +1506,10 @@ public class GameController {
 
     public Result<Void> purchase(String name, int number) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        Building building = game.getCurrentPlayer().getBuilding();
+        Building building = player.getBuilding();
         if (!(building instanceof Shop)) return Result.failure(GameError.YOU_SHOULD_BE_ON_SHOP);
         Shop shop = (Shop) building;
-        Inventory inventory = game.getCurrentPlayer().getInventory();
+        Inventory inventory = player.getInventory();
         Result<Void> r = shop.prepareBuy(name, number, inventory, game);
         if (r.isError()) return r;
         return Result.success(null);
@@ -1625,11 +1521,11 @@ public class GameController {
         if (r.isError()) return r;
         assert AnimalData.getAnimalData(animalName) != null : "Animal " + animalName + " not found";
         Animal animal = new Animal(name, AnimalData.getAnimalData(animalName));
-        List<AnimalHouse> animalHouse = game.getCurrentPlayer().getDefaultMap().getBuildings(AnimalHouse.class);
+        List<AnimalHouse> animalHouse = player.getDefaultMap().getBuildings(AnimalHouse.class);
         for (AnimalHouse h : animalHouse) {
             if (animal.canEnterHouse(h.getFullName()) && animal.canEnterHouseType(h.getHouseType()) && h.hasSpace()) {
                 h.add(animal);
-                game.getCurrentPlayer().addAnimal(animal);
+                player.addAnimal(animal);
                 return Result.success("Animal is in " + h.getFullName());
             }
         }
@@ -1637,11 +1533,8 @@ public class GameController {
     }
 
     private Result<Void> purchasePack(String name) {
-        Building building = game.getCurrentPlayer().getBuilding();
+        Building building = player.getBuilding();
         if (!(building instanceof Shop)) return Result.failure(GameError.YOU_SHOULD_BE_ON_SHOP);
-
-
-        Player player = game.getCurrentPlayer();
         Inventory inventory = player.getInventory();
         InventoryType iType = inventory.getInventoryType();
         Shop shop = (Shop) building;
@@ -1683,9 +1576,9 @@ public class GameController {
 
         Item resultItem = Item.build(name, number);
         if (resultItem.getItemType() == ItemType.RECIPE)
-            game.getCurrentPlayer().addRecipes((Recipe) resultItem);
+            player.addRecipes((Recipe) resultItem);
         else
-            game.getCurrentPlayer().getInventory().addItem(resultItem);
+            player.getInventory().addItem(resultItem);
         return Result.success(null);
     }
 
@@ -1696,7 +1589,7 @@ public class GameController {
 
         MapType mapType = MapType.getMapType(name);
 
-        Map map = game.getCurrentPlayer().getDefaultMap();
+        Map map = player.getDefaultMap();
         MapBuilder mapBuilder = new MapBuilder();
 
         mapBuilder.buildAnimalHouse(mapType);
@@ -1714,23 +1607,22 @@ public class GameController {
 
     public void addDollarsCheat(int number) {
         if (game == null) return;
-        game.getCurrentPlayer().addCoins(number);
+        player.addCoins(number);
     }
 
     public boolean isFainted() {
         if (game == null) return false;
-        return game.getCurrentPlayer().isFainted();
+        return player.isFainted();
     }
 
     public Result<Void> setFriendship(String username , int xp){
         Player player = App.getInstance().game.getPlayerByName(username);
-        Relation relation = App.getInstance().game.getRelationOfUs(player , App.getInstance().game.getCurrentPlayer());
+        Relation relation = App.getInstance().game.getRelationOfUs(player , player);
         relation.setFriendshipXP(xp);
         return Result.success(null);
     }
 
     public Result<ArrayList<String>> showSkills() {
-        Player player = game.getCurrentPlayer();
         ArrayList<String> skills = new ArrayList<>();
         skills.add("FARMING : " + player.getSkillExp(SkillType.FARMING));
         skills.add("FORAGING : " + player.getSkillExp(SkillType.FORAGING));
@@ -1741,24 +1633,38 @@ public class GameController {
 
     public Result<Void> goToFarm(String user) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        if (user.equals(game.getCurrentPlayer().getUser().getUsername())) {
+        if (user.equals(player.getUser().getUsername())) {
             return backToHome();
         }
-        if (game.getCurrentPlayer().getMap().mapType != MapType.VILLAGE)
+        if (player.getMap().mapType != MapType.VILLAGE)
             return Result.failure(GameError.YOU_SHOULD_BE_ON_VILLAGE);
-        Relation r = game.getRelationOfUs(game.getCurrentPlayer(), game.getPlayerByName(user));
+        Relation r = game.getRelationOfUs(player, game.getPlayerByName(user));
         if (r == null) return Result.failure(UserError.USER_NOT_FOUND);
         if (r.getLevel() != FriendshipLevel.LEVEL4)
             return Result.failure(GameError.THIS_FARM_DOESNT_BELONG_TO_YOU);
-        game.getCurrentPlayer().setMap(game.getPlayerByName(user).getDefaultMap());
-        game.getCurrentPlayer().setCoord(new Coord(0, 0));
+        player.setMap(game.getPlayerByName(user).getDefaultMap());
+        player.setCoord(new Coord(0, 0));
         return Result.success(null);
     }
 
     public Result<ArrayList<String>> showNotifications(){
-        ArrayList<String> output = new ArrayList<>(App.getInstance().game.getCurrentPlayer().getNotifications());
-        App.getInstance().game.getCurrentPlayer().resetNotifications();
+        ArrayList<String> output = new ArrayList<>(player.getNotifications());
+        player.resetNotifications();
         return Result.success(output);
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void handleToolMove(int screenX , int screenY) {
+        if (player.getItemInHand() instanceof Tool){
+            Tool tool = (Tool) player.getItemInHand();
+            tool.handleRotation(screenX , Gdx.graphics.getHeight() - screenY);
+        }
+    }
 }

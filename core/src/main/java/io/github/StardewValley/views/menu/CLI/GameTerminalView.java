@@ -18,7 +18,7 @@ import java.util.regex.Matcher;
 
 public class GameTerminalView implements Menu {
     Matcher matcher;
-    GameController gameController = new GameController();
+    GameController gameController = App.getInstance().currentPlayerController;
     private static GameTerminalView instance;
 
     public void setGameController(GameController gameController) {
@@ -106,7 +106,6 @@ public class GameTerminalView implements Menu {
     }
 
     public void Result(String command) {
-        gameController.game = App.getInstance().game;
 
         if (gameController.isGameLockedDueToNight()) {
             System.out.println("You are already locked due to night, Skipping turn...");
@@ -131,7 +130,8 @@ public class GameTerminalView implements Menu {
             System.out.println(gameController.showCurrentMenu());
         }
         else if ((matcher = GameMenuCommand.NEW_GAME.getMatcher(command)) != null) {
-            System.out.println(gameController.createGame(matcher.group("username1") , matcher.group("username2") , matcher.group("username3")));
+            System.out.println("HAS CHANGED!");
+            //System.out.println(gameController.createGame(matcher.group("username1") , matcher.group("username2") , matcher.group("username3")));
         }
         else if ((matcher = GameMenuCommand.EAT.getMatcher(command)) != null) {
             System.out.println(gameController.eat(matcher.group("name")));
@@ -421,7 +421,6 @@ public class GameTerminalView implements Menu {
 
     @Override
     public String ResultText(String command) {
-        gameController.game = App.getInstance().game;
 
         if (gameController.isGameLockedDueToNight()) {
             gameController.nextTurn();
@@ -446,8 +445,8 @@ public class GameTerminalView implements Menu {
 
         }
         else if ((matcher = GameMenuCommand.NEW_GAME.getMatcher(command)) != null) {
-            return gameController.createGame(matcher.group("username1") , matcher.group("username2") , matcher.group("username3")).toString();
-
+            return "NOT FINISHED ACTUALLY";
+           // return gameController.createGame(matcher.group("username1") , matcher.group("username2") , matcher.group("username3")).toString();
         }
         else if ((matcher = GameMenuCommand.EAT.getMatcher(command)) != null) {
             return gameController.eat(matcher.group("name")).toString();

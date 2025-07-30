@@ -156,9 +156,9 @@ public class Player implements DailyUpdate, Serializable {
 
     public ArrayList<Tile> getNeighborTiles(Game game){
         ArrayList<Tile> output = new ArrayList<>();
-        Coord playerCord = game.getCurrentPlayer().getCoord();
+        Coord playerCord = getCoord();
         for(Direction direction : Direction.values()) {
-            Tile tile = game.getCurrentPlayerMap().getTile(direction.getCoord().addCoord(playerCord));
+            Tile tile = getMap().getTile(direction.getCoord().addCoord(playerCord));
             if (tile == null)
                 continue;
             output.add(tile);

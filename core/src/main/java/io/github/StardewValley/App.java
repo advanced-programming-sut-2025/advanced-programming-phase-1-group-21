@@ -4,11 +4,14 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.Array;
 import data.DataLoader;
 import io.github.StardewValley.controllers.GameController;
+import io.github.StardewValley.controllers.ViewController;
+import io.github.StardewValley.network.MultiplayerProxy;
 import io.github.StardewValley.views.menu.CLI.Colors;
 import io.github.StardewValley.views.menu.CLI.MainMenuView;
 import io.github.StardewValley.views.menu.CLI.Menu;
 import io.github.StardewValley.views.menu.CLI.RegisterMenuView;
 import models.game.Game;
+import models.game.Player;
 import models.user.User;
 
 import java.io.*;
@@ -22,8 +25,10 @@ public class App implements Serializable {
 
     public Menu currentMenu = RegisterMenuView.getInstance();
     public Game game = null;
+    public GameController currentPlayerController = null;
+    public ViewController currentPlayerViewController = null;
 
-    public Map<String, GameController> gameControllers = new HashMap<>();
+    public Map<String, GameController> gameControllers;
 
     //IT WILL BE NO LONGER NEEDED (NETWORK WILL HANDLE IT)!!!!
     //server should already know which user is registered
@@ -86,5 +91,22 @@ public class App implements Serializable {
                 "5. WHERE'S YOUR FAVORITE CITY?",
                 "6. WHERE'S YOUR FAVORITE COUNTRY?"
         });
+    }
+
+    public void initGame(Game game) {
+
+        gameControllers = new HashMap<>();
+        for (Player player : game.getPlayers()) {
+            String username = player.getUser().getUsername();
+            GameController gc = new GameController(game, player);
+
+            if (username.equals(logedInUser.getUsername())) {
+                currentPlayerViewController = new ViewController(gc);
+                gc = MultiplayerProxy.create(gc);
+                currentPlayerController = gc;
+            }
+
+            gameControllers.put(username, gc);
+        }
     }
 }
