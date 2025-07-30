@@ -46,6 +46,7 @@ public class GameScreen implements Screen , InputProcessor {
         this.game = Main.getInstance();
         this.controller = App.getInstance().currentPlayerController;
         this.viewController = App.getInstance().currentPlayerViewController;
+        ShowMap.player = viewController.player;
         createUI();
     }
 
@@ -60,7 +61,7 @@ public class GameScreen implements Screen , InputProcessor {
         float tileX = stage.getWidth()/ mapX;
 
         Skin skin = Assets.getSkin();
-        inventoryTab = new InventoryTab(this, skin);
+        inventoryTab = new InventoryTab(viewController.player, this, skin);
         shopMenuTab = new ShopMenuTab(this , skin);
         terminalTab = new TerminalTab(this , skin);
     }

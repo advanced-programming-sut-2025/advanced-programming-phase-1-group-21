@@ -455,7 +455,7 @@ public class GameController {
         String recipe = t.getToolMaterialType().getNextToolName();
         if (recipe == null) return Result.failure(GameError.NOT_UPGRADABLE);
 
-        Result<Void> r = shop.prepareBuy(recipe, 1, inventory, game);
+        Result<Void> r = shop.prepareBuy(recipe, 1, inventory, game, player);
         if (r.isError()) return r;
 
         t.setToolMaterialType(t.getToolMaterialType().getNextType());
@@ -479,7 +479,7 @@ public class GameController {
             return Result.failure(GameError.TOOL_NOT_FOUND);
 
         Tool tool = (Tool) player.getItemInHand();
-        Result<Item> item = tool.use(destinyTile, game);
+        Result<Item> item = tool.use(destinyTile, game, player);
         if (item.isError())
             return item;
         if (item == null)
@@ -579,7 +579,7 @@ public class GameController {
         Tool tool = (Tool) player.getItemInHand();
         if (tool == null || tool.getToolType() != ToolType.WATERING_CAN)
             return Result.failure(GameError.TOOL_NOT_IN_HAND);
-        return tool.use(coord, game);
+        return tool.use(coord, game, player);
     }
 
     public Result<List<Recipe>> showCraftingRecipes() {
@@ -893,7 +893,7 @@ public class GameController {
             return Result.failure(GameError.YOU_ARE_DISTANT);
 
         inventory.removeItem(item);
-        shippingBin.add(item);
+        shippingBin.add(item, player);
         return Result.success(null);
     }
 
@@ -939,7 +939,7 @@ public class GameController {
             player.getInventory().addItem(Item.build(FishingPole.getCheapestFish(game), Math.min(6, (int) amount)));
             return Result.success(null);
         } else if (fishingPole.equals("bamboo") || fishingPole.equals("iridium") || fishingPole.equals("fiberglass")) {
-            player.getInventory().addItem(Item.build(FishingPole.randomFish(game), Math.min(6, (int) amount)));
+            player.getInventory().addItem(Item.build(FishingPole.randomFish(game, player), Math.min(6, (int) amount)));
             return Result.success(null);
         }
         return Result.success(null);
@@ -1510,7 +1510,7 @@ public class GameController {
         if (!(building instanceof Shop)) return Result.failure(GameError.YOU_SHOULD_BE_ON_SHOP);
         Shop shop = (Shop) building;
         Inventory inventory = player.getInventory();
-        Result<Void> r = shop.prepareBuy(name, number, inventory, game);
+        Result<Void> r = shop.prepareBuy(name, number, inventory, game, player);
         if (r.isError()) return r;
         return Result.success(null);
     }
@@ -1555,7 +1555,7 @@ public class GameController {
         else {
             return Result.failure(GameError.NOT_FOUND);
         }
-        Result<Void> r = shop.prepareBuy(name, 1, inventory, game);
+        Result<Void> r = shop.prepareBuy(name, 1, inventory, game, player);
         if (r.isError()) return r;
         inventory.upgradeSize(newIType);
 

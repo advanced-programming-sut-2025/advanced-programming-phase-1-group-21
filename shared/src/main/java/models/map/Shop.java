@@ -8,6 +8,7 @@ import models.DailyUpdate;
 import models.Item.Item;
 import models.game.Game;
 import models.game.Inventory;
+import models.game.Player;
 import models.result.Result;
 import models.result.errorTypes.GameError;
 import models.time.Date;
@@ -155,11 +156,11 @@ public class Shop extends Building implements DailyUpdate{
 	 * @param amount
 	 * @return Error or null
 	 */
-	public Result<Void> prepareBuy(String name, int amount, Inventory inventory, Game game) {
+	public Result<Void> prepareBuy(String name, int amount, Inventory inventory, Game game, Player player) {
 		ShopItemInstance itemInstance = getAvailableShopItemInstance(name, game);
 		if (itemInstance == null) return Result.failure(GameError.NOT_FOUND);
 		ShopData data = itemInstance.getData();
-		if (!(new RequirementChecker(game.getCurrentPlayer())).checkShopDate(data)) return Result.failure(GameError.REQUIREMENT_NOT_SATISFIED);
+		if (!(new RequirementChecker(player)).checkShopDate(data)) return Result.failure(GameError.REQUIREMENT_NOT_SATISFIED);
 		int remaining = itemInstance.getRemaining();
 		if (amount > remaining)
 			return Result.failure(GameError.DAILY_LIMIT_EXCEED);

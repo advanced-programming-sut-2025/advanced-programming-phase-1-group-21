@@ -75,9 +75,8 @@ public class App implements Serializable {
 
     public String getUI() {
         if (game == null) return "";
-        return Colors.color(Colors.PURPLE, game.getCurrentPlayer().getUser().getUsername()) + " " +
-                Colors.color(Colors.GREEN, game.getGameDate().compactString()) + " " +
-                Colors.color(Colors.YELLOW, "" + game.getCurrentPlayer().getEnergy());
+        return Colors.color(Colors.PURPLE, App.getInstance().logedInUser.getUsername() + " " +
+                Colors.color(Colors.GREEN, game.getGameDate().compactString()));
     }
 
     public Random getRandom() { return random; }

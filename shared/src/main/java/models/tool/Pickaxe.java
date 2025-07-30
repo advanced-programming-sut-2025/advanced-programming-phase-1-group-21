@@ -46,8 +46,7 @@ public class Pickaxe extends Tool {
 	}
 
 	@Override
-	public Result<Item> use(Coord coord, Game game) {
-		Player player = game.getCurrentPlayer();
+	public Result<Item> use(Coord coord, Game game, Player player) {
 		MapType mapType = player.getMap().mapType;
 
 		if (mapType != MapType.FARM && mapType != MapType.MINES)

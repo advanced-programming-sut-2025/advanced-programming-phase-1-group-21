@@ -9,23 +9,28 @@ import models.game.Player;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ShippingBin implements Placable, DailyUpdate, Serializable {
     List<Item> toSell = new ArrayList<>();
+    Map<Item, Player> map = new HashMap<>();
 
-    public void add(Item item) {
+    public void add(Item item, Player player) {
         toSell.add(item);
+        map.put(item, player);
     }
 
     @Override
     public boolean nextDay(Game g) {
-        Player owner = g.getCurrentPlayer();
         for (Item item : toSell) {
+            Player owner = map.get(item);
             System.err.println("tasfie hesab anjam shod!! " + owner.getUser().getUsername() + " " + item);
             owner.getInventory().changeCoin(item.getPrice() * item.getAmount());
         }
         toSell.clear();
+        map.clear();
         return false;
     }
 

@@ -9,6 +9,8 @@ import models.map.*;
 import models.tool.Tool;
 
 public class ShowMap {
+    public static Player player;
+
     public static void show(Main game , float delta){
         showTiles(game);
         showHouse(game);
@@ -18,7 +20,7 @@ public class ShowMap {
     }
 
     public static void showTiles(Main game){
-        Map map = App.getInstance().game.getCurrentPlayer().getMap();
+        Map map = player.getMap();
         float mapX = map.getMaxX();
         float mapY = map.getMaxY();
         for(int i = 0 ; i < mapY ; i++){
@@ -32,7 +34,7 @@ public class ShowMap {
     }
 
     public static void onTilesShow(Main game){
-        Map map = App.getInstance().game.getCurrentPlayer().getMap();
+        Map map = player.getMap();
         float mapX = map.getMaxX();
         float mapY = map.getMaxY();
 
@@ -47,11 +49,11 @@ public class ShowMap {
     }
 
     public static void showPlayer(Main game){
-        App.getInstance().game.getCurrentPlayer().getSprite().draw(game.getBatch());
+        player.getSprite().draw(game.getBatch());
     }
 
     public static void showHouse(Main game){//TODO: this function should be changed to showBuilding
-        Map map = App.getInstance().game.getCurrentPlayer().getMap();
+        Map map = player.getMap();
         for(Building building : map.getBuildings()){
             if(building.sprite != null)
                 building.sprite.draw(game.getBatch());
@@ -59,7 +61,6 @@ public class ShowMap {
     }
 
     public static void showTool(Main game , float delta){
-        Player player = App.getInstance().game.getCurrentPlayer();
         if(player.getItemInHand() instanceof Tool){
             Tool tool = (Tool) player.getItemInHand();
             tool.spriteX = player.getSprite().getX();

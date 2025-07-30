@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.MathUtils;
 import models.Item.Item;
 import models.Item.ItemType;
 import models.game.Game;
+import models.game.Player;
 import models.map.Coord;
 import models.map.Direction;
 import models.result.Result;
@@ -85,7 +86,7 @@ public abstract class Tool extends Item {
 		return toolMaterialType;
 	}
 
-	abstract public Result<Item> use(Coord coord, Game game);
+	abstract public Result<Item> use(Coord coord, Game game, Player player);
 
 	public String getName() {
 		return toolType.getName();

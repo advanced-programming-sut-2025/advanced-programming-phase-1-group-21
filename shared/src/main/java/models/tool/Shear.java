@@ -15,8 +15,7 @@ public class Shear extends Tool {
 	}
 
 	@Override
-	public Result<Item> use(Coord coord, Game game) {
-		Player player = game.getCurrentPlayer();
+	public Result<Item> use(Coord coord, Game game, Player player) {
 		Tile tile = player.getMap().getTile(coord);
 
 		player.decreaseEnergy((int)(4 * game.weatherCoefficient()));

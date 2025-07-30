@@ -168,10 +168,10 @@ public class Player implements DailyUpdate, Serializable {
 
     public ArrayList<Coord> getNeighborCoord(Game game) {
         ArrayList<Coord> output = new ArrayList<>();
-        Coord playerCord = game.getCurrentPlayer().getCoord();
+        Coord playerCord = getCoord();
         for(Direction direction : Direction.values()) {
             Coord c = direction.getCoord().addCoord(playerCord);
-            Tile tile = game.getCurrentPlayerMap().getTile(c);
+            Tile tile = getMap().getTile(c);
             if (tile == null)
                 continue;
             output.add(c);
@@ -180,10 +180,10 @@ public class Player implements DailyUpdate, Serializable {
     }
 
     public boolean weAreNextToEachOther(Player otherPlayer, Game game) {
-        if(!game.getCurrentPlayer().getMap().equals(otherPlayer.getMap()))
+        if(!getMap().equals(otherPlayer.getMap()))
             return false;
         Coord otherPlayerCord = otherPlayer.getCoord();
-        Coord myCoord = game.getCurrentPlayer().getCoord();
+        Coord myCoord = getCoord();
 
         if((otherPlayerCord.getX() - myCoord.getX()) * (otherPlayerCord.getX() - myCoord.getX()) > 1)
             return false;
