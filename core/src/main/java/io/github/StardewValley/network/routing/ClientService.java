@@ -23,6 +23,7 @@ import models.user.User;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * All functions should be static
@@ -88,7 +89,9 @@ public class ClientService {
         ArrayList<Player> players = new ArrayList<>();
         MapBuilder mapBuilder = new MapBuilder();
 
-        for (LobbyUser lobbyUser : lobby.getUsers()) {
+        Gdx.app.postRunnable(() -> {
+
+            for (LobbyUser lobbyUser : lobby.getUsers()) {
             User user = lobbyUser.user;
             int seed = lobbyUser.mapID;
             Map map = mapBuilder.buildFarm(new Random(seed));
@@ -96,8 +99,8 @@ public class ClientService {
             players.add(player);
         }
 
-        Game game = new Game(players);
-
-        App.getInstance().initGame(game);
+            Game game = new Game(players);
+            App.getInstance().initGame(game);
+        });
     }
 }

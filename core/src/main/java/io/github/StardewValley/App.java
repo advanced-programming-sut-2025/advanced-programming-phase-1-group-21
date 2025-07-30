@@ -10,6 +10,7 @@ import io.github.StardewValley.views.menu.CLI.Colors;
 import io.github.StardewValley.views.menu.CLI.MainMenuView;
 import io.github.StardewValley.views.menu.CLI.Menu;
 import io.github.StardewValley.views.menu.CLI.RegisterMenuView;
+import io.github.StardewValley.views.menu.GUI.GameScreen;
 import models.game.Game;
 import models.game.Player;
 import models.user.User;
@@ -101,11 +102,18 @@ public class App implements Serializable {
 
             if (username.equals(logedInUser.getUsername())) {
                 currentPlayerViewController = new ViewController(gc);
-                gc = MultiplayerProxy.create(gc);
+                try {
+                    gc = MultiplayerProxy.create(gc);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
                 currentPlayerController = gc;
             }
 
             gameControllers.put(username, gc);
         }
+
+        Main.getInstance().setScreen(new GameScreen());
     }
 }

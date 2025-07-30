@@ -88,7 +88,6 @@ public class ClientNetwork {
 
     public static void sendMessage(Message message) {
         CompletableFuture.runAsync(() -> {
-
             if (client != null && client.isConnected()) {
                 client.sendTCP(message);
             } else {

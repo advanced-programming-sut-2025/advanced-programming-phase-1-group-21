@@ -57,15 +57,7 @@ public class UIUtil {
     }
 
     public static void showErrorScreen(Error error) {
-        Main.getInstance().setScreen(new ErrorScreen(error));
-    }
-
-    public static void showErrorScreen(String error) {
-        Main.getInstance().setScreen(new ErrorScreen(error));
-    }
-
-    public static void showErrorScreen() {
-        Main.getInstance().setScreen(new ErrorScreen("Something went wrong"));
+        System.out.println(error.getMessage());
     }
 
     public static class FilePicker {

@@ -46,8 +46,16 @@ import java.util.*;
 
 public class GameController {
 
-    private final Game game;
-    private final Player player;
+    private Game game;
+    private Player player;
+
+    /**
+     * Required for ByteBuddy INIT
+     * DON'T EVER USE THIS
+     */
+    public GameController() {
+
+    }
 
     public GameController(Game game, Player player) {
         this.game = game;
