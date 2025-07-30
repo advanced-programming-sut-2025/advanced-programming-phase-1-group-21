@@ -33,8 +33,10 @@ public class GameScreen implements Screen , InputProcessor {
     private Stage stage;
     private InventoryTab inventoryTab;
     private ShopMenuTab shopMenuTab;
+    private TerminalTab terminalTab;
     private boolean isInventoryShown = false;
     private boolean isShopMenuShown = false;
+    private boolean isTerminalShown = false;
     private BitmapFont messagePrinter = new BitmapFont();
     private String message;
 
@@ -62,6 +64,7 @@ public class GameScreen implements Screen , InputProcessor {
         Skin skin = Assets.getSkin();
         inventoryTab = new InventoryTab(this, skin);
         shopMenuTab = new ShopMenuTab(this , skin);
+        terminalTab = new TerminalTab(this , skin);
     }
 
     @Override
@@ -83,6 +86,8 @@ public class GameScreen implements Screen , InputProcessor {
         }
         if(isShopMenuShown)
             shopMenuTab.draw();
+        if(isTerminalShown)
+            terminalTab.draw();
     }
 
     @Override
@@ -124,6 +129,12 @@ public class GameScreen implements Screen , InputProcessor {
             shopMenuTab.show();
 
         }
+        if (i == Input.Keys.T && !isInventoryShown) {
+            isTerminalShown = true;
+            terminalTab.show();
+
+        }
+
         return false;
     }
 
@@ -179,6 +190,11 @@ public class GameScreen implements Screen , InputProcessor {
 
     public void onShopMenuClosed() {
         isShopMenuShown = false;
+        Gdx.input.setInputProcessor(this);
+    }
+
+    public void onTerminalClosed(){
+        isTerminalShown = false;
         Gdx.input.setInputProcessor(this);
     }
 
