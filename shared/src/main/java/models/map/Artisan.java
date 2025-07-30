@@ -111,7 +111,7 @@ public class Artisan implements Placable, Serializable {
 	public boolean isEmpty() {
 		return !isProcessing() && result == null;
 	}
-
+  
 	public Item getResult(Inventory inventory) {
 		Item r = result;
 		result = null;
