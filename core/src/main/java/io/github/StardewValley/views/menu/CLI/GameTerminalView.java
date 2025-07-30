@@ -21,7 +21,11 @@ public class GameTerminalView implements Menu {
     GameController gameController = new GameController();
     private static GameTerminalView instance;
 
-    private GameTerminalView() {
+    public void setGameController(GameController gameController) {
+        this.gameController = gameController;
+    }
+
+    public GameTerminalView() {
     }
 
     public static GameTerminalView getInstance() {
