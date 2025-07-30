@@ -108,7 +108,6 @@ public enum GameMenuCommand implements Command {
     SHOP_SHOW_ALL_AVAILABLE_PRODUCTS("show all available products"),
     SHOP_PURCHASE("purchase\\s+(?<name>.+?)(?:\\s+-n\\s+(?<number>\\d+))?"),
     CHEAT_ADD_DOLLARS("cheat add (?<number>\\d+) dollars"),
-
     BUY_ANIMAL("buy\\s+animal\\s+-a\\s+(?<animalName>.+)\\s+-n\\s+(?<name>.+)\\s*"),
 
     //THESE ARE DEBUG COMMANDS
