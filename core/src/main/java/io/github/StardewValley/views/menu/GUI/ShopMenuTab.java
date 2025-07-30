@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import models.map.Coord;
 
 
 import java.util.ArrayList;
@@ -27,8 +28,10 @@ public class ShopMenuTab {
     private TextButton allProducts;
     private TextButton availableProducts;
     private boolean isAll = true;
-    private TextField amount;
-    private TextButton buy;
+    private TextField input;
+    private TextButton buyItem , buyAnimal , build;
+    private Label message;
+
 
 
     private Table scrollTable;
@@ -42,6 +45,7 @@ public class ShopMenuTab {
         this.itemToBy = new Label("" , skin);
         this.allProducts = new TextButton("Show All" , skin);
         this.availableProducts = new TextButton("Show Available" , skin);
+        message = new Label("" , skin);
         createUI();
     }
 
@@ -67,7 +71,7 @@ public class ShopMenuTab {
         }
 
         menuScrollPane = new ScrollPane(scrollTable, skin);
-        menuScrollPane.setScrollingDisabled(true, false);
+        menuScrollPane.setScrollingDisabled(false, false);
         menuScrollPane.setFadeScrollBars(true);
         menuScrollPane.setSize(1200, 600);
         menuScrollPane.setPosition(360, 227);
@@ -82,9 +86,9 @@ public class ShopMenuTab {
         exitButton.setX(1670);
         exitButton.setY(850);
 
-        amount = new TextField("" , skin);
-        amount.setX(1200);
-        amount.setY(170);
+        input = new TextField("" , skin);
+        input.setX(1200);
+        input.setY(170);
 
         allProducts = new TextButton("Show All" , skin);
         allProducts.setX(400);
@@ -113,17 +117,45 @@ public class ShopMenuTab {
         itemToBy.setX(900);
         itemToBy.setY(190);
 
-        buy = new TextButton("Buy" , skin);
-        buy.setX(1350);
-        buy.setY(170);
-        buy.addListener(new ClickListener() {
+        buyItem = new TextButton("Buy Item" , skin);
+        buyItem.setX(1380);
+        buyItem.setY(170);
+        buyItem.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                buy();
+                buyItem();
                 createUI();
                 draw();
             }
         });
+
+        buyAnimal = new TextButton("Buy Animal" , skin);
+        buyAnimal.setX(1380);
+        buyAnimal.setY(120);
+        buyAnimal.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                buyAnimal();
+                createUI();
+                draw();
+            }
+        });
+
+        build = new TextButton("Build" , skin);
+        build.setX(1380);
+        build.setY(70);
+        build.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                build();
+                createUI();
+                draw();
+            }
+        });
+
+        message.setX(900);
+        message.setY(850);
+        message.setColor(Color.RED);
 
 
         stage.addActor(exitButton);
@@ -131,12 +163,42 @@ public class ShopMenuTab {
         stage.addActor(itemToBy);
         stage.addActor(allProducts);
         stage.addActor(availableProducts);
-        stage.addActor(amount);
-        stage.addActor(buy);
+        stage.addActor(input);
+        stage.addActor(buyItem);
+        stage.addActor(buyAnimal);
+        stage.addActor(build);
+        stage.addActor(message);
     }
 
-    private void buy(){
+    private void buyItem(){
+        if(input.getText().isEmpty()){
+            message.setText("invalid amount");
+            return;
+        }
+        int amount = Integer.parseInt(input.getText());
+        String itemName = itemToBy.getText().toString();
+        message.setText(gameScreen.getController().purchaseItem(itemName , amount).getMessage());
+    }
 
+    private void buyAnimal(){
+        String name = input.getText();
+        String animalName = itemToBy.getText().toString();
+        message.setText(gameScreen.getController().purchaseAnimal(animalName , name).getMessage());
+    }
+
+    private void build(){
+        String regex = "\\((?<x>\\d+),(?<y>\\d+)\\)";
+        Matcher matcher = Pattern.compile(regex).matcher(input.getText());
+        if(!matcher.matches()) {
+            message.setText("invalid coordinate");
+            return;
+        }
+        matcher.matches();
+
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        String buildingName = itemToBy.getText().toString();
+        message.setText(gameScreen.getController().purchaseBuilding(buildingName , new Coord(x,y)).getMessage());
     }
 
     private void setProducts(){

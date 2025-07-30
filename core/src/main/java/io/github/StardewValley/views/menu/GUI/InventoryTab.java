@@ -100,9 +100,6 @@ class InventoryTab {
 			number++;
 		}
 
-		for(int i = 0 ; i < itemMatrix.size() ; i++)
-			System.out.println(itemMatrix.get(i/12).get(i%12).getName());
-
 		if (goldItem != null)
 			goldLabel = new Label(goldItem.getAmount() + "g", skin);
 		else
@@ -120,6 +117,7 @@ class InventoryTab {
 				Image cell;
 				if (row * 12 + col < number) {
 					Item item = itemMatrix.get(row).get(col);
+					System.out.println(item.getName());
 					AllItemsData data = AllItemsData.getData(item.getName());
 					if (data != null) {
 						String address = data.getTextureAddress();

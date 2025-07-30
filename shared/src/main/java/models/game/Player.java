@@ -97,7 +97,7 @@ public class Player implements DailyUpdate, Serializable {
     public Player(User user, Map defaultMap) {
         this.user = user;
         this.inventory = Inventory.buildPlayerInventory();
-        inventory.addItem(Game.getCoinItem(0));
+        inventory.addItem(Game.getCoinItem(10000));
         energy = new Energy();
         this.defaultMap = defaultMap;
         this.map = defaultMap;
