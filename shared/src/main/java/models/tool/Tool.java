@@ -39,7 +39,7 @@ public abstract class Tool extends Item {
 
 	public void animation(float delta){
 		animationTime += delta;
-		sprite.rotate((float) (3.14 + animationTime * animationDirection * MathUtils.radiansToDegrees));
+		sprite.rotate((float) (3.14 + animationTime * 0.01 * animationDirection * MathUtils.radiansToDegrees));
 		if(animationTime > 1)
 			animationTime = 0;
 	}

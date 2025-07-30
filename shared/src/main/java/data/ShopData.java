@@ -123,18 +123,20 @@ public class ShopData implements Data {
 
 	@Override
 	public String toString() {
-		return "ShopData{" +
-				"shop='" + shop + '\'' +
-				", name='" + name + '\'' +
-				", description='" + description + '\'' +
-				", cseasons=" + cseasons +
-				", prices=" + price +
-				", ingredients=" + ingredients +
-				", backpackRequired='" + backpackRequired + '\'' +
-				", buildingRequired='" + buildingRequired + '\'' +
-				", skillTypeRequired='" + skillTypeRequired + '\'' +
-				", skillLevelRequired=" + skillLevelRequired +
-				", dailyLimit=" + (dailyLimit == -1 ? "NO LIMIT" : dailyLimit) +
-				'}';
+//		return "ShopData{" +
+//				"shop='" + shop + '\'' +
+//				", name='" + name + '\'' +
+//				", description='" + description + '\'' +
+//				", cseasons=" + cseasons +
+//				", prices=" + price +
+//				", ingredients=" + ingredients +
+//				", backpackRequired='" + backpackRequired + '\'' +
+//				", buildingRequired='" + buildingRequired + '\'' +
+//				", skillTypeRequired='" + skillTypeRequired + '\'' +
+//				", skillLevelRequired=" + skillLevelRequired +
+//				", dailyLimit=" + (dailyLimit == -1 ? "NO LIMIT" : dailyLimit) +
+//				'}';
+		return "name : " + name + "   " +
+				"price = " + price + "   ";
 	}
 }

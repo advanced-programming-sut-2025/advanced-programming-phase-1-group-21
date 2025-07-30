@@ -1558,7 +1558,7 @@ public class GameController {
 
     public Result<String> showAllShopProducts() {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        Building building = game.getCurrentPlayer().getBuilding();
+        Building building = App.getInstance().game.getCurrentPlayer().getBuilding();
         if (!(building instanceof Shop)) return Result.failure(GameError.YOU_SHOULD_BE_ON_SHOP);
         Shop shop = (Shop) building;
         return Result.success(shop.showProducts());

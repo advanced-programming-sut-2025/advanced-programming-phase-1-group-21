@@ -32,7 +32,9 @@ public class GameScreen implements Screen , InputProcessor {
     private final GameController controller;
     private Stage stage;
     private InventoryTab inventoryTab;
+    private ShopMenuTab shopMenuTab;
     private boolean isInventoryShown = false;
+    private boolean isShopMenuShown = false;
     private BitmapFont messagePrinter = new BitmapFont();
     private String message;
 
@@ -59,6 +61,7 @@ public class GameScreen implements Screen , InputProcessor {
 
         Skin skin = Assets.getSkin();
         inventoryTab = new InventoryTab(this, skin);
+        shopMenuTab = new ShopMenuTab(this , skin);
     }
 
     @Override
@@ -78,6 +81,8 @@ public class GameScreen implements Screen , InputProcessor {
         if (isInventoryShown) {
             inventoryTab.draw();
         }
+        if(isShopMenuShown)
+            shopMenuTab.draw();
     }
 
     @Override
@@ -113,6 +118,11 @@ public class GameScreen implements Screen , InputProcessor {
         if (i == Input.Keys.I && !isInventoryShown) {
             isInventoryShown = true;
             inventoryTab.show();
+        }
+        if (i == Input.Keys.M && !isInventoryShown) {
+            isShopMenuShown = true;
+            shopMenuTab.show();
+
         }
         return false;
     }
@@ -165,5 +175,14 @@ public class GameScreen implements Screen , InputProcessor {
     public void onInventoryClosed() {
         isInventoryShown = false;
         Gdx.input.setInputProcessor(this);
+    }
+
+    public void onShopMenuClosed() {
+        isShopMenuShown = false;
+        Gdx.input.setInputProcessor(this);
+    }
+
+    public GameController getController() {
+        return controller;
     }
 }
