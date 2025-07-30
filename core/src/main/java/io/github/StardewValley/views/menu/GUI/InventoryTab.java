@@ -64,6 +64,13 @@ class InventoryTab {
 		foragingLevels = new ArrayList<>();
 		fishingLevels = new ArrayList<>();
 		createUI();
+
+		Inventory inv = App.getInstance().game.getCurrentPlayer().getInventory();
+		inv.addItem(Item.build("Loom", 1));
+		inv.addItem(Item.build("Furnace", 1));
+		inv.addItem(Item.build("Keg", 1));
+		inv.addItem(Item.build("Wool", 1));
+		inv.addItem(Item.build("Coal", 1));
 	}
 
 	void createUI() {

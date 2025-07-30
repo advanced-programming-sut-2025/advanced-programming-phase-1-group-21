@@ -10,7 +10,10 @@
           []
         ]
       }
-    ]
+    ],
+    "empty-texture": "Textures/Craftable_item/Bee_House.png",
+    "processing-texture": "Textures/Craftable_item/Bee_House.png",
+    "done-texture": "Textures/Craftable_item/Bee_House_Full.png"
   },
   {
     "artisan": "Cheese Press",
@@ -33,7 +36,10 @@
           {"Large Goat Milk": 1}
         ]
       }
-    ]
+    ],
+    "empty-texture": "Textures/Craftable_item/Cheese_Press.png",
+    "processing-texture": "Textures/Craftable_item/Cheese_Press.png",
+    "done-texture": "Textures/Craftable_item/Cheese_Press.png"
   },
   {
     "artisan": "Keg",
@@ -139,7 +145,10 @@
           {"Wild Plum": 1}
         ]
       }
-    ]
+    ],
+    "empty-texture": "Textures/Craftable_item/Keg.png",
+    "processing-texture": "Textures/Craftable_item/Keg.png",
+    "done-texture": "Textures/Craftable_item/Keg.png"
   },
   {
     "artisan": "Loom",
@@ -152,7 +161,10 @@
           {"Wool": 1}
         ]
       }
-    ]
+    ],
+    "empty-texture": "Textures/Craftable_item/Loom.png",
+    "processing-texture": "Textures/Craftable_item/Loom.png",
+    "done-texture": "Textures/Craftable_item/Loom_Done.png"
   },
   {
     "artisan": "Mayonnaise Machine",
@@ -182,7 +194,10 @@
           {"Dinosaur Egg": 1}
         ]
       }
-    ]
+    ],
+    "empty-texture": "Textures/Craftable_item/Mayonnaise_Machine.png",
+    "processing-texture": "Textures/Craftable_item/Mayonnaise_Machine.png",
+    "done-texture": "Textures/Craftable_item/Mayonnaise_Machine.png"
   },
   {
     "artisan": "Oil Maker",
@@ -219,7 +234,10 @@
           {"Sunflower": 1}
         ]
       }
-    ]
+    ],
+    "empty-texture": "Textures/Craftable_item/Oil_Maker.png",
+    "processing-texture": "Textures/Craftable_item/Oil_Maker.png",
+    "done-texture": "Textures/Craftable_item/Oil_Maker.png"
   },
   {
     "artisan": "Preserves Jar",
@@ -285,7 +303,10 @@
           {"Wild Plum": 1}
         ]
       }
-    ]
+    ],
+    "empty-texture": "Textures/Craftable_item/Preserves_Jar.png",
+    "processing-texture": "Textures/Craftable_item/Preserves_Jar.png",
+    "done-texture": "Textures/Craftable_item/Preserves_Jar.png"
   },
   {
     "artisan": "Charcoal Kiln",
@@ -298,7 +319,10 @@
           {"Wood": 10}
         ]
       }
-    ]
+    ],
+    "empty-texture": "Textures/Craftable_item/Charcoal_Kiln_Off.png",
+    "processing-texture": "Textures/Craftable_item/Charcoal_Kiln.png",
+    "done-texture": "Textures/Craftable_item/Charcoal_Kiln.png"
   },
   {
     "artisan": "Furnace",
@@ -335,6 +359,9 @@
           {"Iridium Ore": 5, "Coal": 1}
         ]
       }
-    ]
+    ],
+    "empty-texture": "Textures/Craftable_item/Furnace.png",
+    "processing-texture": "Textures/Craftable_item/Furnace_On.png",
+    "done-texture": "Textures/Craftable_item/Furnace.png"
   }
 ]

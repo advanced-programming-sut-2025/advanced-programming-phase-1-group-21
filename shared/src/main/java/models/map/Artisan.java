@@ -64,12 +64,20 @@ public class Artisan implements Placable, Serializable {
 
 				inventory.removeItems(requiredItems);
 
-				result = Item.build(recipe.getName(), 1);
+				startProcess(recipe.getName(), 0);
 
 				return Result.success(null);
 			}
 		}
 		return Result.failure(GameError.WRONG_ITEM_TYPES);
+	}
+
+	private void startProcess(String recipeName, int time) {
+		result = Item.build(recipeName, 1);
+	}
+
+	private boolean isProcessing() {
+		return false;
 	}
 
 	public Item getResult(Inventory inventory) {
@@ -100,12 +108,17 @@ public class Artisan implements Placable, Serializable {
 
 	@Override
 	public Texture getTexture() {
-		return null;
+
+		if (isProcessing())
+			return new Texture(goodsData.getProcessingTexture());
+		else if (result == null)
+			return new Texture(goodsData.getEmptyTexture());
+		return new Texture(goodsData.getDoneTexture());
 	}
 
 	@Override
 	public Sprite spriteGetter() {
-		return null;
+		return new Sprite(getTexture());
 	}
 
 	@Override

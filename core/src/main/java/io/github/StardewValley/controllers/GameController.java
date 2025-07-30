@@ -45,25 +45,23 @@ public class GameController {
     public void buttonController(Main thisGame){
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
             thisGame.setScreen(new MainMenuScreen());
-        if(Gdx.input.isKeyPressed(Input.Keys.UP))
+        if(Gdx.input.isKeyPressed(Input.Keys.W))
             walk(Direction.NORTH);
-        if(Gdx.input.isKeyPressed(Input.Keys.DOWN))
+        if(Gdx.input.isKeyPressed(Input.Keys.S))
             walk(Direction.SOUTH);
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT))
+        if(Gdx.input.isKeyPressed(Input.Keys.D))
             walk(Direction.EAST);
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT))
+        if(Gdx.input.isKeyPressed(Input.Keys.A))
             walk(Direction.WEST);
 
-        if(Gdx.input.isKeyPressed(Input.Keys.W))
+        if(Gdx.input.isKeyPressed(Input.Keys.UP))
             useTool(Direction.SOUTH);
-        if(Gdx.input.isKeyPressed(Input.Keys.S))
+        if(Gdx.input.isKeyPressed(Input.Keys.DOWN))
             useTool(Direction.NORTH);
-        if(Gdx.input.isKeyPressed(Input.Keys.D))
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT))
             useTool(Direction.EAST);
-        if(Gdx.input.isKeyPressed(Input.Keys.A))
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT))
             useTool(Direction.WEST);
-
-
     }
 
     public String clickController(int x , int y){
@@ -86,6 +84,12 @@ public class GameController {
             return "tile is not neighbor";
         if((player.getCoord().getY() - (y - map.mapType.distanceY)/30) < -1)
             return "tile is not neighbor";
+
+        if (tile.getTileType() == TileType.PLOWED || tile.getTileType() == TileType.UNPLOWED){
+            if (player.getItemInHand().getItemType() == ItemType.PLACEABLE) {
+                placeArtisan(player.getItemInHand(), tile);
+            }
+        }
 
         return null;
 
@@ -1045,6 +1049,24 @@ public class GameController {
         new Artisan(ArtisanGoodsData.getRecipeData(artisanName), game.getCurrentPlayer().getInventory()).onPlace(tile);
         return Result.success(null);
     }
+
+    public Result<Void> placeArtisan(Item artisan, Tile tile) {
+        Player player = game.getCurrentPlayer();
+        Inventory inventory = player.getInventory();
+        if (artisan == null)
+            return Result.failure(GameError.CANT_FIND_ITEM_IN_INVENTORY);
+
+        if (tile == null)
+            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
+        if (!tile.isEmpty()) {
+            return Result.failure(GameError.TILE_IS_NOT_EMPTY);
+        }
+
+        inventory.removeItem(Item.build(artisan.getName(), 1));
+        new Artisan(ArtisanGoodsData.getRecipeData(artisan.getName()), game.getCurrentPlayer().getInventory()).onPlace(tile);
+        return Result.success(null);
+    }
+
 
     public Result<Void> useArtisan(String artisanName, ArrayList<String> itemNames) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);

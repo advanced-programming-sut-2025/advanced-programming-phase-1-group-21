@@ -13,6 +13,13 @@ public class ArtisanGoodsData implements Data, ItemData {
 	private String artisan;
 	@SerializedName("recipes")
 	private ArrayList <ArtisanRecipeData> artisanRecipes;
+	@SerializedName("empty-texture")
+	private String emptyTexture;
+	@SerializedName("processing-texture")
+	private String processingTexture;
+	@SerializedName("done-texture")
+	private String doneTexture;
+
 
 	public static String getDataURL() {
 		return dataURL;
@@ -45,6 +52,18 @@ public class ArtisanGoodsData implements Data, ItemData {
 
 	public ArrayList<ArtisanRecipeData> getRecipes() {
 		return artisanRecipes;
+	}
+
+	public String getEmptyTexture() {
+		return emptyTexture;
+	}
+
+	public String getProcessingTexture() {
+		return processingTexture;
+	}
+
+	public String getDoneTexture() {
+		return doneTexture;
 	}
 
 	public static ArtisanGoodsData getRecipeData(String name) {
