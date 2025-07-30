@@ -128,6 +128,16 @@ public class Tile implements DailyUpdate, Serializable {
         this.placable = placable;
         if (placable == null) {
             setTileType(TileType.UNPLOWED);
+            onTileTexture = null;
+            onTileSprite = null;
+        }
+        else {
+            onTileTexture = placable.getTexture();
+            if(onTileTexture != null) {
+                onTileSprite = new Sprite(onTileTexture);
+                onTileSprite.setX(sprite.getX());
+                onTileSprite.setY(sprite.getY());
+            }
         }
     }
 
