@@ -137,6 +137,7 @@ public class ShopData implements Data {
 //				", dailyLimit=" + (dailyLimit == -1 ? "NO LIMIT" : dailyLimit) +
 //				'}';
 		return "name : " + name + "   " +
-				"price = " + price + "   ";
+				"prices = " + price + "   " +
+				"ingredients = " + ingredients;
 	}
 }
