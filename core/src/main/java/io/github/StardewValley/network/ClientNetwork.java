@@ -88,12 +88,12 @@ public class ClientNetwork {
 
     public static void sendMessage(Message message) {
         System.out.println("[BRUV] we wanna send message: " + message);
-            if (client != null && client.isConnected()) {
-                client.sendTCP(message);
-            } else {
-                UIUtil.showErrorScreen(ServerError.NO_SERVER_IS_RUNNING);
-                throw new RuntimeException("[ERROR] Cannot send message. Client is not connected to the server.");
-            }
+        if (client != null && client.isConnected()) {
+            client.sendTCP(message);
+        } else {
+            UIUtil.showErrorScreen(ServerError.NO_SERVER_IS_RUNNING);
+            throw new RuntimeException("[ERROR] Cannot send message. Client is not connected to the server.");
+        }
     }
 
 }
