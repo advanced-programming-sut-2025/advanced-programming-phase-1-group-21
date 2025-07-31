@@ -16,12 +16,11 @@ public class Hoe extends Tool {
 	}
 
 	@Override
-	public Result<Item> use(Coord coord, Game game) {
-		Player player = game.getCurrentPlayer();
+	public Result<Item> use(Coord coord, Game game, Player player) {
 		Tile tile = player.getMap().getTile(coord);
 		if(tile == null)
 			return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
-		ToolMaterialType type = ((Tool) game.getCurrentPlayer().getItemInHand()).getToolMaterialType();
+		ToolMaterialType type = ((Tool) player.getItemInHand()).getToolMaterialType();
 
 		double weatherCofficien  = game.weatherCoefficient();
 

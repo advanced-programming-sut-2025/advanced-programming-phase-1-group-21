@@ -32,9 +32,7 @@ public class Main {
 
             public void received(Connection connection, Object o) {
                 if (o instanceof Message) {
-                    CompletableFuture.runAsync(() -> {
-                        MessageHandler.handle(connection, (Message) o);
-                    });
+                    MessageHandler.handle(connection, (Message) o);
                 }
             }
 
@@ -46,5 +44,6 @@ public class Main {
 
         server.start();
         server.bind(54555, 54777);
+
     }
 }

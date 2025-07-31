@@ -18,8 +18,7 @@ public class Scythe extends Tool {
 	}
 
 	@Override
-	public Result<Item> use(Coord coord, Game game) {
-		Player player = game.getCurrentPlayer();
+	public Result<Item> use(Coord coord, Game game, Player player) {
 		player.decreaseEnergy((int)(2 * game.weatherCoefficient()));
 		Tile tile = player.getMap().getTile(coord);
 
@@ -38,7 +37,7 @@ public class Scythe extends Tool {
 				if (plantedSeed.isHarvestReady()) {
 					String resultName = plantedSeed.getResultName();
 					if (inventory.canAdd(resultName)) {
-						Item result = plantedSeed.harvest(game.getCurrentPlayer());
+						Item result = plantedSeed.harvest(player);
 						if (plantedSeed.isOneTime())
 							tile.setPlacable(null);
 						return Result.success(result, "The crop has been harvested");
@@ -50,7 +49,7 @@ public class Scythe extends Tool {
 				if (plantedTree.isHarvestReady()) {
 					String result = plantedTree.getResultName();
 					if (inventory.canAdd(result))
-						return Result.success(plantedTree.harvest(game.getCurrentPlayer()), "The fruit has been harvested");
+						return Result.success(plantedTree.harvest(player), "The fruit has been harvested");
 				}
 			}
 			case FORAGING_CROP -> {
@@ -58,7 +57,7 @@ public class Scythe extends Tool {
 				String result = foragingCrop.getResultName();
 				if (inventory.canAdd(result)) {
 
-					Item resultItem = foragingCrop.harvest(game.getCurrentPlayer());
+					Item resultItem = foragingCrop.harvest(player);
 					tile.setPlacable(null);
 					return Result.success(resultItem, "The foraging crop has been harvested");
 				}

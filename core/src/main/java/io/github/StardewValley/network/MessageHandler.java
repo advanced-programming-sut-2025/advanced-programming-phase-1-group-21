@@ -9,6 +9,7 @@ import util.NetworkUtil;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 public class MessageHandler {
 
@@ -32,10 +33,6 @@ public class MessageHandler {
     }
 
     private static void handleMethod(Connection connection, Message msg) {
-        if (msg.type == MessageType.GAME_SERVICE) {
-
-        }
-
         ServiceRouter serviceRouter = serviceMap.get(msg.type);
         if (serviceRouter == null)
             throw new RuntimeException("Service router not found");

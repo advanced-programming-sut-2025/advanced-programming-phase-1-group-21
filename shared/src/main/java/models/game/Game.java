@@ -16,17 +16,15 @@ public class Game implements Serializable {
     private ArrayList<Player> players;
     private ArrayList<NPC> npcs = new ArrayList<>();
     private ArrayList<Relation> relations = new ArrayList<>();
-    private Player currentPlayer;
     public final Map village;
     private int roundCount = 0;
     private Date gameDate;
     private Weather gameWeather;
     private Weather nextDayWeather;
-    public final Random rand = new Random();
+    public final Random rand = new Random(1);
 
-    public Game(ArrayList<Player> players, Player currentPlayer) {
+    public Game(ArrayList<Player> players) {
         this.players = players;
-        this.currentPlayer = currentPlayer;
         this.gameDate = Date.createBias();
         this.gameWeather = Weather.SUNNY;
         this.nextDayWeather = calculateRandomWeather();
@@ -48,7 +46,6 @@ public class Game implements Serializable {
         this.players = other.players;
         this.npcs = other.npcs;
         this.relations = other.relations;
-        this.currentPlayer = other.currentPlayer;
         this.village = other.village;
         this.roundCount = other.roundCount;
         this.gameDate = new Date(other.gameDate);
@@ -135,10 +132,6 @@ public class Game implements Serializable {
         return nextDayWeather;
     }
 
-    public Map getCurrentPlayerMap() {
-        return currentPlayer.getMap();
-    }
-
     public void setNextDayWeather(Weather newWeather) {
         nextDayWeather = newWeather;
     }
@@ -163,12 +156,6 @@ public class Game implements Serializable {
         }
     }
 
-    public Player getNextPlayer() {
-        int currentIndex = players.indexOf(currentPlayer);
-        int nextIndex = (currentIndex + 1) % players.size();
-        return players.get(nextIndex);
-    }
-
     private void endOfRound() {
         //TODO IF everyone should sleep
         if (gameDate.getHour() == 22) {
@@ -183,29 +170,13 @@ public class Game implements Serializable {
         }
     }
 
-    public void setCurrentPlayer(Player currentPlayer) {
-        this.currentPlayer = currentPlayer;
-    }
-
     public ArrayList<Player> getPlayers() {
         return players;
     }
 
-    public void nextTurn() {
-        Player nextPlayer = getNextPlayer();
-
-        if (players.indexOf(nextPlayer) == 0)
-            endOfRound();
-
-        currentPlayer = nextPlayer;
-    }
 
     public void endgame() {
         throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public Player getCurrentPlayer() {
-        return currentPlayer;
     }
 
     public static Item getCoinItem(int amount) {
@@ -245,7 +216,7 @@ public class Game implements Serializable {
         }
 
         for (Player player : players) {
-            copy.setCurrentPlayer(player);
+            //copy.setCurrentPlayer(player);
             player.nextDay(copy);
         }
         gameDate.nextDay(copy);

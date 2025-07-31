@@ -11,11 +11,12 @@ import models.result.errorTypes.ServerError;
 import java.io.IOException;
 import java.util.UUID;
 import java.util.concurrent.*;
+import java.util.logging.Logger;
 
 public class ClientNetwork {
 
     private static final int TIMEOUT = 5000;
-    private static Client client;
+    public static Client client;
 
     private static final ConcurrentHashMap<String, BlockingQueue<Message>> responseMap = new ConcurrentHashMap<>();
 
@@ -28,14 +29,13 @@ public class ClientNetwork {
 
         NetworkRegister.register(client.getKryo());
 
-
         client.addListener(new Listener() {
             public void received(Connection connection, Object o) {
                 handle(connection, o);
             }
         });
         client.start();
-        client.connect(5000, "localhost", 54555, 54777);
+        client.connect(1000, "localhost", 54555, 54777);
     }
 
     public static void handle(Connection connection, Object o) {
@@ -87,15 +87,13 @@ public class ClientNetwork {
     }
 
     public static void sendMessage(Message message) {
-        CompletableFuture.runAsync(() -> {
-
-            if (client != null && client.isConnected()) {
-                client.sendTCP(message);
-            } else {
-                UIUtil.showErrorScreen(ServerError.NO_SERVER_IS_RUNNING);
-                throw new RuntimeException("[ERROR] Cannot send message. Client is not connected to the server.");
-            }
-        });
+        System.out.println("[BRUV] we wanna send message: " + message);
+        if (client != null && client.isConnected()) {
+            client.sendTCP(message);
+        } else {
+            UIUtil.showErrorScreen(ServerError.NO_SERVER_IS_RUNNING);
+            throw new RuntimeException("[ERROR] Cannot send message. Client is not connected to the server.");
+        }
     }
 
 }

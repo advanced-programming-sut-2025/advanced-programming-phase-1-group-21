@@ -37,8 +37,8 @@ public class WateringCan extends Tool {
     }
 
     @Override
-    public Result<Item> use(Coord coord, Game game) {
-        Tile tile = game.getCurrentPlayerMap().getTile(coord);
+    public Result<Item> use(Coord coord, Game game, Player player) {
+        Tile tile = player.getMap().getTile(coord);
         if (tile == null)
             return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
 
@@ -51,9 +51,6 @@ public class WateringCan extends Tool {
             tile.water();
             currentWater -= 1;
         }
-        //calc energy TODO
-        Player player = game.getCurrentPlayer();
-
         double weatherCoefficient = game.weatherCoefficient();
 
         switch (getToolMaterialType()) {

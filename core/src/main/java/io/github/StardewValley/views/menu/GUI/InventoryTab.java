@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class InventoryTab {
+	private final Player player;
 	private Stage stage;
 	private Skin skin;
 	private GameScreen gameScreen;
@@ -55,8 +56,9 @@ class InventoryTab {
 
 	private Texture sampleTexture;
 
-	public InventoryTab(GameScreen gameScreen, Skin skin) {
-		stage = new Stage(new ScreenViewport());
+	public InventoryTab(Player player, GameScreen gameScreen, Skin skin) {
+        this.player = player;
+        stage = new Stage(new ScreenViewport());
 		this.gameScreen = gameScreen;
 		this.skin = skin;
 		farmingLevels = new ArrayList<>();
@@ -65,7 +67,7 @@ class InventoryTab {
 		fishingLevels = new ArrayList<>();
 		createUI();
 
-		Inventory inv = App.getInstance().game.getCurrentPlayer().getInventory();
+		Inventory inv = player.getInventory();
 		inv.addItem(Item.build("Loom", 1));
 		inv.addItem(Item.build("Furnace", 1));
 		inv.addItem(Item.build("Keg", 1));
@@ -76,7 +78,6 @@ class InventoryTab {
 	void createUI() {
 		stage.clear();
 		itemMatrix.clear();
-		Player player = App.getInstance().game.getCurrentPlayer();
 		setEmpty();
 		setNumberFont();
 
@@ -412,7 +413,7 @@ class InventoryTab {
 		if (itemInHandImage != null) {
 			itemInHandImage.remove();
 		}
-		Item item = App.getInstance().game.getCurrentPlayer().getItemInHand();
+		Item item = player.getItemInHand();
 		if (item == null || getItemTexture(item) == null) {
 			itemInHandImage = new Image(emptyDrawable);
 		}

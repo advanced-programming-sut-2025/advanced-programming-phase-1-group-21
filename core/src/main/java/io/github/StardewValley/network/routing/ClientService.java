@@ -4,10 +4,26 @@ import Network.Message;
 import Network.MessageType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import io.github.StardewValley.App;
 import io.github.StardewValley.Main;
+import io.github.StardewValley.network.NetworkLobbyController;
 import io.github.StardewValley.network.Refreshable;
+import io.github.StardewValley.views.menu.CLI.GameTerminalView;
 import io.github.StardewValley.views.menu.GUI.LobbyScreen;
+import models.game.Game;
+import models.game.Player;
+import models.map.Map;
+import models.map.MapBuilder;
 import models.network.Chat;
+import models.network.Lobby;
+import models.network.LobbyUser;
+import models.result.Result;
+import models.result.errorTypes.AuthError;
+import models.user.User;
+
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * All functions should be static
@@ -53,6 +69,27 @@ public class ClientService {
     }
 
     public static void startGame() {
-        System.out.println("HERE");
+        Result<Lobby> result = NetworkLobbyController.getLobby();
+        Lobby lobby = result.getData();
+
+        /*
+        SHOULD CHECK IF USER IS ALREADY IN A GAME...
+         */
+        ArrayList<Player> players = new ArrayList<>();
+        MapBuilder mapBuilder = new MapBuilder();
+
+        Gdx.app.postRunnable(() -> {
+
+            for (LobbyUser lobbyUser : lobby.getUsers()) {
+                User user = lobbyUser.user;
+                int seed = lobbyUser.mapID;
+                Map map = mapBuilder.buildFarm(new Random(seed));
+                Player player = new Player(user, map);
+                players.add(player);
+            }
+
+            Game game = new Game(players);
+            App.getInstance().initGame(game);
+        });
     }
 }

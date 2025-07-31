@@ -12,14 +12,21 @@ import models.result.errorTypes.GameError;
 
 import java.util.ArrayList;
 
-public class TradeController{
+public class TradeController {
+
+
 
     public Result<Void> backToGame() {
+        /*
         App.getInstance().currentMenu = GameTerminalView.getInstance();
         return Result.success(null);
+
+         */
+        return null;
     }
 
     public Result<Void> tradeWithMoney(String username , String type , String item , int amount , int price) {
+        /*
         if (App.getInstance().game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         if(App.getInstance().game.getCurrentPlayer().getUser().getUsername().equals(username))
             return Result.failure(GameError.NO_PLAYER_FOUND);
@@ -42,9 +49,13 @@ public class TradeController{
         }
 
         return Result.success(null);
+
+         */
+        return null;
     }
 
     public Result<Void> tradeWithItem(String username , String type , String item1 , int amount1 , String item2 , int amount2) {
+        /*
         if (App.getInstance().game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         if(App.getInstance().game.getCurrentPlayer().getUser().getUsername().equals(username))
             return Result.failure(GameError.NO_PLAYER_FOUND);
@@ -70,9 +81,13 @@ public class TradeController{
         }
 
         return Result.success(null);
+
+         */
+        return null;
     }
 
     public Result<ArrayList<String>> tradeList(){
+        /*
         ArrayList<String> output = new ArrayList<>();
         for(Player player : App.getInstance().game.getPlayers()){
             if(player.equals(App.getInstance().game.getCurrentPlayer()))
@@ -104,9 +119,13 @@ public class TradeController{
             }
         }
         return Result.success(output);
+
+         */
+        return null;
     }
 
     public Result<Void> tradeResponse(String username , String response , int ID){
+        /*
         if (App.getInstance().game == null) return Result.failure(GameError.NO_GAME_RUNNING);
 
         if(App.getInstance().game.getCurrentPlayer().getUser().getUsername().equals(username))
@@ -193,9 +212,14 @@ public class TradeController{
         }
         relation.setFriendshipXP(relation.getFriendshipXP() + 50);
         return Result.success(null);
+
+         */
+
+        return null;
     }
 
-    public Result<ArrayList<String>> tradeHistory(){
+    public Result<ArrayList<String>> tradeHistory() {
+        /*
         ArrayList<String> output = new ArrayList<>();
         for(Player player : App.getInstance().game.getPlayers()){
             if(player.equals(App.getInstance().game.getCurrentPlayer()))
@@ -225,6 +249,9 @@ public class TradeController{
             }
         }
         return Result.success(output);
+
+         */
+        return null;
     }
 
 }

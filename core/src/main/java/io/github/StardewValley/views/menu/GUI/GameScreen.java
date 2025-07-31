@@ -1,5 +1,6 @@
 package io.github.StardewValley.views.menu.GUI;
 
+import Network.Message;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
@@ -15,12 +16,15 @@ import io.github.StardewValley.App;
 import io.github.StardewValley.Main;
 import io.github.StardewValley.asset.Assets;
 import io.github.StardewValley.controllers.GameController;
+import io.github.StardewValley.controllers.ViewController;
+import io.github.StardewValley.network.ClientNetwork;
 import models.game.Game;
 import models.game.Player;
 import models.map.Coord;
 import models.map.Map;
 import models.map.MapBuilder;
 import models.map.Tile;
+import models.network.HeartBeatPacket;
 import models.tool.Tool;
 
 import java.awt.*;
@@ -30,6 +34,7 @@ import java.util.Random;
 public class GameScreen implements Screen , InputProcessor {
     private final Main game;
     private final GameController controller;
+    private final ViewController viewController;
     private Stage stage;
     private InventoryTab inventoryTab;
     private ShopMenuTab shopMenuTab;
@@ -41,13 +46,10 @@ public class GameScreen implements Screen , InputProcessor {
     private String message;
 
     public GameScreen() {
-        Map map = new MapBuilder().buildFarm(new Random(1));
-        ArrayList<Player> players = new ArrayList<>();
-        players.add(new Player(App.getInstance().logedInUser, map));
-        App.getInstance().game = new Game(players, players.get(0));
         this.game = Main.getInstance();
-        this.controller = new GameController();
-        controller.game = App.getInstance().game;
+        this.controller = App.getInstance().currentPlayerController;
+        this.viewController = App.getInstance().currentPlayerViewController;
+        ShowMap.player = viewController.player;
         createUI();
     }
 
@@ -55,14 +57,14 @@ public class GameScreen implements Screen , InputProcessor {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(this);
 
-        Map map = App.getInstance().game.getCurrentPlayerMap();
+        Map map = viewController.player.getMap();
         float mapX = map.getMaxX();
         float mapY = map.getMaxY();
         float tileY = stage.getHeight()/ mapY;
         float tileX = stage.getWidth()/ mapX;
 
         Skin skin = Assets.getSkin();
-        inventoryTab = new InventoryTab(this, skin);
+        inventoryTab = new InventoryTab(viewController.player, this, skin);
         shopMenuTab = new ShopMenuTab(this , skin);
         terminalTab = new TerminalTab(this , skin);
     }
@@ -75,7 +77,7 @@ public class GameScreen implements Screen , InputProcessor {
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.getBatch().begin();
-        controller.buttonController(game);
+        viewController.buttonController(game);
         ShowMap.show(game , delta);
         messagePrinter.setColor(Color.RED);
         if(message != null)
@@ -150,7 +152,7 @@ public class GameScreen implements Screen , InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        message = controller.clickController(screenX, screenY);
+        message = viewController.clickController(screenX, screenY);
         return false;
     }
 
@@ -171,10 +173,7 @@ public class GameScreen implements Screen , InputProcessor {
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-        if(App.getInstance().game.getCurrentPlayer().getItemInHand() instanceof Tool){
-            Tool tool = (Tool) App.getInstance().game.getCurrentPlayer().getItemInHand();
-            tool.handleRotation(screenX , Gdx.graphics.getHeight() - screenY);
-        }
+        controller.handleToolMove(screenX, screenY);
         return false;
     }
 

@@ -21,13 +21,12 @@ public class FishingPole extends Tool {
 	}
 
 	@Override
-	public Result<Item> use(Coord coord, Game game) {
-		Player player = game.getCurrentPlayer();
+	public Result<Item> use(Coord coord, Game game, Player player) {
 		Tile tile = player.getMap().getTile(coord);
 		if(tile.getPlacable(Lake.class) == null)
 			return null;
 
-		Tool fishingPole = (Tool) game.getCurrentPlayer().getItemInHand();
+		Tool fishingPole = (Tool) player.getItemInHand();
 
 		//TODO : check skills
 		if(fishingPole.toolMaterialType.equals(ToolMaterialType.EDUCATIONAL) || fishingPole.toolMaterialType.equals(ToolMaterialType.BAMBOO) || fishingPole.toolMaterialType.equals
@@ -48,7 +47,7 @@ public class FishingPole extends Tool {
 		else if(fishingPole.toolMaterialType.equals(ToolMaterialType.IRIDIUM))
 			player.decreaseEnergy((int)(4 * weatherCofficient));
 
-		double amount = Math.random() * (game.getCurrentPlayer().getSkillLevel(SkillType.FISHING) + 2);
+		double amount = Math.random() * (player.getSkillLevel(SkillType.FISHING) + 2);
 		if(game.getWeather().equals(Weather.SUNNY))
 			amount *= 1.5;
 		if(game.getWeather().equals(Weather.RAINY))
@@ -63,7 +62,7 @@ public class FishingPole extends Tool {
 
 		else if(fishingPole.toolMaterialType.equals(ToolMaterialType.BAMBOO) || fishingPole.toolMaterialType.equals
 				(ToolMaterialType.IRIDIUM) || fishingPole.toolMaterialType.equals(ToolMaterialType.FIBERGLASS))
-			return Result.success(Item.build(randomFish(game) , Math.min((int) amount , 6)));
+			return Result.success(Item.build(randomFish(game, player) , Math.min((int) amount , 6)));
 
 		return null;
 	}
@@ -80,12 +79,12 @@ public class FishingPole extends Tool {
 		return null;
 	}
 
-	public static String randomFish(Game game){
+	public static String randomFish(Game game, Player player){
 		ArrayList<FishData> allFishes = FishData.getFishes();
 		ArrayList<String> catchFishes  = new ArrayList<>();
 		for(FishData fishData : allFishes){
 			if(fishData.getSeason().equalsIgnoreCase(game.getSeason().toString())){
-				if(game.getCurrentPlayer().getSkillLevel(SkillType.FISHING) >= 4){
+				if(player.getSkillLevel(SkillType.FISHING) >= 4){
 					catchFishes.add(fishData.getName());
 				}
 				else{
