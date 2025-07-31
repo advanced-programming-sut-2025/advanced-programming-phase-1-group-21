@@ -35,10 +35,7 @@ public class ClientNetwork {
             }
         });
         client.start();
-        client.connect(5000, "localhost", 54555, 54777);
-
-        client.setKeepAliveTCP(0); // disables TCP idle timeout
-        //TODO (REMOVE ABOVE PLS)
+        client.connect(1000, "localhost", 54555, 54777);
     }
 
     public static void handle(Connection connection, Object o) {
@@ -91,14 +88,12 @@ public class ClientNetwork {
 
     public static void sendMessage(Message message) {
         System.out.println("[BRUV] we wanna send message: " + message);
-        CompletableFuture.runAsync(() -> {
             if (client != null && client.isConnected()) {
                 client.sendTCP(message);
             } else {
                 UIUtil.showErrorScreen(ServerError.NO_SERVER_IS_RUNNING);
                 throw new RuntimeException("[ERROR] Cannot send message. Client is not connected to the server.");
             }
-        });
     }
 
 }

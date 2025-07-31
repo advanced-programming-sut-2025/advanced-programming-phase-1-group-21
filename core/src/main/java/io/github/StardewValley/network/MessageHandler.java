@@ -36,8 +36,6 @@ public class MessageHandler {
         ServiceRouter serviceRouter = serviceMap.get(msg.type);
         if (serviceRouter == null)
             throw new RuntimeException("Service router not found");
-        CompletableFuture.runAsync(() -> {
-            serviceRouter.route(connection, msg);
-        });
+        serviceRouter.route(connection, msg);
     }
 }
