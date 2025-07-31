@@ -90,8 +90,6 @@ public class GameScreen implements Screen , InputProcessor {
             shopMenuTab.draw();
         if(isTerminalShown)
             terminalTab.draw();
-
-        ClientNetwork.sendMessage(new Message());
     }
 
     @Override
