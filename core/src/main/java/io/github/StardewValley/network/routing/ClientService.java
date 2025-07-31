@@ -69,22 +69,11 @@ public class ClientService {
     }
 
     public static void startGame() {
-        System.out.println("HERE");
         Result<Lobby> result = NetworkLobbyController.getLobby();
         Lobby lobby = result.getData();
 
         /*
-        for(User user : users) {
-            if(user.isInAgame)
-                return Result.failure(AuthError.IN_GAME_USER);
-        }
-
-
-            for (User user : users) {
-                user.setInAGame(true);
-                DataBaseController.editUser(user);
-            }
-
+        SHOULD CHECK IF USER IS ALREADY IN A GAME...
          */
         ArrayList<Player> players = new ArrayList<>();
         MapBuilder mapBuilder = new MapBuilder();
@@ -92,12 +81,12 @@ public class ClientService {
         Gdx.app.postRunnable(() -> {
 
             for (LobbyUser lobbyUser : lobby.getUsers()) {
-            User user = lobbyUser.user;
-            int seed = lobbyUser.mapID;
-            Map map = mapBuilder.buildFarm(new Random(seed));
-            Player player = new Player(user, map);
-            players.add(player);
-        }
+                User user = lobbyUser.user;
+                int seed = lobbyUser.mapID;
+                Map map = mapBuilder.buildFarm(new Random(seed));
+                Player player = new Player(user, map);
+                players.add(player);
+            }
 
             Game game = new Game(players);
             App.getInstance().initGame(game);

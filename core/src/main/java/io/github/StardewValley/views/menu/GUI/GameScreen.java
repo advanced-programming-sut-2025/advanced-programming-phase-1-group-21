@@ -1,5 +1,6 @@
 package io.github.StardewValley.views.menu.GUI;
 
+import Network.Message;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
@@ -16,12 +17,14 @@ import io.github.StardewValley.Main;
 import io.github.StardewValley.asset.Assets;
 import io.github.StardewValley.controllers.GameController;
 import io.github.StardewValley.controllers.ViewController;
+import io.github.StardewValley.network.ClientNetwork;
 import models.game.Game;
 import models.game.Player;
 import models.map.Coord;
 import models.map.Map;
 import models.map.MapBuilder;
 import models.map.Tile;
+import models.network.HeartBeatPacket;
 import models.tool.Tool;
 
 import java.awt.*;
@@ -87,6 +90,8 @@ public class GameScreen implements Screen , InputProcessor {
             shopMenuTab.draw();
         if(isTerminalShown)
             terminalTab.draw();
+
+        ClientNetwork.sendMessage(new Message());
     }
 
     @Override

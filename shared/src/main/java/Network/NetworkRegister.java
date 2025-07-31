@@ -1,10 +1,7 @@
 package Network;
 
 import com.esotericsoftware.kryo.Kryo;
-import models.network.Chat;
-import models.network.ChatType;
-import models.network.Lobby;
-import models.network.LobbyUser;
+import models.network.*;
 import models.result.Error;
 import models.result.Result;
 import models.result.errorTypes.*;
@@ -50,5 +47,7 @@ public class NetworkRegister {
         kryo.register(Chat.class);
 
         kryo.register(LobbyUser.class);
+
+        kryo.register(HeartBeatPacket.class);
     }
 }

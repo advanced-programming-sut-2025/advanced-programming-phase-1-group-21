@@ -28,6 +28,9 @@ public class Main {
                 System.out.println("[SERVER] Client connected: " + c.getRemoteAddressTCP().getAddress().getHostAddress());
                 c.sendTCP(ServerUtil.createPingMessage());
                 SessionManager.add(c);
+
+                c.setKeepAliveTCP(Integer.MAX_VALUE);
+                //TODO it's bad to keep this
             }
 
             public void received(Connection connection, Object o) {
@@ -42,9 +45,15 @@ public class Main {
                 System.out.println("[SERVER] Client disconnected");
                 SessionManager.disconnected(connection);
             }
+
+            @Override
+            public void idle(Connection connection) {
+                System.out.println("Server idle timeout for: " + connection.getRemoteAddressTCP());
+            }
         });
 
         server.start();
         server.bind(54555, 54777);
+
     }
 }

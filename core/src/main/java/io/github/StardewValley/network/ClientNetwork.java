@@ -11,11 +11,12 @@ import models.result.errorTypes.ServerError;
 import java.io.IOException;
 import java.util.UUID;
 import java.util.concurrent.*;
+import java.util.logging.Logger;
 
 public class ClientNetwork {
 
     private static final int TIMEOUT = 5000;
-    private static Client client;
+    public static Client client;
 
     private static final ConcurrentHashMap<String, BlockingQueue<Message>> responseMap = new ConcurrentHashMap<>();
 
@@ -28,7 +29,6 @@ public class ClientNetwork {
 
         NetworkRegister.register(client.getKryo());
 
-
         client.addListener(new Listener() {
             public void received(Connection connection, Object o) {
                 handle(connection, o);
@@ -36,6 +36,9 @@ public class ClientNetwork {
         });
         client.start();
         client.connect(5000, "localhost", 54555, 54777);
+
+        client.setKeepAliveTCP(0); // disables TCP idle timeout
+        //TODO (REMOVE ABOVE PLS)
     }
 
     public static void handle(Connection connection, Object o) {
@@ -87,6 +90,7 @@ public class ClientNetwork {
     }
 
     public static void sendMessage(Message message) {
+        System.out.println("[BRUV] we wanna send message: " + message);
         CompletableFuture.runAsync(() -> {
             if (client != null && client.isConnected()) {
                 client.sendTCP(message);
