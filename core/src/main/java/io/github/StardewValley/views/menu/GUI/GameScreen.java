@@ -1,13 +1,17 @@
 package io.github.StardewValley.views.menu.GUI;
 
+import Asset.SharedAssetManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.github.czyzby.lml.parser.impl.attribute.progress.AnimateDurationLmlAttribute;
@@ -28,12 +32,17 @@ public class GameScreen implements Screen , InputProcessor {
     private InventoryTab inventoryTab;
     private ShopMenuTab shopMenuTab;
     private TerminalTab terminalTab;
+    private PauseMenu pauseMenu;
     private boolean isInventoryShown = false;
     private boolean isShopMenuShown = false;
     private boolean isTerminalShown = false;
     private BitmapFont messagePrinter = new BitmapFont();
     private String message;
     private AnimalInfoWindow animalInfoWindow;
+    private Pixmap darkLayout;
+    private Texture darkLayoutTexture;
+    private Image darkModeImage;
+    private boolean isNight;
 
     public GameScreen() {
         this.game = Main.getInstance();
@@ -48,6 +57,13 @@ public class GameScreen implements Screen , InputProcessor {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(this);
 
+        darkLayout = new Pixmap((int) stage.getWidth(), (int) stage.getHeight(), Pixmap.Format.RGBA8888);
+        darkLayout.setColor(0, 0, 0, 0.5f);
+        darkLayout.fill();
+        darkLayoutTexture = new Texture(darkLayout);
+        darkLayout.dispose();
+        darkModeImage = new Image(darkLayoutTexture);
+
         Skin skin = Assets.getSkin();
         inventoryTab = new InventoryTab(viewController.player, this, skin);
         shopMenuTab = new ShopMenuTab(this , skin);
@@ -61,6 +77,7 @@ public class GameScreen implements Screen , InputProcessor {
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         game.getBatch().begin();
         viewController.buttonController(game);
         ShowMap.show(delta);
@@ -68,6 +85,7 @@ public class GameScreen implements Screen , InputProcessor {
         if(message != null)
             messagePrinter.draw(game.getBatch(), message , 100 , 100);
         game.getBatch().end();
+
         if (isInventoryShown) {
             inventoryTab.draw();
         }
@@ -75,6 +93,16 @@ public class GameScreen implements Screen , InputProcessor {
             shopMenuTab.draw();
         if(isTerminalShown)
             terminalTab.draw();
+        if(pauseMenu != null)
+            pauseMenu.draw();
+        if(controller.getTime().getData() >= 22 || controller.getTime().getData() <= 5)
+            setDarkMode();
+        else{
+            if(isNight){
+                isNight = false;
+                stage.clear();
+            }
+        }
         stage.draw();
     }
 
@@ -120,7 +148,10 @@ public class GameScreen implements Screen , InputProcessor {
         if (i == Input.Keys.T && !isInventoryShown) {
             isTerminalShown = true;
             terminalTab.show();
-
+        }
+        if(i == Input.Keys.P && pauseMenu == null){
+            pauseMenu = new PauseMenu(this , Assets.getSkin());
+            pauseMenu.show();
         }
 
         return false;
@@ -202,5 +233,15 @@ public class GameScreen implements Screen , InputProcessor {
         }
         stage.clear();
         Gdx.input.setInputProcessor(this);
+    }
+
+    public void onPauseClosed(){
+        pauseMenu = null;
+        Gdx.input.setInputProcessor(this);
+    }
+
+    private void setDarkMode(){
+        stage.addActor(darkModeImage);
+        isNight = true;
     }
 }
