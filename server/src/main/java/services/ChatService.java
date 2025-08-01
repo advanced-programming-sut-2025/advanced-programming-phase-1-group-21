@@ -1,19 +1,16 @@
 package services;
 
-import Network.Message;
-import Network.MessageType;
+import models.network.Message;
+import models.network.MessageType;
 import com.esotericsoftware.kryonet.Connection;
 import controller.LobbyManager;
 import models.network.Chat;
 import models.network.ChatType;
-import models.network.Lobby;
 import models.network.LobbyUser;
 import models.result.Result;
-import models.result.errorTypes.UserError;
 import models.user.User;
 import session.SessionManager;
 import util.NetworkUtil;
-import util.ServerUtil;
 
 import java.util.ArrayList;
 import java.util.List;

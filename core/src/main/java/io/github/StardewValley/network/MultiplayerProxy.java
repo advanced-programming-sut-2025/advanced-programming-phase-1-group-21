@@ -1,7 +1,7 @@
 package io.github.StardewValley.network;
 
-import Network.Message;
-import Network.MessageType;
+import models.network.Message;
+import models.network.MessageType;
 import io.github.StardewValley.App;
 import io.github.StardewValley.controllers.GameController;
 
@@ -18,13 +18,13 @@ public class MultiplayerProxy {
             Object result = method.invoke(controller, args);
 
             // Network logic
-            /*
+
             Message msg = new Message(MessageType.GAME_SERVICE);
             msg.methodName = method.getName();
             msg.data = args;
             msg.username = App.getInstance().logedInUser.getUsername();
             ClientNetwork.sendMessage(msg);
-             */
+
 
             return result;
         };

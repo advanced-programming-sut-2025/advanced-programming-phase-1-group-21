@@ -71,7 +71,7 @@ public class ViewController {
             return "tile is not neighbor";
 
         if (tile.getTileType() == TileType.PLOWED || tile.getTileType() == TileType.UNPLOWED){
-            if (player.getItemInHand().getItemType() == ItemType.PLACEABLE) {
+            if (player.getItemInHand() != null && player.getItemInHand().getItemType() == ItemType.PLACEABLE) {
                 gc.placeArtisan(player.getItemInHand(), tile);
             }
         }

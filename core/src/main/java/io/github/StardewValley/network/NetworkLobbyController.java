@@ -5,8 +5,8 @@ import models.network.Lobby;
 import models.network.LobbyUser;
 import models.result.Result;
 import models.user.User;
-import Network.Message;
-import Network.MessageType;
+import models.network.Message;
+import models.network.MessageType;
 import util.NetworkUtil;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package util;
 
-import Network.Message;
+import models.network.Message;
 import com.esotericsoftware.kryonet.Connection;
 
 import java.lang.reflect.Method;

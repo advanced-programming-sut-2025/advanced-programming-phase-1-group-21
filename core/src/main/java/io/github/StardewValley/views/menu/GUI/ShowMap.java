@@ -8,19 +8,29 @@ import models.game.Refrigerator;
 import models.map.*;
 import models.tool.Tool;
 
-public class ShowMap {
-    public static Player player;
+import java.util.List;
 
-    public static void show(Main game , float delta){
-        showTiles(game);
-        showHouse(game);
-        onTilesShow(game);
-        showPlayer(game);
-        showTool(game , delta);
+public class ShowMap {
+    public static Player currentPlayer;
+    public static List<Player> listOfPlayers;
+    public static Map map;
+    private static Main game = Main.getInstance();
+
+    public static void show(float delta){
+        map = currentPlayer.getMap();
+        showTiles();
+        showHouse();
+        onTilesShow();
+        for (Player player : listOfPlayers) {
+            if (player.getMap() == map) {
+                showPlayer(player);
+                showTool(delta, player);
+            }
+        }
     }
 
-    public static void showTiles(Main game){
-        Map map = player.getMap();
+    public static void showTiles(){
+        //Map map = player.getMap();
         float mapX = map.getMaxX();
         float mapY = map.getMaxY();
         for(int i = 0 ; i < mapY ; i++){
@@ -33,8 +43,8 @@ public class ShowMap {
         }
     }
 
-    public static void onTilesShow(Main game){
-        Map map = player.getMap();
+    public static void onTilesShow(){
+        //Map map = player.getMap();
         float mapX = map.getMaxX();
         float mapY = map.getMaxY();
 
@@ -48,19 +58,20 @@ public class ShowMap {
         }
     }
 
-    public static void showPlayer(Main game){
-        player.getSprite().draw(game.getBatch());
+    public static void showPlayer(Player player){
+        if (player.getMap() == map)
+            player.getSprite().draw(game.getBatch());
     }
 
-    public static void showHouse(Main game){//TODO: this function should be changed to showBuilding
-        Map map = player.getMap();
+    public static void showHouse(){//TODO: this function should be changed to showBuilding
+        //Map map = player.getMap();
         for(Building building : map.getBuildings()){
             if(building.sprite != null)
                 building.sprite.draw(game.getBatch());
         }
     }
 
-    public static void showTool(Main game , float delta){
+    public static void showTool(float delta, Player player) {
         if(player.getItemInHand() instanceof Tool){
             Tool tool = (Tool) player.getItemInHand();
             tool.spriteX = player.getSprite().getX();

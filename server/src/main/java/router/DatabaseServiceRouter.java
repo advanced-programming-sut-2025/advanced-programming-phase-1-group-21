@@ -1,8 +1,8 @@
 package router;
 
-import Network.Message;
+import models.network.Message;
 import com.esotericsoftware.kryonet.Connection;
-import Network.ServiceRouter;
+import network.ServiceRouter;
 import services.DatabaseService;
 import session.SessionManager;
 import util.NetworkUtil;

@@ -1,15 +1,14 @@
 package io.github.StardewValley.network;
 
-import Network.Message;
-import Network.MessageType;
-import Network.ServiceRouter;
+import models.network.Message;
+import models.network.MessageType;
+import network.ServiceRouter;
 import com.esotericsoftware.kryonet.Connection;
 import io.github.StardewValley.network.routing.ClientServiceRouter;
 import util.NetworkUtil;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 
 public class MessageHandler {
 

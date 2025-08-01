@@ -1,6 +1,5 @@
 package io.github.StardewValley.views.menu.GUI;
 
-import Network.Message;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
@@ -9,7 +8,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import io.github.StardewValley.App;
@@ -17,19 +15,7 @@ import io.github.StardewValley.Main;
 import io.github.StardewValley.asset.Assets;
 import io.github.StardewValley.controllers.GameController;
 import io.github.StardewValley.controllers.ViewController;
-import io.github.StardewValley.network.ClientNetwork;
-import models.game.Game;
-import models.game.Player;
-import models.map.Coord;
 import models.map.Map;
-import models.map.MapBuilder;
-import models.map.Tile;
-import models.network.HeartBeatPacket;
-import models.tool.Tool;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Random;
 
 public class GameScreen implements Screen , InputProcessor {
     private final Main game;
@@ -49,7 +35,8 @@ public class GameScreen implements Screen , InputProcessor {
         this.game = Main.getInstance();
         this.controller = App.getInstance().currentPlayerController;
         this.viewController = App.getInstance().currentPlayerViewController;
-        ShowMap.player = viewController.player;
+        ShowMap.currentPlayer = viewController.player;
+        ShowMap.listOfPlayers = viewController.game.getPlayers();
         createUI();
     }
 
@@ -78,7 +65,7 @@ public class GameScreen implements Screen , InputProcessor {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.getBatch().begin();
         viewController.buttonController(game);
-        ShowMap.show(game , delta);
+        ShowMap.show(delta);
         messagePrinter.setColor(Color.RED);
         if(message != null)
             messagePrinter.draw(game.getBatch(), message , 100 , 100);

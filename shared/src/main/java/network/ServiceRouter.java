@@ -1,9 +1,9 @@
-package Network;
+package network;
 
 import com.esotericsoftware.kryonet.Connection;
+import models.network.Message;
+import models.network.MessageType;
 import util.NetworkUtil;
-
-import java.util.Map;
 
 public interface ServiceRouter {
     Object dispatch(Connection conn, Message msg) throws Exception;

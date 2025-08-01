@@ -1,10 +1,7 @@
 package services;
 
-import Network.Message;
+import models.network.Message;
 import com.esotericsoftware.kryonet.Connection;
-import models.network.Lobby;
-import models.network.LobbyUser;
-import session.SessionManager;
 import util.NetworkUtil;
 
 import java.util.ArrayList;

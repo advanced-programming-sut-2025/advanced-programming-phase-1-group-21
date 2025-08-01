@@ -1,4 +1,4 @@
-package Network;
+package models.network;
 
 //Kinda outdated now
 //It's massively covered by MethodName kind of requests

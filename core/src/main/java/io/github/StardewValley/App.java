@@ -101,7 +101,6 @@ public class App implements Serializable {
             GameController gc = new GameController(game, player);
 
             if (username.equals(logedInUser.getUsername())) {
-                currentPlayerViewController = new ViewController(gc);
                 try {
                     gc = MultiplayerProxy.create(gc);
                 }
@@ -109,6 +108,7 @@ public class App implements Serializable {
                     e.printStackTrace();
                 }
                 currentPlayerController = gc;
+                currentPlayerViewController = new ViewController(gc);
             }
 
             gameControllers.put(username, gc);
