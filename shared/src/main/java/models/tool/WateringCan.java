@@ -62,6 +62,7 @@ public class WateringCan extends Tool {
         }
         if(player.getSkillLevel(SkillType.FARMING) >= 4)
             player.setEnergy(player.getEnergy() + 1);
+        tile.loadOnTileTexture();
         return Result.success(null);
     }
 

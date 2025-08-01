@@ -78,8 +78,12 @@ Textures/Bait/Deluxe_Bait.png
 Textures/Bait/Magic_Bait.png
 Textures/Bait/Wild_Bait.png
 Textures/Buildings/AbigailHouse.png
+Textures/Buildings/Big_Barn.png
+Textures/Buildings/Big_Coop.png
 Textures/Buildings/Blacksmith.png
 Textures/Buildings/Carpenter's_Shop.png
+Textures/Buildings/Deluxe_Barn.png
+Textures/Buildings/Deluxe_Coop.png
 Textures/Buildings/DestroyedGreenHouse.png
 Textures/Buildings/Farm Buildings.png
 Textures/Buildings/Fish_Shop.png
@@ -90,6 +94,8 @@ Textures/Buildings/HouseLevel3.png
 Textures/Buildings/Jojamart.png
 Textures/Buildings/LeahHouse.png
 Textures/Buildings/NormalGreenHouse.png
+Textures/Buildings/Normal_Barn.png
+Textures/Buildings/Normal_Coop.png
 Textures/Buildings/Pierres_shop.png
 Textures/Buildings/RobinHouse.png
 Textures/Buildings/SebastianHouse.png

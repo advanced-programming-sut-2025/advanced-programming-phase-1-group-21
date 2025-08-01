@@ -40,6 +40,7 @@ public class Hoe extends Tool {
 		if(!player.getMap().getTile(coord).isEmpty())
 			return Result.failure(GameError.TILE_IS_NOT_EMPTY);
 		player.getMap().getTile(coord).setTileType(TileType.PLOWED);
+		tile.loadOnTileTexture();
 
 		return Result.success(null, "zamin shokhmi shod");
 	}

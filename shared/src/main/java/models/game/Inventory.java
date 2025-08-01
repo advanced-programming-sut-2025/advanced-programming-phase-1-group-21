@@ -14,7 +14,7 @@ import java.util.List;
 public class Inventory implements Serializable {
     public static final int MAXIMUM_ITEM_PER_SLOT = 100000;
     List<Item> items = new ArrayList<>();
-    InventoryType inventoryType = InventoryType.PRIMITIVE;
+    InventoryType inventoryType = InventoryType.BIG;
     ToolMaterialType trashcanType = ToolMaterialType.PRIMITIVE;
 
     public static Inventory buildPlayerInventory() {

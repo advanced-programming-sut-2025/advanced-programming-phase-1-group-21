@@ -64,6 +64,8 @@ public class FishingPole extends Tool {
 				(ToolMaterialType.IRIDIUM) || fishingPole.toolMaterialType.equals(ToolMaterialType.FIBERGLASS))
 			return Result.success(Item.build(randomFish(game, player) , Math.min((int) amount , 6)));
 
+		tile.loadOnTileTexture();
+
 		return null;
 	}
 

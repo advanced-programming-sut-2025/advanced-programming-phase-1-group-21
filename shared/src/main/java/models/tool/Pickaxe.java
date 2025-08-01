@@ -99,6 +99,7 @@ public class Pickaxe extends Tool {
 			return Result.success(null, "zamin gheir shokhmi shod");
 
 		player.setSkillExp(SkillType.MINING , player.getSkillExp(SkillType.MINING) + 10);
+		tile.loadOnTileTexture();
 		return Result.success(Item.build(makeOre(tileType) , 1) , "the Rock removed from the ground");
 	}
 

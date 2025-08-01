@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
+import data.AnimalData;
 import models.DailyUpdate;
 import models.Item.Item;
 import models.Item.Recipe;
@@ -111,6 +112,9 @@ public class Player implements DailyUpdate, Serializable {
         sprite.setX(getMap().mapType.getDistanceX());
         sprite.setY(getMap().mapType.getDistanceY() + (getMap().getMaxY() - 1)*30);
         sprite.setSize(30 , 78);
+        Animal animal = new Animal("ali", AnimalData.getAnimalData("cow"));
+        getMap().getTile(18 , 8).setPlacable(animal);
+        this.addAnimal(animal);
     }
 
     public Map getDefaultMap() {

@@ -1,5 +1,6 @@
 package models.map;
 
+import Asset.SharedAssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import models.animal.Animal;
@@ -17,7 +18,19 @@ public class AnimalHouse extends Building {
         map = (new MapBuilder().buildAnimalHouse(MapType.getMapType(name)));
         houseType = AnimalHouseType.getAnimalHouseType(name);
         this.type = name.split("\\s+")[1];
+        loadTexture();
         if (houseType == null) throw new RuntimeException("Could not find animal type " + name);
+    }
+
+    public void loadTexture(){
+        String textureName = houseType.getName().substring(0,1).toUpperCase() + houseType.getName().substring(1)
+                + "_" + type.substring(0,1).toUpperCase() + type.substring(1);
+        texture = SharedAssetManager.getAnimalHouse(textureName);
+        if(sprite == null) {
+            sprite = new Sprite(texture);
+            sprite.setSize(150 , 150);
+        }
+        sprite.setTexture(texture);
     }
 
     public AnimalHouseType getHouseType() {
@@ -26,7 +39,7 @@ public class AnimalHouse extends Building {
 
     @Override
     public boolean canEnter(Date date) {
-        return false;
+        return true;
     }
 
     @Override
@@ -60,6 +73,16 @@ public class AnimalHouse extends Building {
 
     public void add(Animal animal) {
         animals.add(animal);
+        for(int x = 0 ; x < 10 ; x ++){
+            for(int y = 0 ; y < 10 ; y++){
+                Tile tile = getMap().getTile(3*x + 1 , 3*y + 1);
+                if(tile.getPlacable(Animal.class) == null){
+                    tile.setPlacable(animal);
+                    tile.loadOnTileTexture();
+                    return;
+                }
+            }
+        }
     }
 
     public List<Animal> getAnimals() {

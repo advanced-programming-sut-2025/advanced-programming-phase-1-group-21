@@ -63,6 +63,7 @@ public class Scythe extends Tool {
 				}
 			}
 		}
+		tile.loadOnTileTexture();
 		return Result.success(null, "Failed to use scythe.");
 	}
 

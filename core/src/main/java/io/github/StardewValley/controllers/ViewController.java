@@ -49,26 +49,26 @@ public class ViewController {
             gc.useTool(Direction.WEST);
     }
 
-    public String clickController(int x , int y){
+    public Coord clickController(int x , int y){
         Player player = gc.getPlayer();
         Map map = player.getMap();
         Tile tile = map.getTile((x - map.mapType.distanceX)/30 , (y - map.mapType.distanceY)/30);
         if(tile == null)
-            return "invalid tile";
+            return new Coord(-1 , -1);
         if(tile.getPlacable(Building.class) != null){
             Building building = tile.getPlacable(Building.class);
             if(checkCollision(building.sprite , player.getSprite()) && building.canEnter(game.getGameDate())){
                 player.enterBuilding(building);
             }
         }
-        if((player.getCoord().getX() - (x - map.mapType.distanceX)/30) > 1)
-            return "tile is not neighbor";
-        if((player.getCoord().getX() - (x - map.mapType.distanceX)/30) < -1)
-            return "tile is not neighbor";
-        if((player.getCoord().getY() - (y - map.mapType.distanceY)/30) > 1)
-            return "tile is not neighbor";
-        if((player.getCoord().getY() - (y - map.mapType.distanceY)/30) < -1)
-            return "tile is not neighbor";
+//        if((player.getCoord().getX() - (x - map.mapType.distanceX)/30) > 1)
+//            return "tile is not neighbor";
+//        if((player.getCoord().getX() - (x - map.mapType.distanceX)/30) < -1)
+//            return "tile is not neighbor";
+//        if((player.getCoord().getY() - (y - map.mapType.distanceY)/30) > 1)
+//            return "tile is not neighbor";
+//        if((player.getCoord().getY() - (y - map.mapType.distanceY)/30) < -1)
+//            return "tile is not neighbor";
 
         if (tile.getTileType() == TileType.PLOWED || tile.getTileType() == TileType.UNPLOWED){
             if (player.getItemInHand() != null && player.getItemInHand().getItemType() == ItemType.PLACEABLE) {
@@ -91,7 +91,7 @@ public class ViewController {
             }
         }
 
-        return null;
+        return new Coord((x - map.mapType.distanceX)/30 ,(y - map.mapType.distanceY)/30);
 
     }
 
