@@ -5,9 +5,11 @@ import data.items.ConsumableData;
 import data.items.ItemData;
 
 public class Consumable extends Item {
-    private final ConsumableData data;
-    private final ItemType itemType;
+    private ConsumableData data;
+    private ItemType itemType;
     private int amount;
+
+    public Consumable() {}
 
     public Consumable(ConsumableData data, ItemType itemType, int amount) {
         this.data = data;

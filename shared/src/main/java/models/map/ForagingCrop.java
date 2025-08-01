@@ -11,14 +11,15 @@ import models.time.Date;
 import java.io.Serializable;
 
 public class ForagingCrop implements Placable, Harvestable, Serializable {
-	public final ForagingCropData data;
+	public ForagingCropData data;
+
+	public ForagingCrop() {}
 
 	public ForagingCrop(ForagingCropData data) {
 		this.data = data;
 	}
 
 	public Item harvest(Player player) {
-
 		return Item.build(data.getName(), 1);
 	}
 

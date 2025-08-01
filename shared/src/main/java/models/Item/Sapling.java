@@ -7,9 +7,11 @@ import models.crop.PlantedTree;
 import models.map.Tile;
 
 public class Sapling extends Item implements Plantable {
-	private final TreeData data;
-	private final ItemType itemType;
+	private TreeData data;
+	private ItemType itemType;
 	private int amount;
+
+	public Sapling() {}
 
 	public Sapling(TreeData data, ItemType itemType, int amount) {
 		this.data = data;

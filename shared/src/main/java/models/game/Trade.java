@@ -16,6 +16,8 @@ public class Trade implements Serializable {
 	private boolean responsed = false;
 	private TradeType tradeType;
 
+	public Trade() {}
+
 	public Trade(int ID, Player sender, Player receiver, int offerPrice, Item offerItem, int requestPrice, Item requestItem , TradeType tradeType) {
 		this.ID = ID;
 		this.sender = sender;

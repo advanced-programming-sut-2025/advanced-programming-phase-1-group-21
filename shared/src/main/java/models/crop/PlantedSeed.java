@@ -20,7 +20,9 @@ public class PlantedSeed implements Placable, Harvestable, DailyUpdate, Serializ
 	private int lastHarvest = 0;
 	private int waterStage = 2;
 	private boolean readyToHarvest = false;
-	private final SeedData seedData;
+	private SeedData seedData;
+
+	public PlantedSeed() {}
 
 	public PlantedSeed(SeedData seedData) {
 		this.seedData = seedData;

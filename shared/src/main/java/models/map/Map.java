@@ -15,7 +15,9 @@ public class Map implements DailyUpdate, Serializable {
     public ArrayList<ArrayList<Tile>> tiles;
     private ArrayList<Building> buildings = new ArrayList<>();
 
-    public final MapType mapType;
+    public MapType mapType;
+
+    public Map() {}
 
     public <T extends Building> List<T> getBuildings(Class<T> type) {
         List<T> result = new ArrayList<>();

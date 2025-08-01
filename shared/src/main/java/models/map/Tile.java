@@ -22,6 +22,8 @@ public class Tile implements DailyUpdate, Serializable {
     transient private Texture onTileTexture;
     transient private Sprite onTileSprite;
 
+    public Tile() {}
+
     private Tile(TileType tileType, Placable placable) {
         this.tileType = tileType;
         this.placable = placable;

@@ -1,6 +1,5 @@
 package models.Item;
 
-
 import data.items.ItemData;
 import data.items.RecipeData;
 
@@ -8,10 +7,12 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class Recipe extends Item {
-    private final RecipeData data;
-    public final RecipeType type;
-    public final ItemType itemType;
+    private RecipeData data;
+    public RecipeType type;
+    public ItemType itemType;
     private int amount;
+
+    public Recipe() {}
 
     public Recipe(RecipeData data, RecipeType recipeType, int amount) {
         this.data = data;

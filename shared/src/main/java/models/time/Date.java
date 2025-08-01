@@ -16,6 +16,8 @@ public class Date implements DailyUpdate, Serializable {
     private static final int SEASONS_IN_YEAR = 4;
     private static final int DEFAULT_START_HOUR = 9; // 9 AM
 
+    public Date() {}
+
     private Date(int hour, int day, int season, int year) {
         this.hour = hour;
         this.day = day;

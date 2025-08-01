@@ -14,6 +14,8 @@ public class AnimalHouse extends Building {
     AnimalHouseType houseType;
     String type;
 
+    public AnimalHouse() {}
+
     public AnimalHouse(String name) {
         map = (new MapBuilder().buildAnimalHouse(MapType.getMapType(name)));
         houseType = AnimalHouseType.getAnimalHouseType(name);

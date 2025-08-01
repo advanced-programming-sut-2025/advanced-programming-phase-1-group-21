@@ -23,6 +23,8 @@ public class NPC implements Placable, DailyUpdate, Serializable {
     private ArrayList<String> favorites;
     private Coord coord;
 
+    public NPC() {}
+
     public NPC(String npcName , ArrayList<Player> players) {
         name = VillagerData.getData(npcName).getName();
         tasks = VillagerData.getData(npcName).getTasks();

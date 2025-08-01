@@ -5,6 +5,8 @@ import models.Item.ItemType;
 import models.game.Player;
 
 public class Tree implements Harvestable {
+	public Tree() {}
+	
 	public Tree(String name, ItemType itemType, int cost) {
 //		super(name, itemType, cost, 1);
 	}

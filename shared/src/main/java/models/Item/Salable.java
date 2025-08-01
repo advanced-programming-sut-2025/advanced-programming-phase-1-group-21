@@ -5,9 +5,11 @@ import data.items.ItemData;
 import data.items.SalableData;
 
 public class Salable extends Item {
-	private final SalableData data;
-	private final ItemType itemType;
+	private SalableData data;
+	private ItemType itemType;
 	private int amount;
+
+	public Salable() {}
 
 	public Salable(SalableData data, ItemType itemType, int amount) {
 		this.data = data;

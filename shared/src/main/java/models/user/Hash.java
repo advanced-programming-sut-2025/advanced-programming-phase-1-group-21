@@ -10,6 +10,8 @@ public class Hash implements Serializable {
     private String hashedPassword;
     private static final String SALT = "namak";
 
+    public Hash() {}
+
     public Hash(String hashedPassword) {
         this.hashedPassword = hashPassword(hashedPassword);
     }

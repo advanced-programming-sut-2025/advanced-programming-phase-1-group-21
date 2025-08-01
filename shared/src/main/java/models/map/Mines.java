@@ -8,6 +8,8 @@ import java.util.Random;
 
 public class Mines extends Building {
 
+    public Mines() {}
+
     public Mines(Random rand) {
         map = (new MapBuilder()).buildMines(rand);
         texture = new Texture("Textures/Buildings/mines.png");

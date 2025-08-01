@@ -39,6 +39,8 @@ public class Animal implements Placable, DailyUpdate, Serializable {
     private transient Sprite sprite;
     private transient Texture texture;
 
+    public Animal() {}
+
     public Animal(String name, AnimalData animalData) {
         products = animalData.getProducts();
         this.name = name;
