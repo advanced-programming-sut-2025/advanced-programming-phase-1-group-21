@@ -16,12 +16,14 @@ public class Game implements Serializable {
     private ArrayList<Player> players;
     private ArrayList<NPC> npcs = new ArrayList<>();
     private ArrayList<Relation> relations = new ArrayList<>();
-    public final Map village;
+    public Map village;
     private int roundCount = 0;
     private Date gameDate;
     private Weather gameWeather;
     private Weather nextDayWeather;
-    public final Random rand = new Random(1);
+    public Random rand = new Random(1);
+
+    public Game() {}
 
     public Game(ArrayList<Player> players) {
         this.players = players;

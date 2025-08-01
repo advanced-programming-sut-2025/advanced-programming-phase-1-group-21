@@ -5,10 +5,12 @@ import models.Item.Item;
 import java.io.Serializable;
 
 public class Gift implements Serializable {
-    private final Player Sender, Receiver;
+    private Player Sender, Receiver;
     private double rate;
-    private final Item item;
+    private Item item;
     private int id;
+
+    public Gift() {}
 
     public Gift(Player sender, Player receiver, Item item , int id) {
         Sender = sender;

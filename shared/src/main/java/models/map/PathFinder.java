@@ -4,8 +4,10 @@ import models.game.Player;
 import java.util.*;
 
 public class PathFinder {
-    private final Player player;
-    private final Map map;
+    private Player player;
+    private Map map;
+
+    public PathFinder() {}
 
     public PathFinder(Player player) {
         this.player = player;

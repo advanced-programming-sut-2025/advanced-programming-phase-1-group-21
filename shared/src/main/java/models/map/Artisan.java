@@ -15,8 +15,10 @@ import java.util.List;
 import java.util.Map;
 
 public class Artisan implements Placable, Serializable {
-	private final ArtisanGoodsData goodsData;
+	private ArtisanGoodsData goodsData;
 	Item result;
+
+	public Artisan() {}
 
 	public Artisan(ArtisanGoodsData goodsData, Inventory inventory) {
 		this.goodsData = goodsData;

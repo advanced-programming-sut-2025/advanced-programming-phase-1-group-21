@@ -19,8 +19,10 @@ public class PlantedTree implements Placable, Harvestable, Serializable, DailyUp
 	private int lastHarvest = 0;
 	private int waterStage = 2;
 	private boolean readyToHarvest = false;
-	public final TreeData treeData;
+	public TreeData treeData;
 	private Sprite sprite;
+
+	public PlantedTree() {}
 
 	public PlantedTree(TreeData treeData) {
 		this.treeData = treeData;

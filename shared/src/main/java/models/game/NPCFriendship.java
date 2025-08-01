@@ -16,6 +16,7 @@ public class NPCFriendship implements DailyUpdate, Serializable {
     private HashMap<Integer, String> summerGreetings = new HashMap<>();
     private HashMap<Integer, String> autumnGreetings = new HashMap<>();
 
+    public NPCFriendship() {}
 
     public NPCFriendship(Player player, FriendshipLevel level , int friendshipXP) {
         this.player = player;
