@@ -30,6 +30,20 @@ public class SharedAssetManager {
         manager.load("Textures/Buildings/Normal_Coop.png" , Texture.class);
         manager.load("Textures/Buildings/Big_Coop.png" , Texture.class);
         manager.load("Textures/Buildings/Deluxe_Coop.png" , Texture.class);
+        manager.load("Textures/Buildings/NormalGreenHouse.png" , Texture.class);
+        manager.load("Textures/Buildings/DestroyedGreenHouse.png" , Texture.class);
+        manager.load("Textures/map/FallBasicTile.png" , Texture.class);
+        manager.load("Textures/map/WinterBasicTile.png" , Texture.class);
+        manager.load("Textures/map/SpringBasicTile.png" , Texture.class);
+        manager.load("Textures/map/SummerBasicTile.png" , Texture.class);
+    }
+
+    public static Texture getGreenHouse(String type){
+        return manager.get("Textures/Buildings/" + type + "GreenHouse.png");
+    }
+
+    public static Texture getTile(String season){
+        return manager.get("Textures/map/" + season + "BasicTile.png");
     }
 
     public static void finishLoading() {

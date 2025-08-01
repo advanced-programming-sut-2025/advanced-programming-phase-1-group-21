@@ -1,5 +1,6 @@
 package models.map;
 
+import Asset.SharedAssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import models.game.Game;
@@ -10,12 +11,14 @@ public class GreenHouse extends Building {
 
     public GreenHouse() {
         this.map = (new MapBuilder()).buildGreenHouse();
-        texture = new Texture("Textures/Buildings/DestroyedGreenHouse.png");
+        texture = SharedAssetManager.getGreenHouse("Destroyed");
         sprite = new Sprite(texture);
         sprite.setSize(210 , 300);
     }
 
     public void setBuild(boolean build) {
+        texture = SharedAssetManager.getGreenHouse("Normal");
+        sprite.setTexture(texture);
         isBuild = build;
     }
 
