@@ -26,6 +26,8 @@ public class AnimalData implements Data {
 	private String toolName;
 	@SerializedName("price")
 	private int price;
+	@SerializedName("textures")
+	private ArrayList<String> textureAddress;
 
 	protected static String getDataURL() {
 		return dataURL;
@@ -88,5 +90,9 @@ public class AnimalData implements Data {
 			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
+	}
+
+	public String getTextureAddress() {
+		return textureAddress.get(0);
 	}
 }

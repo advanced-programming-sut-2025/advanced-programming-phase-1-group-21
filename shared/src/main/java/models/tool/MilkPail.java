@@ -34,6 +34,8 @@ public class MilkPail extends Tool {
 			return Result.success(Item.build(animal.getTodayProduct() , 1));
 		}
 
+		tile.loadOnTileTexture();
+
 		return null;
 
 	}

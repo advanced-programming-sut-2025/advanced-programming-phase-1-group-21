@@ -12,12 +12,14 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.github.czyzby.lml.parser.impl.attribute.progress.AnimateDurationLmlAttribute;
 import io.github.StardewValley.App;
 import io.github.StardewValley.Main;
 import io.github.StardewValley.asset.Assets;
 import io.github.StardewValley.controllers.GameController;
 import io.github.StardewValley.controllers.ViewController;
 import io.github.StardewValley.network.ClientNetwork;
+import models.animal.Animal;
 import models.game.Game;
 import models.game.Player;
 import models.map.Coord;
@@ -44,6 +46,7 @@ public class GameScreen implements Screen , InputProcessor {
     private boolean isTerminalShown = false;
     private BitmapFont messagePrinter = new BitmapFont();
     private String message;
+    private AnimalInfoWindow animalInfoWindow;
 
     public GameScreen() {
         this.game = Main.getInstance();
@@ -56,12 +59,6 @@ public class GameScreen implements Screen , InputProcessor {
     private void createUI() {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(this);
-
-        Map map = viewController.player.getMap();
-        float mapX = map.getMaxX();
-        float mapY = map.getMaxY();
-        float tileY = stage.getHeight()/ mapY;
-        float tileX = stage.getWidth()/ mapX;
 
         Skin skin = Assets.getSkin();
         inventoryTab = new InventoryTab(viewController.player, this, skin);
@@ -90,6 +87,7 @@ public class GameScreen implements Screen , InputProcessor {
             shopMenuTab.draw();
         if(isTerminalShown)
             terminalTab.draw();
+        stage.draw();
     }
 
     @Override
@@ -152,7 +150,16 @@ public class GameScreen implements Screen , InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        message = viewController.clickController(screenX, screenY);
+        message = "(" + viewController.clickController(screenX, screenY).getX() + ","
+                + viewController.clickController(screenX , screenY).getY() + ")";
+        Tile tile = controller.getPlayer().getMap().getTile(viewController.clickController(screenX , screenY));
+        if(tile != null && tile.getPlacable(Animal.class) != null){
+            Animal animal = tile.getPlacable(Animal.class);
+            animalInfoWindow = new AnimalInfoWindow(this , Assets.getSkin() , animal);
+            animalInfoWindow.setPosition(screenX + 30, Gdx.graphics.getHeight() - screenY + 30);
+            Gdx.input.setInputProcessor(stage);
+            stage.addActor(animalInfoWindow);
+        }
         return false;
     }
 
@@ -199,5 +206,13 @@ public class GameScreen implements Screen , InputProcessor {
 
     public GameController getController() {
         return controller;
+    }
+
+    public void closeAnimalInfo(){
+        if(animalInfoWindow != null){
+            animalInfoWindow = null;
+        }
+        stage.clear();
+        Gdx.input.setInputProcessor(this);
     }
 }

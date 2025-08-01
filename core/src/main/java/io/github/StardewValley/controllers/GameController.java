@@ -283,6 +283,9 @@ public class GameController {
         else if(tile.getTileType() == TileType.BRIDGE && map.mapType == MapType.FARM){
             goToVillage();
         }
+        else if(tile.getTileType() == TileType.BRIDGE && map.mapType == MapType.VILLAGE) {
+            backToHome();
+        }
         else if (tile.getPlacable(Building.class) != null) {
             return;
         }
@@ -908,13 +911,22 @@ public class GameController {
     public Result<Void> sellAnimal(String name) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
 
-        Animal animal = player.getAnimalByName(name);
-        if (animal == null)
-            return Result.failure(GameError.ANIMAL_NOT_FOUND);
+        List<Tile> neigh = player.getNeighborTiles(game);
 
-        Item price = Item.build("coin", (int) (animal.getPrice() * ((double) animal.getFriendship() / 1000 + 0.3)));
-        player.getAnimals().remove(animal);
-        player.getInventory().addItem(price);
+        for (Tile tile : neigh) {
+            Animal animal = tile.getPlacable(Animal.class);
+            if (animal == null)
+                continue;
+
+            if (animal.getName().equals(name)) {
+                Item price = Item.build("coin", (int) (animal.getPrice() * ((double) animal.getFriendship() / 1000 + 0.3)));
+                player.getAnimals().remove(animal);
+                player.getInventory().addItem(price);
+                tile.setPlacable(null);
+                tile.loadOnTileTexture();
+            }
+        }
+
         return Result.success(null);
     }
 
@@ -1066,6 +1078,8 @@ public class GameController {
             return Result.failure(GameError.YOU_SHOULD_BE_ON_VILLAGE);
         player.setMap(player.getDefaultMap());
         player.setCoord(new Coord(0, 0));
+        player.getSprite().setX(player.getMap().mapType.getDistanceX());
+        player.getSprite().setY(player.getMap().mapType.getDistanceY() + (player.getMap().getMaxY() - 1)*30);
         return Result.success("Now you are home");
     }
 

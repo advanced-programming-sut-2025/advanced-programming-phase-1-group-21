@@ -1,9 +1,11 @@
 package models.map;
 
+import data.AnimalData;
 import data.ForagingCropData;
 import data.items.TreeData;
 import models.Item.ItemType;
 import models.Item.Sapling;
+import models.animal.Animal;
 import models.crop.PlantedTree;
 import models.game.NPC;
 import models.game.Refrigerator;
@@ -145,6 +147,7 @@ public class MapBuilder {
     public Map buildVillage(List<NPC> npcs, Random random) {
         while (true) {
             Map map = new Map(MapType.VILLAGE);
+            map.getTile(map.getMaxX() - 1 , map.getMaxY() - 1).setTileType(TileType.BRIDGE);
 
             List<Pair<TileType, Placable>> buildings = new ArrayList<>();
             for (TileType type : TileType.values()) if (type.isShop()) {

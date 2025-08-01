@@ -24,11 +24,21 @@ public class SharedAssetManager {
         manager.load("Textures/Tools/Primitive_Trashcan.png" , Texture.class);
         manager.load("Textures/Tools/Primitive_Watering_can.png" , Texture.class);
         manager.load("Textures/Tools/Steel_Scythe.png" , Texture.class);
+        manager.load("Textures/Buildings/Normal_Barn.png" , Texture.class);
+        manager.load("Textures/Buildings/Big_Barn.png" , Texture.class);
+        manager.load("Textures/Buildings/Deluxe_Barn.png" , Texture.class);
+        manager.load("Textures/Buildings/Normal_Coop.png" , Texture.class);
+        manager.load("Textures/Buildings/Big_Coop.png" , Texture.class);
+        manager.load("Textures/Buildings/Deluxe_Coop.png" , Texture.class);
     }
 
     public static void finishLoading() {
         manager.finishLoading();
         //skin = manager.get("skin/uiskin.json", Skin.class);
+    }
+
+    public static Texture getAnimalHouse(String name){
+        return manager.get("Textures/Buildings/" + name + ".png");
     }
 
     public static Texture getToolTexture(String name){

@@ -33,6 +33,11 @@ public class Animal implements Placable, DailyUpdate, Serializable {
     private int productTime;
     private ArrayList<AnimalHouseType> houseTypes;
     private String house;
+    private AnimalData thisAnimalData;
+    private float spriteX;
+    private float spriteY;
+    private transient Sprite sprite;
+    private transient Texture texture;
 
     public Animal(String name, AnimalData animalData) {
         products = animalData.getProducts();
@@ -46,6 +51,9 @@ public class Animal implements Placable, DailyUpdate, Serializable {
         this.house = animalData.getHouse();
         this.houseTypes = animalData.getHouseType();
         produceStage = animalData.getProductTime();
+        thisAnimalData = animalData;
+        texture = new Texture(animalData.getTextureAddress());
+        sprite = new Sprite(texture);
     }
 
     public String getName() {
@@ -147,12 +155,12 @@ public class Animal implements Placable, DailyUpdate, Serializable {
 
     @Override
     public Texture getTexture() {
-        return null;
+        return texture;
     }
 
     @Override
     public Sprite spriteGetter() {
-        return null;
+        return sprite;
     }
 
     public boolean canEnterHouseType(AnimalHouseType animalHouseType) {
@@ -221,5 +229,13 @@ public class Animal implements Placable, DailyUpdate, Serializable {
         return false;
     }
 
+    public float getSpriteX() {
+        spriteX = sprite.getX();
+        return spriteX;
+    }
 
+    public float getSpriteY() {
+        spriteY = sprite.getY();
+        return spriteY;
+    }
 }
