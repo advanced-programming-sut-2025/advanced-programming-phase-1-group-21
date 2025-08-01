@@ -16,7 +16,9 @@ import io.github.StardewValley.Main;
 import io.github.StardewValley.asset.Assets;
 import io.github.StardewValley.controllers.GameController;
 import io.github.StardewValley.controllers.ViewController;
+import models.animal.Animal;
 import models.map.Map;
+import models.map.Tile;
 
 public class GameScreen implements Screen , InputProcessor {
     private final Main game;
