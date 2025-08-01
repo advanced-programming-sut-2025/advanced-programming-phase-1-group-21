@@ -1,16 +1,12 @@
 package io.github.StardewValley.views.menu.GUI;
 
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -18,13 +14,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import data.items.AllItemsData;
-import io.github.StardewValley.App;
+import data.items.RecipeData;
 import models.Item.Item;
 import models.Item.ItemType;
+import models.Item.Recipe;
+import models.Item.RecipeType;
 import models.game.Inventory;
 import models.game.InventoryType;
 import models.game.Player;
-import models.network.Lobby;
 import models.skill.SkillType;
 import models.tool.Tool;
 
@@ -36,43 +33,48 @@ class InventoryTab {
 	private Stage stage;
 	private Skin skin;
 	private GameScreen gameScreen;
-//	private Dialog tableDialog;
 	private Texture emptyTexture;
 	private TextureRegionDrawable emptyDrawable, whiteSquare, redSquare;
-	private TextButton exitButton, inventoryButton, socialButton, mapButton, settingButton, skillButton, missionButton;
+	private TextButton exitButton, inventoryButton, socialButton, mapButton, settingButton, skillButton, missionButton, craftButton, cookButton;
 	private Label farmingSkillLabel, miningSkillLabel, foragingSkillLabel, fishingSkillLabel;
 	private final ArrayList<Image> farmingLevels, miningLevels, foragingLevels, fishingLevels;
 	private final ArrayList<ArrayList<Item>> itemMatrix = new ArrayList<>();
 	private Item goldItem;
 	private Label goldLabel;
-	private Image itemInHandImage;
+	private Stack itemInHandStack;
 
-	private Container<Image> selectedItem;
+	private Container<Image> inventorySelectedItem, craftingSelectedItem, cookingSelectedItem;
 
-
-	private Table scrollTable;
-	private ScrollPane inventoryScrollPane;
+	private ScrollPane inventoryScrollPane, craftingScrollPane, cookingScrollPane;
 	BitmapFont numberFont;
 
 	private Texture sampleTexture;
 
 	public InventoryTab(Player player, GameScreen gameScreen, Skin skin) {
-        this.player = player;
-        stage = new Stage(new ScreenViewport());
+		this.player = player;
+		stage = new Stage(new ScreenViewport());
 		this.gameScreen = gameScreen;
 		this.skin = skin;
 		farmingLevels = new ArrayList<>();
 		miningLevels = new ArrayList<>();
 		foragingLevels = new ArrayList<>();
 		fishingLevels = new ArrayList<>();
-		createUI();
 
 		Inventory inv = player.getInventory();
 		inv.addItem(Item.build("Loom", 1));
-		inv.addItem(Item.build("Furnace", 1));
+		inv.addItem(Item.build("Furnace", 15));
 		inv.addItem(Item.build("Keg", 1));
-		inv.addItem(Item.build("Wool", 1));
-		inv.addItem(Item.build("Coal", 1));
+		inv.addItem(Item.build("Wool", 3));
+		inv.addItem(Item.build("Coal", 8));
+
+		player.addRecipes(new Recipe(RecipeData.getCookingRecipeData("Dish O' The Sea Recipe"), RecipeType.COOKING, 1));
+		player.addRecipes(new Recipe(RecipeData.getCookingRecipeData("Triple Shot Espresso Recipe"), RecipeType.COOKING, 1));
+		player.addRecipes(new Recipe(RecipeData.getCookingRecipeData("Tortilla Recipe"), RecipeType.COOKING, 1));
+		player.addRecipes(new Recipe(RecipeData.getCraftingRecipeData("Charcoal Kiln Recipe"), RecipeType.CRAFTING, 1));
+		player.addRecipes(new Recipe(RecipeData.getCraftingRecipeData("Bee House Recipe"), RecipeType.CRAFTING, 1));
+		player.addRecipes(new Recipe(RecipeData.getCraftingRecipeData("Keg Recipe"), RecipeType.CRAFTING, 1));
+
+		createUI();
 	}
 
 	void createUI() {
@@ -80,114 +82,16 @@ class InventoryTab {
 		itemMatrix.clear();
 		setEmpty();
 		setNumberFont();
+//		sampleTexture = new Texture(AllItemsData.getData("Wool").getTextureAddress());
 
-		sampleTexture = new Texture(AllItemsData.getData("Wool").getTextureAddress());
+		createMainButtonsUI();
+		createInventoryUI();
+		createSkillsUI();
+		createCraftingUI();
+		createCookingUI();
+	}
 
-		scrollTable = new Table();
-		scrollTable.defaults().width(64).height(64).pad(2);
-
-
-		Inventory inv = player.getInventory();
-		List<Item> items = inv.getItems();
-		int rowIndex = 0, colIndex = 0, number = 0;
-		for (Item item: items) {
-			if (item.getName().equalsIgnoreCase("coin")) {
-				goldItem = item;
-				continue;
-			}
-			if (colIndex == 0)
-				itemMatrix.add(new ArrayList<>());
-
-			itemMatrix.get(rowIndex).add(item);
-			colIndex++;
-
-			if (colIndex == 12) {
-				rowIndex++;
-				colIndex = 0;
-			}
-			number++;
-		}
-
-		if (goldItem != null)
-			goldLabel = new Label(goldItem.getAmount() + "g", skin);
-		else
-			goldLabel = new Label("Gold Item not found!", skin);
-		goldLabel.setPosition(610, 500);
-
-		int rowNumber = inv.getMaximumSize() / 12;
-		if (inv.getInventoryType() == InventoryType.UNLIMITED)
-			rowNumber = Integer.max(3, (items.size() + 11) / 12);
-
-		for (int row = 0; row < rowNumber; row++) {
-			for (int col = 0; col < 12; col++) {
-				Container<Image> container = new Container<>();
-				container.setSize(64, 64);
-				Image cell;
-				if (row * 12 + col < number) {
-					Item item = itemMatrix.get(row).get(col);
-					System.out.println(item.getName());
-					AllItemsData data = AllItemsData.getData(item.getName());
-					if (data != null) {
-						String address = data.getTextureAddress();
-						if (address != null) {
-							cell = new Image(new TextureRegionDrawable(new TextureRegion(new Texture(address))));
-							cell.setUserObject(item);
-						}
-						else {
-							System.err.println("There is no texture for this item!! item name: " + item.getName() + ", row: " + row + ", col: " + col);
-							cell = new Image(emptyDrawable);
-							cell.setUserObject(item);
-						}
-					}
-					else {
-						if (item.getItemType() == ItemType.TOOL) {
-							cell = new Image(new TextureRegionDrawable(new TextureRegion(new Texture(getItemTexture(item)))));
-							cell.setUserObject(item);
-						}
-						else {
-							cell = new Image(emptyDrawable);
-							cell.setUserObject(null);
-						}
-					}
-				}
-				else {
-					cell = new Image(emptyDrawable);
-					cell.setUserObject(null);
-				}
-				container.setActor(cell);
-				container.addListener(new ClickListener() {
-					@Override
-					public void clicked(InputEvent event, float x, float y) {
-						if (selectedItem != null)
-							selectedItem.setBackground(skin.newDrawable("white", Color.CLEAR));
-
-						container.setBackground(skin.newDrawable("white", new Color(Color.LIGHT_GRAY.r, Color.LIGHT_GRAY.g, Color.LIGHT_GRAY.b, 0.4f)));
-						selectedItem = container;
-
-						if (getTapCount() == 2) {
-							Object o = container.getActor().getUserObject();
-							if (o instanceof Item) {
-								player.setItemInHand((Item) o);
-							}
-							else {
-								player.setItemInHand(null);
-							}
-							setItemInHand();
-						}
-					}
-				});
-
-				scrollTable.add(container);
-			}
-			scrollTable.row();
-		}
-
-		inventoryScrollPane = new ScrollPane(scrollTable, skin);
-		inventoryScrollPane.setScrollingDisabled(true, false);
-		inventoryScrollPane.setFadeScrollBars(false);
-		inventoryScrollPane.setSize(850, 200);
-		inventoryScrollPane.setPosition(610, 575);
-
+	private void createMainButtonsUI() {
 		exitButton = new TextButton("X", skin);
 		exitButton.addListener(new ClickListener() {
 			@Override
@@ -244,6 +148,289 @@ class InventoryTab {
 			}
 		});
 
+		craftButton = new TextButton("Crafting", skin);
+		craftButton.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				setCraftTab();
+			}
+		});
+
+		cookButton = new TextButton("Cooking", skin);
+		cookButton.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				setCookTab();
+			}
+		});
+	}
+
+	private void createInventoryUI() {
+		Table scrollTable = new Table();
+		scrollTable.defaults().width(64).height(64).pad(2);
+		Inventory inv = player.getInventory();
+		List<Item> items = inv.getItems();
+		int rowIndex = 0, colIndex = 0, number = 0;
+		for (Item item: items) {
+			if (item.getName().equalsIgnoreCase("coin")) {
+				goldItem = item;
+				continue;
+			}
+			if (colIndex == 0)
+				itemMatrix.add(new ArrayList<>());
+
+			itemMatrix.get(rowIndex).add(item);
+			colIndex++;
+
+			if (colIndex == 12) {
+				rowIndex++;
+				colIndex = 0;
+			}
+			number++;
+		}
+
+		if (goldItem != null)
+			goldLabel = new Label(goldItem.getAmount() + "g", skin);
+		else
+			goldLabel = new Label("Gold Item not found!", skin);
+		goldLabel.setPosition(610, 500);
+
+		int rowNumber = inv.getMaximumSize() / 12;
+		if (inv.getInventoryType() == InventoryType.UNLIMITED)
+			rowNumber = Integer.max(3, (items.size() + 11) / 12);
+
+		for (int row = 0; row < rowNumber; row++) {
+			for (int col = 0; col < 12; col++) {
+				Image cell;
+				int numberOfItem = -1;
+				if (row * 12 + col < number) {
+					Item item = itemMatrix.get(row).get(col);
+//					System.out.println(item.getName());
+					numberOfItem = item.getAmount();
+					AllItemsData data = AllItemsData.getData(item.getName());
+					if (data != null) {
+						String address = data.getTextureAddress();
+						if (address != null) {
+							cell = new Image(new TextureRegionDrawable(new TextureRegion(new Texture(address))));
+							cell.setUserObject(item);
+						}
+						else {
+							System.err.println("There is no texture for this item!! item name: " + item.getName() + ", row: " + row + ", col: " + col);
+							cell = new Image(emptyDrawable);
+							cell.setUserObject(item);
+						}
+					}
+					else {
+						if (item.getItemType() == ItemType.TOOL) {
+							cell = new Image(new TextureRegionDrawable(new TextureRegion(new Texture(getItemTexture(item)))));
+							cell.setUserObject(item);
+						}
+						else {
+							cell = new Image(emptyDrawable);
+							cell.setUserObject(null);
+						}
+					}
+				}
+				else {
+					cell = new Image(emptyDrawable);
+					cell.setUserObject(null);
+				}
+				Container<Image> container = new Container<>();
+				container.setSize(64, 64);
+				container.setActor(cell);
+				container.addListener(new ClickListener() {
+					@Override
+					public void clicked(InputEvent event, float x, float y) {
+						if (inventorySelectedItem != null)
+							inventorySelectedItem.setBackground(skin.newDrawable("white", Color.CLEAR));
+
+						container.setBackground(skin.newDrawable("white", new Color(Color.LIGHT_GRAY.r, Color.LIGHT_GRAY.g, Color.LIGHT_GRAY.b, 0.4f)));
+						inventorySelectedItem = container;
+
+						if (getTapCount() == 2) {
+							Object o = container.getActor().getUserObject();
+							if (o instanceof Item) {
+								player.setItemInHand((Item) o);
+							}
+							else {
+								player.setItemInHand(null);
+							}
+							setItemInHand();
+						}
+					}
+				});
+
+
+				Stack stack = new Stack();
+				stack.add(container);
+				if (numberOfItem != -1) {
+					Label.LabelStyle labelStyle = new Label.LabelStyle(numberFont, Color.WHITE);
+					Label numberLabel = new Label(String.valueOf(numberOfItem), labelStyle);
+
+					Container<Label> numberContainer = new Container<>(numberLabel);
+					numberContainer.bottom().right();
+					numberContainer.padBottom(5).padRight(5); // Add some padding
+					stack.add(numberContainer);
+				}
+
+				scrollTable.add(stack);
+			}
+			scrollTable.row();
+		}
+
+		inventoryScrollPane = new ScrollPane(scrollTable, skin);
+		inventoryScrollPane.setScrollingDisabled(true, false);
+		inventoryScrollPane.setFadeScrollBars(false);
+		inventoryScrollPane.setSize(850, 200);
+		inventoryScrollPane.setPosition(482, 575);
+	}
+
+	private void createCraftingUI() {
+		Table scrollTable = new Table();
+		scrollTable.defaults().width(64).height(64).pad(2);
+		List<Recipe> recipes = player.getRecipes(RecipeType.CRAFTING);
+		int rowNumber = Integer.max(3, (recipes.size() + 11) / 12);
+
+		for (int row = 0; row < rowNumber; row++) {
+			for (int col = 0; col < 12; col++) {
+				Image cell;
+				if (row * 12 + col < recipes.size()) {
+					Recipe recipe = recipes.get(row * 12 + col);
+					String resultName = recipe.getResult().getName();
+					AllItemsData data = AllItemsData.getData(resultName);
+					if (data != null) {
+						String address = data.getTextureAddress();
+						if (address != null) {
+							cell = new Image(new TextureRegionDrawable(new TextureRegion(new Texture(address))));
+							cell.setUserObject(recipe);
+						}
+						else {
+							System.err.println("There is no texture for this item!! item name: " + resultName + ", row: " + row + ", col: " + col);
+							cell = new Image(emptyDrawable);
+							cell.setUserObject(recipe);
+						}
+					}
+					else {
+						cell = new Image(emptyDrawable);
+						cell.setUserObject(null);
+					}
+				}
+				else {
+					cell = new Image(emptyDrawable);
+					cell.setUserObject(null);
+				}
+				Container<Image> container = new Container<>();
+				container.setSize(64, 64);
+				container.setActor(cell);
+				container.addListener(new ClickListener() {
+					@Override
+					public void clicked(InputEvent event, float x, float y) {
+						if (craftingSelectedItem != null)
+							craftingSelectedItem.setBackground(skin.newDrawable("white", Color.CLEAR));
+
+						container.setBackground(skin.newDrawable("white", new Color(Color.LIGHT_GRAY.r, Color.LIGHT_GRAY.g, Color.LIGHT_GRAY.b, 0.4f)));
+						craftingSelectedItem = container;
+
+						if (getTapCount() == 2) {
+							Object o = container.getActor().getUserObject();
+							if (o instanceof Recipe) {
+								// It's show time ;))
+//								player.setItemInHand((Item) o);
+							}
+//							else {
+////								player.setItemInHand(null);
+//							}
+//							setItemInHand();
+						}
+					}
+				});
+				scrollTable.add(container);
+			}
+			scrollTable.row();
+		}
+
+		craftingScrollPane = new ScrollPane(scrollTable, skin);
+		craftingScrollPane.setScrollingDisabled(true, false);
+		craftingScrollPane.setFadeScrollBars(false);
+		craftingScrollPane.setSize(850, 200);
+		craftingScrollPane.setPosition(482, 575);
+	}
+
+	private void createCookingUI() {
+		Table scrollTable = new Table();
+		scrollTable.defaults().width(64).height(64).pad(2);
+		List<Recipe> recipes = player.getRecipes(RecipeType.COOKING);
+		int rowNumber = Integer.max(3, (recipes.size() + 11) / 12);
+
+		for (int row = 0; row < rowNumber; row++) {
+			for (int col = 0; col < 12; col++) {
+				Image cell;
+				if (row * 12 + col < recipes.size()) {
+//					System.out.println("row * 12 + col: " + (row * 12 + col));
+					Recipe recipe = recipes.get(row * 12 + col);
+//					System.out.println("Recipe: " + recipe);
+//					System.out.println("recipe.getResult(): " + recipe.getResult());
+					String resultName = recipe.getResult().getName();
+					AllItemsData data = AllItemsData.getData(resultName);
+					if (data != null) {
+						String address = data.getTextureAddress();
+						if (address != null) {
+							cell = new Image(new TextureRegionDrawable(new TextureRegion(new Texture(address))));
+							cell.setUserObject(recipe);
+						}
+						else {
+							System.err.println("There is no texture for this item!! item name: " + resultName + ", row: " + row + ", col: " + col);
+							cell = new Image(emptyDrawable);
+							cell.setUserObject(recipe);
+						}
+					}
+					else {
+						cell = new Image(emptyDrawable);
+						cell.setUserObject(null);
+					}
+				}
+				else {
+					cell = new Image(emptyDrawable);
+					cell.setUserObject(null);
+				}
+				Container<Image> container = new Container<>();
+				container.setSize(64, 64);
+				container.setActor(cell);
+				container.addListener(new ClickListener() {
+					@Override
+					public void clicked(InputEvent event, float x, float y) {
+						if (cookingSelectedItem != null)
+							cookingSelectedItem.setBackground(skin.newDrawable("white", Color.CLEAR));
+
+						container.setBackground(skin.newDrawable("white", new Color(Color.LIGHT_GRAY.r, Color.LIGHT_GRAY.g, Color.LIGHT_GRAY.b, 0.4f)));
+						cookingSelectedItem = container;
+
+						if (getTapCount() == 2) {
+							Object o = container.getActor().getUserObject();
+							if (o instanceof Recipe) {
+								// It's show time ;))
+//								player.setItemInHand((Item) o);
+							}
+//							else {
+////								player.setItemInHand(null);
+//							}
+//							setItemInHand();
+						}
+					}
+				});
+				scrollTable.add(container);
+			}
+			scrollTable.row();
+		}
+
+		cookingScrollPane = new ScrollPane(scrollTable, skin);
+		cookingScrollPane.setScrollingDisabled(true, false);
+		cookingScrollPane.setFadeScrollBars(false);
+		cookingScrollPane.setSize(850, 200);
+		cookingScrollPane.setPosition(482, 575);
+	}
+
+	private void createSkillsUI() {
 		int farmingLevel = player.getSkillLevel(SkillType.FARMING);
 		int miningLevel = player.getSkillLevel(SkillType.MINING);
 		int foragingLevel = player.getSkillLevel(SkillType.FORAGING);
@@ -371,6 +558,10 @@ class InventoryTab {
 		buttonTable.add(skillButton).pad(0);
 		buttonTable.add(settingButton).pad(0);
 		buttonTable.add(missionButton).pad(0);
+		buttonTable.add(craftButton).pad(0);
+		if (true) { // if player is in the house
+			buttonTable.add(cookButton).pad(0);
+		}
 
 		buttonTable.add(exitButton).padLeft(100);
 		buttonTable.setPosition(1000, 800);
@@ -383,7 +574,6 @@ class InventoryTab {
 		setButtonBar();
 		stage.addActor(goldLabel);
 		setItemInHand();
-//		stage.addActor(scrollTable);
 		stage.addActor(inventoryScrollPane);
 	}
 
@@ -410,20 +600,33 @@ class InventoryTab {
 	}
 
 	private void setItemInHand() {
-		if (itemInHandImage != null) {
-			itemInHandImage.remove();
+
+		if (itemInHandStack != null) {
+			itemInHandStack.remove();
 		}
+		itemInHandStack = new Stack();
 		Item item = player.getItemInHand();
+		Image itemInHandImage;
 		if (item == null || getItemTexture(item) == null) {
 			itemInHandImage = new Image(emptyDrawable);
+			itemInHandStack.add(itemInHandImage);
 		}
 		else {
 			itemInHandImage = new Image(new TextureRegionDrawable(new TextureRegion(new Texture(getItemTexture(item)))));
-		}
-		itemInHandImage.setPosition(1350, 480);
-		stage.addActor(itemInHandImage);
-	}
+			itemInHandStack.add(itemInHandImage);
+			Label.LabelStyle labelStyle = new Label.LabelStyle(numberFont, Color.WHITE);
+			Label numberLabel = new Label(String.valueOf(item.getAmount()), labelStyle);
 
+			Container<Label> numberContainer = new Container<>(numberLabel);
+			numberContainer.bottom().right();
+			numberContainer.padBottom(5).padRight(5); // Add some padding
+			itemInHandStack.add(numberContainer);
+		}
+
+		itemInHandStack.setPosition(1350, 480);
+		itemInHandStack.setSize(64, 64);
+		stage.addActor(itemInHandStack);
+	}
 
 	private void setMapTab() {
 		setStage();
@@ -439,6 +642,18 @@ class InventoryTab {
 	private void setMissionTab() {
 		setStage();
 		setButtonBar();
+	}
+
+	private void setCraftTab() {
+		setStage();
+		setButtonBar();
+		stage.addActor(craftingScrollPane);
+	}
+
+	private void setCookTab() {
+		setStage();
+		setButtonBar();
+		stage.addActor(cookingScrollPane);
 	}
 
 	private void setSettingTab() {

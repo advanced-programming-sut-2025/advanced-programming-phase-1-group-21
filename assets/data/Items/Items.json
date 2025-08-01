@@ -336,17 +336,17 @@
   {
     "name": "Dish O' The Sea",
     "type": "Consumable",
-    "texture-address": "Textures/Recipe/Dish O The Sea.png"
+    "texture-address": "Textures/Recipe/Dish_O_The_Sea.png"
   },
   {
     "name": "Seafoam Pudding",
     "type": "Consumable",
-    "texture-address": "Textures/Recipe/Seafoam Pudding.png"
+    "texture-address": "Textures/Recipe/Seafoam_Pudding.png"
   },
   {
     "name": "Miner's Treat",
     "type": "Consumable",
-    "texture-address": "Textures/Recipe/Miners Treat.png"
+    "texture-address": "Textures/Recipe/Miners_Treat.png"
   },
   {
     "name": "Blue Jazz",
@@ -1385,11 +1385,6 @@
   },
   {
     "name": "Dish O' The Sea Recipe",
-    "type": "Recipe",
-    "texture-address": null
-  },
-  {
-    "name": "Seaform Pudding Recipe",
     "type": "Recipe",
     "texture-address": null
   },
