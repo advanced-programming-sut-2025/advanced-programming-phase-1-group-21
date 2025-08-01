@@ -1,7 +1,7 @@
 package io.github.StardewValley.network.routing;
 
-import Network.Message;
-import Network.ServiceRouter;
+import models.network.Message;
+import network.ServiceRouter;
 import com.esotericsoftware.kryonet.Connection;
 import util.NetworkUtil;
 

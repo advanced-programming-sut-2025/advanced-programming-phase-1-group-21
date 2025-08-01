@@ -1,7 +1,7 @@
 package services;
 
-import Network.Message;
-import Network.MessageType;
+import models.network.Message;
+import models.network.MessageType;
 import com.esotericsoftware.kryonet.Connection;
 import controller.LobbyManager;
 import models.network.Lobby;

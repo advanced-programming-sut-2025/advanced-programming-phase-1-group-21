@@ -3,8 +3,8 @@ package io.github.StardewValley.network;
 import models.result.Result;
 import models.user.Gender;
 import models.user.User;
-import Network.Message;
-import Network.MessageType;
+import models.network.Message;
+import models.network.MessageType;
 import util.NetworkUtil;
 
 public class NetworkDataBaseController {

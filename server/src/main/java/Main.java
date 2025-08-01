@@ -3,15 +3,13 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import controller.MessageHandler;
-import Network.Message;
-import Network.MessageType;
-import Network.NetworkRegister;
+import models.network.Message;
+import network.NetworkRegister;
 import session.SessionManager;
 import util.ServerUtil;
 
 import java.io.IOException;
 import java.util.Random;
-import java.util.concurrent.CompletableFuture;
 
 public class Main {
     public static Random rand = new Random();

@@ -3,15 +3,14 @@ package io.github.StardewValley.network;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
-import Network.Message;
-import Network.NetworkRegister;
+import models.network.Message;
+import network.NetworkRegister;
 import io.github.StardewValley.views.menu.GUI.UIUtil;
 import models.result.errorTypes.ServerError;
 
 import java.io.IOException;
 import java.util.UUID;
 import java.util.concurrent.*;
-import java.util.logging.Logger;
 
 public class ClientNetwork {
 

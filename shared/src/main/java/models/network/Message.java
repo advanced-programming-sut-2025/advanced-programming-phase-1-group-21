@@ -1,4 +1,4 @@
-package Network;
+package models.network;
 
 import util.NetworkUtil;
 

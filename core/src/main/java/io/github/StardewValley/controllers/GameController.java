@@ -1670,7 +1670,7 @@ public class GameController {
     }
 
     public void handleToolMove(int screenX , int screenY) {
-        if (player.getItemInHand() instanceof Tool){
+        if (player.getItemInHand() instanceof Tool) {
             Tool tool = (Tool) player.getItemInHand();
             tool.handleRotation(screenX , Gdx.graphics.getHeight() - screenY);
         }

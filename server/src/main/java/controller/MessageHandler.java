@@ -1,14 +1,14 @@
 package controller;
 
-import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
-import Network.Message;
-import Network.MessageType;
-import models.network.Chat;
+import models.game.Game;
+import models.network.Message;
+import models.network.MessageType;
 import router.ChatServiceRouter;
 import router.DatabaseServiceRouter;
+import router.GameServiceRouter;
 import router.LobbyServiceRouter;
-import Network.ServiceRouter;
+import network.ServiceRouter;
 import util.NetworkUtil;
 
 import java.util.HashMap;
@@ -25,6 +25,7 @@ public class MessageHandler {
         serviceMap.put(MessageType.DATABASE_SERVICE, new DatabaseServiceRouter());
         serviceMap.put(MessageType.LOBBY_SERVICE, new LobbyServiceRouter());
         serviceMap.put(MessageType.CLIENT_SERVICE, new ChatServiceRouter());
+        serviceMap.put(MessageType.GAME_SERVICE, new GameServiceRouter());
     }
 
 

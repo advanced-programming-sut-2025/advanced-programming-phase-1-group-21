@@ -1,16 +1,12 @@
 package util;
 
-import Network.Message;
-import Network.MessageType;
-import com.esotericsoftware.kryonet.Connection;
-
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
+import models.network.Message;
+import models.network.MessageType;
 
 
 public class ServerUtil {
 
-    public static final long AVOID_RACE = 5000;
+    public static final long AVOID_RACE = 1000;
 
     public static Message createPingMessage() {
         Message msg = new Message(MessageType.CLIENT_SERVICE);
