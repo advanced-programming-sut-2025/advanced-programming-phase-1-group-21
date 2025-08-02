@@ -21,6 +21,7 @@ import io.github.StardewValley.asset.Assets;
 import io.github.StardewValley.controllers.GameController;
 import io.github.StardewValley.controllers.ViewController;
 import models.animal.Animal;
+import models.map.Coord;
 import models.map.Map;
 import models.map.Tile;
 
@@ -169,9 +170,10 @@ public class GameScreen implements Screen , InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        message = "(" + viewController.clickController(screenX, screenY).getX() + ","
-                + viewController.clickController(screenX , screenY).getY() + ")";
-        Tile tile = controller.getPlayer().getMap().getTile(viewController.clickController(screenX , screenY));
+        Coord c = viewController.clickController(screenX, screenY);
+        message = "(" + c.getX() + ","
+                + c.getY() + ")";
+        Tile tile = controller.getPlayer().getMap().getTile(c);
         if(tile != null && tile.getPlacable(Animal.class) != null){
             Animal animal = tile.getPlacable(Animal.class);
             animalInfoWindow = new AnimalInfoWindow(this , Assets.getSkin() , animal);

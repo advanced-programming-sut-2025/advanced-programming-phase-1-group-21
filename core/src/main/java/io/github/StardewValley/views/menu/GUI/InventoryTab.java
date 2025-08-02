@@ -66,6 +66,7 @@ class InventoryTab {
 
 		Inventory inv = player.getInventory();
 		inv.addItem(Item.build("Loom", 1));
+		inv.addItem(Item.build("Bee House", 1));
 		inv.addItem(Item.build("Furnace", 15));
 		inv.addItem(Item.build("Keg", 1));
 		inv.addItem(Item.build("Wool", 3));

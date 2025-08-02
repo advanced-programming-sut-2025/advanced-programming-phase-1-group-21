@@ -1,5 +1,6 @@
 package models.game;
 
+import com.badlogic.gdx.maps.tiled.renderers.IsometricTiledMapRenderer;
 import models.Item.Item;
 import models.Item.ItemType;
 import models.result.errorTypes.GameError;
@@ -16,6 +17,7 @@ public class Inventory implements Serializable {
     List<Item> items = new ArrayList<>();
     InventoryType inventoryType = InventoryType.BIG;
     ToolMaterialType trashcanType = ToolMaterialType.PRIMITIVE;
+    private Item itemInHand;
 
     public static Inventory buildPlayerInventory() {
         Inventory inventory = new Inventory();
@@ -124,7 +126,12 @@ public class Inventory implements Serializable {
                     int removeAmt = Math.min(slot.getAmount(), remaining);
                     slot.changeAmount(-removeAmt);
                     remaining -= removeAmt;
-                    if (slot.getAmount() == 0) itr.remove();
+                    if (slot.getAmount() == 0) {
+                        itr.remove();
+                        if (slot == itemInHand) {
+                            itemInHand = null;
+                        }
+                    }
                 }
             }
         }
@@ -251,7 +258,6 @@ public class Inventory implements Serializable {
         return new ArrayList<>(items);
     }
 
-
     public void normalize() {
         Iterator<Item> iterator = items.iterator();
         while (iterator.hasNext()) {
@@ -260,5 +266,13 @@ public class Inventory implements Serializable {
                 iterator.remove();
             }
         }
+    }
+
+    public Item getItemInHand() {
+        return itemInHand;
+    }
+
+    public void setItemInHand(Item itemInHand) {
+        this.itemInHand = itemInHand;
     }
 }

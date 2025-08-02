@@ -21,6 +21,7 @@ public class Artisan implements Placable, Serializable {
 	public Artisan() {}
 
 	public Artisan(ArtisanGoodsData goodsData, Inventory inventory) {
+//		System.out.println("---- Artisan Created " + goodsData.getName() + " ----");
 		this.goodsData = goodsData;
 
 		// The ingredients of "Bee House" is null
@@ -37,32 +38,27 @@ public class Artisan implements Placable, Serializable {
 		return goodsData.getName();
 	}
 
-	public Result<Void> findRecipeAndCraft(String mainIngredient, Inventory inventory) {
+	public ArtisanRecipeData getRecipeData(String mainIngredient) {
+		ArtisanRecipeData resultRecipe = null;
 		int numberOfRecipe = 0;
 		for (ArtisanRecipeData recipe : goodsData.getRecipes())
 			for (Map <String, Integer> baseIngredients: recipe.getIngredients())
 				for (Map.Entry<String, Integer> entry : baseIngredients.entrySet())
-					if (mainIngredient.equalsIgnoreCase(entry.getKey()))
-						numberOfRecipe++;
-		if (numberOfRecipe != 1)
-			return Result.success(null);
-
-		Map <String, Integer> ingredients = null;
-		mainLoop:
-		for (ArtisanRecipeData recipe : goodsData.getRecipes())
-			for (Map <String, Integer> baseIngredients: recipe.getIngredients())
-				for (Map.Entry<String, Integer> entry : baseIngredients.entrySet())
 					if (mainIngredient.equalsIgnoreCase(entry.getKey())) {
-						ingredients = baseIngredients;
-						break mainLoop;
+						numberOfRecipe++;
+						resultRecipe = recipe;
 					}
-		if (ingredients == null)
-			return Result.success(null);
-		ArrayList <String> itemNames = new ArrayList<>();
-		for (Map.Entry<String, Integer> entry : ingredients.entrySet()) {
-			itemNames.add(entry.getKey());
+		if (numberOfRecipe != 1)
+			return null;
+		return resultRecipe;
+	}
+
+	public void startProcess(String result) {
+		for (ArtisanRecipeData recipeData: goodsData.getRecipes()) {
+			if (recipeData.getName().equalsIgnoreCase(result)) {
+				startProcess(result, recipeData.getProcessingTime());
+			}
 		}
-		return craft(itemNames, inventory);
 	}
 
 	public Result<Void> craft(ArrayList <String> itemNames, Inventory inventory) {
@@ -103,6 +99,7 @@ public class Artisan implements Placable, Serializable {
 	}
 
 	private void startProcess(String recipeName, int time) {
+//		System.out.println("---- Artisan Start Process: " + recipeName);
 		result = Item.build(recipeName, 1);
 	}
 
