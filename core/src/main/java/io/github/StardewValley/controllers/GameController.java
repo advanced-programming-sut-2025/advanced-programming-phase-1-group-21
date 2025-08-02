@@ -1022,6 +1022,11 @@ public class GameController {
         }
         return null;
     }
+  
+    public void enterBuilding(String buildingName) {
+        Building building = player.getMap().getBuildingByName(buildingName);
+        player.enterBuilding(building);
+    }
 
     public Result<Void> useArtisan(String artisanName, ArrayList<String> itemNames) {
 

@@ -77,7 +77,7 @@ public class TerminalTab {
 
     private void getResult(){
         String command = input.getText();
-        resultGetter.Result(command);
+        //resultGetter.Result(command);
         message.setText(resultGetter.ResultText(command));
 
     }

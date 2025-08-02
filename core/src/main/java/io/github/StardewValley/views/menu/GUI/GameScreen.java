@@ -22,6 +22,8 @@ import io.github.StardewValley.controllers.GameController;
 import io.github.StardewValley.controllers.ViewController;
 import models.animal.Animal;
 import models.map.Coord;
+import models.game.Game;
+import models.game.Player;
 import models.map.Map;
 import models.map.Tile;
 
@@ -29,6 +31,8 @@ public class GameScreen implements Screen , InputProcessor {
     private final Main game;
     private final GameController controller;
     private final ViewController viewController;
+    private final Player currentPlayer;
+    private final Game gameModel;
     private Stage stage;
     private InventoryTab inventoryTab;
     private ShopMenuTab shopMenuTab;
@@ -49,6 +53,8 @@ public class GameScreen implements Screen , InputProcessor {
         this.game = Main.getInstance();
         this.controller = App.getInstance().currentPlayerController;
         this.viewController = App.getInstance().currentPlayerViewController;
+        this.gameModel = this.viewController.game;
+        currentPlayer = this.viewController.player;
         ShowMap.currentPlayer = viewController.player;
         ShowMap.listOfPlayers = viewController.game.getPlayers();
         createUI();
@@ -96,7 +102,7 @@ public class GameScreen implements Screen , InputProcessor {
             terminalTab.draw();
         if(pauseMenu != null)
             pauseMenu.draw();
-        if(controller.getTime().getData() >= 22 || controller.getTime().getData() <= 5)
+        if(gameModel.getGameDate().getHour() >= 22 || gameModel.getGameDate().getHour() <= 5)
             setDarkMode();
         else{
             if(isNight){
