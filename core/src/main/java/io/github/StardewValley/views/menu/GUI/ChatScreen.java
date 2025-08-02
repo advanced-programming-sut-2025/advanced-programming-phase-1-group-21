@@ -13,6 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import io.github.StardewValley.App;
+import io.github.StardewValley.controllers.ChatController;
 import models.game.Player;
 
 public class ChatScreen {
@@ -23,6 +25,7 @@ public class ChatScreen {
 	private Table messageTable;
 	private ScrollPane scrollPane;
 	private TextField inputField;
+	private final ChatController chatController;
 
 	public ChatScreen(Player player, GameScreen gameScreen, Skin skin) {
 		this.player = player;
@@ -30,7 +33,7 @@ public class ChatScreen {
 		this.skin = skin;
 		stage = new Stage(new ScreenViewport());
 //		Gdx.input.setInputProcessor(stage);
-
+		chatController = new ChatController(App.getInstance().logedInUser.getUsername());
 		createUI();
 	}
 
@@ -60,8 +63,7 @@ public class ChatScreen {
 		inputField.setTextFieldListener((textField, c) -> {
 			if (c == '\r' || c == '\n') {
 				String text = textField.getText();
-
-				pushMessage("You", text, Color.WHITE);
+				chatController.sendMessage(text);
 				textField.setText("");
 			}
 		});
