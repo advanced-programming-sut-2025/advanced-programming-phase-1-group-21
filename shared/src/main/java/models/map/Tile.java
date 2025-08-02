@@ -3,7 +3,9 @@ package models.map;
 import Asset.SharedAssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.ui.TextTooltip;
 import models.DailyUpdate;
+import models.animal.Animal;
 import models.crop.Harvestable;
 import models.crop.PlantedSeed;
 import models.Item.Item;
@@ -22,6 +24,8 @@ public class Tile implements DailyUpdate, Serializable {
     transient private Texture onTileTexture;
     transient private Sprite onTileSprite;
 
+    MapType mapType;
+
     public Tile() {}
 
     private Tile(TileType tileType, Placable placable) {
@@ -30,10 +34,15 @@ public class Tile implements DailyUpdate, Serializable {
     }
 
     public void setTexture(MapType mapType) {
+        this.mapType = mapType;
         float x = sprite.getX();
         float y = sprite.getY();
         if(mapType.equals(MapType.HOUSE))
             texture = new Texture("Textures/Flooring/HouseFloor.png");
+        else if(tileType.equals(TileType.SIMPLE_STABLE))
+            texture = SharedAssetManager.getStable("Simple");
+        else if(tileType.equals(TileType.FOOD_STABLE))
+            texture = SharedAssetManager.getStable("Food");
         else if(getPlacable(Building.class) != null)
             texture = new Texture("Textures/map/SpringBasicTile.png");
         else if(isEmpty())
@@ -41,8 +50,10 @@ public class Tile implements DailyUpdate, Serializable {
 
         if(tileType.getTextureAddress() != null)
             onTileTexture = new Texture(tileType.getTextureAddress());
-        else if(placable!= null && placable.getTexture() != null)
+        else if(placable!= null && placable.getTexture() != null) {
             onTileTexture = placable.getTexture();
+        }
+
 
         sprite = new Sprite(texture);
         sprite.setSize(30 , (float) (30 * texture.getHeight()) / texture.getWidth());
@@ -53,6 +64,10 @@ public class Tile implements DailyUpdate, Serializable {
             onTileSprite = new Sprite(onTileTexture);
             onTileSprite.setX(x);
             onTileSprite.setY(y);
+            if(placable != null && placable.spriteGetter() != null){
+                placable.spriteGetter().setX(x);
+                placable.spriteGetter().setY(y);
+            }
         }
     }
 
@@ -156,6 +171,10 @@ public class Tile implements DailyUpdate, Serializable {
                 onTileSprite = new Sprite(onTileTexture);
                 onTileSprite.setX(sprite.getX());
                 onTileSprite.setY(sprite.getY());
+                if(placable.spriteGetter() != null && placable.spriteGetter() != null){
+                    placable.spriteGetter().setX(sprite.getX());
+                    placable.spriteGetter().setY(sprite.getY());
+                }
             }
         }
     }
@@ -189,14 +208,18 @@ public class Tile implements DailyUpdate, Serializable {
     }
 
     public void setTexture(Season season){
-        if(season.equals(Season.SPRING))
+        if(!mapType.equals(MapType.VILLAGE) && !mapType.equals(MapType.FARM))
+            return;
+        else if(season.equals(Season.SPRING))
             texture = SharedAssetManager.getTile("Spring");
-        if(season.equals(Season.WINTER))
+        else if(season.equals(Season.WINTER))
             texture = SharedAssetManager.getTile("Winter");
-        if(season.equals(Season.AUTUMN))
+        else if(season.equals(Season.AUTUMN))
             texture = SharedAssetManager.getTile("Fall");
-        if(season.equals(Season.SUMMER))
+        else if(season.equals(Season.SUMMER))
             texture = SharedAssetManager.getTile("Summer");
+
         sprite.setTexture(texture);
     }
+
 }

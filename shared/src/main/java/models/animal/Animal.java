@@ -1,5 +1,6 @@
 package models.animal;
 
+import Asset.SharedAssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import data.AnimalData;
@@ -38,6 +39,9 @@ public class Animal implements Placable, DailyUpdate, Serializable {
     private float spriteY;
     private transient Sprite sprite;
     private transient Texture texture;
+    transient private Texture animalReact;
+    transient private Sprite animalReactSprite;
+    private float animationRunTime;
 
     public Animal() {}
 
@@ -100,6 +104,7 @@ public class Animal implements Placable, DailyUpdate, Serializable {
 
     public void pet() {
         this.friendship += 15;
+        setPetAnimation();
         isTodayPet = true;
     }
 
@@ -108,6 +113,7 @@ public class Animal implements Placable, DailyUpdate, Serializable {
     }
 
     public void setFeedToday(boolean feedToday) {
+        setFeedAnimation();
         this.isFeedToday = feedToday;
     }
 
@@ -162,7 +168,7 @@ public class Animal implements Placable, DailyUpdate, Serializable {
 
     @Override
     public Sprite spriteGetter() {
-        return sprite;
+        return this.sprite;
     }
 
     public boolean canEnterHouseType(AnimalHouseType animalHouseType) {
@@ -239,5 +245,43 @@ public class Animal implements Placable, DailyUpdate, Serializable {
     public float getSpriteY() {
         spriteY = sprite.getY();
         return spriteY;
+    }
+
+    public void setPetAnimation(){
+        animalReact = SharedAssetManager.getHeart();
+        if(animalReactSprite == null)
+            animalReactSprite = new Sprite(animalReact);
+        animalReactSprite.setTexture(animalReact);
+        animalReactSprite.setSize(30 , 30);
+        animalReactSprite.setX(sprite.getX() + 20);
+        animalReactSprite.setY(sprite.getY() + 70);
+        animationRunTime = 1;
+    }
+
+    public void setFeedAnimation(){
+        animalReact = SharedAssetManager.getFoodEmoji();
+        if(animalReactSprite == null)
+            animalReactSprite = new Sprite(animalReact);
+        animalReactSprite.setTexture(animalReact);
+        animalReactSprite.setSize(30 , 30);
+        animalReactSprite.setX(sprite.getX() + 20);
+        animalReactSprite.setY(sprite.getY() + 70);
+        animationRunTime = 1;
+    }
+
+    public void runPetAnimation(){
+        animalReactSprite.setAlpha(animationRunTime);
+        animationRunTime -= (float) 0.002;
+        animalReactSprite.setX(getSpriteX() + 20);
+        animalReactSprite.setY(getSpriteY() + 70);
+        if(animationRunTime <= 0){
+            animationRunTime = 0;
+            animalReact = null;
+            animalReactSprite = null;
+        }
+    }
+
+    public Sprite getAnimalReactSprite() {
+        return animalReactSprite;
     }
 }

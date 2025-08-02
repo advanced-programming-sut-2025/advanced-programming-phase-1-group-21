@@ -237,7 +237,19 @@ public class MapBuilder {
 
     public Map buildAnimalHouse(MapType mapType) {
         Map map = new Map(mapType);
-        map.tiles.get(7).get(7).setTileType(TileType.DOOR);
+        for(int i = 0 ; i < 10 ; i++){
+            for(int j = 0 ; j < 10 ; j++){
+                map.tiles.get(3*i).get(3*j).setTileType(TileType.SIMPLE_STABLE);
+                map.tiles.get(3*i).get(3*j + 1).setTileType(TileType.SIMPLE_STABLE);
+                map.tiles.get(3*i).get(3*j + 2).setTileType(TileType.SIMPLE_STABLE);
+                map.tiles.get(3*i + 1).get(3*j).setTileType(TileType.SIMPLE_STABLE);
+                map.tiles.get(3*i + 1).get(3*j + 2).setTileType(TileType.SIMPLE_STABLE);
+                map.tiles.get(3*i + 2).get(3*j).setTileType(TileType.FOOD_STABLE);
+                map.tiles.get(3*i + 2).get(3*j + 1).setTileType(TileType.SIMPLE_STABLE);
+                map.tiles.get(3*i + 2).get(3*j + 2).setTileType(TileType.SIMPLE_STABLE);
+            }
+        }
+        map.tiles.get(29).get(29).setTileType(TileType.DOOR);
         map.setTextures();
         return map;
     }

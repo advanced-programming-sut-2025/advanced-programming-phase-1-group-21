@@ -3,6 +3,7 @@ package io.github.StardewValley.views.menu.GUI;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import io.github.StardewValley.App;
 import io.github.StardewValley.Main;
+import models.animal.Animal;
 import models.game.Player;
 import models.game.Refrigerator;
 import models.map.*;
@@ -21,6 +22,7 @@ public class ShowMap {
         showTiles();
         showHouse();
         onTilesShow();
+        animalAnimations();
         for (Player player : listOfPlayers) {
             if (player.getMap() == map) {
                 showPlayer(player);
@@ -51,8 +53,29 @@ public class ShowMap {
         for(int i = (int)mapY - 1 ; i >= 0 ; i--){
             for(int j = 0 ; j < mapX ; j++){
                 Tile tile = map.getTile(j , (int)mapY - i -1);
+                Placable placable = tile.getPlacable(Placable.class);
+                if(placable != null && placable.spriteGetter() != null)
+                    placable.spriteGetter().draw(game.getBatch());
                 if(tile.getOnTileSprite() != null) {
                     tile.getOnTileSprite().draw(game.getBatch());
+                }
+            }
+        }
+    }
+
+    public static void animalAnimations(){
+        float mapX = map.getMaxX();
+        float mapY = map.getMaxY();
+
+        for(int i = (int)mapY - 1 ; i >= 0 ; i--){
+            for(int j = 0 ; j < mapX ; j++){
+                Tile tile = map.getTile(j , (int)mapY - i -1);
+                if(tile.getPlacable(Animal.class) != null){
+                    Animal animal = tile.getPlacable(Animal.class);
+                    if(animal.getAnimalReactSprite() != null) {
+                        animal.getAnimalReactSprite().draw(game.getBatch());
+                        animal.runPetAnimation();
+                    }
                 }
             }
         }
