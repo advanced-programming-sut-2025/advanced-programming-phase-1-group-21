@@ -28,8 +28,8 @@ public class ViewController {
 
 
     public void buttonController(Main thisGame){
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
-            thisGame.setScreen(new MainMenuScreen());
+//        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
+//            thisGame.setScreen(new MainMenuScreen());
         if(Gdx.input.isKeyPressed(Input.Keys.W))
             gc.walk(Direction.NORTH);
         if(Gdx.input.isKeyPressed(Input.Keys.S))
