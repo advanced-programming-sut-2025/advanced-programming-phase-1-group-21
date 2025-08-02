@@ -84,7 +84,7 @@ public class ChatScreen {
 	}
 
 	public void pushMessage(String senderName, String message, Color color) {
-		Label messageLabel = new Label(senderName + message, skin);
+		Label messageLabel = new Label(senderName + ": " + message, skin);
 		messageLabel.setWrap(true);
 		messageLabel.setColor(color);
 		messageLabel.setAlignment(Align.left);
