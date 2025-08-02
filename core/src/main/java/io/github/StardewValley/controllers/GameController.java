@@ -6,20 +6,13 @@ package io.github.StardewValley.controllers;
  */
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.Rectangle;
 import data.ArtisanRecipeData;
 import io.github.StardewValley.App;
 
 import data.AnimalData;
 import data.ArtisanGoodsData;
 import data.items.SeedData;
-import io.github.StardewValley.network.NetworkDataBaseController;
-import io.github.StardewValley.Main;
-import io.github.StardewValley.views.menu.CLI.TradeMenuView;
-import io.github.StardewValley.views.menu.GUI.MainMenuScreen;
 import models.Item.*;
 import models.animal.Animal;
 import models.animal.AnimalTypes;
@@ -30,19 +23,15 @@ import models.crop.PlantedTree;
 import models.game.*;
 import models.map.*;
 import models.map.Map;
-import models.network.Lobby;
 import models.result.Result;
-import models.result.errorTypes.AuthError;
 import models.result.errorTypes.GameError;
 import models.result.errorTypes.UserError;
 import models.skill.SkillType;
 import models.tool.*;
 import models.user.Gender;
-import models.user.User;
 import org.apache.commons.lang3.tuple.Pair;
 import io.github.StardewValley.views.menu.CLI.GameTerminalView;
 
-import java.security.Key;
 import java.util.*;
 
 public class GameController {
@@ -1380,13 +1369,6 @@ public class GameController {
         return Result.success("ke emshab shabe eshghe hamin emshabo darim");
     }
 
-
-    public Result<Void> startTrade() {
-        if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        App.getInstance().currentMenu = TradeMenuView.getInstance();
-        return Result.success(null);
-    }
-
     public Result<String> meetNPC(String NPCName) {
         NPC npc = game.getNPCByName(NPCName);
         if (npc == null) return Result.failure(GameError.THIS_NPC_DOES_NOT_EXIST);
@@ -1716,5 +1698,216 @@ public class GameController {
             Tool tool = (Tool) player.getItemInHand();
             tool.handleRotation(screenX , Gdx.graphics.getHeight() - screenY);
         }
+    }
+
+    /*
+     * TRADES FROM HERE
+     */
+
+    public Result<Void> tradeWithMoney(String username , String type , String item , int amount , int price) {
+        if(player.getUser().getUsername().equals(username))
+            return Result.failure(GameError.NO_PLAYER_FOUND);
+
+        Player trader = game.getPlayerByName(username);
+        if(trader == null) return Result.failure(GameError.NO_PLAYER_FOUND);
+
+        Item thisItem = Item.build(item , amount);
+        assert thisItem != null;
+        if(type.equals("offer") && !player.getInventory().canRemoveItem(thisItem))
+            return Result.failure(GameError.NOT_ENOUGH_ITEMS);
+        Relation relation = game.getRelationOfUs(player, trader);
+        if(type.equals("offer")) {
+            relation.addTrade(new Trade(relation.getTrades().size(), player, trader, 0 ,
+                    thisItem , price , null , TradeType.OFFER_MONEY));
+        }
+        else{
+            relation.addTrade(new Trade(relation.getTrades().size(), player, trader, price ,
+                    Item.build("coin" , price) , 0 , thisItem , TradeType.REQUEST_MONEY));
+        }
+
+        return Result.success(null);
+
+    }
+
+    public Result<Void> tradeWithItem(String username , String type , String item1 , int amount1 , String item2 , int amount2) {
+        if(player.getUser().getUsername().equals(username))
+            return Result.failure(GameError.NO_PLAYER_FOUND);
+
+        Player trader = game.getPlayerByName(username);
+        if(trader == null) return Result.failure(GameError.NO_PLAYER_FOUND);
+
+        Item firstItem = Item.build(item1 , amount1);
+        Item secondItem = Item.build(item2 , amount2);
+        if(type.equals("offer") && !player.getInventory().canRemoveItem(firstItem))
+            return Result.failure(GameError.NOT_ENOUGH_ITEMS);
+        if(type.equals("request") && !player.getInventory().canRemoveItem(secondItem))
+            return Result.failure(GameError.NOT_ENOUGH_ITEMS);
+
+        Relation relation = game.getRelationOfUs(player, trader);
+        if(type.equals("offer")) {
+            relation.addTrade(new Trade(relation.getTrades().size(), player, trader, 0 ,
+                    firstItem , 0 , secondItem , TradeType.OFFER_ITEM));
+        }
+        else{
+            relation.addTrade(new Trade(relation.getTrades().size(), player, trader, 0 ,
+                    secondItem , 0 , firstItem , TradeType.REQUEST_ITEM));
+        }
+
+        return Result.success(null);
+
+    }
+
+    public Result<ArrayList<String>> tradeList(){
+        ArrayList<String> output = new ArrayList<>();
+        for(Player trader : game.getPlayers()){
+            if(trader.equals(player))
+                continue;
+            Relation relation = game.getRelationOfUs(player, trader);
+            for(Trade trade : relation.getTrades()){
+                if(trade.isResponsed())
+                    continue;
+                output.add("Sender : " + trade.getSender().getUser().getUsername());
+                output.add("Receiver : " + trade.getReceiver().getUser().getUsername());
+                output.add("ID : " + trade.getID());
+                if(TradeType.OFFER_ITEM.equals(trade.getTradeType())) {
+                    output.add("Offered Item : " + trade.getOfferItem().getName() + " " + trade.getOfferItem().getAmount());
+                    output.add("Requested Item : " + trade.getRequestItem().getName() + " " + trade.getRequestItem().getAmount());
+                }
+                if(TradeType.REQUEST_ITEM.equals(trade.getTradeType())) {
+                    output.add("Requested Item : " + trade.getRequestItem().getName() + " " + trade.getRequestItem().getAmount());
+                    output.add("Offered Item : " + trade.getOfferItem().getName() + " " + trade.getOfferItem().getAmount());
+                }
+                if(TradeType.OFFER_MONEY.equals(trade.getTradeType())) {
+                    output.add("Offered Item : " + trade.getOfferItem().getName() + " " + trade.getOfferItem().getAmount());
+                    output.add("Requested Price : " + trade.getRequestPrice());
+                }
+                if(TradeType.REQUEST_MONEY.equals(trade.getTradeType())) {
+                    output.add("Requested Item : " + trade.getRequestItem().getName() + " " + trade.getRequestItem().getAmount());
+                    output.add("Offered Price : " + trade.getOfferPrice());
+                }
+                output.add("----------");
+            }
+        }
+        return Result.success(output);
+    }
+
+    public Result<Void> tradeResponse(String username , String response , int ID){
+        if(player.getUser().getUsername().equals(username))
+            return Result.failure(GameError.NO_PLAYER_FOUND);
+
+        Player trader = game.getPlayerByName(username);
+        if(trader == null) return Result.failure(GameError.NO_PLAYER_FOUND);
+
+        if((!response.equals("accept") && !response.equals("reject")))
+            return Result.failure(GameError.RESPONSE_IS_NOT_SUPPORTED);
+
+        Relation relation = game.getRelationOfUs(player, trader);
+        if(ID >= relation.getTrades().size())
+            return Result.failure(GameError.TRADE_ID_DOES_NOT_EXIST);
+
+        Trade trade = relation.getTrades().get(ID);
+
+        if(response.equals("reject")){
+            trade.setResponse(false);
+            trade.setResponsed(true);
+            relation.setFriendshipXP(relation.getFriendshipXP() - 30);
+            return Result.success(null);
+        }
+        if(trade.getTradeType().equals(TradeType.OFFER_ITEM)){
+            if(!trader.getInventory().canRemoveItem(trade.getOfferItem()) || !player.getInventory()
+                    .canRemoveItem(trade.getRequestItem())){
+                trade.setResponse(false);
+                trade.setResponsed(true);
+                relation.setFriendshipXP(relation.getFriendshipXP() - 30);
+                return Result.failure(GameError.NOT_ENOUGH_ITEMS);
+            }
+            trader.getInventory().removeItem(trade.getOfferItem());
+            player.getInventory().addItem(trade.getOfferItem());
+            player.getInventory().removeItem(trade.getRequestItem());
+            trader.getInventory().addItem(trade.getRequestItem());
+            trade.setResponse(true);
+            trade.setResponsed(true);
+        }
+
+        if(trade.getTradeType().equals(TradeType.REQUEST_ITEM)){
+            if(!trader.getInventory().canRemoveItem(trade.getRequestItem()) || !player.getInventory()
+                    .canRemoveItem(trade.getOfferItem())){
+                trade.setResponse(false);
+                trade.setResponsed(true);
+                relation.setFriendshipXP(relation.getFriendshipXP() - 30);
+                return Result.failure(GameError.NOT_ENOUGH_ITEMS);
+            }
+            trader.getInventory().removeItem(trade.getRequestItem());
+            player.getInventory().addItem(trade.getRequestItem());
+            player.getInventory().removeItem(trade.getOfferItem());
+            trader.getInventory().addItem(trade.getOfferItem());
+            trade.setResponse(true);
+            trade.setResponsed(true);
+        }
+
+        if(trade.getTradeType().equals(TradeType.OFFER_MONEY)){
+            if(!trader.getInventory().canRemoveItem(trade.getOfferItem()) || (player.getInventory()
+                    .getCoin().getAmount() < trade.getRequestPrice())){
+                trade.setResponse(true);
+                trade.setResponsed(true);
+                return Result.failure(GameError.NOT_ENOUGH_ITEMS);
+            }
+            trader.getInventory().removeItem(trade.getOfferItem());
+            player.getInventory().addItem(trade.getOfferItem());
+            player.getInventory().changeCoin(-trade.getRequestPrice());
+            trader.getInventory().changeCoin(trade.getRequestPrice());
+            trade.setResponse(true);
+            trade.setResponsed(true);
+        }
+
+        if(trade.getTradeType().equals(TradeType.REQUEST_MONEY)){
+            if(!player.getInventory().canRemoveItem(trade.getRequestItem()) || (trader.getInventory()
+                    .getCoin().getAmount() < trade.getOfferPrice())){
+                trade.setResponse(true);
+                trade.setResponsed(true);
+                return Result.failure(GameError.NOT_ENOUGH_ITEMS);
+            }
+            trader.getInventory().changeCoin(-trade.getOfferPrice());
+            player.getInventory().changeCoin(trade.getOfferPrice());
+            player.getInventory().removeItem(trade.getRequestItem());
+            trader.getInventory().addItem(trade.getRequestItem());
+            trade.setResponse(true);
+            trade.setResponsed(true);
+        }
+        relation.setFriendshipXP(relation.getFriendshipXP() + 50);
+        return Result.success(null);
+
+    }
+
+    public Result<ArrayList<String>> tradeHistory() {
+        ArrayList<String> output = new ArrayList<>();
+        for(Player trader : game.getPlayers()){
+            if(trader.equals(player))
+                continue;
+            Relation relation = game.getRelationOfUs(player, trader);
+            for(Trade trade : relation.getTrades()){
+                output.add("Sender : " + trade.getSender().getUser().getUsername());
+                output.add("Receiver : " + trade.getReceiver().getUser().getUsername());
+                output.add("ID : " + trade.getID());
+                if(TradeType.OFFER_ITEM.equals(trade.getTradeType())) {
+                    output.add("Offered Item : " + trade.getOfferItem().getName() + " " + trade.getOfferItem().getAmount());
+                    output.add("Requested Item : " + trade.getRequestItem().getName() + " " + trade.getRequestItem().getAmount());
+                }
+                if(TradeType.REQUEST_ITEM.equals(trade.getTradeType())) {
+                    output.add("Requested Item : " + trade.getRequestItem().getName() + " " + trade.getRequestItem().getAmount());
+                    output.add("Offered Item : " + trade.getOfferItem().getName() + " " + trade.getOfferItem().getAmount());
+                }
+                if(TradeType.OFFER_MONEY.equals(trade.getTradeType())) {
+                    output.add("Offered Item : " + trade.getOfferItem().getName() + " " + trade.getOfferItem().getAmount());
+                    output.add("Requested Price : " + trade.getRequestPrice());
+                }
+                if(TradeType.REQUEST_MONEY.equals(trade.getTradeType())) {
+                    output.add("Requested Item : " + trade.getRequestItem().getName() + " " + trade.getRequestItem().getAmount());
+                    output.add("Offered Price : " + trade.getOfferPrice());
+                }
+                output.add("----------");
+            }
+        }
+        return Result.success(output);
     }
 }
