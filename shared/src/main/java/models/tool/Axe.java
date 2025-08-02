@@ -50,6 +50,7 @@ public class Axe extends Tool {
 		}
 
 		player.decreaseEnergy(1);
+		tile.loadOnTileTexture();
 		return Result.success(null, "tabaret khata raft");
 	}
 

@@ -19,7 +19,9 @@ import java.util.List;
 
 public class Shop extends Building implements DailyUpdate{
 	private List<ShopItemInstance> items = new ArrayList<>();
-	private final TileType shopType;
+	private TileType shopType;
+
+	public Shop() {}
 
 	public Shop(TileType shopType) {
 		if (!shopType.isShop())

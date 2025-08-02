@@ -8,9 +8,11 @@ import models.map.Placable;
 import models.map.TileType;
 
 public class Placeable extends Item implements Placable {
-	private final PlaceableData data;
-	private final ItemType itemType;
+	private PlaceableData data;
+	private ItemType itemType;
 	private int amount;
+
+	public Placeable() {}
 
 	public Placeable(PlaceableData data, ItemType itemType, int amount) {
 		this.data = data;

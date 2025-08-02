@@ -18,6 +18,8 @@ public class Relation implements DailyUpdate, Serializable {
     private ArrayList<Gift> gifts = new ArrayList<>();
     private boolean isFlower = false;
 
+    public Relation() {}
+
     public Relation(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;

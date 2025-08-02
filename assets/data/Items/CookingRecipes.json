@@ -163,17 +163,9 @@
     "name": "Dish O' The Sea Recipe",
     "description": "",
     "result-name": "Dish O' The Sea",
-    "ingredients": {"Sardines": 1, "Hash Browns": 1},
+    "ingredients": {"Sardine": 1, "Hash Browns": 1},
     "skill-type": "Fishing",
     "skill-level": 2
-  },
-  {
-    "name": "Seaform Pudding Recipe",
-    "description": "",
-    "result-name": "Seaform Pudding",
-    "ingredients": {"Flounder": 1, "Midnight Carp": 1},
-    "skill-type": "Fishing",
-    "skill-level": 3
   },
   {
     "name": "Miner's Treat Recipe",

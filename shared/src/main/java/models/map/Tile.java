@@ -1,5 +1,6 @@
 package models.map;
 
+import Asset.SharedAssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import models.DailyUpdate;
@@ -8,6 +9,7 @@ import models.crop.PlantedSeed;
 import models.Item.Item;
 import models.game.Game;
 import models.game.Player;
+import models.time.Season;
 import org.w3c.dom.Text;
 
 import java.io.Serializable;
@@ -19,6 +21,8 @@ public class Tile implements DailyUpdate, Serializable {
     transient private Sprite sprite = new Sprite(texture);
     transient private Texture onTileTexture;
     transient private Sprite onTileSprite;
+
+    public Tile() {}
 
     private Tile(TileType tileType, Placable placable) {
         this.tileType = tileType;
@@ -45,6 +49,20 @@ public class Tile implements DailyUpdate, Serializable {
         sprite.setX(x);
         sprite.setY(y);
 
+        if(onTileTexture != null) {
+            onTileSprite = new Sprite(onTileTexture);
+            onTileSprite.setX(x);
+            onTileSprite.setY(y);
+        }
+    }
+
+    public void loadOnTileTexture(){
+        float x = sprite.getX();
+        float y = sprite.getY();
+        if(tileType.getTextureAddress() != null)
+            onTileTexture = new Texture(tileType.getTextureAddress());
+        else if(placable!= null && placable.getTexture() != null)
+            onTileTexture = placable.getTexture();
         if(onTileTexture != null) {
             onTileSprite = new Sprite(onTileTexture);
             onTileSprite.setX(x);
@@ -105,6 +123,7 @@ public class Tile implements DailyUpdate, Serializable {
                 tileType = TileType.UNPLOWED;
             }
         }
+        setTexture(g.getSeason());
         return true;
     }
 
@@ -167,5 +186,17 @@ public class Tile implements DailyUpdate, Serializable {
             return placable.equals(other.placable);
         }
         return false;
+    }
+
+    public void setTexture(Season season){
+        if(season.equals(Season.SPRING))
+            texture = SharedAssetManager.getTile("Spring");
+        if(season.equals(Season.WINTER))
+            texture = SharedAssetManager.getTile("Winter");
+        if(season.equals(Season.AUTUMN))
+            texture = SharedAssetManager.getTile("Fall");
+        if(season.equals(Season.SUMMER))
+            texture = SharedAssetManager.getTile("Summer");
+        sprite.setTexture(texture);
     }
 }

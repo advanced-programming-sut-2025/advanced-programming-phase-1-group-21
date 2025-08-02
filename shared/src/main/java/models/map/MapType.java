@@ -11,8 +11,8 @@ public enum MapType {
     VILLAGE(64, 34 , 0 , 25),
     SHOP(20, 20 , 660 , 227),
     NPC_HOUSE(10, 10 , 810 , 377),
-    BARN(8, 8 , 0 , 0),
-    COOP(8, 8 , 0 , 0),
+    BARN(30, 30 , 510 , 77),
+    COOP(30, 30 , 510 , 77),
     ;
 
     public final int x;

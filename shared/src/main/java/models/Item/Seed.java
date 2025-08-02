@@ -7,9 +7,11 @@ import models.crop.PlantedSeed;
 import models.map.Tile;
 
 public class Seed extends Item implements Plantable {
-	private final SeedData data;
-	private final ItemType itemType;
+	private SeedData data;
+	private ItemType itemType;
 	private int amount;
+
+	public Seed() {}
 
 	public Seed(SeedData data, ItemType itemType, int amount) {
 		this.data = data;

@@ -1,6 +1,5 @@
 package models.user;
 
-import models.network.Lobby;
 import models.network.LobbyUser;
 
 import java.io.Serializable;

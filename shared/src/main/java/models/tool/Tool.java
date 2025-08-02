@@ -23,10 +23,7 @@ public abstract class Tool extends Item {
 	public float spriteY;
 	public float animationTime;
 	public int animationDirection;
-
-
-
-
+	
 	public Tool(ToolType toolType) {
 		this.toolType = toolType;
 		if (toolType == ToolType.SCYTHE) {

@@ -1,21 +1,28 @@
 package io.github.StardewValley.views.menu.GUI;
 
+import Asset.SharedAssetManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.github.czyzby.lml.parser.impl.attribute.progress.AnimateDurationLmlAttribute;
 import io.github.StardewValley.App;
 import io.github.StardewValley.Main;
 import io.github.StardewValley.asset.Assets;
 import io.github.StardewValley.controllers.GameController;
 import io.github.StardewValley.controllers.ViewController;
+import models.animal.Animal;
 import models.map.Map;
+import models.map.Tile;
 
 public class GameScreen implements Screen , InputProcessor {
     private final Main game;
@@ -25,11 +32,17 @@ public class GameScreen implements Screen , InputProcessor {
     private InventoryTab inventoryTab;
     private ShopMenuTab shopMenuTab;
     private TerminalTab terminalTab;
+    private PauseMenu pauseMenu;
     private boolean isInventoryShown = false;
     private boolean isShopMenuShown = false;
     private boolean isTerminalShown = false;
     private BitmapFont messagePrinter = new BitmapFont();
     private String message;
+    private AnimalInfoWindow animalInfoWindow;
+    private Pixmap darkLayout;
+    private Texture darkLayoutTexture;
+    private Image darkModeImage;
+    private boolean isNight;
 
     public GameScreen() {
         this.game = Main.getInstance();
@@ -44,11 +57,12 @@ public class GameScreen implements Screen , InputProcessor {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(this);
 
-        Map map = viewController.player.getMap();
-        float mapX = map.getMaxX();
-        float mapY = map.getMaxY();
-        float tileY = stage.getHeight()/ mapY;
-        float tileX = stage.getWidth()/ mapX;
+        darkLayout = new Pixmap((int) stage.getWidth(), (int) stage.getHeight(), Pixmap.Format.RGBA8888);
+        darkLayout.setColor(0, 0, 0, 0.5f);
+        darkLayout.fill();
+        darkLayoutTexture = new Texture(darkLayout);
+        darkLayout.dispose();
+        darkModeImage = new Image(darkLayoutTexture);
 
         Skin skin = Assets.getSkin();
         inventoryTab = new InventoryTab(viewController.player, this, skin);
@@ -63,6 +77,7 @@ public class GameScreen implements Screen , InputProcessor {
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         game.getBatch().begin();
         viewController.buttonController(game);
         ShowMap.show(delta);
@@ -70,6 +85,7 @@ public class GameScreen implements Screen , InputProcessor {
         if(message != null)
             messagePrinter.draw(game.getBatch(), message , 100 , 100);
         game.getBatch().end();
+
         if (isInventoryShown) {
             inventoryTab.draw();
         }
@@ -77,6 +93,17 @@ public class GameScreen implements Screen , InputProcessor {
             shopMenuTab.draw();
         if(isTerminalShown)
             terminalTab.draw();
+        if(pauseMenu != null)
+            pauseMenu.draw();
+        if(controller.getTime().getData() >= 22 || controller.getTime().getData() <= 5)
+            setDarkMode();
+        else{
+            if(isNight){
+                isNight = false;
+                stage.clear();
+            }
+        }
+        stage.draw();
     }
 
     @Override
@@ -121,7 +148,10 @@ public class GameScreen implements Screen , InputProcessor {
         if (i == Input.Keys.T && !isInventoryShown) {
             isTerminalShown = true;
             terminalTab.show();
-
+        }
+        if(i == Input.Keys.P && pauseMenu == null){
+            pauseMenu = new PauseMenu(this , Assets.getSkin());
+            pauseMenu.show();
         }
 
         return false;
@@ -139,7 +169,16 @@ public class GameScreen implements Screen , InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        message = viewController.clickController(screenX, screenY);
+        message = "(" + viewController.clickController(screenX, screenY).getX() + ","
+                + viewController.clickController(screenX , screenY).getY() + ")";
+        Tile tile = controller.getPlayer().getMap().getTile(viewController.clickController(screenX , screenY));
+        if(tile != null && tile.getPlacable(Animal.class) != null){
+            Animal animal = tile.getPlacable(Animal.class);
+            animalInfoWindow = new AnimalInfoWindow(this , Assets.getSkin() , animal);
+            animalInfoWindow.setPosition(screenX + 30, Gdx.graphics.getHeight() - screenY + 30);
+            Gdx.input.setInputProcessor(stage);
+            stage.addActor(animalInfoWindow);
+        }
         return false;
     }
 
@@ -186,5 +225,23 @@ public class GameScreen implements Screen , InputProcessor {
 
     public GameController getController() {
         return controller;
+    }
+
+    public void closeAnimalInfo(){
+        if(animalInfoWindow != null){
+            animalInfoWindow = null;
+        }
+        stage.clear();
+        Gdx.input.setInputProcessor(this);
+    }
+
+    public void onPauseClosed(){
+        pauseMenu = null;
+        Gdx.input.setInputProcessor(this);
+    }
+
+    private void setDarkMode(){
+        stage.addActor(darkModeImage);
+        isNight = true;
     }
 }
