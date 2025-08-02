@@ -224,9 +224,13 @@ public class Shop extends Building implements DailyUpdate{
 		return null;
 	}
 
-	private static class ShopItemInstance implements DailyUpdate, Serializable {
-		private final ShopData data;
+	public static class ShopItemInstance implements DailyUpdate, Serializable {
+		private ShopData data;
 		private int soldToday;
+
+		public ShopItemInstance() {
+
+		}
 
 		public ShopItemInstance(ShopData data) {
 			this.data = data;

@@ -1,6 +1,8 @@
 package network;
 
 import com.esotericsoftware.kryo.Kryo;
+import models.game.NPC;
+import models.map.Shop;
 
 public class NetworkRegister {
 
@@ -14,6 +16,8 @@ public class NetworkRegister {
         kryo.register(models.Item.Salable.class);
         kryo.register(models.Item.Sapling.class);
         kryo.register(models.Item.Seed.class);
+        kryo.register(NPC.NPCHouse.class);
+        kryo.register(Shop.ShopItemInstance.class);
         kryo.register(models.animal.Animal.class);
         kryo.register(models.animal.AnimalTypes.class);
         kryo.register(models.animal.Fish.class);

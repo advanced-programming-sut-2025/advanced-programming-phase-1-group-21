@@ -40,6 +40,13 @@ public class Map implements DailyUpdate, Serializable {
         return buildings;
     }
 
+    public Building getBuildingByName(String name) {
+        for (Building building : buildings) {
+            if (building.getFullName().equals(name)) return building;
+        }
+        return null;
+    }
+
     public Coord getCoord(Placable placable) {
         for (int i = 0; i < getMaxX(); ++i) {
             for (int j = 0; j < getMaxY(); ++j) {

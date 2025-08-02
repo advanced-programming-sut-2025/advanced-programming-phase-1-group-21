@@ -1001,6 +1001,11 @@ public class GameController {
         return Result.success(null);
     }
 
+    public void enterBuilding(String buildingName) {
+        Building building = player.getMap().getBuildingByName(buildingName);
+        player.enterBuilding(building);
+    }
+
     public Result<Void> useArtisan(String artisanName, ArrayList<String> itemNames) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
 

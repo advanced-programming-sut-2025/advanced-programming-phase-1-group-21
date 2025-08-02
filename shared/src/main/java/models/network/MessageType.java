@@ -8,7 +8,9 @@ public enum MessageType {
     DATABASE_SERVICE("DatabaseService"),
     LOBBY_SERVICE("LobbyService"),
     CHAT_SERVICE("ChatService"),
-    RESPONSE, GAME_SERVICE;
+    RESPONSE,
+    GAME_SERVICE("GameService"),
+    ;
 
 
     public final String serviceName;

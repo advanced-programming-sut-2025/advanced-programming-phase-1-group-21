@@ -1,5 +1,6 @@
 package io.github.StardewValley.network;
 
+import io.github.StardewValley.network.routing.GameServiceRouter;
 import models.network.Message;
 import models.network.MessageType;
 import network.ServiceRouter;
@@ -20,6 +21,7 @@ public class MessageHandler {
 
     private static void registerAll() {
         serviceMap.put(MessageType.CLIENT_SERVICE, new ClientServiceRouter());
+        serviceMap.put(MessageType.GAME_SERVICE, new GameServiceRouter());
     }
 
 
