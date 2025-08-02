@@ -335,9 +335,6 @@ public class GameTerminalView implements Menu {
         else if ((matcher = GameMenuCommand.SEND_FLOWER.getMatcher(command)) != null) {
             System.out.println(gameController.sendFlower(matcher.group("username")));
         }
-        else if ((matcher = GameMenuCommand.START_TRADE.getMatcher(command)) != null) {
-            System.out.println(gameController.startTrade());
-        }
         else if ((matcher = GameMenuCommand.SHOP_SHOW_ALL_PRODUCTS.getMatcher(command)) != null) {
             System.out.println(gameController.showAllShopProducts().getMessage());
         }
@@ -412,6 +409,25 @@ public class GameTerminalView implements Menu {
         }
         else if((matcher = GameMenuCommand.SHOW_NOTIFICATIONS.getMatcher(command)) != null) {
             printArrayList(gameController.showNotifications().getData());
+        }
+        if((matcher = GameMenuCommand.TRADE_WITH_MONEY.getMatcher(command)) != null) {
+            System.out.println(gameController.tradeWithMoney(matcher.group("username") , matcher.group("type")
+                    , matcher.group("item") , Integer.parseInt(matcher.group("amount")) , Integer.parseInt
+                            (matcher.group("price"))));
+        }
+
+        else if((matcher = GameMenuCommand.TRADE_WITH_ITEM.getMatcher(command)) != null) {
+            System.out.println(gameController.tradeWithItem(matcher.group("username") , matcher.group("type")
+                    , matcher.group("item1") , Integer.parseInt(matcher.group("amount1")) ,
+                    matcher.group("item2") , Integer.parseInt(matcher.group("amount2"))));
+        }
+
+        else if((matcher = GameMenuCommand.TRADE_RESPONSE.getMatcher(command)) != null) {
+            System.out.println(gameController.tradeResponse(matcher.group("username") , matcher.group("response") , Integer.parseInt(matcher.group("ID"))));
+        }
+
+        else if((matcher = GameMenuCommand.TRADE_HISTORY.getMatcher(command)) != null) {
+            printArrayList(gameController.tradeHistory().getData());
         }
         else {
             System.out.println("invalid command");
@@ -701,10 +717,7 @@ public class GameTerminalView implements Menu {
             return gameController.sendFlower(matcher.group("username")).toString();
 
         }
-        else if ((matcher = GameMenuCommand.START_TRADE.getMatcher(command)) != null) {
-            return gameController.startTrade().toString();
 
-        }
         else if ((matcher = GameMenuCommand.SHOP_SHOW_ALL_PRODUCTS.getMatcher(command)) != null) {
             return gameController.showAllShopProducts().getMessage().toString();
 
@@ -792,6 +805,26 @@ public class GameTerminalView implements Menu {
         }
         else if((matcher = GameMenuCommand.SHOW_NOTIFICATIONS.getMatcher(command)) != null) {
             printArrayList(gameController.showNotifications().getData());
+        }
+
+        if((matcher = GameMenuCommand.TRADE_WITH_MONEY.getMatcher(command)) != null) {
+            return gameController.tradeWithMoney(matcher.group("username") , matcher.group("type")
+                    , matcher.group("item") , Integer.parseInt(matcher.group("amount")) , Integer.parseInt
+                            (matcher.group("price"))).toString();
+        }
+
+        else if((matcher = GameMenuCommand.TRADE_WITH_ITEM.getMatcher(command)) != null) {
+            return gameController.tradeWithItem(matcher.group("username") , matcher.group("type")
+                    , matcher.group("item1") , Integer.parseInt(matcher.group("amount1")) ,
+                    matcher.group("item2") , Integer.parseInt(matcher.group("amount2"))).toString();
+        }
+
+        else if((matcher = GameMenuCommand.TRADE_RESPONSE.getMatcher(command)) != null) {
+            return gameController.tradeResponse(matcher.group("username") , matcher.group("response") , Integer.parseInt(matcher.group("ID"))).toString();
+        }
+
+        else if((matcher = GameMenuCommand.TRADE_HISTORY.getMatcher(command)) != null) {
+            printArrayList(gameController.tradeHistory().getData());
         }
         return "invalid command";
     }
