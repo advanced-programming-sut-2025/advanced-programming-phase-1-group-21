@@ -784,8 +784,13 @@ class InventoryTab {
 			items.add(Item.build(itemName, ingredients.get(itemName) * amount));
 		}
 		if (player.getInventory().canRemoveItems(items)) {
-			player.getInventory().removeItems(items);
-			player.getInventory().addItem(Item.build(recipe.getData().getResultName(), amount));
+			if (player.getInventory().canAdd(recipe.getData().getResultName())) {
+				player.getInventory().removeItems(items);
+				player.getInventory().addItem(Item.build(recipe.getData().getResultName(), amount));
+			}
+			else {
+				notEnoughSpaceInInventoryDialog().show(stage);
+			}
 		}
 		else {
 			notEnoughItemDialog().show(stage);
@@ -794,6 +799,12 @@ class InventoryTab {
 
 	private Dialog notEnoughItemDialog() {
 		Dialog d = new Dialog("You don't have all the ingredients to make this item.", skin);
+		d.button("Ok");
+		return d;
+	}
+
+	private Dialog notEnoughSpaceInInventoryDialog() {
+		Dialog d = new Dialog("You don't have space in your inventory for new item.", skin);
 		d.button("Ok");
 		return d;
 	}
