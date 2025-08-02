@@ -163,7 +163,7 @@
     "name": "Dish O' The Sea Recipe",
     "description": "",
     "result-name": "Dish O' The Sea",
-    "ingredients": {"Sardines": 1, "Hash Browns": 1},
+    "ingredients": {"Sardine": 1, "Hash Browns": 1},
     "skill-type": "Fishing",
     "skill-level": 2
   },

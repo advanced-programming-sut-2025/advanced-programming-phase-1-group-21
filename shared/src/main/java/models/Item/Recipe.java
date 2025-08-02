@@ -35,7 +35,7 @@ public class Recipe extends Item {
         return itemType;
     }
 
-    private ItemData getData() {
+    public RecipeData getData() {
         return data;
     }
 
