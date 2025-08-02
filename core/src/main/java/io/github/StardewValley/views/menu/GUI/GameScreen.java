@@ -287,8 +287,8 @@ public class GameScreen implements Screen , InputProcessor {
         chatScreen.show();
     }
 
-    public ChatScreen getChatScreen() {
-        return chatScreen;
+    public void sendMessageInChat(String sender, String message, Color color) {
+        chatScreen.pushMessage(sender, message, color);
     }
 
     public void showNotification(String text) {
