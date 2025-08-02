@@ -1243,11 +1243,13 @@ Textures/Decor/Crystal_Floor_Tile_Winter.png
 Textures/Decor/Crystal_Path.png
 Textures/Decor/Crystal_Path_Tile.png
 Textures/Decor/Crystal_Path_Tile_Winter.png
+Textures/Decor/FoodStable.png
 Textures/Decor/Gravel_Path.png
 Textures/Decor/Gravel_Path_Tile.png
 Textures/Decor/Gravel_Path_Tile_Winter.png
 Textures/Decor/Rustic_Plank_Floor.png
 Textures/Decor/Rustic_Plank_Floor_Tile.png
+Textures/Decor/SimpleStable.png
 Textures/Decor/Stepping_Stone_Path.png
 Textures/Decor/Stepping_Stone_Path_Tile.png
 Textures/Decor/Stepping_Stone_Path_Tile_Winter.png
@@ -1257,10 +1259,8 @@ Textures/Decor/Stone_Floor_Tile_Winter.png
 Textures/Decor/Stone_Walkway_Floor.png
 Textures/Decor/Stone_Walkway_Floor_Tile.png
 Textures/Decor/Straw_Floor.png
-Textures/Decor/Straw_Floor_Tile.png
 Textures/Decor/Straw_Floor_Tile_Winter.png
 Textures/Decor/Weathered_Floor.png
-Textures/Decor/Weathered_Floor_Tile.png
 Textures/Decor/Weathered_Floor_Tile_Winter.png
 Textures/Decor/Wood_Floor.png
 Textures/Decor/Wood_Floor_Tile.png
@@ -1268,6 +1268,7 @@ Textures/Decor/Wood_Floor_Tile_Winter.png
 Textures/Decor/Wood_Path.png
 Textures/Decor/Wood_Path_Tile.png
 Textures/Decor/Wood_Path_Tile_Winter.png
+Textures/Decor/heart.png
 Textures/Emoji (probably unusable)/Emojis000.png
 Textures/Emoji (probably unusable)/Emojis001.png
 Textures/Emoji (probably unusable)/Emojis002.png
@@ -1384,7 +1385,6 @@ Textures/Emoji (probably unusable)/Emojis112.png
 Textures/Emoji (probably unusable)/Emojis113.png
 Textures/Emoji (probably unusable)/Emojis114.png
 Textures/Emoji (probably unusable)/Emojis115.png
-Textures/Emoji (probably unusable)/Emojis116.png
 Textures/Emoji (probably unusable)/Emojis117.png
 Textures/Emoji (probably unusable)/Emojis118.png
 Textures/Emoji (probably unusable)/Emojis119.png
@@ -1427,6 +1427,7 @@ Textures/Emoji (probably unusable)/Emojis190.png
 Textures/Emoji (probably unusable)/Emojis191.png
 Textures/Emoji (probably unusable)/Emojis194.png
 Textures/Emoji (probably unusable)/Emojis195.png
+Textures/Emoji (probably unusable)/food.png
 Textures/Farming/Agriculturist.png
 Textures/Farming/Amaranth.png
 Textures/Farming/Ancient_Fruit.png

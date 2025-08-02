@@ -291,4 +291,9 @@ public class Shop extends Building implements DailyUpdate{
 		}
 		return false;
 	}
+
+	@Override
+	public String getFullName() {
+		return shopType.name();
+	}
 }

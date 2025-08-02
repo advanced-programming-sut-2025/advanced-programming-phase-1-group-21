@@ -36,10 +36,26 @@ public class SharedAssetManager {
         manager.load("Textures/map/WinterBasicTile.png" , Texture.class);
         manager.load("Textures/map/SpringBasicTile.png" , Texture.class);
         manager.load("Textures/map/SummerBasicTile.png" , Texture.class);
+        manager.load("Textures/Decor/FoodStable.png" , Texture.class);
+        manager.load("Textures/Decor/SimpleStable.png" , Texture.class);
+        manager.load("Textures/Decor/heart.png" , Texture.class);
+        manager.load("Textures/Emoji (probably unusable)/food.png" , Texture.class);
+    }
+
+    public static Texture getFoodEmoji(){
+        return manager.get("Textures/Emoji (probably unusable)/food.png");
+    }
+
+    public static Texture getHeart(){
+        return manager.get("Textures/Decor/heart.png");
     }
 
     public static Texture getGreenHouse(String type){
         return manager.get("Textures/Buildings/" + type + "GreenHouse.png");
+    }
+
+    public static Texture getStable(String type){
+        return manager.get("Textures/Decor/" + type + "Stable.png");
     }
 
     public static Texture getTile(String season){

@@ -11,7 +11,9 @@ public enum TileType {
 	LAKE(4, 5, false, '~' , null),
 	COOP(5, 5, true, 'C' , null),
 	BARN(5, 5, true, 'B' , null),
-	STABLE(1,1,false, 'S' , "Textures/Decor/Stepping_Stone_Path_Tile.png"),
+	SIMPLE_STABLE(1,1,false, 'S' , null),
+	FOOD_STABLE(1,1,false, 'S' , null),
+
 
 	// Shops
 	BLACKSMITH(6, 9, true, 'B' , null),

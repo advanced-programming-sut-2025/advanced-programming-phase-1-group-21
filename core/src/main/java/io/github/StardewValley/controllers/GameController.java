@@ -1567,6 +1567,10 @@ public class GameController {
 
     public Result<Void> purchaseAnimal(String animalName, String name) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+        for(Animal animal : player.getAnimals()){
+            if(animal.getName().equals(name))
+                return Result.failure(GameError.ANIMAL_NOT_FOUND);
+        }
         Result<Void> r = purchase(animalName, 1);
         if (r.isError()) return r;
         assert AnimalData.getAnimalData(animalName) != null : "Animal " + animalName + " not found";
@@ -1576,6 +1580,9 @@ public class GameController {
             if (animal.canEnterHouse(h.getFullName()) && animal.canEnterHouseType(h.getHouseType()) && h.hasSpace()) {
                 h.add(animal);
                 player.addAnimal(animal);
+                player.leave();
+                backToHome();
+                enterBuilding(h.getFullName());
                 return Result.success("Animal is in " + h.getFullName());
             }
         }
