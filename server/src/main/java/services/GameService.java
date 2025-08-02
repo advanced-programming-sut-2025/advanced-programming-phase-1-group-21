@@ -21,7 +21,9 @@ public class GameService {
     }
 
     public void sendAll(Message msg) {
+        System.out.println("SENDING TO ALL: MSG: " + msg);
         for (Connection conn : toSendList) {
+            System.out.println("SENDING: " + conn.getEndPoint());
             NetworkUtil.sendMessage(msg, conn);
         }
     }

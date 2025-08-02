@@ -21,6 +21,7 @@ public class GameServiceRouter implements ServiceRouter {
 
     @Override
     public Object dispatch(Connection conn, Message msg) throws Exception {
+        System.out.println("WE ARE DISPATCHING: " + msg);
         String methodName = msg.getMethodName();
         //args is actually args
         Object[] args = (Object[]) msg.data;
