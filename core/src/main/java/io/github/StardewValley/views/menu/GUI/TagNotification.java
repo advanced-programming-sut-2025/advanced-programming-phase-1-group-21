@@ -51,10 +51,9 @@ public class TagNotification {
 
 		messageLabel.setText(text);
 
-		// یک بار Stage رو act کن تا اندازه واقعی متن محاسبه شه
 		stage.act(Gdx.graphics.getDeltaTime());
 
-		container.pack(); // حالا اندازه واقعی محتوا مشخصه
+		container.pack();
 
 		float width = container.getWidth();
 		float height = container.getHeight();
@@ -63,7 +62,6 @@ public class TagNotification {
 		float y = Gdx.graphics.getHeight() - height - MARGIN;
 		container.setPosition(x, y);
 
-		// ساخت پس‌زمینه جدید با اندازه درست و گوشه‌های گرد
 		container.setBackground(new Image(new TextureRegionDrawable(new TextureRegion(
 				createRoundedBackground((int) width, (int) height, 20)
 		))).getDrawable());
@@ -105,16 +103,15 @@ public class TagNotification {
 	private Texture createRoundedBackground(int width, int height, int radius) {
 		Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
 		pixmap.setBlending(Pixmap.Blending.None);
-		Color bgColor = new Color(0.3f, 0.3f, 0.3f, 0.8f); // خاکستری نیمه شفاف
+		Color bgColor = new Color(0.3f, 0.3f, 0.3f, 0.8f);
 		pixmap.setColor(bgColor);
 
-		// رسم مستطیل با لبه گرد
 		pixmap.fillCircle(radius, radius, radius);
 		pixmap.fillCircle(width - radius - 1, radius, radius);
 		pixmap.fillCircle(radius, height - radius - 1, radius);
 		pixmap.fillCircle(width - radius - 1, height - radius - 1, radius);
-		pixmap.fillRectangle(radius, 0, width - 2 * radius, height); // مرکز افقی
-		pixmap.fillRectangle(0, radius, width, height - 2 * radius); // مرکز عمودی
+		pixmap.fillRectangle(radius, 0, width - 2 * radius, height);
+		pixmap.fillRectangle(0, radius, width, height - 2 * radius);
 
 		Texture texture = new Texture(pixmap);
 		pixmap.dispose();
