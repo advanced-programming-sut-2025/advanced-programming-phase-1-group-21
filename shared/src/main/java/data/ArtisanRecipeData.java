@@ -52,4 +52,18 @@ public class ArtisanRecipeData implements Data {
 	public int getProcessingTime() {
 		return processingTime;
 	}
+
+	public Map <String, Integer> getItemList(String mainIngredient) {
+		Map <String, Integer> resultRecipe = null;
+		int numberOfRecipe = 0;
+		for (Map <String, Integer> baseIngredients: ingredients)
+			for (Map.Entry<String, Integer> entry : baseIngredients.entrySet())
+				if (mainIngredient.equalsIgnoreCase(entry.getKey())) {
+					numberOfRecipe++;
+					resultRecipe = baseIngredients;
+				}
+		if (numberOfRecipe != 1)
+			return null;
+		return resultRecipe;
+	}
 }

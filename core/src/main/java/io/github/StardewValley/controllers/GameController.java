@@ -10,6 +10,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
+import data.ArtisanRecipeData;
 import io.github.StardewValley.App;
 
 import data.AnimalData;
@@ -1001,12 +1002,34 @@ public class GameController {
         return Result.success(null);
     }
 
+    public Result<Void> useArtisan(Artisan artisan, String mainIngredient) {
+//        java.util.Map<String, Integer> recipe = artisan.getRecipe(mainIngredient);
+        ArtisanRecipeData recipe = artisan.getRecipeData(mainIngredient);
+        if (recipe == null) return null;
+        java.util.Map<String, Integer> itemList = recipe.getItemList(mainIngredient);
+        if (itemList == null) return null;
+//        System.out.println("Artisan: " + artisan + "\nresult: " + mainIngredient);
+//        System.out.println("Recipe: " + recipe);
+        ArrayList<Item> requiredItems = new ArrayList<>();
+        for (String ing: itemList.keySet()) {
+            requiredItems.add(Item.build(ing, itemList.get(ing)));
+        }
+//        System.out.println("RequiredItems: " + requiredItems);
+        if (player.getInventory().canRemoveItems(requiredItems)) {
+            player.getInventory().removeItems(requiredItems);
+            artisan.startProcess(recipe.getName());
+//            System.out.println("Done");
+        }
+        return null;
+    }
+  
     public void enterBuilding(String buildingName) {
         Building building = player.getMap().getBuildingByName(buildingName);
         player.enterBuilding(building);
     }
 
     public Result<Void> useArtisan(String artisanName, ArrayList<String> itemNames) {
+
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
 
         Inventory inventory = player.getInventory();

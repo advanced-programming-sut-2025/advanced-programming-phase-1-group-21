@@ -37,7 +37,6 @@ public class Player implements DailyUpdate, Serializable {
     private ArrayList<Animal> animals = new ArrayList<>();
     private Energy energy;
     private Inventory inventory;
-    private Item itemInHand;
     private ArrayList<NPCFriendship> npcFriendships;
     private ArrayList<Recipe> recipes = new ArrayList<>();
     private Skill skill = new Skill();
@@ -207,11 +206,13 @@ public class Player implements DailyUpdate, Serializable {
     }
 
     public Item getItemInHand() {
-        return itemInHand;
+        return inventory.getItemInHand();
+//        return itemInHand;
     }
 
     public void setItemInHand(Item item) {
-        this.itemInHand = item;
+        inventory.setItemInHand(item);
+//        this.itemInHand = item;
     }
 
     public void faint() {
@@ -327,7 +328,7 @@ public class Player implements DailyUpdate, Serializable {
         }
         sb.append("\n");
 
-        sb.append("Items in Hand: ").append(itemInHand != null ? itemInHand.getName() : "None").append("\n");
+//        sb.append("Items in Hand: ").append(itemInHand != null ? itemInHand.getName() : "None").append("\n");
 
         //TODO ADD THIS
         //sb.append("Relations: ").append(relations.size()).append(" relations\n");

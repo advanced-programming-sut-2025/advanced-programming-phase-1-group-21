@@ -61,26 +61,42 @@ public class ViewController {
             }
         }
 
-        if (tile.getTileType() == TileType.PLOWED || tile.getTileType() == TileType.UNPLOWED){
-            if (player.getItemInHand() != null && player.getItemInHand().getItemType() == ItemType.PLACEABLE) {
-                gc.placeArtisan(player.getItemInHand(), tile);
+        if ((player.getCoord().getX() - (x - map.mapType.distanceX)/30) <= 1)
+        if ((player.getCoord().getX() - (x - map.mapType.distanceX)/30) >= -1)
+        if ((player.getCoord().getY() - (y - map.mapType.distanceY)/30) <= 1)
+        if ((player.getCoord().getY() - (y - map.mapType.distanceY)/30) >= -1) {
+//            System.out.println("Tile type: " + tile.getTileType());
+            if (tile.getTileType() == TileType.PLOWED || tile.getTileType() == TileType.UNPLOWED){
+                if (player.getItemInHand() != null && player.getItemInHand().getItemType() == ItemType.PLACEABLE) {
+                    gc.placeArtisan(player.getItemInHand(), tile);
+//                    System.out.println("You just Placed an Artisan, tile type: " + tile.getTileType());
+                }
             }
-        }
-        if (tile.getTileType() == TileType.ARTISAN && tile.getPlacable(Artisan.class).isEmpty() && player.getItemInHand() != null) {
-            tile.getPlacable(Artisan.class).findRecipeAndCraft(player.getItemInHand().getName(), player.getInventory());
-        }
+            else if (tile.getTileType() == TileType.ARTISAN) {
+                Artisan artisan = tile.getPlacable(Artisan.class);
+                Inventory inventory = player.getInventory();
 
-        if (tile.getTileType() == TileType.ARTISAN) {
-            Artisan artisan = tile.getPlacable(Artisan.class);
-            System.out.println("result: " + artisan.isResultReady() + ", empty: " + artisan.isEmpty());
-            Inventory inventory = player.getInventory();
-            if (artisan.isResultReady() && inventory.canAdd(artisan.getResultWithoutReset().getName())) {
-                Item result = artisan.getResultWithoutReset();
-                if (inventory.addItem(result).isSuccess()) {
-                    artisan.getResult(inventory);
+//                System.out.println("You Clicked on an artisan");
+//                System.out.println("result: " + artisan.isResultReady() + ", empty: " + artisan.isEmpty());
+
+                if (artisan.isResultReady() && inventory.canAdd(artisan.getResultWithoutReset().getName())) {
+//                    System.out.println("You tried to collect the result");
+                    Item result = artisan.getResultWithoutReset();
+                    if (inventory.addItem(result).isSuccess()) {
+                        artisan.getResult(inventory);
+//                        System.out.println("You collected the result");
+                    }
+                }
+                else if (artisan.isEmpty() && player.getItemInHand() != null) {
+//                    artisan.findRecipeAndCraft(player.getItemInHand().getName(), player.getInventory());
+                    gc.useArtisan(artisan, player.getItemInHand().getName());
+//                    System.out.println("You just Placed an Item in an Artisan");
                 }
             }
         }
+
+
+
 
         return new Coord((x - map.mapType.distanceX)/30 ,(y - map.mapType.distanceY)/30);
 
