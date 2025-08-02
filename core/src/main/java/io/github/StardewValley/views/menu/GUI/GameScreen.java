@@ -39,6 +39,7 @@ public class GameScreen implements Screen , InputProcessor {
     private TerminalTab terminalTab;
     private PauseMenu pauseMenu;
     private ChatScreen chatScreen;
+    private TagNotification tagNotification;
     private boolean isInventoryShown = false;
     private boolean isShopMenuShown = false;
     private boolean isTerminalShown = false;
@@ -78,6 +79,7 @@ public class GameScreen implements Screen , InputProcessor {
         shopMenuTab = new ShopMenuTab(this , skin);
         terminalTab = new TerminalTab(this , skin);
         chatScreen = new ChatScreen(viewController.player, this, skin);
+        tagNotification = new TagNotification(skin);
     }
 
     @Override
@@ -119,6 +121,9 @@ public class GameScreen implements Screen , InputProcessor {
             pauseMenu.draw();
         if (isChatShown) {
             chatScreen.draw();
+        }
+        if (tagNotification.isVisible()) {
+            tagNotification.draw();
         }
     }
 
@@ -174,6 +179,10 @@ public class GameScreen implements Screen , InputProcessor {
         if (i == Input.Keys.P && pauseMenu == null) {
             pauseMenu = new PauseMenu(this , Assets.getSkin());
             pauseMenu.show();
+        }
+
+        if (i == Input.Keys.F1) {
+            tagNotification.show("You Pressed F1");
         }
 
         return false;
@@ -280,5 +289,9 @@ public class GameScreen implements Screen , InputProcessor {
 
     public ChatScreen getChatScreen() {
         return chatScreen;
+    }
+
+    public void showNotification(String text) {
+        tagNotification.show(text);
     }
 }
