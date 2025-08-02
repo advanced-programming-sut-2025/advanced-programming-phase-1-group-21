@@ -38,9 +38,11 @@ public class GameScreen implements Screen , InputProcessor {
     private ShopMenuTab shopMenuTab;
     private TerminalTab terminalTab;
     private PauseMenu pauseMenu;
+    private ChatScreen chatScreen;
     private boolean isInventoryShown = false;
     private boolean isShopMenuShown = false;
     private boolean isTerminalShown = false;
+    private boolean isChatShown = false;
     private BitmapFont messagePrinter = new BitmapFont();
     private String message;
     private AnimalInfoWindow animalInfoWindow;
@@ -75,6 +77,7 @@ public class GameScreen implements Screen , InputProcessor {
         inventoryTab = new InventoryTab(viewController.player, this, skin);
         shopMenuTab = new ShopMenuTab(this , skin);
         terminalTab = new TerminalTab(this , skin);
+        chatScreen = new ChatScreen(viewController.player, this, skin);
     }
 
     @Override
@@ -83,6 +86,8 @@ public class GameScreen implements Screen , InputProcessor {
 
     @Override
     public void render(float delta) {
+
+//        System.out.println("Game Screen test render");
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         game.getBatch().begin();
@@ -93,24 +98,28 @@ public class GameScreen implements Screen , InputProcessor {
             messagePrinter.draw(game.getBatch(), message , 100 , 100);
         game.getBatch().end();
 
-        if (isInventoryShown) {
-            inventoryTab.draw();
-        }
-        if(isShopMenuShown)
-            shopMenuTab.draw();
-        if(isTerminalShown)
-            terminalTab.draw();
-        if(pauseMenu != null)
-            pauseMenu.draw();
-        if(gameModel.getGameDate().getHour() >= 22 || gameModel.getGameDate().getHour() <= 5)
+        if (gameModel.getGameDate().getHour() >= 22 || gameModel.getGameDate().getHour() <= 5)
             setDarkMode();
-        else{
+        else {
             if(isNight){
                 isNight = false;
                 stage.clear();
             }
         }
         stage.draw();
+
+        if (isInventoryShown) {
+            inventoryTab.draw();
+        }
+        if (isShopMenuShown)
+            shopMenuTab.draw();
+        if (isTerminalShown)
+            terminalTab.draw();
+        if (pauseMenu != null)
+            pauseMenu.draw();
+        if (isChatShown) {
+            chatScreen.draw();
+        }
     }
 
     @Override
@@ -139,24 +148,30 @@ public class GameScreen implements Screen , InputProcessor {
         if (inventoryTab != null) {
             inventoryTab.dispose();
         }
+        if (chatScreen != null) {
+            chatScreen.dispose();
+        }
     }
 
     @Override
     public boolean keyDown(int i) {
-        if (i == Input.Keys.I && !isInventoryShown) {
+        if (i == Input.Keys.I && !isInventoryShown && !isChatShown) {
             isInventoryShown = true;
             inventoryTab.show();
         }
-        if (i == Input.Keys.M && !isInventoryShown) {
+        if (i == Input.Keys.Y && !isChatShown) {
+            showChat();
+        }
+        if (i == Input.Keys.M && !isShopMenuShown && !isChatShown) {
             isShopMenuShown = true;
             shopMenuTab.show();
 
         }
-        if (i == Input.Keys.T && !isInventoryShown) {
+        if (i == Input.Keys.T && !isTerminalShown && !isChatShown) {
             isTerminalShown = true;
             terminalTab.show();
         }
-        if(i == Input.Keys.P && pauseMenu == null){
+        if (i == Input.Keys.P && pauseMenu == null) {
             pauseMenu = new PauseMenu(this , Assets.getSkin());
             pauseMenu.show();
         }
@@ -221,6 +236,11 @@ public class GameScreen implements Screen , InputProcessor {
         Gdx.input.setInputProcessor(this);
     }
 
+    public void onChatClosed() {
+        isChatShown = false;
+        Gdx.input.setInputProcessor(this);
+    }
+
     public void onShopMenuClosed() {
         isShopMenuShown = false;
         Gdx.input.setInputProcessor(this);
@@ -251,5 +271,14 @@ public class GameScreen implements Screen , InputProcessor {
     private void setDarkMode(){
         stage.addActor(darkModeImage);
         isNight = true;
+    }
+
+    public void showChat() {
+        isChatShown = true;
+        chatScreen.show();
+    }
+
+    public ChatScreen getChatScreen() {
+        return chatScreen;
     }
 }
