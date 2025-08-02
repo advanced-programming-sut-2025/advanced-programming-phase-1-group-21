@@ -7,10 +7,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import data.items.AllItemsData;
@@ -27,6 +29,8 @@ import models.tool.Tool;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
 
 class InventoryTab {
 	private final Player player;
@@ -48,7 +52,7 @@ class InventoryTab {
 	private ScrollPane inventoryScrollPane, craftingScrollPane, cookingScrollPane;
 	BitmapFont numberFont;
 
-	private Texture sampleTexture;
+//	private Texture sampleTexture;
 
 	public InventoryTab(Player player, GameScreen gameScreen, Skin skin) {
 		this.player = player;
@@ -66,6 +70,9 @@ class InventoryTab {
 		inv.addItem(Item.build("Keg", 1));
 		inv.addItem(Item.build("Wool", 3));
 		inv.addItem(Item.build("Coal", 8));
+		inv.addItem(Item.build("Wood", 200));
+		inv.addItem(Item.build("Copper Bar", 100));
+		inv.addItem(Item.build("Iron Bar", 2));
 
 		player.addRecipes(new Recipe(RecipeData.getCookingRecipeData("Dish O' The Sea Recipe"), RecipeType.COOKING, 1));
 		player.addRecipes(new Recipe(RecipeData.getCookingRecipeData("Triple Shot Espresso Recipe"), RecipeType.COOKING, 1));
@@ -261,19 +268,16 @@ class InventoryTab {
 				});
 
 
-				Stack stack = new Stack();
-				stack.add(container);
-				if (numberOfItem != -1) {
-					Label.LabelStyle labelStyle = new Label.LabelStyle(numberFont, Color.WHITE);
-					Label numberLabel = new Label(String.valueOf(numberOfItem), labelStyle);
 
-					Container<Label> numberContainer = new Container<>(numberLabel);
-					numberContainer.bottom().right();
-					numberContainer.padBottom(5).padRight(5); // Add some padding
-					stack.add(numberContainer);
+				if (numberOfItem != -1) {
+					scrollTable.add(mergeActorAndNumber(container, numberOfItem));
+				}
+				else {
+					Stack stack = new Stack();
+					stack.add(container);
+					scrollTable.add(stack);
 				}
 
-				scrollTable.add(stack);
 			}
 			scrollTable.row();
 		}
@@ -334,13 +338,9 @@ class InventoryTab {
 						if (getTapCount() == 2) {
 							Object o = container.getActor().getUserObject();
 							if (o instanceof Recipe) {
+								craftDialog((Recipe) o);
 								// It's show time ;))
-//								player.setItemInHand((Item) o);
 							}
-//							else {
-////								player.setItemInHand(null);
-//							}
-//							setItemInHand();
 						}
 					}
 				});
@@ -366,10 +366,7 @@ class InventoryTab {
 			for (int col = 0; col < 12; col++) {
 				Image cell;
 				if (row * 12 + col < recipes.size()) {
-//					System.out.println("row * 12 + col: " + (row * 12 + col));
 					Recipe recipe = recipes.get(row * 12 + col);
-//					System.out.println("Recipe: " + recipe);
-//					System.out.println("recipe.getResult(): " + recipe.getResult());
 					String resultName = recipe.getResult().getName();
 					AllItemsData data = AllItemsData.getData(resultName);
 					if (data != null) {
@@ -408,13 +405,8 @@ class InventoryTab {
 						if (getTapCount() == 2) {
 							Object o = container.getActor().getUserObject();
 							if (o instanceof Recipe) {
-								// It's show time ;))
-//								player.setItemInHand((Item) o);
+								craftDialog((Recipe) o);
 							}
-//							else {
-////								player.setItemInHand(null);
-//							}
-//							setItemInHand();
 						}
 					}
 				});
@@ -496,7 +488,7 @@ class InventoryTab {
 
 	public void dispose() {
 		emptyTexture.dispose();
-		sampleTexture.dispose();
+//		sampleTexture.dispose();
 	}
 
 	private void setEmpty() {
@@ -599,35 +591,6 @@ class InventoryTab {
 		}
 	}
 
-	private void setItemInHand() {
-
-		if (itemInHandStack != null) {
-			itemInHandStack.remove();
-		}
-		itemInHandStack = new Stack();
-		Item item = player.getItemInHand();
-		Image itemInHandImage;
-		if (item == null || getItemTexture(item) == null) {
-			itemInHandImage = new Image(emptyDrawable);
-			itemInHandStack.add(itemInHandImage);
-		}
-		else {
-			itemInHandImage = new Image(new TextureRegionDrawable(new TextureRegion(new Texture(getItemTexture(item)))));
-			itemInHandStack.add(itemInHandImage);
-			Label.LabelStyle labelStyle = new Label.LabelStyle(numberFont, Color.WHITE);
-			Label numberLabel = new Label(String.valueOf(item.getAmount()), labelStyle);
-
-			Container<Label> numberContainer = new Container<>(numberLabel);
-			numberContainer.bottom().right();
-			numberContainer.padBottom(5).padRight(5); // Add some padding
-			itemInHandStack.add(numberContainer);
-		}
-
-		itemInHandStack.setPosition(1350, 480);
-		itemInHandStack.setSize(64, 64);
-		stage.addActor(itemInHandStack);
-	}
-
 	private void setMapTab() {
 		setStage();
 		setButtonBar();
@@ -680,5 +643,175 @@ class InventoryTab {
 			return null;
 		}
 		return data.getTextureAddress();
+	}
+
+	private void setItemInHand() {
+
+		if (itemInHandStack != null) {
+			itemInHandStack.remove();
+		}
+		Item item = player.getItemInHand();
+		Image itemInHandImage;
+		if (item == null || getItemTexture(item) == null) {
+			itemInHandImage = new Image(emptyDrawable);
+			itemInHandStack = new Stack();
+			itemInHandStack.add(itemInHandImage);
+		}
+		else {
+			itemInHandImage = new Image(new TextureRegionDrawable(new TextureRegion(new Texture(getItemTexture(item)))));
+			itemInHandStack = mergeActorAndNumber(itemInHandImage, item.getAmount());
+//			itemInHandStack.add(itemInHandImage);
+//			Label.LabelStyle labelStyle = new Label.LabelStyle(numberFont, Color.WHITE);
+//			Label numberLabel = new Label(String.valueOf(item.getAmount()), labelStyle);
+//
+//			Container<Label> numberContainer = new Container<>(numberLabel);
+//			numberContainer.bottom().right();
+//			numberContainer.padBottom(5).padRight(5); // Add some padding
+//			itemInHandStack.add(numberContainer);
+		}
+
+		itemInHandStack.setPosition(1350, 480);
+		itemInHandStack.setSize(64, 64);
+		stage.addActor(itemInHandStack);
+	}
+
+	private void craftDialog(Recipe recipe) {
+		String titleName, buttonName;
+		if (recipe.getType() == RecipeType.COOKING) {
+			titleName = "Cooking";
+			buttonName = "Cook";
+		}
+		else {
+			titleName = "Crafting";
+			buttonName = "Craft";
+		}
+
+		Label descriptionLabel = new Label(recipe.getName() + "\n" + recipe.getData().getDescription(), skin);
+		descriptionLabel.setAlignment(Align.center);
+
+		Table imageTable = new Table();
+		Map<String, Integer> ingredients = recipe.getData().getIngredients();
+
+		final Consumer<Integer> updateDialog = (amount) -> {
+			// Clear previous images
+			imageTable.clearChildren();
+
+			for (String ingredient : ingredients.keySet()) {
+				Image ingredientImage = new Image(new Texture(AllItemsData.getData(ingredient).getTextureAddress()));
+				int value = amount * ingredients.get(ingredient);
+				if (player.getInventory().canRemoveItem(Item.build(ingredient, value))) {
+					imageTable.add(mergeActorAndNumber(ingredientImage, value)).size(64, 64).padRight(10);
+				}
+				else {
+					imageTable.add(mergeActorAndNumber(ingredientImage, value, Color.RED)).size(64, 64).padRight(10);
+				}
+			}
+		};
+		updateDialog.accept(1);
+
+// Create amount selector
+		final TextField amountField = new TextField("1", skin);
+		amountField.setTextFieldFilter(new TextField.TextFieldFilter.DigitsOnlyFilter());
+
+		Table amountTable = new Table();
+		TextButton minusButton = new TextButton("-", skin);
+		TextButton plusButton = new TextButton("+", skin);
+
+// Add button functionality
+		minusButton.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				int amount = Integer.parseInt(amountField.getText());
+				if(amount > 1) amount--;
+				amountField.setText(String.valueOf(amount));
+				updateDialog.accept(amount);
+			}
+		});
+
+		plusButton.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				int amount = Integer.parseInt(amountField.getText());
+				amount++;
+				amountField.setText(String.valueOf(amount));
+				updateDialog.accept(amount);
+			}
+		});
+
+		amountTable.add(minusButton).padRight(5);
+		amountTable.add(amountField).width(60);
+		amountTable.add(plusButton).padLeft(5);
+
+
+		Dialog d = new Dialog(titleName, skin) {
+			@Override
+			public Dialog show(Stage stage) {
+				super.show(stage);
+				// Center the title label after showing
+				getTitleLabel().setAlignment(Align.center);
+				getTitleTable().getCell(getTitleLabel()).expandX().fillX();
+				return this;
+			}
+			@Override
+			protected void result(Object object) {
+				try {
+					String result = (String) object;
+					if (result.equals("Done")) {
+						craft(recipe, Integer.parseInt(amountField.getText()));
+					}
+				}
+				catch (Exception e) {}
+			}
+		};
+		d.button(buttonName, "Done");
+		d.button("Cancel", "Cancel");
+		d.setSize(400, 300);
+		d.setModal(true);
+
+		Table contentTable = d.getContentTable();
+		contentTable.defaults().pad(10);
+		contentTable.add(descriptionLabel).colspan(2).row();
+		contentTable.add(imageTable).colspan(2).row();
+		contentTable.add(amountTable).colspan(2).row();
+
+		d.show(stage);
+	}
+
+	private void craft(Recipe recipe, int amount) {
+		ArrayList <Item> items = new ArrayList<>();
+		Map <String, Integer> ingredients = recipe.getData().getIngredients();
+		for (String itemName: ingredients.keySet()) {
+			items.add(Item.build(itemName, ingredients.get(itemName) * amount));
+		}
+		if (player.getInventory().canRemoveItems(items)) {
+			player.getInventory().removeItems(items);
+			player.getInventory().addItem(Item.build(recipe.getData().getResultName(), amount));
+		}
+		else {
+			notEnoughItemDialog().show(stage);
+		}
+	}
+
+	private Dialog notEnoughItemDialog() {
+		Dialog d = new Dialog("You don't have all the ingredients to make this item.", skin);
+		d.button("Ok");
+		return d;
+	}
+
+	private Stack mergeActorAndNumber(Actor actor, int number) {
+		return mergeActorAndNumber(actor, number, Color.WHITE);
+	}
+
+	private Stack mergeActorAndNumber(Actor actor, int number, Color color) {
+		Stack stack = new Stack();
+		stack.add(actor);
+		Label.LabelStyle labelStyle = new Label.LabelStyle(numberFont, color);
+		Label numberLabel = new Label(String.valueOf(number), labelStyle);
+
+		Container<Label> numberContainer = new Container<>(numberLabel);
+		numberContainer.bottom().right();
+		numberContainer.padBottom(5).padRight(5); // Add some padding
+		stack.add(numberContainer);
+		return stack;
 	}
 }
