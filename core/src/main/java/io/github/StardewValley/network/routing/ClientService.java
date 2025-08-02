@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import io.github.StardewValley.App;
 import io.github.StardewValley.Main;
+import io.github.StardewValley.controllers.ChatController;
 import io.github.StardewValley.network.NetworkLobbyController;
 import io.github.StardewValley.network.Refreshable;
 import io.github.StardewValley.views.menu.GUI.LobbyScreen;
@@ -46,7 +47,10 @@ public class ClientService {
     }
 
     public static void handleChat(Chat chat) {
-
+        System.out.println("CHAT RECIEVED: " + chat);
+        Gdx.app.postRunnable(() -> {
+            ChatController.onChat(chat);
+        });
     }
 
     public static void refresh() {

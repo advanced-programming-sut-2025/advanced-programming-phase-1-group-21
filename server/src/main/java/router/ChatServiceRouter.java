@@ -3,6 +3,7 @@ package router;
 import models.network.Message;
 import network.ServiceRouter;
 import com.esotericsoftware.kryonet.Connection;
+import services.ChatService;
 import session.SessionManager;
 import util.NetworkUtil;
 
@@ -14,7 +15,7 @@ public class ChatServiceRouter implements ServiceRouter {
     private static final Map<String, Method> methods = new HashMap<>();
 
     static {
-        for (Method method : ChatServiceRouter.class.getDeclaredMethods()) {
+        for (Method method : ChatService.class.getDeclaredMethods()) {
             methods.put(method.getName(), method);
         }
     }

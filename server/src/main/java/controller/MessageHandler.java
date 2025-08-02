@@ -24,7 +24,7 @@ public class MessageHandler {
     private static void registerAll() {
         serviceMap.put(MessageType.DATABASE_SERVICE, new DatabaseServiceRouter());
         serviceMap.put(MessageType.LOBBY_SERVICE, new LobbyServiceRouter());
-        serviceMap.put(MessageType.CLIENT_SERVICE, new ChatServiceRouter());
+        serviceMap.put(MessageType.CHAT_SERVICE, new ChatServiceRouter());
         serviceMap.put(MessageType.GAME_SERVICE, new GameServiceRouter());
     }
 
