@@ -285,6 +285,12 @@ public class GameController {
         player.getCoord().setX((int) (sprite.getX() - map.mapType.distanceX)/30);
         player.getCoord().setY(map.getMaxY() - 1 - (int) (sprite.getY() - map.mapType.distanceY)/30);
 
+        if(player.getShepherdingAnimal() != null){
+            player.getShepherdingAnimal().spriteGetter().setX(speed*direction.getDx() + sprite.getX() + 30);
+            player.getShepherdingAnimal().spriteGetter().setY(speed*direction.getDy() + sprite.getY());
+        }
+        player.decreaseEnergy((float) 0.001);
+
     }
 
     public Result<Void> putItemInRefrigerator(Refrigerator refrigerator, String itemName) {
@@ -354,7 +360,7 @@ public class GameController {
         return Result.success(player.getMap().printMap(new Coord(x, y), size, game.getPlayers()));
     }
 
-    public int showEnergy() {
+    public float showEnergy() {
         if (game == null) return -1;
         return player.getEnergy();
     }
@@ -791,10 +797,36 @@ public class GameController {
             return Result.failure(GameError.ANIMAL_NOT_FOUND);
 
 
-        animal.shepherd(); //TODO
+        animal.shepherd();
         player.getMap().getTile(new Coord(x, y)).setPlacable(animal);
 
         return Result.success(name + " is on tile (" + x + ", " + y + ")");
+    }
+
+    public Result<Void> startShepherd(String animalName){
+        List<Tile> neigh = player.getNeighborTiles(game);
+
+        for (Tile tile : neigh) {
+            Animal animal = tile.getPlacable(Animal.class);
+            if (animal == null)
+                continue;
+
+            if (animal.getName().equals(animalName)) {
+                animal.shepherd();
+                tile.setPlacable(null);
+                player.setShepherdingAnimal(animal);
+                return Result.success(null);
+            }
+        }
+
+        return Result.failure(GameError.ANIMAL_NOT_FOUND);
+    }
+
+    public Result<Void> endShepherd(String animalName){
+        Tile tile = player.getMap().getTile(player.getCoord());
+        tile.setPlacable(player.getShepherdingAnimal());
+        player.setShepherdingAnimal(null);
+        return Result.success(null);
     }
 
     public Result<Void> feedHay(String name) {

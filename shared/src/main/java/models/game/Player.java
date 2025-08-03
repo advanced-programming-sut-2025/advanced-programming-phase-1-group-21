@@ -42,6 +42,8 @@ public class Player implements DailyUpdate, Serializable {
     private Skill skill = new Skill();
     private ArrayList<String> notifications = new ArrayList<>();
     private float speed = (float) 4;
+    private Animal shepherdingAnimal;
+    private boolean faint = false;
 
     public Player() {}
 
@@ -132,15 +134,15 @@ public class Player implements DailyUpdate, Serializable {
         return energy.getMaxEnergy();
     }
 
-    public int getEnergy() {
+    public float getEnergy() {
         return energy.getCurrentEnergy();
     }
 
-    public void decreaseEnergy(int amount) {
+    public void decreaseEnergy(float amount) {
         energy.decreaseEnergy(amount);
     }
 
-    public void setEnergy(int energyValue) {
+    public void setEnergy(float energyValue) {
         energy.setEnergy(energyValue);
     }
 
@@ -368,6 +370,10 @@ public class Player implements DailyUpdate, Serializable {
     }
 
     public boolean isFainted() {
+        if(!faint && energy.getCurrentEnergy() <= 0){
+            faint = true;
+            sprite.rotate(90);
+        }
         return energy.getCurrentEnergy() <= 0;
     }
 
@@ -389,5 +395,17 @@ public class Player implements DailyUpdate, Serializable {
 
     public float getSpeed() {
         return speed;
+    }
+
+    public void setShepherdingAnimal(Animal shepherdingAnimal) {
+        this.shepherdingAnimal = shepherdingAnimal;
+        if(shepherdingAnimal != null) {
+            shepherdingAnimal.spriteGetter().setX(sprite.getX());
+            shepherdingAnimal.spriteGetter().setY(sprite.getY());
+        }
+    }
+
+    public Animal getShepherdingAnimal() {
+        return shepherdingAnimal;
     }
 }

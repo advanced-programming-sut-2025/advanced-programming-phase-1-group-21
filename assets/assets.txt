@@ -1269,6 +1269,7 @@ Textures/Decor/Wood_Path.png
 Textures/Decor/Wood_Path_Tile.png
 Textures/Decor/Wood_Path_Tile_Winter.png
 Textures/Decor/heart.png
+Textures/Decor/lightning.png
 Textures/Emoji (probably unusable)/Emojis000.png
 Textures/Emoji (probably unusable)/Emojis001.png
 Textures/Emoji (probably unusable)/Emojis002.png

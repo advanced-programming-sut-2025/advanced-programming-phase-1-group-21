@@ -23,6 +23,7 @@ public class Tile implements DailyUpdate, Serializable {
     transient private Sprite sprite = new Sprite(texture);
     transient private Texture onTileTexture;
     transient private Sprite onTileSprite;
+    transient private Sprite lightningSprite;
 
     MapType mapType;
 
@@ -222,4 +223,30 @@ public class Tile implements DailyUpdate, Serializable {
         sprite.setTexture(texture);
     }
 
+    public void startLightning(){
+        lightningSprite = new Sprite(SharedAssetManager.getLightning());
+        lightningSprite.setY(1052);
+        lightningSprite.setX(sprite.getX());
+        lightningSprite.setSize(100 , 3);
+    }
+
+    public void runLightning(){
+        if(lightningSprite.getY() > sprite.getY()){
+            lightningSprite.setY(lightningSprite.getY() * (float) 0.9);
+            lightningSprite.setSize(100, 1055 - lightningSprite.getY());
+        }
+        else
+            lightningSprite = null;
+    }
+
+    public Sprite getLightningSprite() {
+        return lightningSprite;
+    }
+
+    public void resetTile(){
+        tileType = null;
+        placable = null;
+        onTileSprite = null;
+        onTileTexture = null;
+    }
 }

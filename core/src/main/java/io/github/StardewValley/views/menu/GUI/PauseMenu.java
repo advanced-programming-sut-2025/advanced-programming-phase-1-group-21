@@ -17,7 +17,7 @@ public class PauseMenu {
     private Skin skin;
     private GameScreen gameScreen;
     private TextButton exitButton;
-    private Label date , time , weather;
+    private Label date , time , weather , energy;
 
 
     public PauseMenu(GameScreen gameScreen, Skin skin) {
@@ -45,20 +45,25 @@ public class PauseMenu {
         date = new Label("Date : " + gameScreen.getController().getDate().getData() , skin);
         time = new Label("Time : " + gameScreen.getController().getTime() , skin);
         weather = new Label("Weather : " + gameScreen.getController().getWeather() , skin);
+        energy = new Label("Energy : " + gameScreen.getController().showEnergy() , skin);
 
 
         date.setColor(Color.WHITE);
-        date.setPosition((float) Gdx.graphics.getWidth() /2 - date.getWidth()/2 , (float) Gdx.graphics.getHeight() /2 + 50);
+        date.setPosition((float) Gdx.graphics.getWidth() /2 - date.getWidth()/2 , (float) Gdx.graphics.getHeight() /2 + 75);
 
         time.setColor(Color.WHITE);
-        time.setPosition((float) Gdx.graphics.getWidth() /2 - time.getWidth()/2 , (float) Gdx.graphics.getHeight() /2);
+        time.setPosition((float) Gdx.graphics.getWidth() /2 - time.getWidth()/2 , (float) Gdx.graphics.getHeight() /2 + 25);
 
         weather.setColor(Color.WHITE);
-        weather.setPosition((float) Gdx.graphics.getWidth() /2 - weather.getWidth()/2 , (float) Gdx.graphics.getHeight() /2 - 50);
+        weather.setPosition((float) Gdx.graphics.getWidth() /2 - weather.getWidth()/2 , (float) Gdx.graphics.getHeight() /2 - 25);
+
+        energy.setColor(Color.WHITE);
+        energy.setPosition((float) Gdx.graphics.getWidth() /2 - energy.getWidth()/2 , (float) Gdx.graphics.getHeight() /2 - 75);
 
         stage.addActor(date);
         stage.addActor(time);
         stage.addActor(weather);
+        stage.addActor(energy);
         stage.addActor(exitButton);
     }
 
