@@ -102,6 +102,7 @@ public class App implements Serializable {
 
             if (username.equals(logedInUser.getUsername())) {
                 try {
+                    gc.init();
                     gc = MultiplayerProxy.create(gc);
                 }
                 catch (Exception e) {

@@ -33,6 +33,9 @@ import org.apache.commons.lang3.tuple.Pair;
 import io.github.StardewValley.views.menu.CLI.GameTerminalView;
 
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 public class GameController {
 
@@ -1948,5 +1951,17 @@ public class GameController {
             }
         }
         return Result.success(output);
+    }
+
+    /**
+     * ummm IDK what to explain
+     * this function here runs with NO PROXY (NO NETWORK)
+     * and ALL CIENTS (IT'S GOOD FOR STH LIKE ADDING TIME ON REGULAR BASIS)
+     */
+    public void init() {
+        CompletableFuture.runAsync(
+                () -> game.advance(),
+                CompletableFuture.delayedExecutor(30, TimeUnit.SECONDS)
+        );
     }
 }
