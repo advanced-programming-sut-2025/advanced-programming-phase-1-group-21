@@ -2416,6 +2416,8 @@ data/Scarecrows.json
 data/Shop Recipes.json
 data/Sprinklers.json
 data/Villagers.json
+hs_err_pid1035.log
+hs_err_pid1545.log
 menu.png
 skin/default.fnt
 skin/font-small.fnt
