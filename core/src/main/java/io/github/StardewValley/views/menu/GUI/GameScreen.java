@@ -37,7 +37,6 @@ public class GameScreen implements Screen , InputProcessor {
     private InventoryTab inventoryTab;
     private ShopMenuTab shopMenuTab;
     private TerminalTab terminalTab;
-    private PauseMenu pauseMenu;
     private ChatScreen chatScreen;
     private TagNotification tagNotification;
     private boolean isInventoryShown = false;
@@ -117,8 +116,6 @@ public class GameScreen implements Screen , InputProcessor {
             shopMenuTab.draw();
         if (isTerminalShown)
             terminalTab.draw();
-        if (pauseMenu != null)
-            pauseMenu.draw();
         if (isChatShown) {
             chatScreen.draw();
         }
@@ -176,9 +173,8 @@ public class GameScreen implements Screen , InputProcessor {
             isTerminalShown = true;
             terminalTab.show();
         }
-        if (i == Input.Keys.P && pauseMenu == null) {
-            pauseMenu = new PauseMenu(this , Assets.getSkin());
-            pauseMenu.show();
+        if (i == Input.Keys.P) {
+            game.setScreen(new PauseMenu());
         }
 
         if (i == Input.Keys.F1) {
@@ -269,11 +265,6 @@ public class GameScreen implements Screen , InputProcessor {
             animalInfoWindow = null;
         }
         stage.clear();
-        Gdx.input.setInputProcessor(this);
-    }
-
-    public void onPauseClosed(){
-        pauseMenu = null;
         Gdx.input.setInputProcessor(this);
     }
 
