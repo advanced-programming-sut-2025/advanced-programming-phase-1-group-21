@@ -34,7 +34,7 @@ public class ViewController {
     public void buttonController(Main thisGame){
 //        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
 //            thisGame.setScreen(new MainMenuScreen());
-        if(gc.isFainted())
+        if(player.isFainted())
             return;
         if(Gdx.input.isKeyPressed(Input.Keys.W))
             gc.walk(Direction.NORTH);
@@ -60,7 +60,7 @@ public class ViewController {
     }
 
     public Coord clickController(int x , int y){
-        if(gc.isFainted())
+        if(player.isFainted())
             return new Coord(0,0);
         Map map = player.getMap();
         Tile tile = map.getTile((x - map.mapType.distanceX)/30 , (y - map.mapType.distanceY)/30);
