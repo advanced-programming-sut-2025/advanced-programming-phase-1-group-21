@@ -77,6 +77,7 @@ public class AnimalInfoWindow extends Window {
         shepherd.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                gameScreen.getController().startShepherd(animal.getName());
                 gameScreen.closeAnimalInfo();
 
             }

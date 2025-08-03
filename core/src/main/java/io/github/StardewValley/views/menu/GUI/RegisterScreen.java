@@ -132,7 +132,7 @@ public class RegisterScreen implements Screen {
         Gender gender = genderBox.getSelected();
         String email = emailField.getText();
 
-        Result<Void> result = controller.register(username, password, repeatPassword, nickname, email, gender);
+        Result<Void> result = controller.register(username, password, repeatPassword, nickname, email, gender , securityQuestion , securityAnswer);
 
         if (result.isSuccess()) {
             showMessage("success", Color.GREEN);

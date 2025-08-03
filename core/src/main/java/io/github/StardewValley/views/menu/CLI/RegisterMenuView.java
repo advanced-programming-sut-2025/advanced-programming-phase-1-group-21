@@ -34,16 +34,16 @@ public class RegisterMenuView implements Menu {
     }
 
     public void Result(String command) {
-        if((matcher = RegisterMenuCommand.REGISTER.getMatcher(command)) != null){
-            Result<Void> result = registerMenuController.register(matcher.group("username") , matcher.group("password")
-                    , matcher.group("passwordConfirm") , matcher.group("nickname") , matcher.group("email")
-                    , Gender.getGenderByName(matcher.group("gender")));
-            System.out.println(result);
-            if(!result.isError())
-                printQuestions();
-        }
+//        if((matcher = RegisterMenuCommand.REGISTER.getMatcher(command)) != null){
+//            Result<Void> result = registerMenuController.register(matcher.group("username") , matcher.group("password")
+//                    , matcher.group("passwordConfirm") , matcher.group("nickname") , matcher.group("email")
+//                    , Gender.getGenderByName(matcher.group("gender")));
+//            System.out.println(result);
+//            if(!result.isError())
+//                printQuestions();
+//        }
 
-        else if((matcher = RegisterMenuCommand.PICK_QUESTION.getMatcher(command)) != null){
+        if((matcher = RegisterMenuCommand.PICK_QUESTION.getMatcher(command)) != null){
             System.out.println(registerMenuController.pickQuestion(matcher.group("answer") ,
                     matcher.group("answerConfirm") , matcher.group("questionNumber")));
         }
@@ -62,17 +62,17 @@ public class RegisterMenuView implements Menu {
     }
 
     public String ResultText(String command) {
-        if((matcher = RegisterMenuCommand.REGISTER.getMatcher(command)) != null){
-            Result <Void> result = registerMenuController.register(matcher.group("username") , matcher.group("password")
-                    , matcher.group("passwordConfirm") , matcher.group("nickname") , matcher.group("email")
-                    , Gender.getGenderByName(matcher.group("gender")));
-            if (!result.isError())
-                printQuestions();
-            else
-                return result.toString();
-        }
+//        if((matcher = RegisterMenuCommand.REGISTER.getMatcher(command)) != null){
+//            Result <Void> result = registerMenuController.register(matcher.group("username") , matcher.group("password")
+//                    , matcher.group("passwordConfirm") , matcher.group("nickname") , matcher.group("email")
+//                    , Gender.getGenderByName(matcher.group("gender")));
+//            if (!result.isError())
+//                printQuestions();
+//            else
+//                return result.toString();
+//        }
 
-        else if((matcher = RegisterMenuCommand.PICK_QUESTION.getMatcher(command)) != null){
+        if((matcher = RegisterMenuCommand.PICK_QUESTION.getMatcher(command)) != null){
             System.out.println(registerMenuController.pickQuestion(matcher.group("answer") ,
                     matcher.group("answerConfirm") , matcher.group("questionNumber")));
         }

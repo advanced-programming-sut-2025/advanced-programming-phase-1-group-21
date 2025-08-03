@@ -156,7 +156,8 @@ public class Map implements DailyUpdate, Serializable {
         Tile t = getTile(coord);
         if (t == null) return false;
         if (t.getTileType().canThorAttack()) {
-            setTile(coord, Tile.createEmpty());
+            t.resetTile();
+            t.startLightning();
             System.err.println("Tile with coord " + coord + " is hit by thor");
             return true;
         }

@@ -7,8 +7,8 @@ import java.io.Serializable;
 public class Energy implements DailyUpdate, Serializable {
     static final int MAX_ENERGY = 200;
 
-    private int currentEnergy;
-    private int totalEnergyForRound;
+    private float currentEnergy;
+    private float totalEnergyForRound;
     private int maxEnergy;
 
     private int remainingDays;
@@ -20,7 +20,7 @@ public class Energy implements DailyUpdate, Serializable {
         remainingDays = -1;
     }
 
-    public int getCurrentEnergy() {
+    public float getCurrentEnergy() {
         return currentEnergy;
     }
 
@@ -28,7 +28,7 @@ public class Energy implements DailyUpdate, Serializable {
         return maxEnergy;
     }
 
-    public void decreaseEnergy(int amount) {
+    public void decreaseEnergy(float amount) {
         amount = Math.min(amount, currentEnergy);
         currentEnergy -= amount;
         totalEnergyForRound -= amount;
@@ -51,7 +51,7 @@ public class Energy implements DailyUpdate, Serializable {
         this.remainingDays = days;
     }
 
-    public void setEnergy(int energy) {
+    public void setEnergy(float energy) {
         currentEnergy = energy;
     }
 

@@ -9,10 +9,14 @@ import io.github.StardewValley.Main;
 import io.github.StardewValley.views.menu.GUI.MainMenuScreen;
 import models.Item.Item;
 import models.Item.ItemType;
+import models.animal.Animal;
 import models.game.Game;
 import models.game.Inventory;
 import models.game.Player;
 import models.map.*;
+import models.result.Result;
+
+import java.util.List;
 
 public class ViewController {
 
@@ -30,6 +34,8 @@ public class ViewController {
     public void buttonController(Main thisGame){
 //        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
 //            thisGame.setScreen(new MainMenuScreen());
+        if(gc.isFainted())
+            return;
         if(Gdx.input.isKeyPressed(Input.Keys.W))
             gc.walk(Direction.NORTH);
         if(Gdx.input.isKeyPressed(Input.Keys.S))
@@ -47,9 +53,15 @@ public class ViewController {
             gc.useTool(Direction.EAST);
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT))
             gc.useTool(Direction.WEST);
+        if(Gdx.input.isKeyPressed(Input.Keys.E)) {
+            if(player.getShepherdingAnimal() != null)
+                gc.endShepherd(player.getShepherdingAnimal().getName());
+        }
     }
 
     public Coord clickController(int x , int y){
+        if(gc.isFainted())
+            return new Coord(0,0);
         Map map = player.getMap();
         Tile tile = map.getTile((x - map.mapType.distanceX)/30 , (y - map.mapType.distanceY)/30);
         if(tile == null)
@@ -61,10 +73,16 @@ public class ViewController {
             }
         }
 
-        if ((player.getCoord().getX() - (x - map.mapType.distanceX)/30) <= 1)
-        if ((player.getCoord().getX() - (x - map.mapType.distanceX)/30) >= -1)
-        if ((player.getCoord().getY() - (y - map.mapType.distanceY)/30) <= 1)
-        if ((player.getCoord().getY() - (y - map.mapType.distanceY)/30) >= -1) {
+        for(Direction direction : Direction.values()){
+            int newX = player.getCoord().getX() + direction.getDx();
+            int newY = player.getCoord().getY() + direction.getDy();
+
+            if(newX == (x - map.mapType.distanceX)/30 && newY == (y - map.mapType.distanceY)/30)
+                gc.useTool(direction);
+        }
+
+
+        {
 //            System.out.println("Tile type: " + tile.getTileType());
             if (tile.getTileType() == TileType.PLOWED || tile.getTileType() == TileType.UNPLOWED){
                 if (player.getItemInHand() != null && player.getItemInHand().getItemType() == ItemType.PLACEABLE) {

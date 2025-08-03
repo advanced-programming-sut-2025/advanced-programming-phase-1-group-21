@@ -59,6 +59,10 @@ public class ShowMap {
                 if(tile.getOnTileSprite() != null) {
                     tile.getOnTileSprite().draw(game.getBatch());
                 }
+                if(tile.getLightningSprite() != null){
+                    tile.getLightningSprite().draw(game.getBatch());
+                    tile.runLightning();
+                }
             }
         }
     }
@@ -82,11 +86,14 @@ public class ShowMap {
     }
 
     public static void showPlayer(Player player){
-        if (player.getMap() == map)
+        if (player.getMap() == map) {
             player.getSprite().draw(game.getBatch());
+            if(player.getShepherdingAnimal() != null)
+                player.getShepherdingAnimal().spriteGetter().draw(game.getBatch());
+        }
     }
 
-    public static void showHouse(){//TODO: this function should be changed to showBuilding
+    public static void showHouse(){
         //Map map = player.getMap();
         for(Building building : map.getBuildings()){
             if(building.sprite != null)

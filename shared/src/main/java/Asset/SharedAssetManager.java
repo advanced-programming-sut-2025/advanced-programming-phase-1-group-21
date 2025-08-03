@@ -40,6 +40,11 @@ public class SharedAssetManager {
         manager.load("Textures/Decor/SimpleStable.png" , Texture.class);
         manager.load("Textures/Decor/heart.png" , Texture.class);
         manager.load("Textures/Emoji (probably unusable)/food.png" , Texture.class);
+        manager.load("Textures/Decor/lightning.png" , Texture.class);
+    }
+
+    public static Texture getLightning(){
+        return manager.get("Textures/Decor/lightning.png");
     }
 
     public static Texture getFoodEmoji(){

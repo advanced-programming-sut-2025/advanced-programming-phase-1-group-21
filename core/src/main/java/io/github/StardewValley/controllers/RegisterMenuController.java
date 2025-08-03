@@ -28,7 +28,8 @@ public class RegisterMenuController{
         return Result.success("Register Menu");
     }
 
-    public Result<Void> register(String username, String password, String passwordConfirm, String nickname , String email, Gender gender) {
+    public Result<Void> register(String username, String password, String passwordConfirm, String nickname , String email
+            , Gender gender , String question , String answer) {
         if (!usernameValidation(username))
             return Result.failure(AuthError.INVALID_USERNAME);
 
