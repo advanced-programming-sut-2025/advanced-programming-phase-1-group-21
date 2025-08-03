@@ -83,18 +83,7 @@ public class PlantedTree implements Placable, Harvestable, Serializable, DailyUp
 				readyToHarvest = true;
 			}
 		}
-		if(stage == treeData.getStages().size()){
-			if(readyToHarvest) {
-				if(treeData.getHarvestTexture() != null) {
-					texture = SharedAssetManager.getOrLoad(treeData.getHarvestTexture());
-				}
-			}
-			else
-				texture = SharedAssetManager.getOrLoad(treeData.getSeasonTexture());//TODO this function logic should depends on current season
-		}
-		else
-			texture = SharedAssetManager.getOrLoad(treeData.getStageTexture(stage));
-		sprite.setTexture(texture);
+		resetSprite();
 		return false;
 	}
 	public void setDay(int day) {
@@ -149,5 +138,20 @@ public class PlantedTree implements Placable, Harvestable, Serializable, DailyUp
 				lastHarvest == -1 ? "never" : lastHarvest,
 				treeData.getHarvestCycle()
 		);
+	}
+
+	private void resetSprite(){
+		if(stage == treeData.getStages().size()){
+			if(readyToHarvest) {
+				if(treeData.getHarvestTexture() != null) {
+					texture = SharedAssetManager.getOrLoad(treeData.getHarvestTexture());
+				}
+			}
+			else
+				texture = SharedAssetManager.getOrLoad(treeData.getSeasonTexture());//TODO this function logic should depends on current season
+		}
+		else
+			texture = SharedAssetManager.getOrLoad(treeData.getStageTexture(stage));
+		sprite.setTexture(texture);
 	}
 }
