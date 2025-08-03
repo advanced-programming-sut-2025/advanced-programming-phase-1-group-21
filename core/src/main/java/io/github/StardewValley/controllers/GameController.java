@@ -6,6 +6,7 @@ package io.github.StardewValley.controllers;
  */
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import data.ArtisanRecipeData;
 import io.github.StardewValley.App;
@@ -13,6 +14,8 @@ import io.github.StardewValley.App;
 import data.AnimalData;
 import data.ArtisanGoodsData;
 import data.items.SeedData;
+import io.github.StardewValley.Main;
+import io.github.StardewValley.views.menu.GUI.GameScreen;
 import models.Item.*;
 import models.animal.Animal;
 import models.animal.AnimalTypes;
@@ -49,6 +52,8 @@ public class GameController {
     public GameController() {
 
     }
+
+
 
     public GameController(Game game, Player player) {
         this.game = game;
@@ -1144,27 +1149,36 @@ public class GameController {
         return Result.success(output);
     }
 
-    public Result<Void> talk(String username, String massage) {
+    public String showFriendship(String otherPlayerUsername){
+        for(Relation relation : game.getMyRelations(player)){
+            if(relation.getPlayer1().getUser().getUsername().equals(otherPlayerUsername) ||
+                    relation.getPlayer2().getUser().getUsername().equals(otherPlayerUsername)){
+                return relation.printRelation(player);
+            }
+        }
+        return null;
+    }
+
+    public Result<Void> talk(String username) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
 
         if (player.getUser().getUsername().equals(username))
             return Result.failure(GameError.NO_PLAYER_FOUND);
 
-        Player player = game.getPlayerByName(username);
+        Player player1 = game.getPlayerByName(username);
         if (player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
 
-//        if(!player.weAreNextToEachOther(player))
-//            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
+        if(!player.weAreNextToEachOther(player1))
+            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
 
-        Relation relation = game.getRelationOfUs(player, player);
-        relation.addTalk(player.getUser().getUsername() + ": " + massage);
+        Relation relation = game.getRelationOfUs(player1, player);
         if (!relation.isTodayTalk())
             relation.setFriendshipXP(relation.getFriendshipXP() + 20);
         if(relation.getLevel().getLevel() == 4){
-            player.setEnergy(player.getEnergy() + 50);
+            player1.setEnergy(player1.getEnergy() + 50);
             player.setEnergy(player.getEnergy() + 50);
         }
-        player.addNotifications(player.getUser().getUsername() + " sends you a message");
+//        player1.addNotifications(player.getUser().getUsername() + " sends you a message");
         relation.setTodayTalk(true);
         return Result.success(null);
     }
@@ -1194,13 +1208,13 @@ public class GameController {
         if (player.getUser().getUsername().equals(username))
             return Result.failure(GameError.NO_PLAYER_FOUND);
 
-        Player player = game.getPlayerByName(username);
+        Player player1 = game.getPlayerByName(username);
         if (player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
 
-//        if(!player.weAreNextToEachOther(player))
-//            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
+        if(!player.weAreNextToEachOther(player1))
+            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
 
-        Relation relation = game.getRelationOfUs(player, player);
+        Relation relation = game.getRelationOfUs(player, player1);
         if (relation.getLevel().getLevel() == 0)
             return Result.failure(GameError.FRIENDSHIP_LEVEL_IS_NOT_ENOUGH);
 
@@ -1209,14 +1223,22 @@ public class GameController {
             return Result.failure(GameError.NOT_ENOUGH_ITEMS);
 
         player.getInventory().removeItem(item);
-        player.getInventory().addItem(item);
-        relation.addGift(new Gift(player , player , item , relation.getGifts().size()));
+        player1.getInventory().addItem(item);
+        relation.addGift(new Gift(player , player1 , item , relation.getGifts().size()));
         if(relation.getLevel().getLevel() == 4){
-            player.setEnergy(player.getEnergy() + 50);
+            player1.setEnergy(player1.getEnergy() + 50);
             player.setEnergy(player.getEnergy() + 50);
         }
-        player.addNotifications(player.getUser().getUsername() + " sends you a gift");
+        player1.addNotifications(player.getUser().getUsername() + " sends you a gift");
         return Result.success(null);
+    }
+
+    public void sendNotification(String message , String username){
+        if(App.getInstance().logedInUser.getUsername().equals(username)) {
+            Screen screen = Main.getInstance().getScreen();
+            if(screen instanceof GameScreen)
+                ((GameScreen) screen).showNotification(message);
+        }
     }
 
     //    What's its difference with gift history :/
@@ -1304,13 +1326,13 @@ public class GameController {
         if (player.getUser().getUsername().equals(username))
             return Result.failure(GameError.NO_PLAYER_FOUND);
 
-        Player player = game.getPlayerByName(username);
-        if (player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
+        Player player1 = game.getPlayerByName(username);
+        if (player1 == null) return Result.failure(GameError.NO_PLAYER_FOUND);
 
-//        if(!player.weAreNextToEachOther(player))
-//            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
+        if(!player.weAreNextToEachOther(player1))
+            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
 
-        Relation relation = game.getRelationOfUs(player, player);
+        Relation relation = game.getRelationOfUs(player1, player);
 
         if (relation.getLevel().getLevel() < 2)
             return Result.failure(GameError.FRIENDSHIP_LEVEL_IS_NOT_ENOUGH);
@@ -1318,7 +1340,7 @@ public class GameController {
         if (!relation.isTodayHug())
             relation.setFriendshipXP(relation.getFriendshipXP() + 60);
         if(relation.getLevel().getLevel() == 4){
-            player.setEnergy(player.getEnergy() + 50);
+            player1.setEnergy(player1.getEnergy() + 50);
             player.setEnergy(player.getEnergy() + 50);
         }
         relation.checkOverFlow();
@@ -1331,13 +1353,13 @@ public class GameController {
         if (player.getUser().getUsername().equals(username))
             return Result.failure(GameError.NO_PLAYER_FOUND);
 
-        Player player = game.getPlayerByName(username);
+        Player player1 = game.getPlayerByName(username);
         if (player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
 
-//        if(!player.weAreNextToEachOther(player))
-//            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
+        if(!player.weAreNextToEachOther(player1))
+            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
 
-        Relation relation = game.getRelationOfUs(player, player);
+        Relation relation = game.getRelationOfUs(player, player1);
         if (relation.getLevel().getLevel() == 0)
             return Result.failure(GameError.FRIENDSHIP_LEVEL_IS_NOT_ENOUGH);
 
@@ -1346,7 +1368,7 @@ public class GameController {
             return Result.failure(GameError.NOT_ENOUGH_ITEMS);
 
         player.getInventory().removeItem(item);
-        player.getInventory().addItem(item);
+        player1.getInventory().addItem(item);
         relation.setFlower(true);
         if(relation.getLevel().getLevel() == 4){
             player.setEnergy(player.getEnergy() + 50);
@@ -1690,8 +1712,8 @@ public class GameController {
     }
 
     public Result<Void> setFriendship(String username , int xp){
-        Player player = App.getInstance().game.getPlayerByName(username);
-        Relation relation = App.getInstance().game.getRelationOfUs(player , player);
+        Player player1 = game.getPlayerByName(username);
+        Relation relation = game.getRelationOfUs(player1 , player);
         relation.setFriendshipXP(xp);
         return Result.success(null);
     }

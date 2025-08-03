@@ -308,9 +308,9 @@ public class GameTerminalView implements Menu {
         else if ((matcher = GameMenuCommand.SHOW_FRIENDSHIP.getMatcher(command)) != null) {
             printArrayList(gameController.showFriendships().getData());
         }
-        else if ((matcher = GameMenuCommand.TALK.getMatcher(command)) != null) {
-            System.out.println(gameController.talk(matcher.group("username") , matcher.group("message").trim()));
-        }
+//        else if ((matcher = GameMenuCommand.TALK.getMatcher(command)) != null) {
+//            System.out.println(gameController.talk(matcher.group("username") , matcher.group("message").trim()));
+//        }
         else if ((matcher = GameMenuCommand.SHOW_TALK_HISTORY.getMatcher(command)) != null) {
             if(gameController.talkHistory(matcher.group("username")).getData() != null)
                 printArrayList(gameController.talkHistory(matcher.group("username")).getData());
@@ -687,10 +687,10 @@ public class GameTerminalView implements Menu {
         else if ((matcher = GameMenuCommand.SHOW_FRIENDSHIP.getMatcher(command)) != null) {
             printArrayList(gameController.showFriendships().getData());
         }
-        else if ((matcher = GameMenuCommand.TALK.getMatcher(command)) != null) {
-            return gameController.talk(matcher.group("username") , matcher.group("message").trim()).toString();
-
-        }
+//        else if ((matcher = GameMenuCommand.TALK.getMatcher(command)) != null) {
+//            return gameController.talk(matcher.group("username") , matcher.group("message").trim()).toString();
+//
+//        }
         else if ((matcher = GameMenuCommand.SHOW_TALK_HISTORY.getMatcher(command)) != null) {
             if(gameController.talkHistory(matcher.group("username")).getData() != null)
                 printArrayList(gameController.talkHistory(matcher.group("username")).getData());
