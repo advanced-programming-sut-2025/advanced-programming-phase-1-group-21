@@ -1,5 +1,6 @@
 package models.crop;
 
+import Asset.SharedAssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import data.items.TreeData;
@@ -20,13 +21,25 @@ public class PlantedTree implements Placable, Harvestable, Serializable, DailyUp
 	private int waterStage = 2;
 	private boolean readyToHarvest = false;
 	public TreeData treeData;
+	Texture texture;
 	private Sprite sprite;
 
 	public PlantedTree() {}
 
 	public PlantedTree(TreeData treeData) {
 		this.treeData = treeData;
-		sprite = new Sprite(getTexture());
+		if(stage == treeData.getStages().size()){
+			if(readyToHarvest) {
+				if(treeData.getHarvestTexture() != null) {
+					texture = SharedAssetManager.getOrLoad(treeData.getHarvestTexture());
+				}
+			}
+			else
+				texture = SharedAssetManager.getOrLoad(treeData.getSeasonTexture());//TODO this function logic should depends on current season
+		}
+		else
+			texture = SharedAssetManager.getOrLoad(treeData.getStageTexture(stage));
+		sprite = new Sprite(texture);
 	}
 
 	private void water() {
@@ -70,7 +83,18 @@ public class PlantedTree implements Placable, Harvestable, Serializable, DailyUp
 				readyToHarvest = true;
 			}
 		}
-		sprite.setTexture(getTexture());
+		if(stage == treeData.getStages().size()){
+			if(readyToHarvest) {
+				if(treeData.getHarvestTexture() != null) {
+					texture = SharedAssetManager.getOrLoad(treeData.getHarvestTexture());
+				}
+			}
+			else
+				texture = SharedAssetManager.getOrLoad(treeData.getSeasonTexture());//TODO this function logic should depends on current season
+		}
+		else
+			texture = SharedAssetManager.getOrLoad(treeData.getStageTexture(stage));
+		sprite.setTexture(texture);
 		return false;
 	}
 	public void setDay(int day) {
@@ -99,23 +123,12 @@ public class PlantedTree implements Placable, Harvestable, Serializable, DailyUp
 
 	@Override
 	public Texture getTexture() {
-		if(stage == treeData.getStages().size()){
-			if(readyToHarvest) {
-				if(treeData.getHarvestTexture() != null) {
-					return new Texture(treeData.getHarvestTexture());
-				}
-			}
-			else
-				return new Texture(treeData.getSeasonTexture());//TODO this function logic should depends on current season
-		}
-		else
-			return new Texture(treeData.getStageTexture(stage));
-		return null;
+		return texture;
 	}
 
 	@Override
 	public Sprite spriteGetter() {
-		return null;
+		return sprite;
 	}
 
 	public String getResultName() {

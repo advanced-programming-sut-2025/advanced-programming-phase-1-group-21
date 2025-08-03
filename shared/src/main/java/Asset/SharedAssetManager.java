@@ -3,6 +3,9 @@ package Asset;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Tree;
+
+import java.security.cert.TrustAnchor;
 
 public class SharedAssetManager {
     private static final AssetManager manager = new AssetManager();
@@ -41,7 +44,36 @@ public class SharedAssetManager {
         manager.load("Textures/Decor/heart.png" , Texture.class);
         manager.load("Textures/Emoji (probably unusable)/food.png" , Texture.class);
         manager.load("Textures/Decor/lightning.png" , Texture.class);
+        manager.load("Textures/Flooring/HouseFloor.png" , Texture.class);
+        manager.load("Textures/Refrigerator/Fridge.png" , Texture.class);
     }
+
+    public static Texture getHouseTile(){
+        return manager.get("Textures/Flooring/HouseFloor.png");
+    }
+
+    public static Texture getRefrigerator(){
+        return manager.get("Textures/Refrigerator/Fridge.png");
+    }
+
+    public static Texture getOrLoad(String path){
+        if(manager.isLoaded(path)) {
+            return manager.get(path, Texture.class);
+        }
+
+        if(!manager.contains(path)) {
+            manager.load(path, Texture.class);
+        }
+
+        manager.update(17);
+
+        if(manager.isLoaded(path)) {
+            return manager.get(path, Texture.class);
+        }
+
+        return null;
+    }
+
 
     public static Texture getLightning(){
         return manager.get("Textures/Decor/lightning.png");

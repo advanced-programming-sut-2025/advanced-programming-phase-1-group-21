@@ -1,5 +1,6 @@
 package models.game;
 
+import Asset.SharedAssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import models.map.Placable;
@@ -9,6 +10,8 @@ import java.io.Serializable;
 
 public class Refrigerator implements Placable, Serializable {
     Inventory inventory;
+    Texture texture = SharedAssetManager.getRefrigerator();
+    Sprite sprite = new Sprite(texture);
 
     public Refrigerator() {
         this.inventory = new Inventory();
@@ -36,12 +39,12 @@ public class Refrigerator implements Placable, Serializable {
 
     @Override
     public Texture getTexture() {
-        return new Texture("Textures/Refrigerator/Fridge.png");
+        return texture;
     }
 
     @Override
     public Sprite spriteGetter() {
-        return null;
+        return sprite;
     }
 
     @Override

@@ -39,21 +39,21 @@ public class Tile implements DailyUpdate, Serializable {
         float x = sprite.getX();
         float y = sprite.getY();
         if(mapType.equals(MapType.HOUSE))
-            texture = new Texture("Textures/Flooring/HouseFloor.png");
+            texture = SharedAssetManager.getHouseTile();
         else if(tileType.equals(TileType.SIMPLE_STABLE))
             texture = SharedAssetManager.getStable("Simple");
         else if(tileType.equals(TileType.FOOD_STABLE))
             texture = SharedAssetManager.getStable("Food");
         else if(getPlacable(Building.class) != null)
-            texture = new Texture("Textures/map/SpringBasicTile.png");
+            texture = SharedAssetManager.getTile("Spring");
         else if(isEmpty())
-            texture = new Texture("Textures/map/SpringBasicTile.png");
+            texture = SharedAssetManager.getTile("Spring");
 
         if(tileType.getTextureAddress() != null)
             onTileTexture = new Texture(tileType.getTextureAddress());
-        else if(placable!= null && placable.getTexture() != null) {
-            onTileTexture = placable.getTexture();
-        }
+//        else if(placable!= null && placable.getTexture() != null) {
+//            onTileTexture = placable.getTexture();
+//        }
 
 
         sprite = new Sprite(texture);
@@ -65,10 +65,11 @@ public class Tile implements DailyUpdate, Serializable {
             onTileSprite = new Sprite(onTileTexture);
             onTileSprite.setX(x);
             onTileSprite.setY(y);
-            if(placable != null && placable.spriteGetter() != null){
-                placable.spriteGetter().setX(x);
-                placable.spriteGetter().setY(y);
-            }
+        }
+
+        if(placable != null && placable.spriteGetter() != null){
+            placable.spriteGetter().setX(x);
+            placable.spriteGetter().setY(y);
         }
     }
 
@@ -167,15 +168,18 @@ public class Tile implements DailyUpdate, Serializable {
             onTileSprite = null;
         }
         else {
-            onTileTexture = placable.getTexture();
             if(onTileTexture != null) {
-                onTileSprite = new Sprite(onTileTexture);
-                onTileSprite.setX(sprite.getX());
-                onTileSprite.setY(sprite.getY());
+//                onTileSprite = new Sprite(onTileTexture);
+//                onTileSprite.setX(sprite.getX());
+//                onTileSprite.setY(sprite.getY());
                 if(placable.spriteGetter() != null && placable.spriteGetter() != null){
                     placable.spriteGetter().setX(sprite.getX());
                     placable.spriteGetter().setY(sprite.getY());
                 }
+            }
+            if(placable.spriteGetter() != null && placable.spriteGetter() != null){
+                placable.spriteGetter().setX(sprite.getX());
+                placable.spriteGetter().setY(sprite.getY());
             }
         }
     }
