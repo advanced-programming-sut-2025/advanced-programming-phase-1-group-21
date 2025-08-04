@@ -1242,27 +1242,50 @@ public class GameController {
     }
 
     //    What's its difference with gift history :/
-    public Result<ArrayList<String>> giftList() {
+    public Result<ArrayList<String>> receivedGiftList() {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
 
         ArrayList<String> output = new ArrayList<>();
-        for(Player player : App.getInstance().game.getPlayers()){
-            if(player.equals(player))
+        for(Player player1 : game.getPlayers()){
+            if(player.equals(player1))
                 continue;
-            output.addAll(giftHistory(player.getUser().getUsername()).getData());
-            Relation relation = App.getInstance().game.getRelationOfUs(player, player);
+            Relation relation = game.getRelationOfUs(player1, player);
             for(Gift gift : relation.getGifts()){
-                if(gift.getReceiver().equals(player) && (gift.getRate() == 0)) {
-                    output.add("Gift ID : " + gift.getId());
-                    output.add("Item : " + gift.getItem().getName());
-                    output.add("Sender : " + gift.getSender().getUser().getUsername());
-                    output.add("Receiver : " + gift.getReceiver().getUser().getUsername());
+                if(gift.getReceiver().equals(player)) {
+                    StringBuilder string = new StringBuilder();
+                    string.append("GiftID : ").append(gift.getId()).append(" | ");
+                    string.append("Sender : ").append(gift.getSender().getUser().getUsername()).append(" | ");
+                    string.append("Item : ").append(gift.getItem().getName()).append(" | ");
+                    string.append("Receiver : ").append(gift.getReceiver().getUser().getUsername()).append(" | ");
                     if (gift.getRate() == 0)
-                        output.add("Rate : not rated yet!");
+                        string.append("Rate : not rated yet!");
                     else
-                        output.add("Rate : " + gift.getRate());
-                    output.add("-------------------");
+                        string.append("Rate : ").append(gift.getRate());
+                    output.add(string.toString());
                 }
+            }
+        }
+        return Result.success(output);
+    }
+
+    public Result<ArrayList<String>> allGifts(){
+        if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+
+        ArrayList<String> output = new ArrayList<>();
+        for(Player player1 : game.getPlayers()){
+            if(player.equals(player1))
+                continue;
+            Relation relation = game.getRelationOfUs(player1, player);
+            for(Gift gift : relation.getGifts()){
+                StringBuilder string = new StringBuilder();
+                string.append("Item : ").append(gift.getItem().getName()).append(" | ");
+                string.append("Sender : ").append(gift.getSender().getUser().getUsername()).append(" | ");
+                string.append("Receiver : ").append(gift.getReceiver().getUser().getUsername()).append(" | ");
+                if (gift.getRate() == 0)
+                    string.append("Rate : not rated yet!");
+                else
+                    string.append("Rate : ").append(gift.getRate());
+                output.add(string.toString());
             }
         }
         return Result.success(output);
@@ -1274,11 +1297,11 @@ public class GameController {
         if (player.getUser().getUsername().equals(username))
             return Result.failure(GameError.NO_PLAYER_FOUND);
 
-        Player player = game.getPlayerByName(username);
-        if (player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
+        Player player1 = game.getPlayerByName(username);
+        if (player1 == null) return Result.failure(GameError.NO_PLAYER_FOUND);
 
 
-        Relation relation = game.getRelationOfUs(player, player);
+        Relation relation = game.getRelationOfUs(player1, player);
         if ((relation.getGifts().size() <= giftID) || (giftID < 0))
             return Result.failure(GameError.GIFT_ID_DOES_NOT_EXIST);
 
@@ -1301,10 +1324,10 @@ public class GameController {
         if (player.getUser().getUsername().equals(username))
             return Result.failure(GameError.NO_PLAYER_FOUND);
 
-        Player player = game.getPlayerByName(username);
-        if (player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
+        Player player1 = game.getPlayerByName(username);
+        if (player1 == null) return Result.failure(GameError.NO_PLAYER_FOUND);
 
-        Relation relation = game.getRelationOfUs(player, player);
+        Relation relation = game.getRelationOfUs(player1, player);
         output.add("your gift history with " + username + " :");
         for (Gift gift : relation.getGifts()) {
             output.add("Gift ID : " + gift.getId());

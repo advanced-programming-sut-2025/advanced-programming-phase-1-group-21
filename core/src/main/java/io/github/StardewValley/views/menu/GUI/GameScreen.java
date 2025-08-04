@@ -37,6 +37,7 @@ public class GameScreen implements Screen , InputProcessor {
     private Stage stage;
     private InventoryTab inventoryTab;
     private ShopMenuTab shopMenuTab;
+    private GiftTab giftTab;
     private TerminalTab terminalTab;
     private ChatScreen chatScreen;
     private TalkScreen talkScreen;
@@ -48,6 +49,7 @@ public class GameScreen implements Screen , InputProcessor {
     private boolean isFriendshipShown = false;
     private boolean isChatShown = false;
     private boolean isTalkScreen = false;
+    private boolean isGiftTabShown = false;
     private BitmapFont messagePrinter = new BitmapFont();
     private String message;
     private AnimalInfoWindow animalInfoWindow;
@@ -82,6 +84,7 @@ public class GameScreen implements Screen , InputProcessor {
         Skin skin = Assets.getSkin();
         inventoryTab = new InventoryTab(viewController.player, this, skin);
         shopMenuTab = new ShopMenuTab(this , skin);
+        giftTab = new GiftTab(this , skin);
         terminalTab = new TerminalTab(this , skin);
         friendshipsTab = new FriendshipsTab(this , skin);
         chatScreen = new ChatScreen(viewController.player, this, skin);
@@ -134,6 +137,8 @@ public class GameScreen implements Screen , InputProcessor {
         if (tagNotification.isVisible()) {
             tagNotification.draw();
         }
+        if(isGiftTabShown)
+            giftTab.draw();
 
         if(!viewController.player.getNotifications().isEmpty()){
             int size = viewController.player.getNotifications().size();
@@ -186,6 +191,10 @@ public class GameScreen implements Screen , InputProcessor {
             isShopMenuShown = true;
             shopMenuTab.show();
 
+        }
+        if(i == Input.Keys.G){
+            isGiftTabShown = true;
+            giftTab.show();
         }
         if (i == Input.Keys.T && !isTerminalShown && !isChatShown) {
             isTerminalShown = true;
@@ -284,6 +293,11 @@ public class GameScreen implements Screen , InputProcessor {
 
     public void onShopMenuClosed() {
         isShopMenuShown = false;
+        Gdx.input.setInputProcessor(this);
+    }
+
+    public void onGiftMenuClosed(){
+        isGiftTabShown = false;
         Gdx.input.setInputProcessor(this);
     }
 

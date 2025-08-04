@@ -325,9 +325,9 @@ public class GameTerminalView implements Menu {
             System.out.println(gameController.sendGift(matcher.group("username") , matcher.group("itemName")
                     , Integer.parseInt(matcher.group("amount"))));
         }
-        else if ((matcher = GameMenuCommand.LIST_GIFTS.getMatcher(command)) != null) {
-            printArrayList(gameController.giftList().getData());
-        }
+//        else if ((matcher = GameMenuCommand.LIST_GIFTS.getMatcher(command)) != null) {
+//            printArrayList(gameController.giftList().getData());
+//        }
         else if ((matcher = GameMenuCommand.GIFT_RATE.getMatcher(command)) != null) {
             System.out.println(gameController.giftRate(matcher.group("username") , Integer.parseInt(matcher.
                     group("giftID")) , Double.parseDouble(matcher.group("rate"))));
@@ -706,9 +706,9 @@ public class GameTerminalView implements Menu {
             System.out.println(gameController.sendGift(matcher.group("username") , matcher.group("itemName")
                     , Integer.parseInt(matcher.group("amount"))));
         }
-        else if ((matcher = GameMenuCommand.LIST_GIFTS.getMatcher(command)) != null) {
-            printArrayList(gameController.giftList().getData());
-        }
+//        else if ((matcher = GameMenuCommand.LIST_GIFTS.getMatcher(command)) != null) {
+//            printArrayList(gameController.giftList().getData());
+//        }
         else if ((matcher = GameMenuCommand.GIFT_RATE.getMatcher(command)) != null) {
             System.out.println(gameController.giftRate(matcher.group("username") , Integer.parseInt(matcher.
                     group("giftID")) , Double.parseDouble(matcher.group("rate"))));
