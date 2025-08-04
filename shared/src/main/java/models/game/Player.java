@@ -30,10 +30,6 @@ public class Player implements DailyUpdate, Serializable {
     private Map map;
     private Map defaultMap;
     private Coord coord = new Coord(0 , 0);
-    private int agronomicAbility = 0;
-    private int miningAbility = 0;
-    private int foragingAbility = 0;
-    private int fishingAbility = 0;
     private ArrayList<Animal> animals = new ArrayList<>();
     private Energy energy;
     private Inventory inventory;
@@ -44,6 +40,7 @@ public class Player implements DailyUpdate, Serializable {
     private float speed = (float) 4;
     private Animal shepherdingAnimal;
     private boolean faint = false;
+    private int quest = 0;
 
     public Player() {}
 
@@ -245,38 +242,6 @@ public class Player implements DailyUpdate, Serializable {
         animals.add(animal);
     }
 
-    public int getAgronomicAbility() {
-        return agronomicAbility;
-    }
-
-    public int getMiningAbility() {
-        return miningAbility;
-    }
-
-    public int getForagingAbility() {
-        return foragingAbility;
-    }
-
-    public int getFishingAbility() {
-        return fishingAbility;
-    }
-
-    public void raiseAgronomicAbility() {
-        this.agronomicAbility += 5;
-    }
-
-    public void raiseMiningAbility() {
-        this.miningAbility += 10;
-    }
-
-    public void raiseForagingAbility() {
-        this.foragingAbility += 10;
-    }
-
-    public void setFishingAbility() {
-        this.fishingAbility += 5;
-    }
-
     static final int DURATION_ENERGY = 7;
     static final int FAINTED_ENERGY = 100;
     @Override
@@ -303,10 +268,6 @@ public class Player implements DailyUpdate, Serializable {
         sb.append("Username: ").append(user.getUsername()).append("\n");
         sb.append("Current Coordinates: ").append(coord).append("\n");
         sb.append("Energy: ").append(energy.getCurrentEnergy()).append("/").append(energy.getMaxEnergy()).append("\n");
-        sb.append("Agronomic Ability: ").append(agronomicAbility).append("\n");
-        sb.append("Mining Ability: ").append(miningAbility).append("\n");
-        sb.append("Foraging Ability: ").append(foragingAbility).append("\n");
-        sb.append("Fishing Ability: ").append(fishingAbility).append("\n");
         sb.append("Coins: ").append(getCoins()).append("\n");
         sb.append("Skills: ").append(skill).append("\n");
 
@@ -407,5 +368,17 @@ public class Player implements DailyUpdate, Serializable {
 
     public Animal getShepherdingAnimal() {
         return shepherdingAnimal;
+    }
+
+    public void addQuest() {
+        quest++;
+    }
+
+    public int getQuest() {
+        return quest;
+    }
+
+    public int getSkill() {
+        return skill.getOverallSkill();
     }
 }

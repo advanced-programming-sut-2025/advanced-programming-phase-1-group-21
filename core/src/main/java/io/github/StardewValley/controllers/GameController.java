@@ -1511,6 +1511,7 @@ public class GameController {
 
         player.getInventory().addItem(rewardItem);
         npc.getTasksFlag().set(questID, true);
+        player.addQuest();
         return Result.success(null);
 
     }
