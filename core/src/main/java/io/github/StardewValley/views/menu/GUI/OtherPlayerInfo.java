@@ -1,27 +1,23 @@
 package io.github.StardewValley.views.menu.GUI;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import models.Item.Item;
 import models.game.Player;
 import models.result.Result;
 
-import java.awt.image.RescaleOp;
 import java.util.regex.Pattern;
 
 public class OtherPlayerInfo extends Window{
-    TextButton hug , gift , marriage , trade , talk , flower;
+    TextButton hug , gift , askMarriage, trade , talk , flower , yes , no;
     TextField inputAmount;
     Label name , friendship , message;
     Player otherPlayer;
@@ -87,11 +83,11 @@ public class OtherPlayerInfo extends Window{
             }
         });
 
-        marriage = new TextButton("Marriage" , skin);
-        marriage.addListener(new ClickListener() {
+        askMarriage = new TextButton("Ask Marriage" , skin);
+        askMarriage.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                gameScreen.closePlayerInfo();
+                askMarriage();
             }
         });
 
@@ -123,7 +119,28 @@ public class OtherPlayerInfo extends Window{
         content.add(gift).row();
         content.add(hug).row();
         content.add(flower).row();
-        content.add(marriage).row();
+        content.add(askMarriage).row();
+        if(otherPlayer.getUser().getUsername().equals(me.getSuitor())){
+            yes = new TextButton("Yes" , skin);
+            yes.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    gameScreen.getController().marriageResponse("yes");
+                    gameScreen.closePlayerInfo();
+                }
+            });
+
+            no = new TextButton("No" ,skin);
+            no.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    gameScreen.getController().marriageResponse("no");
+                    gameScreen.closePlayerInfo();
+                }
+            });
+            content.add(yes);
+            content.add(no);
+        }
         content.add(message);
 
         this.addListener(new InputListener() {
@@ -183,6 +200,15 @@ public class OtherPlayerInfo extends Window{
         message.setText("Hugging");
     }
 
+    private void askMarriage(){
+        Result<?> result = gameScreen.getController().askMarriage(otherPlayer.getUser().getUsername());
+        if(result.isError()){
+            message.setText(result.getMessage());
+            return;
+        }
+        message.setText("Payam e risky");
+    }
+
     private void sendGift(){
         if(me.getItemInHand() == null){
             message.setText("You should pick up your gift");
@@ -200,5 +226,9 @@ public class OtherPlayerInfo extends Window{
             return;
         }
         message.setText("Gift Sent");
+    }
+
+    private void answerSuitor(String response){
+
     }
 }
