@@ -135,10 +135,10 @@ public class GameScreen implements Screen , InputProcessor {
             tagNotification.draw();
         }
 
-        if(!controller.getPlayer().getNotifications().isEmpty()){
-            int size = controller.getPlayer().getNotifications().size();
-            showNotification(controller.getPlayer().getNotifications().get(size - 1));
-            controller.getPlayer().getNotifications().remove(size - 1);
+        if(!viewController.player.getNotifications().isEmpty()){
+            int size = viewController.player.getNotifications().size();
+            showNotification(viewController.player.getNotifications().get(size - 1));
+            viewController.player.getNotifications().remove(size - 1);
         }
     }
 
@@ -232,7 +232,7 @@ public class GameScreen implements Screen , InputProcessor {
 
         Player player = viewController.getOtherPlayerClick(c);
         if(player != null){
-            otherPlayerInfo = new OtherPlayerInfo(this , Assets.getSkin() , player , controller.getPlayer());
+            otherPlayerInfo = new OtherPlayerInfo(this , Assets.getSkin() , player , currentPlayer);
             otherPlayerInfo.setPosition(screenX + 30, Gdx.graphics.getHeight() - screenY + 30);
             Gdx.input.setInputProcessor(stage);
             stage.addActor(otherPlayerInfo);

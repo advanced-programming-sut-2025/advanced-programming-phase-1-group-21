@@ -1205,14 +1205,14 @@ public class GameController {
     public Result<Void> sendGift(String username, String itemName, int amount) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
 
-        if (player.getUser().getUsername().equals(username))
-            return Result.failure(GameError.NO_PLAYER_FOUND);
+//        if (player.getUser().getUsername().equals(username))
+//            return Result.failure(GameError.NO_PLAYER_FOUND);
 
         Player player1 = game.getPlayerByName(username);
-        if (player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
-
-        if(!player.weAreNextToEachOther(player1))
-            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
+//        if (player1 == null) return Result.failure(GameError.NO_PLAYER_FOUND);
+//
+//        if(!player.weAreNextToEachOther(player1))
+//            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
 
         Relation relation = game.getRelationOfUs(player, player1);
         if (relation.getLevel().getLevel() == 0)
