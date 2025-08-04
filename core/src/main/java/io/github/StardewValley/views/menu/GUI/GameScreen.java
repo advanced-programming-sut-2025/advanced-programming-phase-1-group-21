@@ -200,12 +200,12 @@ public class GameScreen implements Screen , InputProcessor {
             isTerminalShown = true;
             terminalTab.show();
         }
+        if (i == Input.Keys.P) {
+            game.setScreen(new PauseMenu());
+        }
         if (i == Input.Keys.F && !isTerminalShown && !isChatShown) {
             isFriendshipShown = true;
             friendshipsTab.show();
-        }
-        if (i == Input.Keys.P) {
-            game.setScreen(new PauseMenu());
         }
 
         if (i == Input.Keys.F1) {
@@ -224,6 +224,7 @@ public class GameScreen implements Screen , InputProcessor {
     public boolean keyTyped(char c) {
         return false;
     }
+
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {

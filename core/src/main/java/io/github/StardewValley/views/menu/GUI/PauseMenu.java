@@ -20,7 +20,7 @@ import io.github.StardewValley.controllers.GameController;
 public class PauseMenu implements Screen {
     private Stage stage;
     private Skin skin;
-    private TextButton exitButton;
+    private TextButton exitButton, scoreboardButton;
     private Label date, time, weather, energy;
     private Texture bgTexture;
     private GameController controller = App.getInstance().currentPlayerController;
@@ -43,9 +43,27 @@ public class PauseMenu implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("CLICKED");
                 Main.getInstance().setScreen(new GameScreen());
+                System.out.println("CLICKED");
+                Main.getInstance().setScreen(new GameScreen());
             }
         });
         exitButton.setPosition(1670, 850);
+
+        // Create scoreboard button
+        scoreboardButton = new TextButton("SCOREBOARD", skin);
+        scoreboardButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("Scoreboard button clicked");
+                // Add your scoreboard functionality here
+                Main.getInstance().setScreen(new ScoreboardScreen());
+            }
+        });
+        exitButton.setPosition(1670, 850);
+        // Position the scoreboard button below the info labels
+        float centerX = Gdx.graphics.getWidth() / 2f;
+        float centerY = Gdx.graphics.getHeight() / 2f;
+        scoreboardButton.setPosition(centerX - scoreboardButton.getWidth() / 2, centerY - 150);
 
         // Create info labels
         date = new Label("Date: " + controller.getDate().getData(), skin);
@@ -59,9 +77,6 @@ public class PauseMenu implements Screen {
         weather.setColor(Color.WHITE);
         energy.setColor(Color.WHITE);
 
-        // Position labels
-        float centerX = Gdx.graphics.getWidth() / 2f;
-        float centerY = Gdx.graphics.getHeight() / 2f;
 
         date.setPosition(centerX - date.getWidth() / 2, centerY + 75);
         time.setPosition(centerX - time.getWidth() / 2, centerY + 25);
@@ -70,10 +85,12 @@ public class PauseMenu implements Screen {
 
         // Add actors to stage
         stage.addActor(exitButton);
+        stage.addActor(scoreboardButton);
         stage.addActor(date);
         stage.addActor(time);
         stage.addActor(weather);
         stage.addActor(energy);
+        stage.addActor(exitButton);
     }
 
     private void setDarkBackground() {
