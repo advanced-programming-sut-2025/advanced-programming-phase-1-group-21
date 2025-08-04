@@ -47,7 +47,9 @@ public class ChatService {
     //throws an ERROR if run from CLIENT (because of private access)
     private List<Connection> handleUserMessage(Chat chat) {
         Connection reciver = SessionManager.getConnection(chat.getReceiver());
-        return List.of(reciver);
+        Connection sender = SessionManager.getConnection(chat.getSender());
+
+        return List.of(reciver, sender);
     }
 
     private List<Connection> handleLobbyMessage(Chat chat) {

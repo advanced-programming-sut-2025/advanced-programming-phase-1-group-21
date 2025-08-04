@@ -74,6 +74,9 @@ class InventoryTab {
 		inv.addItem(Item.build("Wood", 200));
 		inv.addItem(Item.build("Copper Bar", 100));
 		inv.addItem(Item.build("Iron Bar", 2));
+		inv.addItem(Item.build("Jazz Seeds", 5));
+		inv.addItem(Item.build("Banana Sapling", 5));
+		inv.addItem(Item.build("Bean Starter", 5));
 
 		player.addRecipes(new Recipe(RecipeData.getCookingRecipeData("Dish O' The Sea Recipe"), RecipeType.COOKING, 1));
 		player.addRecipes(new Recipe(RecipeData.getCookingRecipeData("Triple Shot Espresso Recipe"), RecipeType.COOKING, 1));

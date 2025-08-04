@@ -35,7 +35,9 @@ public class ChatController {
         if (screen instanceof GameScreen) {
             GameScreen gameScreen = (GameScreen) screen;
             gameScreen.sendMessageInChat(chat.getSender() + " be " + chat.getType().getUI(), chat.getMessage(), chat.determineColor(App.getInstance().logedInUser.getUsername()));
-            gameScreen.showNotification("seen bezan");
+            if (chat.getType() == ChatType.TO_USER && chat.getReceiver().equals(App.getInstance().logedInUser.getUsername())) {
+                gameScreen.showNotification("Seen bezan");
+            }
         }
         else {
             System.out.println("WHY ARE YOU SENDING MESSAGE WIHTOUT GAME_SCREEN?");
