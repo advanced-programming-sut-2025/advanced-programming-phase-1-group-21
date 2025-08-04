@@ -39,6 +39,8 @@ public class Game implements Serializable {
 
         addNPC();
         village = (new MapBuilder()).buildVillage(npcs, new Random(42));
+        for(NPC npc : npcs)
+            npc.setNpcMap(village);
     }
 
     /**

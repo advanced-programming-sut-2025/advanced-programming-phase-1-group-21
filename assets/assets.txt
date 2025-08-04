@@ -2378,11 +2378,11 @@ Textures/Trees/Wild_Tree_stump_Fall.png
 Textures/Trees/Wild_Tree_stump_Spring.png
 Textures/Trees/Wild_Tree_stump_Winter.png
 Textures/Trees/Wood.png
-Textures/Villagers/Abigail.png
-Textures/Villagers/Harvey.png
-Textures/Villagers/Leah.png
-Textures/Villagers/Robin.png
-Textures/Villagers/Sebastian.png
+Textures/Villagers/abigail.png
+Textures/Villagers/harvey.png
+Textures/Villagers/leah.png
+Textures/Villagers/robin.png
+Textures/Villagers/sebastian.png
 Textures/map/FallBasicTile.png
 Textures/map/Outdoors Fall.png
 Textures/map/Outdoors Spring.png

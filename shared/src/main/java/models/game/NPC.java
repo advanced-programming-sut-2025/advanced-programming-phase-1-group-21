@@ -1,5 +1,6 @@
 package models.game;
 
+import Asset.SharedAssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import data.VillagerData;
@@ -17,11 +18,15 @@ public class NPC implements Placable, DailyUpdate, Serializable {
     private String name;
     // Characterization
     NPCHouse house;
+    Map npcMap;
+    Building building;
     private ArrayList<VillagerTask> tasks;
     private ArrayList<Boolean> tasksFlag = new ArrayList<>();
     private ArrayList<NPCFriendship> friendships = new ArrayList<>();
     private ArrayList<String> favorites;
     private Coord coord;
+    private transient Texture texture;
+    private transient Sprite sprite;
 
     public NPC() {}
 
@@ -32,9 +37,25 @@ public class NPC implements Placable, DailyUpdate, Serializable {
         for(Player player : players)
             friendships.add(new NPCFriendship(player , FriendshipLevel.LEVEL0 , 0));
         house = new NPCHouse();
+        this.building = house;
         tasksFlag.add(false);
         tasksFlag.add(false);
         tasksFlag.add(false);
+        texture = SharedAssetManager.getNPCTexture(name.toLowerCase());
+        sprite = new Sprite(texture);
+        sprite.setX(getMap().mapType.getDistanceX());
+        sprite.setY(getMap().mapType.getDistanceY() + (getMap().getMaxY() - 1)*30);
+        sprite.setSize(60 , 100);
+        coord = new Coord(0,0);
+    }
+
+    public void setNpcMap(Map npcMap) {
+        this.npcMap = npcMap;
+    }
+
+    public Map getMap() {
+        if(building == null) return npcMap;
+        return building.getMap();
     }
 
     public ArrayList<Boolean> getTasksFlag() {
@@ -121,7 +142,7 @@ public class NPC implements Placable, DailyUpdate, Serializable {
 
     @Override
     public Sprite spriteGetter() {
-        return null;
+        return sprite;
     }
 
     public NPCHouse getHouse() {
@@ -155,6 +176,11 @@ public class NPC implements Placable, DailyUpdate, Serializable {
         @Override
         public TileType getTileType() {
             return TileType.NPC;
+        }
+
+        @Override
+        public String getFullName() {
+            return name + "'s House";
         }
 
         @Override
