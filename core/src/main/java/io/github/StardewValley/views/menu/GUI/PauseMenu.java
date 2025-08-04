@@ -43,6 +43,8 @@ public class PauseMenu implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("CLICKED");
                 Main.getInstance().setScreen(new GameScreen());
+                System.out.println("CLICKED");
+                Main.getInstance().setScreen(new GameScreen());
             }
         });
         exitButton.setPosition(1670, 850);
@@ -57,6 +59,7 @@ public class PauseMenu implements Screen {
                 Main.getInstance().setScreen(new ScoreboardScreen());
             }
         });
+        exitButton.setPosition(1670, 850);
         // Position the scoreboard button below the info labels
         float centerX = Gdx.graphics.getWidth() / 2f;
         float centerY = Gdx.graphics.getHeight() / 2f;
@@ -87,6 +90,7 @@ public class PauseMenu implements Screen {
         stage.addActor(time);
         stage.addActor(weather);
         stage.addActor(energy);
+        stage.addActor(exitButton);
     }
 
     private void setDarkBackground() {

@@ -182,7 +182,7 @@ public class Player implements DailyUpdate, Serializable {
         return output;
     }
 
-    public boolean weAreNextToEachOther(Player otherPlayer, Game game) {
+    public boolean weAreNextToEachOther(Player otherPlayer) {
         if(!getMap().equals(otherPlayer.getMap()))
             return false;
         Coord otherPlayerCord = otherPlayer.getCoord();

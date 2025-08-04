@@ -24,6 +24,11 @@ public class ChatController {
         NetworkChatController.sendMessage(chat);
     }
 
+    public void sendMessage(String text , String receiver){
+        Chat chat =  new Chat(ChatType.TO_USER, text, username, receiver);
+        NetworkChatController.sendMessage(chat);
+    }
+
 
     public static void onChat(Chat chat) {
         Screen screen = Main.getInstance().getScreen();
