@@ -9,7 +9,11 @@ import io.github.StardewValley.Main;
 import io.github.StardewValley.views.menu.GUI.MainMenuScreen;
 import models.Item.Item;
 import models.Item.ItemType;
+import models.Item.Sapling;
+import models.Item.Seed;
 import models.animal.Animal;
+import models.crop.PlantedSeed;
+import models.crop.PlantedTree;
 import models.game.Game;
 import models.game.Inventory;
 import models.game.Player;
@@ -85,9 +89,18 @@ public class ViewController {
         {
 //            System.out.println("Tile type: " + tile.getTileType());
             if (tile.getTileType() == TileType.PLOWED || tile.getTileType() == TileType.UNPLOWED){
-                if (player.getItemInHand() != null && player.getItemInHand().getItemType() == ItemType.PLACEABLE) {
-                    gc.placeArtisan(player.getItemInHand(), tile);
+                Item itemInHand = player.getItemInHand();
+                if (itemInHand != null) {
+                    if (itemInHand.getItemType() == ItemType.PLACEABLE) {
+                        gc.placeArtisan(itemInHand, tile);
 //                    System.out.println("You just Placed an Artisan, tile type: " + tile.getTileType());
+                    }
+                    if (itemInHand.getItemType() == ItemType.SEED) {
+                        gc.plant(tile, (Seed) Item.build(itemInHand.getName(), 1));
+                    }
+                    if (itemInHand.getItemType() == ItemType.SAPLING) {
+                        gc.plant(tile, (Sapling) Item.build(itemInHand.getName(), 1));
+                    }
                 }
             }
             else if (tile.getTileType() == TileType.ARTISAN) {
@@ -98,19 +111,22 @@ public class ViewController {
 //                System.out.println("result: " + artisan.isResultReady() + ", empty: " + artisan.isEmpty());
 
                 if (artisan.isResultReady() && inventory.canAdd(artisan.getResultWithoutReset().getName())) {
-//                    System.out.println("You tried to collect the result");
                     Item result = artisan.getResultWithoutReset();
                     if (inventory.addItem(result).isSuccess()) {
                         artisan.getResult(inventory);
-//                        System.out.println("You collected the result");
                     }
                 }
                 else if (artisan.isEmpty() && player.getItemInHand() != null) {
-//                    artisan.findRecipeAndCraft(player.getItemInHand().getName(), player.getInventory());
                     gc.useArtisan(artisan, player.getItemInHand().getName());
-//                    System.out.println("You just Placed an Item in an Artisan");
                 }
             }
+            else if (tile.getTileType() == TileType.PLANTED_SEED && tile.getPlacable(PlantedSeed.class).isHarvestReady()) {
+                gc.harvest(tile);
+            }
+            else if (tile.getTileType() == TileType.PLANTED_TREE && tile.getPlacable(PlantedTree.class).isHarvestReady()) {
+                gc.harvest(tile);
+            }
+
         }
 
 

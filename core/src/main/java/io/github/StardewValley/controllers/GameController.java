@@ -516,6 +516,21 @@ public class GameController {
         return Result.success(seedData.toString());
     }
 
+    public void plant(Tile tile, Seed seed) {
+        seed.plant(tile);
+        player.getInventory().removeItem(seed);
+    }
+
+    public void plant(Tile tile, Sapling sap) {
+        sap.plant(tile);
+        player.getInventory().removeItem(sap);
+    }
+
+    public void harvest(Tile tile) {
+        Item item = tile.harvest(player);
+        player.getInventory().addItem(item);
+    }
+
     public Result<Void> plant(String seedName, Direction direction) { // After MAP
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         if (direction == null)
