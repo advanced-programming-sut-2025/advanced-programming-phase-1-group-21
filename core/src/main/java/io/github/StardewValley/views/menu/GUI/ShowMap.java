@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import io.github.StardewValley.App;
 import io.github.StardewValley.Main;
 import models.animal.Animal;
+import models.game.NPC;
 import models.game.Player;
 import models.game.Refrigerator;
 import models.map.*;
@@ -14,6 +15,7 @@ import java.util.List;
 public class ShowMap {
     public static Player currentPlayer;
     public static List<Player> listOfPlayers;
+    public static List<NPC> listOfNPCs;
     public static Map map;
     private static Main game = Main.getInstance();
 
@@ -112,4 +114,10 @@ public class ShowMap {
                 tool.animation(delta);
         }
     }
+
+//    public static void showNPCs(){
+//        for(NPC npc : listOfNPCs){
+//            if()
+//        }
+//    }
 }

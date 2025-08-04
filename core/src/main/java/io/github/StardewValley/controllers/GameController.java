@@ -1209,7 +1209,7 @@ public class GameController {
 //            return Result.failure(GameError.NO_PLAYER_FOUND);
 
         Player player1 = game.getPlayerByName(username);
-//        if (player1 == null) return Result.failure(GameError.NO_PLAYER_FOUND);
+        if (player1 == null) return Result.failure(GameError.NO_PLAYER_FOUND);
 //
 //        if(!player.weAreNextToEachOther(player1))
 //            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
@@ -1231,14 +1231,6 @@ public class GameController {
         }
         player1.addNotifications(player.getUser().getUsername() + " sends you a gift");
         return Result.success(null);
-    }
-
-    public void sendNotification(String message , String username){
-        if(App.getInstance().logedInUser.getUsername().equals(username)) {
-            Screen screen = Main.getInstance().getScreen();
-            if(screen instanceof GameScreen)
-                ((GameScreen) screen).showNotification(message);
-        }
     }
 
     //    What's its difference with gift history :/

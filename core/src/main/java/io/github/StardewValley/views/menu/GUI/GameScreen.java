@@ -67,6 +67,7 @@ public class GameScreen implements Screen , InputProcessor {
         currentPlayer = this.viewController.player;
         ShowMap.currentPlayer = viewController.player;
         ShowMap.listOfPlayers = viewController.game.getPlayers();
+        ShowMap.listOfNPCs = viewController.game.getNpcs();
         createUI();
     }
 
