@@ -120,6 +120,14 @@ public class ViewController {
 
     }
 
+    public Player getOtherPlayerClick(Coord coord){
+        for(Player player1 : gc.getGame().getPlayers()){
+            if(player1.getMap().equals(player.getMap()) && player1.getCoord().equals(coord) && !player1.equals(player))
+                return player1;
+        }
+        return null;
+    }
+
     public boolean checkCollision(Sprite target, Sprite player) {
         Rectangle targetRect = target.getBoundingRectangle();
         Rectangle playerRect = player.getBoundingRectangle();

@@ -2,7 +2,9 @@ package io.github.StardewValley.views.menu.GUI;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -10,86 +12,142 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import io.github.StardewValley.views.menu.CLI.GameTerminalView;
+import io.github.StardewValley.App;
+import io.github.StardewValley.Main;
+import io.github.StardewValley.asset.Assets;
+import io.github.StardewValley.controllers.GameController;
 
-public class PauseMenu {
+public class PauseMenu implements Screen {
     private Stage stage;
     private Skin skin;
-    private GameScreen gameScreen;
     private TextButton exitButton;
-    private Label date , time , weather , energy;
+    private Label date, time, weather, energy;
+    private Texture bgTexture;
+    private GameController controller = App.getInstance().currentPlayerController;
 
+    public PauseMenu() {
 
-    public PauseMenu(GameScreen gameScreen, Skin skin) {
-        stage = new Stage(new ScreenViewport());
-        this.gameScreen = gameScreen;
-        this.skin = skin;
+        this.skin = Assets.getSkin();
+        this.stage = new Stage(new ScreenViewport());
         createUI();
     }
 
-    void createUI() {
+    private void createUI() {
         stage.clear();
         setDarkBackground();
 
+        // Create exit button
         exitButton = new TextButton("X", skin);
         exitButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                gameScreen.onPauseClosed();
+                System.out.println("CLICKED");
+                Main.getInstance().setScreen(new GameScreen());
             }
         });
-        exitButton.setX(1670);
-        exitButton.setY(850);
+        exitButton.setPosition(1670, 850);
 
+        // Create info labels
+        date = new Label("Date: " + controller.getDate().getData(), skin);
+        time = new Label("Time: " + controller.getTime(), skin);
+        weather = new Label("Weather: " + controller.getWeather(), skin);
+        energy = new Label("Energy: " + controller.showEnergy(), skin);
 
-        date = new Label("Date : " + gameScreen.getController().getDate().getData() , skin);
-        time = new Label("Time : " + gameScreen.getController().getTime() , skin);
-        weather = new Label("Weather : " + gameScreen.getController().getWeather() , skin);
-        energy = new Label("Energy : " + gameScreen.getController().showEnergy() , skin);
-
-
+        // Style labels
         date.setColor(Color.WHITE);
-        date.setPosition((float) Gdx.graphics.getWidth() /2 - date.getWidth()/2 , (float) Gdx.graphics.getHeight() /2 + 75);
-
         time.setColor(Color.WHITE);
-        time.setPosition((float) Gdx.graphics.getWidth() /2 - time.getWidth()/2 , (float) Gdx.graphics.getHeight() /2 + 25);
-
         weather.setColor(Color.WHITE);
-        weather.setPosition((float) Gdx.graphics.getWidth() /2 - weather.getWidth()/2 , (float) Gdx.graphics.getHeight() /2 - 25);
-
         energy.setColor(Color.WHITE);
-        energy.setPosition((float) Gdx.graphics.getWidth() /2 - energy.getWidth()/2 , (float) Gdx.graphics.getHeight() /2 - 75);
 
+        // Position labels
+        float centerX = Gdx.graphics.getWidth() / 2f;
+        float centerY = Gdx.graphics.getHeight() / 2f;
+
+        date.setPosition(centerX - date.getWidth() / 2, centerY + 75);
+        time.setPosition(centerX - time.getWidth() / 2, centerY + 25);
+        weather.setPosition(centerX - weather.getWidth() / 2, centerY - 25);
+        energy.setPosition(centerX - energy.getWidth() / 2, centerY - 75);
+
+        // Add actors to stage
+        stage.addActor(exitButton);
         stage.addActor(date);
         stage.addActor(time);
         stage.addActor(weather);
         stage.addActor(energy);
-        stage.addActor(exitButton);
-    }
-
-
-    public void show() {
-        createUI();
-        Gdx.input.setInputProcessor(stage);
-    }
-
-    public void draw() {
-        if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
-//			System.out.println("Left mouse button clicked!, coor: " + Gdx.input.getX() + " " + Gdx.input.getY());
-        }
-        stage.act(Gdx.graphics.getDeltaTime());
-        stage.draw();
-    }
-
-    public void dispose() {
     }
 
     private void setDarkBackground() {
-        Pixmap bgPixmap = new Pixmap((int) stage.getWidth(), (int) stage.getHeight(), Pixmap.Format.RGBA8888);
+        Pixmap bgPixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
         bgPixmap.setColor(0, 0, 0, 0.5f);
         bgPixmap.fill();
-        Texture bgTexture = new Texture(bgPixmap);
+        bgTexture = new Texture(bgPixmap);
         bgPixmap.dispose();
-        stage.addActor(new Image(bgTexture));
+
+        Image bgImage = new Image(bgTexture);
+        bgImage.setSize(stage.getWidth(), stage.getHeight());
+        stage.addActor(bgImage);
+
+        Gdx.input.setInputProcessor(stage);
+    }
+
+    @Override
+    public void show() {
+        Gdx.input.setInputProcessor(stage);
+        updateLabels();
+    }
+
+    private void updateLabels() {
+        date.setText("Date: " + controller.getDate().getData());
+        time.setText("Time: " + controller.getTime());
+        weather.setText("Weather: " + controller.getWeather());
+        energy.setText("Energy: " + controller.showEnergy());
+
+        // Re-center labels after text changes
+        float centerX = Gdx.graphics.getWidth() / 2f;
+        date.setX(centerX - date.getWidth() / 2);
+        time.setX(centerX - time.getWidth() / 2);
+        weather.setX(centerX - weather.getWidth() / 2);
+        energy.setX(centerX - energy.getWidth() / 2);
+    }
+
+    @Override
+    public void render(float delta) {
+        // Clear screen
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        // Update and draw stage
+        stage.act(delta);
+        stage.draw();
+
+        // Debug input (optional)
+        if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
+            // System.out.println("Click at: " + Gdx.input.getX() + ", " + Gdx.input.getY());
+        }
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        stage.getViewport().update(width, height, true);
+        createUI(); // Recreate UI to adjust to new size
+    }
+
+    @Override
+    public void pause() {
+        // Optional: Handle game pause
+    }
+
+    @Override
+    public void resume() {
+        // Optional: Handle game resume
+    }
+
+    @Override
+    public void hide() {
+        // Optional: Clean up when screen is hidden
+    }
+
+    @Override
+    public void dispose() {
     }
 }

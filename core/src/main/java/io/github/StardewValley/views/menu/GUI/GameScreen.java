@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.github.czyzby.lml.parser.impl.attribute.progress.AnimateDurationLmlAttribute;
 import io.github.StardewValley.App;
@@ -36,17 +37,23 @@ public class GameScreen implements Screen , InputProcessor {
     private Stage stage;
     private InventoryTab inventoryTab;
     private ShopMenuTab shopMenuTab;
+    private GiftTab giftTab;
     private TerminalTab terminalTab;
-    private PauseMenu pauseMenu;
     private ChatScreen chatScreen;
+    private TalkScreen talkScreen;
     private TagNotification tagNotification;
+    private FriendshipsTab friendshipsTab;
     private boolean isInventoryShown = false;
     private boolean isShopMenuShown = false;
     private boolean isTerminalShown = false;
+    private boolean isFriendshipShown = false;
     private boolean isChatShown = false;
+    private boolean isTalkScreen = false;
+    private boolean isGiftTabShown = false;
     private BitmapFont messagePrinter = new BitmapFont();
     private String message;
     private AnimalInfoWindow animalInfoWindow;
+    private OtherPlayerInfo otherPlayerInfo;
     private Pixmap darkLayout;
     private Texture darkLayoutTexture;
     private Image darkModeImage;
@@ -77,7 +84,9 @@ public class GameScreen implements Screen , InputProcessor {
         Skin skin = Assets.getSkin();
         inventoryTab = new InventoryTab(viewController.player, this, skin);
         shopMenuTab = new ShopMenuTab(this , skin);
+        giftTab = new GiftTab(this , skin);
         terminalTab = new TerminalTab(this , skin);
+        friendshipsTab = new FriendshipsTab(this , skin);
         chatScreen = new ChatScreen(viewController.player, this, skin);
         tagNotification = new TagNotification(skin);
     }
@@ -117,13 +126,24 @@ public class GameScreen implements Screen , InputProcessor {
             shopMenuTab.draw();
         if (isTerminalShown)
             terminalTab.draw();
-        if (pauseMenu != null)
-            pauseMenu.draw();
         if (isChatShown) {
             chatScreen.draw();
         }
+        if(isTalkScreen)
+            talkScreen.draw();
+
+        if(isFriendshipShown)
+            friendshipsTab.draw();
         if (tagNotification.isVisible()) {
             tagNotification.draw();
+        }
+        if(isGiftTabShown)
+            giftTab.draw();
+
+        if(!viewController.player.getNotifications().isEmpty()){
+            int size = viewController.player.getNotifications().size();
+            showNotification(viewController.player.getNotifications().get(size - 1));
+            viewController.player.getNotifications().remove(size - 1);
         }
     }
 
@@ -172,13 +192,20 @@ public class GameScreen implements Screen , InputProcessor {
             shopMenuTab.show();
 
         }
+        if(i == Input.Keys.G){
+            isGiftTabShown = true;
+            giftTab.show();
+        }
         if (i == Input.Keys.T && !isTerminalShown && !isChatShown) {
             isTerminalShown = true;
             terminalTab.show();
         }
-        if (i == Input.Keys.P && pauseMenu == null) {
-            pauseMenu = new PauseMenu(this , Assets.getSkin());
-            pauseMenu.show();
+        if (i == Input.Keys.F && !isTerminalShown && !isChatShown) {
+            isFriendshipShown = true;
+            friendshipsTab.show();
+        }
+        if (i == Input.Keys.P) {
+            game.setScreen(new PauseMenu());
         }
 
         if (i == Input.Keys.F1) {
@@ -210,6 +237,14 @@ public class GameScreen implements Screen , InputProcessor {
             animalInfoWindow.setPosition(screenX + 30, Gdx.graphics.getHeight() - screenY + 30);
             Gdx.input.setInputProcessor(stage);
             stage.addActor(animalInfoWindow);
+        }
+
+        Player player = viewController.getOtherPlayerClick(c);
+        if(player != null){
+            otherPlayerInfo = new OtherPlayerInfo(this , Assets.getSkin() , player , currentPlayer);
+            otherPlayerInfo.setPosition(screenX + 30, Gdx.graphics.getHeight() - screenY + 30);
+            Gdx.input.setInputProcessor(stage);
+            stage.addActor(otherPlayerInfo);
         }
         return false;
     }
@@ -250,13 +285,29 @@ public class GameScreen implements Screen , InputProcessor {
         Gdx.input.setInputProcessor(this);
     }
 
+    public void onTalkClosed(){
+        isTalkScreen = false;
+        talkScreen = null;
+        Gdx.input.setInputProcessor(this);
+    }
+
     public void onShopMenuClosed() {
         isShopMenuShown = false;
         Gdx.input.setInputProcessor(this);
     }
 
+    public void onGiftMenuClosed(){
+        isGiftTabShown = false;
+        Gdx.input.setInputProcessor(this);
+    }
+
     public void onTerminalClosed(){
         isTerminalShown = false;
+        Gdx.input.setInputProcessor(this);
+    }
+
+    public void onFriendshipScreenClosed(){
+        isFriendshipShown = false;
         Gdx.input.setInputProcessor(this);
     }
 
@@ -272,8 +323,11 @@ public class GameScreen implements Screen , InputProcessor {
         Gdx.input.setInputProcessor(this);
     }
 
-    public void onPauseClosed(){
-        pauseMenu = null;
+    public void closePlayerInfo(){
+        if(otherPlayerInfo != null){
+            otherPlayerInfo = null;
+        }
+        stage.clear();
         Gdx.input.setInputProcessor(this);
     }
 
@@ -288,10 +342,22 @@ public class GameScreen implements Screen , InputProcessor {
     }
 
     public void sendMessageInChat(String sender, String message, Color color) {
+        if(talkScreen != null){
+            talkScreen.pushMessage(sender , message , color);
+            return;
+        }
         chatScreen.pushMessage(sender, message, color);
     }
 
     public void showNotification(String text) {
         tagNotification.show(text);
+    }
+
+    public void setTalkScreen(TalkScreen talkScreen) {
+        this.talkScreen = talkScreen;
+        if(talkScreen != null){
+            isTalkScreen = true;
+            talkScreen.show();
+        }
     }
 }

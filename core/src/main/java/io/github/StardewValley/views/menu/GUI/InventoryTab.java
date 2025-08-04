@@ -175,6 +175,7 @@ class InventoryTab {
 
 	private void createInventoryUI() {
 		Table scrollTable = new Table();
+		itemMatrix.clear();
 		scrollTable.defaults().width(64).height(64).pad(2);
 		Inventory inv = player.getInventory();
 		List<Item> items = inv.getItems();
