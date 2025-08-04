@@ -41,7 +41,7 @@ public class Player implements DailyUpdate, Serializable {
     private Animal shepherdingAnimal;
     private boolean faint = false;
     private int quest = 0;
-
+    private String suitor;
     public Player() {}
 
     private transient Texture texture = new Texture("Textures/Players/FarmerFront1.png");
@@ -380,5 +380,13 @@ public class Player implements DailyUpdate, Serializable {
 
     public int getSkill() {
         return skill.getOverallSkill();
+    }
+
+    public void setSuitor(String suitor) {
+        this.suitor = suitor;
+    }
+
+    public String getSuitor() {
+        return suitor;
     }
 }

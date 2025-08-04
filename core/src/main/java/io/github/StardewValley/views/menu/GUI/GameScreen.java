@@ -231,7 +231,7 @@ public class GameScreen implements Screen , InputProcessor {
         Coord c = viewController.clickController(screenX, screenY);
         message = "(" + c.getX() + ","
                 + c.getY() + ")";
-        Tile tile = controller.getPlayer().getMap().getTile(c);
+        Tile tile = currentPlayer.getMap().getTile(c);
         if(tile != null && tile.getPlacable(Animal.class) != null){
             Animal animal = tile.getPlacable(Animal.class);
             animalInfoWindow = new AnimalInfoWindow(this , Assets.getSkin() , animal);
