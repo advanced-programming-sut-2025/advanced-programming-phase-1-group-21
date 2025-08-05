@@ -410,4 +410,6 @@ public class GameScreen implements Screen , InputProcessor {
             talkScreen.show();
         }
     }
+
+
 }

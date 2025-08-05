@@ -1029,6 +1029,7 @@ public class GameController {
 
         inventory.removeItem(Item.build(artisanName, 1));
         new Artisan(ArtisanGoodsData.getRecipeData(artisanName), player.getInventory()).onPlace(tile);
+        tile.setPlacableLoc();
         return Result.success(null);
     }
 
@@ -1045,6 +1046,7 @@ public class GameController {
 
         inventory.removeItem(Item.build(artisan.getName(), 1));
         new Artisan(ArtisanGoodsData.getRecipeData(artisan.getName()), player.getInventory()).onPlace(tile);
+        tile.setPlacableLoc();
         return Result.success(null);
     }
 

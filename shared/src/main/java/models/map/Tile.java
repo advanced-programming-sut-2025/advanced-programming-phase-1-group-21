@@ -87,6 +87,13 @@ public class Tile implements DailyUpdate, Serializable {
         }
     }
 
+    public void setPlacableLoc(){
+        if(placable != null && placable.spriteGetter() != null){
+            placable.spriteGetter().setX(sprite.getX());
+            placable.spriteGetter().setY(sprite.getY());
+        }
+    }
+
     public Texture getTexture() {
         return texture;
     }

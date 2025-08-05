@@ -16,6 +16,7 @@ import java.util.Map;
 
 public class Artisan implements Placable, Serializable {
 	private ArtisanGoodsData goodsData;
+	private transient Sprite sprite;
 	Item result;
 
 	public Artisan() {}
@@ -149,7 +150,11 @@ public class Artisan implements Placable, Serializable {
 
 	@Override
 	public Sprite spriteGetter() {
-		return new Sprite(getTexture());
+		if(sprite == null){
+			sprite = new Sprite(getTexture());
+		}
+		sprite.setTexture(getTexture());
+		return sprite;
 	}
 
 	@Override
