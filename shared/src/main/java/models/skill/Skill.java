@@ -34,4 +34,12 @@ public class Skill implements Serializable {
         }
         return sb.toString();
     }
+
+    public int getOverallSkill() {
+        int total = 0;
+        for (SkillType type : SkillType.values()) {
+            total += getSkillLevel(type);
+        }
+        return total;
+    }
 }

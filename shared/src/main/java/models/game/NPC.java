@@ -1,5 +1,6 @@
 package models.game;
 
+import Asset.SharedAssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import data.VillagerData;
@@ -17,11 +18,20 @@ public class NPC implements Placable, DailyUpdate, Serializable {
     private String name;
     // Characterization
     NPCHouse house;
+    Map npcMap;
+    Building building;
     private ArrayList<VillagerTask> tasks;
     private ArrayList<Boolean> tasksFlag = new ArrayList<>();
     private ArrayList<NPCFriendship> friendships = new ArrayList<>();
     private ArrayList<String> favorites;
     private Coord coord;
+    private transient Texture texture;
+    private transient Sprite sprite;
+    private transient String responseToMessage;
+    private transient Sprite cloudSprite;
+    private transient Sprite reactSprite;
+    private transient Texture reactTexture;
+    private float animationTime;
 
     public NPC() {}
 
@@ -32,9 +42,25 @@ public class NPC implements Placable, DailyUpdate, Serializable {
         for(Player player : players)
             friendships.add(new NPCFriendship(player , FriendshipLevel.LEVEL0 , 0));
         house = new NPCHouse();
+        this.building = house;
         tasksFlag.add(false);
         tasksFlag.add(false);
         tasksFlag.add(false);
+        texture = SharedAssetManager.getNPCTexture(name.toLowerCase());
+        sprite = new Sprite(texture);
+        sprite.setX(getMap().mapType.getDistanceX());
+        sprite.setY(getMap().mapType.getDistanceY() + (getMap().getMaxY() - 1)*30);
+        sprite.setSize(60 , 100);
+        coord = new Coord(0,0);
+    }
+
+    public void setNpcMap(Map npcMap) {
+        this.npcMap = npcMap;
+    }
+
+    public Map getMap() {
+        if(building == null) return npcMap;
+        return building.getMap();
     }
 
     public ArrayList<Boolean> getTasksFlag() {
@@ -81,6 +107,30 @@ public class NPC implements Placable, DailyUpdate, Serializable {
         this.coord = coord;
     }
 
+    public void talk(String message){
+        responseToMessage = "OKAY";//TODO : response to message should gets from LLM
+        cloudSprite = new Sprite(SharedAssetManager.getCloud());
+        cloudSprite.setSize(60 , 60);
+        cloudSprite.setX(sprite.getX() + 50);
+        cloudSprite.setY(sprite.getY() + 90);
+    }
+
+    public Sprite getCloudSprite() {
+        return cloudSprite;
+    }
+
+    public String getResponseToMessage() {
+        return responseToMessage;
+    }
+
+    public void setResponseToMessage(String responseToMessage) {
+        this.responseToMessage = responseToMessage;
+    }
+
+    public void setCloudSprite(Sprite cloudSprite) {
+        this.cloudSprite = cloudSprite;
+    }
+
     public NPCFriendship getFriendshipByPlayer(Player player) {
         for(NPCFriendship npcFriendship : friendships) {
             if(npcFriendship.getPlayer().equals(player)) {
@@ -121,7 +171,7 @@ public class NPC implements Placable, DailyUpdate, Serializable {
 
     @Override
     public Sprite spriteGetter() {
-        return null;
+        return sprite;
     }
 
     public NPCHouse getHouse() {
@@ -158,6 +208,11 @@ public class NPC implements Placable, DailyUpdate, Serializable {
         }
 
         @Override
+        public String getFullName() {
+            return name + "'s House";
+        }
+
+        @Override
         public boolean canEnter(Date date) {
             return true;
         }
@@ -190,4 +245,42 @@ public class NPC implements Placable, DailyUpdate, Serializable {
         );
     }
 
+    public void setGiftAnimation(){
+        reactTexture = SharedAssetManager.getHeart();
+        if(reactSprite == null)
+            reactSprite = new Sprite(reactTexture);
+        reactSprite.setTexture(reactTexture);
+        reactSprite.setSize(30 , 30);
+        reactSprite.setX(sprite.getX() + 20);
+        reactSprite.setY(sprite.getY() + 110);
+        animationTime = 1;
+    }
+
+    public void setQuestAnimation(){
+        reactTexture = SharedAssetManager.getCup();
+        if(reactSprite == null)
+            reactSprite = new Sprite(reactTexture);
+        reactSprite.setTexture(reactTexture);
+        reactSprite.setSize(30 , 30);
+        reactSprite.setX(sprite.getX() + 20);
+        reactSprite.setY(sprite.getY() + 110);
+        animationTime = 1;
+    }
+
+
+    public void runAnimation(){
+        reactSprite.setAlpha(animationTime);
+        animationTime -= (float) 0.002;
+        reactSprite.setX(sprite.getX() + 20);
+        reactSprite.setY(sprite.getY() + 110);
+        if(animationTime <= 0){
+            animationTime = 0;
+            reactSprite = null;
+            reactTexture = null;
+        }
+    }
+
+    public Sprite getReactSprite() {
+        return reactSprite;
+    }
 }

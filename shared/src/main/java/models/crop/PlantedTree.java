@@ -18,7 +18,6 @@ public class PlantedTree implements Placable, Harvestable, Serializable, DailyUp
 	private int stage = 0;
 	private int day = 1;
 	private int lastHarvest = 0;
-	private int waterStage = 2;
 	private boolean readyToHarvest = false;
 	public TreeData treeData;
 	Texture texture;
@@ -42,20 +41,13 @@ public class PlantedTree implements Placable, Harvestable, Serializable, DailyUp
 		sprite = new Sprite(texture);
 	}
 
-	private void water() {
-		// We currently don't need this method.
-		// But I don't delete it because there is a small change that we are going to need it later.
-		// I just changed it to 'private'.
-
-		waterStage = 2;
-	}
-
 	public Item harvest(Player player) {
 		// This method is supposed to be called by its tile.
 		if (readyToHarvest) {
 			player.setSkillExp(SkillType.FORAGING , player.getSkillExp(SkillType.FORAGING) + 5);
 			readyToHarvest = false;
 			lastHarvest = day;
+			sprite.setTexture(SharedAssetManager.getOrLoad(treeData.getSeasonTexture()));
 			return Item.build(treeData.getResultName(), 1);
 		}
 
@@ -64,12 +56,6 @@ public class PlantedTree implements Placable, Harvestable, Serializable, DailyUp
 
 	public boolean nextDay(Game g) {
 		// This method is supposed to be called by its tile.
-
-		/*
-		waterStage--;
-		if (waterStage < 0)
-			return true;
-		 */
 
 		day++;
 		stage = treeData.getStage(day);
@@ -140,18 +126,15 @@ public class PlantedTree implements Placable, Harvestable, Serializable, DailyUp
 		);
 	}
 
-	private void resetSprite(){
-		if(stage == treeData.getStages().size()){
-			if(readyToHarvest) {
-				if(treeData.getHarvestTexture() != null) {
-					texture = SharedAssetManager.getOrLoad(treeData.getHarvestTexture());
-				}
-			}
-			else
-				texture = SharedAssetManager.getOrLoad(treeData.getSeasonTexture());//TODO this function logic should depends on current season
+	private void resetSprite() {
+		if (readyToHarvest) {
+			sprite.setTexture(SharedAssetManager.getOrLoad(treeData.getHarvestTexture()));
 		}
-		else
-			texture = SharedAssetManager.getOrLoad(treeData.getStageTexture(stage));
-		sprite.setTexture(texture);
+		else if (stage == treeData.getStages().size()) {
+			sprite.setTexture(SharedAssetManager.getOrLoad(treeData.getSeasonTexture()));
+		}
+		else {
+			sprite.setTexture(SharedAssetManager.getOrLoad(treeData.getStageTexture(stage)));
+		}
 	}
 }

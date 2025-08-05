@@ -789,7 +789,7 @@
     "texture-address": "Textures/Foraging/Salmonberry.png"
   },
   {
-    "name": "Onion",
+    "name": "Spring Onion",
     "type": "Consumable",
     "texture-address": "Textures/Foraging/Spring_Onion.png"
   },

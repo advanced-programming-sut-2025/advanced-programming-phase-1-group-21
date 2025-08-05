@@ -149,7 +149,7 @@
       "Textures/Trees/Oak_Stage_3.png",
       "Textures/Trees/Oak_Stage_4.png"
     ],
-    "harvest-texture": null,
+    "harvest-texture": "Textures/Trees/Oak_Stage_5.png",
     "season-texture": "Textures/Trees/Oak_Stage_5.png"
   },
   {
@@ -166,7 +166,7 @@
       "Textures/Trees/Maple_Stage_3.png",
       "Textures/Trees/Maple_Stage_4.png"
     ],
-    "harvest-texture": null,
+    "harvest-texture": "Textures/Trees/Maple_Stage_5.png",
     "season-texture": "Textures/Trees/Maple_Stage_5.png"
   },
   {
@@ -183,7 +183,7 @@
       "Textures/Trees/Pine_Stage_3.png",
       "Textures/Trees/Pine_Stage_4.png"
     ],
-    "harvest-texture": null,
+    "harvest-texture": "Textures/Trees/Pine_Stage_5.png",
     "season-texture": "Textures/Trees/Pine_Stage_5.png"
   },
   {
@@ -200,7 +200,7 @@
       "Textures/Trees/Mahogany_Stage_3.png",
       "Textures/Trees/Mahogany_Stage_4.png"
     ],
-    "harvest-texture": null,
+    "harvest-texture": "Textures/Trees/Mahogany_Stage_5.png",
     "season-texture": "Textures/Trees/Mahogany_Stage_5.png"
   },
   {
@@ -217,7 +217,7 @@
       "Textures/Trees/Mushroom_Stage_3.png",
       "Textures/Trees/Mushroom_Stage_4.png"
     ],
-    "harvest-texture": null,
+    "harvest-texture": "Textures/Trees/Mushroom_Stage_5.png",
     "season-texture": "Textures/Trees/Mushroom_Stage_5.png"
   },
   {
@@ -234,7 +234,7 @@
       "Textures/Trees/Mystic_Tree_Stage_3.png",
       "Textures/Trees/Mystic_Tree_Stage_4.png"
     ],
-    "harvest-texture": null,
+    "harvest-texture": "Textures/Trees/Mystic_Tree_Stage_5.png",
     "season-texture": "Textures/Trees/Mystic_Tree_Stage_5.png"
   }
 ]

@@ -248,7 +248,7 @@ public class Tile implements DailyUpdate, Serializable {
     }
 
     public void resetTile(){
-        tileType = null;
+        tileType = TileType.UNPLOWED;
         placable = null;
         onTileSprite = null;
         onTileTexture = null;

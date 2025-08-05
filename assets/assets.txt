@@ -1428,6 +1428,7 @@ Textures/Emoji (probably unusable)/Emojis190.png
 Textures/Emoji (probably unusable)/Emojis191.png
 Textures/Emoji (probably unusable)/Emojis194.png
 Textures/Emoji (probably unusable)/Emojis195.png
+Textures/Emoji (probably unusable)/cup.png
 Textures/Emoji (probably unusable)/food.png
 Textures/Farming/Agriculturist.png
 Textures/Farming/Amaranth.png
@@ -2378,11 +2379,12 @@ Textures/Trees/Wild_Tree_stump_Fall.png
 Textures/Trees/Wild_Tree_stump_Spring.png
 Textures/Trees/Wild_Tree_stump_Winter.png
 Textures/Trees/Wood.png
-Textures/Villagers/Abigail.png
-Textures/Villagers/Harvey.png
-Textures/Villagers/Leah.png
-Textures/Villagers/Robin.png
-Textures/Villagers/Sebastian.png
+Textures/Villagers/abigail.png
+Textures/Villagers/cloud.png
+Textures/Villagers/harvey.png
+Textures/Villagers/leah.png
+Textures/Villagers/robin.png
+Textures/Villagers/sebastian.png
 Textures/map/FallBasicTile.png
 Textures/map/Outdoors Fall.png
 Textures/map/Outdoors Spring.png

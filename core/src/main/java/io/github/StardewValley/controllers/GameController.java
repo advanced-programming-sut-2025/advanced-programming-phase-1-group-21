@@ -6,7 +6,6 @@ package io.github.StardewValley.controllers;
  */
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import data.ArtisanRecipeData;
 import io.github.StardewValley.App;
@@ -14,8 +13,6 @@ import io.github.StardewValley.App;
 import data.AnimalData;
 import data.ArtisanGoodsData;
 import data.items.SeedData;
-import io.github.StardewValley.Main;
-import io.github.StardewValley.views.menu.GUI.GameScreen;
 import models.Item.*;
 import models.animal.Animal;
 import models.animal.AnimalTypes;
@@ -37,7 +34,6 @@ import io.github.StardewValley.views.menu.CLI.GameTerminalView;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 public class GameController {
@@ -516,6 +512,21 @@ public class GameController {
         return Result.success(seedData.toString());
     }
 
+    public void plant(Tile tile, Seed seed) {
+        seed.plant(tile);
+        player.getInventory().removeItem(seed);
+    }
+
+    public void plant(Tile tile, Sapling sap) {
+        sap.plant(tile);
+        player.getInventory().removeItem(sap);
+    }
+
+    public void harvest(Tile tile) {
+        Item item = tile.harvest(player);
+        player.getInventory().addItem(item);
+    }
+
     public Result<Void> plant(String seedName, Direction direction) { // After MAP
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         if (direction == null)
@@ -550,6 +561,11 @@ public class GameController {
         if (tile.getTileType() == TileType.PLANTED_SEED)
             return Result.success(tile.getPlacable(PlantedSeed.class).toString());
         return Result.success(tile.getPlacable(PlantedTree.class).toString());
+    }
+
+    public void fertilize(Tile tile, Item fertilizer) {
+        tile.getPlacable(PlantedSeed.class).fertilize(FertilizerType.getFertilizerType(fertilizer.getName()));
+        player.getInventory().removeItem(Item.build(fertilizer.getName(), 1));
     }
 
     public Result<Void> fertilize(FertilizerType fertilizer, Direction direction) {
@@ -1143,7 +1159,7 @@ public class GameController {
     public Result<ArrayList<String>> showFriendships() {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         ArrayList<String> output = new ArrayList<>();
-        output.add(player.getUser().getUsername() + "'s friendships :");
+        output.add(player.getUser().getUsername() + "'s friendships with other players:");
         for (Relation relation : game.getMyRelations(player))
             output.add(relation.printRelation(player));
         return Result.success(output);
@@ -1209,7 +1225,7 @@ public class GameController {
 //            return Result.failure(GameError.NO_PLAYER_FOUND);
 
         Player player1 = game.getPlayerByName(username);
-//        if (player1 == null) return Result.failure(GameError.NO_PLAYER_FOUND);
+        if (player1 == null) return Result.failure(GameError.NO_PLAYER_FOUND);
 //
 //        if(!player.weAreNextToEachOther(player1))
 //            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
@@ -1231,14 +1247,6 @@ public class GameController {
         }
         player1.addNotifications(player.getUser().getUsername() + " sends you a gift");
         return Result.success(null);
-    }
-
-    public void sendNotification(String message , String username){
-        if(App.getInstance().logedInUser.getUsername().equals(username)) {
-            Screen screen = Main.getInstance().getScreen();
-            if(screen instanceof GameScreen)
-                ((GameScreen) screen).showNotification(message);
-        }
     }
 
     //    What's its difference with gift history :/
@@ -1352,8 +1360,8 @@ public class GameController {
         Player player1 = game.getPlayerByName(username);
         if (player1 == null) return Result.failure(GameError.NO_PLAYER_FOUND);
 
-        if(!player.weAreNextToEachOther(player1))
-            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
+//        if(!player.weAreNextToEachOther(player1))
+//            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
 
         Relation relation = game.getRelationOfUs(player1, player);
 
@@ -1366,6 +1374,7 @@ public class GameController {
             player1.setEnergy(player1.getEnergy() + 50);
             player.setEnergy(player.getEnergy() + 50);
         }
+//        player1.setEnergy(0);
         relation.checkOverFlow();
         return Result.success(null);
     }
@@ -1379,8 +1388,8 @@ public class GameController {
         Player player1 = game.getPlayerByName(username);
         if (player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
 
-        if(!player.weAreNextToEachOther(player1))
-            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
+//        if(!player.weAreNextToEachOther(player1))
+//            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
 
         Relation relation = game.getRelationOfUs(player, player1);
         if (relation.getLevel().getLevel() == 0)
@@ -1392,12 +1401,18 @@ public class GameController {
 
         player.getInventory().removeItem(item);
         player1.getInventory().addItem(item);
+//        player1.setEnergy(0);
         relation.setFlower(true);
         if(relation.getLevel().getLevel() == 4){
             player.setEnergy(player.getEnergy() + 50);
-            player.setEnergy(player.getEnergy() + 50);
+            player1.setEnergy(player1.getEnergy() + 50);
         }
         relation.checkOverFlow();
+//        StringBuilder stringBuilder = new StringBuilder();
+//        for(Item item1 : player1.getInventory().getItems()){
+//            stringBuilder.append(item1.getName()).append(" ").append(item1.getAmount()).append("\n");
+//        }
+//        throw new RuntimeException(stringBuilder.toString());
         return Result.success(null);
     }
 
@@ -1407,13 +1422,13 @@ public class GameController {
         if (player.getUser().getUsername().equals(username))
             return Result.failure(GameError.NO_PLAYER_FOUND);
 
-        Player player = game.getPlayerByName(username);
-        if (player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
+        Player player1 = game.getPlayerByName(username);
+        if (player1 == null) return Result.failure(GameError.NO_PLAYER_FOUND);
 
-//        if(!player.weAreNextToEachOther(player))
+//        if(!player1.weAreNextToEachOther(player))
 //            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
 
-        Relation relation = game.getRelationOfUs(player, player);
+        Relation relation = game.getRelationOfUs(player1, player);
         if (relation.getLevel().getLevel() < 3)
             return Result.failure(GameError.FRIENDSHIP_LEVEL_IS_NOT_ENOUGH);
         if (relation.getFriendshipXP() < 300)
@@ -1426,30 +1441,40 @@ public class GameController {
 
         if (player.getUser().getGender().equals(Gender.FEMALE))
             return Result.failure(GameError.YOU_ARE_GIRL);
-        if (player.getUser().getGender().equals(Gender.MALE))
+        if (player1.getUser().getGender().equals(Gender.MALE))
             return Result.failure(GameError.YOUR_WIFE_CAN_NOT_BE_A_BOY);
 
-        String response = GameTerminalView.getResponse(player);
-        if (response.equals("no")) {
+        player1.setSuitor(player.getUser().getUsername());
+        player1.addNotifications("Would you marry " + player.getUser().getUsername() + "?");
+        return Result.success(null);
+    }
+
+    public Result<Void> marriageResponse(String response){
+        Player sender = game.getPlayerByName(player.getSuitor());
+        Relation relation = game.getRelationOfUs(player , sender);
+        if (response.equalsIgnoreCase("no")) {
             relation.setFriendshipXP(0);
             relation.setLevel(FriendshipLevel.LEVEL0);
             relation.setFlower(false);
             player.setMaxEnergy(100 , 7);
-            return Result.success("aaaajaaaab rasmieeeeeh rasme zamoooneeehhh");
+            sender.addNotifications("Geryeh kon aghab mande, friend zone shodi");
+            return Result.success(null);
         }
 
         relation.setLevel(FriendshipLevel.LEVEL4);
-        player.getInventory().removeItem(ring);
+        Item ring = Item.build("wedding ring" , 1);
+        sender.getInventory().removeItem(ring);
         player.getInventory().addItem(ring);
         Item coin = Item.build("coin", player.getCoins() + player.getCoins());
         player.getInventory().removeItem(Item.build("coin", player.getCoins()));
-        player.getInventory().removeItem(Item.build("coin", player.getCoins()));
+        sender.getInventory().removeItem(Item.build("coin", player.getCoins()));
         player.getInventory().addItem(coin);
-        player.getInventory().addItem(coin);
-        return Result.success("ke emshab shabe eshghe hamin emshabo darim");
+        sender.getInventory().addItem(coin);
+        sender.addNotifications("dige rafti ghati morgha");
+        return Result.success(null);
     }
 
-    public Result<String> meetNPC(String NPCName) {
+    public Result<Void> meetNPC(String NPCName , String message) {
         NPC npc = game.getNPCByName(NPCName);
         if (npc == null) return Result.failure(GameError.THIS_NPC_DOES_NOT_EXIST);
 
@@ -1457,8 +1482,16 @@ public class GameController {
         if (!npcFriendship.isTodayMeet())
             npcFriendship.setFriendshipXP(npcFriendship.getFriendshipXP() + 20);
         npcFriendship.setTodayMeet(true);
-        return Result.success(npcFriendship.talk(game.getGameDate().getSeason(), game.getGameDate().getHour()));
+        npc.talk(message);
+        return Result.success(null);
 
+    }
+
+    public Result<Void> resetNPCResponse(String NPCName){
+        NPC npc = game.getNPCByName(NPCName);
+        npc.setResponseToMessage(null);
+        npc.setCloudSprite(null);
+        return Result.success(null);
     }
 
     public Result<Void> giftNPC(String NPCName, String item, int amount) {
@@ -1481,52 +1514,49 @@ public class GameController {
             npcFriendship.setFriendshipXP(npcFriendship.getFriendshipXP() + 200);
         else
             npcFriendship.setFriendshipXP(npcFriendship.getFriendshipXP() + 50);
+        npc.setGiftAnimation();
         return Result.success(null);
     }
 
     public Result<ArrayList<String>> friendShipNPCList() {
         ArrayList<String> output = new ArrayList<>();
+        output.add("NPC FRIENDSHIPS : ");
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         for (NPC npc : game.getNpcs()) {
             for (NPCFriendship npcFriendship : npc.getFriendships()) {
                 if (npcFriendship.getPlayer().equals(player)) {
-                    output.add("NPC name: " + npc.getName());
-                    output.add("Friendship XP: " + npcFriendship.getFriendshipXP());
-                    output.add("Friendship Level: " + npcFriendship.getLevel().getLevel());
-                    if (npcFriendship.isTodayMeet())
-                        output.add("last seen recently");
-                    else
-                        output.add("last seen a long time ago");
-                    if (npcFriendship.isTodayGift())
-                        output.add("last gift recently");
-                    else
-                        output.add("last gift a long time ago");
-                    output.add("-----------------");
+                    String stringBuilder = "NPC name: " + npc.getName() + " | " +
+                            "Friendship XP: " + npcFriendship.getFriendshipXP() + " | " +
+                            "Friendship Level: " + npcFriendship.getLevel().getLevel();
+//                    if (npcFriendship.isTodayMeet())
+//                        output.add("last seen recently");
+//                    else
+//                        output.add("last seen a long time ago");
+//                    if (npcFriendship.isTodayGift())
+//                        output.add("last gift recently");
+//                    else
+//                        output.add("last gift a long time ago");
+//                    output.add("-----------------");
+                    output.add(stringBuilder);
                 }
             }
         }
         return Result.success(output);
     }
 
-    public Result<ArrayList<String>> showQuestList() {
+    public Result<ArrayList<String>> showQuestList(String NPCName) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+
         ArrayList<String> output = new ArrayList<>();
-        for (NPC npc : game.getNpcs()) {
-            NPCFriendship npcFriendship = npc.getFriendshipByPlayer(player);
-            output.add("NPC name: " + npc.getName());
-            for (int i = 0; i < Math.min(npcFriendship.getLevel().getLevel() + 1, 3); i++) {
-                output.add(i + ":");
-                output.add("Request Item: " + npc.getTasks().get(i).getRequestItem());
-                output.add("Request Amount: " + npc.getTasks().get(i).getRequestAmount());
-                output.add("Reward Item: " + npc.getTasks().get(i).getRewardItem());
-                output.add("Reward Amount: " + npc.getTasks().get(i).getRewardAmount());
-                if(npc.getTasksFlag().get(i))
-                    output.add("this quest has been finished");
-                else
-                    output.add("you finish this quest");
-                output.add("--------------------");
-                output.add("\n");
-            }
+        NPC npc = game.getNPCByName(NPCName);
+        NPCFriendship npcFriendship = npc.getFriendshipByPlayer(player);
+        for (int i = 0; i < Math.min(npcFriendship.getLevel().getLevel() + 1, 3); i++) {
+            String stringBuilder = (i) + ": " +
+                    "Request Item: " + npc.getTasks().get(i).getRequestItem() +
+                    " :" + npc.getTasks().get(i).getRequestAmount() + " | " +
+                    "Reward Item: " + npc.getTasks().get(i).getRewardItem() +
+                    " :" + npc.getTasks().get(i).getRewardAmount();
+            output.add(stringBuilder);
         }
         return Result.success(output);
     }
@@ -1541,7 +1571,7 @@ public class GameController {
         if (questID > npcFriendship.getLevel().getLevel())
             return Result.failure(GameError.FRIENDSHIP_LEVEL_IS_NOT_ENOUGH);
         if(npc.getTasksFlag().get(questID))
-            return Result.failure(GameError.THIS_NPC_DOES_NOT_EXIST);
+            return Result.failure(GameError.QUEST_HAS_BEEN_FINISHED);
 
         Item requiredItem = Item.build(npc.getTasks().get(questID).getRequestItem(), npc.getTasks().get(questID).getRequestAmount());
 
@@ -1556,6 +1586,8 @@ public class GameController {
 
         player.getInventory().addItem(rewardItem);
         npc.getTasksFlag().set(questID, true);
+        player.addQuest();
+        npc.setQuestAnimation();
         return Result.success(null);
 
     }

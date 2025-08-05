@@ -46,6 +46,25 @@ public class SharedAssetManager {
         manager.load("Textures/Decor/lightning.png" , Texture.class);
         manager.load("Textures/Flooring/HouseFloor.png" , Texture.class);
         manager.load("Textures/Refrigerator/Fridge.png" , Texture.class);
+        manager.load("Textures/Villagers/abigail.png" , Texture.class);
+        manager.load("Textures/Villagers/sebastian.png" , Texture.class);
+        manager.load("Textures/Villagers/harvey.png" , Texture.class);
+        manager.load("Textures/Villagers/robin.png" , Texture.class);
+        manager.load("Textures/Villagers/leah.png" , Texture.class);
+        manager.load("Textures/Villagers/cloud.png", Texture.class);
+        manager.load("Textures/Emoji (probably unusable)/cup.png" , Texture.class);
+    }
+
+    public static Texture getCup(){
+        return manager.get("Textures/Emoji (probably unusable)/cup.png");
+    }
+
+    public static Texture getCloud(){
+        return manager.get("Textures/Villagers/cloud.png");
+    }
+
+    public static Texture getNPCTexture(String NPCName){
+        return manager.get("Textures/Villagers/" + NPCName + ".png");
     }
 
     public static Texture getHouseTile(){

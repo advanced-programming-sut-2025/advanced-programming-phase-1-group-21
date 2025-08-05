@@ -44,6 +44,8 @@ public class FriendshipsTab {
         exitButton.setY(850);
 
         ArrayList<String> printedFriendships = gameScreen.getController().showFriendships().getData();
+        ArrayList<String> npcFriendShips = gameScreen.getController().friendShipNPCList().getData();
+        printedFriendships.addAll(npcFriendShips);
         for(int i = 0 ; i < printedFriendships.size() ; i++){
             String string = printedFriendships.get(i);
             Label label = new Label(string , skin);

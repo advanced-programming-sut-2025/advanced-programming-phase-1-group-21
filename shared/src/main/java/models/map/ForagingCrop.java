@@ -1,8 +1,10 @@
 package models.map;
 
+import Asset.SharedAssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import data.ForagingCropData;
+import data.items.AllItemsData;
 import models.Item.Item;
 import models.crop.Harvestable;
 import models.game.Player;
@@ -12,11 +14,13 @@ import java.io.Serializable;
 
 public class ForagingCrop implements Placable, Harvestable, Serializable {
 	public ForagingCropData data;
+	private Sprite sprite;
 
 	public ForagingCrop() {}
 
 	public ForagingCrop(ForagingCropData data) {
 		this.data = data;
+		sprite = new Sprite(SharedAssetManager.getOrLoad(AllItemsData.getData(getResultName()).getTextureAddress()));
 	}
 
 	public Item harvest(Player player) {
@@ -49,7 +53,7 @@ public class ForagingCrop implements Placable, Harvestable, Serializable {
 
 	@Override
 	public Sprite spriteGetter() {
-		return null;
+		return sprite;
 	}
 
 	public String getResultName() {

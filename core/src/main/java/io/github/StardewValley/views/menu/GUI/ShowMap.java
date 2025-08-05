@@ -1,21 +1,23 @@
 package io.github.StardewValley.views.menu.GUI;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import io.github.StardewValley.App;
+import io.github.StardewValley.Animations.IndependentAnimation;
 import io.github.StardewValley.Main;
 import models.animal.Animal;
+import models.game.NPC;
 import models.game.Player;
-import models.game.Refrigerator;
 import models.map.*;
 import models.tool.Tool;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShowMap {
     public static Player currentPlayer;
     public static List<Player> listOfPlayers;
+    public static List<NPC> listOfNPCs;
     public static Map map;
     private static Main game = Main.getInstance();
+    private static final ArrayList<IndependentAnimation> animations = new ArrayList<>();
 
     public static void show(float delta){
         map = currentPlayer.getMap();
@@ -23,6 +25,8 @@ public class ShowMap {
         showHouse();
         onTilesShow();
         animalAnimations();
+        showAnimations();
+        showNPCReactions();
         for (Player player : listOfPlayers) {
             if (player.getMap() == map) {
                 showPlayer(player);
@@ -111,5 +115,29 @@ public class ShowMap {
             if(tool.getAnimationTime() > 0)
                 tool.animation(delta);
         }
+    }
+
+    public static void showNPCReactions(){
+        for(NPC npc : listOfNPCs){
+            if(npc.getMap().equals(map) && npc.getCloudSprite() != null) {
+                npc.getCloudSprite().draw(game.getBatch());
+            }
+            if(npc.getReactSprite() != null){
+                npc.getReactSprite().draw(game.getBatch());
+                npc.runAnimation();
+            }
+        }
+    }
+
+    private static void showAnimations() {
+        for (var itr = animations.iterator(); itr.hasNext();) {
+            IndependentAnimation animation = itr.next();
+            if (animation.draw(game.getBatch()))
+                itr.remove();
+        }
+    }
+
+    public static void addAnimation(IndependentAnimation animation) {
+        animations.add(animation);
     }
 }
