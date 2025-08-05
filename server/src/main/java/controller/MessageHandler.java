@@ -4,10 +4,7 @@ import com.esotericsoftware.kryonet.Connection;
 import models.game.Game;
 import models.network.Message;
 import models.network.MessageType;
-import router.ChatServiceRouter;
-import router.DatabaseServiceRouter;
-import router.GameServiceRouter;
-import router.LobbyServiceRouter;
+import router.*;
 import network.ServiceRouter;
 import util.NetworkUtil;
 
@@ -26,6 +23,7 @@ public class MessageHandler {
         serviceMap.put(MessageType.LOBBY_SERVICE, new LobbyServiceRouter());
         serviceMap.put(MessageType.CHAT_SERVICE, new ChatServiceRouter());
         serviceMap.put(MessageType.GAME_SERVICE, new GameServiceRouter());
+        serviceMap.put(MessageType.LLM_SERVICE, new LLMServiceRouter());
     }
 
 

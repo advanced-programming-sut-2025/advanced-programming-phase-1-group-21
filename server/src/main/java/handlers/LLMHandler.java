@@ -4,14 +4,33 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+
 import com.google.gson.*;
 
 public class LLMHandler {
 
-    private static final Gson gson = new GsonBuilder().create();
+    private static String loadApiKey() throws IOException {
+        String filePath = "server/API";
+        Path currentPath = Paths.get(filePath).toAbsolutePath();
+        System.out.println("Looking for API file at: " + currentPath);
+        System.out.println("File exists: " + Files.exists(currentPath));
 
+        List<String> lines = Files.readAllLines(currentPath, StandardCharsets.UTF_8);
+
+        if (lines.isEmpty()) {
+            throw new IOException("API file is empty");
+        }
+
+        return lines.get(0).trim();
+    }
+
+    private static final Gson gson = new GsonBuilder().create();
     public static String generateMsg(String playerQuery, String npcInfo, String gameInfo) throws IOException {
-        String apiKey = System.getenv("OPENROUTER_API_KEY");
+        String apiKey = loadApiKey();
         if (apiKey == null || apiKey.isEmpty()) {
             throw new RuntimeException("OPENROUTER_API_KEY environment variable not set");
         }
@@ -68,19 +87,6 @@ public class LLMHandler {
                 throw new RuntimeException("API request failed with code " + responseCode +
                         ": " + (errorResponse != null ? errorResponse.toString() : "No error details"));
             }
-        }
-    }
-
-    public static void main(String[] args) {
-        try {
-            String gameInfo = "Stardew Valley is a farming simulation game...";
-            String npcInfo = "You are Linus, a kind but solitary man who lives in a tent...";
-            String playerQuery = "Why do you live outside?";
-
-            String response = generateMsg(playerQuery, npcInfo, gameInfo);
-            System.out.println("NPC Response: " + response);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }

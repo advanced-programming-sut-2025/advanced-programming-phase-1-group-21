@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import data.VillagerData;
 import data.VillagerTask;
+import models.BriefInfo;
 import models.DailyUpdate;
 import models.Item.Item;
 import models.map.*;
@@ -14,7 +15,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class NPC implements Placable, DailyUpdate, Serializable {
+public class NPC implements Placable, DailyUpdate, Serializable, BriefInfo {
     private String name;
     // Characterization
     NPCHouse house;
@@ -107,8 +108,8 @@ public class NPC implements Placable, DailyUpdate, Serializable {
         this.coord = coord;
     }
 
-    public void talk(String message){
-        responseToMessage = "OKAY";//TODO : response to message should gets from LLM
+    public void talk(String responseToMessage) {
+        this.responseToMessage = responseToMessage;
         cloudSprite = new Sprite(SharedAssetManager.getCloud());
         cloudSprite.setSize(60 , 60);
         cloudSprite.setX(sprite.getX() + 50);
@@ -191,6 +192,10 @@ public class NPC implements Placable, DailyUpdate, Serializable {
             }
         }
         return false;
+    }
+
+    public String getInfo() {
+        return "Name {" + name + "}";
     }
 
     public class NPCHouse extends Building implements Placable {
