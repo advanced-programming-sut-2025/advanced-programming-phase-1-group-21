@@ -6,7 +6,6 @@ package io.github.StardewValley.controllers;
  */
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import data.ArtisanRecipeData;
 import io.github.StardewValley.App;
@@ -14,8 +13,6 @@ import io.github.StardewValley.App;
 import data.AnimalData;
 import data.ArtisanGoodsData;
 import data.items.SeedData;
-import io.github.StardewValley.Main;
-import io.github.StardewValley.views.menu.GUI.GameScreen;
 import models.Item.*;
 import models.animal.Animal;
 import models.animal.AnimalTypes;
@@ -37,7 +34,6 @@ import io.github.StardewValley.views.menu.CLI.GameTerminalView;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 public class GameController {
@@ -1158,7 +1154,7 @@ public class GameController {
     public Result<ArrayList<String>> showFriendships() {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         ArrayList<String> output = new ArrayList<>();
-        output.add(player.getUser().getUsername() + "'s friendships :");
+        output.add(player.getUser().getUsername() + "'s friendships with other players:");
         for (Relation relation : game.getMyRelations(player))
             output.add(relation.printRelation(player));
         return Result.success(output);
@@ -1473,7 +1469,7 @@ public class GameController {
         return Result.success(null);
     }
 
-    public Result<String> meetNPC(String NPCName) {
+    public Result<Void> meetNPC(String NPCName , String message) {
         NPC npc = game.getNPCByName(NPCName);
         if (npc == null) return Result.failure(GameError.THIS_NPC_DOES_NOT_EXIST);
 
@@ -1481,8 +1477,16 @@ public class GameController {
         if (!npcFriendship.isTodayMeet())
             npcFriendship.setFriendshipXP(npcFriendship.getFriendshipXP() + 20);
         npcFriendship.setTodayMeet(true);
-        return Result.success(npcFriendship.talk(game.getGameDate().getSeason(), game.getGameDate().getHour()));
+        npc.talk(message);
+        return Result.success(null);
 
+    }
+
+    public Result<Void> resetNPCResponse(String NPCName){
+        NPC npc = game.getNPCByName(NPCName);
+        npc.setResponseToMessage(null);
+        npc.setCloudSprite(null);
+        return Result.success(null);
     }
 
     public Result<Void> giftNPC(String NPCName, String item, int amount) {
@@ -1505,52 +1509,49 @@ public class GameController {
             npcFriendship.setFriendshipXP(npcFriendship.getFriendshipXP() + 200);
         else
             npcFriendship.setFriendshipXP(npcFriendship.getFriendshipXP() + 50);
+        npc.setGiftAnimation();
         return Result.success(null);
     }
 
     public Result<ArrayList<String>> friendShipNPCList() {
         ArrayList<String> output = new ArrayList<>();
+        output.add("NPC FRIENDSHIPS : ");
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         for (NPC npc : game.getNpcs()) {
             for (NPCFriendship npcFriendship : npc.getFriendships()) {
                 if (npcFriendship.getPlayer().equals(player)) {
-                    output.add("NPC name: " + npc.getName());
-                    output.add("Friendship XP: " + npcFriendship.getFriendshipXP());
-                    output.add("Friendship Level: " + npcFriendship.getLevel().getLevel());
-                    if (npcFriendship.isTodayMeet())
-                        output.add("last seen recently");
-                    else
-                        output.add("last seen a long time ago");
-                    if (npcFriendship.isTodayGift())
-                        output.add("last gift recently");
-                    else
-                        output.add("last gift a long time ago");
-                    output.add("-----------------");
+                    String stringBuilder = "NPC name: " + npc.getName() + " | " +
+                            "Friendship XP: " + npcFriendship.getFriendshipXP() + " | " +
+                            "Friendship Level: " + npcFriendship.getLevel().getLevel();
+//                    if (npcFriendship.isTodayMeet())
+//                        output.add("last seen recently");
+//                    else
+//                        output.add("last seen a long time ago");
+//                    if (npcFriendship.isTodayGift())
+//                        output.add("last gift recently");
+//                    else
+//                        output.add("last gift a long time ago");
+//                    output.add("-----------------");
+                    output.add(stringBuilder);
                 }
             }
         }
         return Result.success(output);
     }
 
-    public Result<ArrayList<String>> showQuestList() {
+    public Result<ArrayList<String>> showQuestList(String NPCName) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
+
         ArrayList<String> output = new ArrayList<>();
-        for (NPC npc : game.getNpcs()) {
-            NPCFriendship npcFriendship = npc.getFriendshipByPlayer(player);
-            output.add("NPC name: " + npc.getName());
-            for (int i = 0; i < Math.min(npcFriendship.getLevel().getLevel() + 1, 3); i++) {
-                output.add(i + ":");
-                output.add("Request Item: " + npc.getTasks().get(i).getRequestItem());
-                output.add("Request Amount: " + npc.getTasks().get(i).getRequestAmount());
-                output.add("Reward Item: " + npc.getTasks().get(i).getRewardItem());
-                output.add("Reward Amount: " + npc.getTasks().get(i).getRewardAmount());
-                if(npc.getTasksFlag().get(i))
-                    output.add("this quest has been finished");
-                else
-                    output.add("you finish this quest");
-                output.add("--------------------");
-                output.add("\n");
-            }
+        NPC npc = game.getNPCByName(NPCName);
+        NPCFriendship npcFriendship = npc.getFriendshipByPlayer(player);
+        for (int i = 0; i < Math.min(npcFriendship.getLevel().getLevel() + 1, 3); i++) {
+            String stringBuilder = (i) + ": " +
+                    "Request Item: " + npc.getTasks().get(i).getRequestItem() +
+                    " :" + npc.getTasks().get(i).getRequestAmount() + " | " +
+                    "Reward Item: " + npc.getTasks().get(i).getRewardItem() +
+                    " :" + npc.getTasks().get(i).getRewardAmount();
+            output.add(stringBuilder);
         }
         return Result.success(output);
     }
@@ -1565,7 +1566,7 @@ public class GameController {
         if (questID > npcFriendship.getLevel().getLevel())
             return Result.failure(GameError.FRIENDSHIP_LEVEL_IS_NOT_ENOUGH);
         if(npc.getTasksFlag().get(questID))
-            return Result.failure(GameError.THIS_NPC_DOES_NOT_EXIST);
+            return Result.failure(GameError.QUEST_HAS_BEEN_FINISHED);
 
         Item requiredItem = Item.build(npc.getTasks().get(questID).getRequestItem(), npc.getTasks().get(questID).getRequestAmount());
 
@@ -1581,6 +1582,7 @@ public class GameController {
         player.getInventory().addItem(rewardItem);
         npc.getTasksFlag().set(questID, true);
         player.addQuest();
+        npc.setQuestAnimation();
         return Result.success(null);
 
     }

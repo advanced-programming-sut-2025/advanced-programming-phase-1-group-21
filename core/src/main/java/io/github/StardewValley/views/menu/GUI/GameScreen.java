@@ -1,6 +1,5 @@
 package io.github.StardewValley.views.menu.GUI;
 
-import Asset.SharedAssetManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
@@ -13,19 +12,17 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.github.czyzby.lml.parser.impl.attribute.progress.AnimateDurationLmlAttribute;
 import io.github.StardewValley.App;
 import io.github.StardewValley.Main;
 import io.github.StardewValley.asset.Assets;
 import io.github.StardewValley.controllers.GameController;
 import io.github.StardewValley.controllers.ViewController;
 import models.animal.Animal;
+import models.game.NPC;
 import models.map.Coord;
 import models.game.Game;
 import models.game.Player;
-import models.map.Map;
 import models.map.Tile;
 
 public class GameScreen implements Screen , InputProcessor {
@@ -54,6 +51,8 @@ public class GameScreen implements Screen , InputProcessor {
     private String message;
     private AnimalInfoWindow animalInfoWindow;
     private OtherPlayerInfo otherPlayerInfo;
+    private NPCInformationWindow NPCInformation;
+    private NPCResponseWindow NPCAnswer;
     private Pixmap darkLayout;
     private Texture darkLayoutTexture;
     private Image darkModeImage;
@@ -231,7 +230,7 @@ public class GameScreen implements Screen , InputProcessor {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         Coord c = viewController.clickController(screenX, screenY);
         message = "(" + c.getX() + ","
-                + c.getY() + "), " + currentPlayer.getMap().getTile(c).getTileType();
+                + c.getY() + "), ";
         Tile tile = currentPlayer.getMap().getTile(c);
         if(tile != null && tile.getPlacable(Animal.class) != null){
             Animal animal = tile.getPlacable(Animal.class);
@@ -241,12 +240,31 @@ public class GameScreen implements Screen , InputProcessor {
             stage.addActor(animalInfoWindow);
         }
 
+        if(tile != null && tile.getPlacable(NPC.class) != null){
+            NPC npc = tile.getPlacable(NPC.class);
+            NPCInformation = new NPCInformationWindow(this , Assets.getSkin() , npc , currentPlayer);
+            NPCInformation.setPosition(screenX + 30, Gdx.graphics.getHeight() - screenY + 30);
+            Gdx.input.setInputProcessor(stage);
+            stage.addActor(NPCInformation);
+        }
+
         Player player = viewController.getOtherPlayerClick(c);
         if(player != null){
             otherPlayerInfo = new OtherPlayerInfo(this , Assets.getSkin() , player , currentPlayer);
             otherPlayerInfo.setPosition(screenX + 30, Gdx.graphics.getHeight() - screenY + 30);
             Gdx.input.setInputProcessor(stage);
             stage.addActor(otherPlayerInfo);
+        }
+
+        for(NPC npc : ShowMap.listOfNPCs){
+            if(npc.getCloudSprite() != null && viewController.clickOnSprite(npc.getCloudSprite() , screenX , screenY)) {
+                NPCAnswer = new NPCResponseWindow(this , Assets.getSkin() , npc.getResponseToMessage() , screenX ,
+                        Gdx.graphics.getHeight() - screenY);
+                NPCAnswer.setPosition(screenX, Gdx.graphics.getHeight() - screenY);
+                Gdx.input.setInputProcessor(stage);
+                stage.addActor(NPCAnswer);
+                controller.resetNPCResponse(npc.getName());
+            }
         }
         return false;
     }
@@ -328,6 +346,22 @@ public class GameScreen implements Screen , InputProcessor {
     public void closePlayerInfo(){
         if(otherPlayerInfo != null){
             otherPlayerInfo = null;
+        }
+        stage.clear();
+        Gdx.input.setInputProcessor(this);
+    }
+
+    public void closeNPCAnswer(){
+        if(NPCAnswer != null){
+            NPCAnswer = null;
+        }
+        stage.clear();
+        Gdx.input.setInputProcessor(this);
+    }
+
+    public void closeNPCInfo(){
+        if(NPCInformation != null){
+            NPCInformation = null;
         }
         stage.clear();
         Gdx.input.setInputProcessor(this);
