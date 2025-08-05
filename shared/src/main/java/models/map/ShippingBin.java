@@ -1,11 +1,13 @@
 package models.map;
 
+import Asset.SharedAssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import models.DailyUpdate;
 import models.Item.Item;
 import models.game.Game;
 import models.game.Player;
+import org.w3c.dom.Text;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,6 +18,12 @@ import java.util.Map;
 public class ShippingBin implements Placable, DailyUpdate, Serializable {
     List<Item> toSell = new ArrayList<>();
     Map<Item, Player> map = new HashMap<>();
+    transient Texture texture = SharedAssetManager.getHeart();
+    transient Sprite sprite = new Sprite(texture);
+
+    {
+        sprite.setSize(30 , 30);
+    }
 
     public void add(Item item, Player player) {
         toSell.add(item);
@@ -51,11 +59,11 @@ public class ShippingBin implements Placable, DailyUpdate, Serializable {
 
     @Override
     public Texture getTexture() {
-        return null;
+        return texture;
     }
 
     @Override
     public Sprite spriteGetter() {
-        return null;
+        return sprite;
     }
 }

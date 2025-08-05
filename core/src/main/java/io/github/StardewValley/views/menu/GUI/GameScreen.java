@@ -34,6 +34,7 @@ public class GameScreen implements Screen , InputProcessor {
     private Stage stage;
     private InventoryTab inventoryTab;
     private ShopMenuTab shopMenuTab;
+    private SellTab sellTab;
     private GiftTab giftTab;
     private TerminalTab terminalTab;
     private ChatScreen chatScreen;
@@ -42,6 +43,7 @@ public class GameScreen implements Screen , InputProcessor {
     private FriendshipsTab friendshipsTab;
     private boolean isInventoryShown = false;
     private boolean isShopMenuShown = false;
+    private boolean isSellTabShown = false;
     private boolean isTerminalShown = false;
     private boolean isFriendshipShown = false;
     private boolean isChatShown = false;
@@ -84,6 +86,7 @@ public class GameScreen implements Screen , InputProcessor {
         Skin skin = Assets.getSkin();
         inventoryTab = new InventoryTab(viewController.player, this, skin);
         shopMenuTab = new ShopMenuTab(this , skin);
+        sellTab = new SellTab(this , skin , viewController.player);
         giftTab = new GiftTab(this , skin);
         terminalTab = new TerminalTab(this , skin);
         friendshipsTab = new FriendshipsTab(this , skin);
@@ -124,6 +127,8 @@ public class GameScreen implements Screen , InputProcessor {
         }
         if (isShopMenuShown)
             shopMenuTab.draw();
+        if(isSellTabShown)
+            sellTab.draw();
         if (isTerminalShown)
             terminalTab.draw();
         if (isChatShown) {
@@ -190,7 +195,11 @@ public class GameScreen implements Screen , InputProcessor {
         if (i == Input.Keys.M && !isShopMenuShown && !isChatShown) {
             isShopMenuShown = true;
             shopMenuTab.show();
+        }
 
+        if(i == Input.Keys.B){
+            isSellTabShown = true;
+            sellTab.show();
         }
         if(i == Input.Keys.G){
             isGiftTabShown = true;
@@ -230,7 +239,7 @@ public class GameScreen implements Screen , InputProcessor {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         Coord c = viewController.clickController(screenX, screenY);
         message = "(" + c.getX() + ","
-                + c.getY() + "), " + currentPlayer.getMap().getTile(c).getTileType();
+                + c.getY() + "), ";
         Tile tile = currentPlayer.getMap().getTile(c);
         if(tile != null && tile.getPlacable(Animal.class) != null){
             Animal animal = tile.getPlacable(Animal.class);
@@ -313,6 +322,11 @@ public class GameScreen implements Screen , InputProcessor {
 
     public void onShopMenuClosed() {
         isShopMenuShown = false;
+        Gdx.input.setInputProcessor(this);
+    }
+
+    public void onSellTabClosed(){
+        isSellTabShown = false;
         Gdx.input.setInputProcessor(this);
     }
 
