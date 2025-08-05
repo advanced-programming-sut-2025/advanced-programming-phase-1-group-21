@@ -133,6 +133,14 @@ public class ViewController {
                     gc.harvest(tile);
                 }
             }
+            else if (tile.getTileType() == TileType.FORAGING_CROP) {
+                ForagingCrop crop = tile.getPlacable(ForagingCrop.class);
+                if (player.getInventory().canAdd(crop.getResultName())) {
+                    player.getInventory().addItem(Item.build(crop.getResultName(), 1));
+                    ShowMap.addAnimation(new HarvestAnimation().show(player, crop.getResultName(), x, y));
+                    tile.resetTile();
+                }
+            }
         }
 
 
