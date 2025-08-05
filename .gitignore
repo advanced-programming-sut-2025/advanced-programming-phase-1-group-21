@@ -22,3 +22,6 @@ build/
 
 !gradle/wrapper/gradle-wrapper.jar
 Users.json
+
+# ENV
+*.env

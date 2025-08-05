@@ -4,10 +4,7 @@ import com.esotericsoftware.kryonet.Connection;
 import models.network.Lobby;
 import models.network.LobbyUser;
 import models.user.User;
-import services.ChatService;
-import services.DatabaseService;
-import services.GameService;
-import services.LobbyService;
+import services.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +20,7 @@ public class SessionManager {
     private static final Map<Connection, ChatService> chatServiceMap = new ConcurrentHashMap<>();
     private static final List<User> listUsers = new ArrayList<>();
     private static final Map<Connection, GameService> gameServiceMap = new ConcurrentHashMap<>();
+    private static final Map<Connection, LLMService> llmServiceMap = new ConcurrentHashMap<>();
 
 
     public static void add(Connection connection) {
@@ -34,6 +32,7 @@ public class SessionManager {
         userConnectionMap.put(user.getUsername(), conn);
         lobbyServiceMap.put(conn, new LobbyService(conn));
         chatServiceMap.put(conn, new ChatService(conn));
+        llmServiceMap.put(conn, new LLMService(conn));
         listUsers.add(user);
     }
 
