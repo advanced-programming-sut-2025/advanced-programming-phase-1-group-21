@@ -20,7 +20,6 @@ public class ForagingCrop implements Placable, Harvestable, Serializable {
 
 	public ForagingCrop(ForagingCropData data) {
 		this.data = data;
-		System.out.println("Foraging crop name: " + getResultName());
 		sprite = new Sprite(SharedAssetManager.getOrLoad(AllItemsData.getData(getResultName()).getTextureAddress()));
 	}
 
