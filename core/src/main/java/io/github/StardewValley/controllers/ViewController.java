@@ -5,13 +5,17 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
+import io.github.StardewValley.Animations.FertilizerAnimation;
+import io.github.StardewValley.Animations.HarvestAnimation;
 import io.github.StardewValley.Main;
 import io.github.StardewValley.views.menu.GUI.MainMenuScreen;
+import io.github.StardewValley.views.menu.GUI.ShowMap;
 import models.Item.Item;
 import models.Item.ItemType;
 import models.Item.Sapling;
 import models.Item.Seed;
 import models.animal.Animal;
+import models.crop.FertilizerType;
 import models.crop.PlantedSeed;
 import models.crop.PlantedTree;
 import models.game.Game;
@@ -64,20 +68,20 @@ public class ViewController {
     }
 
     public Coord clickController(int x , int y){
-        if(player.isFainted())
+        if (player.isFainted())
             return new Coord(0,0);
         Map map = player.getMap();
         Tile tile = map.getTile((x - map.mapType.distanceX)/30 , (y - map.mapType.distanceY)/30);
-        if(tile == null)
+        if (tile == null)
             return new Coord(-1 , -1);
-        if(tile.getPlacable(Building.class) != null){
+        if (tile.getPlacable(Building.class) != null){
             Building building = tile.getPlacable(Building.class);
             if(checkCollision(building.sprite , player.getSprite()) && building.canEnter(game.getGameDate())) {
                 gc.enterBuilding(building.getFullName());
             }
         }
 
-        for(Direction direction : Direction.values()){
+        for (Direction direction : Direction.values()){
             int newX = player.getCoord().getX() + direction.getDx();
             int newY = player.getCoord().getY() + direction.getDy();
 
@@ -87,28 +91,20 @@ public class ViewController {
 
 
         {
-//            System.out.println("Tile type: " + tile.getTileType());
+            Item itemInHand = player.getItemInHand();
             if (tile.getTileType() == TileType.PLOWED || tile.getTileType() == TileType.UNPLOWED){
-                Item itemInHand = player.getItemInHand();
                 if (itemInHand != null) {
-                    if (itemInHand.getItemType() == ItemType.PLACEABLE) {
+                    if (itemInHand.getItemType() == ItemType.PLACEABLE)
                         gc.placeArtisan(itemInHand, tile);
-//                    System.out.println("You just Placed an Artisan, tile type: " + tile.getTileType());
-                    }
-                    if (itemInHand.getItemType() == ItemType.SEED) {
+                    if (itemInHand.getItemType() == ItemType.SEED)
                         gc.plant(tile, (Seed) Item.build(itemInHand.getName(), 1));
-                    }
-                    if (itemInHand.getItemType() == ItemType.SAPLING) {
+                    if (itemInHand.getItemType() == ItemType.SAPLING)
                         gc.plant(tile, (Sapling) Item.build(itemInHand.getName(), 1));
-                    }
                 }
             }
             else if (tile.getTileType() == TileType.ARTISAN) {
                 Artisan artisan = tile.getPlacable(Artisan.class);
                 Inventory inventory = player.getInventory();
-
-//                System.out.println("You Clicked on an artisan");
-//                System.out.println("result: " + artisan.isResultReady() + ", empty: " + artisan.isEmpty());
 
                 if (artisan.isResultReady() && inventory.canAdd(artisan.getResultWithoutReset().getName())) {
                     Item result = artisan.getResultWithoutReset();
@@ -116,20 +112,36 @@ public class ViewController {
                         artisan.getResult(inventory);
                     }
                 }
-                else if (artisan.isEmpty() && player.getItemInHand() != null) {
-                    gc.useArtisan(artisan, player.getItemInHand().getName());
+                else if (artisan.isEmpty() && itemInHand != null) {
+                    gc.useArtisan(artisan, itemInHand.getName());
                 }
             }
-            else if (tile.getTileType() == TileType.PLANTED_SEED && tile.getPlacable(PlantedSeed.class).isHarvestReady()) {
-                gc.harvest(tile);
-            }
-            else if (tile.getTileType() == TileType.PLANTED_TREE && tile.getPlacable(PlantedTree.class).isHarvestReady()) {
-                gc.harvest(tile);
-            }
+            else if (tile.getTileType() == TileType.PLANTED_SEED) {
+                if (tile.getPlacable(PlantedSeed.class).isHarvestReady()) {
+                    ShowMap.addAnimation(new HarvestAnimation().show(player, tile.getPlacable(PlantedSeed.class).getResultName(), x, y));
+                    gc.harvest(tile);
+                }
 
+                if (itemInHand != null && itemInHand.getName().contains("Soil")) {
+                    gc.fertilize(tile, itemInHand);
+                    ShowMap.addAnimation(new FertilizerAnimation().show(itemInHand.getName(), x, y));
+                }
+            }
+            else if (tile.getTileType() == TileType.PLANTED_TREE) {
+                if (tile.getPlacable(PlantedTree.class).isHarvestReady()) {
+                    ShowMap.addAnimation(new HarvestAnimation().show(player, tile.getPlacable(PlantedTree.class).getResultName(), x, y));
+                    gc.harvest(tile);
+                }
+            }
+            else if (tile.getTileType() == TileType.FORAGING_CROP) {
+                ForagingCrop crop = tile.getPlacable(ForagingCrop.class);
+                if (player.getInventory().canAdd(crop.getResultName())) {
+                    player.getInventory().addItem(Item.build(crop.getResultName(), 1));
+                    ShowMap.addAnimation(new HarvestAnimation().show(player, crop.getResultName(), x, y));
+                    tile.resetTile();
+                }
+            }
         }
-
-
 
 
         return new Coord((x - map.mapType.distanceX)/30 ,(y - map.mapType.distanceY)/30);

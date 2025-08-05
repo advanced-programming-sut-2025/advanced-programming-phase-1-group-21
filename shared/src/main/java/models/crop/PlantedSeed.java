@@ -15,7 +15,6 @@ import models.skill.SkillType;
 import java.io.Serializable;
 
 public class PlantedSeed implements Placable, Harvestable, DailyUpdate, Serializable {
-	private FertilizerType fertilizerType = null; // not implemented yet.
 	private Sprite sprite;
 	private int stage = 0;
 	private int day = 1;
@@ -33,7 +32,6 @@ public class PlantedSeed implements Placable, Harvestable, DailyUpdate, Serializ
 
 	public void water() {
 		// This method is supposed to be called by its tile.
-		System.out.println("TESTETESTSTEST");
 		waterStage = Math.max(2, waterStage);
 	}
 
@@ -53,9 +51,7 @@ public class PlantedSeed implements Placable, Harvestable, DailyUpdate, Serializ
 	@Override
 	public boolean nextDay(Game g) {
 		// This method is supposed to be called by its tile.
-		System.err.println("WATER: " + waterStage);
-
-//		waterStage--;
+		waterStage--;
 		if (waterStage < 0)
 			return true;
 
