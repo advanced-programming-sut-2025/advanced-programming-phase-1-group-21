@@ -563,6 +563,11 @@ public class GameController {
         return Result.success(tile.getPlacable(PlantedTree.class).toString());
     }
 
+    public void fertilize(Tile tile, Item fertilizer) {
+        tile.getPlacable(PlantedSeed.class).fertilize(FertilizerType.getFertilizerType(fertilizer.getName()));
+        player.getInventory().removeItem(Item.build(fertilizer.getName(), 1));
+    }
+
     public Result<Void> fertilize(FertilizerType fertilizer, Direction direction) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         if (direction == null)

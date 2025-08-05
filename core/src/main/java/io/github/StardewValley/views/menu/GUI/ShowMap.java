@@ -1,5 +1,6 @@
 package io.github.StardewValley.views.menu.GUI;
 
+import io.github.StardewValley.Animations.IndependentAnimation;
 import io.github.StardewValley.Main;
 import models.animal.Animal;
 import models.game.NPC;
@@ -7,6 +8,7 @@ import models.game.Player;
 import models.map.*;
 import models.tool.Tool;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShowMap {
@@ -15,6 +17,7 @@ public class ShowMap {
     public static List<NPC> listOfNPCs;
     public static Map map;
     private static Main game = Main.getInstance();
+    private static final ArrayList<IndependentAnimation> animations = new ArrayList<>();
 
     public static void show(float delta){
         map = currentPlayer.getMap();
@@ -22,6 +25,7 @@ public class ShowMap {
         showHouse();
         onTilesShow();
         animalAnimations();
+        showAnimations();
         showNPCReactions();
         for (Player player : listOfPlayers) {
             if (player.getMap() == map) {
@@ -123,5 +127,17 @@ public class ShowMap {
                 npc.runAnimation();
             }
         }
+    }
+
+    private static void showAnimations() {
+        for (var itr = animations.iterator(); itr.hasNext();) {
+            IndependentAnimation animation = itr.next();
+            if (animation.draw(game.getBatch()))
+                itr.remove();
+        }
+    }
+
+    public static void addAnimation(IndependentAnimation animation) {
+        animations.add(animation);
     }
 }
