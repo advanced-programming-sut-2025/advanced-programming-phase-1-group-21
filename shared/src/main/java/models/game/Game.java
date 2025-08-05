@@ -1,5 +1,6 @@
 package models.game;
 
+import models.BriefInfo;
 import models.Item.Item;
 import models.map.Map;
 
@@ -12,7 +13,7 @@ import models.map.Weather;
 import models.time.Date;
 import models.time.Season;
 
-public class Game implements Serializable {
+public class Game implements Serializable, BriefInfo {
     private ArrayList<Player> players;
     private ArrayList<NPC> npcs = new ArrayList<>();
     private ArrayList<Relation> relations = new ArrayList<>();
@@ -275,5 +276,10 @@ public class Game implements Serializable {
      */
     public void setWeather(Weather newWeather) {
         gameWeather = newWeather;
+    }
+
+    @Override
+    public String getInfo() {
+        return "Season {" + gameDate.getCurrentSeason().toString() + "}, Hour{" + gameDate.getHour() + "}";
     }
 }

@@ -10,6 +10,7 @@ public enum MessageType {
     CHAT_SERVICE("ChatService"),
     RESPONSE,
     GAME_SERVICE("GameService"),
+    LLM_SERVICE("LLMService"),
     ;
 
 

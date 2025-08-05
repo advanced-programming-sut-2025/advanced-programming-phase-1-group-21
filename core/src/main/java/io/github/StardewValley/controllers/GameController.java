@@ -13,6 +13,7 @@ import io.github.StardewValley.App;
 import data.AnimalData;
 import data.ArtisanGoodsData;
 import data.items.SeedData;
+import io.github.StardewValley.network.NetworkLLMController;
 import models.Item.*;
 import models.animal.Animal;
 import models.animal.AnimalTypes;
@@ -1482,7 +1483,7 @@ public class GameController {
         if (!npcFriendship.isTodayMeet())
             npcFriendship.setFriendshipXP(npcFriendship.getFriendshipXP() + 20);
         npcFriendship.setTodayMeet(true);
-        npc.talk(message);
+        npc.talk(NetworkLLMController.generateMsg(message, game.getInfo(), npc.getInfo()));
         return Result.success(null);
 
     }
