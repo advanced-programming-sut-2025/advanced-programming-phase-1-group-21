@@ -136,6 +136,10 @@ public class ViewController {
 
     }
 
+    public boolean clickOnSprite(Sprite sprite , int x , int y){
+        return sprite.getBoundingRectangle().contains(x, Gdx.graphics.getHeight() - y);
+    }
+
     public Player getOtherPlayerClick(Coord coord){
         for(Player player1 : gc.getGame().getPlayers()){
             if(player1.getMap().equals(player.getMap()) && player1.getCoord().equals(coord) && !player1.equals(player))

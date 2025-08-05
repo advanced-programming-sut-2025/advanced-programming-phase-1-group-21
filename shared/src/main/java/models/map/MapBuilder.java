@@ -229,7 +229,8 @@ public class MapBuilder {
     public Map buildNPCHouse(NPC npc) {
         Map map = new Map(MapType.NPC_HOUSE);
         map.tiles.get(9).get(9).setTileType(TileType.DOOR);
-        map.tiles.get(7).get(0).setPlacable(npc);
+        map.tiles.get(0).get(0).setPlacable(npc);
+        npc.setCoord(new Coord(0,0));
         map.tiles.get(7).get(0).setTileType(TileType.NPC);
         map.setTextures();
         return map;

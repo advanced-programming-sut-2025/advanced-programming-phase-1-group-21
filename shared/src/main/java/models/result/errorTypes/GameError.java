@@ -4,6 +4,7 @@ import models.result.Error;
 
 public enum GameError implements Error {
     YOU_SHOULD_BE_ON_BLACKSMITH("you are not in a blacksmith"),
+    QUEST_HAS_BEEN_FINISHED("quest has been finished"),
     ITEM_IS_NOT_TOOL("Item is not a tool"),
     NOT_UPGRADABLE("Not upgradable"),
     INVALID_NUMBER("invalid number"),

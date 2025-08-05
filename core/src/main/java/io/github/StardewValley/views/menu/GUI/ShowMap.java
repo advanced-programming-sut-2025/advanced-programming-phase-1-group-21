@@ -1,12 +1,9 @@
 package io.github.StardewValley.views.menu.GUI;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import io.github.StardewValley.App;
 import io.github.StardewValley.Main;
 import models.animal.Animal;
 import models.game.NPC;
 import models.game.Player;
-import models.game.Refrigerator;
 import models.map.*;
 import models.tool.Tool;
 
@@ -25,6 +22,7 @@ public class ShowMap {
         showHouse();
         onTilesShow();
         animalAnimations();
+        showNPCReactions();
         for (Player player : listOfPlayers) {
             if (player.getMap() == map) {
                 showPlayer(player);
@@ -115,9 +113,15 @@ public class ShowMap {
         }
     }
 
-//    public static void showNPCs(){
-//        for(NPC npc : listOfNPCs){
-//            if()
-//        }
-//    }
+    public static void showNPCReactions(){
+        for(NPC npc : listOfNPCs){
+            if(npc.getMap().equals(map) && npc.getCloudSprite() != null) {
+                npc.getCloudSprite().draw(game.getBatch());
+            }
+            if(npc.getReactSprite() != null){
+                npc.getReactSprite().draw(game.getBatch());
+                npc.runAnimation();
+            }
+        }
+    }
 }

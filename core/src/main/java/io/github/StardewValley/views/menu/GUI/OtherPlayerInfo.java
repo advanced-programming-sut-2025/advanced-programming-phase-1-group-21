@@ -26,7 +26,7 @@ public class OtherPlayerInfo extends Window{
     GameScreen gameScreen;
 
     public OtherPlayerInfo(GameScreen screen , Skin skin ,Player player , Player me) {
-        super("Animal Menu", skin);
+        super("Player Menu", skin);
         this.otherPlayer = player;
         this.skin = skin;
         this.gameScreen = screen;
@@ -226,9 +226,5 @@ public class OtherPlayerInfo extends Window{
             return;
         }
         message.setText("Gift Sent");
-    }
-
-    private void answerSuitor(String response){
-
     }
 }

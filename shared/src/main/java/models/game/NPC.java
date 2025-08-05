@@ -27,6 +27,11 @@ public class NPC implements Placable, DailyUpdate, Serializable {
     private Coord coord;
     private transient Texture texture;
     private transient Sprite sprite;
+    private transient String responseToMessage;
+    private transient Sprite cloudSprite;
+    private transient Sprite reactSprite;
+    private transient Texture reactTexture;
+    private float animationTime;
 
     public NPC() {}
 
@@ -100,6 +105,30 @@ public class NPC implements Placable, DailyUpdate, Serializable {
 
     public void setCoord(Coord coord) {
         this.coord = coord;
+    }
+
+    public void talk(String message){
+        responseToMessage = "OKAY";//TODO : response to message should gets from LLM
+        cloudSprite = new Sprite(SharedAssetManager.getCloud());
+        cloudSprite.setSize(60 , 60);
+        cloudSprite.setX(sprite.getX() + 50);
+        cloudSprite.setY(sprite.getY() + 90);
+    }
+
+    public Sprite getCloudSprite() {
+        return cloudSprite;
+    }
+
+    public String getResponseToMessage() {
+        return responseToMessage;
+    }
+
+    public void setResponseToMessage(String responseToMessage) {
+        this.responseToMessage = responseToMessage;
+    }
+
+    public void setCloudSprite(Sprite cloudSprite) {
+        this.cloudSprite = cloudSprite;
     }
 
     public NPCFriendship getFriendshipByPlayer(Player player) {
@@ -216,4 +245,42 @@ public class NPC implements Placable, DailyUpdate, Serializable {
         );
     }
 
+    public void setGiftAnimation(){
+        reactTexture = SharedAssetManager.getHeart();
+        if(reactSprite == null)
+            reactSprite = new Sprite(reactTexture);
+        reactSprite.setTexture(reactTexture);
+        reactSprite.setSize(30 , 30);
+        reactSprite.setX(sprite.getX() + 20);
+        reactSprite.setY(sprite.getY() + 110);
+        animationTime = 1;
+    }
+
+    public void setQuestAnimation(){
+        reactTexture = SharedAssetManager.getCup();
+        if(reactSprite == null)
+            reactSprite = new Sprite(reactTexture);
+        reactSprite.setTexture(reactTexture);
+        reactSprite.setSize(30 , 30);
+        reactSprite.setX(sprite.getX() + 20);
+        reactSprite.setY(sprite.getY() + 110);
+        animationTime = 1;
+    }
+
+
+    public void runAnimation(){
+        reactSprite.setAlpha(animationTime);
+        animationTime -= (float) 0.002;
+        reactSprite.setX(sprite.getX() + 20);
+        reactSprite.setY(sprite.getY() + 110);
+        if(animationTime <= 0){
+            animationTime = 0;
+            reactSprite = null;
+            reactTexture = null;
+        }
+    }
+
+    public Sprite getReactSprite() {
+        return reactSprite;
+    }
 }
