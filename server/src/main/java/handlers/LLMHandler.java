@@ -14,7 +14,7 @@ import com.google.gson.*;
 public class LLMHandler {
 
     private static String loadApiKey() throws IOException {
-        String filePath = "server/API";
+        String filePath = "API";
         Path currentPath = Paths.get(filePath).toAbsolutePath();
         System.out.println("Looking for API file at: " + currentPath);
         System.out.println("File exists: " + Files.exists(currentPath));

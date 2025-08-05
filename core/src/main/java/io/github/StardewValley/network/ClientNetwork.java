@@ -14,7 +14,7 @@ import java.util.concurrent.*;
 
 public class ClientNetwork {
 
-    private static final int TIMEOUT = 5000;
+    private static final int TIMEOUT = 20000;
     public static Client client;
 
     private static final ConcurrentHashMap<String, BlockingQueue<Message>> responseMap = new ConcurrentHashMap<>();
