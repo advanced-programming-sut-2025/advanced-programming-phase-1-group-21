@@ -19,11 +19,11 @@ public class MultiplayerProxy {
 
             // Network logic
 
-//            Message msg = new Message(MessageType.GAME_SERVICE);
-//            msg.methodName = method.getName();
-//            msg.data = args;
-//            msg.username = App.getInstance().logedInUser.getUsername();
-//            ClientNetwork.sendMessage(msg);
+            Message msg = new Message(MessageType.GAME_SERVICE);
+            msg.methodName = method.getName();
+            msg.data = args;
+            msg.username = App.getInstance().logedInUser.getUsername();
+            ClientNetwork.sendMessage(msg);
 
 
             return result;
