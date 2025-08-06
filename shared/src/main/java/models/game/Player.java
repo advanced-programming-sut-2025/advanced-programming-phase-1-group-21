@@ -9,6 +9,7 @@ import models.DailyUpdate;
 import models.Item.Item;
 import models.Item.Recipe;
 import models.Item.RecipeType;
+import models.MusicData;
 import models.animal.Animal;
 import models.map.*;
 import models.skill.Skill;
@@ -19,6 +20,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import javax.swing.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public class Player implements DailyUpdate, Serializable {
@@ -43,6 +45,8 @@ public class Player implements DailyUpdate, Serializable {
     private int quest = 0;
     private String suitor;
     private Reaction reaction = new Reaction();
+    private final transient List<MusicData> musics = new ArrayList<>();
+
     public Player() {}
 
     private transient Texture texture = new Texture("Textures/Players/FarmerFront1.png");
@@ -402,5 +406,13 @@ public class Player implements DailyUpdate, Serializable {
 
     public String getDefaultReaction() {
         return defaultReaction;
+    }
+
+    public List<MusicData> getMusics() {
+        return musics;
+    }
+
+    public void addMusic(MusicData music) {
+        musics.add(music);
     }
 }

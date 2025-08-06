@@ -20,7 +20,7 @@ import io.github.StardewValley.controllers.GameController;
 public class PauseMenu implements Screen {
     private Stage stage;
     private Skin skin;
-    private TextButton exitButton, scoreboardButton, reactionButton;
+    private TextButton exitButton, scoreboardButton, reactionButton, musicButton;
     private Label date, time, weather, energy;
     private Texture bgTexture;
     private GameController controller = App.getInstance().currentPlayerController;
@@ -40,9 +40,6 @@ public class PauseMenu implements Screen {
         exitButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("CLICKED");
-                Main.getInstance().setScreen(new GameScreen());
-                System.out.println("CLICKED");
                 Main.getInstance().setScreen(new GameScreen());
             }
         });
@@ -53,27 +50,36 @@ public class PauseMenu implements Screen {
         scoreboardButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Scoreboard button clicked");
                 Main.getInstance().setScreen(new ScoreboardScreen());
             }
         });
-        exitButton.setPosition(1670, 850);
 
         // Create reaction button
         reactionButton = new TextButton("REACTION", skin);
         reactionButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Reaction button clicked");
                 Main.getInstance().setScreen(new ReactionScreen());
+            }
+        });
+
+        // Create music button
+        musicButton = new TextButton("MUSIC", skin);
+        musicButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Main.getInstance().setScreen(new MusicMenuScreen());
             }
         });
 
         // Position the buttons
         float centerX = Gdx.graphics.getWidth() / 2f;
         float centerY = Gdx.graphics.getHeight() / 2f;
-        scoreboardButton.setPosition(centerX - scoreboardButton.getWidth() / 2, centerY - 150);
-        reactionButton.setPosition(centerX - reactionButton.getWidth() / 2, centerY - 200);
+
+        // Vertical layout for buttons
+        scoreboardButton.setPosition(centerX - scoreboardButton.getWidth() / 2, centerY - 100);
+        reactionButton.setPosition(centerX - reactionButton.getWidth() / 2, centerY - 150);
+        musicButton.setPosition(centerX - musicButton.getWidth() / 2, centerY - 200);
 
         // Create info labels
         date = new Label("Date: " + controller.getDate().getData(), skin);
@@ -95,6 +101,7 @@ public class PauseMenu implements Screen {
         // Add actors to stage
         stage.addActor(scoreboardButton);
         stage.addActor(reactionButton);
+        stage.addActor(musicButton);
         stage.addActor(date);
         stage.addActor(time);
         stage.addActor(weather);
@@ -138,15 +145,12 @@ public class PauseMenu implements Screen {
 
     @Override
     public void render(float delta) {
-        // Clear screen
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        // Update and draw stage
         stage.act(delta);
         stage.draw();
 
-        // Debug input (optional)
         if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
             // System.out.println("Click at: " + Gdx.input.getX() + ", " + Gdx.input.getY());
         }
@@ -155,22 +159,19 @@ public class PauseMenu implements Screen {
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
-        createUI(); // Recreate UI to adjust to new size
+        createUI();
     }
 
     @Override
     public void pause() {
-        // Optional: Handle game pause
     }
 
     @Override
     public void resume() {
-        // Optional: Handle game resume
     }
 
     @Override
     public void hide() {
-        // Optional: Clean up when screen is hidden
     }
 
     @Override
