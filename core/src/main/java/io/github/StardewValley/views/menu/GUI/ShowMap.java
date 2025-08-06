@@ -29,7 +29,7 @@ public class ShowMap {
         showNPCReactions();
         for (Player player : listOfPlayers) {
             if (player.getMap() == map) {
-                showPlayer(player);
+                showPlayer(player, delta);
                 showTool(delta, player);
             }
         }
@@ -89,9 +89,12 @@ public class ShowMap {
         }
     }
 
-    public static void showPlayer(Player player){
+    public static void showPlayer(Player player, float delta) {
+        player.getReaction().update(delta);
+
         if (player.getMap() == map) {
             player.getSprite().draw(game.getBatch());
+            player.getReaction().render(game.getBatch(), player.getSprite().getX(), player.getSprite().getY() + 40);
             if(player.getShepherdingAnimal() != null)
                 player.getShepherdingAnimal().spriteGetter().draw(game.getBatch());
         }

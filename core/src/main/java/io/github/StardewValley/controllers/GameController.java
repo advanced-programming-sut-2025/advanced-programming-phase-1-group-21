@@ -2033,6 +2033,27 @@ public class GameController {
         return Result.success(output);
     }
 
+    public void reactEmoji(Reaction.EmojiType emoji) {
+        player.getReaction().showEmoji(emoji, 5);
+    }
+
+    public void reactText(String text) {
+        player.getReaction().showText(text, 5);
+    }
+
+    public void setDefaultReaction(String defaultReaction) {
+        player.setDefaultReaction(defaultReaction);
+    }
+
+    public void setReaction(String str) {
+        player.getReaction().fromString(str);
+    }
+
+
+    public void setReactionToDeafult() {
+        player.getReaction().fromString(player.getDefaultReaction());
+    }
+
     /**
      * ummm IDK what to explain
      * this function here runs with NO PROXY (NO NETWORK)

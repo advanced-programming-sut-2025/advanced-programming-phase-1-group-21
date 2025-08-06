@@ -7,6 +7,8 @@ import io.github.StardewValley.Main;
 import io.github.StardewValley.network.NetworkChatController;
 import io.github.StardewValley.views.menu.GUI.ChatScreen;
 import io.github.StardewValley.views.menu.GUI.GameScreen;
+import models.game.Game;
+import models.game.Reaction;
 import models.network.Chat;
 import models.network.ChatType;
 
