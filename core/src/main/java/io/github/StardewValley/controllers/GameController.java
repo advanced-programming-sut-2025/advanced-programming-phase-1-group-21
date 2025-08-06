@@ -15,6 +15,7 @@ import data.ArtisanGoodsData;
 import data.items.SeedData;
 import io.github.StardewValley.network.NetworkLLMController;
 import models.Item.*;
+import models.MusicData;
 import models.animal.Animal;
 import models.animal.AnimalTypes;
 import models.crop.FertilizerType;
@@ -2064,5 +2065,9 @@ public class GameController {
                 () -> game.advance(),
                 CompletableFuture.delayedExecutor(30, TimeUnit.SECONDS)
         );
+    }
+
+    public void addMusic(MusicData musicData) {
+        player.addMusic(musicData);
     }
 }

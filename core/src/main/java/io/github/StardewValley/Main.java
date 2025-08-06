@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
+import de.tomgrill.gdxdialogs.desktop.DesktopGDXDialogs;
 import io.github.StardewValley.asset.Assets;
 import io.github.StardewValley.network.ClientNetwork;
 import io.github.StardewValley.views.menu.GUI.PreMenuScreen;
@@ -17,13 +18,15 @@ import java.util.LinkedList;
 public class Main extends Game {
     private final LinkedList <Stage> layers = new LinkedList<>();
     private SpriteBatch batch;
+    public final DesktopGDXDialogs dialogs;
 
 
     private static Main main;
 
-    public Main() {
+    public Main(de.tomgrill.gdxdialogs.desktop.DesktopGDXDialogs desktopGDXDialogs) {
         super();
         main = this;
+        this.dialogs = desktopGDXDialogs;
     }
 
     public SpriteBatch getBatch() {

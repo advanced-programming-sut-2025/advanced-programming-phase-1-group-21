@@ -24,8 +24,7 @@ public class ClientNetwork {
     }
 
     public static void init() throws IOException {
-        client = new Client();
-
+        client = new Client(10485760, 10485760);
         NetworkRegister.register(client.getKryo());
 
         client.addListener(new Listener() {

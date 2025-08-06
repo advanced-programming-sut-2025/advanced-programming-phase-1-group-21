@@ -1,12 +1,14 @@
 package network;
 
 import com.esotericsoftware.kryo.Kryo;
+import models.MusicData;
 import models.game.NPC;
 import models.map.Shop;
 
 public class NetworkRegister {
 
     public static void register(Kryo kryo) {
+        kryo.register(MusicData.class);
         kryo.register(models.Item.Consumable.class);
         kryo.register(models.Item.Item.class);
         kryo.register(models.Item.ItemType.class);

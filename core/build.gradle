@@ -8,6 +8,8 @@ dependencies {
   api "com.badlogicgames.gdx:gdx-ai:$aiVersion"
   api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
   api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+  implementation "de.tomgrill.gdxdialogs:gdx-dialogs-desktop:1.2.5"
+  implementation "com.kotcrab.vis:vis-ui:1.1.0"
   api "com.badlogicgames.gdx:gdx:$gdxVersion"
   api "com.crashinvaders.lml:gdx-autumn-mvc:$lmlVersion"
   api "com.crashinvaders.lml:gdx-autumn:$lmlVersion"
