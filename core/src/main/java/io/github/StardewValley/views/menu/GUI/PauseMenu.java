@@ -20,13 +20,12 @@ import io.github.StardewValley.controllers.GameController;
 public class PauseMenu implements Screen {
     private Stage stage;
     private Skin skin;
-    private TextButton exitButton, scoreboardButton;
+    private TextButton exitButton, scoreboardButton, reactionButton;
     private Label date, time, weather, energy;
     private Texture bgTexture;
     private GameController controller = App.getInstance().currentPlayerController;
 
     public PauseMenu() {
-
         this.skin = Assets.getSkin();
         this.stage = new Stage(new ScreenViewport());
         createUI();
@@ -55,15 +54,26 @@ public class PauseMenu implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Scoreboard button clicked");
-                // Add your scoreboard functionality here
                 Main.getInstance().setScreen(new ScoreboardScreen());
             }
         });
         exitButton.setPosition(1670, 850);
-        // Position the scoreboard button below the info labels
+
+        // Create reaction button
+        reactionButton = new TextButton("REACTION", skin);
+        reactionButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("Reaction button clicked");
+                Main.getInstance().setScreen(new ReactionScreen());
+            }
+        });
+
+        // Position the buttons
         float centerX = Gdx.graphics.getWidth() / 2f;
         float centerY = Gdx.graphics.getHeight() / 2f;
         scoreboardButton.setPosition(centerX - scoreboardButton.getWidth() / 2, centerY - 150);
+        reactionButton.setPosition(centerX - reactionButton.getWidth() / 2, centerY - 200);
 
         // Create info labels
         date = new Label("Date: " + controller.getDate().getData(), skin);
@@ -77,15 +87,14 @@ public class PauseMenu implements Screen {
         weather.setColor(Color.WHITE);
         energy.setColor(Color.WHITE);
 
-
         date.setPosition(centerX - date.getWidth() / 2, centerY + 75);
         time.setPosition(centerX - time.getWidth() / 2, centerY + 25);
         weather.setPosition(centerX - weather.getWidth() / 2, centerY - 25);
         energy.setPosition(centerX - energy.getWidth() / 2, centerY - 75);
 
         // Add actors to stage
-        stage.addActor(exitButton);
         stage.addActor(scoreboardButton);
+        stage.addActor(reactionButton);
         stage.addActor(date);
         stage.addActor(time);
         stage.addActor(weather);

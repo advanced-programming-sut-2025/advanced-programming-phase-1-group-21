@@ -42,7 +42,7 @@ public class SharedAssetManager {
         manager.load("Textures/Decor/FoodStable.png" , Texture.class);
         manager.load("Textures/Decor/SimpleStable.png" , Texture.class);
         manager.load("Textures/Decor/heart.png" , Texture.class);
-        manager.load("Textures/Emoji (probably unusable)/food.png" , Texture.class);
+        manager.load("Textures/emoji/food.png" , Texture.class);
         manager.load("Textures/Decor/lightning.png" , Texture.class);
         manager.load("Textures/Flooring/HouseFloor.png" , Texture.class);
         manager.load("Textures/Refrigerator/Fridge.png" , Texture.class);
@@ -52,11 +52,14 @@ public class SharedAssetManager {
         manager.load("Textures/Villagers/robin.png" , Texture.class);
         manager.load("Textures/Villagers/leah.png" , Texture.class);
         manager.load("Textures/Villagers/cloud.png", Texture.class);
-        manager.load("Textures/Emoji (probably unusable)/cup.png" , Texture.class);
+        manager.load("Textures/emoji/cup.png" , Texture.class);
+        manager.load("Textures/emoji/happy.png" , Texture.class);
+        manager.load("Textures/emoji/sad.png" , Texture.class);
+
     }
 
     public static Texture getCup(){
-        return manager.get("Textures/Emoji (probably unusable)/cup.png");
+        return manager.get("Textures/emoji/cup.png");
     }
 
     public static Texture getCloud(){

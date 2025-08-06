@@ -42,6 +42,7 @@ public class Player implements DailyUpdate, Serializable {
     private boolean faint = false;
     private int quest = 0;
     private String suitor;
+    private Reaction reaction = new Reaction();
     public Player() {}
 
     private transient Texture texture = new Texture("Textures/Players/FarmerFront1.png");
@@ -388,5 +389,18 @@ public class Player implements DailyUpdate, Serializable {
 
     public String getSuitor() {
         return suitor;
+    }
+
+    public Reaction getReaction() {
+        return reaction;
+    }
+
+    String defaultReaction = "";
+    public void setDefaultReaction(String defaultReaction) {
+        this.defaultReaction = defaultReaction;
+    }
+
+    public String getDefaultReaction() {
+        return defaultReaction;
     }
 }
