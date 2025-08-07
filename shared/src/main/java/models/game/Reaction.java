@@ -25,10 +25,16 @@ public class Reaction {
 
     private EmojiType currentEmoji = EmojiType.NONE;
     private String currentText = null;
-    private final Sprite emojiSprite;
+    private Sprite emojiSprite;
     private final BitmapFont font;
     private float duration;
     private float timer;
+
+    public Sprite getEmojiSprite() {
+        if(emojiSprite == null || emojiSprite.getTexture() == null)
+            emojiSprite = new Sprite(SharedAssetManager.getHeart());
+        return emojiSprite;
+    }
 
     private BitmapFont generateFont(int size) {
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Fonts/Blomberg-8MKKZ.otf"));

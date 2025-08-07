@@ -1,5 +1,6 @@
 package io.github.StardewValley.views.menu.GUI;
 
+import Asset.SharedAssetManager;
 import io.github.StardewValley.Animations.IndependentAnimation;
 import io.github.StardewValley.Main;
 import models.animal.Animal;
@@ -94,7 +95,11 @@ public class ShowMap {
 
         if (player.getMap() == map) {
             player.getSprite().draw(game.getBatch());
-            player.getReaction().render(game.getBatch(), player.getSprite().getX(), player.getSprite().getY() + 40);
+            player.getReaction().render(game.getBatch() , player.getSprite().getX() ,  player.getSprite().getY());
+            if(player.getReaction().getEmojiSprite().getTexture() != null  && player.getReaction().getEmojiSprite().getTexture() != SharedAssetManager.getHeart()) {
+                player.getReaction().render(game.getBatch() , player.getSprite().getX() ,  player.getSprite().getY());
+
+            }
             if(player.getShepherdingAnimal() != null)
                 player.getShepherdingAnimal().spriteGetter().draw(game.getBatch());
         }
