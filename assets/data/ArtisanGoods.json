@@ -65,7 +65,7 @@
         "description": "It smells delicious. This is sure to give you a boost.",
         "processing-time": 2,
         "ingredients": [
-          {"Coffee Beans": 5}
+          {"Coffee Bean": 5}
         ]
       },
       {

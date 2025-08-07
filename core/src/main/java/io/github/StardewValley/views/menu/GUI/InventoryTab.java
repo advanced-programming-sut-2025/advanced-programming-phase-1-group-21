@@ -228,7 +228,7 @@ class InventoryTab {
 							cell.setUserObject(item);
 						}
 						else {
-							System.err.println("There is no texture for this item!! item name: " + item.getName() + ", row: " + row + ", col: " + col);
+//							System.err.println("There is no texture for this item!! item name: " + item.getName() + ", row: " + row + ", col: " + col);
 							cell = new Image(emptyDrawable);
 							cell.setUserObject(item);
 						}
@@ -315,7 +315,7 @@ class InventoryTab {
 							cell.setUserObject(recipe);
 						}
 						else {
-							System.err.println("There is no texture for this item!! item name: " + resultName + ", row: " + row + ", col: " + col);
+//							System.err.println("There is no texture for this item!! item name: " + resultName + ", row: " + row + ", col: " + col);
 							cell = new Image(emptyDrawable);
 							cell.setUserObject(recipe);
 						}
@@ -382,7 +382,7 @@ class InventoryTab {
 							cell.setUserObject(recipe);
 						}
 						else {
-							System.err.println("There is no texture for this item!! item name: " + resultName + ", row: " + row + ", col: " + col);
+//							System.err.println("There is no texture for this item!! item name: " + resultName + ", row: " + row + ", col: " + col);
 							cell = new Image(emptyDrawable);
 							cell.setUserObject(recipe);
 						}
