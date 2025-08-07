@@ -220,6 +220,8 @@ public class GameScreen implements Screen , InputProcessor {
         if (i == Input.Keys.F1) {
             tagNotification.show("You Pressed F1");
         }
+        if(i == Input.Keys.Q)
+            Main.getInstance().setScreen(new MiniGameScreen());
 
         return false;
     }

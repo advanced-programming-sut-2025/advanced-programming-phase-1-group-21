@@ -16,6 +16,8 @@ public class FishData implements Data {
 	private String season;
 	@SerializedName("price")
 	private int price;
+	@SerializedName("texture")
+	private String textureAddress;
 
 	public static String getDataURL() {
 		return dataURL;
@@ -54,5 +56,9 @@ public class FishData implements Data {
 			if (a.getName().equalsIgnoreCase(name))
 				return a;
 		return null;
+	}
+
+	public String getTextureAddress() {
+		return textureAddress;
 	}
 }

@@ -102,7 +102,7 @@ public class SharedAssetManager {
     }
 
     public static Texture getFoodEmoji(){
-        return manager.get("Textures/Emoji (probably unusable)/food.png");
+        return manager.get("Textures/emoji/food.png");
     }
 
     public static Texture getHeart(){
