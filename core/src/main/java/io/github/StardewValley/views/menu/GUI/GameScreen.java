@@ -20,6 +20,7 @@ import io.github.StardewValley.controllers.GameController;
 import io.github.StardewValley.controllers.ViewController;
 import models.animal.Animal;
 import models.game.NPC;
+import models.map.Artisan;
 import models.map.Coord;
 import models.game.Game;
 import models.game.Player;
@@ -41,6 +42,7 @@ public class GameScreen implements Screen , InputProcessor {
     private TalkScreen talkScreen;
     private TagNotification tagNotification;
     private FriendshipsTab friendshipsTab;
+    private ArtisanTab artisanTab;
     private boolean isInventoryShown = false;
     private boolean isShopMenuShown = false;
     private boolean isSellTabShown = false;
@@ -49,6 +51,7 @@ public class GameScreen implements Screen , InputProcessor {
     private boolean isChatShown = false;
     private boolean isTalkScreen = false;
     private boolean isGiftTabShown = false;
+    private boolean isArtisanShown = false;
     private BitmapFont messagePrinter = new BitmapFont();
     private String message;
     private AnimalInfoWindow animalInfoWindow;
@@ -92,6 +95,7 @@ public class GameScreen implements Screen , InputProcessor {
         friendshipsTab = new FriendshipsTab(this , skin);
         chatScreen = new ChatScreen(viewController.player, this, skin);
         tagNotification = new TagNotification(skin);
+        artisanTab = new ArtisanTab(currentPlayer, this, skin);
     }
 
     @Override
@@ -122,28 +126,16 @@ public class GameScreen implements Screen , InputProcessor {
         }
         stage.draw();
 
-        if (isInventoryShown) {
-            inventoryTab.draw();
-        }
-        if (isShopMenuShown)
-            shopMenuTab.draw();
-        if(isSellTabShown)
-            sellTab.draw();
-        if (isTerminalShown)
-            terminalTab.draw();
-        if (isChatShown) {
-            chatScreen.draw();
-        }
-        if(isTalkScreen)
-            talkScreen.draw();
-
-        if(isFriendshipShown)
-            friendshipsTab.draw();
-        if (tagNotification.isVisible()) {
-            tagNotification.draw();
-        }
-        if(isGiftTabShown)
-            giftTab.draw();
+        if (isInventoryShown) inventoryTab.draw();
+        if (isShopMenuShown) shopMenuTab.draw();
+        if (isSellTabShown) sellTab.draw();
+        if (isTerminalShown) terminalTab.draw();
+        if (isChatShown) chatScreen.draw();
+        if (isTalkScreen) talkScreen.draw();
+        if (isFriendshipShown) friendshipsTab.draw();
+        if (tagNotification.isVisible()) tagNotification.draw();
+        if (isGiftTabShown) giftTab.draw();
+        if (isArtisanShown) artisanTab.draw();
 
         if(!viewController.player.getNotifications().isEmpty()){
             int size = viewController.player.getNotifications().size();
@@ -345,6 +337,18 @@ public class GameScreen implements Screen , InputProcessor {
     public void onFriendshipScreenClosed(){
         isFriendshipShown = false;
         Gdx.input.setInputProcessor(this);
+    }
+
+    public void onArtisanTabClosed() {
+        System.out.println("artisan tab finished");
+        isArtisanShown = false;
+        Gdx.input.setInputProcessor(this);
+    }
+
+    public void showArtisanTab(Artisan artisan, GameController gameController, int cursorX, int cursorY) {
+        System.out.println("artisan tab started");
+        isArtisanShown = true;
+        artisanTab.show(artisan, gameController, cursorX, cursorY);
     }
 
     public GameController getController() {

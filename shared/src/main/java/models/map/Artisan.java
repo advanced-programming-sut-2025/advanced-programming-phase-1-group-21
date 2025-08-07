@@ -157,6 +157,10 @@ public class Artisan implements Placable, Serializable {
 		return sprite;
 	}
 
+	public ArtisanGoodsData getRecipeData() {
+		return goodsData;
+	}
+
 	@Override
 	public String toString() {
 		return String.format(

@@ -528,18 +528,16 @@ public class GameController {
         return Result.success(seedData.toString());
     }
 
-    public void plant(Tile tile, Seed seed) {
-        seed.plant(tile);
-        player.getInventory().removeItem(seed);
+    public void plant(Coord coord, String seedName) {
+        Plantable plantable = (Plantable) Item.build(seedName, 1);
+        Tile tile = player.getMap().getTile(coord);
+
+        plantable.plant(tile);
+        player.getInventory().removeItem((Item) plantable);
     }
 
-    public void plant(Tile tile, Sapling sap) {
-        sap.plant(tile);
-        player.getInventory().removeItem(sap);
-    }
-
-    public void harvest(Tile tile) {
-        Item item = tile.harvest(player);
+    public void harvest(Coord coord) {
+        Item item = player.getMap().getTile(coord).harvest(player);
         player.getInventory().addItem(item);
     }
 
@@ -579,9 +577,11 @@ public class GameController {
         return Result.success(tile.getPlacable(PlantedTree.class).toString());
     }
 
-    public void fertilize(Tile tile, Item fertilizer) {
-        tile.getPlacable(PlantedSeed.class).fertilize(FertilizerType.getFertilizerType(fertilizer.getName()));
-        player.getInventory().removeItem(Item.build(fertilizer.getName(), 1));
+    public void fertilize(Coord coord, String fertilizerName) {
+        Tile tile = player.getMap().getTile(coord);
+        Item fertilizer = Item.build(fertilizerName, 1);
+        tile.getPlacable(PlantedSeed.class).fertilize(FertilizerType.getFertilizerType(fertilizerName));
+        player.getInventory().removeItem(fertilizer);
     }
 
     public Result<Void> fertilize(FertilizerType fertilizer, Direction direction) {
@@ -1048,42 +1048,36 @@ public class GameController {
         return Result.success(null);
     }
 
-    public Result<Void> placeArtisan(Item artisan, Tile tile) {
+    public Result<Void> placeArtisan(Coord coord, String artisanName) {
         Inventory inventory = player.getInventory();
+        Item artisan = Item.build(artisanName, 1);
+        Tile tile = player.getMap().getTile(coord);
+
         if (artisan == null)
             return Result.failure(GameError.CANT_FIND_ITEM_IN_INVENTORY);
-
         if (tile == null)
             return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
         if (!tile.isEmpty()) {
             return Result.failure(GameError.TILE_IS_NOT_EMPTY);
         }
 
-        inventory.removeItem(Item.build(artisan.getName(), 1));
-        new Artisan(ArtisanGoodsData.getRecipeData(artisan.getName()), player.getInventory()).onPlace(tile);
+        inventory.removeItem(artisan);
+        new Artisan(ArtisanGoodsData.getRecipeData(artisanName), player.getInventory()).onPlace(tile);
         tile.setPlacableLoc();
         return Result.success(null);
     }
 
-    public Result<Void> useArtisan(Artisan artisan, String mainIngredient) {
-//        java.util.Map<String, Integer> recipe = artisan.getRecipe(mainIngredient);
-        ArtisanRecipeData recipe = artisan.getRecipeData(mainIngredient);
-        if (recipe == null) return null;
-        java.util.Map<String, Integer> itemList = recipe.getItemList(mainIngredient);
-        if (itemList == null) return null;
-//        System.out.println("Artisan: " + artisan + "\nresult: " + mainIngredient);
-//        System.out.println("Recipe: " + recipe);
+    public Result<Void> useArtisan(Artisan artisan, String resultName, java.util.Map <String, Integer> itemList) {
         ArrayList<Item> requiredItems = new ArrayList<>();
-        for (String ing: itemList.keySet()) {
+        for (String ing: itemList.keySet())
             requiredItems.add(Item.build(ing, itemList.get(ing)));
-        }
-//        System.out.println("RequiredItems: " + requiredItems);
         if (player.getInventory().canRemoveItems(requiredItems)) {
             player.getInventory().removeItems(requiredItems);
-            artisan.startProcess(recipe.getName());
-//            System.out.println("Done");
+            artisan.startProcess(resultName);
         }
-        return null;
+        else
+            return Result.failure(GameError.NOT_ENOUGH_ITEMS);
+        return Result.success(null);
     }
   
     public void enterBuilding(String buildingName) {
@@ -1118,27 +1112,27 @@ public class GameController {
         return Result.failure(GameError.NO_FREE_ARTISAN_AROUND);
     }
 
+    public Result<Item> getArtisanProduct(Artisan artisan) {
+        if (artisan.isResultReady()) {
+            Item result = artisan.getResultWithoutReset();
+            if (player.getInventory().addItem(result).isSuccess()) {
+                artisan.getResult(player.getInventory());
+                return Result.success(null);
+            }
+            return Result.failure(GameError.CANT_ADD_ITEM_TO_INVENTORY);
+        }
+        return Result.failure(GameError.NO_READY_ARTISAN_AROUND);
+    }
+
     public Result<Item> getArtisanProduct(String artisanName) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-
-        Inventory inventory = player.getInventory();
-
         for (Direction direction : Direction.values()) {
             Coord coord = player.getCoord().addCoord(direction.getCoord());
             Tile tile = player.getMap().getTile(coord);
             if (tile == null) continue;
             if (tile.getTileType() == TileType.ARTISAN && tile.getPlacable(Artisan.class).isResultReady() && tile.getPlacable(Artisan.class).getName().equalsIgnoreCase(artisanName)) {
                 Artisan artisan = tile.getPlacable(Artisan.class);
-
-
-                if (artisan.isResultReady()) {
-                    Item result = artisan.getResultWithoutReset();
-                    if (inventory.addItem(result).isSuccess()) {
-                        artisan.getResult(player.getInventory());
-                        return Result.success(null);
-                    }
-                    return Result.failure(GameError.CANT_ADD_ITEM_TO_INVENTORY);
-                }
+                return getArtisanProduct(artisan);
             }
         }
 

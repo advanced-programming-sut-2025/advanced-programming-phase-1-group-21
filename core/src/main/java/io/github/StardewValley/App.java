@@ -28,6 +28,7 @@ public class App implements Serializable {
     public Game game = null;
     public GameController currentPlayerController = null;
     public ViewController currentPlayerViewController = null;
+    public GameScreen currentPlayerGameScreen = null;
 
     public Map<String, GameController> gameControllers;
 
@@ -115,6 +116,7 @@ public class App implements Serializable {
             gameControllers.put(username, gc);
         }
 
-        Main.getInstance().setScreen(new GameScreen());
+        currentPlayerGameScreen = new GameScreen();
+        Main.getInstance().setScreen(currentPlayerGameScreen);
     }
 }
