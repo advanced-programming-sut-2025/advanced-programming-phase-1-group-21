@@ -17,17 +17,14 @@ import java.util.Map;
 public class Artisan implements Placable, Serializable {
 	private ArtisanGoodsData goodsData;
 	private transient Sprite sprite;
+	private float remainTime, fullTime;
 	Item result;
+	private String resultName;
 
 	public Artisan() {}
 
 	public Artisan(ArtisanGoodsData goodsData, Inventory inventory) {
-//		System.out.println("---- Artisan Created " + goodsData.getName() + " ----");
 		this.goodsData = goodsData;
-
-		// The ingredients of "Bee House" is null
-		if (goodsData.getName().equalsIgnoreCase("Bee House"))
-			craft(new ArrayList<>(), inventory);
 	}
 
 	@Override
@@ -39,19 +36,33 @@ public class Artisan implements Placable, Serializable {
 		return goodsData.getName();
 	}
 
-	public ArtisanRecipeData getRecipeData(String mainIngredient) {
-		ArtisanRecipeData resultRecipe = null;
-		int numberOfRecipe = 0;
-		for (ArtisanRecipeData recipe : goodsData.getRecipes())
-			for (Map <String, Integer> baseIngredients: recipe.getIngredients())
-				for (Map.Entry<String, Integer> entry : baseIngredients.entrySet())
-					if (mainIngredient.equalsIgnoreCase(entry.getKey())) {
-						numberOfRecipe++;
-						resultRecipe = recipe;
-					}
-		if (numberOfRecipe != 1)
-			return null;
-		return resultRecipe;
+	public String getResultName() {
+		return resultName;
+	}
+
+	public float getPercentage() {
+		return (float) (1.0 - (remainTime / fullTime));
+	}
+
+	public void updateTime(float deltaTime) {
+		if (isProcessing()) {
+			remainTime -= deltaTime;
+			if (remainTime <= 0) {
+				result = Item.build(resultName, 1);
+				remainTime = 0;
+			}
+		}
+	}
+
+	public void cancel() {
+		resultName = null;
+		result = null;
+		remainTime = 0;
+		fullTime = 0;
+	}
+
+	public void finish() {
+		remainTime = 0.0001f;
 	}
 
 	public void startProcess(String result) {
@@ -91,7 +102,7 @@ public class Artisan implements Placable, Serializable {
 
 				inventory.removeItems(requiredItems);
 
-				startProcess(recipe.getName(), 0);
+				startProcess(recipe.getName(), recipe.getProcessingTime());
 
 				return Result.success(null);
 			}
@@ -100,12 +111,14 @@ public class Artisan implements Placable, Serializable {
 	}
 
 	private void startProcess(String recipeName, int time) {
-//		System.out.println("---- Artisan Start Process: " + recipeName);
-		result = Item.build(recipeName, 1);
+		resultName = recipeName;
+		remainTime = time;
+		fullTime = time;
+		result = null;
 	}
 
-	private boolean isProcessing() {
-		return false;
+	public boolean isProcessing() {
+		return remainTime != 0;
 	}
 
 	public boolean isEmpty() {
@@ -115,8 +128,6 @@ public class Artisan implements Placable, Serializable {
 	public Item getResult(Inventory inventory) {
 		Item r = result;
 		result = null;
-		if (goodsData.getName().equalsIgnoreCase("Bee House"))
-			craft(new ArrayList<>(), inventory);
 		return r;
 	}
 

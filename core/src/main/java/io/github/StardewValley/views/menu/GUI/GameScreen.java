@@ -340,13 +340,11 @@ public class GameScreen implements Screen , InputProcessor {
     }
 
     public void onArtisanTabClosed() {
-        System.out.println("artisan tab finished");
         isArtisanShown = false;
         Gdx.input.setInputProcessor(this);
     }
 
     public void showArtisanTab(Artisan artisan, GameController gameController, int cursorX, int cursorY) {
-        System.out.println("artisan tab started");
         isArtisanShown = true;
         artisanTab.show(artisan, gameController, cursorX, cursorY);
     }
