@@ -3,120 +3,140 @@
     "name": "Salmon",
     "type": "Normal",
     "price": 75,
-    "season": "autumn"
+    "season": "autumn",
+    "texture": "Textures/Fish/Salmon.png"
   },
   {
     "name": "Sardine",
     "type": "Normal",
     "price": 40,
-    "season": "autumn"
+    "season": "autumn",
+    "texture": "Textures/Fish/Sardine.png"
   },
   {
     "name": "Shad",
     "type": "Normal",
     "price": 60,
-    "season": "autumn"
+    "season": "autumn",
+    "texture": "Textures/Fish/Shad.png"
   },
   {
     "name": "Blue Discus",
     "type": "Normal",
     "price": 120,
-    "season": "autumn"
+    "season": "autumn",
+    "texture": "Textures/Fish/Blue_Discus.png"
   },
   {
     "name": "Midnight Carp",
     "type": "Normal",
     "price": 150,
-    "season": "winter"
+    "season": "winter",
+    "texture": "Textures/Fish/Midnight_Carp.png"
   },
   {
     "name": "Squid",
     "type": "Normal",
     "price": 80,
-    "season": "winter"
+    "season": "winter",
+    "texture": "Textures/Fish/Squid.png"
   },
   {
     "name": "Tuna",
     "type": "Normal",
     "price": 100,
-    "season": "winter"
+    "season": "winter",
+    "texture": "Textures/Fish/Tuna.png"
   },
   {
     "name": "Perch",
     "type": "Normal",
     "price": 55,
-    "season": "winter"
+    "season": "winter",
+    "texture": "Textures/Fish/Perch.png"
   },
   {
     "name": "Flounder",
     "type": "Normal",
     "price": 100,
-    "season": "spring"
+    "season": "spring",
+    "texture": "Textures/Fish/Flounder.png"
   },
   {
     "name": "Lionfish",
     "type": "Normal",
     "price": 100,
-    "season": "spring"
+    "season": "spring",
+    "texture": "Textures/Fish/LionFish.png"
   },
   {
     "name": "Herring",
     "type": "Normal",
     "price": 30,
-    "season": "spring"
+    "season": "spring",
+    "texture": "Textures/Fish/Herring.png"
   },
   {
     "name": "Ghostfish",
     "type": "Normal",
     "price": 45,
-    "season": "spring"
+    "season": "spring",
+    "texture": "Textures/Fish/Ghostfish.png"
   },
   {
     "name": "Tilapia",
     "type": "Normal",
     "price": 75,
-    "season": "summer"
+    "season": "summer",
+    "texture": "Textures/Fish/Tilapia.png"
   },
   {
     "name": "Dorado",
     "type": "Normal",
     "price": 100,
-    "season": "summer"
+    "season": "summer",
+    "texture": "Textures/Fish/Dorado.png"
   },
   {
     "name": "Sunfish",
     "type": "Normal",
     "price": 30,
-    "season": "summer"
+    "season": "summer",
+    "texture": "Textures/Fish/Sunfish.png"
   },
   {
     "name": "Rainbow Trout",
     "type": "Normal",
     "price": 65,
-    "season": "summer"
+    "season": "summer",
+    "texture": "Textures/Fish/Rainbow_Trout.png"
   },
   {
     "name": "Legend",
     "type": "Legendary",
     "price": 5000,
-    "season": "spring"
+    "season": "spring",
+    "texture": "Textures/Fish/Legend2.png"
   },
   {
     "name": "Glacierfish",
     "type": "Legendary",
     "price": 1000,
-    "season": "winter"
+    "season": "winter",
+    "texture": "Textures/Fish/Glacierfish2.png"
   },
   {
     "name": "Angler",
     "type": "Legendary",
     "price": 900,
-    "season": "autumn"
+    "season": "autumn",
+    "texture": "Textures/Fish/Angler2.png"
   },
   {
     "name": "Crimsonfish",
     "type": "Legendary",
     "price": 1500,
-    "season": "summer"
+    "season": "summer",
+    "texture": "Textures/Fish/Crimsonfish2.png"
   }
 ]

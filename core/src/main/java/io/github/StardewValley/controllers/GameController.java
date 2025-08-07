@@ -505,6 +505,20 @@ public class GameController {
         return item;
     }
 
+    public Result<Void> addFishToInventory(String fishName , boolean isPerfect){
+        Item item = Item.build(fishName , 1);
+        if(item == null)
+            throw new RuntimeException("Name = " + fishName);
+        player.getInventory().addItem(item);
+        if(isPerfect) {
+            int beforeSkill = player.getSkillExp(SkillType.FISHING);
+            if (beforeSkill == 0)
+                beforeSkill = 1;
+            player.setSkillExp(SkillType.FISHING, (int) (2.4 * beforeSkill));
+        }
+        return Result.success(null);
+    }
+
     public Result<String> craftInfo(String craftName) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         SeedData seedData = SeedData.getData(craftName);

@@ -31,6 +31,7 @@ public class Assets {
         manager.load("Textures/Tools/Primitive_Trashcan.png" , Texture.class);
         manager.load("Textures/Tools/Primitive_Watering_can.png" , Texture.class);
         manager.load("Textures/Tools/Steel_Scythe.png" , Texture.class);
+        manager.load("Textures/Fish/MiniGameLake.png" , Texture.class);
     }
 
     public static void finishLoading() {
@@ -41,6 +42,10 @@ public class Assets {
         for (GameSound gameSound: GameSound.values()) {
             gameSound.setSound(manager.get(gameSound.getPath(), Sound.class));
         }
+    }
+
+    public static Texture getLakeTexture(){
+        return manager.get("Textures/Fish/MiniGameLake.png");
     }
 
     public static Texture getToolTexture(String name){

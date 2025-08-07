@@ -1270,6 +1270,165 @@ Textures/Decor/Wood_Path_Tile.png
 Textures/Decor/Wood_Path_Tile_Winter.png
 Textures/Decor/heart.png
 Textures/Decor/lightning.png
+Textures/Emoji (probably unusable)/Emojis000.png
+Textures/Emoji (probably unusable)/Emojis001.png
+Textures/Emoji (probably unusable)/Emojis002.png
+Textures/Emoji (probably unusable)/Emojis003.png
+Textures/Emoji (probably unusable)/Emojis004.png
+Textures/Emoji (probably unusable)/Emojis005.png
+Textures/Emoji (probably unusable)/Emojis006.png
+Textures/Emoji (probably unusable)/Emojis007.png
+Textures/Emoji (probably unusable)/Emojis008.png
+Textures/Emoji (probably unusable)/Emojis009.png
+Textures/Emoji (probably unusable)/Emojis010.png
+Textures/Emoji (probably unusable)/Emojis011.png
+Textures/Emoji (probably unusable)/Emojis012.png
+Textures/Emoji (probably unusable)/Emojis013.png
+Textures/Emoji (probably unusable)/Emojis014.png
+Textures/Emoji (probably unusable)/Emojis015.png
+Textures/Emoji (probably unusable)/Emojis016.png
+Textures/Emoji (probably unusable)/Emojis017.png
+Textures/Emoji (probably unusable)/Emojis018.png
+Textures/Emoji (probably unusable)/Emojis019.png
+Textures/Emoji (probably unusable)/Emojis020.png
+Textures/Emoji (probably unusable)/Emojis021.png
+Textures/Emoji (probably unusable)/Emojis022.png
+Textures/Emoji (probably unusable)/Emojis023.png
+Textures/Emoji (probably unusable)/Emojis024.png
+Textures/Emoji (probably unusable)/Emojis025.png
+Textures/Emoji (probably unusable)/Emojis026.png
+Textures/Emoji (probably unusable)/Emojis027.png
+Textures/Emoji (probably unusable)/Emojis028.png
+Textures/Emoji (probably unusable)/Emojis029.png
+Textures/Emoji (probably unusable)/Emojis030.png
+Textures/Emoji (probably unusable)/Emojis031.png
+Textures/Emoji (probably unusable)/Emojis032.png
+Textures/Emoji (probably unusable)/Emojis033.png
+Textures/Emoji (probably unusable)/Emojis034.png
+Textures/Emoji (probably unusable)/Emojis035.png
+Textures/Emoji (probably unusable)/Emojis036.png
+Textures/Emoji (probably unusable)/Emojis037.png
+Textures/Emoji (probably unusable)/Emojis038.png
+Textures/Emoji (probably unusable)/Emojis039.png
+Textures/Emoji (probably unusable)/Emojis040.png
+Textures/Emoji (probably unusable)/Emojis041.png
+Textures/Emoji (probably unusable)/Emojis042.png
+Textures/Emoji (probably unusable)/Emojis043.png
+Textures/Emoji (probably unusable)/Emojis044.png
+Textures/Emoji (probably unusable)/Emojis045.png
+Textures/Emoji (probably unusable)/Emojis046.png
+Textures/Emoji (probably unusable)/Emojis047.png
+Textures/Emoji (probably unusable)/Emojis048.png
+Textures/Emoji (probably unusable)/Emojis049.png
+Textures/Emoji (probably unusable)/Emojis050.png
+Textures/Emoji (probably unusable)/Emojis051.png
+Textures/Emoji (probably unusable)/Emojis052.png
+Textures/Emoji (probably unusable)/Emojis053.png
+Textures/Emoji (probably unusable)/Emojis054.png
+Textures/Emoji (probably unusable)/Emojis055.png
+Textures/Emoji (probably unusable)/Emojis056.png
+Textures/Emoji (probably unusable)/Emojis057.png
+Textures/Emoji (probably unusable)/Emojis058.png
+Textures/Emoji (probably unusable)/Emojis059.png
+Textures/Emoji (probably unusable)/Emojis060.png
+Textures/Emoji (probably unusable)/Emojis061.png
+Textures/Emoji (probably unusable)/Emojis062.png
+Textures/Emoji (probably unusable)/Emojis063.png
+Textures/Emoji (probably unusable)/Emojis064.png
+Textures/Emoji (probably unusable)/Emojis065.png
+Textures/Emoji (probably unusable)/Emojis066.png
+Textures/Emoji (probably unusable)/Emojis067.png
+Textures/Emoji (probably unusable)/Emojis068.png
+Textures/Emoji (probably unusable)/Emojis069.png
+Textures/Emoji (probably unusable)/Emojis070.png
+Textures/Emoji (probably unusable)/Emojis071.png
+Textures/Emoji (probably unusable)/Emojis072.png
+Textures/Emoji (probably unusable)/Emojis073.png
+Textures/Emoji (probably unusable)/Emojis074.png
+Textures/Emoji (probably unusable)/Emojis075.png
+Textures/Emoji (probably unusable)/Emojis076.png
+Textures/Emoji (probably unusable)/Emojis077.png
+Textures/Emoji (probably unusable)/Emojis078.png
+Textures/Emoji (probably unusable)/Emojis079.png
+Textures/Emoji (probably unusable)/Emojis080.png
+Textures/Emoji (probably unusable)/Emojis081.png
+Textures/Emoji (probably unusable)/Emojis082.png
+Textures/Emoji (probably unusable)/Emojis083.png
+Textures/Emoji (probably unusable)/Emojis084.png
+Textures/Emoji (probably unusable)/Emojis085.png
+Textures/Emoji (probably unusable)/Emojis086.png
+Textures/Emoji (probably unusable)/Emojis087.png
+Textures/Emoji (probably unusable)/Emojis088.png
+Textures/Emoji (probably unusable)/Emojis089.png
+Textures/Emoji (probably unusable)/Emojis090.png
+Textures/Emoji (probably unusable)/Emojis091.png
+Textures/Emoji (probably unusable)/Emojis092.png
+Textures/Emoji (probably unusable)/Emojis093.png
+Textures/Emoji (probably unusable)/Emojis094.png
+Textures/Emoji (probably unusable)/Emojis095.png
+Textures/Emoji (probably unusable)/Emojis096.png
+Textures/Emoji (probably unusable)/Emojis097.png
+Textures/Emoji (probably unusable)/Emojis098.png
+Textures/Emoji (probably unusable)/Emojis099.png
+Textures/Emoji (probably unusable)/Emojis100.png
+Textures/Emoji (probably unusable)/Emojis101.png
+Textures/Emoji (probably unusable)/Emojis102.png
+Textures/Emoji (probably unusable)/Emojis103.png
+Textures/Emoji (probably unusable)/Emojis104.png
+Textures/Emoji (probably unusable)/Emojis105.png
+Textures/Emoji (probably unusable)/Emojis106.png
+Textures/Emoji (probably unusable)/Emojis107.png
+Textures/Emoji (probably unusable)/Emojis108.png
+Textures/Emoji (probably unusable)/Emojis109.png
+Textures/Emoji (probably unusable)/Emojis110.png
+Textures/Emoji (probably unusable)/Emojis111.png
+Textures/Emoji (probably unusable)/Emojis112.png
+Textures/Emoji (probably unusable)/Emojis113.png
+Textures/Emoji (probably unusable)/Emojis114.png
+Textures/Emoji (probably unusable)/Emojis115.png
+Textures/Emoji (probably unusable)/Emojis117.png
+Textures/Emoji (probably unusable)/Emojis118.png
+Textures/Emoji (probably unusable)/Emojis119.png
+Textures/Emoji (probably unusable)/Emojis120.png
+Textures/Emoji (probably unusable)/Emojis121.png
+Textures/Emoji (probably unusable)/Emojis122.png
+Textures/Emoji (probably unusable)/Emojis123.png
+Textures/Emoji (probably unusable)/Emojis124.png
+Textures/Emoji (probably unusable)/Emojis125.png
+Textures/Emoji (probably unusable)/Emojis126.png
+Textures/Emoji (probably unusable)/Emojis127.png
+Textures/Emoji (probably unusable)/Emojis128.png
+Textures/Emoji (probably unusable)/Emojis129.png
+Textures/Emoji (probably unusable)/Emojis130.png
+Textures/Emoji (probably unusable)/Emojis131.png
+Textures/Emoji (probably unusable)/Emojis132.png
+Textures/Emoji (probably unusable)/Emojis133.png
+Textures/Emoji (probably unusable)/Emojis134.png
+Textures/Emoji (probably unusable)/Emojis135.png
+Textures/Emoji (probably unusable)/Emojis136.png
+Textures/Emoji (probably unusable)/Emojis137.png
+Textures/Emoji (probably unusable)/Emojis138.png
+Textures/Emoji (probably unusable)/Emojis139.png
+Textures/Emoji (probably unusable)/Emojis140.png
+Textures/Emoji (probably unusable)/Emojis141.png
+Textures/Emoji (probably unusable)/Emojis142.png
+Textures/Emoji (probably unusable)/Emojis143.png
+Textures/Emoji (probably unusable)/Emojis144.png
+Textures/Emoji (probably unusable)/Emojis145.png
+Textures/Emoji (probably unusable)/Emojis146.png
+Textures/Emoji (probably unusable)/Emojis147.png
+Textures/Emoji (probably unusable)/Emojis148.png
+Textures/Emoji (probably unusable)/Emojis149.png
+Textures/Emoji (probably unusable)/Emojis150.png
+Textures/Emoji (probably unusable)/Emojis151.png
+Textures/Emoji (probably unusable)/Emojis152.png
+Textures/Emoji (probably unusable)/Emojis153.png
+Textures/Emoji (probably unusable)/Emojis189.png
+Textures/Emoji (probably unusable)/Emojis190.png
+Textures/Emoji (probably unusable)/Emojis191.png
+Textures/Emoji (probably unusable)/Emojis194.png
+Textures/Emoji (probably unusable)/Emojis195.png
+Textures/Emoji (probably unusable)/food.png
 Textures/Farming/Agriculturist.png
 Textures/Farming/Amaranth.png
 Textures/Farming/Ancient_Fruit.png
@@ -1384,16 +1543,21 @@ Textures/Fertilizer/Basic_Retaining_Soil.png
 Textures/Fertilizer/Deluxe_Retaining_Soil.png
 Textures/Fertilizer/Quality_Retaining_Soil.png
 Textures/Fish/Angler.png
+Textures/Fish/Angler2.png
 Textures/Fish/Blue_Discus.png
 Textures/Fish/Crimsonfish.png
+Textures/Fish/Crimsonfish2.png
 Textures/Fish/Dorado.png
 Textures/Fish/Flounder.png
 Textures/Fish/Ghostfish.png
 Textures/Fish/Glacierfish.png
+Textures/Fish/Glacierfish2.png
 Textures/Fish/Herring.png
 Textures/Fish/Legend.png
+Textures/Fish/Legend2.png
 Textures/Fish/Lionfish.png
 Textures/Fish/Midnight_Carp.png
+Textures/Fish/MiniGameLake.png
 Textures/Fish/Perch.png
 Textures/Fish/Rainbow_Trout.png
 Textures/Fish/Salmon.png
