@@ -1,5 +1,6 @@
 package io.github.StardewValley.views.menu.GUI;
 
+import Asset.SharedAssetManager;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -94,7 +95,6 @@ class InventoryTab {
 		itemMatrix.clear();
 		setEmpty();
 		setNumberFont();
-//		sampleTexture = new Texture(AllItemsData.getData("Wool").getTextureAddress());
 
 		createMainButtonsUI();
 		createInventoryUI();
@@ -224,7 +224,7 @@ class InventoryTab {
 					if (data != null) {
 						String address = data.getTextureAddress();
 						if (address != null) {
-							cell = new Image(new TextureRegionDrawable(new TextureRegion(new Texture(address))));
+							cell = new Image(new TextureRegionDrawable(new TextureRegion(SharedAssetManager.getOrLoad(address))));
 							cell.setUserObject(item);
 						}
 						else {
@@ -235,7 +235,7 @@ class InventoryTab {
 					}
 					else {
 						if (item.getItemType() == ItemType.TOOL) {
-							cell = new Image(new TextureRegionDrawable(new TextureRegion(new Texture(getItemTexture(item)))));
+							cell = new Image(new TextureRegionDrawable(new TextureRegion(SharedAssetManager.getOrLoad(getItemTexture(item)))));
 							cell.setUserObject(item);
 						}
 						else {
@@ -311,7 +311,7 @@ class InventoryTab {
 					if (data != null) {
 						String address = data.getTextureAddress();
 						if (address != null) {
-							cell = new Image(new TextureRegionDrawable(new TextureRegion(new Texture(address))));
+							cell = new Image(new TextureRegionDrawable(new TextureRegion(SharedAssetManager.getOrLoad(address))));
 							cell.setUserObject(recipe);
 						}
 						else {
@@ -378,7 +378,7 @@ class InventoryTab {
 					if (data != null) {
 						String address = data.getTextureAddress();
 						if (address != null) {
-							cell = new Image(new TextureRegionDrawable(new TextureRegion(new Texture(address))));
+							cell = new Image(new TextureRegionDrawable(new TextureRegion(SharedAssetManager.getOrLoad(address))));
 							cell.setUserObject(recipe);
 						}
 						else {
@@ -664,7 +664,7 @@ class InventoryTab {
 			itemInHandStack.add(itemInHandImage);
 		}
 		else {
-			itemInHandImage = new Image(new TextureRegionDrawable(new TextureRegion(new Texture(getItemTexture(item)))));
+			itemInHandImage = new Image(new TextureRegionDrawable(new TextureRegion(SharedAssetManager.getOrLoad(getItemTexture(item)))));
 			itemInHandStack = mergeActorAndNumber(itemInHandImage, item.getAmount());
 //			itemInHandStack.add(itemInHandImage);
 //			Label.LabelStyle labelStyle = new Label.LabelStyle(numberFont, Color.WHITE);
@@ -703,7 +703,7 @@ class InventoryTab {
 			imageTable.clearChildren();
 
 			for (String ingredient : ingredients.keySet()) {
-				Image ingredientImage = new Image(new Texture(AllItemsData.getData(ingredient).getTextureAddress()));
+				Image ingredientImage = new Image(SharedAssetManager.getOrLoad(AllItemsData.getData(ingredient).getTextureAddress()));
 				int value = amount * ingredients.get(ingredient);
 				if (player.getInventory().canRemoveItem(Item.build(ingredient, value))) {
 					imageTable.add(mergeActorAndNumber(ingredientImage, value)).size(64, 64).padRight(10);
