@@ -7,7 +7,6 @@ package io.github.StardewValley.controllers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import data.ArtisanRecipeData;
 import io.github.StardewValley.App;
 
 import data.AnimalData;
@@ -1137,6 +1136,10 @@ public class GameController {
         }
 
         return Result.failure(GameError.NO_READY_ARTISAN_AROUND);
+    }
+
+    public void cancelArtisan(Artisan artisan) {
+        artisan.cancel();
     }
 
     public Result<Void> crowAttack() {

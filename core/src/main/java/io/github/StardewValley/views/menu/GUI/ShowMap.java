@@ -1,7 +1,10 @@
 package io.github.StardewValley.views.menu.GUI;
 
 import Asset.SharedAssetManager;
+import com.badlogic.gdx.Gdx;
+import io.github.StardewValley.Animations.ExclamationMarkAnimation;
 import io.github.StardewValley.Animations.IndependentAnimation;
+import io.github.StardewValley.App;
 import io.github.StardewValley.Main;
 import models.animal.Animal;
 import models.game.NPC;
@@ -19,12 +22,14 @@ public class ShowMap {
     public static Map map;
     private static Main game = Main.getInstance();
     private static final ArrayList<IndependentAnimation> animations = new ArrayList<>();
+    private static final ArrayList<ExclamationMarkAnimation> exclamationMarks = new ArrayList<>();
 
     public static void show(float delta){
         map = currentPlayer.getMap();
         showTiles();
         showHouse();
         onTilesShow();
+        exclamationMarkShow();
         animalAnimations();
         showAnimations();
         showNPCReactions();
@@ -59,6 +64,13 @@ public class ShowMap {
             for(int j = 0 ; j < mapX ; j++){
                 Tile tile = map.getTile(j , (int)mapY - i -1);
                 Placable placable = tile.getPlacable(Placable.class);
+                if (tile.getTileType() == TileType.ARTISAN) {
+                    Artisan artisan = tile.getPlacable(Artisan.class);
+                    artisan.updateTime(Gdx.graphics.getDeltaTime());
+                    if (artisan.isResultReady()) {
+                        setExclamationMarkShow(artisan);
+                    }
+                }
                 if(placable != null && placable.spriteGetter() != null)
                     placable.spriteGetter().draw(game.getBatch());
                 if(tile.getOnTileSprite() != null) {
@@ -147,5 +159,34 @@ public class ShowMap {
 
     public static void addAnimation(IndependentAnimation animation) {
         animations.add(animation);
+    }
+
+    public static void exclamationMarkShow() {
+        for (ExclamationMarkAnimation e: exclamationMarks) {
+            e.draw(game.getBatch());
+        }
+        App.getInstance();
+    }
+
+    public static void setExclamationMarkShow(Artisan artisan) {
+        for (ExclamationMarkAnimation e: exclamationMarks) {
+            if (e.check(artisan)) {
+                e.setShown();
+                return;
+            }
+        }
+    }
+
+    public static void addExclamationMark(ExclamationMarkAnimation e) {
+        exclamationMarks.add(e);
+    }
+
+    public static void removeExclamationMark(Artisan artisan) {
+        for (ExclamationMarkAnimation e: exclamationMarks) {
+            if (e.check(artisan)) {
+                exclamationMarks.remove(e);
+                return;
+            }
+        }
     }
 }
