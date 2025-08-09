@@ -23,7 +23,7 @@ public class Artisan implements Placable, Serializable {
 
 	public Artisan() {}
 
-	public Artisan(ArtisanGoodsData goodsData, Inventory inventory) {
+	public Artisan(ArtisanGoodsData goodsData) {
 		this.goodsData = goodsData;
 	}
 
@@ -73,43 +73,6 @@ public class Artisan implements Placable, Serializable {
 		}
 	}
 
-	public Result<Void> craft(ArrayList <String> itemNames, Inventory inventory) {
-		for (ArtisanRecipeData recipe : goodsData.getRecipes()) {
-			mainLoop:
-			for (Map <String, Integer> baseIngredients: recipe.getIngredients()) {
-				int correct = 0;
-				for (Map.Entry<String, Integer> entry : baseIngredients.entrySet()) {
-					if (itemNames.contains(entry.getKey()))
-						correct++;
-					else
-						continue mainLoop;
-				}
-				if (correct != itemNames.size())
-					continue;
-
-				List<Item> requiredItems = new ArrayList<>();
-				for (Map.Entry<String, Integer> entry : baseIngredients.entrySet()) {
-					String ingredientName = entry.getKey();
-					int totalRequired = entry.getValue();
-					Item inventoryItem = inventory.getItem(ingredientName);
-
-					if (inventoryItem == null || inventoryItem.getAmount() < totalRequired) {
-						return Result.failure(GameError.NOT_ENOUGH_ITEMS);
-					}
-					Item required = Item.build(inventoryItem.getName(), totalRequired); // assuming Item has a copy constructor
-					requiredItems.add(required);
-				}
-
-				inventory.removeItems(requiredItems);
-
-				startProcess(recipe.getName(), recipe.getProcessingTime());
-
-				return Result.success(null);
-			}
-		}
-		return Result.failure(GameError.WRONG_ITEM_TYPES);
-	}
-
 	private void startProcess(String recipeName, int time) {
 		resultName = recipeName;
 		remainTime = time;
@@ -125,7 +88,7 @@ public class Artisan implements Placable, Serializable {
 		return !isProcessing() && result == null;
 	}
   
-	public Item getResult(Inventory inventory) {
+	public Item getResult() {
 		Item r = result;
 		result = null;
 		return r;

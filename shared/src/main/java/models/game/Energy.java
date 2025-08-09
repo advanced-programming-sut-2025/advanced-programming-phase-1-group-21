@@ -34,6 +34,12 @@ public class Energy implements DailyUpdate, Serializable {
         totalEnergyForRound -= amount;
     }
 
+    public void increaseEnergy(float amount) {
+        currentEnergy += amount;
+        currentEnergy = Math.max(currentEnergy, MAX_ENERGY);
+        totalEnergyForRound += amount;
+    }
+
     @Override
     public boolean nextDay(Game g) {
         remainingDays--;

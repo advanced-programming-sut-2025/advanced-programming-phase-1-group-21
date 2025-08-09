@@ -7,12 +7,14 @@ package io.github.StardewValley.controllers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import io.github.StardewValley.Animations.EatingAnimation;
 import io.github.StardewValley.App;
 
 import data.AnimalData;
 import data.ArtisanGoodsData;
 import data.items.SeedData;
 import io.github.StardewValley.network.NetworkLLMController;
+import io.github.StardewValley.views.menu.GUI.ShowMap;
 import models.Item.*;
 import models.MusicData;
 import models.animal.Animal;
@@ -740,6 +742,15 @@ public class GameController {
         return Result.success(player.getRecipes(RecipeType.COOKING));
     }
 
+    public void eat() {
+        Consumable c = (Consumable) player.getItemInHand().copy();
+        c.setAmount(1);
+        player.getInventory().removeItem(c);
+        player.increaseEnergy(c.getEnergy());
+        System.err.println("ate " + c.getName());
+        ShowMap.addAnimation(new EatingAnimation().show(player, c.getName()));
+    }
+
     public Result<Void> eat(String name) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         Item item = player.getInventory().getItem(name);
@@ -755,7 +766,7 @@ public class GameController {
             return Result.failure(GameError.ITEM_IS_NOT_AVAILABLE);
         inventory.removeItem(consumable);
         System.err.println("ate " + name);
-        player.decreaseEnergy(-consumable.getEnergy());
+        player.increaseEnergy(consumable.getEnergy());
         return Result.success(null);
     }
 
@@ -1042,7 +1053,7 @@ public class GameController {
         }
 
         inventory.removeItem(Item.build(artisanName, 1));
-        new Artisan(ArtisanGoodsData.getRecipeData(artisanName), player.getInventory()).onPlace(tile);
+        new Artisan(ArtisanGoodsData.getRecipeData(artisanName)).onPlace(tile);
         tile.setPlacableLoc();
         return Result.success(null);
     }
@@ -1061,7 +1072,7 @@ public class GameController {
         }
 
         inventory.removeItem(artisan);
-        new Artisan(ArtisanGoodsData.getRecipeData(artisanName), player.getInventory()).onPlace(tile);
+        new Artisan(ArtisanGoodsData.getRecipeData(artisanName)).onPlace(tile);
         tile.setPlacableLoc();
         return Result.success(null);
     }
@@ -1085,28 +1096,23 @@ public class GameController {
     }
 
     public Result<Void> useArtisan(String artisanName, ArrayList<String> itemNames) {
-
-        if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-
-        Inventory inventory = player.getInventory();
-
-        Result<Void> result = null;
-
-        for (Direction direction : Direction.values()) {
-            Coord coord = player.getCoord().addCoord(direction.getCoord());
-
-            Tile tile = player.getMap().getTile(coord);
-            if (tile.getTileType() == TileType.ARTISAN && tile.getPlacable(Artisan.class).getName().equalsIgnoreCase(artisanName) && !tile.getPlacable(Artisan.class).isResultReady()) {
-                Artisan artisan = tile.getPlacable(Artisan.class);
-
-                result = artisan.craft(itemNames, player.getInventory());
-                if (result.isSuccess())
-                    return result;
-            }
-        }
-
-        if (result != null)
-            return result;
+//        Result<Void> result = null;
+//
+//        for (Direction direction : Direction.values()) {
+//            Coord coord = player.getCoord().addCoord(direction.getCoord());
+//
+//            Tile tile = player.getMap().getTile(coord);
+//            if (tile.getTileType() == TileType.ARTISAN && tile.getPlacable(Artisan.class).getName().equalsIgnoreCase(artisanName) && !tile.getPlacable(Artisan.class).isResultReady()) {
+//                Artisan artisan = tile.getPlacable(Artisan.class);
+//
+//                result = artisan.craft(itemNames, player.getInventory());
+//                if (result.isSuccess())
+//                    return result;
+//            }
+//        }
+//
+//        if (result != null)
+//            return result;
 
         return Result.failure(GameError.NO_FREE_ARTISAN_AROUND);
     }
@@ -1115,7 +1121,7 @@ public class GameController {
         if (artisan.isResultReady()) {
             Item result = artisan.getResultWithoutReset();
             if (player.getInventory().addItem(result).isSuccess()) {
-                artisan.getResult(player.getInventory());
+                player.getInventory().addItem(artisan.getResult());
                 return Result.success(null);
             }
             return Result.failure(GameError.CANT_ADD_ITEM_TO_INVENTORY);
@@ -1604,7 +1610,6 @@ public class GameController {
         player.addQuest();
         npc.setQuestAnimation();
         return Result.success(null);
-
     }
 
     public boolean isGameLockedDueToNight() {
@@ -2080,5 +2085,17 @@ public class GameController {
 
     public void addMusic(MusicData musicData) {
         player.addMusic(musicData);
+    }
+
+    public void addItem(Item item) {
+        player.getInventory().addItem(item);
+    }
+
+    public void removeItems(List <Item> items) {
+        player.getInventory().removeItems(items);
+    }
+
+    public void setItemInHand(Item item) {
+        player.setItemInHand(item);
     }
 }

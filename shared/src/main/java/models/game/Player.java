@@ -144,6 +144,10 @@ public class Player implements DailyUpdate, Serializable {
         energy.decreaseEnergy(amount);
     }
 
+    public void increaseEnergy(float amount) {
+        energy.increaseEnergy(amount);
+    }
+
     public void setEnergy(float energyValue) {
         energy.setEnergy(energyValue);
     }
