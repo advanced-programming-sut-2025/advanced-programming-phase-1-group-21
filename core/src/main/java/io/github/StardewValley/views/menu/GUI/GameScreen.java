@@ -18,6 +18,7 @@ import io.github.StardewValley.Main;
 import io.github.StardewValley.asset.Assets;
 import io.github.StardewValley.controllers.GameController;
 import io.github.StardewValley.controllers.ViewController;
+import models.Item.ItemType;
 import models.animal.Animal;
 import models.game.NPC;
 import models.map.Artisan;
@@ -87,7 +88,7 @@ public class GameScreen implements Screen , InputProcessor {
         darkModeImage = new Image(darkLayoutTexture);
 
         Skin skin = Assets.getSkin();
-        inventoryTab = new InventoryTab(viewController.player, this, skin);
+        inventoryTab = new InventoryTab(viewController.player, this, App.getInstance().currentPlayerController, skin);
         shopMenuTab = new ShopMenuTab(this , skin);
         sellTab = new SellTab(this , skin , viewController.player);
         giftTab = new GiftTab(this , skin);
@@ -208,12 +209,15 @@ public class GameScreen implements Screen , InputProcessor {
             isFriendshipShown = true;
             friendshipsTab.show();
         }
-
+        if (i == Input.Keys.E && currentPlayer.getItemInHand() != null && currentPlayer.getItemInHand().getItemType() == ItemType.CONSUMABLE) {
+            App.getInstance().currentPlayerController.eat();
+        }
         if (i == Input.Keys.F1) {
             tagNotification.show("You Pressed F1");
         }
-        if(i == Input.Keys.Q)
+        if (i == Input.Keys.Q) {
             Main.getInstance().setScreen(new MiniGameScreen());
+        }
 
         return false;
     }

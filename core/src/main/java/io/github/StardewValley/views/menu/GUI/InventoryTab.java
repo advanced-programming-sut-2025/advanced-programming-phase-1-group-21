@@ -8,7 +8,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -18,12 +20,14 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import data.items.AllItemsData;
 import data.items.RecipeData;
+import io.github.StardewValley.controllers.GameController;
 import models.Item.Item;
 import models.Item.ItemType;
 import models.Item.Recipe;
 import models.Item.RecipeType;
 import models.game.Inventory;
 import models.game.InventoryType;
+import models.game.NPC;
 import models.game.Player;
 import models.skill.SkillType;
 import models.tool.Tool;
@@ -38,6 +42,7 @@ class InventoryTab {
 	private Stage stage;
 	private Skin skin;
 	private GameScreen gameScreen;
+	private GameController gc;
 	private Texture emptyTexture;
 	private TextureRegionDrawable emptyDrawable, whiteSquare, redSquare;
 	private TextButton exitButton, inventoryButton, socialButton, mapButton, settingButton, skillButton, missionButton, craftButton, cookButton;
@@ -47,18 +52,18 @@ class InventoryTab {
 	private Item goldItem;
 	private Label goldLabel;
 	private Stack itemInHandStack;
+	private Table skillTable, hoverTable, socialTitle;
 
 	private Container<Image> inventorySelectedItem, craftingSelectedItem, cookingSelectedItem;
 
-	private ScrollPane inventoryScrollPane, craftingScrollPane, cookingScrollPane;
+	private ScrollPane inventoryScrollPane, craftingScrollPane, cookingScrollPane, socialScrollPane;
 	BitmapFont numberFont;
 
-//	private Texture sampleTexture;
-
-	public InventoryTab(Player player, GameScreen gameScreen, Skin skin) {
+	public InventoryTab(Player player, GameScreen gameScreen, GameController gc, Skin skin) {
 		this.player = player;
 		stage = new Stage(new ScreenViewport());
 		this.gameScreen = gameScreen;
+		this.gc = gc;
 		this.skin = skin;
 		farmingLevels = new ArrayList<>();
 		miningLevels = new ArrayList<>();
@@ -79,6 +84,7 @@ class InventoryTab {
 		inv.addItem(Item.build("Banana Sapling", 5));
 		inv.addItem(Item.build("Bean Starter", 5));
 		inv.addItem(Item.build("Deluxe Retaining Soil", 5));
+		inv.addItem(Item.build("Egg", 5));
 
 		player.addRecipes(new Recipe(RecipeData.getCookingRecipeData("Dish O' The Sea Recipe"), RecipeType.COOKING, 1));
 		player.addRecipes(new Recipe(RecipeData.getCookingRecipeData("Triple Shot Espresso Recipe"), RecipeType.COOKING, 1));
@@ -87,7 +93,7 @@ class InventoryTab {
 		player.addRecipes(new Recipe(RecipeData.getCraftingRecipeData("Bee House Recipe"), RecipeType.CRAFTING, 1));
 		player.addRecipes(new Recipe(RecipeData.getCraftingRecipeData("Keg Recipe"), RecipeType.CRAFTING, 1));
 
-		createUI();
+//		createUI();
 	}
 
 	void createUI() {
@@ -99,6 +105,7 @@ class InventoryTab {
 		createMainButtonsUI();
 		createInventoryUI();
 		createSkillsUI();
+		createSocialUI();
 		createCraftingUI();
 		createCookingUI();
 	}
@@ -218,20 +225,15 @@ class InventoryTab {
 				int numberOfItem = -1;
 				if (row * 12 + col < number) {
 					Item item = itemMatrix.get(row).get(col);
-//					System.out.println(item.getName());
 					numberOfItem = item.getAmount();
 					AllItemsData data = AllItemsData.getData(item.getName());
 					if (data != null) {
 						String address = data.getTextureAddress();
-						if (address != null) {
+						if (address != null)
 							cell = new Image(new TextureRegionDrawable(new TextureRegion(SharedAssetManager.getOrLoad(address))));
-							cell.setUserObject(item);
-						}
-						else {
-//							System.err.println("There is no texture for this item!! item name: " + item.getName() + ", row: " + row + ", col: " + col);
+						else
 							cell = new Image(emptyDrawable);
-							cell.setUserObject(item);
-						}
+						cell.setUserObject(item);
 					}
 					else {
 						if (item.getItemType() == ItemType.TOOL) {
@@ -263,17 +265,15 @@ class InventoryTab {
 						if (getTapCount() == 2) {
 							Object o = container.getActor().getUserObject();
 							if (o instanceof Item) {
-								player.setItemInHand((Item) o);
+								gc.setItemInHand((Item) o);
 							}
 							else {
-								player.setItemInHand(null);
+								gc.setItemInHand(null);
 							}
 							setItemInHand();
 						}
 					}
 				});
-
-
 
 				if (numberOfItem != -1) {
 					scrollTable.add(mergeActorAndNumber(container, numberOfItem));
@@ -429,54 +429,213 @@ class InventoryTab {
 	}
 
 	private void createSkillsUI() {
+		hoverTable = new Table();
+		hoverTable.setSize(400, 100);
+		hoverTable.setBackground(new TextureRegionDrawable(new TextureRegion(createBackGround(Color.GRAY))));
+		Label description = new Label("", skin);
+		hoverTable.add(description).center();
+		hoverTable.setVisible(false);
+
+		skillTable = new Table();
+		skillTable.setPosition(490, 370);
+		skillTable.setBackground(new TextureRegionDrawable(new TextureRegion(createBackGround(Color.DARK_GRAY))));
+
 		int farmingLevel = player.getSkillLevel(SkillType.FARMING);
 		int miningLevel = player.getSkillLevel(SkillType.MINING);
 		int foragingLevel = player.getSkillLevel(SkillType.FORAGING);
 		int fishingLevel = player.getSkillLevel(SkillType.FISHING);
-		farmingSkillLabel = new Label("Farming", skin);
-		farmingSkillLabel.setPosition(610, 700);
+		farmingSkillLabel = new Label("Farming:", skin);
+		farmingSkillLabel.addListener(new InputListener() {
+			public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+				description.setText("This is farming skill");
+				hoverTable.setVisible(true);
+				updateHoverTablePosition(Gdx.input.getX(), Gdx.input.getY());
+			}
+
+			@Override
+			public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+				hoverTable.setVisible(false);
+			}
+
+			@Override
+			public boolean mouseMoved(InputEvent event, float x, float y) {
+				updateHoverTablePosition(Gdx.input.getX(), Gdx.input.getY());
+				return true;
+			}
+		});
+		skillTable.add(farmingSkillLabel).pad(30).padRight(50);
 		for (int i = 0; i < 10; i++) {
 			Image im;
 			if (i < farmingLevel)
 				im = new Image(redSquare);
 			else
 				im = new Image(whiteSquare);
-			im.setPosition(750 + i * 60, 700);
-			farmingLevels.add(im);
+			skillTable.add(im).padRight(30);
 		}
-		miningSkillLabel = new Label("Mining", skin);
-		miningSkillLabel.setPosition(610, 600);
+		skillTable.row();
+
+		miningSkillLabel = new Label("Mining:", skin);
+		miningSkillLabel.addListener(new InputListener() {
+			public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+				description.setText("This is mining skill");
+				hoverTable.setVisible(true);
+				updateHoverTablePosition(Gdx.input.getX(), Gdx.input.getY());
+			}
+
+			@Override
+			public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+				hoverTable.setVisible(false);
+			}
+
+			@Override
+			public boolean mouseMoved(InputEvent event, float x, float y) {
+				updateHoverTablePosition(Gdx.input.getX(), Gdx.input.getY());
+				return true;
+			}
+		});
+		skillTable.add(miningSkillLabel).pad(30).padRight(50);
+
 		for (int i = 0; i < 10; i++) {
 			Image im;
 			if (i < miningLevel)
 				im = new Image(redSquare);
 			else
 				im = new Image(whiteSquare);
-			im.setPosition(750 + i * 60, 600);
-			miningLevels.add(im);
+			skillTable.add(im).padRight(30);
 		}
-		foragingSkillLabel = new Label("Foraging", skin);
-		foragingSkillLabel.setPosition(610, 500);
+		skillTable.row();
+
+		foragingSkillLabel = new Label("Foraging:", skin);
+		foragingSkillLabel.addListener(new InputListener() {
+			public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+				description.setText("This is foraging skill");
+				hoverTable.setVisible(true);
+				updateHoverTablePosition(Gdx.input.getX(), Gdx.input.getY());
+			}
+
+			@Override
+			public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+				hoverTable.setVisible(false);
+			}
+
+			@Override
+			public boolean mouseMoved(InputEvent event, float x, float y) {
+				updateHoverTablePosition(Gdx.input.getX(), Gdx.input.getY());
+				return true;
+			}
+		});
+		skillTable.add(foragingSkillLabel).pad(30).padRight(50);
 		for (int i = 0; i < 10; i++) {
 			Image im;
 			if (i < foragingLevel)
 				im = new Image(redSquare);
 			else
 				im = new Image(whiteSquare);
-			im.setPosition(750 + i * 60, 500);
-			foragingLevels.add(im);
+			skillTable.add(im).padRight(30);
 		}
-		fishingSkillLabel = new Label("Fishing", skin);
-		fishingSkillLabel.setPosition(610, 400);
+		skillTable.row();
+
+		fishingSkillLabel = new Label("Fishing:", skin);
+		fishingSkillLabel.addListener(new InputListener() {
+			public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+				description.setText("This is fishing skill");
+				hoverTable.setVisible(true);
+				updateHoverTablePosition(Gdx.input.getX(), Gdx.input.getY());
+			}
+
+			@Override
+			public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+				hoverTable.setVisible(false);
+			}
+
+			@Override
+			public boolean mouseMoved(InputEvent event, float x, float y) {
+				updateHoverTablePosition(Gdx.input.getX(), Gdx.input.getY());
+				return true;
+			}
+		});
+		skillTable.add(fishingSkillLabel).pad(30).padRight(50);
 		for (int i = 0; i < 10; i++) {
 			Image im;
 			if (i < fishingLevel)
 				im = new Image(redSquare);
 			else
 				im = new Image(whiteSquare);
-			im.setPosition(750 + i * 60, 400);
-			fishingLevels.add(im);
+			skillTable.add(im).padRight(30);
 		}
+
+		skillTable.pack();
+	}
+
+	private void createSocialUI() {
+		TextureRegionDrawable greenBox = getRectangle(Color.GREEN, 50, 30);
+		TextureRegionDrawable whiteBox = getRectangle(Color.WHITE, 50, 30);
+
+
+
+		Table socialTable = new Table();
+		socialTable.setBackground(new TextureRegionDrawable(new TextureRegion(createBackGround(Color.DARK_GRAY))));
+
+		for (NPC npc: ShowMap.listOfNPCs) {
+			Table profile = new Table();
+			Image profilePic = new Image(SharedAssetManager.getOrLoad("Textures/Villagers/" + npc.getName() + "_Profile.png"));
+			profilePic.setSize(100, 100);
+			profile.add(profilePic).padBottom(10).row();
+			profile.add(new Label(npc.getName(), skin));
+			profile.pack();
+
+			Table levels = new Table();
+			int level = npc.getFriendshipByPlayer(player).getLevel().getLevel();
+			for (int i = 0; i < 4; i++) {
+				Image im;
+				if (i < level) {
+					im = new Image(greenBox);
+				}
+				else {
+					im = new Image(whiteBox);
+				}
+				levels.add(im).padRight(30);
+			}
+			levels.pack();
+
+			socialTable.add(profile).pad(10);
+			socialTable.add(levels).pad(10).row();
+		}
+		socialTable.pack();
+
+		socialScrollPane = new ScrollPane(socialTable, skin);
+		socialScrollPane.setScrollingDisabled(true, false);
+		socialScrollPane.setFadeScrollBars(false);
+
+		socialScrollPane.setSize(850, 400);
+		socialScrollPane.setPosition(482, 275);
+
+
+		socialTitle = new Table();
+		socialTitle.setBackground(new TextureRegionDrawable(new TextureRegion(createBackGround(Color.DARK_GRAY))));
+		socialTitle.setSize(850, 100);
+		socialTitle.add(new Label("Villager", skin)).pad(50);
+		socialTitle.add(new Label("Friendship", skin)).pad(100);
+		socialTitle.setPosition(482, 375 + 300);
+	}
+
+	private void updateHoverTablePosition(int screenX, int screenY) {
+		Vector3 pos = new Vector3(screenX, screenY, 0);
+		stage.getViewport().unproject(pos);
+
+		float tableX = pos.x - hoverTable.getWidth();
+		float tableY = pos.y;
+
+		hoverTable.setPosition(tableX, tableY);
+	}
+
+	private Texture createBackGround(Color color) {
+		Pixmap pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+		pixmap.setColor(color);
+		pixmap.fill();
+		Texture texture = new Texture(pixmap);
+		pixmap.dispose();
+		return texture;
 	}
 
 	public void show() {
@@ -493,8 +652,8 @@ class InventoryTab {
 	}
 
 	public void dispose() {
+		stage.dispose();
 		emptyTexture.dispose();
-//		sampleTexture.dispose();
 	}
 
 	private void setEmpty() {
@@ -516,6 +675,16 @@ class InventoryTab {
 		pixmap.setColor(1, 0, 0, 1);
 		pixmap.fillRectangle(0, 0, size, size);
 		redSquare = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
+		pixmap.dispose();
+	}
+
+	private TextureRegionDrawable getRectangle(Color color, int width, int height) {
+		Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);;
+		pixmap.setColor(color);
+		pixmap.fillRectangle(0, 0, width, height);
+		TextureRegionDrawable result = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
+		pixmap.dispose();
+		return result;
 	}
 
 	private void setNumberFont() {
@@ -538,7 +707,6 @@ class InventoryTab {
 		bgPixmap.fill();
 		Texture bgTexture = new Texture(bgPixmap);
 		bgPixmap.dispose();
-//		tableDialog.setBackground(new TextureRegionDrawable(new TextureRegion(bgTexture)));
 		stage.addActor(new Image(bgTexture));
 	}
 
@@ -578,23 +746,8 @@ class InventoryTab {
 	private void setSkillTab() {
 		setStage();
 		setButtonBar();
-
-		stage.addActor(farmingSkillLabel);
-		for (Image i: farmingLevels) {
-			stage.addActor(i);
-		}
-		stage.addActor(miningSkillLabel);
-		for (Image i: miningLevels) {
-			stage.addActor(i);
-		}
-		stage.addActor(foragingSkillLabel);
-		for (Image i: foragingLevels) {
-			stage.addActor(i);
-		}
-		stage.addActor(fishingSkillLabel);
-		for (Image i: fishingLevels) {
-			stage.addActor(i);
-		}
+		stage.addActor(skillTable);
+		stage.addActor(hoverTable);
 	}
 
 	private void setMapTab() {
@@ -606,6 +759,8 @@ class InventoryTab {
 		setStage();
 		setButtonBar();
 
+		stage.addActor(socialTitle);
+		stage.addActor(socialScrollPane);
 	}
 
 	private void setMissionTab() {
@@ -630,7 +785,7 @@ class InventoryTab {
 		setButtonBar();
 	}
 
-	private String capitilize(Tool tool) {
+	private String capitalize(Tool tool) {
 		String type = tool.getToolMaterialType().toString();
 		String name = tool.getToolType().toString();
 		return type.substring(0, 1).toUpperCase() + type.substring(1).toLowerCase() + "_" + name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
@@ -641,21 +796,18 @@ class InventoryTab {
 			return null;
 		if (item.getName().equalsIgnoreCase("coin"))
 			return null;
-		if (item.getItemType() == ItemType.TOOL) {
-			return "Textures/Tools/" + capitilize(((Tool) item)) + ".png";
-		}
+		if (item.getItemType() == ItemType.TOOL)
+			return "Textures/Tools/" + capitalize(((Tool) item)) + ".png";
 		AllItemsData data = AllItemsData.getData(item.getName());
-		if (data == null) {
+		if (data == null)
 			return null;
-		}
 		return data.getTextureAddress();
 	}
 
 	private void setItemInHand() {
 
-		if (itemInHandStack != null) {
+		if (itemInHandStack != null)
 			itemInHandStack.remove();
-		}
 		Item item = player.getItemInHand();
 		Image itemInHandImage;
 		if (item == null || getItemTexture(item) == null) {
@@ -666,14 +818,6 @@ class InventoryTab {
 		else {
 			itemInHandImage = new Image(new TextureRegionDrawable(new TextureRegion(SharedAssetManager.getOrLoad(getItemTexture(item)))));
 			itemInHandStack = mergeActorAndNumber(itemInHandImage, item.getAmount());
-//			itemInHandStack.add(itemInHandImage);
-//			Label.LabelStyle labelStyle = new Label.LabelStyle(numberFont, Color.WHITE);
-//			Label numberLabel = new Label(String.valueOf(item.getAmount()), labelStyle);
-//
-//			Container<Label> numberContainer = new Container<>(numberLabel);
-//			numberContainer.bottom().right();
-//			numberContainer.padBottom(5).padRight(5); // Add some padding
-//			itemInHandStack.add(numberContainer);
 		}
 
 		itemInHandStack.setPosition(1350, 480);
@@ -699,23 +843,19 @@ class InventoryTab {
 		Map<String, Integer> ingredients = recipe.getData().getIngredients();
 
 		final Consumer<Integer> updateDialog = (amount) -> {
-			// Clear previous images
 			imageTable.clearChildren();
 
 			for (String ingredient : ingredients.keySet()) {
 				Image ingredientImage = new Image(SharedAssetManager.getOrLoad(AllItemsData.getData(ingredient).getTextureAddress()));
 				int value = amount * ingredients.get(ingredient);
-				if (player.getInventory().canRemoveItem(Item.build(ingredient, value))) {
+				if (player.getInventory().canRemoveItem(Item.build(ingredient, value)))
 					imageTable.add(mergeActorAndNumber(ingredientImage, value)).size(64, 64).padRight(10);
-				}
-				else {
+				else
 					imageTable.add(mergeActorAndNumber(ingredientImage, value, Color.RED)).size(64, 64).padRight(10);
-				}
 			}
 		};
 		updateDialog.accept(1);
 
-// Create amount selector
 		final TextField amountField = new TextField("1", skin);
 		amountField.setTextFieldFilter(new TextField.TextFieldFilter.DigitsOnlyFilter());
 
@@ -723,7 +863,6 @@ class InventoryTab {
 		TextButton minusButton = new TextButton("-", skin);
 		TextButton plusButton = new TextButton("+", skin);
 
-// Add button functionality
 		minusButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -753,7 +892,6 @@ class InventoryTab {
 			@Override
 			public Dialog show(Stage stage) {
 				super.show(stage);
-				// Center the title label after showing
 				getTitleLabel().setAlignment(Align.center);
 				getTitleTable().getCell(getTitleLabel()).expandX().fillX();
 				return this;
@@ -791,8 +929,8 @@ class InventoryTab {
 		}
 		if (player.getInventory().canRemoveItems(items)) {
 			if (player.getInventory().canAdd(recipe.getData().getResultName())) {
-				player.getInventory().removeItems(items);
-				player.getInventory().addItem(Item.build(recipe.getData().getResultName(), amount));
+				gc.removeItems(items);
+				gc.addItem(Item.build(recipe.getData().getResultName(), amount));
 			}
 			else {
 				notEnoughSpaceInInventoryDialog().show(stage);

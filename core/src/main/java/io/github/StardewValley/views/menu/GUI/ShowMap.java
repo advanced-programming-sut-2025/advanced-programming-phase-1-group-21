@@ -31,7 +31,6 @@ public class ShowMap {
         onTilesShow();
         exclamationMarkShow();
         animalAnimations();
-        showAnimations();
         showNPCReactions();
         for (Player player : listOfPlayers) {
             if (player.getMap() == map) {
@@ -39,6 +38,7 @@ public class ShowMap {
                 showTool(delta, player);
             }
         }
+        showAnimations();
     }
 
     public static void showTiles(){
