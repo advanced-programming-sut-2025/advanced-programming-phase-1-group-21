@@ -8,6 +8,7 @@ import models.Item.Item;
 import models.game.Inventory;
 import models.result.Result;
 import models.result.errorTypes.GameError;
+import models.sprite.GameSprite;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.Map;
 
 public class Artisan implements Placable, Serializable {
 	private ArtisanGoodsData goodsData;
-	private transient Sprite sprite;
+	private transient GameSprite sprite;
 	private float remainTime, fullTime;
 	Item result;
 	private String resultName;
@@ -113,19 +114,19 @@ public class Artisan implements Placable, Serializable {
 	}
 
 	@Override
-	public Texture getTexture() {
+	public String getTexture() {
 
 		if (isProcessing())
-			return new Texture(goodsData.getProcessingTexture());
+			return goodsData.getProcessingTexture();
 		else if (result == null)
-			return new Texture(goodsData.getEmptyTexture());
-		return new Texture(goodsData.getDoneTexture());
+			return goodsData.getEmptyTexture();
+		return goodsData.getDoneTexture();
 	}
 
 	@Override
 	public Sprite spriteGetter() {
 		if(sprite == null){
-			sprite = new Sprite(getTexture());
+			sprite = new GameSprite(getTexture());
 		}
 		sprite.setTexture(getTexture());
 		return sprite;

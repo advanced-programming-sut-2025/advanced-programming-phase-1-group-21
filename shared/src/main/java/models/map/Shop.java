@@ -11,6 +11,7 @@ import models.game.Inventory;
 import models.game.Player;
 import models.result.Result;
 import models.result.errorTypes.GameError;
+import models.sprite.GameSprite;
 import models.time.Date;
 
 import java.io.Serializable;
@@ -30,8 +31,7 @@ public class Shop extends Building implements DailyUpdate{
 		this.shopType = shopType;
 		this.map = (new MapBuilder()).buildShop();
 
-		setTexture();
-		sprite = new Sprite(texture);
+		sprite = new GameSprite(setTexture());
 		sprite.setSize(shopType.getDefaultWidth()*30 , shopType.getDefaultHeight()*30);
 
 		List<ShopData> list = ShopData.getRecipeByShop(getShopName());
@@ -40,27 +40,28 @@ public class Shop extends Building implements DailyUpdate{
 		}
 	}
 
-	private void setTexture(){
+	private String setTexture(){
 		if(shopType.equals(TileType.STARDROP_SALOON))
-			texture = new Texture("Textures/Buildings/stardrop_saloon.png");
+			return "Textures/Buildings/stardrop_saloon.png";
 
 		if(shopType.equals(TileType.BLACKSMITH))
-			texture = new Texture("Textures/Buildings/Blacksmith.png");
+			return "Textures/Buildings/Blacksmith.png";
 
 		if(shopType.equals(TileType.CARPENTER_SHOP))
-			texture = new Texture("Textures/Buildings/Carpenter's_Shop.png");
+			return "Textures/Buildings/Carpenter's_Shop.png";
 
 		if(shopType.equals(TileType.FISH_SHOP))
-			texture = new Texture("Textures/Buildings/Fish_Shop.png");
+			return "Textures/Buildings/Fish_Shop.png";
 
 		if(shopType.equals(TileType.JOJAMART))
-			texture = new Texture("Textures/Buildings/Jojamart.png");
+			return "Textures/Buildings/Jojamart.png";
 
 		if(shopType.equals(TileType.MARINE_SHOP))
-			texture = new Texture("Textures/Buildings/marine_shop.png");
+			return "Textures/Buildings/marine_shop.png";
 
 		if(shopType.equals(TileType.PIERR_STORE))
-			texture = new Texture("Textures/Buildings/Pierres_shop.png");
+			return "Textures/Buildings/Pierres_shop.png";
+		return null;
 	}
 
 	public int openingTime() {
@@ -215,7 +216,7 @@ public class Shop extends Building implements DailyUpdate{
 	}
 
 	@Override
-	public Texture getTexture() {
+	public String getTexture() {
 		return null;
 	}
 

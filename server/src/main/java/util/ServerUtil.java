@@ -28,4 +28,11 @@ public class ServerUtil {
         msg.data = NetworkUtil.mapArgs();
         return msg;
     }
+
+    public static Message createExit() {
+        Message msg = new Message(MessageType.CLIENT_SERVICE);
+        msg.methodName = "exitGame";
+        msg.data = NetworkUtil.mapArgs();
+        return msg;
+    }
 }

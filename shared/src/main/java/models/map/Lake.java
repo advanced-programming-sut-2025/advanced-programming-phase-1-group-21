@@ -2,13 +2,14 @@ package models.map;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import models.sprite.GameSprite;
 import models.time.Date;
 
 public class Lake extends Building {
 
     public Lake() {
-        texture = new Texture("Textures/Buildings/lake.png");
-        sprite = new Sprite(texture);
+        String texture = "Textures/Buildings/lake.png";
+        sprite = new GameSprite(texture);
         sprite.setSize(150 , 120);
     }
 
@@ -34,7 +35,7 @@ public class Lake extends Building {
     }
 
     @Override
-    public Texture getTexture() {
+    public String getTexture() {
         return null;
     }
 

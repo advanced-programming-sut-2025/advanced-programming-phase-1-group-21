@@ -9,6 +9,7 @@ import models.BriefInfo;
 import models.DailyUpdate;
 import models.Item.Item;
 import models.map.*;
+import models.sprite.GameSprite;
 import models.time.Date;
 
 import java.io.Serializable;
@@ -26,12 +27,12 @@ public class NPC implements Placable, DailyUpdate, Serializable, BriefInfo {
     private ArrayList<NPCFriendship> friendships = new ArrayList<>();
     private ArrayList<String> favorites;
     private Coord coord;
-    private transient Texture texture;
-    private transient Sprite sprite;
+    private String texture;
+    private transient GameSprite sprite;
     private transient String responseToMessage;
-    private transient Sprite cloudSprite;
-    private transient Sprite reactSprite;
-    private transient Texture reactTexture;
+    private transient GameSprite cloudSprite;
+    private transient GameSprite reactSprite;
+    private transient String reactTexture;
     private float animationTime;
 
     public NPC() {}
@@ -47,8 +48,8 @@ public class NPC implements Placable, DailyUpdate, Serializable, BriefInfo {
         tasksFlag.add(false);
         tasksFlag.add(false);
         tasksFlag.add(false);
-        texture = SharedAssetManager.getNPCTexture(name.toLowerCase());
-        sprite = new Sprite(texture);
+        texture = SharedAssetManager.getNPCTexturePath(name.toLowerCase());
+        sprite = new GameSprite(texture);
         sprite.setX(getMap().mapType.getDistanceX());
         sprite.setY(getMap().mapType.getDistanceY() + (getMap().getMaxY() - 1)*30);
         sprite.setSize(60 , 100);
@@ -110,7 +111,7 @@ public class NPC implements Placable, DailyUpdate, Serializable, BriefInfo {
 
     public void talk(String responseToMessage) {
         this.responseToMessage = responseToMessage;
-        cloudSprite = new Sprite(SharedAssetManager.getCloud());
+        cloudSprite = new GameSprite(SharedAssetManager.getCloudPath());
         cloudSprite.setSize(60 , 60);
         cloudSprite.setX(sprite.getX() + 50);
         cloudSprite.setY(sprite.getY() + 90);
@@ -128,7 +129,7 @@ public class NPC implements Placable, DailyUpdate, Serializable, BriefInfo {
         this.responseToMessage = responseToMessage;
     }
 
-    public void setCloudSprite(Sprite cloudSprite) {
+    public void setCloudSprite(GameSprite cloudSprite) {
         this.cloudSprite = cloudSprite;
     }
 
@@ -166,7 +167,7 @@ public class NPC implements Placable, DailyUpdate, Serializable, BriefInfo {
     }
 
     @Override
-    public Texture getTexture() {
+    public String getTexture() {
         return null;
     }
 
@@ -202,8 +203,8 @@ public class NPC implements Placable, DailyUpdate, Serializable, BriefInfo {
 
         public NPCHouse() {
             this.map = (new MapBuilder()).buildNPCHouse(NPC.this);
-            texture = new Texture("Textures/Buildings/" + name + "House.png");
-            sprite = new Sprite(texture);
+            String texture = "Textures/Buildings/" + name + "House.png";
+            sprite = new GameSprite(texture);
             sprite.setSize(5 * 30 , 5 * 30);
         }
 
@@ -228,7 +229,7 @@ public class NPC implements Placable, DailyUpdate, Serializable, BriefInfo {
         }
 
         @Override
-        public Texture getTexture() {
+        public String getTexture() {
             return null;
         }
 
@@ -251,9 +252,9 @@ public class NPC implements Placable, DailyUpdate, Serializable, BriefInfo {
     }
 
     public void setGiftAnimation(){
-        reactTexture = SharedAssetManager.getHeart();
+        reactTexture = SharedAssetManager.getHeartPath();
         if(reactSprite == null)
-            reactSprite = new Sprite(reactTexture);
+            reactSprite = new GameSprite(reactTexture);
         reactSprite.setTexture(reactTexture);
         reactSprite.setSize(30 , 30);
         reactSprite.setX(sprite.getX() + 20);
@@ -262,9 +263,9 @@ public class NPC implements Placable, DailyUpdate, Serializable, BriefInfo {
     }
 
     public void setQuestAnimation(){
-        reactTexture = SharedAssetManager.getCup();
+        reactTexture = SharedAssetManager.getCupPath();
         if(reactSprite == null)
-            reactSprite = new Sprite(reactTexture);
+            reactSprite = new GameSprite(reactTexture);
         reactSprite.setTexture(reactTexture);
         reactSprite.setSize(30 , 30);
         reactSprite.setX(sprite.getX() + 20);

@@ -6,21 +6,32 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import data.ForagingCropData;
 import data.items.AllItemsData;
 import models.Item.Item;
+import models.Saver;
 import models.crop.Harvestable;
 import models.game.Player;
+import models.sprite.GameSprite;
 import models.time.Date;
 
 import java.io.Serializable;
 
-public class ForagingCrop implements Placable, Harvestable, Serializable {
+public class ForagingCrop implements Placable, Harvestable, Serializable, Saver {
 	public ForagingCropData data;
-	private Sprite sprite;
+	private transient GameSprite sprite;
 
 	public ForagingCrop() {}
 
 	public ForagingCrop(ForagingCropData data) {
 		this.data = data;
-		sprite = new Sprite(SharedAssetManager.getOrLoad(AllItemsData.getData(getResultName()).getTextureAddress()));
+		sprite = new GameSprite(AllItemsData.getData(getResultName()).getTextureAddress());
+	}
+
+	@Override
+	public void load() {
+	}
+
+	@Override
+	public void save() {
+
 	}
 
 	public Item harvest(Player player) {
@@ -47,7 +58,7 @@ public class ForagingCrop implements Placable, Harvestable, Serializable {
 	}
 
 	@Override
-	public Texture getTexture() {
+	public String getTexture() {
 		return null;
 	}
 

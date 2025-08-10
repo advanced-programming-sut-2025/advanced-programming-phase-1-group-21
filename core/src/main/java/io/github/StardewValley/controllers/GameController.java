@@ -14,6 +14,7 @@ import data.AnimalData;
 import data.ArtisanGoodsData;
 import data.items.SeedData;
 import io.github.StardewValley.network.NetworkLLMController;
+import io.github.StardewValley.network.NetworkLobbyController;
 import io.github.StardewValley.views.menu.GUI.ShowMap;
 import models.Item.*;
 import models.MusicData;
@@ -94,20 +95,7 @@ public class GameController {
         return null;
     }
 
-    public void saveGame() {
-        for (Player player : game.getPlayers())
-            GameSaver.saveApp(App.getInstance(), player.getUser().getUsername());
-    }
-
     public Result<Void> exitGame() {
-        /*
-        if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-        saveGame();
-        game = null;
-        App.getInstance().game = null;
-        return Result.success("Exit Game ...");
-
-         */
         return null;
     }
 

@@ -4,14 +4,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import models.DailyUpdate;
 import models.game.Game;
+import models.sprite.GameSprite;
 import models.time.Date;
 
 import java.io.Serializable;
 
 public abstract class Building implements Placable, DailyUpdate, Serializable {
     public Map map;
-    public transient Texture texture;
-    public transient Sprite sprite;
+    public transient GameSprite sprite;
+    public String texture;
 
     public Map getMap() {
         return map;

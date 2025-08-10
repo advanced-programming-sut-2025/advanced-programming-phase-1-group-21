@@ -10,6 +10,7 @@ import models.game.Game;
 import models.map.AnimalHouseType;
 import models.map.Placable;
 import models.map.TileType;
+import models.sprite.GameSprite;
 import models.time.Date;
 import models.time.Season;
 import org.apache.commons.lang3.StringUtils;
@@ -37,10 +38,10 @@ public class Animal implements Placable, DailyUpdate, Serializable {
     private AnimalData thisAnimalData;
     private float spriteX;
     private float spriteY;
-    private transient Sprite sprite;
-    private transient Texture texture;
-    transient private Texture animalReact;
-    transient private Sprite animalReactSprite;
+    private transient GameSprite sprite;
+    private transient String texture;
+    transient private String animalReact;
+    transient private GameSprite animalReactSprite;
     private float animationRunTime;
 
     public Animal() {}
@@ -58,8 +59,8 @@ public class Animal implements Placable, DailyUpdate, Serializable {
         this.houseTypes = animalData.getHouseType();
         produceStage = animalData.getProductTime();
         thisAnimalData = animalData;
-        texture = new Texture(animalData.getTextureAddress());
-        sprite = new Sprite(texture);
+        texture = animalData.getTextureAddress();
+        sprite = new GameSprite(texture);
     }
 
     public String getName() {
@@ -162,7 +163,7 @@ public class Animal implements Placable, DailyUpdate, Serializable {
     }
 
     @Override
-    public Texture getTexture() {
+    public String getTexture() {
         return texture;
     }
 
@@ -248,9 +249,9 @@ public class Animal implements Placable, DailyUpdate, Serializable {
     }
 
     public void setPetAnimation(){
-        animalReact = SharedAssetManager.getHeart();
+        animalReact = SharedAssetManager.getHeartPath();
         if(animalReactSprite == null)
-            animalReactSprite = new Sprite(animalReact);
+            animalReactSprite = new GameSprite(animalReact);
         animalReactSprite.setTexture(animalReact);
         animalReactSprite.setSize(30 , 30);
         animalReactSprite.setX(sprite.getX() + 20);
@@ -259,9 +260,9 @@ public class Animal implements Placable, DailyUpdate, Serializable {
     }
 
     public void setFeedAnimation(){
-        animalReact = SharedAssetManager.getFoodEmoji();
+        animalReact = SharedAssetManager.getFoodEmojiPath();
         if(animalReactSprite == null)
-            animalReactSprite = new Sprite(animalReact);
+            animalReactSprite = new GameSprite(animalReact);
         animalReactSprite.setTexture(animalReact);
         animalReactSprite.setSize(30 , 30);
         animalReactSprite.setX(sprite.getX() + 20);

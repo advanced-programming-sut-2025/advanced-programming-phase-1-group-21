@@ -1,5 +1,7 @@
 package services;
 
+import models.game.Game;
+import models.game.Player;
 import models.network.Message;
 import models.network.MessageType;
 import com.esotericsoftware.kryonet.Connection;
@@ -15,7 +17,9 @@ import util.ServerUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 public class LobbyService {
 
@@ -116,11 +120,18 @@ public class LobbyService {
     }
 
     private void checkReadyLobby() {
+
         for (LobbyUser user: lobby.getUsers()) {
             if (!user.isReady)
                 return;
         }
-        sendAllLobby(new Message(MessageType.CLIENT_SERVICE, "sendMapID"));
+        if (lobby.getGame() != null) {
+            if (!canLobbyStartLoadedGame(lobby.getGame(), lobby.getUsers()))
+                return;
+        }
+        else {
+            sendAllLobby(new Message(MessageType.CLIENT_SERVICE, "sendMapID"));
+        }
         try {
             Thread.sleep(ServerUtil.AVOID_RACE);
         }
@@ -131,5 +142,34 @@ public class LobbyService {
         //All are READY
         SessionManager.addGame(lobby);
         sendAllLobby(ServerUtil.createGameStart());
+
+        try {
+            Thread.sleep(5 * ServerUtil.AVOID_RACE);
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        lobby.setStarted();
+    }
+
+    private boolean canLobbyStartLoadedGame(Game game, ArrayList<LobbyUser> users) {
+        Set<String> loadedPlayerUsernames = game.getPlayers().stream()
+                .map(player -> player.getUser().getUsername())
+                .collect(Collectors.toSet());
+        return users.stream()
+                .allMatch(lobbyUser -> loadedPlayerUsernames.contains(lobbyUser.user.getUsername()));
+    }
+
+    public void setGame(Game game) {
+        lobby.setGame(game);
+    }
+
+    public void exitGame() {
+        List<Connection> connections = SessionManager.getConnectionsByLobby(lobby);
+        for (Connection c : connections) {
+            if (c.equals(connection))
+                continue;
+            NetworkUtil.sendMessage(ServerUtil.createExit(), c);
+        }
     }
 }

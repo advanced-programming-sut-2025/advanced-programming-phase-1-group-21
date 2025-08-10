@@ -1,5 +1,6 @@
 package models.network;
 
+import models.game.Game;
 import models.user.User;
 
 import java.util.*;
@@ -11,6 +12,8 @@ public class Lobby {
 	private boolean isPrivate;
 	private boolean isVisible;
 	private ArrayList<LobbyUser> users = new ArrayList<>();
+	private Game game = null;
+	private boolean started = false;
 
 	//private Lobby
 	public Lobby(String name, String password, boolean isVisible, boolean isPrivate) {
@@ -110,5 +113,21 @@ public class Lobby {
 				user.isReady = !user.isReady;
 			}
 		}
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
+	public Game getGame() {
+		return game;
+	}
+
+	public void setStarted() {
+		started = true;
+	}
+
+	public boolean isStarted() {
+		return started;
 	}
 }

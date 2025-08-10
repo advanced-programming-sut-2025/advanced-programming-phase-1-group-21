@@ -18,6 +18,7 @@ import io.github.StardewValley.Main;
 import io.github.StardewValley.asset.Assets;
 import io.github.StardewValley.controllers.GameController;
 import io.github.StardewValley.controllers.ViewController;
+import io.github.StardewValley.network.NetworkLobbyController;
 import models.Item.ItemType;
 import models.animal.Animal;
 import models.game.NPC;
@@ -74,6 +75,7 @@ public class GameScreen implements Screen , InputProcessor {
         ShowMap.listOfPlayers = viewController.game.getPlayers();
         ShowMap.listOfNPCs = viewController.game.getNpcs();
         createUI();
+        System.out.println("GAME: " + gameModel.toString());
     }
 
     private void createUI() {
@@ -217,6 +219,11 @@ public class GameScreen implements Screen , InputProcessor {
         }
         if (i == Input.Keys.Q) {
             Main.getInstance().setScreen(new MiniGameScreen());
+        }
+        if (i == Input.Keys.ESCAPE) {
+            NetworkLobbyController.exitGame();
+            App.getInstance().saveGame();
+            game.setScreen(new LobbyScreen(NetworkLobbyController.getLobby().getData()));
         }
 
         return false;

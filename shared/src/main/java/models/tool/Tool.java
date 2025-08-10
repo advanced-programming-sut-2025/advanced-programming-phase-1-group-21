@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import models.Item.Item;
 import models.Item.ItemType;
+import models.Saver;
 import models.game.Game;
 import models.game.Player;
 import models.map.Coord;
@@ -14,7 +15,7 @@ import models.result.Result;
 import org.w3c.dom.Text;
 
 
-public abstract class Tool extends Item {
+public abstract class Tool extends Item implements Saver {
     private final ToolType toolType;
 	public ToolMaterialType toolMaterialType;
 	private Texture texture;
@@ -32,6 +33,17 @@ public abstract class Tool extends Item {
 		else {
 			toolMaterialType = ToolMaterialType.PRIMITIVE;
 		}
+		loadTexture();
+	}
+
+	@Override
+	public void save() {
+		spriteX = sprite.getX();
+		spriteY = sprite.getY();
+	}
+
+	@Override
+	public void load() {
 		loadTexture();
 	}
 

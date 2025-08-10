@@ -3,6 +3,7 @@ package models.map;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import models.game.Refrigerator;
+import models.sprite.GameSprite;
 import models.time.Date;
 
 public class House extends Building {
@@ -15,8 +16,8 @@ public class House extends Building {
     public House() {
         super();
         this.map = (new MapBuilder()).buildHouse(refrigerator);
-        texture = new Texture("Textures/Buildings/HouseLevel1png.png");
-        sprite = new Sprite(texture);
+        String texture = "Textures/Buildings/HouseLevel1png.png";
+        sprite = new GameSprite(texture);
         sprite.setSize(30*8 , 30*8);
     }
 
@@ -42,7 +43,7 @@ public class House extends Building {
     }
 
     @Override
-    public Texture getTexture() {
+    public String getTexture() {
         return null;
     }
 

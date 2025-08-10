@@ -2,6 +2,7 @@ package models.map;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import models.sprite.GameSprite;
 import models.time.Date;
 
 import java.util.Random;
@@ -12,8 +13,7 @@ public class Mines extends Building {
 
     public Mines(Random rand) {
         map = (new MapBuilder()).buildMines(rand);
-        texture = new Texture("Textures/Buildings/mines.png");
-        sprite = new Sprite(texture);
+        sprite = new GameSprite("Textures/Buildings/mines.png");
         sprite.setSize(30*5 , 30*5);
     }
 
@@ -33,7 +33,7 @@ public class Mines extends Building {
     }
 
     @Override
-    public Texture getTexture() {
+    public String getTexture() {
         return null;
     }
 

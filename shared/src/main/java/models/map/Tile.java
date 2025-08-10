@@ -11,6 +11,7 @@ import models.crop.PlantedSeed;
 import models.Item.Item;
 import models.game.Game;
 import models.game.Player;
+import models.sprite.GameSprite;
 import models.time.Season;
 import org.w3c.dom.Text;
 
@@ -19,11 +20,11 @@ import java.io.Serializable;
 public class Tile implements DailyUpdate, Serializable {
     private TileType tileType;
     private Placable placable;
-    transient private Texture texture = new Texture("Textures/map/SpringBasicTile.png");;
-    transient private Sprite sprite = new Sprite(texture);
-    transient private Texture onTileTexture;
-    transient private Sprite onTileSprite;
-    transient private Sprite lightningSprite;
+    transient private GameSprite sprite = new GameSprite("Textures/map/SpringBasicTile.png");
+    transient private String onTileTexture;
+    transient private GameSprite onTileSprite;
+    transient private GameSprite lightningSprite;
+    public String texture = "Textures/map/SpringBasicTile.png";
 
     MapType mapType;
 
@@ -39,30 +40,30 @@ public class Tile implements DailyUpdate, Serializable {
         float x = sprite.getX();
         float y = sprite.getY();
         if(mapType.equals(MapType.HOUSE))
-            texture = SharedAssetManager.getHouseTile();
+            texture = SharedAssetManager.getHouseTilePath();
         else if(tileType.equals(TileType.SIMPLE_STABLE))
-            texture = SharedAssetManager.getStable("Simple");
+            texture = SharedAssetManager.getStablePath("Simple");
         else if(tileType.equals(TileType.FOOD_STABLE))
-            texture = SharedAssetManager.getStable("Food");
+            texture = SharedAssetManager.getStablePath("Food");
         else if(getPlacable(Building.class) != null)
-            texture = SharedAssetManager.getTile("Spring");
+            texture = SharedAssetManager.getTilePath("Spring");
         else if(isEmpty())
-            texture = SharedAssetManager.getTile("Spring");
+            texture = SharedAssetManager.getTilePath("Spring");
 
         if(tileType.getTextureAddress() != null)
-            onTileTexture = new Texture(tileType.getTextureAddress());
+            onTileTexture = tileType.getTextureAddress();
 //        else if(placable!= null && placable.getTexture() != null) {
 //            onTileTexture = placable.getTexture();
 //        }
 
 
-        sprite = new Sprite(texture);
-        sprite.setSize(30 , (float) (30 * texture.getHeight()) / texture.getWidth());
+        sprite = new GameSprite(texture);
+        sprite.setSize(30 , (float) (30 * sprite.getTexture().getHeight()) / sprite.getTexture().getWidth());
         sprite.setX(x);
         sprite.setY(y);
 
         if(onTileTexture != null) {
-            onTileSprite = new Sprite(onTileTexture);
+            onTileSprite = new GameSprite(onTileTexture);
             onTileSprite.setX(x);
             onTileSprite.setY(y);
         }
@@ -77,11 +78,11 @@ public class Tile implements DailyUpdate, Serializable {
         float x = sprite.getX();
         float y = sprite.getY();
         if(tileType.getTextureAddress() != null)
-            onTileTexture = new Texture(tileType.getTextureAddress());
+            onTileTexture = tileType.getTextureAddress();
 //        else if(placable!= null && placable.getTexture() != null)
 //            onTileTexture = placable.getTexture();
         if(onTileTexture != null) {
-            onTileSprite = new Sprite(onTileTexture);
+            onTileSprite = new GameSprite(onTileTexture);
             onTileSprite.setX(x);
             onTileSprite.setY(y);
         }
@@ -92,10 +93,6 @@ public class Tile implements DailyUpdate, Serializable {
             placable.spriteGetter().setX(sprite.getX());
             placable.spriteGetter().setY(sprite.getY());
         }
-    }
-
-    public Texture getTexture() {
-        return texture;
     }
 
     public Sprite spriteGetter(){
@@ -219,23 +216,23 @@ public class Tile implements DailyUpdate, Serializable {
         return false;
     }
 
-    public void setTexture(Season season){
+    public void setTexture(Season season) {
         if(!mapType.equals(MapType.VILLAGE) && !mapType.equals(MapType.FARM))
             return;
         else if(season.equals(Season.SPRING))
-            texture = SharedAssetManager.getTile("Spring");
+            texture = SharedAssetManager.getTilePath("Spring");
         else if(season.equals(Season.WINTER))
-            texture = SharedAssetManager.getTile("Winter");
+            texture = SharedAssetManager.getTilePath("Winter");
         else if(season.equals(Season.AUTUMN))
-            texture = SharedAssetManager.getTile("Fall");
+            texture = SharedAssetManager.getTilePath("Fall");
         else if(season.equals(Season.SUMMER))
-            texture = SharedAssetManager.getTile("Summer");
+            texture = SharedAssetManager.getTilePath("Summer");
 
         sprite.setTexture(texture);
     }
 
     public void startLightning(){
-        lightningSprite = new Sprite(SharedAssetManager.getLightning());
+        lightningSprite = new GameSprite(SharedAssetManager.getLightningPath());
         lightningSprite.setY(1052);
         lightningSprite.setX(sprite.getX());
         lightningSprite.setSize(100 , 3);

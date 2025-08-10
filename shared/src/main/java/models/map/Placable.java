@@ -13,6 +13,6 @@ public interface Placable extends Serializable {
     TileType getTileType();
     boolean isWalkable();
     String getSprite();
-    Texture getTexture();
+    String getTexture();
     Sprite spriteGetter();
 }

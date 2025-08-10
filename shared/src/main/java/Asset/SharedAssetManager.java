@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Tree;
 import java.security.cert.TrustAnchor;
 
 public class SharedAssetManager {
-    private static final AssetManager manager = new AssetManager();
+    public static final AssetManager manager = new AssetManager();
     private static Skin skin;
 
     public SharedAssetManager() {
@@ -164,5 +164,65 @@ public class SharedAssetManager {
 
     public static float getVolume() {
         return 1.0f;
+    }
+
+    public static String getCupPath() {
+        return "Textures/emoji/cup.png";
+    }
+
+    public static String getCloudPath() {
+        return "Textures/Villagers/cloud.png";
+    }
+
+    public static String getNPCTexturePath(String NPCName) {
+        return "Textures/Villagers/" + NPCName + ".png";
+    }
+
+    public static String getHouseTilePath() {
+        return "Textures/Flooring/HouseFloor.png";
+    }
+
+    public static String getRefrigeratorPath() {
+        return "Textures/Refrigerator/Fridge.png";
+    }
+
+    public static String getLightningPath() {
+        return "Textures/Decor/lightning.png";
+    }
+
+    public static String getFoodEmojiPath() {
+        return "Textures/emoji/food.png";
+    }
+
+    public static String getHeartPath() {
+        return "Textures/Decor/heart.png";
+    }
+
+    public static String getGreenHousePath(String type) {
+        return "Textures/Buildings/" + type + "GreenHouse.png";
+    }
+
+    public static String getStablePath(String type) {
+        return "Textures/Decor/" + type + "Stable.png";
+    }
+
+    public static String getTilePath(String season) {
+        return "Textures/map/" + season + "BasicTile.png";
+    }
+
+    public static String getAnimalHousePath(String name) {
+        return "Textures/Buildings/" + name + ".png";
+    }
+
+    public static String getToolTexturePath(String name) {
+        return "Textures/Tools/" + name + ".png";
+    }
+
+    public static String getBackgroundPath() {
+        return "background.png";
+    }
+
+    public static String getMenuBackgroundPath() {
+        return "menu.png";
     }
 }
