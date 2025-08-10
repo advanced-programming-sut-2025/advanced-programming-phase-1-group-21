@@ -90,6 +90,8 @@ public class ClientService {
     }
 
     public static void exitGame() {
-        Main.getInstance().setScreen(new WaitScreen());
+        Gdx.app.postRunnable(() -> {
+            Main.getInstance().setScreen(new WaitScreen());
+        });
     }
 }
