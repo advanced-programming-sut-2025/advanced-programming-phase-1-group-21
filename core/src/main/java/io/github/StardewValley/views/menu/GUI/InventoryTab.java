@@ -20,7 +20,9 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import data.items.AllItemsData;
 import data.items.RecipeData;
+import io.github.StardewValley.App;
 import io.github.StardewValley.controllers.GameController;
+import io.github.StardewValley.network.NetworkLobbyController;
 import models.Item.Item;
 import models.Item.ItemType;
 import models.Item.Recipe;
@@ -28,6 +30,7 @@ import models.Item.RecipeType;
 import models.game.*;
 import models.skill.SkillType;
 import models.tool.Tool;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +49,7 @@ class InventoryTab {
 	private Item goldItem, trashcanItem;
 	private Label goldLabel;
 	private Stack itemInHandStack, trashcanStack;
-	private Table skillTable, hoverTable, socialTitle, missionTitle;
+	private Table skillTable, hoverTable, socialTitle, missionTitle, settingTable;
 
 	private Container<Image> inventorySelectedItem, craftingSelectedItem, cookingSelectedItem;
 
@@ -99,6 +102,7 @@ class InventoryTab {
 		createCookingUI();
 		createMapUI();
 		createMissionUI();
+		createSettingUI();
 	}
 
 	private void createMainButtonsUI() {
@@ -657,7 +661,7 @@ class InventoryTab {
 						": " + npc.getTasks().get(i).getRewardAmount(), skin)).left().pad(10).padLeft(30);
 
 				Label status = new Label("Unavailable", skin);
-				status.setColor(Color.LIGHT_GRAY);
+				status.setColor(Color.RED);
 				if (i <= npcFriendship.getLevel().getLevel()) {
 					if (npc.getTasksFlag().get(i)) {
 						status.setText("Done");
@@ -665,7 +669,7 @@ class InventoryTab {
 					}
 					else {
 						status.setText("Available");
-						status.setColor(Color.RED);
+						status.setColor(Color.LIGHT_GRAY);
 					}
 				}
 				missions.add(status).left().pad(10);
@@ -694,6 +698,26 @@ class InventoryTab {
 		missionTitle.add(new Label("Reward", skin)).pad(100);
 		missionTitle.add(new Label("Status", skin)).pad(100);
 		missionTitle.setPosition(482, 375 + 300);
+	}
+
+	private void createSettingUI() {
+		settingTable = new Table();
+		settingTable.setBackground(new TextureRegionDrawable(new TextureRegion(createBackGround(Color.DARK_GRAY))));
+
+		TextButton exitButton = new TextButton("Exit", skin);
+		exitButton.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				NetworkLobbyController.exitGame();
+				App.getInstance().saveGame();
+				gameScreen.getGame().setScreen(new LobbyScreen(NetworkLobbyController.getLobby().getData()));
+			}
+		});
+
+		settingTable.add(exitButton);
+
+		settingTable.setSize(850, 200);
+		settingTable.setPosition(482, 575);
 	}
 
 	private void updateHoverTablePosition(int screenX, int screenY) {
@@ -818,6 +842,7 @@ class InventoryTab {
 		setTrashcan();
 		addInventoryActors();
 	}
+
 	private void addInventoryActors() {
 		stage.addActor(goldLabel);
 		setItemInHand();
@@ -869,15 +894,16 @@ class InventoryTab {
 	private void setSettingTab() {
 		setStage();
 		setButtonBar();
+		stage.addActor(settingTable);
 	}
 
-	private String capitalize(Tool tool) {
+	public static String capitalize(Tool tool) {
 		String type = tool.getToolMaterialType().toString();
 		String name = tool.getToolType().toString();
 		return type.substring(0, 1).toUpperCase() + type.substring(1).toLowerCase() + "_" + name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
 	}
 
-	private String getItemTexture(Item item) {
+	public static String getItemTexture(Item item) {
 		if (item == null)
 			return null;
 		if (item.getName().equalsIgnoreCase("coin"))
@@ -1023,8 +1049,8 @@ class InventoryTab {
 				catch (Exception e) {}
 			}
 		};
-		d.button(buttonName, "Done");
 		d.button("Cancel", "Cancel");
+		d.button(buttonName, "Done");
 		d.setSize(400, 300);
 		d.setModal(true);
 
