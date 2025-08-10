@@ -2,8 +2,6 @@ package models.game;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.Rectangle;
 import data.AnimalData;
 import models.DailyUpdate;
 import models.Item.Item;
@@ -17,7 +15,6 @@ import models.skill.SkillType;
 import models.user.User;
 import org.apache.commons.lang3.tuple.Pair;
 
-import javax.swing.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +43,7 @@ public class Player implements DailyUpdate, Serializable {
     private String suitor;
     private Reaction reaction = new Reaction();
     private final transient List<MusicData> musics = new ArrayList<>();
+    private int mapID;
 
     public Player() {}
 
@@ -418,5 +416,13 @@ public class Player implements DailyUpdate, Serializable {
 
     public void addMusic(MusicData music) {
         musics.add(music);
+    }
+
+    public int getMapID() {
+        return mapID;
+    }
+
+    public void setMapID(int mapID) {
+        this.mapID = mapID;
     }
 }

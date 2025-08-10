@@ -84,6 +84,7 @@ public class ClientService {
                 int seed = lobbyUser.mapID;
                 Map map = mapBuilder.buildFarm(new Random(seed));
                 Player player = new Player(user, map);
+                player.setMapID(seed);
                 players.add(player);
             }
 

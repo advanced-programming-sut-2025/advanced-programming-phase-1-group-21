@@ -87,7 +87,7 @@ public class SharedAssetManager {
             manager.load(path, Texture.class);
         }
 
-        manager.update(17);
+        manager.update(100);
 
         if(manager.isLoaded(path)) {
             return manager.get(path, Texture.class);
