@@ -2073,7 +2073,21 @@ public class GameController {
         player.getInventory().removeItems(items);
     }
 
+    public void removeItem(Item item) {
+        player.getInventory().removeItem(item);
+    }
+
     public void setItemInHand(Item item) {
         player.setItemInHand(item);
+    }
+
+    public void addToRefrigerator(Coord c, Item item) {
+        Refrigerator ref = player.getMap().getTile(c).getPlacable(Refrigerator.class);
+        ref.getInventory().addItem(item);
+    }
+
+    public void removeFromRefrigerator(Coord c, Item item) {
+        Refrigerator ref = player.getMap().getTile(c).getPlacable(Refrigerator.class);
+        ref.getInventory().removeItem(item);
     }
 }

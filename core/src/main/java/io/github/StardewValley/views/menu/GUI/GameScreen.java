@@ -45,6 +45,7 @@ public class GameScreen implements Screen , InputProcessor {
     private TagNotification tagNotification;
     private FriendshipsTab friendshipsTab;
     private ArtisanTab artisanTab;
+    private RefrigeratorTab refTab;
     private boolean isInventoryShown = false;
     private boolean isShopMenuShown = false;
     private boolean isSellTabShown = false;
@@ -54,6 +55,7 @@ public class GameScreen implements Screen , InputProcessor {
     private boolean isTalkScreen = false;
     private boolean isGiftTabShown = false;
     private boolean isArtisanShown = false;
+    private boolean isRefShow = false;
     private BitmapFont messagePrinter = new BitmapFont();
     private String message;
     private AnimalInfoWindow animalInfoWindow;
@@ -99,6 +101,7 @@ public class GameScreen implements Screen , InputProcessor {
         chatScreen = new ChatScreen(viewController.player, this, skin);
         tagNotification = new TagNotification(skin);
         artisanTab = new ArtisanTab(currentPlayer, this, skin);
+        refTab = new RefrigeratorTab(currentPlayer, this, skin);
     }
 
     @Override
@@ -115,14 +118,14 @@ public class GameScreen implements Screen , InputProcessor {
         viewController.buttonController(game);
         ShowMap.show(delta);
         messagePrinter.setColor(Color.RED);
-        if(message != null)
+        if (message != null)
             messagePrinter.draw(game.getBatch(), message , 100 , 100);
         game.getBatch().end();
 
         if (gameModel.getGameDate().getHour() >= 22 || gameModel.getGameDate().getHour() <= 5)
             setDarkMode();
         else {
-            if(isNight){
+            if (isNight) {
                 isNight = false;
                 stage.clear();
             }
@@ -139,8 +142,9 @@ public class GameScreen implements Screen , InputProcessor {
         if (tagNotification.isVisible()) tagNotification.draw();
         if (isGiftTabShown) giftTab.draw();
         if (isArtisanShown) artisanTab.draw();
+        if (isRefShow) refTab.draw();
 
-        if(!viewController.player.getNotifications().isEmpty()){
+        if (!viewController.player.getNotifications().isEmpty()) {
             int size = viewController.player.getNotifications().size();
             showNotification(viewController.player.getNotifications().get(size - 1));
             viewController.player.getNotifications().remove(size - 1);
@@ -192,11 +196,11 @@ public class GameScreen implements Screen , InputProcessor {
             shopMenuTab.show();
         }
 
-        if(i == Input.Keys.B){
+        if (i == Input.Keys.B) {
             isSellTabShown = true;
             sellTab.show();
         }
-        if(i == Input.Keys.G){
+        if (i == Input.Keys.G) {
             isGiftTabShown = true;
             giftTab.show();
         }
@@ -243,10 +247,10 @@ public class GameScreen implements Screen , InputProcessor {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         Coord c = viewController.clickController(screenX, screenY);
-        message = "(" + c.getX() + ","
-                + c.getY() + "), ";
         Tile tile = currentPlayer.getMap().getTile(c);
-        if(tile != null && tile.getPlacable(Animal.class) != null){
+        message = "(" + c.getX() + ","
+                + c.getY() + "), " + tile.getTileType();
+        if (tile != null && tile.getPlacable(Animal.class) != null) {
             Animal animal = tile.getPlacable(Animal.class);
             animalInfoWindow = new AnimalInfoWindow(this , Assets.getSkin() , animal);
             animalInfoWindow.setPosition(screenX + 30, Gdx.graphics.getHeight() - screenY + 30);
@@ -254,7 +258,7 @@ public class GameScreen implements Screen , InputProcessor {
             stage.addActor(animalInfoWindow);
         }
 
-        if(tile != null && tile.getPlacable(NPC.class) != null){
+        if (tile != null && tile.getPlacable(NPC.class) != null) {
             NPC npc = tile.getPlacable(NPC.class);
             NPCInformation = new NPCInformationWindow(this , Assets.getSkin() , npc , currentPlayer);
             NPCInformation.setPosition(screenX + 30, Gdx.graphics.getHeight() - screenY + 30);
@@ -263,15 +267,15 @@ public class GameScreen implements Screen , InputProcessor {
         }
 
         Player player = viewController.getOtherPlayerClick(c);
-        if(player != null){
+        if (player != null) {
             otherPlayerInfo = new OtherPlayerInfo(this , Assets.getSkin() , player , currentPlayer);
             otherPlayerInfo.setPosition(screenX + 30, Gdx.graphics.getHeight() - screenY + 30);
             Gdx.input.setInputProcessor(stage);
             stage.addActor(otherPlayerInfo);
         }
 
-        for(NPC npc : ShowMap.listOfNPCs){
-            if(npc.getCloudSprite() != null && viewController.clickOnSprite(npc.getCloudSprite() , screenX , screenY)) {
+        for (NPC npc : ShowMap.listOfNPCs) {
+            if (npc.getCloudSprite() != null && viewController.clickOnSprite(npc.getCloudSprite() , screenX , screenY)) {
                 NPCAnswer = new NPCResponseWindow(this , Assets.getSkin() , npc.getResponseToMessage() , screenX ,
                         Gdx.graphics.getHeight() - screenY);
                 NPCAnswer.setPosition(screenX, Gdx.graphics.getHeight() - screenY);
@@ -319,7 +323,7 @@ public class GameScreen implements Screen , InputProcessor {
         Gdx.input.setInputProcessor(this);
     }
 
-    public void onTalkClosed(){
+    public void onTalkClosed() {
         isTalkScreen = false;
         talkScreen = null;
         Gdx.input.setInputProcessor(this);
@@ -330,22 +334,22 @@ public class GameScreen implements Screen , InputProcessor {
         Gdx.input.setInputProcessor(this);
     }
 
-    public void onSellTabClosed(){
+    public void onSellTabClosed() {
         isSellTabShown = false;
         Gdx.input.setInputProcessor(this);
     }
 
-    public void onGiftMenuClosed(){
+    public void onGiftMenuClosed() {
         isGiftTabShown = false;
         Gdx.input.setInputProcessor(this);
     }
 
-    public void onTerminalClosed(){
+    public void onTerminalClosed() {
         isTerminalShown = false;
         Gdx.input.setInputProcessor(this);
     }
 
-    public void onFriendshipScreenClosed(){
+    public void onFriendshipScreenClosed() {
         isFriendshipShown = false;
         Gdx.input.setInputProcessor(this);
     }
@@ -355,48 +359,58 @@ public class GameScreen implements Screen , InputProcessor {
         Gdx.input.setInputProcessor(this);
     }
 
-    public void showArtisanTab(Artisan artisan, GameController gameController, int cursorX, int cursorY) {
+    public void onRefTabClosed() {
+        isRefShow = false;
+        Gdx.input.setInputProcessor(this);
+    }
+
+    public void showArtisanTab(Artisan artisan, int cursorX, int cursorY) {
         isArtisanShown = true;
-        artisanTab.show(artisan, gameController, cursorX, cursorY);
+        artisanTab.show(artisan, controller, cursorX, cursorY);
+    }
+
+    public void showRefrigeratorTab(Coord c) {
+        isRefShow = true;
+        refTab.show(c, controller);
     }
 
     public GameController getController() {
         return controller;
     }
 
-    public void closeAnimalInfo(){
-        if(animalInfoWindow != null){
+    public void closeAnimalInfo() {
+        if (animalInfoWindow != null) {
             animalInfoWindow = null;
         }
         stage.clear();
         Gdx.input.setInputProcessor(this);
     }
 
-    public void closePlayerInfo(){
-        if(otherPlayerInfo != null){
+    public void closePlayerInfo() {
+        if (otherPlayerInfo != null) {
             otherPlayerInfo = null;
         }
         stage.clear();
         Gdx.input.setInputProcessor(this);
     }
 
-    public void closeNPCAnswer(){
-        if(NPCAnswer != null){
+    public void closeNPCAnswer() {
+        if (NPCAnswer != null) {
             NPCAnswer = null;
         }
         stage.clear();
         Gdx.input.setInputProcessor(this);
     }
 
-    public void closeNPCInfo(){
-        if(NPCInformation != null){
+    public void closeNPCInfo() {
+        if (NPCInformation != null) {
             NPCInformation = null;
         }
         stage.clear();
         Gdx.input.setInputProcessor(this);
     }
 
-    private void setDarkMode(){
+    private void setDarkMode() {
         stage.addActor(darkModeImage);
         isNight = true;
     }
@@ -407,7 +421,7 @@ public class GameScreen implements Screen , InputProcessor {
     }
 
     public void sendMessageInChat(String sender, String message, Color color) {
-        if(talkScreen != null){
+        if (talkScreen != null) {
             talkScreen.pushMessage(sender , message , color);
             return;
         }
@@ -420,11 +434,13 @@ public class GameScreen implements Screen , InputProcessor {
 
     public void setTalkScreen(TalkScreen talkScreen) {
         this.talkScreen = talkScreen;
-        if(talkScreen != null){
+        if (talkScreen != null) {
             isTalkScreen = true;
             talkScreen.show();
         }
     }
 
-
+    public Main getGame() {
+        return game;
+    }
 }

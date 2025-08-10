@@ -14,8 +14,8 @@ public class Refrigerator implements Placable, Serializable {
     GameSprite sprite = new GameSprite(SharedAssetManager.getRefrigeratorPath());
 
     public Refrigerator() {
-        this.inventory = new Inventory();
-        this.inventory.inventoryType = InventoryType.BIG;
+        inventory = new Inventory();
+        inventory.inventoryType = InventoryType.UNLIMITED;
     }
 
     public Inventory getInventory() {
