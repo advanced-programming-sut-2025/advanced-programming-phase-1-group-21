@@ -75,7 +75,10 @@ public class ClientService {
         Lobby lobby = result.getData();
 
         if (lobby.isStarted()) {
-            Main.getInstance().setScreen(new GameScreen());
+            System.out.println("I'm Joining an Already Started Game!");
+            Gdx.app.postRunnable(() -> {
+                Main.getInstance().setScreen(new GameScreen());
+            });
             return;
         }
 
@@ -87,6 +90,8 @@ public class ClientService {
     }
 
     public static void exitGame() {
-        Main.getInstance().setScreen(new WaitScreen());
+        Gdx.app.postRunnable(() -> {
+            Main.getInstance().setScreen(new WaitScreen());
+        });
     }
 }
