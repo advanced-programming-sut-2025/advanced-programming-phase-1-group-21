@@ -212,13 +212,13 @@
     "harvest-cycle": 1,
     "seasons": ["spring", "summer", "autumn"],
     "stage-textures": [
-      "Textures/Trees/Mushroom_Stage_1.png",
-      "Textures/Trees/Mushroom_Stage_2.png",
-      "Textures/Trees/Mushroom_Stage_3.png",
-      "Textures/Trees/Mushroom_Stage_4.png"
+      "Textures/Trees/MushroomTree_Stage_1.png",
+      "Textures/Trees/MushroomTree_Stage_2.png",
+      "Textures/Trees/MushroomTree_Stage_3.png",
+      "Textures/Trees/MushroomTree_Stage_4.png"
     ],
-    "harvest-texture": "Textures/Trees/Mushroom_Stage_5.png",
-    "season-texture": "Textures/Trees/Mushroom_Stage_5.png"
+    "harvest-texture": "Textures/Trees/MushroomTree_Stage_5.png",
+    "season-texture": "Textures/Trees/MushroomTree_Stage_5.png"
   },
   {
     "name": "Mystic Tree",

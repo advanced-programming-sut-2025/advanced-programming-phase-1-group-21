@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -77,11 +78,43 @@ public class LobbyScreen implements Screen, Refreshable {
 
         mapNumberField = new TextField("1", skin); // Default value 1
         mapNumberField.setMessageText("Enter your map seed");
-        mapNumberField.setSize(sw / 8f, sh / 20f);
+        mapNumberField.setSize(sw / 30f, sh / 20f);
         mapNumberField.setPosition(sw / 16f + 120, sh * 10 / 16f - 40);
+        mapNumberField.addListener(new InputListener() {
+            @Override
+            public boolean keyTyped(InputEvent event, char character) {
+                return true;
+            }
+        });
+        TextButton minusButton = new TextButton("-", skin);
+        minusButton.setPosition(sw / 16f + 200, sh * 10 / 16f - 40);
+        minusButton.setHeight(sh / 20f);
+        TextButton plusButton = new TextButton("+", skin);
+        plusButton.setPosition(sw / 16f + 250, sh * 10 / 16f - 40);
+        plusButton.setHeight(sh / 20f);
+
+        minusButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                int amount = Integer.parseInt(mapNumberField.getText());
+                if(amount > 1) amount--;
+                mapNumberField.setText(String.valueOf(amount));
+            }
+        });
+
+        plusButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                int amount = Integer.parseInt(mapNumberField.getText());
+                if (amount < 4) amount++;
+                mapNumberField.setText(String.valueOf(amount));
+            }
+        });
 
         stage.addActor(mapLabel);
         stage.addActor(mapNumberField);
+        stage.addActor(minusButton);
+        stage.addActor(plusButton);
 
         // Players Table
         playersTable = new Table();
