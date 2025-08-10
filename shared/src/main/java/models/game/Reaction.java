@@ -26,8 +26,8 @@ public class Reaction {
 
     private EmojiType currentEmoji = EmojiType.NONE;
     private String currentText = null;
-    private GameSprite emojiSprite;
-    private final BitmapFont font;
+    private transient GameSprite emojiSprite;
+    private transient BitmapFont font;
     private float duration;
     private float timer;
 

@@ -22,7 +22,7 @@ public class PlantedTree implements Placable, Harvestable, Serializable, DailyUp
 	private boolean readyToHarvest = false;
 	public TreeData treeData;
 	String texture;
-	private GameSprite sprite;
+	private transient GameSprite sprite;
 
 	public PlantedTree() {}
 
