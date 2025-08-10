@@ -18,8 +18,8 @@ import org.w3c.dom.Text;
 public abstract class Tool extends Item implements Saver {
     private final ToolType toolType;
 	public ToolMaterialType toolMaterialType;
-	private Texture texture;
-	private Sprite sprite;
+	private transient Texture texture;
+	private transient Sprite sprite;
 	public float spriteX;
 	public float spriteY;
 	public float animationTime;

@@ -1,8 +1,8 @@
 package models.game;
 
 public enum InventoryType {
-    PRIMITIVE(12),
-    BIG(24),
+    PRIMITIVE(14),
+    BIG(26),
     UNLIMITED(Integer.MAX_VALUE);
 
     private final int maximumSize;

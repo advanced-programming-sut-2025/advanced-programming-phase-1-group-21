@@ -25,10 +25,7 @@ import models.Item.Item;
 import models.Item.ItemType;
 import models.Item.Recipe;
 import models.Item.RecipeType;
-import models.game.Inventory;
-import models.game.InventoryType;
-import models.game.NPC;
-import models.game.Player;
+import models.game.*;
 import models.skill.SkillType;
 import models.tool.Tool;
 
@@ -39,24 +36,23 @@ import java.util.function.Consumer;
 
 class InventoryTab {
 	private final Player player;
-	private Stage stage;
-	private Skin skin;
-	private GameScreen gameScreen;
-	private GameController gc;
+	private final Stage stage;
+	private final Skin skin;
+	private final GameScreen gameScreen;
+	private final GameController gc;
 	private Texture emptyTexture;
 	private TextureRegionDrawable emptyDrawable, whiteSquare, redSquare;
 	private TextButton exitButton, inventoryButton, socialButton, mapButton, settingButton, skillButton, missionButton, craftButton, cookButton;
-	private Label farmingSkillLabel, miningSkillLabel, foragingSkillLabel, fishingSkillLabel;
-	private final ArrayList<Image> farmingLevels, miningLevels, foragingLevels, fishingLevels;
-	private final ArrayList<ArrayList<Item>> itemMatrix = new ArrayList<>();
-	private Item goldItem;
+	private Item goldItem, trashcanItem;
 	private Label goldLabel;
-	private Stack itemInHandStack;
-	private Table skillTable, hoverTable, socialTitle;
+	private Stack itemInHandStack, trashcanStack;
+	private Table skillTable, hoverTable, socialTitle, missionTitle;
 
 	private Container<Image> inventorySelectedItem, craftingSelectedItem, cookingSelectedItem;
 
-	private ScrollPane inventoryScrollPane, craftingScrollPane, cookingScrollPane, socialScrollPane;
+	private Image mapImage;
+
+	private ScrollPane inventoryScrollPane, craftingScrollPane, cookingScrollPane, socialScrollPane, missionScrollPane;
 	BitmapFont numberFont;
 
 	public InventoryTab(Player player, GameScreen gameScreen, GameController gc, Skin skin) {
@@ -65,10 +61,6 @@ class InventoryTab {
 		this.gameScreen = gameScreen;
 		this.gc = gc;
 		this.skin = skin;
-		farmingLevels = new ArrayList<>();
-		miningLevels = new ArrayList<>();
-		foragingLevels = new ArrayList<>();
-		fishingLevels = new ArrayList<>();
 
 		Inventory inv = player.getInventory();
 		inv.addItem(Item.build("Loom", 1));
@@ -92,13 +84,10 @@ class InventoryTab {
 		player.addRecipes(new Recipe(RecipeData.getCraftingRecipeData("Charcoal Kiln Recipe"), RecipeType.CRAFTING, 1));
 		player.addRecipes(new Recipe(RecipeData.getCraftingRecipeData("Bee House Recipe"), RecipeType.CRAFTING, 1));
 		player.addRecipes(new Recipe(RecipeData.getCraftingRecipeData("Keg Recipe"), RecipeType.CRAFTING, 1));
-
-//		createUI();
 	}
 
 	void createUI() {
 		stage.clear();
-		itemMatrix.clear();
 		setEmpty();
 		setNumberFont();
 
@@ -108,6 +97,8 @@ class InventoryTab {
 		createSocialUI();
 		createCraftingUI();
 		createCookingUI();
+		createMapUI();
+		createMissionUI();
 	}
 
 	private void createMainButtonsUI() {
@@ -186,7 +177,7 @@ class InventoryTab {
 
 	private void createInventoryUI() {
 		Table scrollTable = new Table();
-		itemMatrix.clear();
+		ArrayList<ArrayList<Item>> itemMatrix = new ArrayList<>();
 		scrollTable.defaults().width(64).height(64).pad(2);
 		Inventory inv = player.getInventory();
 		List<Item> items = inv.getItems();
@@ -194,6 +185,10 @@ class InventoryTab {
 		for (Item item: items) {
 			if (item.getName().equalsIgnoreCase("coin")) {
 				goldItem = item;
+				continue;
+			}
+			if (item.getName().equals("TRASHCAN")) {
+				trashcanItem = item;
 				continue;
 			}
 			if (colIndex == 0)
@@ -444,7 +439,7 @@ class InventoryTab {
 		int miningLevel = player.getSkillLevel(SkillType.MINING);
 		int foragingLevel = player.getSkillLevel(SkillType.FORAGING);
 		int fishingLevel = player.getSkillLevel(SkillType.FISHING);
-		farmingSkillLabel = new Label("Farming:", skin);
+		Label farmingSkillLabel = new Label("Farming:", skin);
 		farmingSkillLabel.addListener(new InputListener() {
 			public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
 				description.setText("This is farming skill");
@@ -474,7 +469,7 @@ class InventoryTab {
 		}
 		skillTable.row();
 
-		miningSkillLabel = new Label("Mining:", skin);
+		Label miningSkillLabel = new Label("Mining:", skin);
 		miningSkillLabel.addListener(new InputListener() {
 			public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
 				description.setText("This is mining skill");
@@ -505,7 +500,7 @@ class InventoryTab {
 		}
 		skillTable.row();
 
-		foragingSkillLabel = new Label("Foraging:", skin);
+		Label foragingSkillLabel = new Label("Foraging:", skin);
 		foragingSkillLabel.addListener(new InputListener() {
 			public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
 				description.setText("This is foraging skill");
@@ -535,7 +530,7 @@ class InventoryTab {
 		}
 		skillTable.row();
 
-		fishingSkillLabel = new Label("Fishing:", skin);
+		Label fishingSkillLabel = new Label("Fishing:", skin);
 		fishingSkillLabel.addListener(new InputListener() {
 			public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
 				description.setText("This is fishing skill");
@@ -570,8 +565,6 @@ class InventoryTab {
 	private void createSocialUI() {
 		TextureRegionDrawable greenBox = getRectangle(Color.GREEN, 50, 30);
 		TextureRegionDrawable whiteBox = getRectangle(Color.WHITE, 50, 30);
-
-
 
 		Table socialTable = new Table();
 		socialTable.setBackground(new TextureRegionDrawable(new TextureRegion(createBackGround(Color.DARK_GRAY))));
@@ -617,6 +610,90 @@ class InventoryTab {
 		socialTitle.add(new Label("Villager", skin)).pad(50);
 		socialTitle.add(new Label("Friendship", skin)).pad(100);
 		socialTitle.setPosition(482, 375 + 300);
+	}
+
+	private void createMapUI() {
+		int mapID = player.getMapID();
+//		int mapID = 1;
+		Texture t = SharedAssetManager.getOrLoad(	"Textures/map/Map" + mapID + ".png");
+		if (t == null) {
+			System.out.println("Textures/map/Map" + mapID + ".png");
+			Texture t2 = new Texture("Textures/map/Map" + mapID + ".png");
+			if (t2 == null) {
+				System.out.println("Both");
+			}
+			else
+				System.out.println("t2 good");
+			mapImage = new Image(emptyDrawable);
+		}
+		else
+			mapImage = new Image(SharedAssetManager.getOrLoad("Textures/map/Map" + mapID + ".png"));
+
+		mapImage.setPosition(482, 275);
+		mapImage.setSize(1000, 500);
+	}
+
+	private void createMissionUI() {
+
+		Table missionTable = new Table();
+		missionTable.setBackground(new TextureRegionDrawable(new TextureRegion(createBackGround(Color.DARK_GRAY))));
+
+		for (NPC npc: ShowMap.listOfNPCs) {
+			Table profile = new Table();
+			Image profilePic = new Image(SharedAssetManager.getOrLoad("Textures/Villagers/" + npc.getName() + "_Profile.png"));
+			profilePic.setSize(100, 100);
+			profile.add(profilePic).padBottom(10).row();
+			profile.add(new Label(npc.getName(), skin));
+			profile.pack();
+
+			Table missions = new Table();
+
+			System.out.println("NPC: " + npc.getName());
+			NPCFriendship npcFriendship = npc.getFriendshipByPlayer(player);
+			for (int i = 0; i < 3; i++) {
+				missions.add(new Label(npc.getTasks().get(i).getRequestItem() +
+						": " + npc.getTasks().get(i).getRequestAmount(), skin)).left().pad(10).padLeft(30);
+				missions.add(new Label(npc.getTasks().get(i).getRewardItem() +
+						": " + npc.getTasks().get(i).getRewardAmount(), skin)).left().pad(10).padLeft(30);
+
+				Label status = new Label("Unavailable", skin);
+				status.setColor(Color.LIGHT_GRAY);
+				if (i <= npcFriendship.getLevel().getLevel()) {
+					if (npc.getTasksFlag().get(i)) {
+						status.setText("Done");
+						status.setColor(Color.GREEN);
+					}
+					else {
+						status.setText("Available");
+						status.setColor(Color.RED);
+					}
+				}
+				missions.add(status).left().pad(10);
+				missions.row();
+			}
+			missions.pack();
+
+			missionTable.add(profile).pad(10);
+			missionTable.add(missions).pad(10).row();
+		}
+		missionTable.pack();
+
+		missionScrollPane = new ScrollPane(missionTable, skin);
+		missionScrollPane.setScrollingDisabled(true, false);
+		missionScrollPane.setFadeScrollBars(false);
+
+		missionScrollPane.setSize(1050, 400);
+		missionScrollPane.setPosition(482, 275);
+
+
+		missionTitle = new Table();
+		missionTitle.setBackground(new TextureRegionDrawable(new TextureRegion(createBackGround(Color.DARK_GRAY))));
+		missionTitle.setSize(1050, 100);
+		missionTitle.add(new Label("Villager", skin)).pad(50);
+		missionTitle.add(new Label("Requested", skin)).pad(100);
+		missionTitle.add(new Label("Reward", skin)).pad(100);
+		missionTitle.add(new Label("Status", skin)).pad(100);
+		missionTitle.setPosition(482, 375 + 300);
 	}
 
 	private void updateHoverTablePosition(int screenX, int screenY) {
@@ -738,6 +815,10 @@ class InventoryTab {
 	private void setInventoryTab() {
 		setStage();
 		setButtonBar();
+		setTrashcan();
+		addInventoryActors();
+	}
+	private void addInventoryActors() {
 		stage.addActor(goldLabel);
 		setItemInHand();
 		stage.addActor(inventoryScrollPane);
@@ -753,6 +834,8 @@ class InventoryTab {
 	private void setMapTab() {
 		setStage();
 		setButtonBar();
+
+		stage.addActor(mapImage);
 	}
 
 	private void setSocialTab() {
@@ -766,6 +849,9 @@ class InventoryTab {
 	private void setMissionTab() {
 		setStage();
 		setButtonBar();
+
+		stage.addActor(missionTitle);
+		stage.addActor(missionScrollPane);
 	}
 
 	private void setCraftTab() {
@@ -804,8 +890,38 @@ class InventoryTab {
 		return data.getTextureAddress();
 	}
 
-	private void setItemInHand() {
+	private void setTrashcan() {
+		if (trashcanStack != null)
+			trashcanStack.remove();
+		Image trashcanImage = new Image(new TextureRegionDrawable(new TextureRegion(SharedAssetManager.getOrLoad(getItemTexture(trashcanItem)))));
+		trashcanStack = new Stack();
+		trashcanStack.add(trashcanImage);
+		trashcanStack.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				if (inventorySelectedItem == null || !(inventorySelectedItem.getActor().getUserObject() instanceof Item item) || item.getItemType() == ItemType.TOOL)
+					return;
 
+				int amount = 1;
+				if (getTapCount() == 2) {
+
+					amount = item.getAmount();
+					System.out.println("TEST");
+				}
+				gc.removeFromInventory(item.getName(), amount);
+				inventoryScrollPane.remove();
+				goldLabel.remove();
+				createInventoryUI();
+				addInventoryActors();
+			}
+		});
+
+		trashcanStack.setPosition(1350, 580);
+		trashcanStack.setSize(64, 64);
+		stage.addActor(trashcanStack);
+	}
+
+	private void setItemInHand() {
 		if (itemInHandStack != null)
 			itemInHandStack.remove();
 		Item item = player.getItemInHand();

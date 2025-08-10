@@ -398,25 +398,15 @@ public class GameController {
             return Result.failure(GameError.ITEM_IS_NOT_AVAILABLE);
 
         int addedCoin = itemToRemove.getAmount() * itemToRemove.getPrice();
-        if (trashCan.getToolMaterialType().equals(ToolMaterialType.PRIMITIVE)) {
-            inv.removeItem(itemToRemove);
-        } else if (trashCan.getToolMaterialType().equals(ToolMaterialType.COPPER)) {
-            Item coin = Item.build("coin", addedCoin * 15 / 100);
-            inv.addItem(coin);
-            inv.removeItem(itemToRemove);
-        } else if (trashCan.getToolMaterialType().equals(ToolMaterialType.STEEL)) {
-            Item coin = Item.build("coin", addedCoin * 30 / 100);
-            inv.addItem(coin);
-            inv.removeItem(itemToRemove);
-        } else if (trashCan.getToolMaterialType().equals(ToolMaterialType.GOLD)) {
-            Item coin = Item.build("coin", addedCoin * 45 / 100);
-            inv.addItem(coin);
-            inv.removeItem(itemToRemove);
-        } else if (trashCan.getToolMaterialType().equals(ToolMaterialType.IRIDIUM)) {
-            Item coin = Item.build("coin", addedCoin * 60 / 100);
-            inv.addItem(coin);
-            inv.removeItem(itemToRemove);
+        Item coin = Item.build("coin", 0);
+        switch (trashCan.getToolMaterialType()) {
+            case COPPER -> coin = Item.build("coin", addedCoin * 15 / 100);
+            case STEEL -> coin = Item.build("coin", addedCoin * 30 / 100);
+            case GOLD -> coin = Item.build("coin", addedCoin * 45 / 100);
+            case IRIDIUM -> coin = Item.build("coin", addedCoin * 60 / 100);
         }
+        inv.addItem(coin);
+        inv.removeItem(itemToRemove);
         return Result.success(null);
     }
 

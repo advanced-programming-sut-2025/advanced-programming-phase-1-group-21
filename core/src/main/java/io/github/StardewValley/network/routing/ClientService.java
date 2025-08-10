@@ -74,24 +74,24 @@ public class ClientService {
         Result<Lobby> result = NetworkLobbyController.getLobby();
         Lobby lobby = result.getData();
 
-        if (lobby.isStarted()) {
-            System.out.println("I'm Joining an Already Started Game!");
-            Gdx.app.postRunnable(() -> {
-                Main.getInstance().setScreen(new GameScreen());
-            });
-            return;
-        }
+		if (lobby.isStarted()) {
+			System.out.println("I'm Joining an Already Started Game!");
+			Gdx.app.postRunnable(() -> {
+				Main.getInstance().setScreen(new GameScreen());
+			});
+			return;
+		}
 
-        if (lobby.getGame() == null) {
-            GameStarter.startNewGame(lobby);
-        }
-        else
-            GameStarter.loadGame(lobby);
-    }
+		if (lobby.getGame() == null) {
+			GameStarter.startNewGame(lobby);
+		}
+		else
+			GameStarter.loadGame(lobby);
+	}
 
-    public static void exitGame() {
-        Gdx.app.postRunnable(() -> {
-            Main.getInstance().setScreen(new WaitScreen());
-        });
+	public static void exitGame() {
+		Gdx.app.postRunnable(() -> {
+			Main.getInstance().setScreen(new WaitScreen());
+		});
     }
 }

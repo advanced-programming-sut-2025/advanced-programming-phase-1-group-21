@@ -25,6 +25,7 @@ public class GameStarter {
                 int seed = lobbyUser.mapID;
                 Map map = mapBuilder.buildFarm(new Random(seed));
                 Player player = new Player(user, map);
+                player.setMapID(lobbyUser.mapID);
                 players.add(player);
             }
 
