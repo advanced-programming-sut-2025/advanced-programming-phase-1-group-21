@@ -4,6 +4,7 @@ import Asset.SharedAssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import models.game.Game;
+import models.sprite.GameSprite;
 import models.time.Date;
 
 public class GreenHouse extends Building {
@@ -11,14 +12,12 @@ public class GreenHouse extends Building {
 
     public GreenHouse() {
         this.map = (new MapBuilder()).buildGreenHouse();
-        texture = SharedAssetManager.getGreenHouse("Destroyed");
-        sprite = new Sprite(texture);
+        sprite = new GameSprite(SharedAssetManager.getGreenHousePath("Destroyed"));
         sprite.setSize(210 , 300);
     }
 
     public void setBuild(boolean build) {
-        texture = SharedAssetManager.getGreenHouse("Normal");
-        sprite.setTexture(texture);
+        sprite.setTexture(SharedAssetManager.getGreenHouse("Normal"));
         isBuild = build;
     }
 
@@ -42,7 +41,7 @@ public class GreenHouse extends Building {
     }
 
     @Override
-    public Texture getTexture() {
+    public String getTexture() {
         return null;
     }
 

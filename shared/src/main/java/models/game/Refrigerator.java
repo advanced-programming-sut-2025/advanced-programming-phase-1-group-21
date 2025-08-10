@@ -5,13 +5,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import models.map.Placable;
 import models.map.TileType;
+import models.sprite.GameSprite;
 
 import java.io.Serializable;
 
 public class Refrigerator implements Placable, Serializable {
     Inventory inventory;
-    Texture texture = SharedAssetManager.getRefrigerator();
-    Sprite sprite = new Sprite(texture);
+    GameSprite sprite = new GameSprite(SharedAssetManager.getRefrigeratorPath());
 
     public Refrigerator() {
         this.inventory = new Inventory();
@@ -38,8 +38,8 @@ public class Refrigerator implements Placable, Serializable {
     }
 
     @Override
-    public Texture getTexture() {
-        return texture;
+    public String getTexture() {
+        return SharedAssetManager.getRefrigeratorPath();
     }
 
     @Override

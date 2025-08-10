@@ -11,11 +11,12 @@ import models.game.Player;
 import models.map.Placable;
 import models.map.TileType;
 import models.skill.SkillType;
+import models.sprite.GameSprite;
 
 import java.io.Serializable;
 
 public class PlantedSeed implements Placable, Harvestable, DailyUpdate, Serializable {
-	private Sprite sprite;
+	private transient GameSprite sprite;
 	private int stage = 0;
 	private int day = 1;
 	private int lastHarvest = 0;
@@ -27,7 +28,7 @@ public class PlantedSeed implements Placable, Harvestable, DailyUpdate, Serializ
 
 	public PlantedSeed(SeedData seedData) {
 		this.seedData = seedData;
-		sprite = new Sprite(SharedAssetManager.getOrLoad(seedData.getStageTexture(stage)));
+		sprite = new GameSprite(seedData.getStageTexture(stage));
 	}
 
 	public void water() {
@@ -112,7 +113,7 @@ public class PlantedSeed implements Placable, Harvestable, DailyUpdate, Serializ
 	}
 
 	@Override
-	public Texture getTexture() {
+	public String getTexture() {
 		return null;
 	}
 

@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import models.map.Coord;
+import models.sprite.GameSprite;
 
 public class Reaction {
     public enum EmojiType {
@@ -25,14 +26,14 @@ public class Reaction {
 
     private EmojiType currentEmoji = EmojiType.NONE;
     private String currentText = null;
-    private Sprite emojiSprite;
+    private GameSprite emojiSprite;
     private final BitmapFont font;
     private float duration;
     private float timer;
 
     public Sprite getEmojiSprite() {
         if(emojiSprite == null || emojiSprite.getTexture() == null)
-            emojiSprite = new Sprite(SharedAssetManager.getHeart());
+            emojiSprite = new GameSprite(SharedAssetManager.getHeartPath());
         return emojiSprite;
     }
 
@@ -47,7 +48,7 @@ public class Reaction {
     }
 
     public Reaction() {
-        emojiSprite = new Sprite();
+        emojiSprite = null;
         this.font = generateFont(20);
     }
 
@@ -61,7 +62,7 @@ public class Reaction {
             this.emojiSprite.setTexture(texture);
             this.emojiSprite.setSize(30, 30); // More reasonable size
         } else {
-            this.emojiSprite.setTexture(null);
+            this.emojiSprite = null;
         }
         this.duration = duration;
         this.timer = duration;
@@ -70,7 +71,7 @@ public class Reaction {
     public void showText(String text, float duration) {
         this.currentText = text;
         this.currentEmoji = EmojiType.NONE;
-        this.emojiSprite.setTexture(null);
+        this.emojiSprite = null;
         this.duration = duration;
         this.timer = duration;
     }
@@ -81,7 +82,7 @@ public class Reaction {
             if (timer <= 0) {
                 currentEmoji = EmojiType.NONE;
                 currentText = null;
-                emojiSprite.setTexture(null);
+                emojiSprite = null;
             }
         }
     }
@@ -97,8 +98,7 @@ public class Reaction {
 
             // Make sure we have a valid texture
             if (emojiSprite.getTexture() == null) {
-                Texture texture = new Texture(Gdx.files.internal(currentEmoji.path));
-                emojiSprite.setTexture(texture);
+                emojiSprite.setTexture(currentEmoji.path);
             }
 
             // Set position and draw

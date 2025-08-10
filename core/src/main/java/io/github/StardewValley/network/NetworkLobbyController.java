@@ -1,6 +1,8 @@
 package io.github.StardewValley.network;
 
 import com.esotericsoftware.kryonet.Client;
+import io.github.StardewValley.Main;
+import models.game.Game;
 import models.network.Lobby;
 import models.network.LobbyUser;
 import models.result.Result;
@@ -104,6 +106,20 @@ public class NetworkLobbyController {
     public static void toggleReady() {
         Message msg = new Message(MessageType.LOBBY_SERVICE);
         msg.methodName = "toggleReady";
+        msg.data = NetworkUtil.mapArgs();
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
+    }
+
+    public static void setGame(Game game) {
+        Message msg = new Message(MessageType.LOBBY_SERVICE);
+        msg.methodName = "setGame";
+        msg.data = NetworkUtil.mapArgs("game", game);
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
+    }
+
+    public static void exitGame() {
+        Message msg = new Message(MessageType.LOBBY_SERVICE);
+        msg.methodName = "exitGame";
         msg.data = NetworkUtil.mapArgs();
         Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
     }

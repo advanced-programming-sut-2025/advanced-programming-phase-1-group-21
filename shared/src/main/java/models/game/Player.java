@@ -14,6 +14,7 @@ import models.animal.Animal;
 import models.map.*;
 import models.skill.Skill;
 import models.skill.SkillType;
+import models.sprite.GameSprite;
 import models.user.User;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -49,8 +50,7 @@ public class Player implements DailyUpdate, Serializable {
 
     public Player() {}
 
-    private transient Texture texture = new Texture("Textures/Players/FarmerFront1.png");
-    private transient Sprite sprite = new Sprite(texture);
+    private transient GameSprite sprite = new GameSprite("Textures/Players/FarmerFront1.png");
 
     public Sprite getSprite() {
         return sprite;

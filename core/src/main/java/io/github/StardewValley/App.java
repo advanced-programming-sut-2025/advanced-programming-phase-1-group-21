@@ -4,6 +4,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.Array;
 import data.DataLoader;
 import io.github.StardewValley.controllers.GameController;
+import io.github.StardewValley.controllers.GameSaver;
 import io.github.StardewValley.controllers.ViewController;
 import io.github.StardewValley.network.MultiplayerProxy;
 import io.github.StardewValley.views.menu.CLI.Colors;
@@ -16,6 +17,7 @@ import models.game.Player;
 import models.user.User;
 
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +30,6 @@ public class App implements Serializable {
     public Game game = null;
     public GameController currentPlayerController = null;
     public ViewController currentPlayerViewController = null;
-    public GameScreen currentPlayerGameScreen = null;
 
     public Map<String, GameController> gameControllers;
 
@@ -116,7 +117,11 @@ public class App implements Serializable {
             gameControllers.put(username, gc);
         }
 
-        currentPlayerGameScreen = new GameScreen();
-        Main.getInstance().setScreen(currentPlayerGameScreen);
+        Main.getInstance().setScreen(new GameScreen());
+    }
+
+    public void saveGame() {
+        Game game = currentPlayerViewController.game;
+        GameSaver.saveGame(game, logedInUser.getUsername() + " " + LocalDateTime.now());
     }
 }

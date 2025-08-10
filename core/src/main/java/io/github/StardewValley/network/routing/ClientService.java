@@ -5,9 +5,12 @@ import com.badlogic.gdx.Screen;
 import io.github.StardewValley.App;
 import io.github.StardewValley.Main;
 import io.github.StardewValley.controllers.ChatController;
+import io.github.StardewValley.controllers.GameStarter;
 import io.github.StardewValley.network.NetworkLobbyController;
 import io.github.StardewValley.network.Refreshable;
+import io.github.StardewValley.views.menu.GUI.GameScreen;
 import io.github.StardewValley.views.menu.GUI.LobbyScreen;
+import io.github.StardewValley.views.menu.GUI.WaitScreen;
 import models.game.Game;
 import models.game.Player;
 import models.map.Map;
@@ -71,24 +74,19 @@ public class ClientService {
         Result<Lobby> result = NetworkLobbyController.getLobby();
         Lobby lobby = result.getData();
 
-        /*
-        SHOULD CHECK IF USER IS ALREADY IN A GAME...
-         */
-        ArrayList<Player> players = new ArrayList<>();
-        MapBuilder mapBuilder = new MapBuilder();
+        if (lobby.isStarted()) {
+            Main.getInstance().setScreen(new GameScreen());
+            return;
+        }
 
-        Gdx.app.postRunnable(() -> {
+        if (lobby.getGame() == null) {
+            GameStarter.startNewGame(lobby);
+        }
+        else
+            GameStarter.loadGame(lobby);
+    }
 
-            for (LobbyUser lobbyUser : lobby.getUsers()) {
-                User user = lobbyUser.user;
-                int seed = lobbyUser.mapID;
-                Map map = mapBuilder.buildFarm(new Random(seed));
-                Player player = new Player(user, map);
-                players.add(player);
-            }
-
-            Game game = new Game(players);
-            App.getInstance().initGame(game);
-        });
+    public static void exitGame() {
+        Main.getInstance().setScreen(new WaitScreen());
     }
 }

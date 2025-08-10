@@ -79,7 +79,7 @@ public class Placeable extends Item implements Placable {
 	}
 
 	@Override
-	public Texture getTexture() {
+	public String getTexture() {
 		return null;
 	}
 

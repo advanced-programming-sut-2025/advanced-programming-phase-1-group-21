@@ -15,10 +15,12 @@ public class FishGame {
     private Sprite sprite;
     private float x;
     private float y;
-    private final Random random;
+    private Random random;
     private FishMoveType fishMoveType;
     private boolean isPerfect = true;
     private float health = 100;
+
+    public FishGame() {}
 
     public FishGame(FishData fishData) {
         this.fishData = fishData;

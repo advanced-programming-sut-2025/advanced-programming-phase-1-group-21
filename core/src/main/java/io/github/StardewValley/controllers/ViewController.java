@@ -9,6 +9,7 @@ import io.github.StardewValley.Animations.FertilizerAnimation;
 import io.github.StardewValley.Animations.HarvestAnimation;
 import io.github.StardewValley.App;
 import io.github.StardewValley.Main;
+import io.github.StardewValley.views.menu.GUI.GameScreen;
 import io.github.StardewValley.views.menu.GUI.ShowMap;
 import models.Item.Item;
 import models.Item.ItemType;
@@ -99,7 +100,7 @@ public class ViewController {
             }
             else if (tile.getTileType() == TileType.ARTISAN) {
                 Artisan artisan = tile.getPlacable(Artisan.class);
-                App.getInstance().currentPlayerGameScreen.showArtisanTab(artisan, gc, x, y);
+                ((GameScreen) Main.getInstance().getScreen()).showArtisanTab(artisan, gc, x, y);
             }
             else if (tile.getTileType() == TileType.PLANTED_SEED) {
                 if (tile.getPlacable(PlantedSeed.class).isHarvestReady()) {

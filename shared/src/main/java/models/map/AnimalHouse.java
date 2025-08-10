@@ -3,13 +3,15 @@ package models.map;
 import Asset.SharedAssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import models.Saver;
 import models.animal.Animal;
+import models.sprite.GameSprite;
 import models.time.Date;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnimalHouse extends Building {
+public class AnimalHouse extends Building implements Saver {
     ArrayList<Animal> animals = new ArrayList<>();
     AnimalHouseType houseType;
     String type;
@@ -27,12 +29,22 @@ public class AnimalHouse extends Building {
     public void loadTexture(){
         String textureName = houseType.getName().substring(0,1).toUpperCase() + houseType.getName().substring(1)
                 + "_" + type.substring(0,1).toUpperCase() + type.substring(1);
-        texture = SharedAssetManager.getAnimalHouse(textureName);
+        texture = SharedAssetManager.getAnimalHousePath(textureName);
         if(sprite == null) {
-            sprite = new Sprite(texture);
+            sprite = new GameSprite(texture);
             sprite.setSize(150 , 150);
         }
         sprite.setTexture(texture);
+    }
+
+    @Override
+    public void load() {
+        loadTexture();
+    }
+
+    @Override
+    public void save() {
+
     }
 
     public AnimalHouseType getHouseType() {
@@ -55,7 +67,7 @@ public class AnimalHouse extends Building {
     }
 
     @Override
-    public Texture getTexture() {
+    public String getTexture() {
         return null;
     }
 

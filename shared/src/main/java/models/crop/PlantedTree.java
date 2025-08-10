@@ -11,6 +11,7 @@ import models.game.Player;
 import models.map.Placable;
 import models.map.TileType;
 import models.skill.SkillType;
+import models.sprite.GameSprite;
 
 import java.io.Serializable;
 
@@ -20,8 +21,8 @@ public class PlantedTree implements Placable, Harvestable, Serializable, DailyUp
 	private int lastHarvest = 0;
 	private boolean readyToHarvest = false;
 	public TreeData treeData;
-	Texture texture;
-	private Sprite sprite;
+	String texture;
+	private GameSprite sprite;
 
 	public PlantedTree() {}
 
@@ -30,15 +31,15 @@ public class PlantedTree implements Placable, Harvestable, Serializable, DailyUp
 		if(stage == treeData.getStages().size()){
 			if(readyToHarvest) {
 				if(treeData.getHarvestTexture() != null) {
-					texture = SharedAssetManager.getOrLoad(treeData.getHarvestTexture());
+					texture = treeData.getHarvestTexture();
 				}
 			}
 			else
-				texture = SharedAssetManager.getOrLoad(treeData.getSeasonTexture());//TODO this function logic should depends on current season
+				texture = treeData.getSeasonTexture();//TODO this function logic should depends on current season
 		}
 		else
-			texture = SharedAssetManager.getOrLoad(treeData.getStageTexture(stage));
-		sprite = new Sprite(texture);
+			texture = treeData.getStageTexture(stage);
+		sprite = new GameSprite(texture);
 	}
 
 	public Item harvest(Player player) {
@@ -97,7 +98,7 @@ public class PlantedTree implements Placable, Harvestable, Serializable, DailyUp
 	}
 
 	@Override
-	public Texture getTexture() {
+	public String getTexture() {
 		return texture;
 	}
 
@@ -128,13 +129,13 @@ public class PlantedTree implements Placable, Harvestable, Serializable, DailyUp
 
 	private void resetSprite() {
 		if (readyToHarvest) {
-			sprite.setTexture(SharedAssetManager.getOrLoad(treeData.getHarvestTexture()));
+			sprite.setTexture(treeData.getHarvestTexture());
 		}
 		else if (stage == treeData.getStages().size()) {
-			sprite.setTexture(SharedAssetManager.getOrLoad(treeData.getSeasonTexture()));
+			sprite.setTexture(treeData.getSeasonTexture());
 		}
 		else {
-			sprite.setTexture(SharedAssetManager.getOrLoad(treeData.getStageTexture(stage)));
+			sprite.setTexture(treeData.getStageTexture(stage));
 		}
 	}
 }
