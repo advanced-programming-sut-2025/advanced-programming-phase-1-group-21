@@ -9,20 +9,30 @@ public class GameSprite extends Sprite {
     private String texturePath;
 
     public GameSprite(String texturePath) {
+        // 1. Call the empty super() constructor first.
         super(loadTexture(texturePath));
         this.texturePath = texturePath;
     }
 
     private static Texture loadTexture(String path) {
+        if (path == null) {
+            return null;
+        }
         return SharedAssetManager.getOrLoad(path);
-    }
-
-    public void setTexture(String path) {
-        super.setTexture(loadTexture(path));
-        this.texturePath = path;
     }
 
     public String getTexturePath() {
         return texturePath;
+    }
+
+
+    public void setTexture(String path) {
+        if (Gdx.app != null) {
+            Texture texture = loadTexture(path);
+            if (texture != null) {
+                super.setTexture(texture);
+                this.texturePath = path;
+            }
+        }
     }
 }

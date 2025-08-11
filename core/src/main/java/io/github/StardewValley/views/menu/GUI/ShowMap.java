@@ -3,6 +3,7 @@ package io.github.StardewValley.views.menu.GUI;
 import Asset.SharedAssetManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import io.github.StardewValley.Animations.ExclamationMarkAnimation;
 import io.github.StardewValley.Animations.IndependentAnimation;
 import io.github.StardewValley.App;
@@ -49,8 +50,13 @@ public class ShowMap {
         for (int i = 0 ; i < mapY ; i++) {
             for (int j = 0 ; j < mapX ; j++) {
                 Tile tile = map.getTile(j , (int)mapY - i -1);
-                if (tile.spriteGetter() != null) {
-                    tile.spriteGetter().draw(game.getBatch());
+                Sprite tileSprite = tile.spriteGetter();
+
+                if(tileSprite == null) {
+                    System.out.println("ERROR: Tile at (" + j + "," + i + ") has a NULL sprite.");
+                } else {
+
+                    tileSprite.draw(game.getBatch());
                 }
             }
         }

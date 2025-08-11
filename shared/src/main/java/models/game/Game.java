@@ -1,15 +1,18 @@
 package models.game;
 
+import controllers.GameSaver;
 import models.BriefInfo;
 import models.Item.Item;
 import models.map.Map;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 import models.map.MapBuilder;
 import models.map.Weather;
+import models.sprite.SpriteData;
 import models.time.Date;
 import models.time.Season;
 
@@ -22,7 +25,7 @@ public class Game implements Serializable, BriefInfo {
     private Date gameDate;
     private Weather gameWeather;
     private Weather nextDayWeather;
-    public Random rand = new Random(1);
+    public transient Random rand = new Random(1);
 
     public Game() {}
 
@@ -282,4 +285,7 @@ public class Game implements Serializable, BriefInfo {
     public String getInfo() {
         return "Season {" + gameDate.getCurrentSeason().toString() + "}, Hour{" + gameDate.getHour() + "}";
     }
+
+    public java.util.Map spriteMap = new HashMap<>();
+
 }
