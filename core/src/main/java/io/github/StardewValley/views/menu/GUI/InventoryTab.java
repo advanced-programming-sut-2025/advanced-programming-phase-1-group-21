@@ -265,7 +265,7 @@ class InventoryTab {
 						if (getTapCount() == 2) {
 							Object o = container.getActor().getUserObject();
 							if (o instanceof Item) {
-								gc.setItemInHand((Item) o);
+								gc.setItemInHand(((Item) o).getName());
 							}
 							else {
 								gc.setItemInHand(null);
