@@ -2039,8 +2039,8 @@ public class GameController {
         player.getInventory().removeItem(item);
     }
 
-    public void setItemInHand(Item item) {
-        player.setItemInHand(item);
+    public void setItemInHand(String item) {
+        player.setItemInHand(player.getInventory().getItem(item));
     }
 
     public void addToRefrigerator(Coord c, Item item) {
