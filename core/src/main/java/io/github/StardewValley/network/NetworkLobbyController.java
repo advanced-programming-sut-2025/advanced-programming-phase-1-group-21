@@ -111,6 +111,7 @@ public class NetworkLobbyController {
     }
 
     public static void setGame(Game game) {
+        System.out.println("GAME: " + game);
         Message msg = new Message(MessageType.LOBBY_SERVICE);
         msg.methodName = "setGame";
         msg.data = NetworkUtil.mapArgs("game", game);

@@ -33,7 +33,7 @@ public class ClientNetwork {
             }
         });
         client.start();
-        client.connect(1000, "localhost", 54555, 54777);
+        client.connect(5000, "localhost", 54555, 54777);
     }
 
     public static void handle(Connection connection, Object o) {

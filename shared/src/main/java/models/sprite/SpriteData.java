@@ -22,7 +22,7 @@ public class SpriteData implements Serializable {
         this.scaleY = sprite.getScaleY();
     }
 
-    public void applyTo(Sprite sprite) {
+    public void applyTo(GameSprite sprite) {
         sprite.setPosition(x, y);
         sprite.setSize(width, height);
         sprite.setRotation(rotation);

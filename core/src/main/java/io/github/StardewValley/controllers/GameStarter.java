@@ -13,6 +13,8 @@ import models.user.User;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static controllers.GameSaver.reloadAllSprites;
+
 public class GameStarter {
     public static void startNewGame(Lobby lobby) {
         ArrayList<Player> players = new ArrayList<>();
@@ -37,6 +39,7 @@ public class GameStarter {
     public static void loadGame(Lobby lobby) {
         Game game = lobby.getGame();
         assert game != null;
+        reloadAllSprites(game, game.spriteMap);
         App.getInstance().initGame(game);
     }
 }

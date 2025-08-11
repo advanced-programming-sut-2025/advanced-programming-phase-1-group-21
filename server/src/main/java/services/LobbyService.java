@@ -161,6 +161,7 @@ public class LobbyService {
     }
 
     public void setGame(Game game) {
+        System.out.println("GAME: " + game);
         lobby.setGame(game);
     }
 

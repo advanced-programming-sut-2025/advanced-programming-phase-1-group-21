@@ -12,14 +12,15 @@ import models.game.Player;
 import models.map.Coord;
 import models.map.Direction;
 import models.result.Result;
+import models.sprite.GameSprite;
 import org.w3c.dom.Text;
 
 
 public abstract class Tool extends Item implements Saver {
     private final ToolType toolType;
 	public ToolMaterialType toolMaterialType;
-	private transient Texture texture;
-	private transient Sprite sprite;
+	private transient String texture;
+	private transient GameSprite sprite;
 	public float spriteX;
 	public float spriteY;
 	public float animationTime;
@@ -77,10 +78,10 @@ public abstract class Tool extends Item implements Saver {
 	public void loadTexture(){
 		String type = this.getToolMaterialType().toString();
 		String name = this.getToolType().toString();
-		String result = type.substring(0, 1).toUpperCase() + type.substring(1).toLowerCase() + "_" + name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
-		texture = SharedAssetManager.getToolTexture(result);
+		texture = type.substring(0, 1).toUpperCase() + type.substring(1).toLowerCase() + "_" + name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
+		texture = SharedAssetManager.getToolTexturePath(texture);
 		if(sprite == null)
-			sprite = new Sprite(texture);
+			sprite = new GameSprite(texture);
 		sprite.setTexture(texture);
 		sprite.setX(spriteX);
 		sprite.setY(spriteY);
