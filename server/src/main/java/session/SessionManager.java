@@ -38,11 +38,13 @@ public class SessionManager {
 
     public static void logout(Connection conn) {
         User user = connectionUserMap.remove(conn);
-        userConnectionMap.remove(user.getUsername());
+
+        if (user != null)
+            userConnectionMap.remove(user.getUsername());
         listUsers.remove(user);
 
         LobbyService lobbyService = lobbyServiceMap.remove(conn);
-        lobbyService.leaveLobby();
+        if (lobbyService != null) lobbyService.leaveLobby();
 
         chatServiceMap.remove(conn);
     }

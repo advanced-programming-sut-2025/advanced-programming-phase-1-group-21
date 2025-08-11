@@ -1,6 +1,7 @@
 package models.map;
 
 import Asset.SharedAssetManager;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.ui.TextTooltip;
@@ -20,11 +21,11 @@ import java.io.Serializable;
 public class Tile implements DailyUpdate, Serializable {
     private TileType tileType;
     private Placable placable;
-    transient private GameSprite sprite = new GameSprite("Textures/map/SpringBasicTile.png");
     transient private String onTileTexture;
     transient private GameSprite onTileSprite;
     transient private GameSprite lightningSprite;
     public String texture = "Textures/map/SpringBasicTile.png";
+    transient private GameSprite sprite = new GameSprite(texture);
 
     MapType mapType;
 
@@ -58,7 +59,9 @@ public class Tile implements DailyUpdate, Serializable {
 
 
         sprite = new GameSprite(texture);
-        sprite.setSize(30 , (float) (30 * sprite.getTexture().getHeight()) / sprite.getTexture().getWidth());
+        if (Gdx.app != null) {
+            sprite.setSize(30, (float) (30 * sprite.getTexture().getHeight()) / sprite.getTexture().getWidth());
+        }
         sprite.setX(x);
         sprite.setY(y);
 

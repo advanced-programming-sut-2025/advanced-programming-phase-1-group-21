@@ -3,11 +3,20 @@ package network;
 import com.esotericsoftware.kryo.Kryo;
 import models.MusicData;
 import models.game.NPC;
+import models.map.NPCHouse;
 import models.map.Shop;
 
 public class NetworkRegister {
 
     public static void register(Kryo kryo) {
+        kryo.setReferences(true);  // This is **CRUCIAL** to avoid infinite recursion in cyclical graphs
+        kryo.setRegistrationRequired(true);
+        kryo.register(org.apache.commons.lang3.tuple.ImmutablePair.class);
+        kryo.register(models.game.Reaction.class);
+        kryo.register(models.game.Reaction.EmojiType.class);
+        kryo.register(java.util.Stack.class);
+        kryo.register(java.util.LinkedHashMap.class);
+        kryo.register(java.util.EnumMap.class);
         kryo.register(MusicData.class);
         kryo.register(models.Item.Consumable.class);
         kryo.register(models.Item.Item.class);
@@ -18,7 +27,7 @@ public class NetworkRegister {
         kryo.register(models.Item.Salable.class);
         kryo.register(models.Item.Sapling.class);
         kryo.register(models.Item.Seed.class);
-        kryo.register(NPC.NPCHouse.class);
+        kryo.register(NPCHouse.class);
         kryo.register(Shop.ShopItemInstance.class);
         kryo.register(models.animal.Animal.class);
         kryo.register(models.animal.AnimalTypes.class);

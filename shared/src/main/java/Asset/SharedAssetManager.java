@@ -1,5 +1,6 @@
 package Asset;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -79,6 +80,7 @@ public class SharedAssetManager {
     }
 
     public static Texture getOrLoad(String path){
+        if (Gdx.app == null) return null;
         if(manager.isLoaded(path)) {
             return manager.get(path, Texture.class);
         }

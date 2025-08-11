@@ -4,9 +4,10 @@ import java.io.Serializable;
 import java.util.EnumMap;
 
 public class Skill implements Serializable {
-    private final EnumMap<SkillType, Integer> expMap = new EnumMap<>(SkillType.class);
+    private EnumMap<SkillType, Integer> expMap;
 
     public Skill() {
+        expMap = new EnumMap<>(SkillType.class);
         for (SkillType type : SkillType.values()) {
             expMap.put(type, 0);
         }

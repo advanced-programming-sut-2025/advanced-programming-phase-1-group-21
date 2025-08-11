@@ -11,7 +11,6 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import io.github.StardewValley.App;
 import io.github.StardewValley.Main;
 import io.github.StardewValley.asset.Assets;
-import io.github.StardewValley.controllers.GameSaver;
 import io.github.StardewValley.network.NetworkLobbyController;
 
 public class WaitScreen implements Screen {

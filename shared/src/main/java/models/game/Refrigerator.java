@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 public class Refrigerator implements Placable, Serializable {
     Inventory inventory;
-    GameSprite sprite = new GameSprite(SharedAssetManager.getRefrigeratorPath());
+    transient GameSprite sprite = new GameSprite(SharedAssetManager.getRefrigeratorPath());
 
     public Refrigerator() {
         inventory = new Inventory();

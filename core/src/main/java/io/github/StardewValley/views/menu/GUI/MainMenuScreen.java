@@ -16,7 +16,7 @@ import com.kotcrab.vis.ui.widget.file.FileChooser;
 import com.kotcrab.vis.ui.widget.file.FileChooserAdapter;
 import io.github.StardewValley.Main;
 import io.github.StardewValley.asset.Assets;
-import io.github.StardewValley.controllers.GameSaver;
+import controllers.GameSaver;
 import io.github.StardewValley.controllers.LoginMenuController;
 import io.github.StardewValley.network.NetworkLobbyController;
 

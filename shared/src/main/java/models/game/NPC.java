@@ -43,7 +43,7 @@ public class NPC implements Placable, DailyUpdate, Serializable, BriefInfo {
         favorites = VillagerData.getData(npcName).getFavorites();
         for(Player player : players)
             friendships.add(new NPCFriendship(player , FriendshipLevel.LEVEL0 , 0));
-        house = new NPCHouse();
+        house = new NPCHouse(this);
         this.building = house;
         tasksFlag.add(false);
         tasksFlag.add(false);
@@ -197,46 +197,6 @@ public class NPC implements Placable, DailyUpdate, Serializable, BriefInfo {
 
     public String getInfo() {
         return "Name {" + name + "}";
-    }
-
-    public class NPCHouse extends Building implements Placable {
-
-        public NPCHouse() {
-            this.map = (new MapBuilder()).buildNPCHouse(NPC.this);
-            String texture = "Textures/Buildings/" + name + "House.png";
-            sprite = new GameSprite(texture);
-            sprite.setSize(5 * 30 , 5 * 30);
-        }
-
-        @Override
-        public TileType getTileType() {
-            return TileType.NPC;
-        }
-
-        @Override
-        public String getFullName() {
-            return name + "'s House";
-        }
-
-        @Override
-        public boolean canEnter(Date date) {
-            return true;
-        }
-
-        @Override
-        public String getSprite() {
-            return "O";
-        }
-
-        @Override
-        public String getTexture() {
-            return null;
-        }
-
-        @Override
-        public Sprite spriteGetter() {
-            return null;
-        }
     }
 
     @Override

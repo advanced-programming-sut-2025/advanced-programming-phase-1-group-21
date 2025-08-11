@@ -9,10 +9,14 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.Json;
 import models.map.Coord;
 import models.sprite.GameSprite;
 
-public class Reaction {
+import java.io.Serializable;
+
+public class Reaction implements Serializable {
     public enum EmojiType {
         HAPPY("Textures/emoji/happy.png"),
         SAD("Textures/emoji/sad.png"),
@@ -37,19 +41,19 @@ public class Reaction {
         return emojiSprite;
     }
 
-    private BitmapFont generateFont(int size) {
+    private void generateFont(int size) {
+        if (font != null) return;
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Fonts/Blomberg-8MKKZ.otf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = size;
         parameter.color = Color.WHITE;
         BitmapFont font = generator.generateFont(parameter);
         generator.dispose();
-        return font;
+        this.font = font;
     }
 
     public Reaction() {
         emojiSprite = null;
-        this.font = generateFont(20);
     }
 
     public void showEmoji(EmojiType type, float duration) {
@@ -105,9 +109,10 @@ public class Reaction {
             emojiSprite.setPosition(x, y + 100); // Centered
             emojiSprite.draw(batch);
 
-            // Keep the debug text
+            generateFont(20);
             font.draw(batch, currentEmoji.name() + " HERE", x, y + 80);
         } else if (currentText != null) {
+            generateFont(20);
             font.draw(batch, currentText, x, y + 80);
         }
     }
