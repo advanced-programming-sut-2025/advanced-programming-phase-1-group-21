@@ -1,6 +1,6 @@
 package models.game;
 
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import data.AnimalData;
 import models.DailyUpdate;
@@ -46,9 +46,60 @@ public class Player implements DailyUpdate, Serializable {
     private final transient List<MusicData> musics = new ArrayList<>();
     private int mapID;
 
+    private List<String[]> animations;
+    private int frameIndex = 0;
+    private float frameTime = 0f;
+    private float frameDuration = 0.3f;
+    private transient GameSprite sprite;
+
     public Player() {}
 
-    private transient GameSprite sprite = new GameSprite("Textures/Players/FarmerFront1.png");
+    public Player(User user, Map defaultMap) {
+        this.user = user;
+        this.inventory = Inventory.buildPlayerInventory();
+        inventory.addItem(Game.getCoinItem(10000));
+        energy = new Energy();
+        this.defaultMap = defaultMap;
+        this.map = defaultMap;
+
+        House house = defaultMap.getBuilding(House.class);
+
+        this.coord = defaultMap.getCoord(house);
+        this.coord = coord.addCoord(new Coord(-1, 0)); //left of it!
+
+        animations = new ArrayList<>();
+
+        animations.add(new String[]{
+                "Textures/Players/Left1.png",
+                "Textures/Players/Left2.png",
+                "Textures/Players/Left3.png"
+        });
+        animations.add(new String[]{
+                "Textures/Players/Right1.png",
+                "Textures/Players/Right2.png",
+                "Textures/Players/Right3.png"
+        });
+        animations.add(new String[]{
+                "Textures/Players/Up1.png",
+                "Textures/Players/Up2.png",
+                "Textures/Players/Up3.png"
+        });
+        animations.add(new String[]{
+                "Textures/Players/Down1.png",
+                "Textures/Players/Down2.png",
+                "Textures/Players/Down3.png"
+        });
+
+        sprite = new GameSprite(animations.get(3)[0]);
+
+        enterBuilding(defaultMap.getBuilding(House.class));
+        sprite.setX(getMap().mapType.getDistanceX());
+        sprite.setY(getMap().mapType.getDistanceY() + (getMap().getMaxY() - 1)*30);
+        sprite.setSize(30 , 78);
+        Animal animal = new Animal("ali", AnimalData.getAnimalData("cow"));
+        getMap().getTile(18 , 8).setPlacable(animal);
+        this.addAnimal(animal);
+    }
 
     public Sprite getSprite() {
         return sprite;
@@ -95,28 +146,6 @@ public class Player implements DailyUpdate, Serializable {
             }
         }
         return null;
-    }
-
-    public Player(User user, Map defaultMap) {
-        this.user = user;
-        this.inventory = Inventory.buildPlayerInventory();
-        inventory.addItem(Game.getCoinItem(10000));
-        energy = new Energy();
-        this.defaultMap = defaultMap;
-        this.map = defaultMap;
-
-        House house = defaultMap.getBuilding(House.class);
-
-        this.coord = defaultMap.getCoord(house);
-        this.coord = coord.addCoord(new Coord(-1, 0)); //left of it!
-
-        enterBuilding(defaultMap.getBuilding(House.class));
-        sprite.setX(getMap().mapType.getDistanceX());
-        sprite.setY(getMap().mapType.getDistanceY() + (getMap().getMaxY() - 1)*30);
-        sprite.setSize(30 , 78);
-        Animal animal = new Animal("ali", AnimalData.getAnimalData("cow"));
-        getMap().getTile(18 , 8).setPlacable(animal);
-        this.addAnimal(animal);
     }
 
     public Map getDefaultMap() {
@@ -424,5 +453,36 @@ public class Player implements DailyUpdate, Serializable {
 
     public void setMapID(int mapID) {
         this.mapID = mapID;
+    }
+
+    private Direction mapToMainDirection(Direction dir) {
+        return switch (dir) {
+            case NORTH, NORTH_EAST, NORTH_WEST -> Direction.NORTH;
+            case SOUTH, SOUTH_EAST, SOUTH_WEST -> Direction.SOUTH;
+            case EAST -> Direction.EAST;
+            case WEST -> Direction.WEST;
+        };
+    }
+
+    public void move(Direction dir) {
+        Direction mainDir = mapToMainDirection(dir);
+
+        frameTime += Gdx.graphics.getDeltaTime();
+
+        if (frameTime >= frameDuration) {
+            frameTime = 0f;
+            frameIndex = (frameIndex + 1) % 3;
+            sprite.setTexture(getTexturePath(mainDir, frameIndex));
+        }
+    }
+
+    private String getTexturePath(Direction dir, int frame) {
+        return switch (dir) {
+            case WEST -> animations.get(0)[frame];
+            case EAST -> animations.get(1)[frame];
+            case NORTH -> animations.get(2)[frame];
+            case SOUTH -> animations.get(3)[frame];
+            default -> animations.get(3)[frame];
+        };
     }
 }

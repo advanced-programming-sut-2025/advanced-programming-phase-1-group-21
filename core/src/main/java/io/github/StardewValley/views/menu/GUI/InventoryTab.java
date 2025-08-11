@@ -69,6 +69,7 @@ class InventoryTab {
 		inv.addItem(Item.build("Keg", 1));
 		inv.addItem(Item.build("Wool", 3));
 		inv.addItem(Item.build("Coal", 8));
+		inv.addItem(Item.build("Stone", 2000));
 		inv.addItem(Item.build("Wood", 200));
 		inv.addItem(Item.build("Copper Bar", 100));
 		inv.addItem(Item.build("Iron Bar", 2));
