@@ -31,35 +31,44 @@ public class ViewController {
     }
 
 
-    public void buttonController(Main thisGame){
-//        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
+    public void buttonController(Main thisGame) {
+//        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
 //            thisGame.setScreen(new MainMenuScreen());
-        if(player.isFainted())
+        if (player.isFainted())
             return;
-        if(Gdx.input.isKeyPressed(Input.Keys.W))
+        if (Gdx.input.isKeyPressed(Input.Keys.W) && Gdx.input.isKeyPressed(Input.Keys.D))
+            gc.walk(Direction.NORTH_EAST);
+        else if (Gdx.input.isKeyPressed(Input.Keys.S) && Gdx.input.isKeyPressed(Input.Keys.D))
+            gc.walk(Direction.SOUTH_EAST);
+        else if (Gdx.input.isKeyPressed(Input.Keys.S) && Gdx.input.isKeyPressed(Input.Keys.A))
+            gc.walk(Direction.SOUTH_WEST);
+        else if (Gdx.input.isKeyPressed(Input.Keys.W) && Gdx.input.isKeyPressed(Input.Keys.A))
+            gc.walk(Direction.NORTH_WEST);
+        else if (Gdx.input.isKeyPressed(Input.Keys.W))
             gc.walk(Direction.NORTH);
-        if(Gdx.input.isKeyPressed(Input.Keys.S))
-            gc.walk(Direction.SOUTH);
-        if(Gdx.input.isKeyPressed(Input.Keys.D))
+        else if (Gdx.input.isKeyPressed(Input.Keys.D))
             gc.walk(Direction.EAST);
-        if(Gdx.input.isKeyPressed(Input.Keys.A))
+        else if (Gdx.input.isKeyPressed(Input.Keys.S))
+            gc.walk(Direction.SOUTH);
+        else if (Gdx.input.isKeyPressed(Input.Keys.A))
             gc.walk(Direction.WEST);
 
-        if(Gdx.input.isKeyPressed(Input.Keys.UP))
+
+        if (Gdx.input.isKeyPressed(Input.Keys.UP))
             gc.useTool(Direction.SOUTH);
-        if(Gdx.input.isKeyPressed(Input.Keys.DOWN))
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
             gc.useTool(Direction.NORTH);
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT))
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
             gc.useTool(Direction.EAST);
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT))
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
             gc.useTool(Direction.WEST);
-        if(Gdx.input.isKeyPressed(Input.Keys.E)) {
-            if(player.getShepherdingAnimal() != null)
+        if (Gdx.input.isKeyPressed(Input.Keys.E)) {
+            if (player.getShepherdingAnimal() != null)
                 gc.endShepherd(player.getShepherdingAnimal().getName());
         }
     }
 
-    public Coord clickController(int x , int y){
+    public Coord clickController(int x , int y) {
         if (player.isFainted())
             return new Coord(0,0);
 
@@ -69,25 +78,25 @@ public class ViewController {
         if (tile == null)
             return new Coord(-1 , -1);
 
-        if (tile.getPlacable(Building.class) != null){
+        if (tile.getPlacable(Building.class) != null) {
             Building building = tile.getPlacable(Building.class);
-            if(checkCollision(building.sprite , player.getSprite()) && building.canEnter(game.getGameDate())) {
+            if (checkCollision(building.sprite , player.getSprite()) && building.canEnter(game.getGameDate())) {
                 gc.enterBuilding(building.getFullName());
             }
         }
 
-        for (Direction direction : Direction.values()){
+        for (Direction direction : Direction.values()) {
             int newX = player.getCoord().getX() + direction.getDx();
             int newY = player.getCoord().getY() + direction.getDy();
 
-            if(newX == (x - map.mapType.distanceX)/30 && newY == (y - map.mapType.distanceY)/30)
+            if (newX == (x - map.mapType.distanceX)/30 && newY == (y - map.mapType.distanceY)/30)
                 gc.useTool(direction);
         }
 
 
         {
             Item itemInHand = player.getItemInHand();
-            if (tile.getTileType() == TileType.PLOWED || tile.getTileType() == TileType.UNPLOWED){
+            if (tile.getTileType() == TileType.PLOWED || tile.getTileType() == TileType.UNPLOWED) {
                 if (itemInHand != null) {
                     if (itemInHand.getItemType() == ItemType.PLACEABLE)
                         gc.placeArtisan(coord, itemInHand.getName());
@@ -134,13 +143,13 @@ public class ViewController {
 
     }
 
-    public boolean clickOnSprite(Sprite sprite , int x , int y){
+    public boolean clickOnSprite(Sprite sprite , int x , int y) {
         return sprite.getBoundingRectangle().contains(x, Gdx.graphics.getHeight() - y);
     }
 
-    public Player getOtherPlayerClick(Coord coord){
-        for(Player player1 : gc.getGame().getPlayers()){
-            if(player1.getMap().equals(player.getMap()) && player1.getCoord().equals(coord) && !player1.equals(player))
+    public Player getOtherPlayerClick(Coord coord) {
+        for (Player player1 : gc.getGame().getPlayers()) {
+            if (player1.getMap().equals(player.getMap()) && player1.getCoord().equals(coord) && !player1.equals(player))
                 return player1;
         }
         return null;

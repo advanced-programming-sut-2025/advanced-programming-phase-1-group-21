@@ -2,6 +2,7 @@ package io.github.StardewValley.views.menu.GUI;
 
 import Asset.SharedAssetManager;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import io.github.StardewValley.Animations.ExclamationMarkAnimation;
 import io.github.StardewValley.Animations.IndependentAnimation;
@@ -25,7 +26,7 @@ public class ShowMap {
     private static final ArrayList<IndependentAnimation> animations = new ArrayList<>();
     private static final ArrayList<ExclamationMarkAnimation> exclamationMarks = new ArrayList<>();
 
-    public static void show(float delta){
+    public static void show(float delta) {
         map = currentPlayer.getMap();
         showTiles();
         showHouse();
@@ -42,15 +43,13 @@ public class ShowMap {
         showAnimations();
     }
 
-    public static void showTiles(){
+    public static void showTiles() {
         //Map map = player.getMap();
         float mapX = map.getMaxX();
         float mapY = map.getMaxY();
-        for(int i = 0 ; i < mapY ; i++){
-            for(int j = 0 ; j < mapX ; j++){
+        for (int i = 0 ; i < mapY ; i++) {
+            for (int j = 0 ; j < mapX ; j++) {
                 Tile tile = map.getTile(j , (int)mapY - i -1);
-
-
                 Sprite tileSprite = tile.spriteGetter();
 
                 if(tileSprite == null) {
@@ -63,13 +62,13 @@ public class ShowMap {
         }
     }
 
-    public static void onTilesShow(){
+    public static void onTilesShow() {
         //Map map = player.getMap();
         float mapX = map.getMaxX();
         float mapY = map.getMaxY();
 
-        for(int i = (int)mapY - 1 ; i >= 0 ; i--){
-            for(int j = 0 ; j < mapX ; j++){
+        for (int i = (int)mapY - 1 ; i >= 0 ; i--) {
+            for (int j = 0 ; j < mapX ; j++) {
                 Tile tile = map.getTile(j , (int)mapY - i -1);
                 Placable placable = tile.getPlacable(Placable.class);
                 if (tile.getTileType() == TileType.ARTISAN) {
@@ -79,12 +78,12 @@ public class ShowMap {
                         setExclamationMarkShow(artisan);
                     }
                 }
-                if(placable != null && placable.spriteGetter() != null)
+                if (placable != null && placable.spriteGetter() != null)
                     placable.spriteGetter().draw(game.getBatch());
-                if(tile.getOnTileSprite() != null) {
+                if (tile.getOnTileSprite() != null) {
                     tile.getOnTileSprite().draw(game.getBatch());
                 }
-                if(tile.getLightningSprite() != null){
+                if (tile.getLightningSprite() != null) {
                     tile.getLightningSprite().draw(game.getBatch());
                     tile.runLightning();
                 }
@@ -92,22 +91,23 @@ public class ShowMap {
         }
     }
 
-    public static void animalAnimations(){
+    public static void animalAnimations() {
         float mapX = map.getMaxX();
         float mapY = map.getMaxY();
 
-        for(int i = (int)mapY - 1 ; i >= 0 ; i--){
-            for(int j = 0 ; j < mapX ; j++){
+        for (int i = (int)mapY - 1 ; i >= 0 ; i--) {
+            for (int j = 0 ; j < mapX ; j++) {
                 Tile tile = map.getTile(j , (int)mapY - i -1);
-                if(tile.getPlacable(Animal.class) != null){
+                if (tile.getPlacable(Animal.class) != null) {
                     Animal animal = tile.getPlacable(Animal.class);
-                    if(animal.getAnimalReactSprite() != null) {
+                    if (animal.getAnimalReactSprite() != null) {
                         animal.getAnimalReactSprite().draw(game.getBatch());
                         animal.runPetAnimation();
                     }
                 }
             }
         }
+
     }
 
     public static void showPlayer(Player player, float delta) {
@@ -115,42 +115,43 @@ public class ShowMap {
 
         if (player.getMap() == map) {
             player.getSprite().draw(game.getBatch());
+
             player.getReaction().render(game.getBatch() , player.getSprite().getX() ,  player.getSprite().getY());
-            if(player.getReaction().getEmojiSprite().getTexture() != null  && player.getReaction().getEmojiSprite().getTexture() != SharedAssetManager.getHeart()) {
+            if (player.getReaction().getEmojiSprite().getTexture() != null  && player.getReaction().getEmojiSprite().getTexture() != SharedAssetManager.getHeart()) {
                 player.getReaction().render(game.getBatch() , player.getSprite().getX() ,  player.getSprite().getY());
 
             }
-            if(player.getShepherdingAnimal() != null)
+            if (player.getShepherdingAnimal() != null)
                 player.getShepherdingAnimal().spriteGetter().draw(game.getBatch());
         }
     }
 
-    public static void showHouse(){
+    public static void showHouse() {
         //Map map = player.getMap();
-        for(Building building : map.getBuildings()){
-            if(building.sprite != null)
+        for (Building building : map.getBuildings()) {
+            if (building.sprite != null)
                 building.sprite.draw(game.getBatch());
         }
     }
 
     public static void showTool(float delta, Player player) {
-        if(player.getItemInHand() instanceof Tool){
+        if (player.getItemInHand() instanceof Tool) {
             Tool tool = (Tool) player.getItemInHand();
             tool.spriteX = player.getSprite().getX();
             tool.spriteY = player.getSprite().getY();
             tool.loadTexture();
             tool.getSprite().draw(game.getBatch());
-            if(tool.getAnimationTime() > 0)
+            if (tool.getAnimationTime() > 0)
                 tool.animation(delta);
         }
     }
 
-    public static void showNPCReactions(){
-        for(NPC npc : listOfNPCs){
-            if(npc.getMap().equals(map) && npc.getCloudSprite() != null) {
+    public static void showNPCReactions() {
+        for (NPC npc : listOfNPCs) {
+            if (npc.getMap().equals(map) && npc.getCloudSprite() != null) {
                 npc.getCloudSprite().draw(game.getBatch());
             }
-            if(npc.getReactSprite() != null){
+            if (npc.getReactSprite() != null) {
                 npc.getReactSprite().draw(game.getBatch());
                 npc.runAnimation();
             }

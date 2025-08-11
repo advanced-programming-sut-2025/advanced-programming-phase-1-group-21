@@ -201,45 +201,6 @@ public class GameController {
     }
 
     public void walk(Direction direction) {
-//        if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
-//        Coord coord = new Coord(x, y);
-//        boolean isNeigh = player.getCoord().isNeighbor(coord);
-//
-//        Tile tile = player.getMap().getTile(coord);
-//
-//        if (tile == null)
-//            return Result.failure(GameError.COORDINATE_DOESNT_EXISTS);
-//
-//        if (tile.getTileType().isForaging())
-//            return Result.failure(GameError.CANT_STAND_ON_FORAGING);
-//        else if (tile.getTileType() == TileType.REFRIGERATOR)
-//            return Result.failure(GameError.CANT_STAND_ON_FRIDGE);
-//        else if (tile.getTileType() == TileType.LAKE)
-//            return Result.failure(GameError.CANT_STAND_ON_LAKE);
-//        else if (tile.getTileType() == TileType.DOOR) {
-//            if (!isNeigh) return Result.failure(GameError.YOU_ARE_DISTANT);
-//            player.leave();
-//        } else if (tile.getPlacable(Building.class) != null) {
-//            if (!isNeigh) return Result.failure(GameError.YOU_ARE_DISTANT);
-//            Building building = tile.getPlacable(Building.class);
-//            if (building.canEnter(game.getGameDate())) {
-//                player.enterBuilding(building);
-//            } else return Result.failure(GameError.CANT_ENTER);
-//        } else if (!coord.equals(player.getCoord())) {
-//            PathFinder pf = new PathFinder(player);
-//            List<PathFinder.PathStep> steps = pf.findPathTo(coord);
-//
-//            if (steps == null || steps.isEmpty()) {
-//                return Result.failure(GameError.NO_PATH);
-//            }
-//            for (PathFinder.PathStep step : steps) {
-//                player.decreaseEnergy(step.energyCost());
-//                player.setCoord(step.coord());
-//                if (player.isFainted()) break;
-//            }
-//        }
-//        printMapFull();
-//        return Result.success(null);
         Map map = player.getMap();
         Sprite sprite = player.getSprite();
         float speed = player.getSpeed();
@@ -279,6 +240,7 @@ public class GameController {
         sprite.setY(speed*direction.getDy() + sprite.getY());
         player.getCoord().setX((int) (sprite.getX() - map.mapType.distanceX)/30);
         player.getCoord().setY(map.getMaxY() - 1 - (int) (sprite.getY() - map.mapType.distanceY)/30);
+        player.move(direction);
 
         if(player.getShepherdingAnimal() != null){
             player.getShepherdingAnimal().spriteGetter().setX(speed*direction.getDx() + sprite.getX() + 30);
