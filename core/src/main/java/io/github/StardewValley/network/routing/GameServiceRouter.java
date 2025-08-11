@@ -1,11 +1,13 @@
 package io.github.StardewValley.network.routing;
 
+import com.badlogic.gdx.Gdx;
 import models.network.Message;
 import network.ServiceRouter;
 import com.esotericsoftware.kryonet.Connection;
 import io.github.StardewValley.App;
 import io.github.StardewValley.controllers.GameController;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +33,15 @@ public class GameServiceRouter implements ServiceRouter {
             throw new RuntimeException("[DISPATCH ERROR] Method not found: " + methodName);
         }
         m.setAccessible(true);
-        m.invoke(g, args);
+        Gdx.app.postRunnable(() -> {
+            try {
+                m.invoke(g, args);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            } catch (InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         return null; // NO RETURN
     }
