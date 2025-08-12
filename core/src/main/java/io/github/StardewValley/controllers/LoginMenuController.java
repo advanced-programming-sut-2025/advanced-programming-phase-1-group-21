@@ -2,6 +2,7 @@ package io.github.StardewValley.controllers;
 
 import io.github.StardewValley.App;
 import io.github.StardewValley.network.NetworkDataBaseController;
+import io.github.StardewValley.util.UserUtil;
 import io.github.StardewValley.views.menu.CLI.MainMenuView;
 import io.github.StardewValley.views.menu.CLI.LoginMenuView;
 import io.github.StardewValley.views.menu.CLI.RegisterMenuView;
@@ -117,6 +118,7 @@ public class LoginMenuController{
             return Result.failure(UserError.USER_NOT_FOUND);
         }
         NetworkDataBaseController.logout();
+        UserUtil.remove();
         return Result.success(null);
     }
 }

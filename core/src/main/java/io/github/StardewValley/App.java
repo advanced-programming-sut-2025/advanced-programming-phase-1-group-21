@@ -122,4 +122,6 @@ public class App implements Serializable {
         Game game = currentPlayerViewController.game;
         GameSaver.saveGame(game, logedInUser.getUsername() + " " + LocalDateTime.now());
     }
+
+
 }
