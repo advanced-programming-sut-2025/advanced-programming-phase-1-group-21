@@ -33,14 +33,14 @@ public class LoginMenuController{
     }
 
     public Result<Void> forgetPass(String username, String answer, String password, String passwordConfirm) {
-        if(NetworkDataBaseController.doesUserExists(username))
+        if(!NetworkDataBaseController.doesUserExists(username))
             return Result.failure(UserError.USER_NOT_FOUND);
 
-        Result<String> question = NetworkDataBaseController.getSecurityQuestion(username);
-        if (question.isError())
-            return Result.failure(question.getError());
+        Result<String> realAnswer = NetworkDataBaseController.getSecurityAnswer(username);
+        if (realAnswer.isError())
+            return Result.failure(realAnswer.getError());
 
-        if(!answer.equals(question.getData()))
+        if(!answer.equals(realAnswer.getMessage()))
             return Result.failure(UserError.INCORRECT_ANSWER);
 
         if(checkPassword(password).isError())
@@ -49,7 +49,7 @@ public class LoginMenuController{
         if(!password.equals(passwordConfirm))
             return Result.failure(AuthError.PASSWORD_CONFIRM_ERROR);
 
-        Result r = NetworkDataBaseController.setPassword(username, password);
+        Result r = NetworkDataBaseController.forgetPassword(username, password);
         if (r.isError())
             return Result.failure(r.getError());
         return r;

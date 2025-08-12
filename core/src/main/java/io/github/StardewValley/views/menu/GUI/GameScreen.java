@@ -18,6 +18,7 @@ import io.github.StardewValley.Main;
 import io.github.StardewValley.asset.Assets;
 import io.github.StardewValley.controllers.GameController;
 import io.github.StardewValley.controllers.ViewController;
+import io.github.StardewValley.network.NetworkDataBaseController;
 import io.github.StardewValley.network.NetworkLobbyController;
 import models.Item.ItemType;
 import models.animal.Animal;
@@ -226,6 +227,7 @@ public class GameScreen implements Screen , InputProcessor {
         }
         if (i == Input.Keys.ESCAPE) {
             NetworkLobbyController.exitGame();
+            NetworkDataBaseController.updateMaxCoinIfHigher(currentPlayer.getCoins());
             App.getInstance().saveGame();
             game.setScreen(new LobbyScreen(NetworkLobbyController.getLobby().getData()));
         }

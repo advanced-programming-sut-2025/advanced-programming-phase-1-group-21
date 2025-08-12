@@ -1,7 +1,6 @@
 package io.github.StardewValley.views.menu.GUI;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -11,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import io.github.StardewValley.App;
 import io.github.StardewValley.Main;
@@ -18,53 +18,68 @@ import io.github.StardewValley.asset.Assets;
 import io.github.StardewValley.controllers.GameController;
 
 public class PauseMenu implements Screen {
-    private Stage stage;
-    private Skin skin;
-    private TextButton exitButton, scoreboardButton, reactionButton, musicButton;
-    private Label date, time, weather, energy;
+    private final Stage stage;
+    private final Skin skin;
     private Texture bgTexture;
-    private GameController controller = App.getInstance().currentPlayerController;
+    private final GameController controller = App.getInstance().currentPlayerController;
+
+    private final Label dateLabel;
+    private final Label timeLabel;
+    private final Label weatherLabel;
+    private final Label energyLabel;
 
     public PauseMenu() {
         this.skin = Assets.getSkin();
         this.stage = new Stage(new ScreenViewport());
+
+        // Initialize labels with empty text
+        dateLabel = new Label("", skin, "default-font", Color.WHITE);
+        timeLabel = new Label("", skin, "default-font", Color.WHITE);
+        weatherLabel = new Label("", skin, "default-font", Color.WHITE);
+        energyLabel = new Label("", skin, "default-font", Color.WHITE);
+
         createUI();
     }
 
     private void createUI() {
-        stage.clear();
-        setDarkBackground();
+        Gdx.input.setInputProcessor(stage);
 
-        // Create exit button
-        exitButton = new TextButton("X", skin);
+        Table rootTable = new Table();
+        rootTable.setFillParent(true);
+        stage.addActor(rootTable);
+
+        // --- Set Dark Background ---
+        Pixmap bgPixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+        bgPixmap.setColor(0, 0, 0, 0.5f);
+        bgPixmap.fill();
+        bgTexture = new Texture(bgPixmap);
+        bgPixmap.dispose();
+        rootTable.setBackground(new Image(bgTexture).getDrawable());
+
+        // --- Create UI Components ---
+        TextButton exitButton = new TextButton("X", skin);
         exitButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Main.getInstance().setScreen(new GameScreen());
             }
         });
-        exitButton.setPosition(1670, 850);
 
-        // Create scoreboard button
-        scoreboardButton = new TextButton("SCOREBOARD", skin);
+        TextButton scoreboardButton = new TextButton("SCOREBOARD", skin);
         scoreboardButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Main.getInstance().setScreen(new ScoreboardScreen());
             }
         });
-
-        // Create reaction button
-        reactionButton = new TextButton("REACTION", skin);
+        TextButton reactionButton = new TextButton("REACTION", skin);
         reactionButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Main.getInstance().setScreen(new ReactionScreen());
             }
         });
-
-        // Create music button
-        musicButton = new TextButton("MUSIC", skin);
+        TextButton musicButton = new TextButton("MUSIC", skin);
         musicButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -72,56 +87,32 @@ public class PauseMenu implements Screen {
             }
         });
 
-        // Position the buttons
-        float centerX = Gdx.graphics.getWidth() / 2f;
-        float centerY = Gdx.graphics.getHeight() / 2f;
+        updateLabels();
 
-        // Vertical layout for buttons
-        scoreboardButton.setPosition(centerX - scoreboardButton.getWidth() / 2, centerY - 100);
-        reactionButton.setPosition(centerX - reactionButton.getWidth() / 2, centerY - 150);
-        musicButton.setPosition(centerX - musicButton.getWidth() / 2, centerY - 200);
+        // --- Arrange Components in the Table ---
+        rootTable.add(exitButton).top().right().pad(20);
+        rootTable.row();
 
-        // Create info labels
-        date = new Label("Date: " + controller.getDate().getData(), skin);
-        time = new Label("Time: " + controller.getTime(), skin);
-        weather = new Label("Weather: " + controller.getWeather(), skin);
-        energy = new Label("Energy: " + controller.showEnergy(), skin);
+        Table contentTable = new Table();
+        contentTable.add(dateLabel).align(Align.center).padBottom(10);
+        contentTable.row();
+        contentTable.add(timeLabel).align(Align.center).padBottom(10);
+        contentTable.row();
+        contentTable.add(weatherLabel).align(Align.center).padBottom(10);
+        contentTable.row();
+        contentTable.add(energyLabel).align(Align.center).padBottom(50);
+        contentTable.row();
 
-        // Style labels
-        date.setColor(Color.WHITE);
-        time.setColor(Color.WHITE);
-        weather.setColor(Color.WHITE);
-        energy.setColor(Color.WHITE);
+        float buttonWidth = 300f;
+        contentTable.add(scoreboardButton).width(buttonWidth).padBottom(15);
+        contentTable.row();
+        contentTable.add(reactionButton).width(buttonWidth).padBottom(15);
+        contentTable.row();
+        contentTable.add(musicButton).width(buttonWidth);
 
-        date.setPosition(centerX - date.getWidth() / 2, centerY + 75);
-        time.setPosition(centerX - time.getWidth() / 2, centerY + 25);
-        weather.setPosition(centerX - weather.getWidth() / 2, centerY - 25);
-        energy.setPosition(centerX - energy.getWidth() / 2, centerY - 75);
-
-        // Add actors to stage
-        stage.addActor(scoreboardButton);
-        stage.addActor(reactionButton);
-        stage.addActor(musicButton);
-        stage.addActor(date);
-        stage.addActor(time);
-        stage.addActor(weather);
-        stage.addActor(energy);
-        stage.addActor(exitButton);
+        rootTable.add(contentTable).expand().center();
     }
 
-    private void setDarkBackground() {
-        Pixmap bgPixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        bgPixmap.setColor(0, 0, 0, 0.5f);
-        bgPixmap.fill();
-        bgTexture = new Texture(bgPixmap);
-        bgPixmap.dispose();
-
-        Image bgImage = new Image(bgTexture);
-        bgImage.setSize(stage.getWidth(), stage.getHeight());
-        stage.addActor(bgImage);
-
-        Gdx.input.setInputProcessor(stage);
-    }
 
     @Override
     public void show() {
@@ -130,51 +121,32 @@ public class PauseMenu implements Screen {
     }
 
     private void updateLabels() {
-        date.setText("Date: " + controller.getDate().getData());
-        time.setText("Time: " + controller.getTime());
-        weather.setText("Weather: " + controller.getWeather());
-        energy.setText("Energy: " + controller.showEnergy());
-
-        // Re-center labels after text changes
-        float centerX = Gdx.graphics.getWidth() / 2f;
-        date.setX(centerX - date.getWidth() / 2);
-        time.setX(centerX - time.getWidth() / 2);
-        weather.setX(centerX - weather.getWidth() / 2);
-        energy.setX(centerX - energy.getWidth() / 2);
+        dateLabel.setText("Date: " + controller.getDate().getData());
+        timeLabel.setText("Time: " + controller.getTime());
+        weatherLabel.setText("Weather: " + controller.getWeather());
+        energyLabel.setText("Energy: " + controller.showEnergy());
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         stage.act(delta);
         stage.draw();
-
-        if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
-            // System.out.println("Click at: " + Gdx.input.getX() + ", " + Gdx.input.getY());
-        }
     }
 
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
-        createUI();
-    }
-
-    @Override
-    public void pause() {
-    }
-
-    @Override
-    public void resume() {
-    }
-
-    @Override
-    public void hide() {
     }
 
     @Override
     public void dispose() {
+        if (bgTexture != null) bgTexture.dispose();
+        stage.dispose();
     }
+
+    @Override public void pause() {}
+    @Override public void resume() {}
+    @Override public void hide() {}
 }

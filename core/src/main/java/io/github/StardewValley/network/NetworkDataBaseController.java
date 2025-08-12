@@ -1,5 +1,6 @@
 package io.github.StardewValley.network;
 
+import io.github.StardewValley.App;
 import models.result.Result;
 import models.user.Gender;
 import models.user.User;
@@ -18,7 +19,7 @@ public class NetworkDataBaseController {
         return result;
     }
 
-    public static void createUser(String username, String password, String email, String nickname, Gender gender) {
+    public static void createUser(String username, String password, String email, String nickname, Gender gender, String securityQuestion, String securityAnswer) {
         Message msg = new Message(MessageType.DATABASE_SERVICE);
         msg.methodName = "createUser";
         msg.data = NetworkUtil.mapArgs(
@@ -26,7 +27,9 @@ public class NetworkDataBaseController {
                 "password", password,
                 "email", email,
                 "nickname", nickname,
-                "gender", gender.name()
+                "gender", gender.name(),
+                "securityQuestion", securityQuestion,
+                "answer", securityAnswer
         );
         Result r = (Result) ClientNetwork.sendMessageAndWaitForResponse(msg).data;
         System.out.println(r.getMessage());
@@ -40,10 +43,18 @@ public class NetworkDataBaseController {
         return (Result<String>) response.data;
     }
 
-    public static void setSecurityQuestionID(int i) {
+    public static Result<String> getSecurityAnswer(String username) {
         Message msg = new Message(MessageType.DATABASE_SERVICE);
-        msg.methodName = "setSecurityQuestionID";
-        msg.data = NetworkUtil.mapArgs("questionID", i);
+        msg.methodName = "getSecurityAnswer";
+        msg.data = NetworkUtil.mapArgs("username", username);
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
+        return (Result<String>) response.data;
+    }
+
+        public static void setSecurityQuestion(String question) {
+        Message msg = new Message(MessageType.DATABASE_SERVICE);
+        msg.methodName = "setSecurityQuestion";
+        msg.data = NetworkUtil.mapArgs("question", question);
         ClientNetwork.sendMessageAndWaitForResponse(msg);
     }
 
@@ -66,6 +77,14 @@ public class NetworkDataBaseController {
         Message msg = new Message(MessageType.DATABASE_SERVICE);
         msg.methodName = "setPassword";
         msg.data = NetworkUtil.mapArgs("oldPassword", oldPassword, "newPassword", newPassword);
+        Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
+        return (Result<Void>) response.data;
+    }
+
+    public static Result<Void> forgetPassword(String username, String password) {
+        Message msg = new Message(MessageType.DATABASE_SERVICE);
+        msg.methodName = "forgetPassword";
+        msg.data = NetworkUtil.mapArgs( "username", username, "password", password);
         Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
         return (Result<Void>) response.data;
     }
@@ -103,5 +122,29 @@ public class NetworkDataBaseController {
         msg.methodName = "logout";
         msg.data = NetworkUtil.mapArgs();
         ClientNetwork.sendMessageAndWaitForResponse(msg);
+    }
+
+    public static void incrementGamesPlayed() {
+        Message msg = new Message(MessageType.DATABASE_SERVICE);
+        msg.methodName = "incrementGamesPlayed";
+        msg.data = NetworkUtil.mapArgs();
+        ClientNetwork.sendMessageAndWaitForResponse(msg);
+    }
+
+    public static void updateMaxCoinIfHigher(int currentCoin) {
+        Message msg = new Message(MessageType.DATABASE_SERVICE);
+        msg.methodName = "updateMaxCoinIfHigher";
+        msg.data = NetworkUtil.mapArgs("currentCoin", currentCoin);
+        ClientNetwork.sendMessageAndWaitForResponse(msg);
+    }
+
+    public static void updateUser() {
+        Message msg = new Message(MessageType.DATABASE_SERVICE);
+        msg.methodName = "getUser";
+        msg.data = NetworkUtil.mapArgs();
+        Message resp = ClientNetwork.sendMessageAndWaitForResponse(msg);
+        Result<User> r = (Result<User>) resp.data;
+        if (r.isSuccess())
+            App.getInstance().logedInUser = r.getData();
     }
 }
