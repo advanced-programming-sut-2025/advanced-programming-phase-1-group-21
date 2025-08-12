@@ -10,6 +10,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import de.tomgrill.gdxdialogs.desktop.DesktopGDXDialogs;
 import io.github.StardewValley.asset.Assets;
 import io.github.StardewValley.network.ClientNetwork;
+import io.github.StardewValley.util.UserUtil;
+import io.github.StardewValley.views.menu.GUI.MainMenuScreen;
 import io.github.StardewValley.views.menu.GUI.PreMenuScreen;
 
 import java.io.IOException;
@@ -52,6 +54,9 @@ public class Main extends Game {
             System.err.println("Error initializing network");
             //throw new RuntimeException(e);
         }
+
+        if (UserUtil.load())
+            setScreen(new MainMenuScreen());
     }
 
     public void addStage(Stage stage) {
