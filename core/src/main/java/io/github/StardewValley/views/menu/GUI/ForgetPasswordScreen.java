@@ -124,7 +124,7 @@ public class ForgetPasswordScreen implements Screen {
             return;
         }
 
-        String question = questionResult.getData();
+        String question = questionResult.getMessage();
 
         if (question == null || question.isEmpty()) {
             showMessage("User not found or has no security question!", Color.RED);

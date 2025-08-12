@@ -3,12 +3,9 @@ package services;
 import com.esotericsoftware.kryonet.Connection;
 import handlers.SQLHandler;
 import models.result.errorTypes.UserError;
-import models.user.Gender;
 import models.user.User;
 import models.result.Result;
 import session.SessionManager;
-
-
 
 public class DatabaseService {
 
@@ -22,13 +19,11 @@ public class DatabaseService {
         return SQLHandler.doesUserExist(username);
     }
 
-    public Result<Void> createUser(String username, String password, String email, String nickname, String gender, Integer questionID, String answer) {
-        return SQLHandler.createUser(username, password, email, nickname, gender, questionID, answer);
+    public Result<Void> createUser(String username, String password, String email, String nickname, String gender,
+                                   String securityQuestion, String answer) {
+        return SQLHandler.createUser(username, password, email, nickname, gender, securityQuestion, answer);
     }
 
-    /**
-     * @param password raw password
-     */
     public Result<User> login(String username, String password, boolean stayLoggedIn) {
         Result<User> re = SQLHandler.login(username, password);
         if (re.isSuccess()) {
@@ -46,47 +41,81 @@ public class DatabaseService {
         return SQLHandler.getSecurityQuestion(username);
     }
 
+    public Result<String> getSecurityAnswer(String username) {
+        return SQLHandler.getSecurityAnswer(username);
+    }
+
     public Result<Void> setEmail(String newEmail) {
         User user = SessionManager.getUser(connection);
-        if (user == null)
-            return Result.failure(UserError.USER_NOT_FOUND);
+        if (user == null) return Result.failure(UserError.USER_NOT_FOUND);
         return SQLHandler.setEmail(user.getUsername(), newEmail);
     }
 
-    public Result<Void> setPassword(String newPassword) {
+
+    public Result<Void> setPassword(String oldPassword, String newPassword) {
         User user = SessionManager.getUser(connection);
-        if (user == null)
-            return Result.failure(UserError.USER_NOT_FOUND);
+        if (user == null) return Result.failure(UserError.USER_NOT_FOUND);
+        if (SQLHandler.login(user.getUsername(), oldPassword).isError())
+            return Result.failure(UserError.PASSWORD_DOESNT_MATCH);
         return SQLHandler.setPassword(user.getUsername(), newPassword);
+    }
+
+    public Result<Void> forgetPassword(String username, String password) {
+        return SQLHandler.setPassword(username, password);
     }
 
     public Result<Void> setNickname(String newNickname) {
         User user = SessionManager.getUser(connection);
-        if (user == null)
-            return Result.failure(UserError.USER_NOT_FOUND);
+        if (user == null) return Result.failure(UserError.USER_NOT_FOUND);
         return SQLHandler.setNickname(user.getUsername(), newNickname);
     }
 
     public Result<Void> setUsername(String newUsername) {
         User user = SessionManager.getUser(connection);
-        if (user == null)
-            return Result.failure(UserError.USER_NOT_FOUND);
-        Result<Void> result = SQLHandler.setUsername(user.getUsername(), newUsername);
-        return result;
+        if (user == null) return Result.failure(UserError.USER_NOT_FOUND);
+        return SQLHandler.setUsername(user.getUsername(), newUsername);
     }
 
-    public Result<Void> setSecurityQuestionID(int id) {
+    public Result<Void> setSecurityQuestion(String question) {
         User user = SessionManager.getUser(connection);
-        if (user == null)
-            return Result.failure(UserError.USER_NOT_FOUND);
-        return SQLHandler.setSecurityQuestionID(user.getUsername(), id);
+        if (user == null) return Result.failure(UserError.USER_NOT_FOUND);
+        return SQLHandler.setSecurityQuestion(user.getUsername(), question);
     }
 
     public Result<Void> setSecurityAnswer(String answer) {
         User user = SessionManager.getUser(connection);
-        if (user == null)
-            return Result.failure(UserError.USER_NOT_FOUND);
+        if (user == null) return Result.failure(UserError.USER_NOT_FOUND);
         return SQLHandler.setSecurityAnswer(user.getUsername(), answer);
+    }
+
+    public Result<Void> setMaxCoin(int maxCoin) {
+        User user = SessionManager.getUser(connection);
+        if (user == null) return Result.failure(UserError.USER_NOT_FOUND);
+        return SQLHandler.setMaxCoin(user.getUsername(), maxCoin);
+    }
+
+    public Result<Void> updateMaxCoinIfHigher(int currentCoin) {
+        User user = SessionManager.getUser(connection);
+        if (user == null) return Result.failure(UserError.USER_NOT_FOUND);
+
+        if (currentCoin > user.getMaxCoin()) {
+            return SQLHandler.setMaxCoin(user.getUsername(), currentCoin);
+        }
+        return Result.success(null);
+    }
+
+    public Result<Void> setGamesPlayed(int gamesPlayed) {
+        User user = SessionManager.getUser(connection);
+        if (user == null) return Result.failure(UserError.USER_NOT_FOUND);
+        return SQLHandler.setGamesPlayed(user.getUsername(), gamesPlayed);
+    }
+
+    public Result<Void> incrementGamesPlayed() {
+        User user = SessionManager.getUser(connection);
+        if (user == null) return Result.failure(UserError.USER_NOT_FOUND);
+
+        int newCount = user.getGamesPlayed() + 1;
+        return SQLHandler.setGamesPlayed(user.getUsername(), newCount);
     }
 
     public Result<String> assignToken(String username) {
@@ -95,5 +124,11 @@ public class DatabaseService {
 
     public Result<User> getUserByToken(String token) {
         return SQLHandler.getUserByToken(token);
+    }
+
+    public Result<User> getUser() {
+        User user = SessionManager.getUser(connection);
+        if (user == null) return Result.failure(UserError.USER_NOT_FOUND);
+        return SQLHandler.getUserByUsername(user.getUsername());
     }
 }

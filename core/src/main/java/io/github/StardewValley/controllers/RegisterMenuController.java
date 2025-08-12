@@ -1,9 +1,11 @@
 package io.github.StardewValley.controllers;
 
+import com.badlogic.gdx.Net;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import io.github.StardewValley.App;
 import io.github.StardewValley.network.NetworkDataBaseController;
+import io.github.StardewValley.network.NetworkLobbyController;
 import io.github.StardewValley.views.menu.CLI.LoginMenuView;
 import com.google.gson.Gson;
 import models.result.Result;
@@ -50,16 +52,14 @@ public class RegisterMenuController{
         if (NetworkDataBaseController.doesUserExists(username))
             return Result.failure(AuthError.USER_ALREADY_EXISTS);
 
-        NetworkDataBaseController.createUser(username, password, email, nickname, gender);
+        NetworkDataBaseController.createUser(username, password, email, nickname, gender, question, answer);
 
-        //User user = new User(username , password , email , nickname , gender , null , null , false);
-        //App.getInstance().registeredUser = user; //TODO
         return Result.success(null, "User Registered " + username + " " + password);
     }
 
     public Result<Void> pickQuestion(String answer, String answerConfirm, String questionNumber) {
         if (answer.equals(answerConfirm)) {
-            NetworkDataBaseController.setSecurityQuestionID(Integer.parseInt(questionNumber));
+            NetworkDataBaseController.setSecurityQuestion(questionNumber);
             NetworkDataBaseController.setSecurityAnswer(answer);
             return Result.success(null, "Answer successfully set!");
         }

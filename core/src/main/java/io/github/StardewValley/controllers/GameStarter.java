@@ -2,6 +2,7 @@ package io.github.StardewValley.controllers;
 
 import com.badlogic.gdx.Gdx;
 import io.github.StardewValley.App;
+import io.github.StardewValley.network.NetworkDataBaseController;
 import models.game.Game;
 import models.game.Player;
 import models.map.Map;
@@ -17,6 +18,8 @@ import static controllers.GameSaver.reloadAllSprites;
 
 public class GameStarter {
     public static void startNewGame(Lobby lobby) {
+        NetworkDataBaseController.incrementGamesPlayed();
+
         ArrayList<Player> players = new ArrayList<>();
         MapBuilder mapBuilder = new MapBuilder();
 

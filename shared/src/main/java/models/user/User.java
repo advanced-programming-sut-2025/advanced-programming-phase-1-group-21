@@ -13,8 +13,12 @@ public class User implements Serializable {
     private boolean isInAGame;
     private boolean stayLoggedIn;
     private String hash;
-    private Integer securityQuestionID;
+
+    private String securityQuestion;
     private String securityAnswer;
+
+    private int maxCoin;
+    private int gamesPlayed;
 
     public static final List<String> SECURITY_QUESTIONS = List.of(
             "What is your mother's maiden name?",
@@ -23,32 +27,25 @@ public class User implements Serializable {
             "What is your favorite book?"
     );
 
-    public void setSecurityQuestionID(Integer securityQuestionID) {
-        this.securityQuestionID = securityQuestionID;
-    }
-
-    public void setSecurityAnswer(String securityAnswer) {
-        this.securityAnswer = securityAnswer;
-    }
-
-
-    /**
-     * for kryo only!
-     */
     public User() {
-
     }
 
-    public User(String username, String password, String email, String nickname, Gender gender, Integer securityQuestionID, String securityAnswer , boolean isInAGame) {
+    public User(String username, String password, String email, String nickname, Gender gender,
+                String securityQuestion, String securityAnswer,
+                boolean isInAGame, int maxCoin, int gamesPlayed) {
         this.username = username;
         this.email = email;
         this.nickname = nickname;
         this.gender = gender;
-        this.securityQuestionID = securityQuestionID;
+        this.securityQuestion = securityQuestion;
         this.securityAnswer = securityAnswer;
         this.isInAGame = isInAGame;
-        if (password != null)
+        this.maxCoin = maxCoin;
+        this.gamesPlayed = gamesPlayed;
+
+        if (password != null) {
             setPassword(password);
+        }
     }
 
     public void setPassword(String password) {
@@ -63,69 +60,43 @@ public class User implements Serializable {
         return isInAGame;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
     public void setInAGame(boolean inAGame) {
         isInAGame = inAGame;
     }
 
-    public String getEmail() {
-        return email;
-    }
+    public String getUsername() { return username; }
+    public String getEmail() { return email; }
+    public Gender getGender() { return gender; }
+    public String getNickname() { return nickname; }
+    public String getSecurityQuestion() { return securityQuestion; }
+    public String getSecurityAnswer() { return securityAnswer; }
+    public int getMaxCoin() { return maxCoin; }
+    public int getGamesPlayed() { return gamesPlayed; }
 
-    public Gender getGender() {
-        return gender;
-    }
+    public void setUsername(String username) { this.username = username; }
+    public void setEmail(String email) { this.email = email; }
+    public void setNickname(String nickname) { this.nickname = nickname; }
+    public void setGender(Gender gender) { this.gender = gender; }
+    public void setSecurityQuestion(String securityQuestion) { this.securityQuestion = securityQuestion; }
+    public void setSecurityAnswer(String securityAnswer) { this.securityAnswer = securityAnswer; }
+    public void setMaxCoin(int maxCoin) { this.maxCoin = maxCoin; }
+    public void setGamesPlayed(int gamesPlayed) { this.gamesPlayed = gamesPlayed; }
+    public void setStayLoggedIn(boolean stayLoggedIn) { this.stayLoggedIn = stayLoggedIn; }
 
-    public String getNickname() {
-        return nickname;
-    }
-
-    public Integer getSecurityQuestionID() {
-        return securityQuestionID;
-    }
-
-    public String getSecurityAnswer() {
-        return securityAnswer;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
+    public boolean isStayLoggedIn() { return stayLoggedIn; }
 
     public boolean validateSecurityAnswer(String answer) {
         return this.securityAnswer.equalsIgnoreCase(answer);
     }
 
-    public void setStayLoggedIn(boolean stayLoggedIn) {
-        this.stayLoggedIn = stayLoggedIn;
-    }
-
-    public boolean isStayLoggedIn() {
-        return stayLoggedIn;
-    }
-
     public User copy() {
-        return new User(username, null, email, nickname, gender, securityQuestionID, securityAnswer, isInAGame);
+        return new User(username, null, email, nickname, gender, securityQuestion, securityAnswer,
+                isInAGame, maxCoin, gamesPlayed);
     }
 
     @Override
     public String toString() {
-        return username;
+        return username + " (MaxCoin: " + maxCoin + ", Games Played: " + gamesPlayed + ")";
     }
 
     @Override
