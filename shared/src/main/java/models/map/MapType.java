@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public enum MapType {
     HOUSE(20, 10 , 660, 377),
-    GREEN_HOUSE(20, 10 , 0 , 0),
+    GREEN_HOUSE(20, 10 , 660 , 377),
     LAKE(10, 10 , 0 , 0),
     MINES(50, 30 , 210 , 77),
     FARM(64, 34 , 0 , 25),

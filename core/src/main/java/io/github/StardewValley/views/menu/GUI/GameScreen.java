@@ -250,7 +250,8 @@ public class GameScreen implements Screen , InputProcessor {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         Coord c = viewController.clickController(screenX, screenY);
         Tile tile = currentPlayer.getMap().getTile(c);
-        message = "(" + c.getX() + ","
+        if(tile != null)
+            message = "(" + c.getX() + ","
                 + c.getY() + "), " + tile.getTileType();
         if (tile != null && tile.getPlacable(Animal.class) != null) {
             Animal animal = tile.getPlacable(Animal.class);

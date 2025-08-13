@@ -53,6 +53,13 @@ public class GameController {
 
     }
 
+    public void startBuild(String buildingName){
+        player.setShopToBuyTof(player.getBuilding());
+        player.setBuildingToBuy(buildingName);
+        player.leave();
+        player.setMap(player.getDefaultMap());
+    }
+
 
 
     public GameController(Game game, Player player) {
@@ -1145,8 +1152,8 @@ public class GameController {
         Player player1 = game.getPlayerByName(username);
         if (player == null) return Result.failure(GameError.NO_PLAYER_FOUND);
 
-        if(!player.weAreNextToEachOther(player1))
-            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
+//        if(!player.weAreNextToEachOther(player1))
+//            return Result.failure(GameError.NOT_NEXT_TO_EACH_OTHER);
 
         Relation relation = game.getRelationOfUs(player1, player);
         if (!relation.isTodayTalk())
@@ -1611,6 +1618,8 @@ public class GameController {
     public Result<Void> purchase(String name, int number) {
         if (game == null) return Result.failure(GameError.NO_GAME_RUNNING);
         Building building = player.getBuilding();
+        if(building == null)
+            building = player.getShopToBuyTof();
         if (!(building instanceof Shop)) return Result.failure(GameError.YOU_SHOULD_BE_ON_SHOP);
         Shop shop = (Shop) building;
         Inventory inventory = player.getInventory();
@@ -1698,6 +1707,9 @@ public class GameController {
         Result<Void> r = purchase(name, 1);
         if (r.isError()) return r;
 
+        player.setShopToBuyTof(null);
+        player.setBuildingToBuy(null);
+
         MapType mapType = MapType.getMapType(name);
 
         Map map = player.getDefaultMap();
@@ -1706,8 +1718,10 @@ public class GameController {
         mapBuilder.buildAnimalHouse(mapType);
         TileType tileType = TileType.fromName(name);
 
-        if (!mapBuilder.isAreaAvailable(map, coord.getY(), coord.getX(), tileType.getDefaultHeight(), tileType.getDefaultWidth()))
+        if (!mapBuilder.isAreaAvailable(map, coord.getY(), coord.getX(), tileType.getDefaultHeight(), tileType.getDefaultWidth())) {
             return Result.failure(GameError.CANT_PLACE);
+//            throw new RuntimeException("Nemitooneh bezare");
+        }
 
         AnimalHouse animalHouse = new AnimalHouse(name);
         map.build(animalHouse);
