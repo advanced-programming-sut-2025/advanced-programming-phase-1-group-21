@@ -2,6 +2,7 @@ package io.github.StardewValley.views.menu.GUI;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.kotcrab.vis.ui.widget.file.FileChooser;
 import com.kotcrab.vis.ui.widget.file.FileChooserAdapter;
+import io.github.StardewValley.App;
 import io.github.StardewValley.Main;
 import io.github.StardewValley.asset.Assets;
 import controllers.GameSaver;
@@ -54,6 +56,11 @@ public class MainMenuScreen implements Screen {
         Label title = new Label("Main Menu", skin);
         title.setFontScale(1.5f);
         table.add(title).colspan(2).padBottom(30).row();
+
+        Label nickName = new Label("I AM " + App.getInstance().logedInUser.getNickname(), skin);
+        nickName.setFontScale(1.5f);
+        nickName.setColor(Color.GREEN);
+        table.add(nickName).colspan(2).padBottom(30).row();
 
         // Profile Button
         TextButton profileButton = new TextButton("Profile", skin);

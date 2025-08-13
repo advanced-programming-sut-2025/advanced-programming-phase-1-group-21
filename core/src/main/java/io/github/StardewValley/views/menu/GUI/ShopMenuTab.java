@@ -189,15 +189,16 @@ public class ShopMenuTab {
     private void build(){
         String regex = "\\((?<x>\\d+),(?<y>\\d+)\\)";
         Matcher matcher = Pattern.compile(regex).matcher(input.getText());
+        String buildingName = itemToBy.getText().toString();
         if(!matcher.matches()) {
             message.setText("invalid coordinate");
+            gameScreen.getController().startBuild(buildingName);
             return;
         }
         matcher.matches();
 
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
-        String buildingName = itemToBy.getText().toString();
         message.setText(gameScreen.getController().purchaseBuilding(buildingName , new Coord(x,y)).getMessage());
     }
 

@@ -78,6 +78,12 @@ public class ViewController {
         if (tile == null)
             return new Coord(-1 , -1);
 
+        if(player.getBuildingToBuy() != null){
+            gc.purchaseBuilding(player.getBuildingToBuy(), coord);
+            player.setBuildingToBuy(null);
+            return coord;
+        }
+
         if (tile.getPlacable(Building.class) != null) {
             Building building = tile.getPlacable(Building.class);
             if (checkCollision(building.sprite , player.getSprite()) && building.canEnter(game.getGameDate())) {

@@ -45,6 +45,24 @@ public class Player implements DailyUpdate, Serializable {
     private Reaction reaction = new Reaction();
     private final transient List<MusicData> musics = new ArrayList<>();
     private int mapID;
+    private String buildingToBuy = null;
+    private Building shopToBuyTof = null;
+
+    public Building getShopToBuyTof() {
+        return shopToBuyTof;
+    }
+
+    public void setShopToBuyTof(Building shopToBuyTof) {
+        this.shopToBuyTof = shopToBuyTof;
+    }
+
+    public String getBuildingToBuy() {
+        return buildingToBuy;
+    }
+
+    public void setBuildingToBuy(String buildingToBuy) {
+        this.buildingToBuy = buildingToBuy;
+    }
 
     private List<String[]> animations;
     private int frameIndex = 0;

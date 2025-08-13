@@ -227,6 +227,9 @@ public class Animal implements Placable, DailyUpdate, Serializable {
         setOut(false);
         setFeedToday(false);
         setTodayPet(false);
+
+        sprite.setX(sprite.getX() - 30);
+        sprite.setY(sprite.getY() + 30);
         return false;
     }
 
