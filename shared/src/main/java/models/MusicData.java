@@ -1,4 +1,5 @@
 package models;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
@@ -12,6 +13,13 @@ public class MusicData implements KryoSerializable {
     private byte[] musicBytes;
     private boolean looping;
     private float volume = 1.0f;
+
+    /**
+     * NEW: Holds the playable music instance on the client.
+     * 'transient' tells Kryo to ignore this field during serialization.
+     * This is crucial because a Music object cannot be sent over the network.
+     */
+    private transient Music musicInstance;
 
     public MusicData() {
     }
@@ -51,32 +59,69 @@ public class MusicData implements KryoSerializable {
     }
 
     /**
-     * Plays the music using LibGDX
+     * MODIFIED: Plays the music, creating the instance if it doesn't exist.
      */
     public void play() {
-        // Create a temporary file to play the music
-        // Note: In a real application, you might want to cache these files
         Gdx.app.postRunnable(() -> {
-            try {
-                // Create temp file (LibGDX needs a file handle to play music)
-                java.io.File tempFile = java.io.File.createTempFile("kryo_music_", getFileExtension());
-                tempFile.deleteOnExit();
+            // If the music instance doesn't exist, create it.
+            if (musicInstance == null && musicBytes != null && musicBytes.length > 0) {
+                try {
+                    java.io.File tempFile = java.io.File.createTempFile("kryo_music_", getFileExtension());
+                    tempFile.deleteOnExit();
+                    java.nio.file.Files.write(tempFile.toPath(), musicBytes);
+                    musicInstance = Gdx.audio.newMusic(Gdx.files.absolute(tempFile.getAbsolutePath()));
+                } catch (Exception e) {
+                    Gdx.app.error("MusicData", "Error creating music from bytes", e);
+                    return; // Exit if creation fails
+                }
+            }
 
-                // Write bytes to temp file
-                java.nio.file.Files.write(tempFile.toPath(), musicBytes);
-
-                // Load and play music
-                Music music = Gdx.audio.newMusic(Gdx.files.absolute(tempFile.getAbsolutePath()));
-                music.setLooping(looping);
-                music.setVolume(volume);
-                music.play();
-
-                // Store reference if you need to control it later
-                // You might want to add this to a music manager
-            } catch (Exception e) {
-                Gdx.app.error("MusicData", "Error playing music", e);
+            // If the instance exists, set its properties and play.
+            if (musicInstance != null) {
+                musicInstance.setLooping(looping);
+                musicInstance.setVolume(volume);
+                musicInstance.play();
             }
         });
+    }
+
+    public void updateVolume(float newVolume) {
+        // Clamp the volume between 0.0 and 1.0
+        this.volume = Math.max(0.0f, Math.min(1.0f, newVolume));
+
+        // If the music is currently playing, update its volume on the main thread.
+        if (musicInstance != null) {
+            Gdx.app.postRunnable(() -> {
+                if (musicInstance != null) { // Double-check in case it was disposed
+                    musicInstance.setVolume(this.volume);
+                }
+            });
+        }
+    }
+
+    /**
+     * NEW: Stops the music playback.
+     */
+    public void stop() {
+        if (musicInstance != null) {
+            Gdx.app.postRunnable(() -> {
+                if (musicInstance != null) musicInstance.stop();
+            });
+        }
+    }
+
+    /**
+     * NEW: Disposes of the music instance to free up memory. Call this when you're done.
+     */
+    public void dispose() {
+        if (musicInstance != null) {
+            Gdx.app.postRunnable(() -> {
+                if (musicInstance != null) {
+                    musicInstance.dispose();
+                    musicInstance = null;
+                }
+            });
+        }
     }
 
     private String getFileExtension() {
@@ -86,36 +131,13 @@ public class MusicData implements KryoSerializable {
         return filePath.substring(lastDot);
     }
 
-    // Getters and setters
-    public String getFilePath() {
-        return filePath;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
-
-    public byte[] getMusicBytes() {
-        return musicBytes;
-    }
-
-    public void setMusicBytes(byte[] musicBytes) {
-        this.musicBytes = musicBytes;
-    }
-
-    public boolean isLooping() {
-        return looping;
-    }
-
-    public void setLooping(boolean looping) {
-        this.looping = looping;
-    }
-
-    public float getVolume() {
-        return volume;
-    }
-
-    public void setVolume(float volume) {
-        this.volume = volume;
-    }
+    // Getters and setters...
+    public String getFilePath() { return filePath; }
+    public void setFilePath(String filePath) { this.filePath = filePath; }
+    public byte[] getMusicBytes() { return musicBytes; }
+    public void setMusicBytes(byte[] musicBytes) { this.musicBytes = musicBytes; }
+    public boolean isLooping() { return looping; }
+    public void setLooping(boolean looping) { this.looping = looping; }
+    public float getVolume() { return volume; }
+    public void setVolume(float volume) { this.volume = volume; }
 }

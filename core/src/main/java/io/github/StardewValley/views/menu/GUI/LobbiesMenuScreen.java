@@ -170,6 +170,7 @@ public class LobbiesMenuScreen implements Screen {
     private void fillLobbyTable() {
         lobbyTable.clear();
         for (Lobby l: lobbies) {
+            if (l.isInvisible()) continue;
             Label nameLabel = new Label("Name: " + l.getName(), skin);
             Label idLabel = new Label("ID: " + l.getID(), skin);
 

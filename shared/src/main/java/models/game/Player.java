@@ -44,6 +44,7 @@ public class Player implements DailyUpdate, Serializable {
     private String suitor;
     private Reaction reaction = new Reaction();
     private final transient List<MusicData> musics = new ArrayList<>();
+    private transient MusicData currentMusic;
     private int mapID;
     private String buildingToBuy = null;
     private Building shopToBuyTof = null;
@@ -502,5 +503,17 @@ public class Player implements DailyUpdate, Serializable {
             case SOUTH -> animations.get(3)[frame];
             default -> animations.get(3)[frame];
         };
+    }
+
+    public void setCurrentMusic(MusicData musicData) {
+        if (currentMusic != null) {
+            currentMusic.stop();
+        }
+        currentMusic = musicData;
+        currentMusic.play();
+    }
+
+    public MusicData getCurrentMusic() {
+        return currentMusic;
     }
 }

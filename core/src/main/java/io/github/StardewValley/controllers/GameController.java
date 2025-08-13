@@ -2066,4 +2066,15 @@ public class GameController {
         Refrigerator ref = player.getMap().getTile(c).getPlacable(Refrigerator.class);
         ref.getInventory().removeItem(item);
     }
+
+    public void playMusic(MusicData musicData) {
+        if (!player.getUser().getUsername().equals(App.getInstance().logedInUser.getUsername())) {
+            musicData.setVolume(0);
+        }
+        else {
+            App.getInstance().stopMusic();
+            App.getInstance().music = musicData;
+        }
+        player.setCurrentMusic(musicData);
+    }
 }
