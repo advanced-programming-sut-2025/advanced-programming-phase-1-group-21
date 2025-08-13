@@ -19,13 +19,13 @@ import java.util.Map;
 public class ShippingBin implements Placable, DailyUpdate, Serializable {
     List<Item> toSell = new ArrayList<>();
     Map<Item, Player> map = new HashMap<>();
-    transient String texture = SharedAssetManager.getHeartPath();
+    transient String texture = "Textures/Decor/shippingbin.png";
     transient GameSprite sprite = new GameSprite(texture);
 
     public ShippingBin() {}
 
     {
-        sprite.setSize(30 , 30);
+        sprite.setSize(60, 60);
     }
 
     public void add(Item item, Player player) {
