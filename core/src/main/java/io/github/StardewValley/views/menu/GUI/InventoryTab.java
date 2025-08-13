@@ -80,7 +80,21 @@ class InventoryTab {
 		inv.addItem(Item.build("Banana Sapling", 5));
 		inv.addItem(Item.build("Bean Starter", 5));
 		inv.addItem(Item.build("Deluxe Retaining Soil", 5));
-		inv.addItem(Item.build("Egg", 5));
+
+		inv.upgradeSize(InventoryType.UNLIMITED);
+		inv.addItem(Item.build("Large Egg", 5));
+		inv.addItem(Item.build("Milk", 5));
+		inv.addItem(Item.build("Duck Egg", 5));
+		inv.addItem(Item.build("Truffle", 5));
+		inv.addItem(Item.build("Kale", 5));
+		inv.addItem(Item.build("Parsnip", 5));
+		inv.addItem(Item.build("Red Cabbage", 5));
+		inv.addItem(Item.build("Tomato", 5));
+		inv.addItem(Item.build("Blueberry", 5));
+		inv.addItem(Item.build("Beet", 5));
+		inv.addItem(Item.build("Fairy Rose", 5));
+		inv.addItem(Item.build("Salmonberry", 5));
+		inv.addItem(Item.build("Hazelnut", 5));
 
 		player.addRecipes(new Recipe(RecipeData.getCookingRecipeData("Dish O' The Sea Recipe"), RecipeType.COOKING, 1));
 		player.addRecipes(new Recipe(RecipeData.getCookingRecipeData("Triple Shot Espresso Recipe"), RecipeType.COOKING, 1));
@@ -1060,8 +1074,9 @@ class InventoryTab {
 		}
 		if (player.getInventory().canRemoveItems(items)) {
 			if (player.getInventory().canAdd(recipe.getData().getResultName())) {
-				gc.removeItems(items);
-				gc.addItem(Item.build(recipe.getData().getResultName(), amount));
+				for (Item i: items)
+					gc.removeItem(i.getName(), i.getAmount());
+				gc.addItem(recipe.getData().getResultName(), amount);
 			}
 			else {
 				notEnoughSpaceInInventoryDialog().show(stage);

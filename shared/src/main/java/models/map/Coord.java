@@ -37,6 +37,7 @@ public class Coord implements Serializable {
     public static Coord getRandomCoord(int maxX, int maxY, Random random) {
         int x = random.nextInt(maxX); // [0, maxX]
         int y = random.nextInt(maxY); // [0, maxY]
+        if (x == 0 && y == 0) return getRandomCoord(maxX, maxY, random);
         return new Coord(x, y);
     }
 

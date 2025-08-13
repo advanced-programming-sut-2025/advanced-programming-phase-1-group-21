@@ -53,18 +53,16 @@ public class GameController {
 
     }
 
+    public GameController(Game game, Player player) {
+        this.game = game;
+        this.player = player;
+    }
+
     public void startBuild(String buildingName){
         player.setShopToBuyTof(player.getBuilding());
         player.setBuildingToBuy(buildingName);
         player.leave();
         player.setMap(player.getDefaultMap());
-    }
-
-
-
-    public GameController(Game game, Player player) {
-        this.game = game;
-        this.player = player;
     }
 
     public Result<String> showCurrentMenu() {
@@ -2041,30 +2039,26 @@ public class GameController {
         player.addMusic(musicData);
     }
 
-    public void addItem(Item item) {
-        player.getInventory().addItem(item);
+    public void addItem(String itemName, int itemAmount) {
+        player.getInventory().addItem(Item.build(itemName, itemAmount));
     }
 
-    public void removeItems(List <Item> items) {
-        player.getInventory().removeItems(items);
-    }
-
-    public void removeItem(Item item) {
-        player.getInventory().removeItem(item);
+    public void removeItem(String itemName, int itemAmount) {
+        player.getInventory().removeItem(Item.build(itemName, itemAmount));
     }
 
     public void setItemInHand(String item) {
         player.setItemInHand(player.getInventory().getItem(item));
     }
 
-    public void addToRefrigerator(Coord c, Item item) {
+    public void addToRefrigerator(Coord c, String itemName, int itemAmount) {
         Refrigerator ref = player.getMap().getTile(c).getPlacable(Refrigerator.class);
-        ref.getInventory().addItem(item);
+        ref.getInventory().addItem(Item.build(itemName, itemAmount));
     }
 
-    public void removeFromRefrigerator(Coord c, Item item) {
+    public void removeFromRefrigerator(Coord c, String itemName, int itemAmount) {
         Refrigerator ref = player.getMap().getTile(c).getPlacable(Refrigerator.class);
-        ref.getInventory().removeItem(item);
+        ref.getInventory().removeItem(Item.build(itemName, itemAmount));
     }
 
     public void playMusic(MusicData musicData) {

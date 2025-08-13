@@ -95,7 +95,7 @@ public class ViewController {
             int newX = player.getCoord().getX() + direction.getDx();
             int newY = player.getCoord().getY() + direction.getDy();
 
-            if (newX == (x - map.mapType.distanceX)/30 && newY == (y - map.mapType.distanceY)/30)
+            if (newX == coord.getX() && newY == coord.getY())
                 gc.useTool(direction);
         }
 

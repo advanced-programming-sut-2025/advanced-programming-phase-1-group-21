@@ -248,15 +248,15 @@ public class RefrigeratorTab {
 		if (method == 1) {
 			// From player to fridge
 			if (ref.getInventory().canAdd(item.getName())) {
-				gc.addToRefrigerator(coord, Item.build(item.getName(), item.getAmount()));
-				gc.removeItem(item);
+				gc.addToRefrigerator(coord, item.getName(), item.getAmount());
+				gc.removeItem(item.getName(), item.getAmount());
 			}
 		}
 		else {
 			// From fridge to player
 			if (player.getInventory().canAdd(item.getName())) {
-				gc.addItem(Item.build(item.getName(), item.getAmount()));
-				gc.removeFromRefrigerator(coord, item);
+				gc.addItem(item.getName(), item.getAmount());
+				gc.removeFromRefrigerator(coord, item.getName(), item.getAmount());
 			}
 		}
 		createUI();
