@@ -1,12 +1,12 @@
 package io.github.StardewValley.views.menu.GUI;
 
+import Asset.SharedAssetManager;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -21,6 +21,7 @@ import models.network.Lobby;
 import models.network.LobbyUser;
 import models.user.User;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,6 +33,7 @@ public class LobbyScreen implements Screen, Refreshable {
     private Set<String> readyPlayers = new HashSet<>();
     private TextField mapNumberField;
     private TextButton readyButton;
+    private ArrayList<Image> mapImages = new ArrayList<>();
 
     Skin skin;
 
@@ -39,6 +41,8 @@ public class LobbyScreen implements Screen, Refreshable {
         this.lobby = lobby;
         this.game = Main.getInstance();
         createUI();
+        for (int i = 1; i <= 4; i++)
+            SharedAssetManager.getOrLoad("Textures/map/Map" + i + ".png");
     }
 
     private void createUI() {
@@ -80,12 +84,7 @@ public class LobbyScreen implements Screen, Refreshable {
         mapNumberField.setMessageText("Enter your map seed");
         mapNumberField.setSize(sw / 30f, sh / 20f);
         mapNumberField.setPosition(sw / 16f + 120, sh * 10 / 16f - 40);
-        mapNumberField.addListener(new InputListener() {
-            @Override
-            public boolean keyTyped(InputEvent event, char character) {
-                return true;
-            }
-        });
+        mapNumberField.setTextFieldFilter((textField, key) -> Character.isDigit(key));
         TextButton minusButton = new TextButton("-", skin);
         minusButton.setPosition(sw / 16f + 200, sh * 10 / 16f - 40);
         minusButton.setHeight(sh / 20f);
@@ -99,6 +98,7 @@ public class LobbyScreen implements Screen, Refreshable {
                 int amount = Integer.parseInt(mapNumberField.getText());
                 if(amount > 1) amount--;
                 mapNumberField.setText(String.valueOf(amount));
+                NetworkLobbyController.sendMap(amount);
             }
         });
 
@@ -108,6 +108,7 @@ public class LobbyScreen implements Screen, Refreshable {
                 int amount = Integer.parseInt(mapNumberField.getText());
                 if (amount < 4) amount++;
                 mapNumberField.setText(String.valueOf(amount));
+                NetworkLobbyController.sendMap(amount);
             }
         });
 
@@ -173,7 +174,14 @@ public class LobbyScreen implements Screen, Refreshable {
     }
 
     private void updatePlayersTable() {
+        for (Image i: mapImages) {
+            i.remove();
+        }
+        mapImages.clear();
+
         playersTable.clear();
+        int x = 100;
+
         for (LobbyUser lobbyUser : lobby.getUsers()) {
             User user = lobbyUser.user;
             String displayName = user.getUsername();
@@ -183,14 +191,19 @@ public class LobbyScreen implements Screen, Refreshable {
 
             Label playerLabel = new Label(displayName, skin);
 
+            Image mapImage = new Image(SharedAssetManager.getOrLoad(	"Textures/map/Map" + lobbyUser.mapID + ".png"));
+            mapImage.setPosition(x, 350);
+            mapImage.setSize(400, 200);
+            stage.addActor(mapImage);
+            mapImages.add(mapImage);
+            x += 450;
+
             if (lobbyUser.isReady) {
                 playerLabel.setColor(Color.GREEN);
             } else {
                 playerLabel.setColor(Color.RED);
             }
-
-            playersTable.add(playerLabel).left().pad(5);
-            playersTable.row();
+            playersTable.add(playerLabel).left().padRight(350);
         }
     }
 

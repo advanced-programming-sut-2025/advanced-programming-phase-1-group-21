@@ -67,7 +67,7 @@ public class Player implements DailyUpdate, Serializable {
     private List<String[]> animations;
     private int frameIndex = 0;
     private float frameTime = 0f;
-    private float frameDuration = 0.3f;
+    private final float frameDuration = 0.15f;
     private transient GameSprite sprite;
 
     public Player() {}

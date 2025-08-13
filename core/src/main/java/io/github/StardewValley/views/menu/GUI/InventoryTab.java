@@ -619,20 +619,8 @@ class InventoryTab {
 
 	private void createMapUI() {
 		int mapID = player.getMapID();
-//		int mapID = 1;
 		Texture t = SharedAssetManager.getOrLoad(	"Textures/map/Map" + mapID + ".png");
-		if (t == null) {
-			System.out.println("Textures/map/Map" + mapID + ".png");
-			Texture t2 = new Texture("Textures/map/Map" + mapID + ".png");
-			if (t2 == null) {
-				System.out.println("Both");
-			}
-			else
-				System.out.println("t2 good");
-			mapImage = new Image(emptyDrawable);
-		}
-		else
-			mapImage = new Image(SharedAssetManager.getOrLoad("Textures/map/Map" + mapID + ".png"));
+		mapImage = new Image(t);
 
 		mapImage.setPosition(482, 275);
 		mapImage.setSize(1000, 500);

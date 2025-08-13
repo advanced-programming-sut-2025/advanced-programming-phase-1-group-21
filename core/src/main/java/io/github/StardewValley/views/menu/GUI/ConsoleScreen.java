@@ -1,4 +1,4 @@
-package io.github.StardewValley.views.console;
+package io.github.StardewValley.views.menu.GUI;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
@@ -8,7 +8,6 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import io.github.StardewValley.Main;
 import io.github.StardewValley.asset.Assets;
 import io.github.StardewValley.views.menu.CLI.AppView;
-import io.github.StardewValley.views.menu.GUI.PreMenuScreen;
 
 public class ConsoleScreen implements Screen {
     private Stage stage;
