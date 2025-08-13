@@ -1,16 +1,19 @@
 package io.github.StardewValley.controllers;
 
 import com.badlogic.gdx.Gdx;
+import controllers.GameSaver;
 import io.github.StardewValley.App;
 import io.github.StardewValley.network.NetworkDataBaseController;
 import models.game.Game;
 import models.game.Player;
 import models.map.Map;
 import models.map.MapBuilder;
+import models.network.GamePacket;
 import models.network.Lobby;
 import models.network.LobbyUser;
 import models.user.User;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -40,9 +43,18 @@ public class GameStarter {
     }
 
     public static void loadGame(Lobby lobby) {
-        Game game = lobby.getGame();
-        assert game != null;
-        reloadAllSprites(game, game.spriteMap);
-        App.getInstance().initGame(game);
+        Gdx.app.postRunnable(() -> {
+            GamePacket gamePacket = lobby.getGame();
+            assert gamePacket != null;
+            Game game;
+            try {
+                game = GameSaver.deserializeFromNetwork(gamePacket);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            App.getInstance().initGame(game);
+        });
     }
 }

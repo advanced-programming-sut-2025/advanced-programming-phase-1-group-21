@@ -1,6 +1,8 @@
 package controllers;
 
 import com.badlogic.gdx.graphics.Texture;
+import models.game.Player;
+import models.network.GamePacket;
 import models.sprite.GameSprite;
 import models.sprite.SpriteData;
 import models.game.Game;
@@ -32,6 +34,8 @@ public class GameSaver {
 
             Map<String, SpriteData> spriteMap = (Map<String, SpriteData>) in.readObject();
 
+            System.out.println("### DEBUG: Loading spriteMap with " + spriteMap.size() + " entries. Keys: " + spriteMap.keySet());
+
             reloadAllSprites(game, spriteMap);
             game.rand = new Random(1);
 
@@ -53,27 +57,22 @@ public class GameSaver {
     private static void saveSpritesRecursive(Object obj, Map<String, SpriteData> spriteMap, Set<Object> visited, String path) {
         if (obj == null || visited.contains(obj)) return;
         visited.add(obj);
-
         Class<?> clazz = obj.getClass();
-        if (isSimple(clazz) || isJavaCoreClass(clazz)) return;
 
-        System.out.println("Visiting: " + clazz.getName());
-
-        // If this object is a Sprite
         if (obj instanceof GameSprite) {
             GameSprite sprite = (GameSprite) obj;
             String texturePath = sprite.getTexturePath();
             spriteMap.put(path, new SpriteData(sprite, texturePath));
-            return;
+            return; // Stop recursion for this branch
         }
 
-        // If it's a collection/array
+        // 2. BEFORE checking isJavaCoreClass, check if it's a collection we should enter
         if (obj instanceof Iterable) {
             int i = 0;
             for (Object item : (Iterable<?>) obj) {
                 saveSpritesRecursive(item, spriteMap, visited, path + "[" + i++ + "]");
             }
-            return;
+            return; // We have handled the list's contents, so we are done with the list itself
         }
         if (clazz.isArray()) {
             int len = Array.getLength(obj);
@@ -83,8 +82,13 @@ public class GameSaver {
             return;
         }
 
-        // Recurse into fields
-        for (Field field : clazz.getDeclaredFields()) {
+        // 3. Now, if it's not a sprite or collection, check if we should ignore it
+        if (isSimple(clazz) || isJavaCoreClass(clazz)) {
+            return;
+        }
+
+        // 4. If we are here, it's a custom object whose fields we need to inspect
+        for (Field field : getAllFields(clazz)) {
             field.setAccessible(true);
             try {
                 Object value = field.get(obj);
@@ -94,6 +98,7 @@ public class GameSaver {
     }
 
     public static void reloadAllSprites(Object root, Map<String, SpriteData> spriteMap) {
+        System.out.println("Reloading all sprites...");
         Set<Object> visited = Collections.newSetFromMap(new IdentityHashMap<>());
         reloadSpritesRecursive(root, spriteMap, visited, "");
     }
@@ -103,14 +108,13 @@ public class GameSaver {
         visited.add(obj);
 
         Class<?> clazz = obj.getClass();
-        if (isSimple(clazz) || isJavaCoreClass(clazz)) return;
+
 
         if (obj instanceof GameSprite) {
             GameSprite sprite = (GameSprite) obj;
             SpriteData data = spriteMap.get(path);
             if (data != null) {
-                Texture texture = Asset.SharedAssetManager.getOrLoad(data.texturePath);
-                sprite.setTexture(texture);
+                sprite.setTexture(data.texturePath);
                 data.applyTo(sprite);
             }
             return;
@@ -131,11 +135,29 @@ public class GameSaver {
             return;
         }
 
-        for (Field field : clazz.getDeclaredFields()) {
+        if (isSimple(clazz) || isJavaCoreClass(clazz)) {
+            return;
+        }
+
+        for (Field field : getAllFields(clazz)) {
             field.setAccessible(true);
             try {
                 Object value = field.get(obj);
-                reloadSpritesRecursive(value, spriteMap, visited, path + "." + field.getName());
+                String currentPath = path + "." + field.getName();
+
+                if (value == null && field.getType() == GameSprite.class) {
+                    SpriteData data = spriteMap.get(currentPath);
+
+                    if (data != null) {
+                        GameSprite newSprite = new GameSprite(data.texturePath); // Requires a public GameSprite() constructor
+
+                        data.applyTo(newSprite);
+
+                        field.set(obj, newSprite);
+                    }
+                } else {
+                    reloadSpritesRecursive(value, spriteMap, visited, currentPath);
+                }
             } catch (IllegalAccessException ignored) {}
         }
     }
@@ -152,6 +174,65 @@ public class GameSaver {
     private static boolean isJavaCoreClass(Class<?> clazz) {
         return clazz.getPackageName().startsWith("java.") ||
                 clazz.getPackageName().startsWith("javax.") ||
-                clazz.getPackageName().startsWith("sun.");
+                clazz.getPackageName().startsWith("sun.") ||
+                clazz.getPackageName().startsWith("com.google");
+    }
+
+    public static GamePacket serializeForNetwork(Game game) throws IOException {
+        GamePacket packet = new GamePacket();
+
+        try (ByteArrayOutputStream bos = new ByteArrayOutputStream();
+             ObjectOutputStream out = new ObjectOutputStream(bos)) {
+            out.writeObject(game);
+            packet.gameBytes = bos.toByteArray();
+        }
+
+        Map<String, SpriteData> spriteMap = GameSaver.saveAllSprites(game);
+
+        try (ByteArrayOutputStream bos = new ByteArrayOutputStream();
+             ObjectOutputStream out = new ObjectOutputStream(bos)) {
+            out.writeObject(spriteMap);
+            packet.spriteMapBytes = bos.toByteArray();
+        }
+
+        ArrayList<String> users = new ArrayList<>();
+        for (Player p: game.getPlayers())
+            users.add(p.getUser().getUsername());
+
+        packet.users = users;
+
+        System.out.println("### DEBUG: Sending spriteMap with " + spriteMap.size() + " entries. Keys: " + spriteMap.keySet());
+
+        return packet;
+    }
+
+    public static Game deserializeFromNetwork(GamePacket packet) throws IOException, ClassNotFoundException {
+        Game game;
+        Map<String, SpriteData> spriteMap;
+
+        try (ByteArrayInputStream bis = new ByteArrayInputStream(packet.gameBytes);
+             ObjectInputStream in = new ObjectInputStream(bis)) {
+            game = (Game) in.readObject();
+        }
+
+        try (ByteArrayInputStream bis = new ByteArrayInputStream(packet.spriteMapBytes);
+             ObjectInputStream in = new ObjectInputStream(bis)) {
+            spriteMap = (Map<String, SpriteData>) in.readObject();
+        }
+
+        System.out.println("### DEBUG: Received spriteMap with " + spriteMap.size() + " entries. Keys: " + spriteMap.keySet());
+
+        GameSaver.reloadAllSprites(game, spriteMap);
+        game.rand = new Random(1);
+
+        return game;
+    }
+
+    public static List<Field> getAllFields(Class<?> type) {
+        List<Field> fields = new ArrayList<>();
+        for (Class<?> c = type; c != null; c = c.getSuperclass()) {
+            fields.addAll(Arrays.asList(c.getDeclaredFields()));
+        }
+        return fields;
     }
 }

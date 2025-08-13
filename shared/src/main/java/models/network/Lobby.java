@@ -12,7 +12,7 @@ public class Lobby {
 	private boolean isPrivate;
 	private boolean isVisible;
 	private ArrayList<LobbyUser> users = new ArrayList<>();
-	private Game game = null;
+	private GamePacket game = null;
 	private boolean started = false;
 
 	//private Lobby
@@ -115,11 +115,11 @@ public class Lobby {
 		}
 	}
 
-	public void setGame(Game game) {
+	public void setGame(GamePacket game) {
 		this.game = game;
 	}
 
-	public Game getGame() {
+	public GamePacket getGame() {
 		return game;
 	}
 
