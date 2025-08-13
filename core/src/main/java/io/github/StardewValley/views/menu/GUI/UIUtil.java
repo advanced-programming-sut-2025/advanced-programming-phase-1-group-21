@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import io.github.StardewValley.Main;
 import io.github.StardewValley.asset.Assets;
 import io.github.StardewValley.asset.GameSound;
-import io.github.StardewValley.views.console.ConsoleScreen;
 import models.result.Error;
 
 import javax.swing.*;
