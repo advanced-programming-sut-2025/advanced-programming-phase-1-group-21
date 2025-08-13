@@ -2,7 +2,6 @@ package io.github.StardewValley.views.menu.GUI;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -11,14 +10,15 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.kotcrab.vis.ui.VisUI;
+import com.kotcrab.vis.ui.widget.Separator;
 import com.kotcrab.vis.ui.widget.file.FileChooser;
 import com.kotcrab.vis.ui.widget.file.FileChooserAdapter;
-import com.kotcrab.vis.ui.widget.file.FileTypeFilter;
 import io.github.StardewValley.App;
 import io.github.StardewValley.Main;
 import io.github.StardewValley.asset.Assets;
@@ -26,6 +26,7 @@ import io.github.StardewValley.controllers.GameController;
 import models.MusicData;
 import models.game.Player;
 
+import java.io.File;
 import java.util.List;
 
 public class MusicMenuScreen implements Screen {
@@ -34,10 +35,9 @@ public class MusicMenuScreen implements Screen {
     private final BitmapFont font;
     private final Skin skin = Assets.getSkin();
 
-    private List<Player> players;
-    private List<MusicData> myMusic;
-    private String myPlayerName = App.getInstance().logedInUser.getUsername();
-    private FileHandle lastSelectedFile;
+    private final List<Player> players;
+    private final List<MusicData> myMusic;
+    private final String myPlayerName = App.getInstance().logedInUser.getUsername();
 
     private Table mainTable;
     private Table playersTable;
@@ -53,7 +53,6 @@ public class MusicMenuScreen implements Screen {
         stage = new Stage(new ScreenViewport());
         font = new BitmapFont();
 
-        // Load VisUI skin for FileChooser
         if (!VisUI.isLoaded()) VisUI.load();
         FileChooser.setDefaultPrefsName("io.github.StardewValley.musicmenu");
 
@@ -65,41 +64,62 @@ public class MusicMenuScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
         mainTable = new Table();
         mainTable.setFillParent(true);
+        mainTable.pad(20); // Add overall padding to the screen edges
         stage.addActor(mainTable);
 
-        // Players Table (Left)
-        playersTable = new Table();
-        playersTable.defaults().pad(5);
-        Label playersHeader = new Label("Players", skin);
-        playersTable.add(playersHeader).colspan(2);
+        // --- NEW: Create a drawable background for our "boxes" ---
+        Drawable tableBackground = skin.newDrawable("white", new Color(0.2f, 0.2f, 0.2f, 0.8f));
+
+        // Players Table (Left Panel)
+        playersTable = new Table(skin);
+        playersTable.setBackground(tableBackground); // Set the box background
+        playersTable.pad(15); // Add padding inside the box
+
+        Label playersHeader = new Label("Players in Session", skin);
+        playersTable.add(playersHeader).colspan(2).padBottom(10);
         playersTable.row();
 
-        for (Player player : players) {
+        for (final Player player : players) {
             Label playerLabel = new Label(player.getUser().getUsername(), skin);
             playerLabel.setAlignment(Align.left);
             if (player.getUser().getUsername().equals(myPlayerName)) {
                 playerLabel.setColor(Color.YELLOW);
             }
+
+            // --- NEW: Make player labels clickable ---
+            playerLabel.setTouchable(Touchable.enabled);
+            playerLabel.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    onPlayerClicked(player);
+                }
+            });
+
             playersTable.add(playerLabel).expandX().fillX().left();
 
             Label statusLabel = new Label("•", skin);
             statusLabel.setColor(player.getUser().getUsername().equals(myPlayerName) ? Color.GREEN : Color.LIGHT_GRAY);
             playersTable.add(statusLabel).width(20);
-            playersTable.row();
+            playersTable.row().padTop(5);
         }
 
-        // Music Table (Right)
-        musicTable = new Table();
+        // Music Table (Right Panel)
+        musicTable = new Table(skin);
+        musicTable.setBackground(tableBackground); // Set the box background
+        musicTable.pad(15); // Add padding inside the box
+
         updateMusicTable();
 
-        mainTable.add(playersTable).width(Gdx.graphics.getWidth() * 0.25f).expandY().fillY().pad(10);
-        mainTable.add(musicTable).expand().fill().pad(10);
+        // Add panels to the main table
+        mainTable.add(playersTable).width(Gdx.graphics.getWidth() * 0.25f).expandY().fillY().top();
+        mainTable.add(musicTable).expand().fill().padLeft(20); // Add space between the two boxes
 
         UIUtil.createBack(() -> Main.getInstance().setScreen(new GameScreen()), stage);
     }
 
     private void updateMusicTable() {
         musicTable.clear();
+        musicTable.top(); // Align content to the top
 
         TextButton uploadButton = new TextButton("Upload Music", skin);
         uploadButton.addListener(new ClickListener() {
@@ -108,29 +128,52 @@ public class MusicMenuScreen implements Screen {
                 openFileChooser();
             }
         });
-        musicTable.add(uploadButton).padBottom(20).colspan(2);
+
+        // --- IMPROVED: Use a header row for better structure ---
+        Table headerTable = new Table();
+        headerTable.add(new Label("Your Music Library", skin)).expandX().left();
+        headerTable.add(uploadButton).right();
+        musicTable.add(headerTable).fillX().padBottom(15);
         musicTable.row();
 
-        musicTable.add(new Label("Your Music", skin)).colspan(2);
+        musicTable.add(new Separator()).fillX().padBottom(15).colspan(2);
         musicTable.row();
 
         if (myMusic.isEmpty()) {
-            musicTable.add(new Label("No music files yet", skin)).colspan(2);
-            musicTable.row();
+            musicTable.add(new Label("No music files yet. Click 'Upload' to add some!", skin)).colspan(2);
         } else {
+            // --- IMPROVED: Put music list in a ScrollPane for long lists ---
+            Table musicListTable = new Table(skin);
             for (final MusicData musicData : myMusic) {
-                Label musicLabel = new Label(musicData.getFilePath(), skin);
+                // Use File to get just the filename, not the whole path
+                String fileName = new File(musicData.getFilePath()).getName();
+                Label musicLabel = new Label(fileName, skin);
                 musicLabel.setTouchable(Touchable.enabled);
                 musicLabel.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        musicData.play();
+                        Gdx.app.log("MusicPlayer", "Playing: " + musicData.getFilePath());
+                        gc.playMusic(musicData);
                     }
                 });
-                musicTable.add(musicLabel).expandX().left().pad(5);
-                musicTable.row();
+                musicListTable.add(musicLabel).expandX().left().pad(5);
+                musicListTable.row();
             }
+            ScrollPane scrollPane = new ScrollPane(musicListTable, skin);
+            scrollPane.setFadeScrollBars(false);
+            musicTable.add(scrollPane).expand().fill();
         }
+    }
+
+    private void onPlayerClicked(Player player) {
+        MusicData musicData = player.getCurrentMusic();
+        if (musicData == null) {
+            System.out.println("nothing is playing");
+            return;
+        }
+        App.getInstance().stopMusic();
+        System.out.println("MUSIC IS PLAYING " + musicData.toString());
+        musicData.setVolume(1);
     }
 
     private void openFileChooser() {
@@ -139,15 +182,12 @@ public class MusicMenuScreen implements Screen {
 
         chooser.setListener(new FileChooserAdapter() {
             @Override
-            public void selected(Array<FileHandle> files) {
-                FileHandle chosen = files.first();
-                Gdx.app.log("FileChooser", "Selected: " + chosen.path());
-                addMusic(new MusicData(chosen.path()));
-            }
-
-            @Override
-            public void canceled() {
-                Gdx.app.log("FileChooser", "Selection canceled");
+            public void selected(Array<com.badlogic.gdx.files.FileHandle> files) {
+                if (files.size > 0) {
+                    com.badlogic.gdx.files.FileHandle chosen = files.first();
+                    Gdx.app.log("FileChooser", "Selected: " + chosen.path());
+                    addMusic(new MusicData(chosen.path()));
+                }
             }
         });
 
@@ -155,8 +195,13 @@ public class MusicMenuScreen implements Screen {
     }
 
     public void addMusic(MusicData musicData) {
-        gc.addMusic(musicData);
-        updateMusicTable();
+        // Prevent duplicates
+        if (!myMusic.contains(musicData)) {
+            gc.addMusic(musicData);
+            updateMusicTable(); // Refresh the list
+        } else {
+            Gdx.app.log("Music", "Music already in list: " + musicData.getFilePath());
+        }
     }
 
     @Override public void show() { Gdx.input.setInputProcessor(stage); }

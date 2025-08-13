@@ -30,13 +30,7 @@ public class LobbyManager {
     }
 
     public ArrayList<Lobby> getLobbies() {
-        ArrayList<Lobby> visibleLobbies = new ArrayList<>();
-        for (Lobby lobby : lobbies) {
-            if (lobby.isVisible()) {
-                visibleLobbies.add(lobby);
-            }
-        }
-        return visibleLobbies;
+        return lobbies;
     }
 
     public Lobby getLobbyByName(String name) {

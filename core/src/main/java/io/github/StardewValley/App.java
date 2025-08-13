@@ -11,6 +11,7 @@ import io.github.StardewValley.views.menu.CLI.MainMenuView;
 import io.github.StardewValley.views.menu.CLI.Menu;
 import io.github.StardewValley.views.menu.CLI.RegisterMenuView;
 import io.github.StardewValley.views.menu.GUI.GameScreen;
+import models.MusicData;
 import models.game.Game;
 import models.game.Player;
 import models.user.User;
@@ -37,6 +38,13 @@ public class App implements Serializable {
 
     public User logedInUser = null;
     public final Random random = new Random(1);
+    public MusicData music;
+
+    public void stopMusic() {
+        if (music != null) {
+            music.stop();
+        }
+    }
 
     private App() {
         DataLoader.load();
