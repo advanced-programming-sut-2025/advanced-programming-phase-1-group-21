@@ -12,6 +12,7 @@ import models.map.Placable;
 import models.map.TileType;
 import models.skill.SkillType;
 import models.sprite.GameSprite;
+import models.time.Season;
 
 import java.io.Serializable;
 
@@ -35,7 +36,7 @@ public class PlantedTree implements Placable, Harvestable, Serializable, DailyUp
 				}
 			}
 			else
-				texture = treeData.getSeasonTexture();//TODO this function logic should depends on current season
+				texture = treeData.getSeasonTexture().get(0);
 		}
 		else
 			texture = treeData.getStageTexture(stage);
@@ -48,7 +49,7 @@ public class PlantedTree implements Placable, Harvestable, Serializable, DailyUp
 			player.setSkillExp(SkillType.FORAGING , player.getSkillExp(SkillType.FORAGING) + 5);
 			readyToHarvest = false;
 			lastHarvest = day;
-			sprite.setTexture(SharedAssetManager.getOrLoad(treeData.getSeasonTexture()));
+			sprite.setTexture(SharedAssetManager.getOrLoad(treeData.getSeasonTexture().get(0)));
 			return Item.build(treeData.getResultName(), 1);
 		}
 
@@ -70,7 +71,26 @@ public class PlantedTree implements Placable, Harvestable, Serializable, DailyUp
 				readyToHarvest = true;
 			}
 		}
-		resetSprite();
+		if (readyToHarvest && g != null && treeData.getSeasons().contains(g.getSeason().toString().toLowerCase())) {
+			sprite.setTexture(treeData.getHarvestTexture());
+		}
+		else if (stage == treeData.getStages().size()) {
+			if(g == null){
+				sprite.setTexture(treeData.getSeasonTexture().get(0));
+				return false;
+			}
+			if(g.getSeason().equals(Season.SPRING))
+				sprite.setTexture(treeData.getSeasonTexture().get(0));
+			if(g.getSeason().equals(Season.SUMMER))
+				sprite.setTexture(treeData.getSeasonTexture().get(1));
+			if(g.getSeason().equals(Season.AUTUMN))
+				sprite.setTexture(treeData.getSeasonTexture().get(2));
+			if(g.getSeason().equals(Season.WINTER))
+				sprite.setTexture(treeData.getSeasonTexture().get(3));
+		}
+		else {
+			sprite.setTexture(treeData.getStageTexture(stage));
+		}
 		return false;
 	}
 	public void setDay(int day) {
@@ -132,7 +152,7 @@ public class PlantedTree implements Placable, Harvestable, Serializable, DailyUp
 			sprite.setTexture(treeData.getHarvestTexture());
 		}
 		else if (stage == treeData.getStages().size()) {
-			sprite.setTexture(treeData.getSeasonTexture());
+			sprite.setTexture(treeData.getSeasonTexture().get(0));
 		}
 		else {
 			sprite.setTexture(treeData.getStageTexture(stage));

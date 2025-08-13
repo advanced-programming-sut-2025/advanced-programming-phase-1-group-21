@@ -38,7 +38,7 @@ public class TreeData implements Data, ItemData {
 	private String harvestTexture;
 
 	@SerializedName("season-texture")
-	private String seasonTexture;
+	private ArrayList<String> seasonTexture;
 
 	public static String getDataURL() {
 		return dataURL;
@@ -111,7 +111,7 @@ public class TreeData implements Data, ItemData {
 		return harvestTexture;
 	}
 
-	public String getSeasonTexture() {
+	public ArrayList<String> getSeasonTexture() {
 		return seasonTexture;
 	}
 

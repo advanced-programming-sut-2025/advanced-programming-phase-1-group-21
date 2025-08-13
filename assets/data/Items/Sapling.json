@@ -14,7 +14,12 @@
       "Textures/Trees/Apricot_Stage_4.png"
     ],
     "harvest-texture": "Textures/Trees/Apricot_Stage_5_Fruit.png",
-    "season-texture": "Textures/Trees/Apricot_Stage_5.png"
+    "season-texture": [
+      "Textures/Trees/Apricot_Spring.png",
+      "Textures/Trees/Apricot_Summer.png",
+      "Textures/Trees/Apricot_Fall.png",
+      "Textures/Trees/Apricot_Winter.png"
+    ]
   },
   {
     "name": "Cherry Tree",
@@ -31,7 +36,12 @@
       "Textures/Trees/Cherry_Stage_4.png"
     ],
     "harvest-texture": "Textures/Trees/Cherry_Stage_5_Fruit.png",
-    "season-texture": "Textures/Trees/Cherry_Stage_5.png"
+    "season-texture": [
+      "Textures/Trees/Cherry_Spring.png",
+      "Textures/Trees/Cherry_Summer.png",
+      "Textures/Trees/Cherry_Fall.png",
+      "Textures/Trees/Cherry_Winter.png"
+    ]
   },
   {
     "name": "Banana Tree",
@@ -48,7 +58,12 @@
       "Textures/Trees/Banana_Stage_4.png"
     ],
     "harvest-texture": "Textures/Trees/Banana_Stage_5_Fruit.png",
-    "season-texture": "Textures/Trees/Banana_Stage_5.png"
+    "season-texture": [
+      "Textures/Trees/Banana_Spring.png",
+      "Textures/Trees/Banana_Summer.png",
+      "Textures/Trees/Banana_Fall.png",
+      "Textures/Trees/Banana_Winter.png"
+    ]
   },
   {
     "name": "Mango Tree",
@@ -65,7 +80,12 @@
       "Textures/Trees/Mango_Stage_4.png"
     ],
     "harvest-texture": "Textures/Trees/Mango_Stage_5_Fruit.png",
-    "season-texture": "Textures/Trees/Mango_Stage_5.png"
+    "season-texture": [
+      "Textures/Trees/Mango_Spring.png",
+      "Textures/Trees/Mango_Summer.png",
+      "Textures/Trees/Mango_Fall.png",
+      "Textures/Trees/Mango_Winter.png"
+    ]
   },
   {
     "name": "Orange Tree",
@@ -82,7 +102,12 @@
       "Textures/Trees/Orange_Stage_4.png"
     ],
     "harvest-texture": "Textures/Trees/Orange_Stage_5_Fruit.png",
-    "season-texture": "Textures/Trees/Orange_Stage_5.png"
+    "season-texture": [
+      "Textures/Trees/Orange_Spring.png",
+      "Textures/Trees/Orange_Summer.png",
+      "Textures/Trees/Orange_Fall.png",
+      "Textures/Trees/Orange_Winter.png"
+    ]
   },
   {
     "name": "Peach Tree",
@@ -99,7 +124,12 @@
       "Textures/Trees/Peach_Stage_4.png"
     ],
     "harvest-texture": "Textures/Trees/Peach_Stage_5_Fruit.png",
-    "season-texture": "Textures/Trees/Peach_Stage_5.png"
+    "season-texture": [
+      "Textures/Trees/Peach_Spring.png",
+      "Textures/Trees/Peach_Summer.png",
+      "Textures/Trees/Peach_Fall.png",
+      "Textures/Trees/Peach_Winter.png"
+    ]
   },
   {
     "name": "Apple Tree",
@@ -116,7 +146,12 @@
       "Textures/Trees/Apple_Stage_4.png"
     ],
     "harvest-texture": "Textures/Trees/Apple_Stage_5_Fruit.png",
-    "season-texture": "Textures/Trees/Apple_Stage_5.png"
+    "season-texture": [
+      "Textures/Trees/Apple_Spring.png",
+      "Textures/Trees/Apple_Summer.png",
+      "Textures/Trees/Apple_Fall.png",
+      "Textures/Trees/Apple_Winter.png"
+    ]
   },
   {
     "name": "Pomegranate Tree",
@@ -133,7 +168,12 @@
       "Textures/Trees/Pomegranate_Stage_4.png"
     ],
     "harvest-texture": "Textures/Trees/Pomegranate_Stage_5_Fruit.png",
-    "season-texture": "Textures/Trees/Pomegranate_Stage_5.png"
+    "season-texture": [
+      "Textures/Trees/Pomegranate_Spring.png",
+      "Textures/Trees/Pomegranate_Summer.png",
+      "Textures/Trees/Pomegranate_Fall.png",
+      "Textures/Trees/Pomegranate_Winter.png"
+    ]
   },
   {
     "name": "Oak Tree",
@@ -150,7 +190,12 @@
       "Textures/Trees/Oak_Stage_4.png"
     ],
     "harvest-texture": "Textures/Trees/Oak_Stage_5.png",
-    "season-texture": "Textures/Trees/Oak_Stage_5.png"
+    "season-texture": [
+      "Textures/Trees/Oak_Spring.png",
+      "Textures/Trees/Oak_Summer.png",
+      "Textures/Trees/Oak_Fall.png",
+      "Textures/Trees/Oak_Winter.png"
+    ]
   },
   {
     "name": "Maple Tree",
@@ -167,7 +212,12 @@
       "Textures/Trees/Maple_Stage_4.png"
     ],
     "harvest-texture": "Textures/Trees/Maple_Stage_5.png",
-    "season-texture": "Textures/Trees/Maple_Stage_5.png"
+    "season-texture": [
+      "Textures/Trees/Maple_Spring.png",
+      "Textures/Trees/Maple_Summer.png",
+      "Textures/Trees/Maple_Fall.png",
+      "Textures/Trees/Maple_Winter.png"
+    ]
   },
   {
     "name": "Pine Tree",
@@ -184,7 +234,12 @@
       "Textures/Trees/Pine_Stage_4.png"
     ],
     "harvest-texture": "Textures/Trees/Pine_Stage_5.png",
-    "season-texture": "Textures/Trees/Pine_Stage_5.png"
+    "season-texture": [
+      "Textures/Trees/Pine_Spring.png",
+      "Textures/Trees/Pine_Summer.png",
+      "Textures/Trees/Pine_Fall.png",
+      "Textures/Trees/Pine_Winter.png"
+    ]
   },
   {
     "name": "Mahogany Tree",
@@ -201,7 +256,12 @@
       "Textures/Trees/Mahogany_Stage_4.png"
     ],
     "harvest-texture": "Textures/Trees/Mahogany_Stage_5.png",
-    "season-texture": "Textures/Trees/Mahogany_Stage_5.png"
+    "season-texture": [
+      "Textures/Trees/Mahogany_Spring.png",
+      "Textures/Trees/Mahogany_Summer.png",
+      "Textures/Trees/Mahogany_Fall.png",
+      "Textures/Trees/Mahogany_Winter.png"
+    ]
   },
   {
     "name": "Mushroom Tree",
@@ -218,7 +278,12 @@
       "Textures/Trees/MushroomTree_Stage_4.png"
     ],
     "harvest-texture": "Textures/Trees/MushroomTree_Stage_5.png",
-    "season-texture": "Textures/Trees/MushroomTree_Stage_5.png"
+    "season-texture": [
+      "Textures/Trees/MushroomTree_Stage_5.png",
+      "Textures/Trees/MushroomTree_Stage_5.png",
+      "Textures/Trees/MushroomTree_Stage_5.png",
+      "Textures/Trees/MushroomTree_Stage_5.png"
+    ]
   },
   {
     "name": "Mystic Tree",
@@ -235,6 +300,11 @@
       "Textures/Trees/Mystic_Tree_Stage_4.png"
     ],
     "harvest-texture": "Textures/Trees/Mystic_Tree_Stage_5.png",
-    "season-texture": "Textures/Trees/Mystic_Tree_Stage_5.png"
+    "season-texture": [
+      "Textures/Trees/Mystic_Tree_Stage_5.png",
+      "Textures/Trees/Mystic_Tree_Stage_5.png",
+      "Textures/Trees/Mystic_Tree_Stage_5.png",
+      "Textures/Trees/Mystic_Tree_Stage_5.png"
+    ]
   }
 ]
