@@ -5,10 +5,13 @@ import models.MusicData;
 import models.game.NPC;
 import models.map.NPCHouse;
 import models.map.Shop;
+import models.network.GamePacket;
 
 public class NetworkRegister {
 
     public static void register(Kryo kryo) {
+        kryo.register(GamePacket.class);
+        kryo.register(byte[].class); // Also register byte arrays
         kryo.setReferences(true);  // This is **CRUCIAL** to avoid infinite recursion in cyclical graphs
         kryo.setRegistrationRequired(true);
         kryo.register(org.apache.commons.lang3.tuple.ImmutablePair.class);

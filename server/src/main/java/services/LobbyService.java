@@ -2,12 +2,9 @@ package services;
 
 import models.game.Game;
 import models.game.Player;
-import models.network.Message;
-import models.network.MessageType;
+import models.network.*;
 import com.esotericsoftware.kryonet.Connection;
 import controller.LobbyManager;
-import models.network.Lobby;
-import models.network.LobbyUser;
 import models.result.Result;
 import models.result.errorTypes.ServerError;
 import models.user.User;
@@ -16,6 +13,7 @@ import util.NetworkUtil;
 import util.ServerUtil;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -152,15 +150,13 @@ public class LobbyService {
         lobby.setStarted();
     }
 
-    private boolean canLobbyStartLoadedGame(Game game, ArrayList<LobbyUser> users) {
-        Set<String> loadedPlayerUsernames = game.getPlayers().stream()
-                .map(player -> player.getUser().getUsername())
-                .collect(Collectors.toSet());
+    private boolean canLobbyStartLoadedGame(GamePacket game, ArrayList<LobbyUser> users) {
+        Set<String> loadedPlayerUsernames = new HashSet<>(game.users);
         return users.stream()
                 .allMatch(lobbyUser -> loadedPlayerUsernames.contains(lobbyUser.user.getUsername()));
     }
 
-    public void setGame(Game game) {
+    public void setGame(GamePacket game) {
         System.out.println("GAME: " + game);
         lobby.setGame(game);
     }

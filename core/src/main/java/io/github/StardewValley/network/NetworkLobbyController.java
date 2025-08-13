@@ -3,12 +3,9 @@ package io.github.StardewValley.network;
 import com.esotericsoftware.kryonet.Client;
 import io.github.StardewValley.Main;
 import models.game.Game;
-import models.network.Lobby;
-import models.network.LobbyUser;
+import models.network.*;
 import models.result.Result;
 import models.user.User;
-import models.network.Message;
-import models.network.MessageType;
 import util.NetworkUtil;
 
 import java.util.List;
@@ -110,7 +107,7 @@ public class NetworkLobbyController {
         Message response = ClientNetwork.sendMessageAndWaitForResponse(msg);
     }
 
-    public static void setGame(Game game) {
+    public static void setGame(GamePacket game) {
         System.out.println("GAME: " + game);
         Message msg = new Message(MessageType.LOBBY_SERVICE);
         msg.methodName = "setGame";

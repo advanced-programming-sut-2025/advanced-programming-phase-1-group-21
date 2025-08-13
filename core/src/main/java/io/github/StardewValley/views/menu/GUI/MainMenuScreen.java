@@ -21,8 +21,10 @@ import io.github.StardewValley.asset.Assets;
 import controllers.GameSaver;
 import io.github.StardewValley.controllers.LoginMenuController;
 import io.github.StardewValley.network.NetworkLobbyController;
+import models.game.Game;
 
 import java.io.File;
+import java.io.IOException;
 
 // Note: This implementation assumes you have the VisUI library in your project dependencies
 // for the FileChooser to work. You also need to call VisUI.load() once at startup.
@@ -144,7 +146,12 @@ public class MainMenuScreen implements Screen {
                 Gdx.app.log("FileChooser", "Selected file to load: " + chosenFile.path());
                 File file = chosenFile.file();
                 NetworkLobbyController.createLobby("LOADING GAME", null, false, false);
-                NetworkLobbyController.setGame(GameSaver.loadGame(file).getData());
+                Game loadedGame = GameSaver.loadGame(file).getData();
+                try {
+                    NetworkLobbyController.setGame(GameSaver.serializeForNetwork(loadedGame));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 game.setScreen(new LobbyScreen(NetworkLobbyController.getLobby().getData()));
             }
 
