@@ -26,7 +26,7 @@ public class EatingAnimation implements IndependentAnimation {
 		time -= Gdx.graphics.getDeltaTime();
 		if (time <= 0) return true;
 		float diff = (MathUtils.sin(time * speed) * amplitude);
-		sprite.setPosition(player.getSprite().getX() - 20, player.getSprite().getY() + 30 + diff);
+		sprite.setPosition(player.getSprite().getX(), player.getSprite().getY() + 30 + diff);
 		sprite.draw(batch);
 		return false;
 	}
